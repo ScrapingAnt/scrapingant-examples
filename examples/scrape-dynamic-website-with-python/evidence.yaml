@@ -1,7 +1,7 @@
 article_id: scrape-dynamic-website-with-python
 canonical_url: https://scrapingant.com/blog/scrape-dynamic-website-with-python
 owner: Oleg Kulyk
-examples_repo_commit: "faf54bf"
+examples_repo_commit: "223a9cf"   # commit that recorded the run below; later commits only edit metadata
 tested_at: 2026-09-14
 requires_api_key: true
 environment:
@@ -14,6 +14,7 @@ dependencies:
   selenium: "4.49.0"
   playwright: "1.62.0"
   scrapingant-client: "2.1.0"
+  requests: "2.34.2"
 run_command: ./run.sh
 fixtures:
   - fixtures/dynamic-domcontentloaded.html

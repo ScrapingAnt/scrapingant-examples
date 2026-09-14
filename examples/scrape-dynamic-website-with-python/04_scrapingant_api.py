@@ -16,7 +16,8 @@ ENDPOINT = "https://api.scrapingant.com/v2/general"
 
 
 def fetch(url: str, **params) -> tuple[str, str]:
-    r = requests.get(ENDPOINT, params={"url": url, "x-api-key": API_KEY, **params}, timeout=120)
+    # The key goes in a header, not the query string, so it does not end up in URL logs.
+    r = requests.get(ENDPOINT, params={"url": url, **params}, headers={"x-api-key": API_KEY}, timeout=120)
     r.raise_for_status()
     return r.text, r.headers.get("Ant-credits-cost", "?")
 
@@ -26,7 +27,7 @@ html, cost = fetch(PUBLIC["domcontentloaded"])
 soup = BeautifulSoup(html, "html.parser")
 print(f"domcontentloaded (browser=true): {soup.find(id='test').get_text()}  [credits: {cost}]")
 
-# 2. Same page without a browser: cheaper, but JavaScript never runs.
+# 2. Same page without a browser (1 credit instead of 10): JavaScript never runs.
 html, cost = fetch(PUBLIC["domcontentloaded"], browser="false")
 soup = BeautifulSoup(html, "html.parser")
 print(f"domcontentloaded (browser=false): {soup.find(id='test').get_text()}  [credits: {cost}]")
