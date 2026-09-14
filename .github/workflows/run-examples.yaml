@@ -1,0 +1,72 @@
+name: run-examples
+
+on:
+  schedule:
+    - cron: "17 6 1 * *"   # monthly, 1st at 06:17 UTC
+  workflow_dispatch:
+    inputs:
+      example:
+        description: "Single example id to run (default: all allow-listed)"
+        required: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.set.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: set
+        run: |
+          if [ -n "${{ github.event.inputs.example }}" ]; then
+            echo "ids=[\"${{ github.event.inputs.example }}\"]" >> "$GITHUB_OUTPUT"
+          else
+            echo "ids=$(jq -c '[.examples[] | .id]' examples.allowlist.json)" >> "$GITHUB_OUTPUT"
+          fi
+
+  run:
+    needs: matrix
+    if: ${{ needs.matrix.outputs.ids != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        id: ${{ fromJson(needs.matrix.outputs.ids) }}
+    env:
+      SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install and run
+        id: run
+        working-directory: examples/${{ matrix.id }}
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f package.json ]; then npm ci; fi
+          if grep -q playwright requirements.txt 2>/dev/null; then python -m playwright install --with-deps chromium; fi
+          chmod +x run.sh && ./run.sh 2>&1 | tee run.log
+          test "${PIPESTATUS[0]}" -eq 0
+      - name: Open issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="example-failed: ${{ matrix.id }}"
+          existing=$(gh issue list --label example-failed --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          body="Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+Last 60 lines of run.log:
+\`\`\`
+$(tail -60 examples/${{ matrix.id }}/run.log 2>/dev/null)
+\`\`\`
+Do not auto-fix. Review the article that references this example and refresh it through the content workflow."
+          if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "$title" --label example-failed --body "$body"; fi

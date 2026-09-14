@@ -1,0 +1,27 @@
+# Evidence manifest. One per article. Committed to scrapingant-examples/examples/<slug>/.
+article_id: <slug>
+canonical_url: https://scrapingant.com/blog/<slug>
+owner: Oleg Kulyk
+examples_repo_commit: <sha, filled after commit>
+tested_at: YYYY-MM-DD
+requires_api_key: false
+environment:
+  os: ""
+  python: ""
+  node: ""
+  browser: ""
+dependencies:            # pinned exactly as tested
+  selenium: ""
+run_command: ./run.sh
+fixtures:
+  - fixtures/<file>
+outputs:
+  - expected_output/<file>
+measurements: []         # [{name, value, unit, denominator, source: expected_output/<file>}]
+limitations:
+  - ""
+claims:                  # mirrored into the claim ledger
+  - id: C1
+    text: ""
+    type: measured       # measured | documented | external | product
+    source: expected_output/<file>

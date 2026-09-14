@@ -1,0 +1,1 @@
+Shared fixtures served via GitHub Pages at https://scrapingant.github.io/scrapingant-examples/fixtures/<file>. Keep them static and small; examples reference them by that URL when a real HTTP fetch is part of what is being demonstrated.
