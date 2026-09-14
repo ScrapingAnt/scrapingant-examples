@@ -1,0 +1,2 @@
+domcontentloaded: Web Scraping is hard
+delayed: Web Scraping is hard

@@ -1,0 +1,4 @@
+playwright chromium 151.0.7922.34
+domcontentloaded: I ❤️ ScrapingAnt
+delayed, read immediately: Web Scraping is hard
+delayed, after waiting for #loaded: I ❤️ ScrapingAnt (after 1500 ms)

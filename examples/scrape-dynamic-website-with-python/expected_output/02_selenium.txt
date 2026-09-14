@@ -1,0 +1,4 @@
+selenium 4.49.0, chrome 152.0.7977.84
+domcontentloaded: I ❤️ ScrapingAnt
+delayed, read immediately: Web Scraping is hard
+delayed, after waiting for #loaded: I ❤️ ScrapingAnt (after 1500 ms)

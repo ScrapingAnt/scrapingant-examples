@@ -1,4 +1,10 @@
 {
   "comment": "Example ids (folder names under examples/) that run in CI. needs_api_key examples run only when the SCRAPINGANT_API_KEY secret is set.",
-  "examples": []
+  "examples": [
+    {
+      "id": "scrape-dynamic-website-with-python",
+      "needs_api_key": true,
+      "note": "04 is skipped without the key"
+    }
+  ]
 }

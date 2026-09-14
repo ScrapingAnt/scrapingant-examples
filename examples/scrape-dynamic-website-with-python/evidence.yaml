@@ -1,0 +1,58 @@
+article_id: scrape-dynamic-website-with-python
+canonical_url: https://scrapingant.com/blog/scrape-dynamic-website-with-python
+owner: Oleg Kulyk
+examples_repo_commit: "faf54bf"
+tested_at: 2026-09-14
+requires_api_key: true
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  python: "3.12.10"
+  chrome: "152.0.7977.84 (Selenium, via Selenium Manager)"
+  chromium: "151.0.7922.34 (Playwright bundled headless shell)"
+dependencies:
+  beautifulsoup4: "4.15.0"
+  selenium: "4.49.0"
+  playwright: "1.62.0"
+  scrapingant-client: "2.1.0"
+run_command: ./run.sh
+fixtures:
+  - fixtures/dynamic-domcontentloaded.html
+  - fixtures/dynamic-delayed.html
+outputs:
+  - expected_output/01_beautifulsoup_only.txt
+  - expected_output/02_selenium.txt
+  - expected_output/03_playwright.txt
+  - expected_output/04_scrapingant_api.txt   # only present after a run with SCRAPINGANT_API_KEY
+measurements: []
+limitations:
+  - Synthetic fixtures only; no anti-bot, no real network latency.
+  - API step not yet recorded (needs SCRAPINGANT_API_KEY); credit costs come from the registry until then.
+claims:
+  - id: C1
+    text: "BeautifulSoup alone returns 'Web Scraping is hard' for both fixtures because no JavaScript runs."
+    type: measured
+    source: expected_output/01_beautifulsoup_only.txt
+  - id: C2
+    text: "Selenium 4.49 with Selenium Manager starts headless Chrome 152 without a manually downloaded chromedriver and returns the rendered text."
+    type: measured
+    source: expected_output/02_selenium.txt
+  - id: C3
+    text: "Reading page_source immediately after driver.get on the delayed page returns the pre-JavaScript text; waiting for #loaded returns the rendered text."
+    type: measured
+    source: expected_output/02_selenium.txt
+  - id: C4
+    text: "Playwright 1.62 shows the same immediate/after-wait behaviour with page.content() and wait_for_selector."
+    type: measured
+    source: expected_output/03_playwright.txt
+  - id: C5
+    text: "Selenium 4 removed the executable_path argument of webdriver.Chrome; the driver path is passed through a Service object or resolved by Selenium Manager."
+    type: documented
+    source: https://www.selenium.dev/documentation/webdriver/troubleshooting/upgrade_to_selenium_4/
+  - id: C6
+    text: "A ScrapingAnt request with JavaScript rendering through a datacenter proxy costs 10 credits; without a browser it costs 1 credit."
+    type: product
+    source: registry credits.browser_js_datacenter, credits.simple_datacenter
+  - id: C7
+    text: "Every ScrapingAnt response carries an Ant-credits-cost header."
+    type: product
+    source: registry header.ant_credits_cost
