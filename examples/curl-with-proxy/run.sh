@@ -20,7 +20,7 @@ sleep 2
 # rec <name> <display command> <shell command>: records "$ display", the output and the exit code
 rec() { { echo "\$ $2"; bash -c "$3" 2>&1; echo "exit=$?"; } > "expected_output/$1.txt"; }
 # vrec: same, but for -v transcripts: keep the protocol lines only and no exit code (the pipe hides it)
-vrec() { { echo "\$ $2"; bash -c "$3" 2>&1 | grep -E '^(> (CONNECT|GET|Host|Proxy-Authorization)|< HTTP|< Proxy-Authenticate|\* (Uses proxy|CONNECT tunnel|Connected to|SOCKS5|Host .* was resolved))'; } > "expected_output/$1.txt"; }
+vrec() { { echo "\$ $2"; bash -c "$3" 2>&1 | tr -d '\r' | grep -E '^(> (CONNECT|GET|Host|Proxy-Authorization)|< HTTP|< Proxy-Authenticate|\* (Uses proxy|CONNECT tunnel|Connected to|SOCKS5|Host .* was resolved))'; } > "expected_output/$1.txt"; }
 
 { echo "curl: $(curl --version | head -1)"; echo "proxy.py: $(pip show proxy.py | awk '/^Version/{print $2}')  pproxy: $(pip show pproxy | awk '/^Version/{print $2}')"; } > expected_output/00_versions.txt
 
