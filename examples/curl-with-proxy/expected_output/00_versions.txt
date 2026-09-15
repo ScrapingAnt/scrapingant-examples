@@ -1,0 +1,2 @@
+curl: curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.1
+proxy.py: 2.4.10  pproxy: 2.7.9

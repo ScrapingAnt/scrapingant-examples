@@ -1,0 +1,6 @@
+$ curl -v -x http://127.0.0.1:8080 --proxy-user user:pass -o /dev/null http://127.0.0.1:8000/index.html
+* Connected to 127.0.0.1 (127.0.0.1) port 8080
+> GET http://127.0.0.1:8000/index.html HTTP/1.1
+> Host: 127.0.0.1:8000
+> Proxy-Authorization: Basic dXNlcjpwYXNz
+< HTTP/1.0 200 OK

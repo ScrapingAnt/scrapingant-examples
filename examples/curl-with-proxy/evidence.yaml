@@ -1,0 +1,58 @@
+article_id: curl-with-proxy
+canonical_url: https://scrapingant.com/blog/curl-with-proxy
+owner: Oleg Kulyk
+examples_repo_commit: ""
+tested_at: 2026-09-15
+requires_api_key: false
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  curl: "8.7.1 (SecureTransport, LibreSSL 3.3.6)"
+  python: "3.12.10"
+dependencies:
+  proxy.py: "2.4.10"
+  pproxy: "2.7.9"
+run_command: ./run.sh
+fixtures:
+  - fixtures/index.html
+  - https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+outputs:
+  - expected_output/00_versions.txt
+  - expected_output/01_basic_x.txt … 20_connection_refused.txt (one file per case)
+measurements: []
+limitations:
+  - Proxies are local; transcripts prove routing, not an exit-IP change.
+  - No TLS proxy; --proxy-cacert / --proxy-insecure documented only.
+  - ScrapingAnt proxy endpoints not exercised (credentials).
+claims:
+  - id: C2
+    text: "http:// target: full GET with Proxy-Authorization sent to the proxy"
+    type: measured
+    source: expected_output/08_http_plain.txt
+  - id: C3
+    text: "https:// target: CONNECT host:443 then TLS inside the tunnel"
+    type: measured
+    source: expected_output/07_https_connect.txt
+  - id: C6
+    text: "missing credentials on an https:// target: status 000, exit 56"
+    type: measured
+    source: expected_output/04_no_creds_https.txt
+  - id: C7
+    text: "missing credentials on an http:// target: status 407, exit 0"
+    type: measured
+    source: expected_output/05_no_creds_http.txt
+  - id: C11
+    text: "socks5:// resolves locally, socks5h:// on the proxy"
+    type: measured
+    source: expected_output/09_socks5.txt, expected_output/10_socks5h.txt
+  - id: C12
+    text: "http_proxy lowercase is used; uppercase HTTP_PROXY is ignored"
+    type: measured
+    source: expected_output/12_env_http_proxy.txt, expected_output/13_env_HTTP_PROXY.txt
+  - id: C14-C18
+    text: "no_proxy, --noproxy '*', -x '' bypass; -x overrides env; .curlrc via CURL_HOME applies proxy and proxy-user"
+    type: measured
+    source: expected_output/15..19
+  - id: C1,C5,C10,C19
+    text: "option semantics quoted from the curl manual (-x, -U, --noproxy, -p, --proxy-cacert, --proxy-insecure, ENVIRONMENT)"
+    type: documented
+    source: curl 8.7.1 --manual; https://curl.se/docs/manpage.html

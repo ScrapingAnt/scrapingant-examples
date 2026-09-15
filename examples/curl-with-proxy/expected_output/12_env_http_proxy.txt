@@ -1,0 +1,6 @@
+$ http_proxy=http://127.0.0.1:8081 curl -v -o /dev/null http://127.0.0.1:8000/index.html
+* Uses proxy env variable http_proxy == 'http://127.0.0.1:8081'
+* Connected to 127.0.0.1 (127.0.0.1) port 8081
+> GET http://127.0.0.1:8000/index.html HTTP/1.1
+> Host: 127.0.0.1:8000
+< HTTP/1.0 200 OK

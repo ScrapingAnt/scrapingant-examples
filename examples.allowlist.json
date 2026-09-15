@@ -10,6 +10,11 @@
       "id": "what-is-mcp-server",
       "needs_api_key": true,
       "note": "00/01/03 run without a key; 02 skipped without it"
+    },
+    {
+      "id": "curl-with-proxy",
+      "needs_api_key": false,
+      "note": "starts local proxies; needs curl and outbound HTTPS"
     }
   ]
 }

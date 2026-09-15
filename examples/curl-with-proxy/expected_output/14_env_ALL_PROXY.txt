@@ -1,0 +1,11 @@
+$ ALL_PROXY=http://127.0.0.1:8081 curl -v -o /dev/null https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+* Uses proxy env variable ALL_PROXY == 'http://127.0.0.1:8081'
+* Connected to 127.0.0.1 (127.0.0.1) port 8081
+* CONNECT tunnel: HTTP/1.1 negotiated
+> CONNECT scrapingant.github.io:443 HTTP/1.1
+> Host: scrapingant.github.io:443
+< HTTP/1.1 200 Connection established
+* CONNECT tunnel established, response 200
+> GET /scrapingant-examples/fixtures/dynamic-delayed.html HTTP/2
+> Host: scrapingant.github.io
+< HTTP/2 200 
