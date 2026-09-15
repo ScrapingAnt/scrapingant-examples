@@ -1,0 +1,3 @@
+server: my-scraper, protocol 2025-11-25
+tool: fetch_markdown - Fetch a web page and return its main content as Markdown.  params=['url', 'browser']
+tools/call skipped (SCRAPINGANT_API_KEY not set)

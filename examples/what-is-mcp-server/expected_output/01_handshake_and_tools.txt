@@ -1,0 +1,27 @@
+POST initialize                   -> HTTP 200 text/event-stream
+  server: ScrapingAnt MCP Server 1.30.0, protocol 2025-06-18
+  capabilities: ['experimental', 'prompts', 'resources', 'tools']
+POST notifications/initialized    -> HTTP 202 application/json
+POST tools/list                   -> HTTP 200 text/event-stream
+  3 tools
+  - get_web_page_html: Fetch (scrape) a URL using ScrapingAnt and return the web page content as HTML.
+      url*: string
+      browser: boolean = true
+      proxy_type: string|null = null
+      proxy_country: string|null = null
+  - get_web_page_markdown: Fetch (scrape) a URL using ScrapingAnt and return the web page content as Markdown.
+      url*: string
+      browser: boolean = true
+      proxy_type: string|null = null
+      proxy_country: string|null = null
+  - get_web_page_text: Fetch (scrape) a URL using ScrapingAnt and return the web page content as plain text.
+      url*: string
+      browser: boolean = true
+      proxy_type: string|null = null
+      proxy_country: string|null = null
+POST prompts/list                 -> HTTP 200 text/event-stream
+  0 prompts: []
+POST resources/list               -> HTTP 200 text/event-stream
+  1 resources: ['get_scraping_options']
+POST tools/call                   -> HTTP 200 text/event-stream
+  tools/call without an API key -> {"jsonrpc": "2.0", "id": 4, "result": {"content": [{"type": "text", "text": "SCRAPING FAILED (Detail: 'Missing API Key. Please ensure 'x-api-key' header is set in your client configuration.').\nINSTRU

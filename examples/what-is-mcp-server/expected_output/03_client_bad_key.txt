@@ -1,0 +1,3 @@
+server: my-scraper, protocol 2025-11-25
+tool: fetch_markdown - Fetch a web page and return its main content as Markdown.  params=['url', 'browser']
+fetch_markdown -> fetch failed: HTTP 403 {"detail":"API token is wrong. Please visit https://app.scrapingant.com/profile to check your tok

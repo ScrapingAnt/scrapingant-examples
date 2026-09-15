@@ -1,0 +1,5 @@
+server: ScrapingAnt MCP Server 1.30.0, protocol 2025-06-18
+capabilities: ['experimental', 'prompts', 'resources', 'tools']
+tool: get_web_page_html(url, browser, proxy_type, proxy_country)  required=['url']
+tool: get_web_page_markdown(url, browser, proxy_type, proxy_country)  required=['url']
+tool: get_web_page_text(url, browser, proxy_type, proxy_country)  required=['url']

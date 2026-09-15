@@ -1,0 +1,59 @@
+article_id: what-is-mcp-server
+canonical_url: https://scrapingant.com/blog/what-is-mcp-server
+owner: Oleg Kulyk
+examples_repo_commit: ""
+tested_at: 2026-09-15
+requires_api_key: true
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  python: "3.12.10"
+dependencies:
+  requests: "2.34.2"
+  mcp: "2.2.0"
+run_command: ./run.sh
+fixtures:
+  - https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+outputs:
+  - expected_output/01_handshake_and_tools.txt
+  - expected_output/03_client.txt
+  - expected_output/02_tool_call.txt   # only after a run with SCRAPINGANT_API_KEY
+measurements: []
+limitations:
+  - tools/call outputs not recorded (no API key at recording time)
+claims:
+  - id: C1
+    text: "The live ScrapingAnt MCP server answers initialize without an API key, reporting protocol 2025-06-18, server version 1.30.0, and tools/prompts/resources capabilities."
+    type: measured
+    source: expected_output/01_handshake_and_tools.txt
+  - id: C2
+    text: "tools/list returns three tools: get_web_page_html, get_web_page_markdown, get_web_page_text, each with url (required), browser (default true), proxy_type, proxy_country."
+    type: measured
+    source: expected_output/01_handshake_and_tools.txt
+  - id: C3
+    text: "prompts/list is empty; resources/list has one resource, get_scraping_options."
+    type: measured
+    source: expected_output/01_handshake_and_tools.txt
+  - id: C4
+    text: "tools/call without an API key returns a normal tool result whose text starts with 'SCRAPING FAILED (Detail: Missing API Key...)' rather than a JSON-RPC error."
+    type: measured
+    source: expected_output/01_handshake_and_tools.txt
+  - id: C5
+    text: "A 25-line server built with mcp 2.2.0 (MCPServer, @tool) is listed by a stdio client with tool fetch_markdown(url, browser)."
+    type: measured
+    source: expected_output/03_client.txt
+  - id: C6
+    text: "MCP architecture: host, clients (one per server connection), servers; primitives tools, resources, prompts; JSON-RPC 2.0; capability negotiation."
+    type: external
+    source: https://modelcontextprotocol.io/specification/2025-06-18/architecture (accessed 2026-09-15)
+  - id: C7
+    text: "Two standard transports, stdio and Streamable HTTP; Streamable HTTP replaces HTTP+SSE from protocol version 2024-11-05; single endpoint supporting POST and GET; Mcp-Session-Id header; Accept must list application/json and text/event-stream."
+    type: external
+    source: https://modelcontextprotocol.io/specification/2025-06-18/basic/transports (accessed 2026-09-15)
+  - id: C8
+    text: "ScrapingAnt MCP setup per client and tool parameter semantics (browser, proxy_type datacenter|residential, proxy_country)."
+    type: product
+    source: https://docs.scrapingant.com/mcp-server
+  - id: C9
+    text: "MCP server requests consume API credits the same way as regular API calls."
+    type: product
+    source: https://docs.scrapingant.com/mcp-server (Credits Usage)
