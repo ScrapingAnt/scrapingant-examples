@@ -1,7 +1,7 @@
 article_id: what-is-mcp-server
 canonical_url: https://scrapingant.com/blog/what-is-mcp-server
 owner: Oleg Kulyk
-examples_repo_commit: ""
+examples_repo_commit: "66c19e8"   # commit that recorded the run
 tested_at: 2026-09-15
 requires_api_key: true
 environment:
@@ -14,8 +14,10 @@ run_command: ./run.sh
 fixtures:
   - https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
 outputs:
+  - expected_output/00_handshake_minimal.txt
   - expected_output/01_handshake_and_tools.txt
   - expected_output/03_client.txt
+  - expected_output/03_client_bad_key.txt
   - expected_output/02_tool_call.txt   # only after a run with SCRAPINGANT_API_KEY
 measurements: []
 limitations:
@@ -38,7 +40,7 @@ claims:
     type: measured
     source: expected_output/01_handshake_and_tools.txt
   - id: C5
-    text: "A 25-line server built with mcp 2.2.0 (MCPServer, @tool) is listed by a stdio client with tool fetch_markdown(url, browser)."
+    text: "A server built with mcp 2.2.0 (MCPServer, @tool) is listed by a stdio client with tool fetch_markdown(url, browser); with a wrong key the tool returns 'fetch failed: HTTP 403 ...' as text."
     type: measured
     source: expected_output/03_client.txt
   - id: C6
