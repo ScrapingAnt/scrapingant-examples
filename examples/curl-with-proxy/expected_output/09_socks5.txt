@@ -1,7 +1,7 @@
 $ curl -v -x socks5://user:pass@127.0.0.1:1080 -o /dev/null https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
 * Connected to 127.0.0.1 (127.0.0.1) port 1080
 * Host scrapingant.github.io:443 was resolved.
-* SOCKS5 connect to 185.199.109.153:443 (locally resolved)
+* SOCKS5 connect to <ip>:443 (locally resolved)
 * SOCKS5 request granted.
 * Connected to 127.0.0.1 (127.0.0.1) port 1080
 > GET /scrapingant-examples/fixtures/dynamic-delayed.html HTTP/2

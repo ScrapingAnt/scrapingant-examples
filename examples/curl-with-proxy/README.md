@@ -20,7 +20,10 @@ python3.12 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 ./run.sh
 ```
-`run.sh` records one file per case in `expected_output/` (`$ command`, output, exit code) and asserts the expected status codes and exit codes. It needs `curl` on `PATH` and outbound HTTPS.
+`run.sh` records one file per case in `expected_output/` (`$ command`, output, exit code) and asserts the expected status codes and exit codes. Verbose (`-v`) transcripts are trimmed to the proxy-related lines and non-loopback IP addresses are masked as `<ip>`, so runs are comparable; a real `-v` prints many more lines. It needs `curl` on `PATH` and outbound HTTPS.
+
+## Diagrams
+`diagrams/*.d2` are the sources of the two figures in the article (render with `d2 --layout dagre`).
 
 ## Not covered
 - A TLS-speaking proxy (`-x https://…`), so `--proxy-cacert` / `--proxy-insecure` are documented from the manual, not run.

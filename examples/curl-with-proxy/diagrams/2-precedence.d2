@@ -1,0 +1,10 @@
+direction: down
+env: "Environment\nhttp_proxy (lowercase only), https_proxy, ALL_PROXY" {class: box}
+rc: "~/.curlrc\nproxy = …   proxy-user = …" {class: box}
+x: "-x / --proxy on the command line\n(-x '' cancels an environment proxy)" {class: emph}
+out: "proxy used for this request" {class: soft}
+np: "no_proxy / NO_PROXY,  --noproxy '*'" {class: box}
+env -> x: "overridden by" {class: edge}
+rc -> x: "overridden by (later option wins)" {class: edge}
+x -> out {class: edgeo}
+np -> out: "removes the proxy for matching hosts,\neven one given with -x" {class: edgeo}

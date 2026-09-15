@@ -1,0 +1,25 @@
+direction: down
+a: "http:// target\nthrough an HTTP proxy" {
+  class: group
+  c: curl {class: box}
+  p: HTTP proxy {class: emph}
+  s: "http://target" {class: box}
+  c -> p: "GET http://target/path\n+ Proxy-Authorization" {class: edgeo}
+  p -> s: "GET /path" {class: edge}
+}
+b: "https:// target\nthrough an HTTP proxy" {
+  class: group
+  c: curl {class: box}
+  p: HTTP proxy {class: emph}
+  s: "https://target" {class: box}
+  c -> p: "CONNECT target:443\n+ Proxy-Authorization" {class: edgeo}
+  p -> s: "TCP tunnel,\nTLS inside" {class: edge}
+}
+c: "any target\nthrough a SOCKS5 proxy" {
+  class: group
+  c: curl {class: box}
+  p: SOCKS5 proxy {class: emph}
+  s: target {class: box}
+  c -> p: "socks5://  IP (curl resolved)\nsocks5h:// hostname" {class: edgeo}
+  p -> s: TCP {class: edge}
+}

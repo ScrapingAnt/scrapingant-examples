@@ -1,4 +1,4 @@
-$ https_proxy=http://127.0.0.1:8081 curl -v --noproxy '*' -o /dev/null https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+$ curl -v -x http://127.0.0.1:8081 --noproxy '*' -o /dev/null https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
 * Host scrapingant.github.io:443 was resolved.
 * Connected to scrapingant.github.io (<ip>) port 443
 > GET /scrapingant-examples/fixtures/dynamic-delayed.html HTTP/2

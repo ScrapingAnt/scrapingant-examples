@@ -1,0 +1,3 @@
+$ curl -x http://proxy.invalid:8080 -o /dev/null -w '%{http_code}\n' https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+000
+exit=5
