@@ -1,7 +1,7 @@
 article_id: curl-with-proxy
 canonical_url: https://scrapingant.com/blog/curl-with-proxy
 owner: Oleg Kulyk
-examples_repo_commit: "6ecaf57"   # commit that recorded the run
+examples_repo_commit: "e882662"   # commit that recorded the run
 tested_at: 2026-09-15
 requires_api_key: false
 environment:
@@ -17,7 +17,7 @@ fixtures:
   - https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
 outputs:
   - expected_output/00_versions.txt
-  - expected_output/01_basic_x.txt … 20_connection_refused.txt (one file per case)
+  - expected_output/01_basic_x.txt … 24_curlrc_vs_x.txt (one file per case)
 measurements: []
 limitations:
   - Proxies are local; transcripts prove routing, not an exit-IP change.
