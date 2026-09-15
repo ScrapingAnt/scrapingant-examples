@@ -59,14 +59,23 @@ jobs:
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
+          EXAMPLE: ${{ matrix.id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          title="example-failed: ${{ matrix.id }}"
+          title="example-failed: $EXAMPLE"
+          {
+            echo "Run: $RUN_URL"
+            echo
+            echo "Last 60 lines of run.log:"
+            echo '```'
+            tail -60 "examples/$EXAMPLE/run.log" 2>/dev/null || echo "(no run.log)"
+            echo '```'
+            echo
+            echo "Do not auto-fix. Review the article that references this example and refresh it through the content workflow."
+          } > /tmp/issue-body.md
           existing=$(gh issue list --label example-failed --state open --search "\"$title\" in:title" --json number -q '.[0].number')
-          body="Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-Last 60 lines of run.log:
-\`\`\`
-$(tail -60 examples/${{ matrix.id }}/run.log 2>/dev/null)
-\`\`\`
-Do not auto-fix. Review the article that references this example and refresh it through the content workflow."
-          if [ -n "$existing" ]; then gh issue comment "$existing" --body "$body"; else gh issue create --title "$title" --label example-failed --body "$body"; fi
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file /tmp/issue-body.md
+          else
+            gh issue create --title "$title" --label example-failed --body-file /tmp/issue-body.md
+          fi
