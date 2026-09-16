@@ -1,7 +1,7 @@
 article_id: wget-post-requests
 canonical_url: https://scrapingant.com/blog/wget-post-requests
 owner: Oleg Kulyk
-examples_repo_commit: "fd4c503"
+examples_repo_commit: "<filled after commit>"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
@@ -79,7 +79,7 @@ claims:   # ids match briefs/wget-post-requests.ledger.md in seo_optimisation
     "type": "measured"
     "source": "11_no_encoding.txt, 12_urlencode.txt"
   - "id": "C15"
-    "text": "Login sequence with --keep-session-cookies → \"hello foo\"; cookie line with expiry 0; without it, grep -c session = 0 (exit 0 is the block's last command); /me without cookies → \"Username/Password Authentication Failed.\" exit 6"
+    "text": "Login sequence with --keep-session-cookies → \"hello foo\"; cookie line with expiry 0; without it, grep -c session prints 0 and the block's exit 1 is grep's (no match); /me without cookies → \"Username/Password Authentication Failed.\" exit 6"
     "type": "measured"
     "source": "13_login_cookies.txt, 13c_save_without_keep.txt, 13b_no_cookies.txt"
   - "id": "C16"
@@ -95,7 +95,7 @@ claims:   # ids match briefs/wget-post-requests.ledger.md in seo_optimisation
     "type": "documented"
     "source": "GNU Wget manual, `--auth-no-challenge` (accessed 2026-09-16)"
   - "id": "C19"
-    "text": "Default --tries=3 does not retry a 503 (exit 8, one POST); --retry-on-http-error=503 --waitretry=1 succeeds on attempt [3] and the body is re-sent (three POSTs to /flaky?case=17 in server.log); flaky counter is per query string"
+    "text": "--tries=3 without --retry-on-http-error does not retry a 503 (exit 8, one POST); --retry-on-http-error=503 --waitretry=1 succeeds on attempt [3] (-nv prints one URL line per failed attempt) and the body is re-sent (three POSTs to /flaky?case=17 in server.log); flaky counter is per query string"
     "type": "measured"
     "source": "16_retry_default.txt, 17_retry_on_503.txt, server.log"
   - "id": "C20"
