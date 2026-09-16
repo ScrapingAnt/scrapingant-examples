@@ -1,0 +1,6 @@
+$ wget -S -qO- --auth-no-challenge --http-user=user --http-password=pass --post-data 'x=1' http://127.0.0.1:8000/auth
+  HTTP/1.1 200 OK
+ "method": "POST",
+ "authorization": "Basic dXNlcjpwYXNz",
+ "body": "x=1",
+exit=0

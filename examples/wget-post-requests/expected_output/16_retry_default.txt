@@ -1,0 +1,4 @@
+$ wget -nv -O- --tries=3 --post-data 'x=1' http://127.0.0.1:8000/flaky
+http://127.0.0.1:8000/flaky:
+<time> ERROR 503: Service Unavailable.
+exit=8

@@ -1,0 +1,3 @@
+$ wget -nv -O- http://127.0.0.1:8000/me
+Username/Password Authentication Failed.
+exit=6

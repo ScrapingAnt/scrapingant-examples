@@ -1,0 +1,23 @@
+$ wget -qO- --post-data 'q=hello world&note=a&b=c' http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "application/x-www-form-urlencoded",
+ "content_length": "24",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "q=hello world&note=a&b=c",
+ "form": {
+  "q": [
+   "hello world"
+  ],
+  "note": [
+   "a"
+  ],
+  "b": [
+   "c"
+  ]
+ }
+}
+exit=0

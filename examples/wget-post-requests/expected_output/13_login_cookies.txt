@@ -1,0 +1,5 @@
+$ wget -qO- --save-cookies cookies.txt --keep-session-cookies --post-data 'user=foo&password=bar' http://127.0.0.1:8000/login && wget -qO- --load-cookies cookies.txt http://127.0.0.1:8000/me && grep session cookies.txt
+logged in
+hello foo
+127.0.0.1:8000	FALSE	/	FALSE	0	session	abc123
+exit=0

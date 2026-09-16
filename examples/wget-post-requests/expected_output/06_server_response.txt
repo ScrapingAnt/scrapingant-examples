@@ -1,0 +1,7 @@
+$ wget -S -qO /dev/null --post-data 'user=foo' http://127.0.0.1:8000/echo
+  HTTP/1.1 200 OK
+  Server: <server>
+  Date: <date>
+  Content-Type: application/json
+  Content-Length: 250
+exit=0

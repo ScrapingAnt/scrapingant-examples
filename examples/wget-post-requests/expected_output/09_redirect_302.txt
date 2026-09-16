@@ -1,0 +1,5 @@
+$ wget -qO- --post-data 'user=foo' http://127.0.0.1:8000/redirect302
+ "method": "GET",
+ "content_type": null,
+ "body": ""
+exit=0

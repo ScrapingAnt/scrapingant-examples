@@ -1,0 +1,5 @@
+$ wget -qO- --post-data 'user=foo' http://127.0.0.1:8000/redirect307
+ "method": "POST",
+ "content_type": "application/x-www-form-urlencoded",
+ "body": "user=foo",
+exit=0

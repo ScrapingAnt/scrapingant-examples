@@ -1,0 +1,12 @@
+$ wget -qO- --header='Content-Type: application/json' --post-file=fixtures/data.json http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "application/json",
+ "content_length": "36",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "{\"name\": \"ant\", \"tags\": [\"a\", \"b\"]}\n"
+}
+exit=0

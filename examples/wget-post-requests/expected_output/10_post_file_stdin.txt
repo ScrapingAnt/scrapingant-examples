@@ -1,0 +1,4 @@
+$ echo 'user=foo' | wget -nv -O- --post-file=/dev/stdin http://127.0.0.1:8000/echo; echo 'user=foo' | wget -nv -O- --post-file=- http://127.0.0.1:8000/echo
+BODY data file '/dev/stdin' missing: Illegal seek
+BODY data file '-' missing: No such file or directory
+exit=3

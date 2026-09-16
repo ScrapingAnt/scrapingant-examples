@@ -1,0 +1,12 @@
+$ curl -s -F file=@fixtures/data.json -F note=hello http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "multipart/form-data; boundary=<boundary>",
+ "content_length": "353",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "curl/<version>",
+ "body": "--------------------------0jBqGHCGg9EfuAn3KuoC4d\r\nContent-Disposition: form-data; name=\"file\"; filename=\"data.json\"\r\nContent-Type: application/octet-stream\r\n\r\n{\"name\": \"ant\", \"tags\": [\"a\", \"b\"]}\n\r\n--<boundary>\r\nContent-Disposition: form-data; name=\"note\"\r\n\r\nhello\r\n--<boundary>--\r\n"
+}
+exit=0

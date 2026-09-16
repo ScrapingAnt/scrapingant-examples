@@ -1,0 +1,4 @@
+$ wget -qO- --save-cookies cookies.txt --post-data 'user=foo&password=bar' http://127.0.0.1:8000/login && grep -c session cookies.txt
+logged in
+0
+exit=1

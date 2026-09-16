@@ -1,0 +1,12 @@
+$ wget -qO- --method=PUT --header='Content-Type: application/json' --body-file=fixtures/data.json http://127.0.0.1:8000/echo
+{
+ "method": "PUT",
+ "path": "/echo",
+ "content_type": "application/json",
+ "content_length": "36",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "{\"name\": \"ant\", \"tags\": [\"a\", \"b\"]}\n"
+}
+exit=0

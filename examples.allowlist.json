@@ -25,6 +25,11 @@
       "id": "python-parse-xml",
       "needs_api_key": false,
       "note": "generates a 24 MB file; the timing table is informational"
+    },
+    {
+      "id": "wget-post-requests",
+      "needs_api_key": false,
+      "note": "starts a local echo server; needs wget and curl"
     }
   ]
 }

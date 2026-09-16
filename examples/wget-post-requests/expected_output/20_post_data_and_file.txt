@@ -1,0 +1,3 @@
+$ wget -qO- --post-data 'a=1' --post-file=fixtures/form.txt http://127.0.0.1:8000/echo
+You cannot specify both --post-data and --post-file.
+exit=1

@@ -1,0 +1,20 @@
+$ wget -qO- --post-data 'user=foo&lang=en' http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "application/x-www-form-urlencoded",
+ "content_length": "16",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "user=foo&lang=en",
+ "form": {
+  "user": [
+   "foo"
+  ],
+  "lang": [
+   "en"
+  ]
+ }
+}
+exit=0

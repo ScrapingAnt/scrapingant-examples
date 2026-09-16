@@ -1,0 +1,19 @@
+$ wget -nv -O- --tries=3 --retry-on-http-error=503 --waitretry=1 --post-data 'x=1' http://127.0.0.1:8000/flaky
+http://127.0.0.1:8000/flaky:
+{
+ "method": "POST",
+ "path": "/flaky",
+ "content_type": "application/x-www-form-urlencoded",
+ "content_length": "3",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "x=1",
+ "form": {
+  "x": [
+   "1"
+  ]
+ }
+}
+<time> URL:http://127.0.0.1:8000/flaky [241/241] -> "-" [2]
+exit=0

@@ -1,0 +1,12 @@
+$ wget -qO- --header='Content-Type: application/json' --post-data='{"key":"value"}' http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "application/json",
+ "content_length": "15",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "{\"key\":\"value\"}"
+}
+exit=0

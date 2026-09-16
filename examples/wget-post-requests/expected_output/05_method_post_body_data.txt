@@ -1,0 +1,20 @@
+$ wget -qO- --method=POST --body-data='a=1&b=2' http://127.0.0.1:8000/echo
+{
+ "method": "POST",
+ "path": "/echo",
+ "content_type": "application/x-www-form-urlencoded",
+ "content_length": "7",
+ "authorization": null,
+ "cookie": null,
+ "user_agent": "Wget/<version>",
+ "body": "a=1&b=2",
+ "form": {
+  "a": [
+   "1"
+  ],
+  "b": [
+   "2"
+  ]
+ }
+}
+exit=0
