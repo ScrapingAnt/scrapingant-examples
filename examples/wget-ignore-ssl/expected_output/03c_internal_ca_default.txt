@@ -1,0 +1,5 @@
+$ wget -nv -O- https://localhost:8445/index.html   # leaf signed by an internal CA
+ERROR: cannot verify localhost's certificate, issued by 'CN=Example Internal CA':
+  Unable to locally verify the issuer's authority.
+To connect to localhost insecurely, use `--no-check-certificate'.
+exit=5

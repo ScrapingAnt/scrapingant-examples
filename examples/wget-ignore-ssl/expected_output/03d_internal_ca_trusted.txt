@@ -1,0 +1,4 @@
+$ wget -nv -O- --ca-certificate=certs/ca.pem https://localhost:8445/index.html
+<!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
+<time> URL:https://localhost:8445/index.html [74/74] -> "-" [1]
+exit=0

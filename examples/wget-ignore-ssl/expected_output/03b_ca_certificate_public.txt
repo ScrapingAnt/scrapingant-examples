@@ -1,0 +1,3 @@
+$ wget -nv -O /dev/null --ca-certificate=certs/localhost.pem https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html   # public site, only our CA file given
+<time> URL:https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html [752/752] -> "/dev/null" [1]
+exit=0

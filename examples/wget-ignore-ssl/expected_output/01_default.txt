@@ -1,5 +1,5 @@
 $ wget -nv -O- https://localhost:8443/index.html
-ERROR: cannot verify localhost's certificate, issued by `CN=localhost':
+ERROR: cannot verify localhost's certificate, issued by 'CN=localhost':
   Self-signed certificate encountered.
 To connect to localhost insecurely, use `--no-check-certificate'.
 exit=5

@@ -1,5 +1,5 @@
 $ PIN=$(openssl x509 -in certs/localhost.pem -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64); wget -nv -O- --no-check-certificate --pinnedpubkey="sha256//$PIN" https://localhost:8443/index.html
-WARNING: cannot verify localhost's certificate, issued by `CN=localhost':
+WARNING: cannot verify localhost's certificate, issued by 'CN=localhost':
   Self-signed certificate encountered.
 <!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
 <time> URL:https://localhost:8443/index.html [74/74] -> "-" [1]

@@ -1,5 +1,5 @@
-"""Two HTTPS servers, each on IPv4 and IPv6 loopback so `localhost` resolves without a refused first attempt:
-   8443 self-signed certificate (SAN localhost), 8444 expired certificate."""
+"""Three HTTPS servers, each on IPv4 and IPv6 loopback so `localhost` resolves without a refused first attempt:
+   8443 self-signed certificate (SAN localhost), 8444 expired certificate, 8445 certificate issued by an internal CA."""
 import http.server, socket, ssl, sys, threading
 
 class V6Server(http.server.ThreadingHTTPServer):
@@ -15,4 +15,5 @@ def serve(host, port, cert, key):
 for host in ("127.0.0.1", "::1"):
     threading.Thread(target=serve, args=(host, 8444, "certs/expired.pem", "certs/expired-key.pem"), daemon=True).start()
     threading.Thread(target=serve, args=(host, 8443, "certs/localhost.pem", "certs/localhost-key.pem"), daemon=True).start()
+    threading.Thread(target=serve, args=(host, 8445, "certs/internal.pem", "certs/internal-key.pem"), daemon=True).start()
 threading.Event().wait()
