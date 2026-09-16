@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# The GnuTLS-build counterpart of cases 00/01/02/03/07, run inside debian:bookworm-slim (Debian's wget links GnuTLS).
+# The GnuTLS-build counterpart of cases 00/01/02/03/03b/04b/07, run inside debian:bookworm-slim (Debian's wget links GnuTLS).
 # Writes expected_output/gnutls/*.txt. Needs Docker; not part of ./run.sh.
 set -uo pipefail
 cd "$(dirname "$0")"; mkdir -p expected_output/gnutls
@@ -20,6 +20,10 @@ rec() { { echo "\$ $2"; bash -c "$3" 2>&1; echo "exit=$?"; } > "expected_output/
 rec 01_default "wget -4 -nv -O- $U" "wget -4 -nv -O- $U"
 rec 02_no_check_certificate "wget -4 -nv -O- --no-check-certificate $U" "wget -4 -nv -O- --no-check-certificate $U"
 rec 03_ca_certificate "wget -4 -nv -O- --ca-certificate=/tmp/certs/localhost.pem $U" "wget -4 -nv -O- --ca-certificate=/tmp/certs/localhost.pem $U"
+P=https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+rec 03b_ca_certificate_public "wget -4 -nv -O /dev/null --ca-certificate=/tmp/certs/localhost.pem $P" "wget -4 -nv -O /dev/null --ca-certificate=/tmp/certs/localhost.pem $P"
+mkdir -p /tmp/cadir && cp /tmp/certs/localhost.pem /tmp/cadir/ && openssl rehash /tmp/cadir > /dev/null 2>&1
+rec 04b_ca_directory_public "wget -4 -nv -O /dev/null --ca-directory=/tmp/cadir $P" "wget -4 -nv -O /dev/null --ca-directory=/tmp/cadir $P"
 rec 07_ssl_cert_file "SSL_CERT_FILE=/tmp/certs/localhost.pem wget -4 -nv -O- $U" "SSL_CERT_FILE=/tmp/certs/localhost.pem wget -4 -nv -O- $U"
 sed -i -E "s/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} /<time> /" expected_output/gnutls/*.txt
 '

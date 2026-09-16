@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Every wget command from the article, run against two local HTTPS servers started here:
+# Every wget command from the article, run against three local HTTPS servers started here:
 #   https://localhost:8443  self-signed certificate (SAN localhost)
 #   https://localhost:8444  expired certificate
+#   https://localhost:8445  leaf certificate issued by a local internal CA
+# expected_output/gnutls/ comes from run-gnutls-docker.sh and is kept across runs.
 set -uo pipefail
 export LC_ALL=C LANG=C
-cd "$(dirname "$0")"; rm -rf expected_output; mkdir -p expected_output; status=0
+cd "$(dirname "$0")"; mkdir -p expected_output; rm -f expected_output/*.txt; status=0
 python3 gen_certs.py > /dev/null
 python3 server.py 2> server.log & SRV=$!
 trap 'kill $SRV 2>/dev/null' EXIT
@@ -12,7 +14,7 @@ for i in $(seq 1 20); do python3 -c "import socket; socket.create_connection(('1
 U=https://localhost:8443/index.html
 rec() { { echo "\$ $2"; bash -c "$3" 2>&1; echo "exit=$?"; } > "expected_output/$1.txt"; }
 { wget --version | head -1; wget --version | grep -o -- '+ssl/[a-z]*'
-  if command -v otool > /dev/null; then echo "wget links: $(otool -L "$(command -v wget)" | grep -o '[^ ]*libssl[^ ]*')"; L=$(otool -L "$(command -v wget)" | grep -o '[^ ]*libssl[^ ]*'); B=$(dirname "$(dirname "$L")")/bin/openssl; [ -x "$B" ] && echo "that OpenSSL: $("$B" version)";
+  if command -v otool > /dev/null; then L=$(otool -L "$(command -v wget)" | grep -o '[^ ]*libssl[^ ]*' | tr -d '\t'); echo "wget links: $L"; B=$(dirname "$(dirname "$L")")/bin/openssl; [ -x "$B" ] && echo "that OpenSSL: $("$B" version)";
   elif command -v ldd > /dev/null; then echo "wget links: $(ldd "$(command -v wget)" | grep -oE '[^ ]*(libssl|libgnutls)[^ ]*' | tr '\n' ' ')"; fi
   echo "openssl cli on PATH (used for rehash and the pin only): $(openssl version)"; echo "curl: $(curl --version | head -1)"; echo "python3: $(python3 --version 2>&1)"; } > expected_output/00_versions.txt
 BACKEND=$(wget --version | grep -o -- '+ssl/[a-z]*' | cut -d/ -f2)
@@ -26,6 +28,7 @@ P=https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.ht
 rec 03b_ca_certificate_public "wget -nv -O /dev/null --ca-certificate=certs/localhost.pem $P   # public site, only our CA file given"   "wget -nv -O /dev/null --ca-certificate=certs/localhost.pem $P"
 rec 03c_internal_ca_default "wget -nv -O- https://localhost:8445/index.html   # leaf signed by an internal CA"   "wget -nv -O- https://localhost:8445/index.html"
 rec 03d_internal_ca_trusted "wget -nv -O- --ca-certificate=certs/ca.pem https://localhost:8445/index.html"   "wget -nv -O- --ca-certificate=certs/ca.pem https://localhost:8445/index.html"
+rec 04b_ca_directory_public "wget -nv -O /dev/null --ca-directory=cadir $P   # public site, only our directory given"   "wget -nv -O /dev/null --ca-directory=cadir $P"
 rec 05_ip_mismatch        "wget -nv -O- --ca-certificate=certs/localhost.pem https://127.0.0.1:8443/index.html" "wget -nv -O- --ca-certificate=certs/localhost.pem https://127.0.0.1:8443/index.html"
 rec 06_expired            "wget -nv -O- --ca-certificate=certs/expired.pem https://localhost:8444/index.html"    "wget -nv -O- --ca-certificate=certs/expired.pem https://localhost:8444/index.html"
 rec 06b_expired_no_check  "wget -nv -O- --no-check-certificate https://localhost:8444/index.html"                 "wget -nv -O- --no-check-certificate https://localhost:8444/index.html"
@@ -43,6 +46,6 @@ sed -i.bak -E 's/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} /<time> 
 for f in expected_output/*.txt; do echo "=== $f"; cat "$f"; done
 g() { grep -q -- "$2" "expected_output/$1"*.txt || { echo "FAILED: $1 missing '$2'"; status=1; }; }
 g 01 "cannot verify localhost's certificate"; g 01 "exit=5"; g 02 "WARNING"; g 02 "served over HTTPS"; g 03 "served over HTTPS"; g 03 "exit=0"
-g 04 "served over HTTPS"; g 03b "exit=0"; g 03c "exit=5"; g 03c "Internal CA"; g 03d "served over HTTPS"; g 05 "exit=5"; g 06_ "expired"; g 06_ "exit=5"; g 06b "served over HTTPS"; g 06b "exit=0"; g 07 "exit="; g 08 "served over HTTPS"; g 09 "served over HTTPS"
+g 04 "served over HTTPS"; g 04b "exit="; g 03b "exit=0"; g 03c "exit=5"; g 03c "Internal CA"; g 03d "served over HTTPS"; g 05 "exit=5"; g 06_ "expired"; g 06_ "exit=5"; g 06b "served over HTTPS"; g 06b "exit=0"; g 07 "exit="; g 08 "served over HTTPS"; g 09 "served over HTTPS"
 g 10 "served over HTTPS"; g 11 "exit=5"; g 12 "exit="; g 13 "served over HTTPS"; g 14 "served over HTTPS"
 echo "backend=$BACKEND"; echo "status=$status"; exit $status

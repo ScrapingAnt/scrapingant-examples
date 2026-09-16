@@ -1,0 +1,6 @@
+$ wget -4 -nv -O- --no-check-certificate https://localhost:8443/index.html
+WARNING: The certificate of 'localhost' is not trusted.
+WARNING: The certificate of 'localhost' doesn't have a known issuer.
+<!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
+<time> URL:https://localhost:8443/index.html [74/74] -> "-" [1]
+exit=0

@@ -1,0 +1,4 @@
+$ SSL_CERT_FILE=/tmp/certs/localhost.pem wget -4 -nv -O- https://localhost:8443/index.html
+ERROR: The certificate of 'localhost' is not trusted.
+ERROR: The certificate of 'localhost' doesn't have a known issuer.
+exit=5

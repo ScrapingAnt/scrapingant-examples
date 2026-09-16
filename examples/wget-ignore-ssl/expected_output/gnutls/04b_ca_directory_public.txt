@@ -1,0 +1,4 @@
+$ wget -4 -nv -O /dev/null --ca-directory=/tmp/cadir https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+ERROR: The certificate of 'scrapingant.github.io' is not trusted.
+ERROR: The certificate of 'scrapingant.github.io' doesn't have a known issuer.
+exit=5

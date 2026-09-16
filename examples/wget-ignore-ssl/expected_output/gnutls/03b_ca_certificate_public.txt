@@ -1,0 +1,3 @@
+$ wget -4 -nv -O /dev/null --ca-certificate=/tmp/certs/localhost.pem https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+<time> URL:https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html [752/752] -> "/dev/null" [1]
+exit=0

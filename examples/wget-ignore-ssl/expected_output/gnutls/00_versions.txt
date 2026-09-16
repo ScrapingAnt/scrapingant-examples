@@ -1,0 +1,4 @@
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+GNU Wget 1.21.3 built on linux-gnu.
++ssl/gnutls
+wget links: 	libgnutls.so.30 /lib/aarch64-linux-gnu/libgnutls.so.30 
