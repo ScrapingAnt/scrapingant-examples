@@ -1,7 +1,7 @@
 article_id: wget-post-requests
 canonical_url: https://scrapingant.com/blog/wget-post-requests
 owner: Oleg Kulyk
-examples_repo_commit: "<filled after commit>"
+examples_repo_commit: "2c1cce4"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
