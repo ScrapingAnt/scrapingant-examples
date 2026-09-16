@@ -1,0 +1,5 @@
+$ wget -nv -O- --ca-certificate=certs/expired.pem https://localhost:8444/index.html
+ERROR: cannot verify localhost's certificate, issued by `CN=localhost':
+  Issued certificate has expired.
+To connect to localhost insecurely, use `--no-check-certificate'.
+exit=5

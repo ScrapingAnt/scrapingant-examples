@@ -1,0 +1,5 @@
+$ wget -nv -O- --no-check-certificate --pinnedpubkey="sha256//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" https://localhost:8443/index.html
+WARNING: cannot verify localhost's certificate, issued by `CN=localhost':
+  Self-signed certificate encountered.
+The public key does not match pinned public key!
+exit=5

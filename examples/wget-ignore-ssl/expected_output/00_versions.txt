@@ -1,0 +1,5 @@
+GNU Wget 1.25.0 built on darwin24.1.0.
++ssl/openssl
+openssl cli: OpenSSL 3.3.0 9 Apr 2024 (Library: OpenSSL 3.3.0 9 Apr 2024)
+curl: curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.1
+python3: Python 3.10.14

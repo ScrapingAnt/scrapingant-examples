@@ -1,0 +1,6 @@
+$ wget -nv -O- --no-check-certificate https://localhost:8443/index.html
+WARNING: cannot verify localhost's certificate, issued by `CN=localhost':
+  Self-signed certificate encountered.
+<!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
+<time> URL:https://localhost:8443/index.html [74/74] -> "-" [1]
+exit=0

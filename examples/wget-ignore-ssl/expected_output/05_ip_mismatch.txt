@@ -1,0 +1,4 @@
+$ wget -nv -O- --ca-certificate=certs/localhost.pem https://127.0.0.1:8443/index.html
+    ERROR: certificate common name 'localhost' doesn't match requested host name '127.0.0.1'.
+To connect to 127.0.0.1 insecurely, use `--no-check-certificate'.
+exit=5

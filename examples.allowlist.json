@@ -30,6 +30,11 @@
       "id": "wget-post-requests",
       "needs_api_key": false,
       "note": "starts a local echo server; needs wget and curl"
+    },
+    {
+      "id": "wget-ignore-ssl",
+      "needs_api_key": false,
+      "note": "local self-signed and expired HTTPS servers; case 07 result depends on the wget TLS backend"
     }
   ]
 }

@@ -1,0 +1,11 @@
+$ curl -sS https://localhost:8443/index.html; echo; curl -sS -k https://localhost:8443/index.html; curl -sS --cacert certs/localhost.pem https://localhost:8443/index.html
+curl: (60) SSL certificate problem: self signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+
+<!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
+<!doctype html><title>self-signed fixture</title><p>served over HTTPS</p>
+exit=0
