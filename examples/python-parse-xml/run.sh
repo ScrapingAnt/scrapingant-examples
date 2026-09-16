@@ -14,7 +14,7 @@ for f in expected_output/*.txt; do echo "=== $f"; cat "$f"; done
 g() { grep -q -- "$2" "expected_output/$1"*.txt || { echo "FAILED: $1 missing '$2'"; status=1; }; }
 for n in 01 02 03 04 05 06 07 08 09 10; do g $n "exit=0"; done
 g 01 "bk101 XML Developer's Guide 44.95"; g 01 "Contains <b>markup</b> & ampersands"
-g 02 "findall('url'): \[\]"; g 02 "3 wildcard: \['https://example.com/'"
+g 02 "findall('url'): \[\]"; g 02 "<ns0:url xmlns:"; g 04 "issubclass(ET.ParseError, SyntaxError): True"; g 09 "400,000 <record>"; g 02 "3 wildcard: \['https://example.com/'"
 g 03 "declaration honoured): Jürgen"; g 03 "UnicodeDecodeError"; g 03 "ValueError: Unicode strings with encoding declaration"
 g 04 "ParseError.position"; g 04 "XMLSyntaxError.lineno"; g 04 "recover=True: <catalog>"
 g 06 "books.xml valid: True"; g 06 "books-invalid.xml valid: False"; g 06 "iterparse books: \['bk101', 'bk102', 'bk103'\]"

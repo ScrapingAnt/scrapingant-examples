@@ -3,6 +3,7 @@ from lxml import etree
 from _common import show
 
 show("ET.parse('fixtures/broken.xml')", lambda: ET.parse("fixtures/broken.xml"))
+print("issubclass(ET.ParseError, SyntaxError):", issubclass(ET.ParseError, SyntaxError))
 try:
     ET.parse("fixtures/broken.xml")
 except ET.ParseError as e:

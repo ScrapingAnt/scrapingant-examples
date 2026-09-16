@@ -17,7 +17,9 @@ for u in root.findall("sm:url", ns):
     alt = u.find("xhtml:link", ns)
     print(u.findtext("sm:loc", namespaces=ns), u.findtext("sm:lastmod", namespaces=ns), alt.get("hreflang") if alt is not None else None)
 
-# register the prefix so serialised output keeps it instead of ns0
+# serialising without registering the prefixes gives ns0/ns1
+print(ET.tostring(root.find("sm:url", ns), encoding="unicode").strip().splitlines()[0])
+# register them so the output keeps the document's own prefixes
 ET.register_namespace("", "http://www.sitemaps.org/schemas/sitemap/0.9")
 ET.register_namespace("xhtml", "http://www.w3.org/1999/xhtml")
 print(ET.tostring(root.find("sm:url", ns), encoding="unicode").strip().splitlines()[0])

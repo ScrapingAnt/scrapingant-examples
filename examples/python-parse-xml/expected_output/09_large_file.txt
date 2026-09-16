@@ -1,13 +1,23 @@
 $ python 09_large_file.py
 file: generated/large.xml, 23.8 MB, 200,000 <record> elements; task: count records with region="us"; one subprocess per approach
 approach                          seconds  peak RSS MB    count
-ET.parse + findall                   0.67          255    66667
+ET.parse + findall                   0.70          255    66667
 ET.iterparse + clear                 0.77           34    66667
+ET.iterparse + clear + root.clear     0.79           17    66667
 lxml.parse + xpath                   0.32          370    66667
 lxml.iterparse + clear               0.29           22    66667
 xml.sax handler                      0.74           23    66667
-xml.dom.minidom                      3.17          751    66667
-xmltodict.parse                      1.55          215    66667
-untangle.parse                       3.50          384    66667
-BeautifulSoup(features='xml')        5.18          872    66667
+xml.dom.minidom                      3.29          751    66667
+xmltodict.parse                      1.56          215    66667
+untangle.parse                       3.48          386    66667
+BeautifulSoup(features='xml')        5.23          872    66667
+
+file: generated/large2.xml, 47.7 MB, 400,000 <record> elements; task: count records with region="us"; one subprocess per approach
+approach                          seconds  peak RSS MB    count
+ET.parse + findall                   1.31          491   133334
+ET.iterparse + clear                 1.58           52   133334
+ET.iterparse + clear + root.clear     1.60           17   133334
+lxml.parse + xpath                   0.58          718   133334
+lxml.iterparse + clear               0.60           22   133334
+xml.sax handler                      1.52           22   133334
 exit=0

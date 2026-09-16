@@ -1,4 +1,4 @@
-import json, xmltodict, untangle, pandas as pd
+import xmltodict, untangle, pandas as pd
 from bs4 import BeautifulSoup
 
 d = xmltodict.parse(open("fixtures/books.xml", "rb").read())
