@@ -1,8 +1,9 @@
-$ wget -nv -O- --tries=3 --retry-on-http-error=503 --waitretry=1 --post-data 'x=1' http://127.0.0.1:8000/flaky
-http://127.0.0.1:8000/flaky:
+$ wget -nv -O- --tries=3 --retry-on-http-error=503 --waitretry=1 --post-data 'x=1' 'http://127.0.0.1:8000/flaky?case=17'
+http://127.0.0.1:8000/flaky?case=17:
+http://127.0.0.1:8000/flaky?case=17:
 {
  "method": "POST",
- "path": "/flaky",
+ "path": "/flaky?case=17",
  "content_type": "application/x-www-form-urlencoded",
  "content_length": "3",
  "authorization": null,
@@ -15,5 +16,5 @@ http://127.0.0.1:8000/flaky:
   ]
  }
 }
-<time> URL:http://127.0.0.1:8000/flaky [241/241] -> "-" [2]
+<time> URL:http://127.0.0.1:8000/flaky?case=17 [249/249] -> "-" [3]
 exit=0

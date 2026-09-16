@@ -1,7 +1,7 @@
 """Local target for the wget cases: echoes the request, and provides redirect, error, auth, cookie, flaky and slow endpoints."""
 import base64, http.server, json, sys, time, urllib.parse
 
-FLAKY_FAILS = {"left": 2}
+FLAKY_FAILS = {}   # per query string, so each case starts with two failures
 
 class H(http.server.BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
@@ -36,8 +36,9 @@ class H(http.server.BaseHTTPRequestHandler):
             code = int(p[len("/redirect"):]); return self._send(code, "", "text/plain", [("Location", "/echo")])
         if p == "/error400": return self._send(400, '{"error": "field user is required"}\n')
         if p == "/flaky":
-            if FLAKY_FAILS["left"] > 0:
-                FLAKY_FAILS["left"] -= 1; return self._send(503, "try again\n", "text/plain")
+            left = FLAKY_FAILS.setdefault(self.path, 2)
+            if left > 0:
+                FLAKY_FAILS[self.path] = left - 1; return self._send(503, "try again\n", "text/plain")
             return self._echo()
         if p == "/slow":
             time.sleep(3); return self._send(200, "late\n", "text/plain")

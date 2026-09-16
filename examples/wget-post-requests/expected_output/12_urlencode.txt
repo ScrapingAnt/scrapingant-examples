@@ -1,4 +1,4 @@
-$ wget -qO- --post-data "$(python -c 'import urllib.parse; print(urllib.parse.urlencode({"q": "hello world", "note": "a&b=c"}))')" http://127.0.0.1:8000/echo
+$ wget -qO- --post-data "$(python3 -c 'import urllib.parse; print(urllib.parse.urlencode({"q": "hello world", "note": "a&b=c"}))')" http://127.0.0.1:8000/echo
 {
  "method": "POST",
  "path": "/echo",

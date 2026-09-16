@@ -1,8 +1,4 @@
-$ wget -nv -O- --post-data 'x=1' http://127.0.0.1:8000/error400; echo "---"; wget -nv -O response.json --post-data 'x=1' http://127.0.0.1:8000/error400; ls -l response.json
+$ wget -nv -O- --post-data 'x=1' http://127.0.0.1:8000/error400
 http://127.0.0.1:8000/error400:
 <time> ERROR 400: Bad Request.
----
-http://127.0.0.1:8000/error400:
-<time> ERROR 400: Bad Request.
-0 response.json
-exit=0
+exit=8
