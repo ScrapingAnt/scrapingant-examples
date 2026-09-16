@@ -28,15 +28,15 @@ APPROACHES = {
 }
 def run_table(path, size_mb, n_records, names):
     print(f"file: {path}, {size_mb:.1f} MB, {n_records:,} <record> elements; task: count records with region=\"us\"; one subprocess per approach")
-    print(f"{'approach':32} {'seconds':>8} {'peak RSS MB':>12} {'count':>8}")
+    print(f"{'approach':34} {'seconds':>8} {'peak RSS MB':>12} {'count':>8}")
     for name in names:
         code = APPROACHES[name]
         prog = f"import resource,sys,time\nP={path!r}\nt=time.perf_counter()\n{code}\nprint(n, round(time.perf_counter()-t,2), round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024*1024 if sys.platform=='darwin' else 1024)))"
         out = subprocess.run([sys.executable, "-c", prog], capture_output=True, text=True, timeout=900)
         if out.returncode:
-            print(f"{name:32} failed: {out.stderr.strip().splitlines()[-1][:80]}"); continue
+            print(f"{name:34} failed: {out.stderr.strip().splitlines()[-1][:80]}"); continue
         n, secs, mb = out.stdout.split()
-        print(f"{name:32} {float(secs):8.2f} {int(mb):12d} {int(n):8d}")
+        print(f"{name:34} {float(secs):8.2f} {int(mb):12d} {int(n):8d}")
 
 run_table(PATH, size_mb, N, list(APPROACHES))
 # twice the file: does streaming memory grow with the file, does a tree?

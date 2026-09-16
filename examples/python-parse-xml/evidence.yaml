@@ -1,7 +1,7 @@
 article_id: python-parse-xml
 canonical_url: https://scrapingant.com/blog/python-parse-xml
 owner: Oleg Kulyk
-examples_repo_commit: "213d627"
+examples_repo_commit: "<filled after commit>"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
@@ -58,7 +58,7 @@ claims:   # ids match briefs/python-parse-xml.ledger.md in seo_optimisation
     "type": "documented"
     "source": "ET docs `iterparse`; https://lxml.de/parsing.html#modifying-the-tree (\"The while loop deletes multiple siblings in a row. This is only necessary if you skipped over some of them using the tag keyword argument.\"), accessed 2026-09-16"
   - "id": "C7"
-    "text": "Measured tables: 23.8 MB / 200,000 records, ten approaches; 47.7 MB / 400,000 records, six approaches; seconds and peak RSS MB as printed; each in its own subprocess"
+    "text": "Measured tables: 23.8 MB / 200,000 records, ten approaches; 47.7 MB / 400,000 records, six approaches (both quoted in full); seconds and peak RSS MB as printed; each in its own subprocess"
     "type": "measured"
     "source": "09_large_file.txt"
   - "id": "C8"
@@ -90,7 +90,7 @@ claims:   # ids match briefs/python-parse-xml.ledger.md in seo_optimisation
     "type": "measured"
     "source": "05_stdlib_others.txt"
   - "id": "C15"
-    "text": "xmltodict (@attr, #text, unparse, namespaces stripped from view), untangle (.cdata, attribute access), bs4 features=\"xml\" (find_all ignores namespaces, recovers broken), pandas.read_xml (xpath, namespaces, NaN) outputs quoted"
+    "text": "xmltodict (@attr, #text, unparse; no namespace processing by default, see C26), untangle (.cdata, attribute access), bs4 features=\"xml\" (find_all ignores namespaces, recovers broken), pandas.read_xml (xpath, namespaces, NaN) outputs quoted"
     "type": "measured"
     "source": "07_third_party.txt"
   - "id": "C16"
