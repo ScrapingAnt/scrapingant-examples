@@ -1,14 +1,14 @@
 $ python 06_environment.py
-$ REQUESTS_CA_BUNDLE='certs/localhost.pem' python -c ...
+$ REQUESTS_CA_BUNDLE=certs/localhost.pem python env_check.py
 requests.get(URL): 200
-$ CURL_CA_BUNDLE='certs/localhost.pem' python -c ...
+$ CURL_CA_BUNDLE=certs/localhost.pem python env_check.py
 requests.get(URL): 200
-$ REQUESTS_CA_BUNDLE='' python -c ...
+$ REQUESTS_CA_BUNDLE='' python env_check.py
 requests.get(URL): requests.exceptions.SSLError: HTTPSConnectionPool(host='localhost', port=8443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)')))
-$ REQUESTS_CA_BUNDLE='/nonexistent.pem' python -c ...
-requests.get(URL): builtins.OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /nonexistent.pem
-$ PYTHONHTTPSVERIFY='0' python -c ...
+$ REQUESTS_CA_BUNDLE=/nonexistent.pem python env_check.py
+requests.get(URL): OSError: Could not find a suitable TLS CA certificate bundle, invalid path: /nonexistent.pem
+$ PYTHONHTTPSVERIFY=0 python env_check.py
 requests.get(URL): requests.exceptions.SSLError: HTTPSConnectionPool(host='localhost', port=8443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)')))
-$ REQUESTS_CA_BUNDLE='certs/localhost.pem' python -c ...
+$ REQUESTS_CA_BUNDLE=certs/localhost.pem python env_check.py --no-trust-env
 trust_env=False; s.get(URL): requests.exceptions.SSLError: HTTPSConnectionPool(host='localhost', port=8443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)')))
 exit=0

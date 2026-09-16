@@ -1,0 +1,4 @@
+$ python 12_combined_bundle.py
+requests.get(URL, verify='certs/bundle.pem'): 200
+requests.get(PUBLIC, verify='certs/bundle.pem'): 200
+exit=0

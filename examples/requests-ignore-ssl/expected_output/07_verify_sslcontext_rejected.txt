@@ -1,4 +1,4 @@
 $ python 07_verify_sslcontext_rejected.py
-requests.get(URL, verify=<SSLContext CERT_NONE>): builtins.TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext
-requests.get(URL, verify=ssl.create_default_context(cafile=CA)): builtins.TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext
+requests.get(URL, verify=<SSLContext CERT_NONE>): TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext
+requests.get(URL, verify=ssl.create_default_context(cafile=CA)): TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext
 exit=0

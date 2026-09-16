@@ -16,7 +16,7 @@ Requires Python 3.12 and the `openssl` command (it generates `certs/localhost.pe
 - `run.sh` — generates the certificate, starts `server.py` on `https://localhost:8443`, runs `NN_*.py`, writes `expected_output/*.txt`, checks the results
 - `server.py` — `http.server` wrapped in an `ssl.SSLContext` serving `fixtures/`
 - `_common.py` — prints results and exceptions in one line each
-- `01`–`11` — one script per recipe (see `evidence.yaml: claims`)
+- `01`–`12` — one script per recipe (`env_check.py` is the one-request helper for the shell cases) (see `evidence.yaml: claims`)
 - `expected_output/` — captured output from the last recorded run (`evidence.yaml: tested_at`)
 
 ## Limitations

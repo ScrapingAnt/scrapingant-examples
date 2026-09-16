@@ -1,4 +1,5 @@
 $ python 05_verify_ca_path.py
 requests.get(URL, verify='certs/localhost.pem'): 200
 requests.get('https://127.0.0.1:8443/', verify='certs/localhost.pem'): requests.exceptions.SSLError: HTTPSConnectionPool(host='127.0.0.1', port=8443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1010)")))
+requests.get(PUBLIC, verify='certs/localhost.pem')  # verify= replaces certifi: requests.exceptions.SSLError: HTTPSConnectionPool(host='scrapingant.github.io', port=443): Max retries exceeded with url: /scrapingant-examples/fixtures/dynamic-delayed.html (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')))
 exit=0

@@ -6,3 +6,4 @@ __pycache__/
 examples/*/.venv/
 examples/*/*.log
 examples/*/curlhome/
+examples/*/certs/
