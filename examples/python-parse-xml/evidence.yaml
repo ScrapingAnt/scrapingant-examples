@@ -1,7 +1,7 @@
 article_id: python-parse-xml
 canonical_url: https://scrapingant.com/blog/python-parse-xml
 owner: Oleg Kulyk
-examples_repo_commit: "e78e341"
+examples_repo_commit: "<filled after commit>"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
@@ -62,7 +62,7 @@ claims:   # ids match briefs/python-parse-xml.ledger.md in seo_optimisation
     "type": "measured"
     "source": "09_large_file.txt"
   - "id": "C8"
-    "text": "Readings: tree 10–16× file size (255 / 370 MB on 23.8 MB), minidom ≈30× (751), streaming 17–34 MB; ET.iterparse with only elem.clear() grows with the file (34 → 52 MB) because cleared stubs stay attached to the root; with root.clear() it stays at 17 MB; lxml.iterparse and sax stay at 22 MB; tree approaches double (255 → 491, 370 → 718); lxml fastest; bs4 and untangle slowest; bs4 and minidom largest"
+    "text": "Readings: tree 10–16× file size (254 / 370 MB on 23.8 MB), minidom ≈30× (751), streaming 17–34 MB; ET.iterparse with only elem.clear() grows with the file (34 → 53 MB) because cleared stubs stay attached to the root; with root.clear() it stays at 17 MB; lxml.iterparse stays at 22 and sax at 23 MB; tree approaches double (254 → 491, 370 → 718); lxml fastest; bs4 and untangle slowest; bs4 and minidom largest"
     "type": "measured"
     "source": "09_large_file.txt (both tables)"
   - "id": "C9"
