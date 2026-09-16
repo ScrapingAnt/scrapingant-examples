@@ -25,121 +25,119 @@ limitations:
   - Local server only; corporate TLS interception described, not run.
   - Trust-store changes (macOS Install Certificates.command, truststore) documented, not run.
 claims:   # ids match briefs/requests-ignore-ssl.ledger.md in seo_optimisation
-  - id: C1
-    text: 'Default requests.get on a self-signed cert raises SSLError with [SSL: CERTIFICATE_VERIFY_FAILED] … self-signed certificate (text quoted)'
-    type: measured
-    source: 01_default_fails.txt
-  - id: C2
-    text: verify=False → 200; urllib3 warns once per unverified request (two calls, two warnings); the next call without verify= fails
-    type: measured
-    source: 02_verify_false.txt
-  - id: C3
-    text: Before 2.32.0 a Session's first verify=False leaked to later same-origin requests (CVE-2024-35195)
-    type: documented
-    source: requests HISTORY 2.32.0 ("Fixed an issue where setting verify=False on the first request from a Session will cause subsequent requests to the same origin to also ignore cert verification"), https://github.com/psf/requests/blob/main/HISTORY.md,
-    accessed 2026-09-16
-  - id: C4
-    text: urllib3.disable_warnings(InsecureRequestWarning) silences it; process-wide via warnings.simplefilter("ignore", category)
-    type: measured + documented
-    source: 03_disable_warning.txt; urllib3 2.8.0 `__init__.py` line 111
-  - id: C5
-    text: Session.verify=False applies to all session requests; per-request verify=True overrides
-    type: measured
-    source: 04_session_verify.txt
-  - id: C6
-    text: requests has no module-level verify; requests.get() builds a fresh Session per call
-    type: documented
-    source: requests 2.34.2 `api.py` line 70 (`with sessions.Session() as session`)
-  - id: C7
-    text: verify='certs/localhost.pem' → 200, no warning
-    type: measured
-    source: 05_verify_ca_path.txt
-  - id: C8
-    text: verify accepts a PEM path or a c_rehash-processed directory
-    type: documented
-    source: https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification (accessed 2026-09-16)
-  - id: C9
-    text: 'verify=<path> replaces the certifi bundle: same file against the public fixture → unable to get local issuer certificate'
-    type: measured + documented
-    source: 05_verify_ca_path.txt; adapters.py line 102 `pool_kwargs["ca_certs"] = verify`
-  - id: C10
-    text: Combined bundle cat "$(python -m certifi)" certs/localhost.pem > certs/bundle.pem → 200 for both the local server and the public fixture
-    type: measured
-    source: run.sh; 12_combined_bundle.txt
-  - id: C11
-    text: Same file, host 127.0.0.1 → IP address mismatch, certificate is not valid for '127.0.0.1'
-    type: measured
-    source: 05_verify_ca_path.txt
-  - id: C12
-    text: REQUESTS_CA_BUNDLE and CURL_CA_BUNDLE both work; REQUESTS_CA_BUNDLE checked first; commands run through bash via env_check.py
-    type: measured + documented
-    source: 06_environment.txt; sessions.py `merge_environment_settings` (2.34.2, lines 845–860)
-  - id: C13
-    text: 'REQUESTS_CA_BUNDLE='''' ignored (fails with certifi); /nonexistent.pem → OSError: Could not find a suitable TLS CA certificate bundle; PYTHONHTTPSVERIFY=0 no effect'
-    type: measured
-    source: 06_environment.txt
-  - id: C14
-    text: The two bundle variables are the only environment variables merge_environment_settings reads for TLS; env consulted only when verify is True/None and trust_env is true; trust_env=False case measured
-    type: measured + documented
-    source: 06_environment.txt (last case); sessions.py lines 845–860
-  - id: C15
-    text: PYTHONHTTPSVERIFY is a Python 2.7 setting
-    type: documented
-    source: https://peps.python.org/pep-0493/ (accessed 2026-09-16)
-  - id: C16
-    text: 'verify=<SSLContext> → TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext'
-    type: measured
-    source: 07_verify_sslcontext_rejected.txt
-  - id: C17
-    text: 'HTTPAdapter.init_poolmanager(ssl_context=…) mounted on a prefix: that host verified with the CA, others default'
-    type: measured
-    source: 08_adapter_sslcontext.txt
-  - id: C18
-    text: 'CERT_NONE context via adapter does not disable verification: cert_reqs="CERT_REQUIRED" unless verify is False (adapters.py _urllib3_request_context), applied to the supplied context by urllib3
-    (connection.py line 1042)'
-    type: measured + documented
-    source: 08_adapter_sslcontext.txt; requests 2.34.2 adapters.py lines 97–105; urllib3 2.8.0 connection.py line 1042
-  - id: C19
-    text: NoVerifyAdapter forcing verify=False in send() disables for one prefix only
-    type: measured
-    source: 08_adapter_sslcontext.txt
-  - id: C20
-    text: 'urllib.request: default fails; ssl._create_unverified_context() → 200; create_default_context(cafile=) → 200'
-    type: measured
-    source: 09_urllib_stdlib.txt
-  - id: C21
-    text: _create_unverified_context is the spelling PEP 476 gives for opting out
-    type: documented
-    source: https://peps.python.org/pep-0476/#opting-out (accessed 2026-09-16)
-  - id: C22
-    text: 'urllib3.PoolManager: default MaxRetryError; cert_reqs="CERT_NONE" → 200 + warning; ca_certs= → 200'
-    type: measured
-    source: 10_urllib3_direct.txt
-  - id: C23
-    text: 'httpx: verify=False, or verify=ssl.create_default_context(cafile=…); string path deprecated since 0.28'
-    type: documented
-    source: https://www.python-httpx.org/advanced/ssl/ ; httpx CHANGELOG 0.28.0 (accessed 2026-09-16)
-  - id: C24
-    text: Default request to the public fixture → 200; certifi.where() = …/certifi/cacert.pem; requests uses certifi, not the OS store
-    type: measured + documented
-    source: 11_public_default.txt; requests docs "CA Certificates"
-  - id: C25
-    text: Upgrade certifi frequently
-    type: documented
-    source: 'requests docs "CA Certificates": "For the sake of security we recommend upgrading certifi frequently!" (accessed 2026-09-16)'
-  - id: C26
-    text: 'macOS python.org installer: keychain certificates are not used as defaults by the ssl module; Install Certificates.command installs certifi''s bundle'
-    type: documented
-    source: python.org macOS installer ReadMe, "Certificate verification and OpenSSL" (accessed 2026-09-16)
-  - id: C27
-    text: 'truststore: Python 3.10+; inject_into_ssl() from applications, not libraries; pip uses system certificates and certifi by default since 24.2 on Python 3.10+'
-    type: documented
-    source: https://truststore.readthedocs.io/ ; https://pip.pypa.io/en/stable/news/#v24-2 (accessed 2026-09-16)
-  - id: C28
-    text: 'ScrapingAnt: client''s TLS connection is to api.scrapingant.com; the target page is fetched by ScrapingAnt''s infrastructure; obstacles named: JavaScript rendering, blocked IP range'
-    type: product
-    source: registry `api.client_tls_scope`; `credits.browser_js_datacenter` (rendering exists); `proxy.residential.endpoint` (other IPs exist)
-  - id: C29
-    text: 'Versions: Python 3.12.11, requests 2.34.2, urllib3 2.8.0, certifi 2026.07.22 (PyPI 2026.7.22)'
-    type: measured
-    source: 00_versions.txt
+  - "id": "C1"
+    "text": "Default requests.get on a self-signed cert raises SSLError with [SSL: CERTIFICATE_VERIFY_FAILED] … self-signed certificate (text quoted)"
+    "type": "measured"
+    "source": "01_default_fails.txt"
+  - "id": "C2"
+    "text": "verify=False → 200; urllib3 warns once per unverified request (two calls, two warnings); the next call without verify= fails"
+    "type": "measured"
+    "source": "02_verify_false.txt"
+  - "id": "C3"
+    "text": "Before 2.32.0 a Session's first verify=False leaked to later same-origin requests (CVE-2024-35195)"
+    "type": "documented"
+    "source": "requests HISTORY 2.32.0 (\"Fixed an issue where setting verify=False on the first request from a Session will cause subsequent requests to the same origin to also ignore cert verification\"), https://github.com/psf/requests/blob/main/HISTORY.md, accessed 2026-09-16"
+  - "id": "C4"
+    "text": "urllib3.disable_warnings(InsecureRequestWarning) silences it; process-wide via warnings.simplefilter(\"ignore\", category)"
+    "type": "measured + documented"
+    "source": "03_disable_warning.txt; urllib3 2.8.0 `__init__.py` line 111"
+  - "id": "C5"
+    "text": "Session.verify=False applies to all session requests; per-request verify=True overrides"
+    "type": "measured"
+    "source": "04_session_verify.txt"
+  - "id": "C6"
+    "text": "requests has no module-level verify; requests.get() builds a fresh Session per call"
+    "type": "documented"
+    "source": "requests 2.34.2 `api.py` line 70 (`with sessions.Session() as session`)"
+  - "id": "C7"
+    "text": "verify='certs/localhost.pem' → 200, no warning"
+    "type": "measured"
+    "source": "05_verify_ca_path.txt"
+  - "id": "C8"
+    "text": "verify accepts a PEM path or a c_rehash-processed directory"
+    "type": "documented"
+    "source": "https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification (accessed 2026-09-16)"
+  - "id": "C9"
+    "text": "verify=<path> replaces the certifi bundle: same file against the public fixture → unable to get local issuer certificate"
+    "type": "measured + documented"
+    "source": "05_verify_ca_path.txt; adapters.py line 102 `pool_kwargs[\"ca_certs\"] = verify`"
+  - "id": "C10"
+    "text": "Combined bundle cat \"$(python -m certifi)\" certs/localhost.pem > certs/bundle.pem → 200 for both the local server and the public fixture"
+    "type": "measured"
+    "source": "run.sh; 12_combined_bundle.txt"
+  - "id": "C11"
+    "text": "Same file, host 127.0.0.1 → IP address mismatch, certificate is not valid for '127.0.0.1'"
+    "type": "measured"
+    "source": "05_verify_ca_path.txt"
+  - "id": "C12"
+    "text": "REQUESTS_CA_BUNDLE and CURL_CA_BUNDLE both work; REQUESTS_CA_BUNDLE checked first; commands run through bash via env_check.py"
+    "type": "measured + documented"
+    "source": "06_environment.txt; sessions.py `merge_environment_settings` (2.34.2, lines 845–860)"
+  - "id": "C13"
+    "text": "REQUESTS_CA_BUNDLE='' ignored (fails with certifi); /nonexistent.pem → OSError: Could not find a suitable TLS CA certificate bundle; PYTHONHTTPSVERIFY=0 no effect"
+    "type": "measured"
+    "source": "06_environment.txt"
+  - "id": "C14"
+    "text": "The two bundle variables are the only environment variables merge_environment_settings reads for TLS; env consulted only when verify is True/None and trust_env is true; trust_env=False case measured"
+    "type": "measured + documented"
+    "source": "06_environment.txt (last case); sessions.py lines 845–860"
+  - "id": "C15"
+    "text": "PYTHONHTTPSVERIFY is a Python 2.7 setting"
+    "type": "documented"
+    "source": "https://peps.python.org/pep-0493/ (accessed 2026-09-16)"
+  - "id": "C16"
+    "text": "verify=<SSLContext> → TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext"
+    "type": "measured"
+    "source": "07_verify_sslcontext_rejected.txt"
+  - "id": "C17"
+    "text": "HTTPAdapter.init_poolmanager(ssl_context=…) mounted on a prefix: that host verified with the CA, others default"
+    "type": "measured"
+    "source": "08_adapter_sslcontext.txt"
+  - "id": "C18"
+    "text": "CERT_NONE context via adapter does not disable verification: cert_reqs=\"CERT_REQUIRED\" unless verify is False (adapters.py _urllib3_request_context), applied to the supplied context by urllib3 (connection.py line 1042)"
+    "type": "measured + documented"
+    "source": "08_adapter_sslcontext.txt; requests 2.34.2 adapters.py lines 97–105; urllib3 2.8.0 connection.py line 1042"
+  - "id": "C19"
+    "text": "NoVerifyAdapter forcing verify=False in send() disables for one prefix only"
+    "type": "measured"
+    "source": "08_adapter_sslcontext.txt"
+  - "id": "C20"
+    "text": "urllib.request: default fails; ssl._create_unverified_context() → 200; create_default_context(cafile=) → 200"
+    "type": "measured"
+    "source": "09_urllib_stdlib.txt"
+  - "id": "C21"
+    "text": "_create_unverified_context is the spelling PEP 476 gives for opting out"
+    "type": "documented"
+    "source": "https://peps.python.org/pep-0476/#opting-out (accessed 2026-09-16)"
+  - "id": "C22"
+    "text": "urllib3.PoolManager: default MaxRetryError; cert_reqs=\"CERT_NONE\" → 200 + warning; ca_certs= → 200"
+    "type": "measured"
+    "source": "10_urllib3_direct.txt"
+  - "id": "C23"
+    "text": "httpx: verify=False, or verify=ssl.create_default_context(cafile=…); string path deprecated since 0.28"
+    "type": "documented"
+    "source": "https://www.python-httpx.org/advanced/ssl/ ; httpx CHANGELOG 0.28.0 (accessed 2026-09-16)"
+  - "id": "C24"
+    "text": "Default request to the public fixture → 200; certifi.where() = …/certifi/cacert.pem; requests uses certifi, not the OS store"
+    "type": "measured + documented"
+    "source": "11_public_default.txt; requests docs \"CA Certificates\""
+  - "id": "C25"
+    "text": "Upgrade certifi frequently"
+    "type": "documented"
+    "source": "requests docs \"CA Certificates\": \"For the sake of security we recommend upgrading certifi frequently!\" (accessed 2026-09-16)"
+  - "id": "C26"
+    "text": "macOS python.org installer: keychain certificates are not used as defaults by the ssl module; Install Certificates.command installs certifi's bundle"
+    "type": "documented"
+    "source": "python.org macOS installer ReadMe, \"Certificate verification and OpenSSL\" (accessed 2026-09-16)"
+  - "id": "C27"
+    "text": "truststore: Python 3.10+; inject_into_ssl() from applications, not libraries; pip uses system certificates and certifi by default since 24.2 on Python 3.10+"
+    "type": "documented"
+    "source": "https://truststore.readthedocs.io/ ; https://pip.pypa.io/en/stable/news/#v24-2 (accessed 2026-09-16)"
+  - "id": "C28"
+    "text": "ScrapingAnt: client's TLS connection is to api.scrapingant.com; the target page is fetched by ScrapingAnt's infrastructure; obstacles named: JavaScript rendering, blocked IP range"
+    "type": "product"
+    "source": "registry `api.client_tls_scope`; `credits.browser_js_datacenter` (rendering exists); `proxy.residential.endpoint` (other IPs exist)"
+  - "id": "C29"
+    "text": "Versions: Python 3.12.11, requests 2.34.2, urllib3 2.8.0, certifi 2026.07.22 (PyPI 2026.7.22)"
+    "type": "measured"
+    "source": "00_versions.txt"
