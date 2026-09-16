@@ -20,6 +20,11 @@
       "id": "requests-ignore-ssl",
       "needs_api_key": false,
       "note": "starts a local self-signed HTTPS server; needs openssl and outbound HTTPS"
+    },
+    {
+      "id": "python-parse-xml",
+      "needs_api_key": false,
+      "note": "generates a 24 MB file; the timing table is informational"
     }
   ]
 }

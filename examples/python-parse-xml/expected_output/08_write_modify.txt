@@ -1,0 +1,29 @@
+$ python 08_write_modify.py
+<?xml version='1.0' encoding='utf-8'?>
+<catalog updated="2026-09-16">
+  <book id="bk101" lang="en">
+    <title>XML Developer's Guide</title>
+    <author>Gambardella, Matthew</author>
+    <price currency="USD">44.95</price>
+    <tags>
+      <tag>xml</tag>
+      <tag>reference</tag>
+    </tags>
+  </book>
+  <book id="bk103" lang="en">
+    <title>Maeve Ascendant (2nd ed.)</title>
+    <author>Corets, Eva</author>
+    <description>Contains &lt;b&gt;markup&lt;/b&gt; &amp; ampersands</description>
+    <tags />
+    <price currency="EUR">9.99</price>
+  </book>
+</catalog>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/</loc>
+  </url>
+  <url>
+    <loc>https://example.com/a</loc>
+  </url>
+</urlset>
+exit=0

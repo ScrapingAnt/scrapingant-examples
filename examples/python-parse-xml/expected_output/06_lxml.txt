@@ -1,0 +1,19 @@
+$ python 06_lxml.py
+xpath titles: ["XML Developer's Guide", 'Midnight Rain']
+xpath count: 3.0 sum prices: 50.900000000000006
+xpath attr: ['bk101']
+sourceline of bk102: 10
+sitemap locs: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+alternates: ['https://example.com/de/']
+iterparse books: ['bk101', 'bk102', 'bk103']
+books.xml valid: True
+books-invalid.xml valid: False
+first error: Element 'price': This element is not expected. Expected is ( author ).
+XMLParser(schema=...): XMLSyntaxError Element 'price': This element is not expected. Expected is ( author ).
+<book id="bk102" lang="en">
+    <title>Midnight Rain</title>
+    <author>Ralls, Kim</author>
+    <price currency="USD">5.95</price>
+    <tags><tag>fantasy</tag></tags>
+  </book>
+exit=0

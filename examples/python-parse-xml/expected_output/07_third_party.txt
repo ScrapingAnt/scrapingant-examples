@@ -1,0 +1,16 @@
+$ python 07_third_party.py
+xmltodict keys: ['@updated', 'book'] first title: XML Developer's Guide
+xmltodict price: {'@currency': 'USD', '#text': '44.95'}
+xmltodict unparse: <?xml version="1.0" encoding="utf-8"?>
+<root><item>a</item><item>b</item></root>
+xmltodict sitemap: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+untangle: 2026-09-16 bk101 XML Developer's Guide USD
+bs4 xml: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing'] alternates: ['https://example.com/de/']
+bs4 recover broken: Unclosed title
+pandas columns: ['id', 'lang', 'title', 'author', 'price', 'tags', 'description']
+   id lang                 title  price
+bk101   en XML Developer's Guide  44.95
+bk102   en         Midnight Rain   5.95
+bk103   de       Maeve Ascendant    NaN
+pandas sitemap: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+exit=0

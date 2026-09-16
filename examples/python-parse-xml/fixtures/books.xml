@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog updated="2026-09-16">
+  <!-- three books, one without a price -->
+  <book id="bk101" lang="en">
+    <title>XML Developer's Guide</title>
+    <author>Gambardella, Matthew</author>
+    <price currency="USD">44.95</price>
+    <tags><tag>xml</tag><tag>reference</tag></tags>
+  </book>
+  <book id="bk102" lang="en">
+    <title>Midnight Rain</title>
+    <author>Ralls, Kim</author>
+    <price currency="USD">5.95</price>
+    <tags><tag>fantasy</tag></tags>
+  </book>
+  <book id="bk103" lang="de">
+    <title>Maeve Ascendant</title>
+    <author>Corets, Eva</author>
+    <description><![CDATA[Contains <b>markup</b> & ampersands]]></description>
+    <tags/>
+  </book>
+</catalog>

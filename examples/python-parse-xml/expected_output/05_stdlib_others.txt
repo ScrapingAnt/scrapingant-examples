@@ -1,0 +1,6 @@
+$ python 05_stdlib_others.py
+minidom: 3 ["XML Developer's Guide", 'Midnight Rain', 'Maeve Ascendant']
+bk101 catalog
+sax element counts: {'catalog': 1, 'book': 3, 'title': 3, 'author': 3, 'price': 2, 'tags': 3, 'tag': 3, 'description': 1}
+expat books: [('book', 'bk101'), ('book', 'bk102'), ('book', 'bk103')]
+exit=0

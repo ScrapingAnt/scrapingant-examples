@@ -1,0 +1,14 @@
+$ python 10_security.py
+expat expat_2.6.3 | libxml2 2.14.6
+ET.parse(billion-laughs): xml.etree.ElementTree.ParseError: limit on input amplification factor (from DTD and entities) breached: line 14, column 6
+ET.parse(xxe): xml.etree.ElementTree.ParseError: undefined entity &leak;: line 3, column 6
+etree.parse(billion-laughs) default parser: lxml.etree.XMLSyntaxError: Maximum entity amplification factor exceeded, see xmlCtxtSetMaxAmplification., line 1, column 7 (<string>, line 1)
+etree.parse(xxe) default parser: lxml.etree.XMLSyntaxError: Entity 'leak' not defined, line 3, column 13 (xxe.xml, line 3)
+etree.parse(xxe, XMLParser(resolve_entities=True)): this-is-the-secret-file-content
+
+etree.parse(xxe, XMLParser(resolve_entities=False)): None
+etree.parse(billion-laughs, XMLParser(huge_tree=True)): lxml.etree.XMLSyntaxError: Maximum entity amplification factor exceeded, see xmlCtxtSetMaxAmplification., line 1, column 7 (<string>, line 1)
+defusedxml.ElementTree.parse(billion-laughs): defusedxml.common.EntitiesForbidden: EntitiesForbidden(name='lol', system_id=None, public_id=None)
+defusedxml.ElementTree.parse(xxe): defusedxml.common.EntitiesForbidden: EntitiesForbidden(name='leak', system_id='secret.txt', public_id=None)
+defusedxml.ElementTree.parse(books.xml): catalog
+exit=0

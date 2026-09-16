@@ -1,0 +1,13 @@
+$ python 09_large_file.py
+file: generated/large.xml, 23.8 MB, 200,000 <record> elements; task: count records with region="us"; one subprocess per approach
+approach                          seconds  peak RSS MB    count
+ET.parse + findall                   0.67          255    66667
+ET.iterparse + clear                 0.77           34    66667
+lxml.parse + xpath                   0.32          370    66667
+lxml.iterparse + clear               0.29           22    66667
+xml.sax handler                      0.74           23    66667
+xml.dom.minidom                      3.17          751    66667
+xmltodict.parse                      1.55          215    66667
+untangle.parse                       3.50          384    66667
+BeautifulSoup(features='xml')        5.18          872    66667
+exit=0

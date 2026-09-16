@@ -7,3 +7,4 @@ examples/*/.venv/
 examples/*/*.log
 examples/*/curlhome/
 examples/*/certs/
+examples/*/generated/

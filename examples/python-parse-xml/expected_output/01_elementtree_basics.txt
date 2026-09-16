@@ -1,0 +1,11 @@
+$ python 01_elementtree_basics.py
+catalog {'updated': '2026-09-16'}
+bk101 XML Developer's Guide 44.95
+bk102 Midnight Rain 5.95
+bk103 Maeve Ascendant n/a
+{'currency': 'USD'} 44.95
+['xml', 'reference', 'fantasy']
+Contains <b>markup</b> & ampersands
+None
+catalog x
+exit=0

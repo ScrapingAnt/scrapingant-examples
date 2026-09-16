@@ -1,0 +1,11 @@
+$ python 02_namespaces.py
+root.tag: {http://www.sitemaps.org/schemas/sitemap/0.9}urlset
+findall('url'): []
+1 braces: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+2 prefix map: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+3 wildcard: ['https://example.com/', 'https://example.com/blog/python-parse-xml', 'https://example.com/pricing']
+https://example.com/ 2026-09-01 de
+https://example.com/blog/python-parse-xml 2026-09-16 None
+https://example.com/pricing 2026-08-20 None
+<url xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+exit=0

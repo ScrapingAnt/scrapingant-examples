@@ -1,0 +1,13 @@
+$ python 04_errors.py
+ET.parse('fixtures/broken.xml'): xml.etree.ElementTree.ParseError: mismatched tag: line 5, column 4
+ParseError.position (line, column): (5, 4)
+etree.parse('fixtures/broken.xml'): lxml.etree.XMLSyntaxError: Opening and ending tag mismatch: title line 4 and book, line 5, column 10 (broken.xml, line 5)
+XMLSyntaxError.lineno: 5 error_log entries: 4
+recover=True: <catalog>
+  <book id="bk101">
+    <title>Unclosed title
+  </title>
+</book>
+</catalog>
+ET.parse('fixtures/missing.xml'): FileNotFoundError: [Errno 2] No such file or directory: 'fixtures/missing.xml'
+exit=0
