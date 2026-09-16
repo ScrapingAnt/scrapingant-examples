@@ -1,0 +1,6 @@
+python: Python 3.12.11
+requests: 2.34.2
+urllib3: 2.8.0
+certifi: 2026.07.22
+OpenSSL 3.0.16 11 Feb 2025
+openssl cli: OpenSSL 3.3.0 9 Apr 2024 (Library: OpenSSL 3.3.0 9 Apr 2024)

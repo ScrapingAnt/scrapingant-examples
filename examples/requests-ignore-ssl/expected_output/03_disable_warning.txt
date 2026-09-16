@@ -1,0 +1,3 @@
+$ python 03_disable_warning.py
+after urllib3.disable_warnings(InsecureRequestWarning): 200
+exit=0

@@ -15,6 +15,11 @@
       "id": "curl-with-proxy",
       "needs_api_key": false,
       "note": "starts local proxies; needs curl and outbound HTTPS"
+    },
+    {
+      "id": "requests-ignore-ssl",
+      "needs_api_key": false,
+      "note": "starts a local self-signed HTTPS server; needs openssl and outbound HTTPS"
     }
   ]
 }

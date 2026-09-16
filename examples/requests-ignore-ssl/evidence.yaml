@@ -1,0 +1,103 @@
+article_id: requests-ignore-ssl
+canonical_url: https://scrapingant.com/blog/requests-ignore-ssl
+owner: Oleg Kulyk
+examples_repo_commit: "<filled after commit>"
+tested_at: 2026-09-16
+requires_api_key: false
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  python: "3.12.11"
+  openssl_python: "OpenSSL 3.0.16"
+  openssl_cli: "OpenSSL 3.3.0"
+dependencies:
+  requests: "2.34.2"
+  urllib3: "2.8.0"
+  certifi: "2026.7.22"
+run_command: ./run.sh
+fixtures:
+  - fixtures/index.html (served at https://localhost:8443/ with certs/localhost.pem, SAN DNS:localhost)
+  - https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html (valid public certificate)
+outputs:
+  - expected_output/00_versions.txt
+  - expected_output/01_default_fails.txt … 11_public_default.txt (one file per script)
+measurements: []
+limitations:
+  - Local server only; corporate TLS interception described, not run.
+  - Trust-store changes (macOS Install Certificates.command, truststore) documented, not run.
+claims:
+  - id: C1
+    text: "Default requests.get against a self-signed certificate raises requests.exceptions.SSLError wrapping SSLCertVerificationError '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate'"
+    type: measured
+    source: expected_output/01_default_fails.txt
+  - id: C2
+    text: "verify=False returns 200 and urllib3 emits InsecureRequestWarning with the text shown"
+    type: measured
+    source: expected_output/02_verify_false.txt
+  - id: C3
+    text: "urllib3.disable_warnings(InsecureRequestWarning) silences the warning; the request still succeeds"
+    type: measured
+    source: expected_output/03_disable_warning.txt
+  - id: C4
+    text: "Session.verify=False applies to every request of the session; a per-request verify=True overrides it (request kwarg wins)"
+    type: measured
+    source: expected_output/04_session_verify.txt
+  - id: C5
+    text: "verify='certs/localhost.pem' (the server's own self-signed certificate as CA) returns 200 without a warning"
+    type: measured
+    source: expected_output/05_verify_ca_path.txt
+  - id: C6
+    text: "Same CA, host 127.0.0.1 instead of localhost: 'IP address mismatch, certificate is not valid for 127.0.0.1'"
+    type: measured
+    source: expected_output/05_verify_ca_path.txt
+  - id: C7
+    text: "REQUESTS_CA_BUNDLE and CURL_CA_BUNDLE pointing at the CA file both make the default request succeed"
+    type: measured
+    source: expected_output/06_environment.txt
+  - id: C8
+    text: "REQUESTS_CA_BUNDLE='' is ignored (verification still fails with certifi); a non-existent path raises OSError 'Could not find a suitable TLS CA certificate bundle'"
+    type: measured
+    source: expected_output/06_environment.txt
+  - id: C9
+    text: "PYTHONHTTPSVERIFY=0 has no effect on requests"
+    type: measured
+    source: expected_output/06_environment.txt
+  - id: C10
+    text: "Session.trust_env=False makes requests ignore REQUESTS_CA_BUNDLE"
+    type: measured
+    source: expected_output/06_environment.txt
+  - id: C11
+    text: "verify=<ssl.SSLContext> raises TypeError 'stat: path should be string, bytes, os.PathLike or integer, not SSLContext'"
+    type: measured
+    source: expected_output/07_verify_sslcontext_rejected.txt
+  - id: C12
+    text: "An HTTPAdapter subclass passing ssl_context=create_default_context(cafile=CA) to init_poolmanager, mounted on one host prefix, verifies that host with the CA while other hosts keep default verification"
+    type: measured
+    source: expected_output/08_adapter_sslcontext.txt
+  - id: C13
+    text: "A CERT_NONE SSLContext through the same adapter does not disable verification: requests sets cert_reqs=CERT_REQUIRED on the pool when verify is True"
+    type: measured + documented
+    source: expected_output/08_adapter_sslcontext.txt; requests 2.34.2 adapters.py _urllib3_request_context
+  - id: C14
+    text: "An HTTPAdapter whose send() forces verify=False, mounted on one host prefix, disables verification for that host only"
+    type: measured
+    source: expected_output/08_adapter_sslcontext.txt
+  - id: C15
+    text: "urllib.request.urlopen: default raises URLError CERTIFICATE_VERIFY_FAILED; context=ssl._create_unverified_context() → 200; context=ssl.create_default_context(cafile=CA) → 200"
+    type: measured
+    source: expected_output/09_urllib_stdlib.txt
+  - id: C16
+    text: "urllib3.PoolManager: default raises MaxRetryError; cert_reqs='CERT_NONE' → 200 with InsecureRequestWarning; ca_certs=CA → 200"
+    type: measured
+    source: expected_output/10_urllib3_direct.txt
+  - id: C17
+    text: "Default verify=True against a valid public certificate returns 200; the trust store is certifi's cacert.pem (2026.07.22)"
+    type: measured
+    source: expected_output/11_public_default.txt
+  - id: C18
+    text: "Environment lookup order and the empty-string behaviour come from Session.merge_environment_settings: only when verify is True or None, REQUESTS_CA_BUNDLE or CURL_CA_BUNDLE, only if trust_env"
+    type: documented
+    source: requests 2.34.2 sessions.py merge_environment_settings; https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification (accessed 2026-09-16)
+  - id: C19
+    text: "Versions: Python 3.12.11, requests 2.34.2, urllib3 2.8.0, certifi 2026.07.22, OpenSSL 3.0.16 (Python) / 3.3.0 (CLI)"
+    type: measured
+    source: expected_output/00_versions.txt

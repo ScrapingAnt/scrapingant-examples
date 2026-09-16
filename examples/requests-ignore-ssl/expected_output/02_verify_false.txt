@@ -1,0 +1,4 @@
+$ python 02_verify_false.py
+warning: InsecureRequestWarning: Unverified HTTPS request is being made to host 'localhost'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+requests.get(URL, verify=False): 200
+exit=0

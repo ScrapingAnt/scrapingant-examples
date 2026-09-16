@@ -1,0 +1,5 @@
+$ python 11_public_default.py
+requests.get(PUBLIC)  # valid public certificate, default verify=True: 200
+certifi.where() = certifi/cacert.pem
+certifi version = 2026.07.22
+exit=0
