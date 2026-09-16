@@ -1,7 +1,7 @@
 article_id: python-parse-xml
 canonical_url: https://scrapingant.com/blog/python-parse-xml
 owner: Oleg Kulyk
-examples_repo_commit: "<filled after commit>"
+examples_repo_commit: "d80f717"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
