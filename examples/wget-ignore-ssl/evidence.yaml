@@ -1,7 +1,7 @@
 article_id: wget-ignore-ssl
 canonical_url: https://scrapingant.com/blog/wget-ignore-ssl
 owner: Oleg Kulyk
-examples_repo_commit: "<filled after commit>"
+examples_repo_commit: "18139b2"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
