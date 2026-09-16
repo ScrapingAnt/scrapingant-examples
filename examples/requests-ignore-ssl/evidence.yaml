@@ -1,7 +1,7 @@
 article_id: requests-ignore-ssl
 canonical_url: https://scrapingant.com/blog/requests-ignore-ssl
 owner: Oleg Kulyk
-examples_repo_commit: "99205aa"
+examples_repo_commit: "<filled after commit>"
 tested_at: 2026-09-16
 requires_api_key: false
 environment:
@@ -36,7 +36,7 @@ claims:   # ids match briefs/requests-ignore-ssl.ledger.md in seo_optimisation
   - "id": "C3"
     "text": "Before 2.32.0 a Session's first verify=False leaked to later same-origin requests (CVE-2024-35195)"
     "type": "documented"
-    "source": "requests HISTORY 2.32.0 (\"Fixed an issue where setting verify=False on the first request from a Session will cause subsequent requests to the same origin to also ignore cert verification\"), https://github.com/psf/requests/blob/main/HISTORY.md, accessed 2026-09-16"
+    "source": "requests HISTORY 2.32.0 (\"… subsequent requests to the same origin to also ignore cert verification\"), https://github.com/psf/requests/blob/main/HISTORY.md; advisory GHSA-9wx4-h78v-vm56 = CVE-2024-35195, https://github.com/psf/requests/security/advisories/GHSA-9wx4-h78v-vm56 (accessed 2026-09-16)"
   - "id": "C4"
     "text": "urllib3.disable_warnings(InsecureRequestWarning) silences it; process-wide via warnings.simplefilter(\"ignore\", category)"
     "type": "measured + documented"
@@ -86,7 +86,7 @@ claims:   # ids match briefs/requests-ignore-ssl.ledger.md in seo_optimisation
     "type": "documented"
     "source": "https://peps.python.org/pep-0493/ (accessed 2026-09-16)"
   - "id": "C16"
-    "text": "verify=<SSLContext> → TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext"
+    "text": "verify=<SSLContext> → TypeError: stat: path should be string, bytes, os.PathLike or integer, not SSLContext; the create_default_context(cafile=…) form fails the same way (line 2)"
     "type": "measured"
     "source": "07_verify_sslcontext_rejected.txt"
   - "id": "C17"
@@ -134,7 +134,7 @@ claims:   # ids match briefs/requests-ignore-ssl.ledger.md in seo_optimisation
     "type": "documented"
     "source": "https://truststore.readthedocs.io/ ; https://pip.pypa.io/en/stable/news/#v24-2 (accessed 2026-09-16)"
   - "id": "C28"
-    "text": "ScrapingAnt: client's TLS connection is to api.scrapingant.com; the target page is fetched by ScrapingAnt's infrastructure; obstacles named: JavaScript rendering, blocked IP range"
+    "text": "ScrapingAnt: registry wording used verbatim (one TLS connection to api.scrapingant.com; target fetched by ScrapingAnt's infrastructure); obstacles named: JavaScript rendering, blocked IP range"
     "type": "product"
     "source": "registry `api.client_tls_scope`; `credits.browser_js_datacenter` (rendering exists); `proxy.residential.endpoint` (other IPs exist)"
   - "id": "C29"
