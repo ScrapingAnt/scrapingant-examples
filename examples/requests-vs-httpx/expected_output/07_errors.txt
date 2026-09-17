@@ -1,0 +1,29 @@
+$ python 07_errors.py
+--- the same failures
+404 + raise_for_status()
+  requests: requests.exceptions.HTTPError  (bases: RequestException)
+  httpx:    httpx.HTTPStatusError  (bases: HTTPError)
+connection refused (port 1)
+  requests: requests.exceptions.ConnectionError  (bases: RequestException)
+  httpx:    httpx.ConnectError  (bases: NetworkError > TransportError > RequestError > HTTPError)
+read timeout (/delay/2, timeout=0.5)
+  requests: requests.exceptions.ReadTimeout  (bases: Timeout > RequestException)
+  httpx:    httpx.ReadTimeout  (bases: TimeoutException > TransportError > RequestError > HTTPError)
+unknown host
+  requests: requests.exceptions.ConnectionError  (bases: RequestException)
+  httpx:    httpx.ConnectError  (bases: NetworkError > TransportError > RequestError > HTTPError)
+bad URL
+  requests: requests.exceptions.InvalidURL  (bases: RequestException)
+  httpx:    httpx.UnsupportedProtocol  (bases: TransportError > RequestError > HTTPError)
+top-level bases: requests.exceptions.RequestException / httpx.HTTPError; both raise_for_status errors carry .response
+--- retries against GET /status/503 (server counts requests)
+requests + urllib3 Retry(total=3, status_forcelist=[503]): requests.exceptions.RetryError: HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /status/503 (Caused by ResponseError('too many 503 error responses'))
+  server saw 4 requests
+httpx.HTTPTransport(retries=3): 503
+  server saw 1 requests
+--- retries against connection refused (port 1)
+httpx.HTTPTransport(retries=3): httpx.ConnectError: [Errno 61] Connection refused
+  gave up after 1.5 s (backoff between attempts)
+requests Retry(total=3, backoff_factor=0.5): requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused"))
+  gave up after 3.0 s
+exit=0

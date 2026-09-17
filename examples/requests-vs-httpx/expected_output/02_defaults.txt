@@ -1,0 +1,16 @@
+$ python 02_defaults.py
+--- redirects: GET /redirect/2 -> /redirect/1 -> /get
+requests default: 200 history: [302, 302] final: http://127.0.0.1:8080/get
+httpx default:    302 history: [] next_request: http://127.0.0.1:8080/redirect/1
+httpx follow_redirects=True: 200 history: [302, 302] final: http://127.0.0.1:8080/get
+requests allow_redirects=False: 302 next: http://127.0.0.1:8080/redirect/1
+--- timeouts: GET /delay/6 (server sleeps 6 s)
+requests default (no timeout): 200 after 6.0 s
+httpx default (5 s): httpx.ReadTimeout: timed out
+  raised after 5.0 s
+requests timeout=1: requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=8080): Read timed out. (read timeout=1)
+httpx timeout=1: httpx.ReadTimeout: timed out
+httpx timeout=None: 200
+httpx.Timeout(10.0, connect=60.0): Timeout(connect=60.0, read=10.0, write=10.0, pool=10.0)
+requests timeout=(connect, read) is a tuple: (3.05, 27)
+exit=0

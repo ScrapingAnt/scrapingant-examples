@@ -1,0 +1,20 @@
+$ python 09_httpx1_preview.py
+httpx 1.0.dev6 from generated/httpx-1.0.dev6/httpx
+httpx.get(URL).status_code: AttributeError: module 'httpx' has no attribute 'get'
+httpx.get(URL).json()['http_version']: AttributeError: module 'httpx' has no attribute 'get'
+httpx.Client(): Client
+with httpx.Client() as c: c.get(URL): 200 OK
+httpx.AsyncClient: AttributeError: module 'httpx' has no attribute 'AsyncClient'
+httpx.Client(http2=True): TypeError: Client.__init__() got an unexpected keyword argument 'http2'
+httpx.get(URL, follow_redirects=True): AttributeError: module 'httpx' has no attribute 'get'
+httpx.get(URL, timeout=5): AttributeError: module 'httpx' has no attribute 'get'
+httpx.get('http://127.0.0.1:8080/redirect/1') default: AttributeError: module 'httpx' has no attribute 'get'
+httpx.post(URL.replace('get','post'), json={'k': 'v'}): AttributeError: module 'httpx' has no attribute 'post'
+httpx.post(..., data={'k': 'v'}): AttributeError: module 'httpx' has no attribute 'post'
+httpx.stream('GET', URL): AttributeError: module 'httpx' has no attribute 'stream'
+httpx.Timeout: AttributeError: module 'httpx' has no attribute 'Timeout'
+httpx.HTTPTransport: AttributeError: module 'httpx' has no attribute 'HTTPTransport'
+httpx.Response(200, content=b'x').status_code: 200 OK
+hasattr(httpx, 'run') (server): False
+public names (31): Binary, ByteStream, Client, Connection, ConnectionPool, Content, DuplexStream, Empty, File, FileStream, Files, Form, HTML, HTTPParser, Headers, JSON, Method, Mode, MultiPart, MultiPartStream, NetworkBackend, NetworkStream, ProtocolError, QueryParams, Request, Response, Server, Stream, Text, Transport, URL
+exit=0

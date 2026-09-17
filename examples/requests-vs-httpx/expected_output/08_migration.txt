@@ -1,0 +1,27 @@
+$ python 08_migration.py
+--- arguments that do not exist or were removed
+httpx.get(url, allow_redirects=True): TypeError: get() got an unexpected keyword argument 'allow_redirects'
+httpx.Client(proxies={...})  (removed in 0.28): TypeError: Client.__init__() got an unexpected keyword argument 'proxies'
+httpx.Client(proxy='http://127.0.0.1:3128'): Client
+httpx.Client(mounts={'http://': httpx.HTTPTransport(proxy='http://127.0.0.1:3128')}): Client
+requests.Session().proxies = {'http': ...}: ok
+httpx.Client(app=...)  (removed in 0.28): TypeError: Client.__init__() got an unexpected keyword argument 'app'
+--- deprecated in 0.28 (still works, warns)
+  DeprecationWarning: `verify=<str>` is deprecated. Use `verify=ssl.create_default_context(cafile=...)` or `verify=ssl.create_default_context(capath=...)` instead.
+httpx.get(url, verify='certs/localhost.pem'): 200
+httpx.get(url, cert=(...)): TypeError: get() got an unexpected keyword argument 'cert'
+  DeprecationWarning: Use 'content=<...>' to upload raw bytes/text content.
+httpx.post(url, data=b'raw'): 200
+  DeprecationWarning: Setting per-request cookies=<...> is being deprecated, because the expected behaviour on cookie persistence is ambiguous. Set cookies directly on the client instance instead.
+client.post(url, cookies={...}) on a Client: 200
+--- attributes with different names
+requests r.reason / httpx r.reason_phrase: True / True
+httpx r.reason: AttributeError: 'Response' object has no attribute 'reason'
+requests r.raw / httpx r.raw: AttributeError: 'Response' object has no attribute 'raw'
+httpx r.iter_content: AttributeError: 'Response' object has no attribute 'iter_content'
+requests r.next / httpx r.next_request: None / None
+str(httpx r.url) == requests r.url: True
+requests.Session().mount / httpx.Client().mounts: True / dict
+httpx elapsed inside stream block: RuntimeError: '.elapsed' may only be accessed after the response has been read or closed.
+httpx elapsed after the block: 0:00:00.000760
+exit=0

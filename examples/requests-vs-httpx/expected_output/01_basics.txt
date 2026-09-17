@@ -1,0 +1,30 @@
+$ python 01_basics.py
+--- GET
+requests: 200 | application/json | 1.1 | str http://127.0.0.1:8080/get?q=ant
+httpx:    200 | application/json | HTTP/1.1 | URL http://127.0.0.1:8080/get?q=ant
+requests user-agent: python-requests/2.34.2
+httpx user-agent:    python-httpx/0.28.1
+requests r.ok / httpx r.is_success: True True
+requests r.is_success: AttributeError: 'Response' object has no attribute 'is_success'
+httpx r.ok: AttributeError: 'Response' object has no attribute 'ok'
+raise_for_status() returns: NoneType / Response
+elapsed types: timedelta / timedelta
+--- POST form, json, raw bytes
+data=dict  requests: 'application/x-www-form-urlencoded' 'k=v'
+           httpx:    'application/x-www-form-urlencoded' 'k=v'
+json=      requests: 'application/json' '{"k": "v"}'
+           httpx:    'application/json' '{"k":"v"}'
+data=bytes requests: '' 'raw bytes'
+  DeprecationWarning: Use 'content=<...>' to upload raw bytes/text content.
+           httpx:    '' 'raw bytes'   <- deprecated, use content=
+content=   httpx:    '' 'raw bytes'
+--- query params edge cases
+requests params={'a': None, 'b': 1}: b=1
+httpx    params={'a': None, 'b': 1}: a=&b=1
+requests params=[('k','1'),('k','2')]: k=1&k=2
+httpx    params=[('k','1'),('k','2')]: k=1&k=2
+httpx    params={'k': ['1','2']}: k=1&k=2
+--- request body on GET
+requests.get(json=...): 200
+httpx.get(json=...): TypeError: get() got an unexpected keyword argument 'json'
+exit=0

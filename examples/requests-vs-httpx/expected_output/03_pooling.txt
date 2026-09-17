@@ -1,0 +1,15 @@
+$ python 03_pooling.py
+--- 300 sequential GET /get, plain HTTP (127.0.0.1:8080), median of 5 runs
+requests.get() x N (no Session)                      median  0.217 s  min  0.207 s  conns opened 300  requests  300
+requests.Session x N                                 median  0.150 s  min  0.150 s  conns opened   1  requests  300
+httpx.get() x N (no Client)                          median  3.090 s  min  3.006 s  conns opened 300  requests  300
+httpx.get() x N (no Client, verify=ctx)              median  0.186 s  min  0.176 s  conns opened 300  requests  300
+httpx.get() x N (no Client, verify=False)            median  0.237 s  min  0.217 s  conns opened 300  requests  300
+httpx.Client x N                                     median  0.126 s  min  0.122 s  conns opened   1  requests  300
+--- 300 sequential GET /get, TLS (localhost:8443, self-signed, verify=certs/localhost.pem)
+requests.get() x N (no Session)                      median  0.785 s  min  0.686 s  conns opened 300  requests  300
+requests.Session x N                                 median  0.181 s  min  0.177 s  conns opened   1  requests  300
+httpx.get() x N (no Client, verify=CERT)             median  0.678 s  min  0.676 s  conns opened 300  requests  300
+httpx.get() x N (no Client, verify=ctx)              median  0.621 s  min  0.590 s  conns opened 300  requests  300
+httpx.Client x N                                     median  0.136 s  min  0.129 s  conns opened   1  requests  300
+exit=0

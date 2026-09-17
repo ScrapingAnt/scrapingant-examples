@@ -1,0 +1,7 @@
+$ python 06_streaming.py
+--- GET /bytes/52428800 (50 MiB), plain HTTP, one process per case, median of 3 runs
+requests.get().content (buffered)            bytes 52428800  median  0.038 s  peak RSS    148 MiB
+requests stream=True, iter_content(1 MiB)    bytes 52428800  median  0.020 s  peak RSS     35 MiB
+httpx.get().content (buffered)               bytes 52428800  median  0.051 s  peak RSS    151 MiB
+httpx.stream(), iter_bytes(1 MiB)            bytes 52428800  median  0.044 s  peak RSS     44 MiB
+exit=0

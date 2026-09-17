@@ -1,0 +1,11 @@
+$ python 10_popularity.py
+30-day PyPI downloads, snapshot 2026-09-01 06:34:08 (top 15,000 packages), fetched 2026-09-17
+requests   rank      7  downloads   1,695,910,251
+httpx      rank     33  downloads     818,096,438
+aiohttp    rank     49  downloads     624,758,174
+urllib3    rank      6  downloads   1,793,872,890
+httpcore   rank     35  downloads     807,678,508
+niquests   rank   3342  downloads       1,897,114
+pycurl     rank   2074  downloads       4,976,065
+h2         rank    187  downloads     207,999,706
+exit=0

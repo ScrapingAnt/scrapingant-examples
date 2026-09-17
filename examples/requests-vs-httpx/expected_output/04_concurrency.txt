@@ -1,0 +1,14 @@
+$ python 04_concurrency.py
+--- 200 x GET /delay/0.05, plain HTTP, concurrency 20 where applicable, median of 3 runs
+requests.Session, sequential                         median 10.422 s  min 10.410 s  conns opened   1  requests  200
+requests.Session + 20 threads                        median  0.543 s  min  0.542 s  conns opened  32  requests  200
+  urllib3 logged 'Connection pool is full, discarding connection: 127.0.0.1. Connection pool size: 10' 68 times over 3 runs
+requests.Session + 20 threads, pool_maxsize=20       median  0.541 s  min  0.540 s  conns opened  20  requests  200
+  urllib3 'pool is full' warnings: 0
+httpx.Client + 20 threads                            median  0.545 s  min  0.538 s  conns opened  20  requests  200
+httpx.AsyncClient + gather, Semaphore(20)            median  0.558 s  min  0.557 s  conns opened  20  requests  200
+httpx.AsyncClient + gather, no semaphore             median  0.367 s  min  0.366 s  conns opened 200  requests  200
+httpx.AsyncClient(limits=Limits(20, 20)), no semaphore median  0.667 s  min  0.665 s  conns opened  20  requests  200
+httpx default client limits: Limits(max_connections=100, max_keepalive_connections=20, keepalive_expiry=5.0)
+requests/urllib3 default pool: pool_connections=10, pool_maxsize=10 (HTTPAdapter defaults)
+exit=0
