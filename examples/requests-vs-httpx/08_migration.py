@@ -1,10 +1,14 @@
 """What breaks when requests code is run against httpx 0.28: the real errors and warnings."""
+import ssl
 import warnings
 import httpx
 import requests
 from _common import CERT, HTTP, HTTPS, show
 
+KEY = "certs/localhost-key.pem"
+ctx = ssl.create_default_context(cafile=CERT)
 warnings.simplefilter("always")
+warnings.simplefilter("ignore", ResourceWarning)   # the interpreter-exit socket warning carries a port number and would make the output non-repeatable
 warnings.showwarning = lambda m, c, f, l, file=None, line=None: print(f"  {c.__name__}: {m}")
 
 print("--- arguments that do not exist or were removed")
@@ -17,6 +21,7 @@ show("httpx.Client(app=...)  (removed in 0.28)", lambda: httpx.Client(app=object
 print("--- deprecated in 0.28 (still works, warns)")
 show("httpx.get(url, verify='certs/localhost.pem')", lambda: httpx.get(f"{HTTPS}/get", verify=CERT).status_code)
 show("httpx.get(url, cert=(...))", lambda: httpx.get(f"{HTTPS}/get", verify=CERT, cert=("certs/localhost.pem", "certs/localhost-key.pem")).status_code)
+show("httpx.Client(verify=ctx, cert=(CERT, KEY))", lambda: type(httpx.Client(verify=ctx, cert=(CERT, KEY))).__name__)
 show("httpx.post(url, data=b'raw')", lambda: httpx.post(f"{HTTP}/post", data=b"raw").status_code)
 c = httpx.Client()
 show("client.post(url, cookies={...}) on a Client", lambda: c.post(f"{HTTP}/post", cookies={"a": "b"}).status_code)

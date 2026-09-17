@@ -10,6 +10,8 @@ httpx.Client(app=...)  (removed in 0.28): TypeError: Client.__init__() got an un
   DeprecationWarning: `verify=<str>` is deprecated. Use `verify=ssl.create_default_context(cafile=...)` or `verify=ssl.create_default_context(capath=...)` instead.
 httpx.get(url, verify='certs/localhost.pem'): 200
 httpx.get(url, cert=(...)): TypeError: get() got an unexpected keyword argument 'cert'
+  DeprecationWarning: `cert=...` is deprecated. Use `verify=<ssl_context>` instead,with `.load_cert_chain()` to configure the certificate chain.
+httpx.Client(verify=ctx, cert=(CERT, KEY)): Client
   DeprecationWarning: Use 'content=<...>' to upload raw bytes/text content.
 httpx.post(url, data=b'raw'): 200
   DeprecationWarning: Setting per-request cookies=<...> is being deprecated, because the expected behaviour on cookie persistence is ambiguous. Set cookies directly on the client instance instead.
@@ -23,5 +25,5 @@ requests r.next / httpx r.next_request: None / None
 str(httpx r.url) == requests r.url: True
 requests.Session().mount / httpx.Client().mounts: True / dict
 httpx elapsed inside stream block: RuntimeError: '.elapsed' may only be accessed after the response has been read or closed.
-httpx elapsed after the block: 0:00:00.000760
+httpx elapsed after the block: 0:00:00.000571
 exit=0

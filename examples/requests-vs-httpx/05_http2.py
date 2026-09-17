@@ -1,4 +1,5 @@
-"""HTTP/2: who speaks it, and what it changes on the same server (TLS, ALPN h2 + http/1.1)."""
+"""HTTP/2: who speaks it, and what it changes on the same server (TLS, ALPN h2 + http/1.1).
+Without a semaphore the client, not the server, bounds concurrency: httpx DEFAULT_LIMITS max_connections=100 and httpcore's local MAX_CONCURRENT_STREAMS=100."""
 import asyncio
 import ssl
 import subprocess
@@ -37,7 +38,7 @@ async def gather(http2, limit=WORKERS):
         assert {x.http_version for x in rs} == ({"HTTP/2"} if http2 else {"HTTP/1.1"})
 bench("HTTP/1.1 (http2=False)", lambda: asyncio.run(gather(False)), runs=3)
 bench("HTTP/2 (http2=True)", lambda: asyncio.run(gather(True)), runs=3)
-print(f"--- the same {N} requests with no semaphore (server allows 200 concurrent HTTP/2 streams)")
+print(f"--- the same {N} requests with no semaphore (httpx defaults cap in-flight work: 100 connections, or 100 streams on one HTTP/2 connection)")
 bench("HTTP/1.1, no semaphore", lambda: asyncio.run(gather(False, N)), runs=3)
 bench("HTTP/2, no semaphore", lambda: asyncio.run(gather(True, N)), runs=3)
 

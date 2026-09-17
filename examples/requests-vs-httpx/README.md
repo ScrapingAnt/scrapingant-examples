@@ -8,6 +8,7 @@ Every snippet and every timing in the article, run against one local server (`se
 - `01_basics.py` — the same GET/POST with both; object differences; form/json/raw bodies; query-parameter edge cases
 - `02_defaults.py` — redirects (followed by default in requests, not in httpx) and timeouts (none vs 5 s)
 - `03_pooling.py` — 300 sequential requests with and without a `Session`/`Client`, plain and TLS; the cost of building an SSL context per `httpx.get()` call
+- `03b_ssl_context.py` — the per-call fixed cost behind that row: building an SSL context (certifi bundle vs one certificate) and constructing a transport, in ms
 - `04_concurrency.py` — 200 requests with a 50 ms server delay: sequential, 20 threads, `AsyncClient` with a semaphore, with default limits, with sized limits; urllib3's "pool is full" warning
 - `05_http2.py` — negotiated protocol, `http2=True` without `h2`, 200 concurrent requests over HTTP/1.1 vs HTTP/2, sequential requests over both, one public HTTP/2 server
 - `06_streaming.py` — a 50 MiB body buffered and streamed, wall time and peak RSS per process

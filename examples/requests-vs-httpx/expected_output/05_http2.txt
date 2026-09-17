@@ -7,14 +7,14 @@ httpx.Client(http2=True) against the plain-HTTP port: HTTP/1.1
 --- http2=True without the h2 package (subprocess with h2 blocked)
 exit 1 | ImportError: Using http2=True, but the 'h2' package is not installed. Make sure to install httpx using `pip install httpx[http2]`.
 --- 200 x GET /delay/0.05 over TLS, AsyncClient + gather with Semaphore(20), median of 3 runs
-HTTP/1.1 (http2=False)                               median  0.573 s  min  0.562 s  conns opened  20  requests  200
-HTTP/2 (http2=True)                                  median  0.599 s  min  0.560 s  conns opened   1  requests  200
---- the same 200 requests with no semaphore (server allows 200 concurrent HTTP/2 streams)
-HTTP/1.1, no semaphore                               median  0.469 s  min  0.463 s  conns opened 200  requests  200
-HTTP/2, no semaphore                                 median  0.170 s  min  0.169 s  conns opened   1  requests  200
+HTTP/1.1 (http2=False)                               median  0.581 s  min  0.568 s  conns opened  20  requests  200
+HTTP/2 (http2=True)                                  median  0.573 s  min  0.558 s  conns opened   1  requests  200
+--- the same 200 requests with no semaphore (httpx defaults cap in-flight work: 100 connections, or 100 streams on one HTTP/2 connection)
+HTTP/1.1, no semaphore                               median  0.476 s  min  0.471 s  conns opened 200  requests  200
+HTTP/2, no semaphore                                 median  0.171 s  min  0.169 s  conns opened   1  requests  200
 --- 300 sequential GET /get over TLS on one Client, median of 5 runs
-httpx.Client() HTTP/1.1                              median  0.115 s  min  0.108 s  conns opened   1  requests  300
-httpx.Client(http2=True)                             median  0.125 s  min  0.123 s  conns opened   1  requests  300
+httpx.Client() HTTP/1.1                              median  0.108 s  min  0.107 s  conns opened   1  requests  300
+httpx.Client(http2=True)                             median  0.125 s  min  0.125 s  conns opened   1  requests  300
 --- a public server: GitHub Pages fixture
 httpx.Client(http2=True) public: HTTP/2
 exit=0

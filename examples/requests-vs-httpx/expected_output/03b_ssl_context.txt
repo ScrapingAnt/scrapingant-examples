@@ -1,0 +1,8 @@
+$ python 03b_ssl_context.py
+ssl.create_default_context(cafile=certifi.where())    median   9.56 ms  min   9.24 ms  (n=50)
+ssl.create_default_context(cafile=CERT) (one cert)    median   0.18 ms  min   0.17 ms  (n=50)
+httpx.HTTPTransport() (default verify=True)           median   9.36 ms  min   9.20 ms  (n=50)
+httpx.HTTPTransport(verify=ctx)                       median   0.00 ms  min   0.00 ms  (n=50)
+httpx.HTTPTransport(verify=False)                     median   0.09 ms  min   0.09 ms  (n=50)
+requests.Session()                                    median   0.01 ms  min   0.01 ms  (n=50)
+exit=0
