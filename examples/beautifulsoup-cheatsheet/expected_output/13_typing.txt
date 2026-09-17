@@ -1,0 +1,5 @@
+$ python 13_typing.py
+h2 Ant Farm Deluxe
+p
+3
+exit=0

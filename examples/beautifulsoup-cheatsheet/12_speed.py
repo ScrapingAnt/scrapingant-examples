@@ -1,4 +1,4 @@
-"""Parse + find_all on a generated page, one subprocess per parser, best of 5, CPU seconds (process_time) so background load matters less."""
+"""Parse + find_all on a generated page, one subprocess per run, 7 runs per case, CPU seconds (process_time): min / median / max, because the builder timings vary a lot between runs on the same machine."""
 import os, subprocess, sys
 N = 20_000
 PATH = "generated/large.html"
@@ -16,14 +16,15 @@ CASES = {
     "BeautifulSoup lxml + select": "from bs4 import BeautifulSoup; s=BeautifulSoup(open(P,'rb').read(),'lxml'); n=len(s.select('p.price'))",
     "lxml.html + xpath (no bs4)": "import lxml.html; doc=lxml.html.parse(P); n=len(doc.xpath('//p[@class=\"price\"]'))",
 }
-print(f"file: {PATH}, {size_mb:.1f} MB, {N:,} products; task: parse and collect every p.price; CPU seconds, best of 5 runs, one subprocess per case")
-print(f"{'case':30} {'cpu s':>8} {'count':>7}")
+print(f"file: {PATH}, {size_mb:.1f} MB, {N:,} products; task: parse and collect every p.price; CPU seconds over 7 runs, one subprocess per run")
+print(f"{'case':30} {'min':>7} {'median':>7} {'max':>7} {'count':>7}")
+import statistics
 for name, code in CASES.items():
-    best = None
-    for _ in range(5):
+    times = []
+    for _ in range(7):
         prog = f"import time\nP={PATH!r}\nt=time.process_time()\n{code}\nprint(n, round(time.process_time()-t, 2))"
         out = subprocess.run([sys.executable, "-c", prog], capture_output=True, text=True, timeout=900)
         if out.returncode: print(f"{name:30} failed: {out.stderr.strip().splitlines()[-1][:80]}"); break
-        n, secs = out.stdout.split(); best = min(best, float(secs)) if best is not None else float(secs)
+        n, secs = out.stdout.split(); times.append(float(secs))
     else:
-        print(f"{name:30} {best:8.2f} {int(n):7d}")
+        print(f"{name:30} {min(times):7.2f} {statistics.median(times):7.2f} {max(times):7.2f} {int(n):7d}")

@@ -1,9 +1,9 @@
 $ python 12_speed.py
-file: generated/large.html, 3.1 MB, 20,000 products; task: parse and collect every p.price; CPU seconds, best of 5 runs, one subprocess per case
-case                              cpu s   count
-BeautifulSoup html.parser          4.36   20000
-BeautifulSoup lxml                 0.97   20000
-BeautifulSoup html5lib             2.45   20000
-BeautifulSoup lxml + select        1.05   20000
-lxml.html + xpath (no bs4)         0.08   20000
+file: generated/large.html, 3.1 MB, 20,000 products; task: parse and collect every p.price; CPU seconds over 7 runs, one subprocess per run
+case                               min  median     max   count
+BeautifulSoup html.parser         1.19    1.19    1.48   20000
+BeautifulSoup lxml                0.89    0.89    0.91   20000
+BeautifulSoup html5lib            2.31    2.34    2.36   20000
+BeautifulSoup lxml + select       0.99    1.00    1.00   20000
+lxml.html + xpath (no bs4)        0.08    0.08    0.08   20000
 exit=0

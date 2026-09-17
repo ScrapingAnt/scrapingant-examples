@@ -4,3 +4,4 @@ html5lib==1.1
 soupsieve==2.9.2
 requests==2.34.2
 pandas==3.0.5
+mypy==1.19.1

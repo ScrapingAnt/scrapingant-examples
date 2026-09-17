@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from _common import PAGE, show, warn_to_stdout
+from _common import show, warn_to_stdout
 warn_to_stdout()
+with open("fixtures/page.html", encoding="utf-8") as f:
+    PAGE = f.read()
 
 soup = BeautifulSoup(PAGE, "html.parser")                 # from a str
 print(soup.title.string, "|", soup.h1.get_text(" ", strip=True))
