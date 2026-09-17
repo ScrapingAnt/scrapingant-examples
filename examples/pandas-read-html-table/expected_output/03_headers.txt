@@ -1,0 +1,54 @@
+$ python 03_headers.py
+two-row thead -> MultiIndex columns:
+  Region 2025     2026    
+  Region   Q1  Q2   Q1  Q2
+0  North   10  12   14  16
+1  South    7   8    9  11
+df.columns: [('Region', 'Region'), ('2025', 'Q1'), ('2025', 'Q2'), ('2026', 'Q1'), ('2026', 'Q2')]
+flattened:
+  Region_Region  2025_Q1  2025_Q2  2026_Q1  2026_Q2
+0         North       10       12       14       16
+1         South        7        8        9       11
+header=1 (second thead row only):
+  Region  Q1  Q2  Q1.1  Q2.1
+0  North  10  12    14    16
+1  South   7   8     9    11
+spans (rowspan/colspan expanded):
+   Group      Item       Qty
+0  Tools  Tweezers         4
+1  Tools     Brush         2
+2   Food  sold out  sold out
+no thead, td first row: default:
+        0      1
+0  Metric  Value
+1  Uptime   99.9
+2  Errors      3
+no thead, td first row: header=0:
+   Metric  Value
+0  Uptime   99.9
+1  Errors    3.0
+simple (th row, no thead): default:
+    Name  Age       City
+0    Ada   36     London
+1  Grace   45  Arlington
+2  Linus   28   Helsinki
+simple: header=None:
+    Name  Age       City
+0    Ada   36     London
+1  Grace   45  Arlington
+2  Linus   28   Helsinki
+simple: index_col=0:
+       Age       City
+Name                 
+Ada     36     London
+Grace   45  Arlington
+Linus   28   Helsinki
+simple: skiprows=1:
+     Ada  36     London
+0  Grace  45  Arlington
+1  Linus  28   Helsinki
+simple: skiprows=[1]:
+    Name  Age       City
+0  Grace   45  Arlington
+1  Linus   28   Helsinki
+exit=0

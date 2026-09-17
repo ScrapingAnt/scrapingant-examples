@@ -1,0 +1,14 @@
+$ python 08_http.py
+pd.read_html(WIKI) with pandas' default user agent: urllib.error.HTTPError: HTTP Error 403: Forbidden
+pd.read_html(WIKI, storage_options=UA): (241, 6)
+requests.get: 200 text/html; charset=utf-8
+pd.read_html(StringIO(r.text)): 12
+pd.read_html(r.text)  (old idiom): FileNotFoundError: [Errno 2] No such file or directory: <!DOCTYPE html>
+pd.read_html(str(target))  (old idiom): FileNotFoundError: [Errno 2] No such file or directory: <table class="data" id="prices">
+pd.read_html(StringIO(str(target))):
+           Product      Price  Units sold  Share
+0  Ant Farm Deluxe  $1,234.50       12345  45.5%
+1    Ant Farm Mini     $99.00        1020   3.8%
+2        Magnifier     $12.25      987654  50.7%
+rows by hand for comparison: [['Product', 'Price', 'Units sold', 'Share'], ['Ant Farm Deluxe', '$1,234.50', '12,345', '45.5%']]
+exit=0

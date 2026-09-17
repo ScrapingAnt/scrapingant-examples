@@ -45,6 +45,11 @@
       "id": "requests-vs-httpx",
       "needs_api_key": false,
       "note": "starts a local hypercorn server (HTTP/1.1 + HTTP/2 over TLS); needs openssl and outbound HTTPS; 09 pip-installs httpx 1.0.dev6 into generated/; timing tables informational; 11 skipped without a key"
+    },
+    {
+      "id": "pandas-read-html-table",
+      "needs_api_key": false,
+      "note": "fixture page served from GitHub Pages; two Wikipedia requests in 08 (403 with the default UA is the recorded result); 10 skipped without a key"
     }
   ]
 }

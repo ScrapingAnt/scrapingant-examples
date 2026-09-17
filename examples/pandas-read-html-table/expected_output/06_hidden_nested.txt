@@ -1,0 +1,23 @@
+$ python 06_hidden_nested.py
+hidden: default (displayed_only=True):
+    Sku  Stock
+0  AF-1      5
+1  AF-3     12
+hidden: displayed_only=False:
+    Sku  Stock
+0  AF-1      5
+1  AF-2      0
+2  AF-3     12
+nested: attrs id=outer:
+  Warehouse                  Bins
+0    Berlin  BinCount  B140  B215
+1       Bin                 Count
+2        B1                    40
+3        B2                    15
+4      Lyon                  none
+nested: attrs id=inner:
+  Bin  Count
+0  B1     40
+1  B2     15
+nested: match='Bin' returns both: [(5, 2), (2, 2)]
+exit=0

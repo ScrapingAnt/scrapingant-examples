@@ -1,0 +1,25 @@
+$ python 07_parsers.py
+broken.html flavor='lxml':
+        Name  Qty
+0   Tweezers    4
+1      Brush    2
+2  Magnifier    1
+broken.html flavor='bs4':
+        Name  Qty
+0   Tweezers    4
+1      Brush    2
+2  Magnifier    1
+broken.html flavor='html5lib':
+        Name  Qty
+0   Tweezers    4
+1      Brush    2
+2  Magnifier    1
+broken.html flavor=None (default: lxml, fallback bs4): (3, 2)
+--- flavor with the library missing (subprocess, module blocked)
+lxml blocked, flavor='lxml': exit 1 | ImportError: `Import lxml` failed.  Use pip or conda to install the lxml package.
+bs4 blocked, flavor='bs4': exit 1 | ImportError: `Import beautifulsoup4` failed.  Use pip or conda to install the beautifulsoup4 package.
+html5lib blocked, flavor='bs4': exit 1 | ImportError: `Import html5lib` failed.  Use pip or conda to install the html5lib package.
+--- generated table: 20000 rows x 6 cols, 1.9 MB of HTML, median of 5 runs
+flavor='lxml'     median   1.27 s  min   1.20 s  shape (20000, 6)  dtypes {'id': 'int64', 'name': 'str', 'amount': 'int64', 'bucket': 'int64', 'tag': 'str', 'flag': 'bool'}
+flavor='bs4'      median  17.19 s  min  15.83 s  shape (20000, 6)  dtypes {'id': 'int64', 'name': 'str', 'amount': 'int64', 'bucket': 'int64', 'tag': 'str', 'flag': 'bool'}
+exit=0

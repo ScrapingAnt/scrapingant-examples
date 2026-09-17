@@ -1,0 +1,15 @@
+$ python 02_select.py
+match='Ant Farm': [(3, 4), (2, 2)]
+match='Ant Farm Deluxe': [(3, 4), (2, 2)]
+match=re.compile(r'^Q[1-4]$'): [(2, 5)]
+attrs={'id': 'prices'}:
+           Product      Price  Units sold  Share
+0  Ant Farm Deluxe  $1,234.50       12345  45.5%
+1    Ant Farm Mini     $99.00        1020   3.8%
+2        Magnifier     $12.25      987654  50.7%
+attrs={'class': 'data'}: [(3, 4)]
+match='Magnifier', attrs={'class': 'data'}: [(3, 4)]
+match='no such text': ValueError: No tables found matching pattern 'no such text'
+attrs={'id': 'nope'}: ValueError: No tables found
+pd.read_html('fixtures/no-tables.html'): ValueError: No tables found
+exit=0

@@ -1,0 +1,18 @@
+$ python 09_old_page_errors.py
+df.append({...}, ignore_index=True)  (removed in pandas 2.0): AttributeError: 'DataFrame' object has no attribute 'append'
+pd.concat([df, pd.DataFrame([{...}])]):
+    Name  Age         City
+0    Ada   36       London
+1  Grace   45    Arlington
+2  Linus   28     Helsinki
+3    Ken   60  Murray Hill
+pd.read_html(PAGE, chunksize=1000): TypeError: read_html() got an unexpected keyword argument 'chunksize'
+pd.read_html(PAGE, usecols=[0, 1]): TypeError: read_html() got an unexpected keyword argument 'usecols'
+table('simple')[['Name', 'Age']] instead:
+    Name  Age
+0    Ada   36
+1  Grace   45
+2  Linus   28
+pd.read_html(PAGE, 'Ant Farm')  (match positionally): TypeError: read_html() takes 1 positional argument but 2 were given
+pd.read_html(PAGE, header=5) (row beyond the table): ValueError: Passed header=[5], len of 1, but only 4 lines in file
+exit=0

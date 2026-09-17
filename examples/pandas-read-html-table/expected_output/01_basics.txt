@@ -1,0 +1,16 @@
+$ python 01_basics.py
+file: 12 tables; shapes: [(3, 3), (3, 4), (2, 5), (3, 3), (2, 3), (2, 3), (2, 2), (2, 2), (5, 2), (2, 2), (3, 2), (3, 3)]
+    Name  Age       City
+0    Ada   36     London
+1  Grace   45  Arlington
+2  Linus   28   Helsinki
+pd.read_html(html) with a str (pandas 3): FileNotFoundError: [Errno 2] No such file or directory: <!DOCTYPE html>
+pd.read_html(StringIO(html)): 12
+pd.read_html(open(PAGE, 'rb')): 12
+pd.read_html(URL): 12
+pd.read_html('https://' + ...)[1]:
+           Product      Price  Units sold  Share
+0  Ant Farm Deluxe  $1,234.50       12345  45.5%
+1    Ant Farm Mini     $99.00        1020   3.8%
+2        Magnifier     $12.25      987654  50.7%
+exit=0

@@ -1,0 +1,16 @@
+$ python 05_links.py
+links: default:
+           Product    Docs
+0  Ant Farm Deluxe  manual
+1        Magnifier    none
+links: extract_links='body':
+                   Product                                  Docs
+0  (Ant Farm Deluxe, None)  (manual, https://example.com/deluxe)
+1        (Magnifier, None)                          (none, None)
+links: extract_links='all':
+  (Product, /docs/product)                          (Docs, None)
+0  (Ant Farm Deluxe, None)  (manual, https://example.com/deluxe)
+1        (Magnifier, None)                          (none, None)
+columns: [('Product', '/docs/product'), ('Docs', None)]
+hrefs of the Docs column: ['https://example.com/deluxe', None]
+exit=0

@@ -1,0 +1,3 @@
+$ python 10_scrapingant.py
+skipped: SCRAPINGANT_API_KEY is not set
+exit=0

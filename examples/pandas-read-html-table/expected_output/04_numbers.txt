@@ -1,0 +1,78 @@
+$ python 04_numbers.py
+prices: default (thousands=','):
+           Product      Price  Units sold  Share
+0  Ant Farm Deluxe  $1,234.50       12345  45.5%
+1    Ant Farm Mini     $99.00        1020   3.8%
+2        Magnifier     $12.25      987654  50.7%
+prices: dtypes:
+Product         str
+Price           str
+Units sold    int64
+Share           str
+dtype: object
+prices: thousands=None:
+Product       str
+Price         str
+Units sold    str
+Share         str
+dtype: object
+prices: converters for $ and %:
+           Product    Price  Units sold  Share
+0  Ant Farm Deluxe  1234.50       12345  0.455
+1    Ant Farm Mini    99.00        1020  0.038
+2        Magnifier    12.25      987654  0.507
+prices: converters dtypes:
+Product           str
+Price         float64
+Units sold      int64
+Share         float64
+dtype: object
+codes: default (leading zeros lost):
+   Code  Postcode   Label
+0     7      1234   agent
+1    42       501  answer
+codes: converters={'Code': str, 'Postcode': str}:
+  Code Postcode   Label
+0  007    01234   agent
+1  042    00501  answer
+european: default:
+   Country       Revenue  Growth
+0  Germany  1.234.567,89      35
+1   France    987.654,32     -12
+2    Spain           NaN       0
+european: thousands='.', decimal=',':
+   Country     Revenue  Growth
+0  Germany  1234567.89     3.5
+1   France   987654.32    -1.2
+2    Spain         NaN     0.0
+european: + na_values=['n/a']:
+Country        str
+Revenue    float64
+Growth     float64
+dtype: object
+european: keep_default_na=False, na_values=['n/a']:
+   Country     Revenue  Growth
+0  Germany  1234567.89     3.5
+1   France   987654.32    -1.2
+2    Spain         NaN     0.0
+dates: default dtypes:
+Shipped        str
+Delivered      str
+Parcels      int64
+dtype: object
+dates: parse_dates=True:
+Shipped        str
+Delivered      str
+Parcels      int64
+dtype: object
+dates: pd.to_datetime after reading:
+Shipped      datetime64[us]
+Delivered               str
+Parcels               int64
+dtype: object
+dates: dtype_backend='numpy_nullable':
+Shipped      string
+Delivered    string
+Parcels       Int64
+dtype: object
+exit=0
