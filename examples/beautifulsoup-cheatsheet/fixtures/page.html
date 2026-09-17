@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ant Supply &mdash; catalogue</title>
+</head>
+<body>
+  <nav id="top">
+    <a href="/">Home</a>
+    <a href="/catalogue" class="active">Catalogue</a>
+    <a href="https://example.com/help" rel="nofollow">Help</a>
+  </nav>
+  <!-- rendered by the catalogue service -->
+  <section id="products">
+    <h1>Products <small>(3)</small></h1>
+    <div class="product featured" data-sku="A100">
+      <h2><a href="/p/a100">Ant Farm Deluxe</a></h2>
+      <p class="price">$49.90</p>
+      <p class="stock in">In stock</p>
+      <ul class="tags"><li>farm</li><li>glass</li></ul>
+    </div>
+    <div class="product" data-sku="A200">
+      <h2><a href="/p/a200">Sugar Water Feeder</a></h2>
+      <p class="price">$7.50</p>
+      <p class="stock out">Out of stock</p>
+      <ul class="tags"><li>feeder</li></ul>
+    </div>
+    <div class="product" data-sku="A300">
+      <h2><a href="/p/a300">Tunnel Kit &amp; Extension</a></h2>
+      <p class="price">$12.00</p>
+      <p class="stock in">In stock</p>
+      <ul class="tags"></ul>
+    </div>
+  </section>
+  <table id="orders">
+    <thead><tr><th>Order</th><th>SKU</th><th>Qty</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td>1001</td><td>A100</td><td>1</td><td>$49.90</td></tr>
+      <tr><td>1002</td><td>A200</td><td>3</td><td>$22.50</td></tr>
+      <tr><td>1003</td><td>A300</td><td>2</td><td>$24.00</td></tr>
+    </tbody>
+  </table>
+  <footer><p>Questions? <a href="mailto:hello@example.com">Write to us</a>.</p></footer>
+  <script>window.dataLayer = [];</script>
+</body>
+</html>

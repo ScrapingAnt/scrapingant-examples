@@ -1,0 +1,10 @@
+$ python 09_tables.py
+[['Order', 'SKU', 'Qty', 'Total'], ['1001', 'A100', '1', '$49.90'], ['1002', 'A200', '3', '$22.50'], ['1003', 'A300', '2', '$24.00']]
+{'Order': '1001', 'SKU': 'A100', 'Qty': '1', 'Total': '$49.90'}
+{'Order': dtype('int64'), 'SKU': <StringDtype(storage='python', na_value=nan)>, 'Qty': dtype('int64'), 'Total': <StringDtype(storage='python', na_value=nan)>}
+ Order  SKU  Qty  Total
+  1001 A100    1 $49.90
+  1002 A200    3 $22.50
+  1003 A300    2 $24.00
+pd.read_html(str(table))  # the old spelling: FileNotFoundError: [Errno 2] No such file or directory: <table id="orders">
+exit=0

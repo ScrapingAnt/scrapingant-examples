@@ -1,0 +1,44 @@
+$ python 07_modify.py
+<div class="product restocked" data-sku="A200" data-updated="2026-09-17">
+ <span class="badge">
+ </span>
+ [NEW]
+ <h2>
+  <a href="/p/a200">
+   Sugar Water Feeder
+  </a>
+ </h2>
+ <p class="price">
+  $7.50
+ </p>
+ <p class="stock out">
+  Back in stock
+ </p>
+ <ul class="tags">
+  <li>
+   feeder
+  </li>
+ </ul>
+ <p class="note">
+  Ships in 2 days
+ </p>
+</div>
+
+None footer None
+<h1>Products (3)</h1> top
+<div class="product featured" data-sku="A100">
+ <h2>
+  <a href="/p/a100">
+   Ant Farm Deluxe
+  </a>
+ </h2>
+ <s>
+ </s>
+ <p class="stock in">
+  In stock
+ </p>
+ <ul class="tags">
+ </ul>
+</div>
+
+exit=0

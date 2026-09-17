@@ -35,6 +35,11 @@
       "id": "wget-ignore-ssl",
       "needs_api_key": false,
       "note": "local self-signed and expired HTTPS servers; case 07 result depends on the wget TLS backend"
+    },
+    {
+      "id": "beautifulsoup-cheatsheet",
+      "needs_api_key": false,
+      "note": "one public fixture fetch; case 11 installs bs4 into a scratch dir; speed table informational"
     }
   ]
 }

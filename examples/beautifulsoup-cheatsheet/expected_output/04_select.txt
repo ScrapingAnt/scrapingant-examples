@@ -1,0 +1,14 @@
+$ python 04_select.py
+Products (3)
+['$49.90', '$7.50', '$12.00']
+['farm', 'glass']
+['/p/a100', '/p/a200', '/p/a300']
+['https://example.com/help', 'mailto:hello@example.com']
+Sugar Water Feeder
+['A100', 'A300']
+['Out of stock']
+1001 3
+None []
+True
+True
+exit=0

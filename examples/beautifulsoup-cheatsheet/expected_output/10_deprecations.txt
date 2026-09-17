@@ -1,0 +1,10 @@
+$ python 10_deprecations.py
+warning: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+7
+Products (3)
+warning: DeprecationWarning: Access to deprecated property nextSibling. (Replaced by next_sibling) -- Deprecated since version 4.0.0.
+<th>SKU</th>
+warning: DeprecationWarning: The 'text' argument to find()-type methods is deprecated. Use 'string' instead.
+['In stock', 'Out of stock', 'In stock']
+['In stock', 'Out of stock', 'In stock']
+exit=0

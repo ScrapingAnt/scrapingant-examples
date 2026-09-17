@@ -1,0 +1,11 @@
+$ python 05_navigate.py
+div A100 ['div', 'section', 'body', 'html', '[document]']
+['NavigableString', 'Tag', 'NavigableString', 'Tag']
+['h2', 'p', 'p', 'ul']
+17 7
+'\n'
+p ['tags']
+Ant Farm Deluxe
+products A200
+Order 1001
+exit=0

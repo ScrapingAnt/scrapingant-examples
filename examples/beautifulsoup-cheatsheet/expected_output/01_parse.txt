@@ -1,0 +1,25 @@
+$ python 01_parse.py
+Ant Supply — catalogue | Products (3)
+utf-8 Ant Supply — catalogue
+200 utf-8 Delayed Dynamic Web Page Example
+Grüße aus München
+Grüße aus München
+warning: UserWarning: You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.
+from_encoding on a str: 'x'
+warning: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a filename than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the contents of a file on disk, then something has gone wrong. You should open the file first, using code like this:
+
+    filehandle = open(your filename)
+
+You can then feed the open filehandle into Beautiful Soup instead of using the filename.
+
+However, if you want to parse some data that happens to look like a filename, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+BeautifulSoup("fixtures/page.html")  # a filename is not markup: 'fixtures/page.html'
+exit=0

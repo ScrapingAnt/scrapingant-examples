@@ -1,0 +1,17 @@
+$ python 03_find.py
+<h2><a href="/p/a100">Ant Farm Deluxe</a></h2>
+['/', '/catalogue', 'https://example.com/help', '/p/a100', '/p/a200', '/p/a300', 'mailto:hello@example.com']
+['h1', 'h2', 'h2', 'h2']
+60
+['$49.90', '$7.50', '$12.00']
+['A100', 'A200', 'A300']
+['A100']
+Sugar Water Feeder
+['Ant Farm Deluxe', 'Sugar Water Feeder', 'Tunnel Kit & Extension']
+['In stock', 'Out of stock', 'In stock']
+['farm', 'glass']
+3 3
+['p', 'p']
+soup.find('h9'): None
+nav None
+exit=0

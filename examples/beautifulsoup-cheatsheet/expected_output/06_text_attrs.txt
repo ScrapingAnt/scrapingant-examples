@@ -1,0 +1,12 @@
+$ python 06_text_attrs.py
+None | 'Products (3)' | Products (3)
+$49.90 $49.90
+['Ant Farm Deluxe', '$49.90', 'In stock', 'farm', 'glass']
+Home|Catalogue|Help
+/catalogue /catalogue None _self False
+a['target']: KeyError: 'target'
+['active'] ['product', 'featured']
+{'class': ['product', 'featured'], 'data-sku': 'A100'}
+['nofollow']
+Ant Farm Deluxe Ant Farm Deluxe
+exit=0

@@ -1,0 +1,70 @@
+{
+ "fetched_at": "2026-09-17",
+ "pypi": {
+  "source": "https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.min.json",
+  "snapshot_last_update": "2026-09-01 06:34:08",
+  "packages_ranked": 15000,
+  "rows": {
+   "beautifulsoup4": {
+    "rank": 101,
+    "downloads_30d": 414809672
+   },
+   "soupsieve": {
+    "rank": 100,
+    "downloads_30d": 421804203
+   },
+   "lxml": {
+    "rank": 109,
+    "downloads_30d": 383194342
+   },
+   "html5lib": {
+    "rank": 699,
+    "downloads_30d": 35913077
+   },
+   "requests": {
+    "rank": 7,
+    "downloads_30d": 1695910251
+   },
+   "httpx": {
+    "rank": 33,
+    "downloads_30d": 818096438
+   },
+   "playwright": {
+    "rank": 308,
+    "downloads_30d": 108699790
+   },
+   "selenium": {
+    "rank": 533,
+    "downloads_30d": 51890951
+   },
+   "scrapy": {
+    "rank": 2180,
+    "downloads_30d": 4577058
+   },
+   "parsel": {
+    "rank": 2236,
+    "downloads_30d": 4426322
+   },
+   "pyquery": {
+    "rank": 3059,
+    "downloads_30d": 2254228
+   },
+   "selectolax": {
+    "rank": 1986,
+    "downloads_30d": 5410211
+   }
+  }
+ },
+ "stackoverflow": {
+  "source": "https://api.stackexchange.com/2.3/tags/{names}/info?site=stackoverflow",
+  "question_count": {
+   "selenium": 99924,
+   "web-scraping": 51307,
+   "beautifulsoup": 32788,
+   "scrapy": 17825,
+   "html-parsing": 6096,
+   "lxml": 5471,
+   "playwright": 3505
+  }
+ }
+}

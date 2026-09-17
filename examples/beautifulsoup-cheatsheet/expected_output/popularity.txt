@@ -1,0 +1,7 @@
+PyPI snapshot 2026-09-01: beautifulsoup4 rank 101 of 15,000, 414,809,672 downloads in 30 days
+  lxml: rank 109, 383,194,342 (1.1x)
+  playwright: rank 308, 108,699,790 (3.8x)
+  selenium: rank 533, 51,890,951 (8.0x)
+  scrapy: rank 2180, 4,577,058 (90.6x)
+  requests: rank 7, 1,695,910,251 (0.2x)
+Stack Overflow questions: {'selenium': 99924, 'web-scraping': 51307, 'beautifulsoup': 32788, 'scrapy': 17825, 'html-parsing': 6096, 'lxml': 5471, 'playwright': 3505}

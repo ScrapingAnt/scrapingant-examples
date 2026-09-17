@@ -1,0 +1,8 @@
+$ python 11_errors.py
+soup.find('p', class_='discount').text: AttributeError: 'NoneType' object has no attribute 'text'
+no discount
+soup.select_one('p.discount').get_text(): AttributeError: 'NoneType' object has no attribute 'get_text'
+no discount
+FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+x
+exit=0

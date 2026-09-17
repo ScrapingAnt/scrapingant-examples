@@ -1,0 +1,29 @@
+$ python 08_output.py
+<h2><a href="/p/a300">Tunnel Kit &amp; Extension</a></h2>
+<h2><a href="/p/a300">Tunnel Kit &amp; Extension</a></h2>
+<h2><a href="/p/a300">Tunnel Kit & Extension</a></h2>
+b'<h2><a href="/p/a300">Tunnel Kit &amp; Extension</a></h2>'
+<h2>
+ <a href="/p/a300">
+  Tunnel Kit &amp; Extension
+ </a>
+</h2>
+<nav id="top">
+ <a href="/">
+  Home
+ </a>
+ <a class="active" href="/catalogue">
+  Catalogue
+ </a>
+ <a href="https://example.com/help" rel="nofollow">
+  Help
+ </a>
+</nav>
+
+<nav id="top">
+<a hidden="False" href="/">Home</a>
+<a checked="True" class="active" href="/catalogue">Catalogue</a>
+<a href="https://example.com/help" rel="nofollow">Help</a>
+</nav> AttributeDict
+<input checked="True" disabled="False" type="checkbox"/> AttributeDict
+exit=0
