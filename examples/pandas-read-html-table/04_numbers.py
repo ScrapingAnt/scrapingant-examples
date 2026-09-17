@@ -12,13 +12,17 @@ show("prices: converters dtypes", lambda: table("prices", converters=clean).dtyp
 
 show("codes: default (leading zeros lost)", lambda: table("codes"))
 show("codes: converters={'Code': str, 'Postcode': str}", lambda: table("codes", converters={"Code": str, "Postcode": str}))
+show("codes: converters={'Code': lambda s: s} (identity) dtypes", lambda: table("codes", converters={"Code": lambda s: s}).dtypes)
 
 show("european: default", lambda: table("european"))
 show("european: thousands='.', decimal=','", lambda: table("european", thousands=".", decimal=","))
 show("european: + na_values=['n/a']", lambda: table("european", thousands=".", decimal=",", na_values=["n/a"]).dtypes)
+show("european: keep_default_na=False alone", lambda: table("european", thousands=".", decimal=",", keep_default_na=False))
 show("european: keep_default_na=False, na_values=['n/a']", lambda: table("european", thousands=".", decimal=",", na_values=["n/a"], keep_default_na=False))
 
 show("dates: default dtypes", lambda: table("dates").dtypes)
 show("dates: parse_dates=True", lambda: table("dates", parse_dates=True).dtypes)
+show("dates: parse_dates=['Shipped']", lambda: table("dates", parse_dates=["Shipped"]).dtypes)
+show("dates: index_col=0, parse_dates=True (index parsed)", lambda: table("dates", index_col=0, parse_dates=True).index)
 show("dates: pd.to_datetime after reading", lambda: table("dates").assign(Shipped=lambda d: pd.to_datetime(d["Shipped"])).dtypes)
 show("dates: dtype_backend='numpy_nullable'", lambda: table("dates", dtype_backend="numpy_nullable").dtypes)

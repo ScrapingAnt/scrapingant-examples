@@ -8,6 +8,20 @@ hidden: displayed_only=False:
 0  AF-1      5
 1  AF-2      0
 2  AF-3     12
+six ways to hide a row, flavor='lxml', displayed_only=True:
+   Row          How hidden
+0    1             visible
+1    3  inline, upper case
+2    4  class + stylesheet
+3    5    hidden attribute
+4    6   visibility:hidden
+six ways to hide a row, flavor='bs4', displayed_only=True:
+   Row          How hidden
+0    1             visible
+1    3  inline, upper case
+2    4  class + stylesheet
+3    5    hidden attribute
+4    6   visibility:hidden
 nested: attrs id=outer:
   Warehouse                  Bins
 0    Berlin  BinCount  B140  B215

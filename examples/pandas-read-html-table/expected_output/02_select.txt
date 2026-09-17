@@ -9,7 +9,13 @@ attrs={'id': 'prices'}:
 2        Magnifier     $12.25      987654  50.7%
 attrs={'class': 'data'}: [(3, 4)]
 match='Magnifier', attrs={'class': 'data'}: [(3, 4)]
+match='Farm Deluxe' (part of one cell): [(3, 4), (2, 2)]
+match='Ant Farm Deluxe manual' (spans two cells): ValueError: No tables found matching pattern 'Ant Farm Deluxe manual'
 match='no such text': ValueError: No tables found matching pattern 'no such text'
+match='no such text', flavor='lxml' (lxml's own message): ValueError: No tables found matching regex 'no such text'
+match='no such text' with only lxml installed (bs4 blocked): ImportError: `Import beautifulsoup4` failed.  Use pip or conda to install the beautifulsoup4 package.
 attrs={'id': 'nope'}: ValueError: No tables found
 pd.read_html('fixtures/no-tables.html'): ValueError: No tables found
+header-only table (empty tbody, as a JS page skeleton): (0, 2)
+  its columns: ['A', 'B']
 exit=0

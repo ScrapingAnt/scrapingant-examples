@@ -14,5 +14,5 @@ table('simple')[['Name', 'Age']] instead:
 1  Grace   45
 2  Linus   28
 pd.read_html(PAGE, 'Ant Farm')  (match positionally): TypeError: read_html() takes 1 positional argument but 2 were given
-pd.read_html(PAGE, header=5) (row beyond the table): ValueError: Passed header=[5], len of 1, but only 4 lines in file
+table('simple', header=5) (row beyond the table): ValueError: Passed header=[5], len of 1, but only 4 lines in file
 exit=0

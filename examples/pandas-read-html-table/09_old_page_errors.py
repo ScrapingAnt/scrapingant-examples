@@ -9,4 +9,4 @@ show("pd.read_html(PAGE, chunksize=1000)", lambda: pd.read_html(PAGE, chunksize=
 show("pd.read_html(PAGE, usecols=[0, 1])", lambda: pd.read_html(PAGE, usecols=[0, 1]))
 show("table('simple')[['Name', 'Age']] instead", lambda: table("simple")[["Name", "Age"]])
 show("pd.read_html(PAGE, 'Ant Farm')  (match positionally)", lambda: [d.shape for d in pd.read_html(PAGE, "Ant Farm")])
-show("pd.read_html(PAGE, header=5) (row beyond the table)", lambda: table("simple", header=5))
+show("table('simple', header=5) (row beyond the table)", lambda: table("simple", header=5))

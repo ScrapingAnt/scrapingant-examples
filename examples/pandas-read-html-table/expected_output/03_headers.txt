@@ -51,4 +51,8 @@ simple: skiprows=[1]:
     Name  Age       City
 0  Grace   45  Arlington
 1  Linus   28   Helsinki
+prices (has thead): skiprows=1:
+  Ant Farm Deluxe $1,234.50  12,345  45.5%
+0   Ant Farm Mini    $99.00    1020   3.8%
+1       Magnifier    $12.25  987654  50.7%
 exit=0

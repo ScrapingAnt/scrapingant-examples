@@ -35,6 +35,11 @@ codes: converters={'Code': str, 'Postcode': str}:
   Code Postcode   Label
 0  007    01234   agent
 1  042    00501  answer
+codes: converters={'Code': lambda s: s} (identity) dtypes:
+Code          str
+Postcode    int64
+Label         str
+dtype: object
 european: default:
    Country       Revenue  Growth
 0  Germany  1.234.567,89      35
@@ -50,6 +55,11 @@ Country        str
 Revenue    float64
 Growth     float64
 dtype: object
+european: keep_default_na=False alone:
+   Country     Revenue  Growth
+0  Germany  1234567.89     3.5
+1   France   987654.32    -1.2
+2    Spain         n/a     0.0
 european: keep_default_na=False, na_values=['n/a']:
    Country     Revenue  Growth
 0  Germany  1234567.89     3.5
@@ -65,6 +75,12 @@ Shipped        str
 Delivered      str
 Parcels      int64
 dtype: object
+dates: parse_dates=['Shipped']:
+Shipped      datetime64[us]
+Delivered               str
+Parcels               int64
+dtype: object
+dates: index_col=0, parse_dates=True (index parsed): DatetimeIndex(['2026-09-01', '2026-09-10'], dtype='datetime64[us]', name='Shipped', freq=None)
 dates: pd.to_datetime after reading:
 Shipped      datetime64[us]
 Delivered               str
