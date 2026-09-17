@@ -15,7 +15,7 @@ Python 3.12. Case 01 fetches one public fixture over HTTPS; case 11 installs bea
 ## Files
 - `run.sh` — runs `NN_*.py`, writes `expected_output/*.txt`, checks key strings
 - `_common.py` — fixture loading, the one-line exception printer, warnings to stdout
-- `01`–`12` — one script per article section; `12_speed.py` generates `generated/large.html` (git-ignored)
+- `01`–`13` — one script per article section; `12_speed.py` generates `generated/large.html` (git-ignored); `13_typing.py` is run through mypy
 - `popularity.py` — PyPI 30-day rank/downloads (hugovk/top-pypi-packages) and Stack Overflow tag counts → `expected_output/popularity.json`
 - `expected_output/` — captured output from the last recorded run (`evidence.yaml: tested_at`)
 
