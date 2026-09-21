@@ -1,12 +1,13 @@
 article_id: selenium-download-file
 canonical_url: https://scrapingant.com/blog/selenium-download-file
 owner: Oleg Kulyk
-examples_repo_commit: pending-source-commit
+examples_repo_commit: 2804500b1a2fe416f69ab26170354f437b25a0ee
 tested_at: '2026-09-21'
 requires_api_key: false
 environment:
   os: macOS 26.6.2, arm64
   python: 3.12.11
+  clean_install_python: 3.12.10
   chrome: 153.0.8010.50
   chromedriver: 153.0.8010.52
   firefox: 156.0 (stable, Selenium Manager cache)
