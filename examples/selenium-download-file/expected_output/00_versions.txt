@@ -1,0 +1,4 @@
+$ python 00_versions.py
+Python 3.12.11
+Selenium 4.49.0
+OS macOS-26.6.2-arm64-arm-64bit

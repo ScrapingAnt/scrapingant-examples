@@ -1,0 +1,13 @@
+$ python -m unittest -v test_wait
+test_create_absolute_directory (test_wait.DownloadTests.test_create_absolute_directory) ... ok
+test_delayed_rename_succeeds (test_wait.DownloadTests.test_delayed_rename_succeeds) ... ok
+test_missing_file_times_out (test_wait.DownloadTests.test_missing_file_times_out) ... ok
+test_partial_artifact_blocks_success (test_wait.DownloadTests.test_partial_artifact_blocks_success) ... ok
+test_reject_stale_directory (test_wait.DownloadTests.test_reject_stale_directory) ... ok
+test_truncated_file_is_not_success (test_wait.DownloadTests.test_truncated_file_is_not_success) ... ok
+test_wrong_content_is_not_success (test_wait.DownloadTests.test_wrong_content_is_not_success) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.689s
+
+OK

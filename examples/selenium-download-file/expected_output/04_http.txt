@@ -1,0 +1,5 @@
+$ python 04_http.py
+HTTP: report.csv bytes=14 sha256=bf162b0bac0059094e9754a1f179b88e05a94785b6b6c58e71478e0b9c198cab verified=True
+id,name
+1,Ant
+missing URL: HTTPError 404 (expected)

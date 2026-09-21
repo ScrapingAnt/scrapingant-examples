@@ -1,0 +1,176 @@
+article_id: selenium-download-file
+canonical_url: https://scrapingant.com/blog/selenium-download-file
+owner: Oleg Kulyk
+examples_repo_commit: pending-source-commit
+tested_at: '2026-09-21'
+requires_api_key: false
+environment:
+  os: macOS 26.6.2, arm64
+  python: 3.12.11
+  chrome: 153.0.8010.50
+  chromedriver: 153.0.8010.52
+  firefox: 156.0 (stable, Selenium Manager cache)
+  geckodriver: 0.37.1
+dependencies:
+  selenium: 4.49.0
+dependency_snapshot: expected_output/dependencies.txt
+run_command: ./run.sh
+fixtures:
+- path: ../../fixtures/selenium-download-file/index.html
+  bytes: 427
+  sha256: 1b283bab6a6d97aa2894d793dff9b79dab2994f8427a5007434e2d746d8148a6
+- path: ../../fixtures/selenium-download-file/payload.bin
+  bytes: 65536
+  sha256: 7daca2095d0438260fa849183dfc67faa459fdf4936e1bc91eec6b281b27e4c2
+- path: ../../fixtures/selenium-download-file/report.csv
+  bytes: 14
+  sha256: bf162b0bac0059094e9754a1f179b88e05a94785b6b6c58e71478e0b9c198cab
+- path: ../../fixtures/selenium-download-file/sample.pdf
+  bytes: 590
+  sha256: cb8d75102cc5a0a252df53b3a977db81e6bcf9bd5af093c3487d713fd5af69dc
+outputs:
+- expected_output/00_versions.txt
+- expected_output/01_chrome_headed.txt
+- expected_output/01_chrome_headless.txt
+- expected_output/02_firefox_headed.txt
+- expected_output/02_firefox_headless.txt
+- expected_output/03_failures.txt
+- expected_output/04_http.txt
+- expected_output/05_old_apis.txt
+- expected_output/06_helper_tests.txt
+- expected_output/07_retained_downloads.txt
+- expected_output/08_clean_install.txt
+- expected_output/dependencies.txt
+measurements:
+- name: verified_downloads
+  value: 12
+  denominator: '12 attempted cases: 2 browsers × 2 modes × 3 fixture payloads'
+  source: expected_output/01_chrome_*.txt; expected_output/02_firefox_*.txt
+- name: interrupted_transfers_rejected
+  value: 2
+  denominator: '2 intentionally interrupted transfers: Chrome headless and Firefox
+    headless'
+  source: expected_output/03_failures.txt
+- name: helper_tests_passed
+  value: 7
+  denominator: 7 unittest methods, including both partial suffix subcases
+  source: expected_output/06_helper_tests.txt
+limitations:
+- Small known attachments only; the byte length and digest are supplied by self-authored
+  fixtures, not inferred from download appearance.
+- PDF served as attachment; inline viewer and blob URL behavior not measured.
+- The helper reads full files into memory; a large-file streaming implementation is
+  outside scope.
+- Local macOS only; remote browser filesystems, Grid, Windows/Linux, concurrent downloads
+  and session transfer not tested.
+- Browser versions may change; Python dependency pinned, actual transitive packages
+  recorded. Firefox stable resolves dynamically.
+- Full headed browser matrix not allow-listed in generic CI, which does not provision
+  its graphical browser environment.
+- No API key or customer data involved.
+sources_file: sources.md
+claims:
+- id: C1
+  text: Python 3.12.11, Selenium 4.49.0, macOS 26.6.2 arm64; exact browser and driver
+    versions in the result matrix.
+  type: measured
+  source: expected_output/00_versions.txt; expected_output/01_chrome_headless.txt;
+    expected_output/02_firefox_headless.txt
+- id: C2
+  text: 'Chrome and Firefox each verified the CSV, delayed binary and PDF attachment
+    in headed and headless modes: 12 verified / 12 attempted.'
+  type: measured
+  source: expected_output/01_chrome_headless.txt; expected_output/01_chrome_headed.txt;
+    expected_output/02_firefox_headless.txt; expected_output/02_firefox_headed.txt
+- id: C3
+  text: The known fixture payloads are 14, 65536 and 590 bytes respectively; their
+    complete SHA-256 values match the output.
+  type: measured
+  source: fixture_server.py; ../../fixtures/selenium-download-file/; expected_output/01_chrome_headless.txt
+- id: C4
+  text: Chrome preferences and --headless, with the absolute download directory, save
+    these fixture attachments; no Safe Browsing override is set.
+  type: measured
+  source: chrome_download.py; expected_output/01_chrome_headless.txt; expected_output/01_chrome_headed.txt
+- id: C5
+  text: Firefox Options preferences, -headless, and stable browser selection save
+    these fixture attachments; pdfjs.disabled is set.
+  type: measured
+  source: firefox_download.py; expected_output/02_firefox_headless.txt; expected_output/02_firefox_headed.txt
+- id: C6
+  text: 'The loopback server supplies Content-Type, Content-Disposition: attachment
+    and Content-Length; the PDF case is not an arbitrary inline-PDF test.'
+  type: measured
+  source: fixture_server.py; ../../fixtures/selenium-download-file/index.html
+- id: C7
+  text: The old existence/nonempty-directory checks accept a 3-byte truncated file
+    where 14 bytes are expected.
+  type: measured
+  source: expected_output/03_failures.txt; 03_failures.py
+- id: C8
+  text: The helper uses a monotonic timeout, rejects partial suffixes, and requires
+    the expected byte count and digest; empty-directory preflight rejects stale files.
+  type: measured
+  source: download_helpers.py; test_wait.py; expected_output/06_helper_tests.txt
+- id: C9
+  text: Interrupted HTTP transfers time out in headless Chrome and Firefox; Firefox
+    leaves a .bin entry in the recorded run.
+  type: measured
+  source: fixture_server.py; 03_failures.py; expected_output/03_failures.txt
+- id: C10
+  text: Seven helper tests pass, covering creation, delayed rename, missing/truncated/wrong-content
+    files, both temporary suffixes and a stale directory.
+  type: measured
+  source: test_wait.py; expected_output/06_helper_tests.txt
+- id: C11
+  text: Executable-path/profile constructor arguments and find_element_by_id fail
+    in tested Selenium; the old window.open text is invalid Python.
+  type: measured
+  source: 05_old_apis.py; expected_output/05_old_apis.txt
+- id: C12
+  text: Modern Selenium Manager resolves and caches drivers when no driver is supplied;
+    Firefox stable requests a managed stable browser.
+  type: documented
+  source: 'sources.md: Selenium Manager; firefox_download.py; expected_output/02_firefox_headless.txt'
+- id: C13
+  text: Use full download paths and keep the browser alive until verification; ChromeDriver
+    does not wait for completion and quitting early can interrupt it.
+  type: documented
+  source: 'sources.md: ChromeDriver capabilities; browser_run.py'
+- id: C14
+  text: A clickability wait and filesystem verification are separate stages; scripts
+    close the browser in finally.
+  type: measured
+  source: browser_run.py; expected_output/01_chrome_headless.txt
+- id: C15
+  text: The packet serves its own local fixture URL, defaults to temporary folders
+    and supports --output for retained downloads in an empty directory.
+  type: measured
+  source: fixture_server.py; browser_run.py; expected_output/07_retained_downloads.txt
+- id: C16
+  text: Direct HTTP retrieves and verifies the same CSV; urllib reports HTTPError
+    404 for the missing route.
+  type: measured
+  source: 04_http.py; expected_output/04_http.txt
+- id: C17
+  text: Selenium file-download guidance recommends handing a resolved link/cookies
+    to an HTTP library when the file content is the goal.
+  type: documented
+  source: 'sources.md: Selenium file downloads'
+- id: C18
+  text: The evidence requires no ScrapingAnt API or API key; the article links a separate
+    page-acquisition next step without claiming binary-download support.
+  type: measured
+  source: requirements.txt; all packet scripts; sources.md product boundary
+- id: C19
+  text: Results are limited to small known attachments on the recorded local macOS
+    environment; no Grid, Windows/Linux, auth, inline PDF, blob or concurrent-download
+    claim. Stable size alone is not the completion oracle.
+  type: documented
+  source: README.md limitations; download_helpers.py; fixture_server.py
+- id: C20
+  text: Installation and command-line examples are reproducible from the pinned dependency
+    and packet; run.sh propagates failures; headed sessions need a desktop.
+  type: measured
+  source: requirements.txt; run.sh; README.md; expected_output/07_retained_downloads.txt;
+    expected_output/08_clean_install.txt

@@ -1,0 +1,6 @@
+$ python 05_old_apis.py
+Chrome executable_path: TypeError: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+Firefox executable_path: TypeError: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+Firefox firefox_profile: TypeError: WebDriver.__init__() got an unexpected keyword argument 'firefox_profile'
+find_element_by_id: AttributeError: type object 'WebDriver' has no attribute 'find_element_by_id'
+old window.open snippet: SyntaxError: unterminated string literal (detected at line 1) (old-snippet, line 1)

@@ -1,0 +1,9 @@
+$ python 03_failures.py
+naive exists=True nonempty_directory=True bytes=3/14
+truncated: TimeoutError (expected)
+stale directory: FileExistsError (expected)
+missing: TimeoutError (expected)
+chrome interrupted HTTP body: TimeoutError (expected)
+chrome remaining suffixes=[]
+firefox interrupted HTTP body: TimeoutError (expected)
+firefox remaining suffixes=['.bin']

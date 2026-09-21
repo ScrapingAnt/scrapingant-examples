@@ -1,0 +1,7 @@
+$ python firefox_download.py
+firefox/headless: browser=156.0
+driver=0.37.1
+csv: report.csv bytes=14/14 sha256=bf162b0bac0059094e9754a1f179b88e05a94785b6b6c58e71478e0b9c198cab verified=True
+slow: payload.bin bytes=65536/65536 sha256=7daca2095d0438260fa849183dfc67faa459fdf4936e1bc91eec6b281b27e4c2 verified=True
+pdf: sample.pdf bytes=590/590 sha256=cb8d75102cc5a0a252df53b3a977db81e6bcf9bd5af093c3487d713fd5af69dc verified=True
+verified=3 attempted=3
