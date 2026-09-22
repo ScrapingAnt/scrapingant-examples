@@ -1,7 +1,7 @@
 article_id: python-proxy-server-proxy-py
 canonical_url: https://scrapingant.com/blog/python-proxy-server-proxy-py
 owner: Oleg Kulyk
-examples_repo_commit: pending-source-commit
+examples_repo_commit: a4e624d3205177c9bae76bb5b71b6a03ab695853
 tested_at: 2026-09-22
 requires_api_key: false
 environment:
@@ -60,7 +60,7 @@ claims:
   - {id: C3, text: 'cURL and Requests each forward HTTP and HTTPS to the local origin', type: measured, source: expected_output/run.txt}
   - {id: C4, text: 'HTTPS uses CONNECT with client certificate verification; no interception CA configured on proxy', type: measured, source: 'expected_output/run.txt; expected_output/plain.log; expected_output/certificates.txt; lab.py'}
   - {id: C5, text: 'Authentication: four successes, eight rejections, zero rejected origin hits', type: measured, source: 'expected_output/summary.json; expected_output/origin.jsonl; expected_output/auth.log'}
-  - {id: C6, text: 'Missing/wrong credentials yield 407; curl HTTP exit22, CONNECT exit56; Requests HTTP407 or HTTPS ProxyError', type: measured, source: expected_output/run.txt}
+  - {id: C6, text: 'Missing/wrong credentials yield 407; captured curl exit22 for HTTP and CONNECT; Requests HTTP407 or HTTPS ProxyError', type: measured, source: expected_output/run.txt}
   - {id: C7, text: 'HTTP marker reaches origin; marker absent inside CONNECT tunnel', type: measured, source: 'expected_output/origin.jsonl; lab_plugins.py'}
   - {id: C8, text: 'Old host/port-rewriting recipe yields HTTP400 and no origin hit in this fixture', type: measured, source: 'expected_output/legacy.log; expected_output/run.txt; lab_plugins.py'}
   - {id: C9, text: 'Each upstream tested separately; 20/20 fresh-connection pool requests preserve destination, with 10 on each upstream in this run', type: measured, source: 'expected_output/summary.json; expected_output/origin.jsonl; expected_output/upstream-a.log; expected_output/upstream-b.log'}
