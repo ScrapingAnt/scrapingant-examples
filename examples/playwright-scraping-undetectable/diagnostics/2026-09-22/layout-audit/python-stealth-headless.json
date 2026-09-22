@@ -1,0 +1,59 @@
+{
+  "snapshot": {
+    "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+    "url": "https://www.browserscan.net/bot-detection",
+    "verdict": "Test Results:\nRobot",
+    "summary": [
+      {
+        "label": "Webdriver",
+        "class": "",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "label": "User-Agent",
+        "class": "",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "label": "CDP",
+        "class": "",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "label": "Navigator",
+        "class": "_107t7ol",
+        "color": "rgb(251, 81, 56)"
+      }
+    ],
+    "rows": [],
+    "fixture": null
+  },
+  "layout": {
+    "innerWidth": 1440,
+    "outerWidth": 1440,
+    "scrollX": 0,
+    "body": {
+      "x": 0,
+      "y": 0,
+      "width": 4000,
+      "height": 1000,
+      "top": 0,
+      "right": 4000,
+      "bottom": 1000,
+      "left": 0
+    },
+    "documentWidth": 4000,
+    "strong": [
+      {
+        "x": 1842.171875,
+        "y": 145,
+        "width": 189.09375,
+        "height": 48,
+        "top": 145,
+        "right": 2031.265625,
+        "bottom": 193,
+        "left": 1842.171875
+      }
+    ]
+  }
+}

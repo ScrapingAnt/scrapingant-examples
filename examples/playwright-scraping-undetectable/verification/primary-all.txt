@@ -1,0 +1,7 @@
+{"approach": "plain-chrome", "browser": "154.0.8037.57", "platform": "MacIntel", "webdriver": true}
+{"approach": "patchright", "browser": "154.0.8037.57", "platform": "MacIntel", "webdriver": false}
+{"approach": "python-stealth", "browser": "154.0.8037.57", "platform": "Win32", "webdriver": false}
+{"approach":"extra-stealth","browser":"154.0.8037.57","webdriver":false,"platform":"MacIntel"}
+{"approach":"rebrowser","browser":"154.0.8037.57","webdriver":true,"platform":"MacIntel"}
+{"approach": "plain-firefox", "browser": "153.0", "platform": "MacIntel", "webdriver": true}
+{"approach": "camoufox", "browser": "152.0.4-beta.30", "platform": "MacIntel", "webdriver": false}

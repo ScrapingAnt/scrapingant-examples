@@ -1,0 +1,1 @@
+{"approach": "plain-firefox", "browser": "153.0", "platform": "MacIntel", "webdriver": true}

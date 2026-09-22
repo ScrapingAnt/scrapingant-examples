@@ -1,0 +1,117 @@
+{
+  "key": "camoufox-headed-2",
+  "approach": "camoufox",
+  "mode": "headed",
+  "repetition": 2,
+  "timestamp": "2026-09-22T19:02:13.739806+00:00",
+  "os": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "pages": [
+    {
+      "site": "local",
+      "url": "file:///Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/fixtures/properties.html",
+      "http_status": null,
+      "properties": {
+        "webdriver": false,
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+        "platform": "MacIntel",
+        "languages": [
+          "en-US",
+          "en"
+        ],
+        "plugins": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "hardwareConcurrency": 12,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "screen": [
+          1440,
+          900
+        ],
+        "webgl": {
+          "vendor": "Apple",
+          "renderer": "Apple M1, or similar"
+        }
+      },
+      "elapsed_seconds": 1.05
+    },
+    {
+      "site": "browserscan",
+      "url": "https://www.browserscan.net/bot-detection",
+      "http_status": 200,
+      "snapshot_6s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nNormal",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "snapshot_10s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nNormal",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "screenshot": "screenshots/camoufox-headed-2-browserscan.png",
+      "elapsed_seconds": 11.715
+    }
+  ],
+  "packages": {
+    "playwright": "1.62.0",
+    "camoufox": "0.5.6",
+    "browserforge": "1.2.4"
+  },
+  "browser_version": "152.0.4-beta.30"
+}

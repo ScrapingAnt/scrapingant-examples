@@ -1,0 +1,112 @@
+{
+  "playwright": {
+    "registry": "https://pypi.org/pypi/playwright/json",
+    "version": "1.63.0",
+    "released": "2026-09-15T16:49:06.045396Z",
+    "urls": {
+      "Release notes": "https://github.com/microsoft/playwright-python/releases",
+      "homepage": "https://github.com/Microsoft/playwright-python"
+    },
+    "requires": [
+      "pyee<14,>=13",
+      "greenlet<4.0.0,>=3.1.1"
+    ]
+  },
+  "patchright": {
+    "registry": "https://pypi.org/pypi/patchright/json",
+    "version": "1.63.0",
+    "released": "2026-09-20T12:14:03.692827Z",
+    "urls": {
+      "Bug Reports": "https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-python/issues",
+      "Patchright core": "https://www.npmjs.com/package/patchright-core/v/1.63.0",
+      "Playwright source": "https://github.com/microsoft/playwright-python/tree/v1.63.0",
+      "Release history": "https://pypi.org/project/patchright/#history",
+      "Source Code": "https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-python",
+      "homepage": "https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-python"
+    },
+    "requires": [
+      "pyee<14,>=13",
+      "greenlet<4.0.0,>=3.1.1"
+    ]
+  },
+  "playwright-stealth": {
+    "registry": "https://pypi.org/pypi/playwright-stealth/json",
+    "version": "2.0.3",
+    "released": "2026-04-04T02:50:35.246953Z",
+    "urls": {
+      "Homepage": "https://github.com/Mattwmaster58/playwright_stealth",
+      "changelog": "https://github.com/Mattwmaster58/playwright_stealth/raw/main/CHANGELOG.md"
+    },
+    "requires": [
+      "black>=25.9.0; extra == \"black\"",
+      "playwright>=1.40.0"
+    ]
+  },
+  "camoufox": {
+    "registry": "https://pypi.org/pypi/camoufox/json",
+    "version": "0.5.6",
+    "released": "2026-09-06T01:27:59.939370Z",
+    "urls": {
+      "Homepage": "https://camoufox.com/python",
+      "Repository": "https://github.com/daijro/camoufox"
+    },
+    "requires": [
+      "PySide6; extra == \"gui\"",
+      "browserforge<2.0.0,>=1.2.4",
+      "geoip2; extra == \"geoip\"",
+      "inquirer",
+      "language-tags",
+      "lxml",
+      "numpy",
+      "orjson",
+      "platformdirs",
+      "playwright<1.63",
+      "pysocks",
+      "pyyaml",
+      "requests",
+      "rich",
+      "rich-click",
+      "screeninfo",
+      "typing_extensions",
+      "ua_parser"
+    ]
+  },
+  "playwright-extra": {
+    "registry": "https://registry.npmjs.org/playwright-extra",
+    "version": "4.3.6",
+    "released": "2023-03-01T12:07:20.917Z",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/berstend/puppeteer-extra.git"
+    },
+    "dependencies": {
+      "debug": "^4.3.4"
+    }
+  },
+  "puppeteer-extra-plugin-stealth": {
+    "registry": "https://registry.npmjs.org/puppeteer-extra-plugin-stealth",
+    "version": "2.11.2",
+    "released": "2023-03-01T12:07:26.660Z",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/berstend/puppeteer-extra.git"
+    },
+    "dependencies": {
+      "debug": "^4.1.1",
+      "puppeteer-extra-plugin": "^3.2.3",
+      "puppeteer-extra-plugin-user-preferences": "^2.4.1"
+    }
+  },
+  "rebrowser-playwright": {
+    "registry": "https://registry.npmjs.org/rebrowser-playwright",
+    "version": "1.52.0",
+    "released": "2025-05-09T01:05:48.474Z",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/rebrowser/rebrowser-playwright.git"
+    },
+    "dependencies": {
+      "playwright-core": "npm:rebrowser-playwright-core@~1.52.0"
+    }
+  }
+}

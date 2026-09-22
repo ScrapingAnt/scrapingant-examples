@@ -1,0 +1,138 @@
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py chrome-control headless 1
+chrome-control-headless-1 local captured
+chrome-control-headless-1 browserscan captured
+chrome-control-headless-1 sannysoft captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py patchright headless 1
+patchright-headless-1 local captured
+patchright-headless-1 browserscan captured
+patchright-headless-1 sannysoft captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py python-stealth headless 1
+python-stealth-headless-1 local captured
+python-stealth-headless-1 browserscan captured
+python-stealth-headless-1 sannysoft captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs extra-stealth headless 1
+extra-stealth-headless-1 local captured
+extra-stealth-headless-1 browserscan ERROR
+extra-stealth-headless-1 sannysoft ERROR
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs rebrowser headless 1
+rebrowser-headless-1 local captured
+rebrowser-headless-1 browserscan ERROR
+rebrowser-headless-1 sannysoft ERROR
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py firefox-control headless 1
+firefox-control-headless-1 local captured
+firefox-control-headless-1 browserscan captured
+firefox-control-headless-1 sannysoft captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py camoufox headless 1
+camoufox-headless-1 local captured
+camoufox-headless-1 browserscan captured
+camoufox-headless-1 sannysoft captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py chrome-control headed 1
+chrome-control-headed-1 local captured
+chrome-control-headed-1 browserscan captured
+chrome-control-headed-1 sannysoft captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py patchright headed 1
+patchright-headed-1 local captured
+patchright-headed-1 browserscan captured
+patchright-headed-1 sannysoft captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py python-stealth headed 1
+python-stealth-headed-1 local captured
+python-stealth-headed-1 browserscan captured
+python-stealth-headed-1 sannysoft captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs extra-stealth headed 1
+extra-stealth-headed-1 local captured
+extra-stealth-headed-1 browserscan captured
+extra-stealth-headed-1 sannysoft captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs rebrowser headed 1
+rebrowser-headed-1 local captured
+rebrowser-headed-1 browserscan captured
+rebrowser-headed-1 sannysoft captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py firefox-control headed 1
+firefox-control-headed-1 local captured
+firefox-control-headed-1 browserscan captured
+firefox-control-headed-1 sannysoft captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py camoufox headed 1
+camoufox-headed-1 local captured
+camoufox-headed-1 browserscan captured
+camoufox-headed-1 sannysoft captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py camoufox headless 2
+camoufox-headless-2 local captured
+camoufox-headless-2 browserscan captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py firefox-control headless 2
+firefox-control-headless-2 local captured
+firefox-control-headless-2 browserscan captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs rebrowser headless 2
+rebrowser-headless-2 local captured
+rebrowser-headless-2 browserscan captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs extra-stealth headless 2
+extra-stealth-headless-2 local captured
+extra-stealth-headless-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py python-stealth headless 2
+python-stealth-headless-2 local captured
+python-stealth-headless-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py patchright headless 2
+patchright-headless-2 local captured
+patchright-headless-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py chrome-control headless 2
+chrome-control-headless-2 local captured
+chrome-control-headless-2 browserscan captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py camoufox headed 2
+camoufox-headed-2 local captured
+camoufox-headed-2 browserscan captured
+exit=0
+$ /tmp/camoufox-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py firefox-control headed 2
+firefox-control-headed-2 local captured
+firefox-control-headed-2 browserscan captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs rebrowser headed 2
+rebrowser-headed-2 local captured
+rebrowser-headed-2 browserscan captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs extra-stealth headed 2
+extra-stealth-headed-2 local captured
+extra-stealth-headed-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py python-stealth headed 2
+python-stealth-headed-2 local captured
+python-stealth-headed-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py patchright headed 2
+patchright-headed-2 local captured
+patchright-headed-2 browserscan captured
+exit=0
+$ /tmp/pw-research-venv/bin/python /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/scripts/probe.py chrome-control headed 2
+chrome-control-headed-2 local captured
+chrome-control-headed-2 browserscan captured
+exit=0
+
+Corrected Node adapter recaptures:
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs extra-stealth headless 1
+extra-stealth-headless-1 local captured
+extra-stealth-headless-1 browserscan captured
+extra-stealth-headless-1 sannysoft captured
+exit=0
+$ node /Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/node/probe.cjs rebrowser headless 1
+rebrowser-headless-1 local captured
+rebrowser-headless-1 browserscan captured
+rebrowser-headless-1 sannysoft captured
+exit=0

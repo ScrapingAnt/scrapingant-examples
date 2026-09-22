@@ -1,0 +1,28 @@
+camoufox-headed-1 152.0.4-beta.30 Normal [] Sannysoft: Chrome (New) stable: True
+camoufox-headed-2 152.0.4-beta.30 Normal [] Sannysoft: not repeated stable: True
+camoufox-headless-1 152.0.4-beta.30 Normal [] Sannysoft: Chrome (New) stable: True
+camoufox-headless-2 152.0.4-beta.30 Normal [] Sannysoft: not repeated stable: True
+chrome-control-headed-1 153.0.8010.53 Robot [Webdriver] Sannysoft: WebDriver (New) stable: True
+chrome-control-headed-2 153.0.8010.53 Robot [Webdriver] Sannysoft: not repeated stable: True
+chrome-control-headless-1 153.0.8010.53 Robot [Webdriver,User-Agent] Sannysoft: User Agent (Old),WebDriver (New),HEADCHR_UA,CHR_MEMORY stable: True
+chrome-control-headless-2 153.0.8010.53 Robot [Webdriver,User-Agent] Sannysoft: not repeated stable: True
+extra-stealth-headed-1 153.0.8010.53 Normal [] Sannysoft: none stable: True
+extra-stealth-headed-2 153.0.8010.53 Normal [] Sannysoft: not repeated stable: True
+extra-stealth-headless-1 153.0.8010.53 Normal [] Sannysoft: none stable: True
+extra-stealth-headless-2 153.0.8010.53 Normal [] Sannysoft: not repeated stable: True
+firefox-control-headed-1 153.0 Robot [Webdriver] Sannysoft: WebDriver (New),Chrome (New),Plugins Length (Old),Plugins is of type PluginArray stable: True
+firefox-control-headed-2 153.0 Robot [Webdriver] Sannysoft: not repeated stable: True
+firefox-control-headless-1 153.0 Robot [Webdriver] Sannysoft: WebDriver (New),Chrome (New),Plugins Length (Old),Plugins is of type PluginArray stable: True
+firefox-control-headless-2 153.0 Robot [Webdriver] Sannysoft: not repeated stable: True
+patchright-headed-1 153.0.8010.53 Normal [] Sannysoft: none stable: True
+patchright-headed-2 153.0.8010.53 Normal [] Sannysoft: not repeated stable: True
+patchright-headless-1 153.0.8010.53 Robot [User-Agent] Sannysoft: User Agent (Old),HEADCHR_UA,CHR_MEMORY stable: True
+patchright-headless-2 153.0.8010.53 Robot [User-Agent] Sannysoft: not repeated stable: True
+python-stealth-headed-1 153.0.8010.53 Robot [Navigator] Sannysoft: none stable: True
+python-stealth-headed-2 153.0.8010.53 Robot [Navigator] Sannysoft: not repeated stable: True
+python-stealth-headless-1 153.0.8010.53 Robot [Navigator] Sannysoft: none stable: True
+python-stealth-headless-2 153.0.8010.53 Robot [Navigator] Sannysoft: not repeated stable: True
+rebrowser-headed-1 153.0.8010.53 Robot [Webdriver] Sannysoft: WebDriver (New) stable: True
+rebrowser-headed-2 153.0.8010.53 Robot [Webdriver] Sannysoft: not repeated stable: True
+rebrowser-headless-1 153.0.8010.53 Robot [Webdriver,User-Agent] Sannysoft: User Agent (Old),WebDriver (New),HEADCHR_UA,CHR_MEMORY stable: True
+rebrowser-headless-2 153.0.8010.53 Robot [Webdriver,User-Agent] Sannysoft: not repeated stable: True

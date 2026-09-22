@@ -55,6 +55,11 @@
       "id": "python-proxy-server-proxy-py",
       "needs_api_key": false,
       "note": "local HTTP/HTTPS origins and proxy.py pool; requires curl and openssl; ports 8000, 8443, 8899-8905 must be free; random pool counts are informational"
+    },
+    {
+      "id": "playwright-scraping-undetectable",
+      "needs_api_key": false,
+      "note": "Default run checks three local Python Chromium fixture adapters only; CI uses bundled Chromium. --all also needs Node dependencies, a separate Camoufox environment and its Firefox builds. Dated public detector observations are not monthly pass/fail gates."
     }
   ]
 }

@@ -1,0 +1,63 @@
+{
+  "key": "rebrowser-headless-1",
+  "approach": "rebrowser",
+  "mode": "headless",
+  "repetition": 1,
+  "timestamp": "2026-09-22T18:55:39.675Z",
+  "node": "v22.20.0",
+  "pages": [
+    {
+      "site": "local",
+      "url": "file:///Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/fixtures/properties.html",
+      "http_status": 200,
+      "properties": {
+        "webdriver": true,
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "languages": [
+          "en-GB",
+          "en-US",
+          "en"
+        ],
+        "plugins": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "hardwareConcurrency": 11,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "screen": [
+          1440,
+          1000
+        ],
+        "webgl": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+        }
+      },
+      "elapsed_seconds": 0.255
+    },
+    {
+      "site": "browserscan",
+      "url": "https://www.browserscan.net/bot-detection",
+      "http_status": 200,
+      "screenshot": "screenshots/rebrowser-headless-1-browserscan.png",
+      "error": "TypeError: Cannot read properties of undefined (reading 'verdict')",
+      "elapsed_seconds": 10.491
+    },
+    {
+      "site": "sannysoft",
+      "url": "https://bot.sannysoft.com/",
+      "http_status": 200,
+      "screenshot": "screenshots/rebrowser-headless-1-sannysoft.png",
+      "error": "TypeError: Cannot read properties of undefined (reading 'rows')",
+      "elapsed_seconds": 10.626
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}

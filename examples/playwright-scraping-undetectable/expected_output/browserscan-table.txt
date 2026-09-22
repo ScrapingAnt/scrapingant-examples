@@ -1,0 +1,8 @@
+approach | headless | headed
+chrome-control | Robot: Webdriver, User-Agent | Robot: Webdriver
+patchright | Robot: User-Agent | Normal
+python-stealth | Robot: Navigator | Robot: Navigator
+extra-stealth | Normal | Normal
+rebrowser | Robot: Webdriver, User-Agent | Robot: Webdriver
+firefox-control | Robot: Webdriver | Robot: Webdriver
+camoufox | Normal | Normal

@@ -1,0 +1,1 @@
+{"approach": "patchright", "browser": "154.0.8037.57", "platform": "MacIntel", "webdriver": false}
