@@ -1,0 +1,13 @@
+2026-09-22 20:24:18,418 - pid:9690 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.HttpProxyPlugin
+2026-09-22 20:24:18,418 - pid:9690 [I] plugins.load:89 - Loaded plugin lab_plugins.UpstreamA
+2026-09-22 20:24:19,572 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60494 - GET localhost:8000/individual-upstream-a - 200 OK - 255 bytes - 3.57ms
+2026-09-22 20:24:19,626 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60501 - GET localhost:8000/pool-0 - 200 OK - 239 bytes - 1.25ms
+2026-09-22 20:24:19,680 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60505 - GET localhost:8000/pool-1 - 200 OK - 239 bytes - 1.22ms
+2026-09-22 20:24:19,733 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60509 - GET localhost:8000/pool-2 - 200 OK - 239 bytes - 1.45ms
+2026-09-22 20:24:19,865 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60521 - GET localhost:8000/pool-5 - 200 OK - 239 bytes - 2.61ms
+2026-09-22 20:24:19,922 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60525 - GET localhost:8000/pool-6 - 200 OK - 239 bytes - 3.49ms
+2026-09-22 20:24:19,977 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60529 - GET localhost:8000/pool-7 - 200 OK - 239 bytes - 2.79ms
+2026-09-22 20:24:20,111 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60541 - GET localhost:8000/pool-10 - 200 OK - 240 bytes - 3.25ms
+2026-09-22 20:24:20,194 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60549 - GET localhost:8000/pool-12 - 200 OK - 240 bytes - 3.90ms
+2026-09-22 20:24:20,250 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60553 - GET localhost:8000/pool-13 - 200 OK - 240 bytes - 3.20ms
+2026-09-22 20:24:20,489 - pid:9692 [I] server.access_log:393 - 127.0.0.1:60573 - GET localhost:8000/pool-18 - 200 OK - 240 bytes - 3.28ms

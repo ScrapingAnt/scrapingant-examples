@@ -1,0 +1,4 @@
+2026-09-22 20:24:18,735 - pid:9699 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.HttpProxyPlugin
+2026-09-22 20:24:18,735 - pid:9699 [I] plugins.load:89 - Loaded plugin lab_plugins.MarkerPlugin
+2026-09-22 20:24:19,527 - pid:9703 [I] server.access_log:393 - 127.0.0.1:60488 - GET localhost:8000/marker - 200 OK - 238 bytes - 4.30ms
+2026-09-22 20:24:19,557 - pid:9703 [I] server.access_log:393 - 127.0.0.1:60491 - CONNECT localhost:8443 - 2189 bytes - 4.33ms

@@ -1,0 +1,22 @@
+2026-09-22 20:24:18,311 - pid:9687 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.HttpProxyPlugin
+2026-09-22 20:24:18,312 - pid:9687 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.auth.AuthPlugin
+2026-09-22 20:24:19,135 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60462 - GET localhost:8000/auth-curl-False - 200 OK - 240 bytes - 3.64ms
+2026-09-22 20:24:19,163 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60465 - GET localhost:8000/auth-requests-False - 200 OK - 244 bytes - 1.35ms
+2026-09-22 20:24:19,189 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,190 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60468 - GET None:None/rejected-False-None - None None - 0 bytes - 0.21ms
+2026-09-22 20:24:19,216 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,216 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60469 - GET None:None/requests-rejected-False-None - None None - 0 bytes - 0.21ms
+2026-09-22 20:24:19,242 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,242 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60470 - GET None:None/rejected-False-lab:wrong - None None - 0 bytes - 0.19ms
+2026-09-22 20:24:19,268 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,268 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60471 - GET None:None/requests-rejected-False-lab:wrong - None None - 0 bytes - 0.24ms
+2026-09-22 20:24:19,351 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60478 - CONNECT localhost:8443 - 2190 bytes - 4.92ms
+2026-09-22 20:24:19,382 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60481 - CONNECT localhost:8443 - 2194 bytes - 4.57ms
+2026-09-22 20:24:19,407 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,407 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60484 - CONNECT None:None - 0 bytes - 0.26ms
+2026-09-22 20:24:19,434 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,434 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60485 - CONNECT None:None - 0 bytes - 0.25ms
+2026-09-22 20:24:19,460 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,461 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60486 - CONNECT None:None - 0 bytes - 0.30ms
+2026-09-22 20:24:19,487 - pid:9689 [W] handler.handle_data:184 - HttpProtocolException: ProxyAuthenticationFailed
+2026-09-22 20:24:19,487 - pid:9689 [I] server.access_log:393 - 127.0.0.1:60487 - CONNECT None:None - 0 bytes - 0.25ms
