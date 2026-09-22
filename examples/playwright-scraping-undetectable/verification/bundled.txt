@@ -1,0 +1,3 @@
+{"approach": "plain-chrome", "browser": "153.0.8010.12", "platform": "MacIntel", "webdriver": true}
+{"approach": "patchright", "browser": "153.0.8010.12", "platform": "MacIntel", "webdriver": false}
+{"approach": "python-stealth", "browser": "153.0.8010.12", "platform": "Win32", "webdriver": false}

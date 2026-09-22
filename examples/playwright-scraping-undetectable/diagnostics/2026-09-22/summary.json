@@ -1,0 +1,1448 @@
+[
+  {
+    "key": "camoufox-headed-1",
+    "approach": "camoufox",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "152.0.4-beta.30",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 8,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1728,
+        1117
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headed-1-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "Chrome (New)"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "camoufox-headed-2",
+    "approach": "camoufox",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "152.0.4-beta.30",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 12,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        900
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headed-2-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "camoufox-headless-1",
+    "approach": "camoufox",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "152.0.4-beta.30",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 14,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        2560,
+        1440
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headless-1-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "Chrome (New)"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "camoufox-headless-2",
+    "approach": "camoufox",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "152.0.4-beta.30",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 10,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        3440,
+        1440
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/camoufox-headless-2-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "chrome-control-headed-1",
+    "approach": "chrome-control",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headed-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "WebDriver (New)"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "chrome-control-headed-2",
+    "approach": "chrome-control",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headed-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "chrome-control-headless-1",
+    "approach": "chrome-control",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headless-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver",
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "User Agent (Old)",
+        "WebDriver (New)",
+        "HEADCHR_UA",
+        "CHR_MEMORY"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "chrome-control-headless-2",
+    "approach": "chrome-control",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/chrome-control-headless-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver",
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "extra-stealth-headed-1",
+    "approach": "extra-stealth",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 4,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headed-1-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "extra-stealth-headed-2",
+    "approach": "extra-stealth",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 4,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headed-2-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "extra-stealth-headless-1",
+    "approach": "extra-stealth",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 4,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headless-1-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "extra-stealth-headless-2",
+    "approach": "extra-stealth",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 4,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/extra-stealth-headless-2-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "firefox-control-headed-1",
+    "approach": "firefox-control",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        3008,
+        1692
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headed-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "WebDriver (New)",
+        "Chrome (New)",
+        "Plugins Length (Old)",
+        "Plugins is of type PluginArray"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "firefox-control-headed-2",
+    "approach": "firefox-control",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        3008,
+        1692
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headed-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "firefox-control-headless-1",
+    "approach": "firefox-control",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1366,
+        768
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headless-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "WebDriver (New)",
+        "Chrome (New)",
+        "Plugins Length (Old)",
+        "Plugins is of type PluginArray"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "firefox-control-headless-2",
+    "approach": "firefox-control",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "platform": "MacIntel",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1366,
+        768
+      ],
+      "webgl": {
+        "vendor": "Apple",
+        "renderer": "Apple M1, or similar"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/firefox-control-headless-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "patchright-headed-1",
+    "approach": "patchright",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headed-1-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "patchright-headed-2",
+    "approach": "patchright",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headed-2-browserscan.png",
+      "verdict": "Normal",
+      "flagged": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "patchright-headless-1",
+    "approach": "patchright",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headless-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "User Agent (Old)",
+        "HEADCHR_UA",
+        "CHR_MEMORY"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "patchright-headless-2",
+    "approach": "patchright",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/patchright-headless-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "python-stealth-headed-1",
+    "approach": "python-stealth",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "Win32",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headed-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Navigator"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "python-stealth-headed-2",
+    "approach": "python-stealth",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "Win32",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headed-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Navigator"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "python-stealth-headless-1",
+    "approach": "python-stealth",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "Win32",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headless-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Navigator"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "python-stealth-headless-2",
+    "approach": "python-stealth",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": false,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "Win32",
+      "languages": [
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Intel Inc.",
+        "renderer": "Intel Iris OpenGL Engine"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/python-stealth-headless-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Navigator"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "rebrowser-headed-1",
+    "approach": "rebrowser",
+    "mode": "headed",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headed-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headed-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "WebDriver (New)"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "rebrowser-headed-2",
+    "approach": "rebrowser",
+    "mode": "headed",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headed-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver"
+      ],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "rebrowser-headless-1",
+    "approach": "rebrowser",
+    "mode": "headless",
+    "repetition": 1,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headless-1-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver",
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    },
+    "sannysoft": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headless-1-sannysoft.png",
+      "classified_rows": 31,
+      "failed": [
+        "User Agent (Old)",
+        "WebDriver (New)",
+        "HEADCHR_UA",
+        "CHR_MEMORY"
+      ],
+      "warn": [],
+      "stable_6_to_10s": true
+    }
+  },
+  {
+    "key": "rebrowser-headless-2",
+    "approach": "rebrowser",
+    "mode": "headless",
+    "repetition": 2,
+    "browser_version": "153.0.8010.53",
+    "launch_error": null,
+    "local_properties": {
+      "webdriver": true,
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "languages": [
+        "en-GB",
+        "en-US",
+        "en"
+      ],
+      "plugins": [
+        "PDF Viewer",
+        "Chrome PDF Viewer",
+        "Chromium PDF Viewer",
+        "Microsoft Edge PDF Viewer",
+        "WebKit built-in PDF"
+      ],
+      "hardwareConcurrency": 11,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "screen": [
+        1440,
+        1000
+      ],
+      "webgl": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+      }
+    },
+    "browserscan": {
+      "http_status": 200,
+      "error": null,
+      "screenshot": "screenshots/rebrowser-headless-2-browserscan.png",
+      "verdict": "Robot",
+      "flagged": [
+        "Webdriver",
+        "User-Agent"
+      ],
+      "stable_6_to_10s": true
+    }
+  }
+]

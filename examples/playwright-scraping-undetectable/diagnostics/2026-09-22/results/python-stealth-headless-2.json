@@ -1,0 +1,117 @@
+{
+  "key": "python-stealth-headless-2",
+  "approach": "python-stealth",
+  "mode": "headless",
+  "repetition": 2,
+  "timestamp": "2026-09-22T19:01:35.809961+00:00",
+  "os": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.11",
+  "pages": [
+    {
+      "site": "local",
+      "url": "file:///Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/fixtures/properties.html",
+      "http_status": 200,
+      "properties": {
+        "webdriver": false,
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+        "platform": "Win32",
+        "languages": [
+          "en-US",
+          "en"
+        ],
+        "plugins": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "hardwareConcurrency": 11,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "screen": [
+          1440,
+          1000
+        ],
+        "webgl": {
+          "vendor": "Intel Inc.",
+          "renderer": "Intel Iris OpenGL Engine"
+        }
+      },
+      "elapsed_seconds": 0.404
+    },
+    {
+      "site": "browserscan",
+      "url": "https://www.browserscan.net/bot-detection",
+      "http_status": 200,
+      "snapshot_6s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "snapshot_10s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "screenshot": "screenshots/python-stealth-headless-2-browserscan.png",
+      "elapsed_seconds": 10.462
+    }
+  ],
+  "packages": {
+    "playwright": "1.63.0",
+    "patchright": "1.63.0",
+    "playwright-stealth": "2.0.3"
+  },
+  "browser_version": "153.0.8010.53"
+}

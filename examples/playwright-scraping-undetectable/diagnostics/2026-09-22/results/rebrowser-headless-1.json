@@ -1,0 +1,2349 @@
+{
+  "key": "rebrowser-headless-1",
+  "approach": "rebrowser",
+  "mode": "headless",
+  "repetition": 1,
+  "timestamp": "2026-09-22T19:04:37.342Z",
+  "node": "v22.20.0",
+  "pages": [
+    {
+      "site": "local",
+      "url": "file:///Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/fixtures/properties.html",
+      "http_status": 200,
+      "properties": {
+        "webdriver": true,
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "languages": [
+          "en-GB",
+          "en-US",
+          "en"
+        ],
+        "plugins": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "hardwareConcurrency": 11,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "screen": [
+          1440,
+          1000
+        ],
+        "webgl": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+        }
+      },
+      "elapsed_seconds": 0.251
+    },
+    {
+      "site": "browserscan",
+      "url": "https://www.browserscan.net/bot-detection",
+      "http_status": 200,
+      "snapshot_6s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "snapshot_10s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "screenshot": "screenshots/rebrowser-headless-1-browserscan.png",
+      "elapsed_seconds": 10.481
+    },
+    {
+      "site": "sannysoft",
+      "url": "https://bot.sannysoft.com/",
+      "http_status": 200,
+      "snapshot_6s": {
+        "title": "Antibot",
+        "url": "https://bot.sannysoft.com/",
+        "verdict": null,
+        "summary": [],
+        "rows": [
+          {
+            "text": "Test Name\tResult",
+            "cells": [
+              {
+                "text": "Test Name",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Result",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "User Agent\n(Old)\n\tMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+            "cells": [
+              {
+                "text": "User Agent\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+                "class": "failed result",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              }
+            ]
+          },
+          {
+            "text": "WebDriver\n(New)\n\tpresent (failed)",
+            "cells": [
+              {
+                "text": "WebDriver\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "present (failed)",
+                "class": "failed result",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              }
+            ]
+          },
+          {
+            "text": "WebDriver Advanced\tpassed",
+            "cells": [
+              {
+                "text": "WebDriver Advanced",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "passed",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Chrome\n(New)\n\tpresent (passed)",
+            "cells": [
+              {
+                "text": "Chrome\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "present (passed)",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Permissions\n(New)\n\tprompt",
+            "cells": [
+              {
+                "text": "Permissions\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "prompt",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Plugins Length\n(Old)\n\t5",
+            "cells": [
+              {
+                "text": "Plugins Length\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "5",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Plugins is of type PluginArray\tpassed",
+            "cells": [
+              {
+                "text": "Plugins is of type PluginArray",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "passed",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Languages\n(Old)\n\ten-GB,en-US,en",
+            "cells": [
+              {
+                "text": "Languages\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "en-GB,en-US,en",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "WebGL Vendor\tGoogle Inc. (Apple)",
+            "cells": [
+              {
+                "text": "WebGL Vendor",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Google Inc. (Apple)",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "WebGL Renderer\tANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)",
+            "cells": [
+              {
+                "text": "WebGL Renderer",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Broken Image Dimensions\t16x16",
+            "cells": [
+              {
+                "text": "Broken Image Dimensions",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "16x16",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_UA\tok\t\n{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_UA",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_PROPERTIES\tok\t\n{\n     \"attributesFound\": [\n          false,\n          false,\n          false\n     ]\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_PROPERTIES",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"attributesFound\": [\n          false,\n          false,\n          false\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_ETSL\tok\t\n{\n     \"etsl\": 33\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_ETSL",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"etsl\": 33\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_LANGUAGE\tok\t\n{\n     \"languages\": [\n          \"en-GB\",\n          \"en-US\",\n          \"en\"\n     ]\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_LANGUAGE",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"languages\": [\n          \"en-GB\",\n          \"en-US\",\n          \"en\"\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_WEBSOCKET\tok\t\n{}",
+            "cells": [
+              {
+                "text": "PHANTOM_WEBSOCKET",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "MQ_SCREEN\tok\t\n{}",
+            "cells": [
+              {
+                "text": "MQ_SCREEN",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_OVERFLOW\tok\t\n{\n     \"depth\": 9423,\n     \"errorMessage\": \"Maximum call stack size exceeded\",\n     \"errorName\": \"RangeError\",\n     \"errorStacklength\": 894\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_OVERFLOW",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"depth\": 9423,\n     \"errorMessage\": \"Maximum call stack size exceeded\",\n     \"errorName\": \"RangeError\",\n     \"errorStacklength\": 894\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_WINDOW_HEIGHT\tok\t\n{\n     \"wInnerHeight\": 1000,\n     \"wOuterHeight\": 1000,\n     \"wOuterWidth\": 1440,\n     \"wInnerWidth\": 1440,\n     \"wScreenX\": 22,\n     \"wPageXOffset\": 0,\n     \"wPageYOffset\": 0,\n     \"cWidth\": 1424,\n     \"cHeight\": 1561,\n     \"sWidth\": 1440,\n     \"sHeight\": 1000,\n     \"sAvailWidth\": 1440,\n     \"sAvailHeight\": 1000,\n     \"sColorDepth\": 24,\n     \"sPixelDepth\": 24,\n     \"wDevicePixelRatio\": 1\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_WINDOW_HEIGHT",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"wInnerHeight\": 1000,\n     \"wOuterHeight\": 1000,\n     \"wOuterWidth\": 1440,\n     \"wInnerWidth\": 1440,\n     \"wScreenX\": 22,\n     \"wPageXOffset\": 0,\n     \"wPageYOffset\": 0,\n     \"cWidth\": 1424,\n     \"cHeight\": 1561,\n     \"sWidth\": 1440,\n     \"sHeight\": 1000,\n     \"sAvailWidth\": 1440,\n     \"sAvailHeight\": 1000,\n     \"sColorDepth\": 24,\n     \"sPixelDepth\": 24,\n     \"wDevicePixelRatio\": 1\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_UA\tFAIL\t\n{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+            "cells": [
+              {
+                "text": "HEADCHR_UA",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "FAIL",
+                "class": "failed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              },
+              {
+                "text": "{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_CHROME_OBJ\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_CHROME_OBJ",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_PERMISSIONS\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_PERMISSIONS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_PLUGINS\tok\t\n{\n     \"plugins\": [\n          \"PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chrome PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chromium PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Microsoft Edge PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"WebKit built-in PDF::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\"\n     ]\n}",
+            "cells": [
+              {
+                "text": "HEADCHR_PLUGINS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"plugins\": [\n          \"PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chrome PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chromium PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Microsoft Edge PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"WebKit built-in PDF::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\"\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_IFRAME\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_IFRAME",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_DEBUG_TOOLS\tok\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_DEBUG_TOOLS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "SELENIUM_DRIVER\tok\t\n{\n     \"attributesFound\": [\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false\n     ]\n}",
+            "cells": [
+              {
+                "text": "SELENIUM_DRIVER",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"attributesFound\": [\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_BATTERY\tok\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_BATTERY",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_MEMORY\tFAIL\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_MEMORY",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "FAIL",
+                "class": "failed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "TRANSPARENT_PIXEL\tok\t\n{\n     \"0\": 0,\n     \"1\": 0,\n     \"2\": 0,\n     \"3\": 0\n}",
+            "cells": [
+              {
+                "text": "TRANSPARENT_PIXEL",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"0\": 0,\n     \"1\": 0,\n     \"2\": 0,\n     \"3\": 0\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "SEQUENTUM\tok\t\n{}",
+            "cells": [
+              {
+                "text": "SEQUENTUM",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "VIDEO_CODECS\tok\t\n{\n     \"h264\": \"probably\"\n}",
+            "cells": [
+              {
+                "text": "VIDEO_CODECS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"h264\": \"probably\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.cookieEnabled\ttrue",
+            "cells": [
+              {
+                "text": "navigator.cookieEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "true",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.doNotTrack\tnull",
+            "cells": [
+              {
+                "text": "navigator.doNotTrack",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "null",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.msDoNotTrack\tundefined",
+            "cells": [
+              {
+                "text": "navigator.msDoNotTrack",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.sendBeacon",
+            "cells": [
+              {
+                "text": "navigator.sendBeacon",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.cookieEnabled\ttrue",
+            "cells": [
+              {
+                "text": "navigator.cookieEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "true",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.userAgent\tMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+            "cells": [
+              {
+                "text": "navigator.userAgent",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.appName\tNetscape",
+            "cells": [
+              {
+                "text": "navigator.appName",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Netscape",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.vendor\tGoogle Inc.",
+            "cells": [
+              {
+                "text": "navigator.vendor",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Google Inc.",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.appCodeName\tMozilla",
+            "cells": [
+              {
+                "text": "navigator.appCodeName",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.getUserMedia",
+            "cells": [
+              {
+                "text": "navigator.getUserMedia",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.sayswho\tundefined",
+            "cells": [
+              {
+                "text": "navigator.sayswho",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.javaEnabled\tfalse",
+            "cells": [
+              {
+                "text": "navigator.javaEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "false",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.plugins\t{\"0\":{\"0\":{},\"1\":{}},\"1\":{\"0\":{},\"1\":{}},\"2\":{\"0\":{},\"1\":{}},\"3\":{\"0\":{},\"1\":{}},\"4\":{\"0\":{},\"1\":{}}}",
+            "cells": [
+              {
+                "text": "navigator.plugins",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "{\"0\":{\"0\":{},\"1\":{}},\"1\":{\"0\":{},\"1\":{}},\"2\":{\"0\":{},\"1\":{}},\"3\":{\"0\":{},\"1\":{}},\"4\":{\"0\":{},\"1\":{}}}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.width\t1440",
+            "cells": [
+              {
+                "text": "screen.width",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "1440",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.height\t1000",
+            "cells": [
+              {
+                "text": "screen.height",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "1000",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.colorDepth\t24",
+            "cells": [
+              {
+                "text": "screen.colorDepth",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "24",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.language\ten-GB",
+            "cells": [
+              {
+                "text": "navigator.language",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "en-GB",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.loadPurpose\tundefined",
+            "cells": [
+              {
+                "text": "navigator.loadPurpose",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.platform\tMacIntel",
+            "cells": [
+              {
+                "text": "navigator.platform",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "MacIntel",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.mediaDevices\taudioinput: id =\nvideoinput: id =\naudiooutput: id =",
+            "cells": [
+              {
+                "text": "navigator.mediaDevices",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "audioinput: id =\nvideoinput: id =\naudiooutput: id =",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.getBattery details\tCharging: true\nLevel: 0.79",
+            "cells": [
+              {
+                "text": "navigator.getBattery details",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Charging: true\nLevel: 0.79",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas1\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas1",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas2\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas2",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas3 (iframe sandbox)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas3 (iframe sandbox)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas4 (iframe sandbox)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas4 (iframe sandbox)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas5 (iframe)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas5 (iframe)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          }
+        ],
+        "fixture": null
+      },
+      "snapshot_10s": {
+        "title": "Antibot",
+        "url": "https://bot.sannysoft.com/",
+        "verdict": null,
+        "summary": [],
+        "rows": [
+          {
+            "text": "Test Name\tResult",
+            "cells": [
+              {
+                "text": "Test Name",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Result",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "User Agent\n(Old)\n\tMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+            "cells": [
+              {
+                "text": "User Agent\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+                "class": "failed result",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              }
+            ]
+          },
+          {
+            "text": "WebDriver\n(New)\n\tpresent (failed)",
+            "cells": [
+              {
+                "text": "WebDriver\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "present (failed)",
+                "class": "failed result",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              }
+            ]
+          },
+          {
+            "text": "WebDriver Advanced\tpassed",
+            "cells": [
+              {
+                "text": "WebDriver Advanced",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "passed",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Chrome\n(New)\n\tpresent (passed)",
+            "cells": [
+              {
+                "text": "Chrome\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "present (passed)",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Permissions\n(New)\n\tprompt",
+            "cells": [
+              {
+                "text": "Permissions\n(New)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "prompt",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Plugins Length\n(Old)\n\t5",
+            "cells": [
+              {
+                "text": "Plugins Length\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "5",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Plugins is of type PluginArray\tpassed",
+            "cells": [
+              {
+                "text": "Plugins is of type PluginArray",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "passed",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Languages\n(Old)\n\ten-GB,en-US,en",
+            "cells": [
+              {
+                "text": "Languages\n(Old)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "en-GB,en-US,en",
+                "class": "result passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "WebGL Vendor\tGoogle Inc. (Apple)",
+            "cells": [
+              {
+                "text": "WebGL Vendor",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Google Inc. (Apple)",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "WebGL Renderer\tANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)",
+            "cells": [
+              {
+                "text": "WebGL Renderer",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "Broken Image Dimensions\t16x16",
+            "cells": [
+              {
+                "text": "Broken Image Dimensions",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "16x16",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_UA\tok\t\n{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_UA",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_PROPERTIES\tok\t\n{\n     \"attributesFound\": [\n          false,\n          false,\n          false\n     ]\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_PROPERTIES",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"attributesFound\": [\n          false,\n          false,\n          false\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_ETSL\tok\t\n{\n     \"etsl\": 33\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_ETSL",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"etsl\": 33\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_LANGUAGE\tok\t\n{\n     \"languages\": [\n          \"en-GB\",\n          \"en-US\",\n          \"en\"\n     ]\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_LANGUAGE",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"languages\": [\n          \"en-GB\",\n          \"en-US\",\n          \"en\"\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_WEBSOCKET\tok\t\n{}",
+            "cells": [
+              {
+                "text": "PHANTOM_WEBSOCKET",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "MQ_SCREEN\tok\t\n{}",
+            "cells": [
+              {
+                "text": "MQ_SCREEN",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_OVERFLOW\tok\t\n{\n     \"depth\": 9423,\n     \"errorMessage\": \"Maximum call stack size exceeded\",\n     \"errorName\": \"RangeError\",\n     \"errorStacklength\": 894\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_OVERFLOW",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"depth\": 9423,\n     \"errorMessage\": \"Maximum call stack size exceeded\",\n     \"errorName\": \"RangeError\",\n     \"errorStacklength\": 894\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "PHANTOM_WINDOW_HEIGHT\tok\t\n{\n     \"wInnerHeight\": 1000,\n     \"wOuterHeight\": 1000,\n     \"wOuterWidth\": 1440,\n     \"wInnerWidth\": 1440,\n     \"wScreenX\": 22,\n     \"wPageXOffset\": 0,\n     \"wPageYOffset\": 0,\n     \"cWidth\": 1424,\n     \"cHeight\": 1561,\n     \"sWidth\": 1440,\n     \"sHeight\": 1000,\n     \"sAvailWidth\": 1440,\n     \"sAvailHeight\": 1000,\n     \"sColorDepth\": 24,\n     \"sPixelDepth\": 24,\n     \"wDevicePixelRatio\": 1\n}",
+            "cells": [
+              {
+                "text": "PHANTOM_WINDOW_HEIGHT",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"wInnerHeight\": 1000,\n     \"wOuterHeight\": 1000,\n     \"wOuterWidth\": 1440,\n     \"wInnerWidth\": 1440,\n     \"wScreenX\": 22,\n     \"wPageXOffset\": 0,\n     \"wPageYOffset\": 0,\n     \"cWidth\": 1424,\n     \"cHeight\": 1561,\n     \"sWidth\": 1440,\n     \"sHeight\": 1000,\n     \"sAvailWidth\": 1440,\n     \"sAvailHeight\": 1000,\n     \"sColorDepth\": 24,\n     \"sPixelDepth\": 24,\n     \"wDevicePixelRatio\": 1\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_UA\tFAIL\t\n{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+            "cells": [
+              {
+                "text": "HEADCHR_UA",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "FAIL",
+                "class": "failed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              },
+              {
+                "text": "{\n     \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_CHROME_OBJ\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_CHROME_OBJ",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_PERMISSIONS\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_PERMISSIONS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_PLUGINS\tok\t\n{\n     \"plugins\": [\n          \"PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chrome PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chromium PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Microsoft Edge PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"WebKit built-in PDF::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\"\n     ]\n}",
+            "cells": [
+              {
+                "text": "HEADCHR_PLUGINS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"plugins\": [\n          \"PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chrome PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Chromium PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"Microsoft Edge PDF Viewer::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\",\n          \"WebKit built-in PDF::Portable Document Format::internal-pdf-viewer::__application/pdf~pdf~Portable Document Format,text/pdf~pdf~Portable Document Format\"\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "HEADCHR_IFRAME\tok\t\n{}",
+            "cells": [
+              {
+                "text": "HEADCHR_IFRAME",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_DEBUG_TOOLS\tok\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_DEBUG_TOOLS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "SELENIUM_DRIVER\tok\t\n{\n     \"attributesFound\": [\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false\n     ]\n}",
+            "cells": [
+              {
+                "text": "SELENIUM_DRIVER",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"attributesFound\": [\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false,\n          false\n     ]\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_BATTERY\tok\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_BATTERY",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "CHR_MEMORY\tFAIL\t\n{}",
+            "cells": [
+              {
+                "text": "CHR_MEMORY",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "FAIL",
+                "class": "failed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(244, 81, 89)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "TRANSPARENT_PIXEL\tok\t\n{\n     \"0\": 0,\n     \"1\": 0,\n     \"2\": 0,\n     \"3\": 0\n}",
+            "cells": [
+              {
+                "text": "TRANSPARENT_PIXEL",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"0\": 0,\n     \"1\": 0,\n     \"2\": 0,\n     \"3\": 0\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "SEQUENTUM\tok\t\n{}",
+            "cells": [
+              {
+                "text": "SEQUENTUM",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "VIDEO_CODECS\tok\t\n{\n     \"h264\": \"probably\"\n}",
+            "cells": [
+              {
+                "text": "VIDEO_CODECS",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "ok",
+                "class": "passed",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgb(200, 216, 109)"
+              },
+              {
+                "text": "{\n     \"h264\": \"probably\"\n}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.cookieEnabled\ttrue",
+            "cells": [
+              {
+                "text": "navigator.cookieEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "true",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.doNotTrack\tnull",
+            "cells": [
+              {
+                "text": "navigator.doNotTrack",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "null",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.msDoNotTrack\tundefined",
+            "cells": [
+              {
+                "text": "navigator.msDoNotTrack",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.sendBeacon",
+            "cells": [
+              {
+                "text": "navigator.sendBeacon",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.cookieEnabled\ttrue",
+            "cells": [
+              {
+                "text": "navigator.cookieEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "true",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.userAgent\tMozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+            "cells": [
+              {
+                "text": "navigator.userAgent",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.appName\tNetscape",
+            "cells": [
+              {
+                "text": "navigator.appName",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Netscape",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.vendor\tGoogle Inc.",
+            "cells": [
+              {
+                "text": "navigator.vendor",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Google Inc.",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.appCodeName\tMozilla",
+            "cells": [
+              {
+                "text": "navigator.appCodeName",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Mozilla",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.getUserMedia",
+            "cells": [
+              {
+                "text": "navigator.getUserMedia",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.sayswho\tundefined",
+            "cells": [
+              {
+                "text": "navigator.sayswho",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.javaEnabled\tfalse",
+            "cells": [
+              {
+                "text": "navigator.javaEnabled",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "false",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.plugins\t{\"0\":{\"0\":{},\"1\":{}},\"1\":{\"0\":{},\"1\":{}},\"2\":{\"0\":{},\"1\":{}},\"3\":{\"0\":{},\"1\":{}},\"4\":{\"0\":{},\"1\":{}}}",
+            "cells": [
+              {
+                "text": "navigator.plugins",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "{\"0\":{\"0\":{},\"1\":{}},\"1\":{\"0\":{},\"1\":{}},\"2\":{\"0\":{},\"1\":{}},\"3\":{\"0\":{},\"1\":{}},\"4\":{\"0\":{},\"1\":{}}}",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.width\t1440",
+            "cells": [
+              {
+                "text": "screen.width",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "1440",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.height\t1000",
+            "cells": [
+              {
+                "text": "screen.height",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "1000",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "screen.colorDepth\t24",
+            "cells": [
+              {
+                "text": "screen.colorDepth",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "24",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.language\ten-GB",
+            "cells": [
+              {
+                "text": "navigator.language",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "en-GB",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.loadPurpose\tundefined",
+            "cells": [
+              {
+                "text": "navigator.loadPurpose",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "undefined",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.platform\tMacIntel",
+            "cells": [
+              {
+                "text": "navigator.platform",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "MacIntel",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.mediaDevices\taudioinput: id =\nvideoinput: id =\naudiooutput: id =",
+            "cells": [
+              {
+                "text": "navigator.mediaDevices",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "audioinput: id =\nvideoinput: id =\naudiooutput: id =",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "navigator.getBattery details\tCharging: true\nLevel: 0.79",
+            "cells": [
+              {
+                "text": "navigator.getBattery details",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Charging: true\nLevel: 0.79",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas1\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas1",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas2\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas2",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas3 (iframe sandbox)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas3 (iframe sandbox)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas4 (iframe sandbox)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas4 (iframe sandbox)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          },
+          {
+            "text": "Canvas5 (iframe)\t\nHash: 848649027",
+            "cells": [
+              {
+                "text": "Canvas5 (iframe)",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              },
+              {
+                "text": "Hash: 848649027",
+                "class": "",
+                "color": "rgb(0, 0, 0)",
+                "background": "rgba(0, 0, 0, 0)"
+              }
+            ]
+          }
+        ],
+        "fixture": null
+      },
+      "screenshot": "screenshots/rebrowser-headless-1-sannysoft.png",
+      "elapsed_seconds": 10.691
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}

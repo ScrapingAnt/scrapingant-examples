@@ -1,0 +1,112 @@
+{
+  "key": "rebrowser-headless-2",
+  "approach": "rebrowser",
+  "mode": "headless",
+  "repetition": 2,
+  "timestamp": "2026-09-22T19:01:10.370Z",
+  "node": "v22.20.0",
+  "pages": [
+    {
+      "site": "local",
+      "url": "file:///Users/olegkulyk/Projects/ScrapingAnt/seo_optimisation/research/playwright-scraping-undetectable/2026-09-22/fixtures/properties.html",
+      "http_status": 200,
+      "properties": {
+        "webdriver": true,
+        "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "languages": [
+          "en-GB",
+          "en-US",
+          "en"
+        ],
+        "plugins": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "hardwareConcurrency": 11,
+        "viewport": [
+          1440,
+          1000
+        ],
+        "screen": [
+          1440,
+          1000
+        ],
+        "webgl": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Pro, Unspecified Version)"
+        }
+      },
+      "elapsed_seconds": 0.33
+    },
+    {
+      "site": "browserscan",
+      "url": "https://www.browserscan.net/bot-detection",
+      "http_status": 200,
+      "snapshot_6s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "snapshot_10s": {
+        "title": "BrowserScan - Robot Detection/WebDriver | BrowserScan",
+        "url": "https://www.browserscan.net/bot-detection",
+        "verdict": "Test Results:\nRobot",
+        "summary": [
+          {
+            "label": "Webdriver",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "User-Agent",
+            "class": "_107t7ol",
+            "color": "rgb(251, 81, 56)"
+          },
+          {
+            "label": "CDP",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          },
+          {
+            "label": "Navigator",
+            "class": "",
+            "color": "rgb(255, 255, 255)"
+          }
+        ],
+        "rows": [],
+        "fixture": null
+      },
+      "screenshot": "screenshots/rebrowser-headless-2-browserscan.png",
+      "elapsed_seconds": 10.576
+    }
+  ],
+  "browser_version": "153.0.8010.53"
+}

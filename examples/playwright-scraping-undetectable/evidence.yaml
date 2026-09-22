@@ -1,0 +1,266 @@
+article_id: playwright-scraping-undetectable
+canonical_url: https://scrapingant.com/blog/playwright-scraping-undetectable
+owner: Oleg Kulyk
+examples_repo_commit: null
+tested_at: '2026-09-22'
+requires_api_key: false
+environment:
+  os: macOS 26.6.2 arm64
+  python: 3.12.11
+  node: 22.20.0
+  local_fixture_chrome: 154.0.8037.57
+  public_matrix_chrome: 153.0.8010.53
+  firefox_control: '153.0'
+  camoufox_browser: 152.0.4-beta.30
+dependencies:
+  playwright: 1.63.0
+  patchright: 1.63.0
+  playwright-stealth: 2.0.3
+  playwright-extra: 4.3.6
+  puppeteer-extra-plugin-stealth: 2.11.2
+  rebrowser-playwright: 1.52.0
+  camoufox: 0.5.6
+  camoufox_environment_playwright: 1.62.0
+run_command: BROWSER_CHANNEL=chrome CAMOUFOX_PYTHON=.venv-camoufox/bin/python ./run.sh --all
+ci_run_command: ./run.sh
+fixtures:
+- fixtures/properties.html
+outputs:
+- expected_output/01_playwright.txt
+- expected_output/02_patchright.txt
+- expected_output/03_python_stealth.txt
+- expected_output/04_extra_stealth.txt
+- expected_output/05_rebrowser.txt
+- expected_output/06_firefox.txt
+- expected_output/07_camoufox.txt
+- expected_output/browserscan-table.txt
+measurements:
+- name: Valid canonical BrowserScan captures
+  value: 28
+  denominator: 28
+  unit: canonical observations, excluding two archived invalid pilots
+  source: diagnostics/2026-09-22/summary.json
+- name: Valid Sannysoft captures
+  value: 14
+  denominator: 14
+  unit: canonical configuration/mode observations
+  source: diagnostics/2026-09-22/summary.json
+- name: Completed local article adapters
+  value: 7
+  denominator: 7
+  unit: scripts
+  source: expected_output/
+limitations:
+- Local article fixtures used Chrome154; public detector data used Chrome153. Do not transfer detector outcomes
+  across these versions.
+- Two BrowserScan repetitions and one Sannysoft visit per configuration/mode are exploratory observations, not success
+  probabilities.
+- A local file fixture is not proof of behavior on every HTTPS origin.
+- Firefox control and Camoufox differ in build and fingerprint defaults; Chromium-only detector rows are not cross-engine
+  scores.
+- Rebrowser1.52 uses an older driver generation with newer installed Chrome; no general compatibility guarantee.
+- The default CI job covers only three Python Chromium fixture adapters; full Node/Firefox and public diagnostics
+  are separate.
+- Invalid Node pilots and supplemental layout visits are retained separately from the canonical matrix.
+- Default configurations were compared; no claim of best tuned configuration or of universal detection avoidance.
+- No ScrapingAnt API, paid proxy, CAPTCHA solve, authenticated account or unrelated protected target was tested.
+claims:
+- id: C01
+  text: Python 3.12.11, Node 22.20.0 and macOS 26.6.2 arm64 were used; local article fixtures used Chrome 154.0.8037.57,
+    separately from Chrome 153.0.8010.53 in the earlier public matrix.
+  type: measured
+  source:
+  - expected_output/01_playwright.txt
+  - diagnostics/2026-09-22/results/chrome-control-headless-1.json
+  - verification/environment.txt
+  accessed_at: '2026-09-22'
+- id: C02
+  text: The chosen packages are Playwright/Patchright 1.63.0, Python playwright-stealth 2.0.3, playwright-extra
+    4.3.6 with stealth plugin 2.11.2, Rebrowser Playwright 1.52.0, and Camoufox 0.5.6.
+  type: measured
+  source:
+  - requirements.txt
+  - package-lock.json
+  - requirements-camoufox.txt
+  - diagnostics/2026-09-22/packages.json
+  accessed_at: '2026-09-22'
+- id: C03
+  text: Camoufox requires Playwright <1.63; its separate environment resolved Playwright 1.62.0 and launches browser
+    152.0.4-beta.30; the plain Firefox control uses 153.0.
+  type: measured
+  source:
+  - requirements-camoufox.txt
+  - diagnostics/2026-09-22/packages.json
+  - expected_output/06_firefox.txt
+  - expected_output/07_camoufox.txt
+  accessed_at: '2026-09-22'
+- id: C04
+  text: The legacy undetected-playwright-python repository was marked archived at inspection on September 22, 2026.
+  type: documented
+  source:
+  - diagnostics/2026-09-22/repositories.json
+  - https://github.com/ttlns/undetected-playwright-python
+  accessed_at: '2026-09-22'
+- id: C05
+  text: The local fixture records properties through a page-owned script, with a 1440x1000 viewport, fresh context
+    and browser cleanup. It uses a file URL and no remote target or API key.
+  type: measured
+  source:
+  - fixtures/properties.html
+  - common.py
+  - common.cjs
+  - run.sh
+  accessed_at: '2026-09-22'
+- id: C06
+  text: Plain Chrome reports webdriver true; Patchright and Python stealth false. Python stealth reports Win32 on
+    the tested Mac while the ordinary Chrome fixture reports MacIntel.
+  type: measured
+  source:
+  - expected_output/01_playwright.txt
+  - expected_output/02_patchright.txt
+  - expected_output/03_python_stealth.txt
+  accessed_at: '2026-09-22'
+- id: C07
+  text: Node stealth reports webdriver false/MacIntel; Rebrowser true/MacIntel in the local fixture.
+  type: measured
+  source:
+  - expected_output/04_extra_stealth.txt
+  - expected_output/05_rebrowser.txt
+  accessed_at: '2026-09-22'
+- id: C08
+  text: Plain Firefox reports webdriver true/MacIntel; Camoufox false/MacIntel in the local fixture.
+  type: measured
+  source:
+  - expected_output/06_firefox.txt
+  - expected_output/07_camoufox.txt
+  accessed_at: '2026-09-22'
+- id: C09
+  text: 'The public matrix contains 28 canonical BrowserScan observations, 14 Sannysoft observations and 28 local
+    captures: seven configurations, two modes, two BrowserScan repetitions and one Sannysoft visit per configuration/mode.'
+  type: measured
+  source:
+  - diagnostics/2026-09-22/summary.json
+  - diagnostics/2026-09-22/scripts/summarize.py
+  - diagnostics/2026-09-22/README.md
+  accessed_at: '2026-09-22'
+- id: C10
+  text: 'BrowserScan results agree between repetitions: plain Chrome Robot with Webdriver/User-Agent headless and
+    Webdriver headed; Patchright Robot User-Agent headless and Normal headed.'
+  type: measured
+  source:
+  - expected_output/browserscan-table.txt
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C11
+  text: BrowserScan reports Python stealth Robot/Navigator in both modes; Node stealth Normal in both modes; Rebrowser
+    has the same categories as plain Chrome.
+  type: measured
+  source:
+  - expected_output/browserscan-table.txt
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C12
+  text: BrowserScan reports plain Firefox Robot/Webdriver and Camoufox Normal in both modes.
+  type: measured
+  source:
+  - expected_output/browserscan-table.txt
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C13
+  text: BrowserScan CDP was unflagged even for plain Chrome, so this matrix cannot demonstrate a CDP-patch advantage.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/results/chrome-control-headless-1.json
+  - diagnostics/2026-09-22/results/chrome-control-headed-1.json
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C14
+  text: Each Sannysoft capture has 31 recognized classified checks and no warning states; Python/Node stealth have
+    no failed checks in either mode, Patchright none headed and User Agent (Old), HEADCHR_UA, CHR_MEMORY headless.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C15
+  text: Sannysoft plain Chrome/Rebrowser fail WebDriver (New) headed; headless also User Agent (Old), HEADCHR_UA,
+    CHR_MEMORY. Firefox control fails WebDriver (New), Chrome (New), Plugins Length (Old), Plugins is of type PluginArray
+    in both modes; Camoufox fails Chrome (New) in both.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C16
+  text: Sannysoft Chrome (New) is a Chrome-specific check; its Firefox result does not provide a fair cross-engine
+    score.
+  type: documented
+  source:
+  - https://bot.sannysoft.com/
+  - diagnostics/2026-09-22/report.md
+  - diagnostics/2026-09-22/results/camoufox-headless-1.json
+  accessed_at: '2026-09-22'
+- id: C17
+  text: The Node plugin package releases selected date to March 1, 2023; Rebrowser 1.52.0 to May 9, 2025. Package
+    age is not proof of abandonment.
+  type: documented
+  source:
+  - diagnostics/2026-09-22/packages.json
+  accessed_at: '2026-09-22'
+- id: C18
+  text: Python stealth uses Stealth().use_sync(sync_playwright()); Node stealth uses chromium.use(StealthPlugin());
+    Patchright changes the imported implementation; Camoufox uses a separate pinned browser and generated fingerprint
+    defaults.
+  type: measured
+  source:
+  - 02_patchright.py
+  - 03_python_stealth.py
+  - 04_extra_stealth.cjs
+  - 07_camoufox.py
+  - diagnostics/2026-09-22/scripts/probe.py
+  accessed_at: '2026-09-22'
+- id: C19
+  text: Public captures used fresh contexts, no proxy/account state, sequential runs, six-/ten-second DOM snapshots
+    and screenshots; captured verdict/check states agreed at those two instants.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/scripts/probe.py
+  - diagnostics/2026-09-22/node/probe.cjs
+  - diagnostics/2026-09-22/summary.json
+  accessed_at: '2026-09-22'
+- id: C20
+  text: Two invalid Node extraction pilots were archived and replaced after the main matrix; three supplemental
+    layout visits are separate. The two JavaScript stealth configurations had 4000-pixel page width outside the
+    1440-pixel viewport; full-page images agreed with DOM results.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/pilot-errors/README.md
+  - diagnostics/2026-09-22/layout-audit/README.md
+  - diagnostics/2026-09-22/layout-audit/python-stealth-headless.json
+  - diagnostics/2026-09-22/layout-audit/extra-stealth-headless.json
+  accessed_at: '2026-09-22'
+- id: C21
+  text: Default CI runs only the three Python Chromium fixture scripts with bundled Chromium; full local mode adds
+    Node and Firefox; public detector verdicts are excluded from the CI gate.
+  type: measured
+  source:
+  - run.sh
+  - ../../examples.allowlist.json
+  accessed_at: '2026-09-22'
+- id: C22
+  text: The experiment does not measure target-site access, CAPTCHA success, IP reputation, TLS fingerprints, performance
+    or detection probabilities; passing a diagnostic is limited to that page/configuration.
+  type: measured
+  source:
+  - diagnostics/2026-09-22/report.md
+  - diagnostics/2026-09-22/README.md
+  accessed_at: '2026-09-22'
+- id: C23
+  text: Reader installation commands and the full seven-adapter local run were executed; failure handling preserves
+    nonzero process exits and separate Camoufox dependencies.
+  type: measured
+  source:
+  - README.md
+  - run.sh
+  - verification/clean-all.txt
+  - verification/clean-reader.txt
+  - verification/bundled.txt
+  accessed_at: '2026-09-22'

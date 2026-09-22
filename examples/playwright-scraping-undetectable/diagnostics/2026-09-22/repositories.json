@@ -1,0 +1,82 @@
+[
+  {
+    "repository": "Kaliiiiiiiiii-Vinyzu/patchright-python",
+    "url": "https://github.com/Kaliiiiiiiiii-Vinyzu/patchright-python",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "c4064f5833c811d99772aabefee8984c51322ace",
+    "commit_date": "2026-09-20T11:54:16Z",
+    "license": "Apache-2.0"
+  },
+  {
+    "repository": "Kaliiiiiiiiii-Vinyzu/patchright",
+    "url": "https://github.com/Kaliiiiiiiiii-Vinyzu/patchright",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "26ab9ae74516a68077f218b5de763d85be9f6d5a",
+    "commit_date": "2026-09-13T12:47:17Z",
+    "license": "Apache-2.0"
+  },
+  {
+    "repository": "Mattwmaster58/playwright_stealth",
+    "url": "https://github.com/Mattwmaster58/playwright_stealth",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "dbfdf8a295fc767427129305e8d602c5288292a4",
+    "commit_date": "2026-04-04T03:02:11Z",
+    "license": "MIT"
+  },
+  {
+    "repository": "berstend/puppeteer-extra",
+    "url": "https://github.com/berstend/puppeteer-extra",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "master",
+    "head_sha": "39248f1f5deeb21b1e7eb6ae07b8ef73f1231ab9",
+    "commit_date": "2023-03-01T12:18:55Z",
+    "license": "MIT"
+  },
+  {
+    "repository": "rebrowser/rebrowser-playwright",
+    "url": "https://github.com/rebrowser/rebrowser-playwright",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "d9b95e3fa6c003709f4534a29b4f1cc38c6bf6ec",
+    "commit_date": "2024-09-28T05:03:29Z",
+    "license": null
+  },
+  {
+    "repository": "rebrowser/rebrowser-patches",
+    "url": "https://github.com/rebrowser/rebrowser-patches",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "6373894fde8379eb9b8d393e1d607706eecd8e70",
+    "commit_date": "2025-05-09T01:07:02Z",
+    "license": null
+  },
+  {
+    "repository": "daijro/camoufox",
+    "url": "https://github.com/daijro/camoufox",
+    "accessed_at": "2026-09-22",
+    "archived": false,
+    "branch": "main",
+    "head_sha": "5e59b70bdd4765a76f2ca50899707ef0622b9368",
+    "commit_date": "2026-09-21T23:24:56Z",
+    "license": "MPL-2.0"
+  },
+  {
+    "repository": "ttlns/undetected-playwright-python",
+    "url": "https://github.com/ttlns/undetected-playwright-python",
+    "accessed_at": "2026-09-22",
+    "archived": true,
+    "branch": "main",
+    "head_sha": "4b15791d5263b886477c14a56d9bb54c1c375997",
+    "commit_date": "2024-11-02T14:06:30Z",
+    "license": "Apache-2.0"
+  }
+]
