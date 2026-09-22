@@ -50,6 +50,11 @@
       "id": "pandas-read-html-table",
       "needs_api_key": false,
       "note": "fixture page served from GitHub Pages; two Wikipedia requests in 08 (403 with the default UA is the recorded result); 10 skipped without a key"
+    },
+    {
+      "id": "python-proxy-server-proxy-py",
+      "needs_api_key": false,
+      "note": "local HTTP/HTTPS origins and proxy.py pool; requires curl and openssl; ports 8000, 8443, 8899-8905 must be free; random pool counts are informational"
     }
   ]
 }

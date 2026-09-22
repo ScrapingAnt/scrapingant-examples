@@ -1,0 +1,10 @@
+{
+  "accessed_at": "2026-09-22",
+  "source": "https://pypi.org/pypi/proxy.py/json",
+  "version": "2.4.10",
+  "requires_python": ">=3.6",
+  "uploaded_at": "2025-02-18T16:36:35.394066Z",
+  "upstream_commit": "3b9964b683dccf4507380fd17d3403ac0cf64342",
+  "pool_sha256": "2d42faf585f622221fba349fa651f5232bfd0bd6124935c3e118c5c8e37fd152",
+  "installed_pool_matches_release_source": true
+}

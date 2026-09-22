@@ -1,0 +1,13 @@
+{
+  "forwarding_successes": 4,
+  "authenticated_successes": 4,
+  "rejected_requests": 8,
+  "rejected_origin_hits": 0,
+  "pool_correct_destinations": 20,
+  "pool_requests": 20,
+  "pool_counts": {
+    "upstream-a": 10,
+    "upstream-b": 10
+  },
+  "origin_requests": 36
+}

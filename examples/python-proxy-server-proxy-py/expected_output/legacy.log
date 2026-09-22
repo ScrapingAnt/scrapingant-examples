@@ -1,0 +1,3 @@
+2026-09-22 20:24:18,850 - pid:9704 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.HttpProxyPlugin
+2026-09-22 20:24:18,850 - pid:9704 [I] plugins.load:89 - Loaded plugin lab_plugins.LegacyRotatingProxyPlugin
+2026-09-22 20:24:20,672 - pid:9706 [I] server.access_log:393 - 127.0.0.1:60586 - GET 127.0.0.1:8901/legacy - 400 BAD REQUEST - 92 bytes - 27.29ms

@@ -1,0 +1,572 @@
+Environment: macOS-26.6.2-arm64-arm-64bit 3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]
+proxy.py 2.4.10
+requests 2.34.2
+certifi 2026.7.22
+charset-normalizer 3.5.1
+idna 3.20
+urllib3 2.8.0
+$ curl --version
+curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.1
+Release-Date: 2024-03-27
+Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns ldap ldaps mqtt pop3 pop3s rtsp smb smbs smtp smtps telnet tftp
+Features: alt-svc AsynchDNS GSS-API HSTS HTTP2 HTTPS-proxy IPv6 Kerberos Largefile libz MultiSSL NTLM SPNEGO SSL threadsafe UnixSockets
+exit=0
+$ openssl version
+OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)
+exit=0
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8899 --num-workers 1 --num-acceptors 1 --log-level INFO
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8900 --num-workers 1 --num-acceptors 1 --log-level INFO --basic-auth lab:secret
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8901 --num-workers 1 --num-acceptors 1 --log-level INFO --plugins lab_plugins.UpstreamA
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8902 --num-workers 1 --num-acceptors 1 --log-level INFO --plugins lab_plugins.UpstreamB
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8903 --num-workers 1 --num-acceptors 1 --log-level INFO --plugins proxy.plugin.ProxyPoolPlugin --proxy-pool 127.0.0.1:8901 --proxy-pool 127.0.0.1:8902
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8904 --num-workers 1 --num-acceptors 1 --log-level INFO --plugins lab_plugins.MarkerPlugin
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8905 --num-workers 1 --num-acceptors 1 --log-level INFO --plugins lab_plugins.LegacyRotatingProxyPlugin
+$ /tmp/proxypy-refresh-venv/bin/python client.py http
+200
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/reader-client", "tls": false}
+exit=0
+$ /tmp/proxypy-refresh-venv/bin/python client.py https
+200
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/reader-client", "tls": true}
+exit=0
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8899 http://localhost:8000/curl-False
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/curl-False", "tls": false}
+*   Trying 127.0.0.1:8899...
+* Connected to 127.0.0.1 (127.0.0.1) port 8899
+> GET http://localhost:8000/curl-False HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 90
+< 
+{ [90 bytes data]
+* Closing connection
+exit=0
+Requests GET http://localhost:8000/requests-False proxies={http: http://127.0.0.1:8899, https: http://127.0.0.1:8899} trust_env=False timeout=5
+status=200 body={"marker": null, "origin": "proxy-py-local-fixture", "path": "/requests-False", "tls": false}
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 --proxy-user lab:secret http://localhost:8000/auth-curl-False
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/auth-curl-False", "tls": false}
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+* Proxy auth using Basic with user 'lab'
+> GET http://localhost:8000/auth-curl-False HTTP/1.1
+> Host: localhost:8000
+> Proxy-Authorization: Basic bGFiOnNlY3JldA==
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 95
+< 
+{ [95 bytes data]
+* Closing connection
+exit=0
+Requests GET http://localhost:8000/auth-requests-False proxies={http: http://lab:secret@127.0.0.1:8900, https: http://lab:secret@127.0.0.1:8900} trust_env=False timeout=5
+status=200 body={"marker": null, "origin": "proxy-py-local-fixture", "path": "/auth-requests-False", "tls": false}
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 http://localhost:8000/rejected-False-None
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+> GET http://localhost:8000/rejected-False-None HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+< HTTP/1.1 407 Proxy Authentication Required
+< Proxy-agent: proxy.py v2.4.10
+< Proxy-Authenticate: Basic
+< Connection: close
+< 
+* The requested URL returned error: 407
+* Closing connection
+curl: (22) The requested URL returned error: 407
+exit=22
+Requests GET http://localhost:8000/requests-rejected-False-None proxies={http: http://127.0.0.1:8900, https: http://127.0.0.1:8900} trust_env=False timeout=5
+status=407 body=Proxy Authentication Required
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 --proxy-user lab:wrong http://localhost:8000/rejected-False-lab:wrong
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+* Proxy auth using Basic with user 'lab'
+> GET http://localhost:8000/rejected-False-lab:wrong HTTP/1.1
+> Host: localhost:8000
+> Proxy-Authorization: Basic bGFiOndyb25n
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+< HTTP/1.1 407 Proxy Authentication Required
+< Proxy-agent: proxy.py v2.4.10
+* Authentication problem. Ignoring this.
+< Proxy-Authenticate: Basic
+< Connection: close
+< 
+* The requested URL returned error: 407
+* Closing connection
+curl: (22) The requested URL returned error: 407
+exit=22
+Requests GET http://localhost:8000/requests-rejected-False-lab:wrong proxies={http: http://lab:wrong@127.0.0.1:8900, https: http://lab:wrong@127.0.0.1:8900} trust_env=False timeout=5
+status=407 body=Proxy Authentication Required
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8899 --cacert generated/ca.pem https://localhost:8443/curl-True
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/curl-True", "tls": true}
+*   Trying 127.0.0.1:8899...
+* Connected to 127.0.0.1 (127.0.0.1) port 8899
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 200 Connection established
+< 
+* CONNECT phase completed
+* CONNECT tunnel established, response 200
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [314 bytes data]
+*  CAfile: generated/ca.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [6 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [855 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Sep 22 17:24:18 2026 GMT
+*  expire date: Sep 24 17:24:18 2026 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: CN=Proxy Lab CA
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET /curl-True HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 88
+< 
+{ [88 bytes data]
+* Closing connection
+exit=0
+Requests GET https://localhost:8443/requests-True proxies={http: http://127.0.0.1:8899, https: http://127.0.0.1:8899} trust_env=False timeout=5
+status=200 body={"marker": null, "origin": "proxy-py-local-fixture", "path": "/requests-True", "tls": true}
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 --proxy-user lab:secret --cacert generated/ca.pem https://localhost:8443/auth-curl-True
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/auth-curl-True", "tls": true}
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Proxy auth using Basic with user 'lab'
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> Proxy-Authorization: Basic bGFiOnNlY3JldA==
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 200 Connection established
+< 
+* CONNECT phase completed
+* CONNECT tunnel established, response 200
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [314 bytes data]
+*  CAfile: generated/ca.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [6 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [855 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Sep 22 17:24:18 2026 GMT
+*  expire date: Sep 24 17:24:18 2026 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: CN=Proxy Lab CA
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET /auth-curl-True HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 93
+< 
+{ [93 bytes data]
+* Closing connection
+exit=0
+Requests GET https://localhost:8443/auth-requests-True proxies={http: http://lab:secret@127.0.0.1:8900, https: http://lab:secret@127.0.0.1:8900} trust_env=False timeout=5
+status=200 body={"marker": null, "origin": "proxy-py-local-fixture", "path": "/auth-requests-True", "tls": true}
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 --cacert generated/ca.pem https://localhost:8443/rejected-True-None
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 407 Proxy Authentication Required
+< Proxy-agent: proxy.py v2.4.10
+< Proxy-Authenticate: Basic
+< Connection: close
+< 
+* The requested URL returned error: 407
+* Closing connection
+curl: (22) The requested URL returned error: 407
+exit=22
+Requests GET https://localhost:8443/requests-rejected-True-None proxies={http: http://127.0.0.1:8900, https: http://127.0.0.1:8900} trust_env=False timeout=5
+ProxyError: HTTPSConnectionPool(host='localhost', port=8443): Max retries exceeded with url: /requests-rejected-True-None (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 407 Proxy Authentication Required')))
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8900 --proxy-user lab:wrong --cacert generated/ca.pem https://localhost:8443/rejected-True-lab:wrong
+*   Trying 127.0.0.1:8900...
+* Connected to 127.0.0.1 (127.0.0.1) port 8900
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Proxy auth using Basic with user 'lab'
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> Proxy-Authorization: Basic bGFiOndyb25n
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 407 Proxy Authentication Required
+< Proxy-agent: proxy.py v2.4.10
+< Proxy-Authenticate: Basic
+* Authentication problem. Ignoring this.
+< Connection: close
+< 
+* Closing connection
+curl: (22) HTTP response code said error
+exit=22
+Requests GET https://localhost:8443/requests-rejected-True-lab:wrong proxies={http: http://lab:wrong@127.0.0.1:8900, https: http://lab:wrong@127.0.0.1:8900} trust_env=False timeout=5
+ProxyError: HTTPSConnectionPool(host='localhost', port=8443): Max retries exceeded with url: /requests-rejected-True-lab:wrong (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 407 Proxy Authentication Required')))
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8904 http://localhost:8000/marker
+{"marker": "local-lab", "origin": "proxy-py-local-fixture", "path": "/marker", "tls": false}
+*   Trying 127.0.0.1:8904...
+* Connected to 127.0.0.1 (127.0.0.1) port 8904
+> GET http://localhost:8000/marker HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 93
+< 
+{ [93 bytes data]
+* Closing connection
+exit=0
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8904 --cacert generated/ca.pem https://localhost:8443/marker-tunnel
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/marker-tunnel", "tls": true}
+*   Trying 127.0.0.1:8904...
+* Connected to 127.0.0.1 (127.0.0.1) port 8904
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 200 Connection established
+< 
+* CONNECT phase completed
+* CONNECT tunnel established, response 200
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [314 bytes data]
+*  CAfile: generated/ca.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [6 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [855 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Sep 22 17:24:18 2026 GMT
+*  expire date: Sep 24 17:24:18 2026 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: CN=Proxy Lab CA
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET /marker-tunnel HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 92
+< 
+{ [92 bytes data]
+* Closing connection
+exit=0
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8901 http://localhost:8000/individual-upstream-a
+{"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/individual-upstream-a", "tls": false}
+*   Trying 127.0.0.1:8901...
+* Connected to 127.0.0.1 (127.0.0.1) port 8901
+> GET http://localhost:8000/individual-upstream-a HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 109
+< 
+{ [109 bytes data]
+* Closing connection
+exit=0
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8902 http://localhost:8000/individual-upstream-b
+{"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/individual-upstream-b", "tls": false}
+*   Trying 127.0.0.1:8902...
+* Connected to 127.0.0.1 (127.0.0.1) port 8902
+> GET http://localhost:8000/individual-upstream-b HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:19 GMT
+< Content-Type: application/json
+< Content-Length: 109
+< 
+{ [109 bytes data]
+* Closing connection
+exit=0
+Requests GET http://localhost:8000/pool-0 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-0", "tls": false}
+Requests GET http://localhost:8000/pool-1 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-1", "tls": false}
+Requests GET http://localhost:8000/pool-2 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-2", "tls": false}
+Requests GET http://localhost:8000/pool-3 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-3", "tls": false}
+Requests GET http://localhost:8000/pool-4 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-4", "tls": false}
+Requests GET http://localhost:8000/pool-5 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-5", "tls": false}
+Requests GET http://localhost:8000/pool-6 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-6", "tls": false}
+Requests GET http://localhost:8000/pool-7 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-7", "tls": false}
+Requests GET http://localhost:8000/pool-8 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-8", "tls": false}
+Requests GET http://localhost:8000/pool-9 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-9", "tls": false}
+Requests GET http://localhost:8000/pool-10 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-10", "tls": false}
+Requests GET http://localhost:8000/pool-11 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-11", "tls": false}
+Requests GET http://localhost:8000/pool-12 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-12", "tls": false}
+Requests GET http://localhost:8000/pool-13 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-13", "tls": false}
+Requests GET http://localhost:8000/pool-14 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-14", "tls": false}
+Requests GET http://localhost:8000/pool-15 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-15", "tls": false}
+Requests GET http://localhost:8000/pool-16 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-16", "tls": false}
+Requests GET http://localhost:8000/pool-17 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-17", "tls": false}
+Requests GET http://localhost:8000/pool-18 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-a", "origin": "proxy-py-local-fixture", "path": "/pool-18", "tls": false}
+Requests GET http://localhost:8000/pool-19 proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": "upstream-b", "origin": "proxy-py-local-fixture", "path": "/pool-19", "tls": false}
+POOL: {"upstream-a": 10, "upstream-b": 10}; correct destinations=20/20
+Requests GET http://127.0.0.1:8000/private-ip-bypass proxies={http: http://127.0.0.1:8903, https: http://127.0.0.1:8903} trust_env=False timeout=5
+status=200 body={"marker": null, "origin": "proxy-py-local-fixture", "path": "/private-ip-bypass", "tls": false}
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8903 --cacert generated/ca.pem https://localhost:8443/pool-tunnel
+{"marker": null, "origin": "proxy-py-local-fixture", "path": "/pool-tunnel", "tls": true}
+*   Trying 127.0.0.1:8903...
+* Connected to 127.0.0.1 (127.0.0.1) port 8903
+* CONNECT tunnel: HTTP/1.1 negotiated
+* allocate connect buffer
+* Establish HTTP proxy tunnel to localhost:8443
+> CONNECT localhost:8443 HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 200 Connection established
+< 
+* CONNECT phase completed
+* CONNECT tunnel established, response 200
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [314 bytes data]
+*  CAfile: generated/ca.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [6 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [855 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Sep 22 17:24:18 2026 GMT
+*  expire date: Sep 24 17:24:18 2026 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: CN=Proxy Lab CA
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET /pool-tunnel HTTP/1.1
+> Host: localhost:8443
+> User-Agent: curl/8.7.1
+> Accept: */*
+> 
+* Request completely sent off
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Server: BaseHTTP/0.6 Python/3.12.11
+< Date: Tue, 22 Sep 2026 17:24:20 GMT
+< Content-Type: application/json
+< Content-Length: 90
+< 
+{ [90 bytes data]
+* Closing connection
+exit=0
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:8905 http://localhost:8000/legacy
+*   Trying 127.0.0.1:8905...
+* Connected to 127.0.0.1 (127.0.0.1) port 8905
+> GET http://localhost:8000/legacy HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+* Request completely sent off
+< HTTP/1.1 400 BAD REQUEST
+< Server: proxy.py v2.4.10
+< Content-Length: 0
+< Connection: close
+< 
+* The requested URL returned error: 400
+* Closing connection
+curl: (22) The requested URL returned error: 400
+exit=22
+$ curl --noproxy '' --silent --show-error --fail --verbose --max-time 5 --proxy http://127.0.0.1:60588 http://localhost:8000/refused
+*   Trying 127.0.0.1:60588...
+* connect to 127.0.0.1 port 60588 from 127.0.0.1 port 60589 failed: Connection refused
+* Failed to connect to 127.0.0.1 port 60588 after 0 ms: Couldn't connect to server
+* Closing connection
+curl: (7) Failed to connect to 127.0.0.1 port 60588 after 0 ms: Couldn't connect to server
+exit=7
+$ /tmp/proxypy-refresh-venv/bin/python -m proxy --hostname 127.0.0.1 --port 8899 --num-workers 1 --num-acceptors 1
+2026-09-22 20:24:20,754 - pid:9764 [I] plugins.load:89 - Loaded plugin proxy.http.proxy.HttpProxyPlugin
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/__main__.py", line 15, in <module>
+    entry_point()
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/proxy.py", line 405, in entry_point
+    main()
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/proxy.py", line 400, in main
+    with Proxy(sys.argv[1:], **opts) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/proxy.py", line 214, in __enter__
+    self.setup()
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/proxy.py", line 234, in setup
+    self.listeners.setup()
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/core/listener/pool.py", line 46, in setup
+    self.add(TcpSocketListener, hostname=hostname, port=port)
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/core/listener/pool.py", line 55, in add
+    listener.setup()
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/core/listener/base.py", line 57, in setup
+    self._socket = self.listen()
+                   ^^^^^^^^^^^^^
+  File "/tmp/proxypy-refresh-venv/lib/python3.12/site-packages/proxy/core/listener/tcp.py", line 91, in listen
+    sock.bind((str(self.hostname), self.port))
+OSError: [Errno 48] Address already in use
+exit=1
+PASS {"authenticated_successes": 4, "forwarding_successes": 4, "origin_requests": 36, "pool_correct_destinations": 20, "pool_counts": {"upstream-a": 10, "upstream-b": 10}, "pool_requests": 20, "rejected_origin_hits": 0, "rejected_requests": 8}

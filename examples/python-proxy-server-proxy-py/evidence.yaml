@@ -1,0 +1,71 @@
+article_id: python-proxy-server-proxy-py
+canonical_url: https://scrapingant.com/blog/python-proxy-server-proxy-py
+owner: Oleg Kulyk
+examples_repo_commit: pending-source-commit
+tested_at: 2026-09-22
+requires_api_key: false
+environment:
+  os: macOS 26.6.2 arm64
+  python: 3.12.11
+  curl: 8.7.1
+  tls: LibreSSL/3.3.6
+  browser: not used
+dependencies:
+  proxy.py: 2.4.10
+  requests: 2.34.2
+  certifi: 2026.7.22
+  charset-normalizer: 3.5.1
+  idna: '3.20'
+  urllib3: 2.8.0
+run_command: ./run.sh
+fixtures:
+  - fixtures/server.cnf
+  - lab.py (self-authored JSON origin on HTTP 8000 and HTTPS 8443)
+outputs:
+  - expected_output/run.txt
+  - expected_output/summary.json
+  - expected_output/origin.jsonl
+  - expected_output/plain.log
+  - expected_output/auth.log
+  - expected_output/marker.log
+  - expected_output/upstream-a.log
+  - expected_output/upstream-b.log
+  - expected_output/pool.log
+  - expected_output/legacy.log
+  - expected_output/certificates.txt
+  - expected_output/proxy-help.txt
+  - expected_output/release.json
+  - expected_output/proxy_pool.source.txt
+measurements:
+  - {name: forwarding_successes, value: 4, unit: requests, denominator: 4, source: expected_output/summary.json}
+  - {name: authenticated_successes, value: 4, unit: requests, denominator: 4, source: expected_output/summary.json}
+  - {name: rejected_requests, value: 8, unit: requests, denominator: 8, source: expected_output/summary.json}
+  - {name: rejected_origin_hits, value: 0, unit: requests, denominator: 8, source: expected_output/summary.json}
+  - {name: pool_correct_destinations, value: 20, unit: requests, denominator: 20, source: expected_output/summary.json}
+  - {name: pool_upstream_a, value: 10, unit: requests, denominator: 20, source: expected_output/summary.json}
+  - {name: pool_upstream_b, value: 10, unit: requests, denominator: 20, source: expected_output/summary.json}
+limitations:
+  - macOS Python 3.12.11 is the recorded environment; no minimum-Python compatibility claim.
+  - Local self-authored origins only; no third-party scraping or paid service tested.
+  - Random selection per fresh client connection; counts vary. Not round-robin, public-IP rotation, throughput or reliability evidence.
+  - Literal private IP addresses bypass this pool implementation; hostname localhost used to exercise chaining.
+  - Legacy recipe retained with only fixture endpoint substitution; observed HTTP 400 is specific to this setup.
+  - Marker modification demonstrated for plain HTTP only; CONNECT contents remain encrypted.
+  - Fixed ports must be free. Refusal case briefly releases an allocated port; unexpected reuse fails the assertion.
+  - Expected failures are asserted; their tracebacks in run.txt do not mean the packet failed.
+  - Dependency installation needs PyPI access; packet runtime uses loopback only.
+claims:
+  - {id: C1, text: 'Pinned release and recorded environment/dependencies', type: measured, source: expected_output/run.txt}
+  - {id: C2, text: 'Explicit loopback listeners, worker/acceptor flags and plugin paths launch successfully', type: measured, source: expected_output/run.txt}
+  - {id: C3, text: 'cURL and Requests each forward HTTP and HTTPS to the local origin', type: measured, source: expected_output/run.txt}
+  - {id: C4, text: 'HTTPS uses CONNECT with client certificate verification; no interception CA configured on proxy', type: measured, source: 'expected_output/run.txt; expected_output/plain.log; expected_output/certificates.txt; lab.py'}
+  - {id: C5, text: 'Authentication: four successes, eight rejections, zero rejected origin hits', type: measured, source: 'expected_output/summary.json; expected_output/origin.jsonl; expected_output/auth.log'}
+  - {id: C6, text: 'Missing/wrong credentials yield 407; curl HTTP exit22, CONNECT exit56; Requests HTTP407 or HTTPS ProxyError', type: measured, source: expected_output/run.txt}
+  - {id: C7, text: 'HTTP marker reaches origin; marker absent inside CONNECT tunnel', type: measured, source: 'expected_output/origin.jsonl; lab_plugins.py'}
+  - {id: C8, text: 'Old host/port-rewriting recipe yields HTTP400 and no origin hit in this fixture', type: measured, source: 'expected_output/legacy.log; expected_output/run.txt; lab_plugins.py'}
+  - {id: C9, text: 'Each upstream tested separately; 20/20 fresh-connection pool requests preserve destination, with 10 on each upstream in this run', type: measured, source: 'expected_output/summary.json; expected_output/origin.jsonl; expected_output/upstream-a.log; expected_output/upstream-b.log'}
+  - {id: C10, text: 'Pool selects randomly in constructor, bypasses private literal IPs, and forwards using request.build(for_proxy=True)', type: documented, source: 'expected_output/proxy_pool.source.txt; expected_output/release.json', accessed_at: 2026-09-22, url: 'https://github.com/abhinavsingh/proxy.py/blob/3b9964b683dccf4507380fd17d3403ac0cf64342/proxy/plugin/proxy_pool.py'}
+  - {id: C11, text: 'Unavailable listener yields curl exit7; occupied proxy port yields exit1 and Address already in use', type: measured, source: expected_output/run.txt}
+  - {id: C12, text: 'Local ports demonstrate routing, not diverse public IPs; no external proxy or API key used', type: measured, source: 'lab.py; README.md'}
+  - {id: C13, text: 'Client controls prevent environment-proxy bypass; fake credentials and generated test CA only', type: measured, source: 'lab.py; client.py; expected_output/certificates.txt'}
+  - {id: C14, text: 'PyPI version2.4.10 release2025-02-18, metadata Python>=3.6; latter not a tested runtime claim', type: documented, source: expected_output/release.json, accessed_at: 2026-09-22, url: 'https://pypi.org/pypi/proxy.py/json'}
