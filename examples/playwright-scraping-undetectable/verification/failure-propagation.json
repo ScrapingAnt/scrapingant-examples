@@ -1,0 +1,6 @@
+{
+  "case": "child executable exits nonzero",
+  "exit_code": 1,
+  "expected": "nonzero",
+  "passed": true
+}

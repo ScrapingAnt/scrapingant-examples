@@ -11,7 +11,7 @@ Five approaches plus plain Chrome/Firefox controls, supporting the existing arti
 
 ## Install and run the article's Chrome fixture
 
-Prerequisites: Python 3.12 (shown as `python3.12` below), installed Google Chrome, and a POSIX shell. Full mode also needs Node 22. Measurements were made on macOS 26.6.2 arm64, Python 3.12.11 and Node 22.20.0. Windows commands and public-suite results on other operating systems were not tested.
+Prerequisites for the complete recorded walkthrough: macOS, Python 3.12 (shown as `python3.12` below), installed Google Chrome, and a POSIX shell. Full mode also needs Node 22. Measurements were made on macOS 26.6.2 arm64, Python 3.12.11 and Node 22.20.0. Windows commands and public-suite results on other operating systems were not tested.
 
 From this directory:
 
@@ -48,7 +48,7 @@ BROWSER_CHANNEL=chrome node 05_rebrowser.cjs
 
 The lockfile pins playwright-extra 4.3.6, puppeteer-extra-plugin-stealth 2.11.2, Playwright 1.63.0 and rebrowser-playwright 1.52.0. Rebrowser with the installed newer Chrome is a tested combination, not a claim of general driver compatibility.
 
-Camoufox 0.5.6 requires Playwright <1.63, so use a separate environment:
+Camoufox 0.5.6 requires Playwright <1.63, so use a separate environment. The supplied full dependency freeze includes macOS-only PyObjC packages; these commands reproduce macOS, not Linux or Windows:
 
 ```bash
 python3.12 -m venv .venv-camoufox
