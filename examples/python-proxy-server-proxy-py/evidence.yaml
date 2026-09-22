@@ -23,6 +23,10 @@ fixtures:
   - lab.py (self-authored JSON origin on HTTP 8000 and HTTPS 8443)
 outputs:
   - expected_output/run.txt
+  - expected_output/install.txt
+  - expected_output/clean-clone-run.txt
+  - expected_output/manual.txt
+  - expected_output/linux-ci.json
   - expected_output/summary.json
   - expected_output/origin.jsonl
   - expected_output/plain.log
@@ -45,6 +49,7 @@ measurements:
   - {name: pool_upstream_a, value: 10, unit: requests, denominator: 20, source: expected_output/summary.json}
   - {name: pool_upstream_b, value: 10, unit: requests, denominator: 20, source: expected_output/summary.json}
 limitations:
+  - Primary measurements come from run.txt and summary.json. Separate clean-clone-run.txt has a different random split; it does not replace the primary data.
   - macOS Python 3.12.11 is the recorded environment; no minimum-Python compatibility claim.
   - Local self-authored origins only; no third-party scraping or paid service tested.
   - Random selection per fresh client connection; counts vary. Not round-robin, public-IP rotation, throughput or reliability evidence.
@@ -69,3 +74,4 @@ claims:
   - {id: C12, text: 'Local ports demonstrate routing, not diverse public IPs; no external proxy or API key used', type: measured, source: 'lab.py; README.md'}
   - {id: C13, text: 'Client controls prevent environment-proxy bypass; fake credentials and generated test CA only', type: measured, source: 'lab.py; client.py; expected_output/certificates.txt'}
   - {id: C14, text: 'PyPI version2.4.10 release2025-02-18, metadata Python>=3.6; latter not a tested runtime claim', type: documented, source: expected_output/release.json, accessed_at: 2026-09-22, url: 'https://pypi.org/pypi/proxy.py/json'}
+  - {id: C15, text: "Fresh clone pip install, run.sh and manual serve/article-client commands passed; Linux workflow passed at source-identical commit6b36fd8", type: measured, source: "expected_output/install.txt; expected_output/clean-clone-run.txt; expected_output/manual.txt; expected_output/linux-ci.json"}

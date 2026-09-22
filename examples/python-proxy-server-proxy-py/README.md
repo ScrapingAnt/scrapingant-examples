@@ -56,6 +56,7 @@ The generated CA is necessary only for this lab's locally signed HTTPS origin. T
 - `fixtures/server.cnf`: localhost certificate extensions.
 - `expected_output/run.txt`: raw commands, client stdout/stderr and exit codes from the recorded run. Negative cases intentionally contain HTTP errors and a bind-error traceback.
 - `expected_output/*.log`: raw proxy access logs. Correlate paths with `origin.jsonl`; pool markers are also asserted against the selected upstream's log.
+- `expected_output/install.txt`, `clean-clone-run.txt`, `manual.txt`: separate fresh-clone/pip reproduction and exact article-client/serve checks. Their random pool split does not replace the primary measurement.
 - `expected_output/summary.json`: denominators and measured counts. Includes two additional reader-client requests beyond the four forwarding matrix cases.
 - `expected_output/proxy-help.txt`, `release.json`, `proxy_pool.source.txt`: package help, release metadata and exact installed pool source, verified byte-for-byte against upstream release commit `3b9964b683dccf4507380fd17d3403ac0cf64342`.
 - `evidence.yaml`: claims, sources, dependencies and scope.
