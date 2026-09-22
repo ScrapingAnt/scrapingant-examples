@@ -1,7 +1,8 @@
 article_id: playwright-scraping-undetectable
 canonical_url: https://scrapingant.com/blog/playwright-scraping-undetectable
 owner: Oleg Kulyk
-examples_repo_commit: null
+examples_repo_commit: 7f5d0a32057da5f771c18bf5e90ccd22163ee76a
+source_commit_note: Executed implementation and primary captures; subsequent commits record metadata and review.
 tested_at: '2026-09-22'
 requires_api_key: false
 environment:
