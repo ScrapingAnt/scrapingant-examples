@@ -1,0 +1,9 @@
+{
+  "tested_at": "2026-09-22",
+  "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35761730892",
+  "status": "completed",
+  "conclusion": "success",
+  "tested_commit": "6b36fd8b28574b41d67281ab4a41d6e2570ab727",
+  "workflow": "run-examples.yaml",
+  "job": "run (python-proxy-server-proxy-py)"
+}
