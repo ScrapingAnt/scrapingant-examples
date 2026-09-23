@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-09-23",
-  "source_commit": "2cc69546eb0f1287d8f37e5dce5ef237b3708386",
+  "source_commit": "8931f8f81a2dc3746822639465cc851c9693fd20",
   "fresh_node_install": {
     "command": "npm ci --ignore-scripts --no-audit --no-fund",
     "exit_code": 0,
@@ -24,7 +24,7 @@
     "stage": "npm ci",
     "cause": "Generated lockfile contained temporary absolute/symlink paths; regenerated from package directory before successful rerun."
   },
-  "paid_tasks_created": 124,
+  "paid_tasks_created": 1204,
   "scrapingant_requests_made": 1,
   "local_scrapingant_probe": {
     "exit_code": 0,
@@ -167,14 +167,14 @@
     "scope": "Five test-key fixture checks and three SDK import/preflight checks only."
   },
   "linux_ci": {
-    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35852936610",
-    "source_commit": "2cc69546eb0f1287d8f37e5dce5ef237b3708386",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35905780623",
+    "source_commit": "8931f8f81a2dc3746822639465cc851c9693fd20",
     "conclusion": "success",
-    "offline_boundary_and_evidence_tests_passed": 16,
+    "offline_boundary_and_evidence_tests_passed": 21,
     "fixture_cases_passed": 5,
     "sdk_preflights_passed": 3,
     "paid_tasks_created": 0,
-    "scope": "Default credential-free checks only. All120 broader paid observations are local and separately recorded."
+    "scope": "Credential-free default checks. The 1,200-request matrix was run locally and is separately recorded."
   },
   "local_default_after_paid_runner": {
     "exit_code": 0,
@@ -261,9 +261,78 @@
     "scope": "Default credential-free checks only. Paid observations are local and separately recorded."
   },
   "publication_privacy_scan": {
-    "files_scanned": 219,
+    "files_scanned": 1530,
     "exact_supplied_credentials_absent": true,
     "private_repository_names_absent": true,
     "local_user_paths_absent": true
+  },
+  "previous_120_task_linux_ci": {
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35852936610",
+    "source_commit": "2cc69546eb0f1287d8f37e5dce5ef237b3708386",
+    "conclusion": "success",
+    "offline_boundary_and_evidence_tests_passed": 16,
+    "fixture_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "scope": "Default credential-free checks only. All120 broader paid observations are local and separately recorded."
+  },
+  "local_100_trial_comparison": {
+    "output": "broad-100-comparison.json",
+    "provider_task_creation_requests": 1200,
+    "tasks_created": 1200,
+    "initial_120_included": true,
+    "additional_requests": 1080,
+    "separate_initial_four_excluded": true,
+    "task_creation_retries": 0,
+    "uncertain_task_creations": 0,
+    "uncharged_setup_diagnostics": 1,
+    "browser_workflow_attempts": 1201,
+    "external_child_timeout_seconds": 400,
+    "turnstile_no_server_verifier": true,
+    "synthetic_ocr_fixtures": 100,
+    "paid_failures_replaced": false
+  },
+  "local_default_after_100_runner": {
+    "checked_at": "2026-09-23T19:40:32.456295+00:00",
+    "command": "./run.sh",
+    "exit_code": 0,
+    "offline_tests_passed": 21,
+    "test_key_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "credentials_supplied": false,
+    "isolated_copy_matches_executable_sources": true,
+    "executable_file_count": 23,
+    "log_sha256": "5f2c63a15c02b891a2c3fd8697e46c075c5e39554e92ec34e2314b4a8985dcdd",
+    "outputs": "expected_output/validation-100-2026-09-23/"
+  },
+  "expanded_summary_reproduction": {
+    "byte_identical": true,
+    "records": 1200,
+    "cells_with_100_requests_and_tasks": 12,
+    "original_120_record_bytes_unchanged": true,
+    "fixture_hashes_and_cross_provider_pairs_verified": 100,
+    "spending_window_coverage": "Every paid record belongs to exactly one captured balance interval, including serial recovery."
+  },
+  "independent_100_review": {
+    "blocking_findings_remaining": 0,
+    "records_checked": 1200,
+    "summary_reproduced_exactly": true,
+    "cells_with_100_requests_and_confirmed_tasks": 12,
+    "initial_120_byte_identical": true,
+    "image_hashes_and_pairs_verified": 100,
+    "setup_recovery_checked": true,
+    "full_workflows_covered_by_exactly_one_spending_interval": 1200,
+    "spending_intervals": 4,
+    "latency_percentiles_independently_recomputed": true,
+    "public_payload_and_path_checks_passed": true,
+    "retained_png_bytes_match_previously_reviewed_safe_images": true,
+    "executable_sources_match_ci_commit": true,
+    "resolved": [
+      "Median convention distinguished from nearest-rank p90/p95",
+      "All non-success outcomes included in failure details",
+      "Strictly uncharged setup archival predicate shared with summarizer",
+      "Receipt-versus-balance discrepancy explicit"
+    ]
   }
 }

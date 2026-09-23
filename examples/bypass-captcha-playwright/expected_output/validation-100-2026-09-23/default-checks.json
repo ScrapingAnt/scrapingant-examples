@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-09-23T19:40:32.456295+00:00",
+  "command": "./run.sh",
+  "exit_code": 0,
+  "offline_tests_passed": 21,
+  "test_key_cases_passed": 5,
+  "sdk_preflights_passed": 3,
+  "paid_tasks_created": 0,
+  "credentials_supplied": false,
+  "isolated_copy_matches_executable_sources": true,
+  "executable_file_count": 23,
+  "log_sha256": "5f2c63a15c02b891a2c3fd8697e46c075c5e39554e92ec34e2314b4a8985dcdd"
+}

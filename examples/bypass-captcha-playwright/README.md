@@ -1,6 +1,6 @@
 # CAPTCHA handling with Playwright: dated research
 
-Tested September 23, 2026. The latest [six-case comparison](broad-report.md) contains **120 new paid tasks**, ten per provider/case, through 2Captcha and Anti-Captcha. It separates verified server acceptance, synthetic image recognition and unverified Turnstile token delivery. The earlier four paid Google-demo tasks and browser-library experiments remain below as a separate cohort. CapSolver remains unavailable without a key. **Public-demo observations do not establish a production bypass rate or an overall winning provider.**
+Tested September 23, 2026. The latest [100-trial comparison](broad-100-report.md) contains **1,200 provider requests: 100 per provider/CAPTCHA pair**, across six cases and two providers. It extends the original 120-record cohort with 1,080 additional requests and preserves every paid failure. Results distinguish demo-server acceptance, synthetic image recognition and unverified Turnstile token delivery. The [original ten-trial report](broad-report.md) and separate four-task experiment remain historical evidence. CapSolver is unavailable without a key. **Public-demo observations do not establish a production bypass rate or an overall winning provider.**
 
 ## Earlier library comparison and four-task cohort
 
@@ -15,7 +15,7 @@ Tested September 23, 2026. The latest [six-case comparison](broad-report.md) con
 | `capsolver` | 1.0.7 | Install/import, method signature, credential preflight | Passed interface checks; live API unavailable without a key |
 | ScrapingAnt browser API | n/a | One local browser/datacenter fetch of the Google demo | API200/target200;10 credits; widget markup present, response textarea absent, no success message; no form submission tested |
 
-See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. This initial cohort created four paid tasks; the later six-case cohort adds120, for124 across both experiments. The initial SDK preflight captures are retained as historical checks. A preflight passing does **not** mean a solve succeeded. See [paid-comparison.json](paid-comparison.json) for the later funded observations.
+See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. This initial cohort created four paid tasks; the six-case matrix now contains 1,200, for 1,204 across both experiments (the original 120 are included). The initial SDK preflight captures are retained as historical checks. A preflight passing does **not** mean a solve succeeded. See [paid-comparison.json](paid-comparison.json) for the later funded observations.
 
 ## Reproduce the credential-free checks
 
@@ -32,7 +32,7 @@ npm ci
 
 On Linux, use `python -m playwright install --with-deps chromium` to install browser system dependencies. Windows has not been tested; the live audio and paid runners use POSIX `SIGALRM`.
 
-Default `run.sh` runs16 offline spending/privacy/evidence assertions, checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
+Default `run.sh` runs 21 offline spending/privacy/evidence assertions, checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
 
 A failed fixture request is not a production-solver result. The forced Turnstile duplicate test uses the documented dummy secret, not a replay of a real production token. The Google test secret is deliberately permissive; missing tokens are rejected locally before Siteverify.
 
@@ -100,3 +100,19 @@ No raw solution tokens, account keys, account balances, cookies, private-reposit
 See [broad-report.md](broad-report.md) for the six fixture definitions, measured counts, latency ranges, costs, negative controls, replay observations and reproduction commands. [broad-comparison.json](broad-comparison.json) is generated from the dated per-trial JSON files by `summarize_broad.py`.
 
 `python broad_matrix.py` prints a plan without network calls. Explicit `--live --rounds 10` permits at most120 tasks in one output directory; first use `--rounds 1` for a12-task pilot, then resume in the same directory. Existing records are never automatically repeated, including failures. Use one batch controller per output directory. Each paid child has a400-second external deadline; POSIX/macOS and Linux are the supported environments. Paid matrix runs are excluded from default and recurring CI.
+
+
+## Reproduce the 100-trial extension
+
+The [expanded report](broad-100-report.md) and [summary](broad-100-comparison.json) retain all 1,200 requests, initial/added phases, ten-trial blocks, returned-solution median/p90/p95, provider failures, receipt coverage and uncharged setup diagnostics. Do not summarize a directory while its controller is running.
+
+```bash
+# Offline plan only:
+python broad_matrix.py --rounds 100
+# Explicit funded run; one controller per output directory:
+python broad_matrix.py --live --rounds 100 --workers 12 --per-provider 6 --output run_output/broad-100
+# Offline reproduction of the committed completed dataset:
+python summarize_100.py --output run_output/rebuilt.json
+```
+
+A fresh output directory can create up to 1,200 paid requests. The dated run first copied its previously measured 120 records, so only 1,080 further requests were made. Preserve existing trial records, including failures and uncertain creations. `recover_setup.py` can archive only a completed fixture-setup error with provably zero provider requests/tasks and no charge or ambiguity; it retains the diagnostic before explicitly releasing that unmeasured slot. Stop the controller before any such recovery, inspect `--help`, and never use recovery to replace a paid failure.
