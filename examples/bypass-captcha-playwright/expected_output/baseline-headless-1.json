@@ -1,0 +1,17 @@
+{
+  "method": "plain-checkbox",
+  "test_mode": false,
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "headed": false,
+  "repeat": 1,
+  "tested_at": "2026-09-23T08:47:00.900352+00:00",
+  "server_accepted": false,
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "token_length": 0,
+  "visible_text": "Sample Form with ReCAPTCHA\nFirst Name\nLast Name\nEmail\n\nPick your favorite color:\n\nRed\nGreen",
+  "challenge_text": [
+    "Select all images with\ncrosswalks\nClick verify once there are none left.\n\t\n\t\n\n\n\t\n\t\n\n\n\t\n\t\nVERIFY"
+  ],
+  "elapsed_seconds": 4.7
+}

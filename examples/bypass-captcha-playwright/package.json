@@ -1,0 +1,1 @@
+{"name":"playwright-captcha-evidence","private":true,"version":"1.0.0","dependencies":{"playwright":"1.63.0","playwright-extra":"4.3.6","puppeteer-extra-plugin-recaptcha":"3.6.8"}}

@@ -1,0 +1,107 @@
+{
+  "accessed": "2026-09-23",
+  "packages": [
+    {
+      "name": "playwright",
+      "registry": "pypi",
+      "version": "1.63.0",
+      "released": "2026-09-15T16:49:06.045396Z",
+      "requires_python": ">=3.10",
+      "requires_dist": [
+        "pyee<14,>=13",
+        "greenlet<4.0.0,>=3.1.1"
+      ],
+      "project_urls": {
+        "Release notes": "https://github.com/microsoft/playwright-python/releases",
+        "homepage": "https://github.com/Microsoft/playwright-python"
+      }
+    },
+    {
+      "name": "playwright-recaptcha",
+      "registry": "pypi",
+      "version": "0.5.1",
+      "released": "2024-06-10T15:59:39.141510Z",
+      "requires_python": ">=3.8",
+      "requires_dist": [
+        "playwright>=1.33.0",
+        "pydub==0.25.1",
+        "SpeechRecognition==3.10.4",
+        "tenacity==8.3.0"
+      ],
+      "project_urls": {
+        "Homepage": "https://github.com/Xewdy444/Playwright-reCAPTCHA"
+      }
+    },
+    {
+      "name": "2captcha-python",
+      "registry": "pypi",
+      "version": "2.1.1",
+      "released": "2026-08-28T09:15:45.181940Z",
+      "requires_python": ">=3.8",
+      "requires_dist": [
+        "requests",
+        "httpx",
+        "aiofiles"
+      ],
+      "project_urls": {
+        "Homepage": "https://github.com/2captcha/2captcha-python/"
+      }
+    },
+    {
+      "name": "anticaptchaofficial",
+      "registry": "pypi",
+      "version": "1.0.70",
+      "released": "2026-06-19T12:31:59.889577Z",
+      "requires_python": null,
+      "requires_dist": [
+        "py>=1.4.32",
+        "requests>=2.22.0"
+      ],
+      "project_urls": {
+        "Homepage": "https://github.com/anti-captcha/anticaptcha-python"
+      }
+    },
+    {
+      "name": "capsolver",
+      "registry": "pypi",
+      "version": "1.0.7",
+      "released": "2023-07-20T09:28:26.389935Z",
+      "requires_python": ">=3.6.8",
+      "requires_dist": [
+        "requests (>=2.26.0)"
+      ],
+      "project_urls": {
+        "Bug Tracker": "https://github.com/capsovler/capsovler-python/issues",
+        "Homepage": "https://github.com/capsolver/capsolver-python"
+      }
+    },
+    {
+      "name": "playwright-extra",
+      "registry": "npm",
+      "version": "4.3.6",
+      "released": "2023-03-01T12:07:20.917Z",
+      "dependencies": {
+        "debug": "^4.3.4"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/berstend/puppeteer-extra.git"
+      }
+    },
+    {
+      "name": "puppeteer-extra-plugin-recaptcha",
+      "registry": "npm",
+      "version": "3.6.8",
+      "released": "2023-03-01T12:19:02.281Z",
+      "dependencies": {
+        "debug": "^4.1.1",
+        "merge-deep": "^3.0.2",
+        "puppeteer-extra-plugin": "^3.2.3"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/berstend/puppeteer-extra.git"
+      }
+    }
+  ]
+}
