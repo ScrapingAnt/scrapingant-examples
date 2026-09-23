@@ -1,0 +1,128 @@
+[
+  {
+    "provider": "google",
+    "mode": "empty",
+    "browser": "153.0.8010.12",
+    "tested_at": "2026-09-23T19:38:54.117316+00:00",
+    "http_status": 403,
+    "result": {
+      "test_mode": true,
+      "provider": "google",
+      "mode": "pass",
+      "token_length": 0,
+      "accepted": false,
+      "verification_called": false,
+      "error_codes": [
+        "missing-token"
+      ]
+    },
+    "assertion_passed": true,
+    "elapsed_seconds": 0.66
+  },
+  {
+    "provider": "google",
+    "mode": "pass",
+    "browser": "153.0.8010.12",
+    "tested_at": "2026-09-23T19:38:54.773614+00:00",
+    "http_status": 200,
+    "result": {
+      "test_mode": true,
+      "provider": "google",
+      "mode": "pass",
+      "token_length": 1657,
+      "accepted": true,
+      "verification_called": true,
+      "provider_http_status": 200,
+      "verification": {
+        "success": true,
+        "challenge_ts": "2026-09-23T19:38:55Z",
+        "hostname": "testkey.google.com"
+      }
+    },
+    "assertion_passed": true,
+    "elapsed_seconds": 1.11
+  },
+  {
+    "provider": "turnstile",
+    "mode": "pass",
+    "browser": "153.0.8010.12",
+    "tested_at": "2026-09-23T19:38:55.887735+00:00",
+    "http_status": 200,
+    "result": {
+      "test_mode": true,
+      "provider": "turnstile",
+      "mode": "pass",
+      "token_length": 21,
+      "accepted": true,
+      "verification_called": true,
+      "provider_http_status": 200,
+      "verification": {
+        "challenge_ts": "2026-09-23T19:38:57.884Z",
+        "error-codes": [],
+        "hostname": "example.com",
+        "metadata": {
+          "result_with_testing_key": true
+        },
+        "success": true
+      }
+    },
+    "assertion_passed": true,
+    "elapsed_seconds": 2.01
+  },
+  {
+    "provider": "turnstile",
+    "mode": "reject",
+    "browser": "153.0.8010.12",
+    "tested_at": "2026-09-23T19:38:57.900123+00:00",
+    "http_status": 403,
+    "result": {
+      "test_mode": true,
+      "provider": "turnstile",
+      "mode": "reject",
+      "token_length": 21,
+      "accepted": false,
+      "verification_called": true,
+      "provider_http_status": 200,
+      "verification": {
+        "error-codes": [
+          "invalid-input-response"
+        ],
+        "success": false,
+        "messages": [],
+        "metadata": {
+          "result_with_testing_key": true
+        }
+      }
+    },
+    "assertion_passed": true,
+    "elapsed_seconds": 1.94
+  },
+  {
+    "provider": "turnstile",
+    "mode": "duplicate",
+    "browser": "153.0.8010.12",
+    "tested_at": "2026-09-23T19:38:59.838111+00:00",
+    "http_status": 403,
+    "result": {
+      "test_mode": true,
+      "provider": "turnstile",
+      "mode": "duplicate",
+      "token_length": 21,
+      "accepted": false,
+      "verification_called": true,
+      "provider_http_status": 200,
+      "verification": {
+        "error-codes": [
+          "timeout-or-duplicate"
+        ],
+        "success": false,
+        "messages": [],
+        "metadata": {
+          "result_with_testing_key": true
+        }
+      }
+    },
+    "assertion_passed": true,
+    "elapsed_seconds": 1.94
+  }
+]

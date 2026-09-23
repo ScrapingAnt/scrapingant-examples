@@ -1,0 +1,9 @@
+{
+  "started_at": "2026-09-23T18:37:38.170442+00:00",
+  "finished_at": "2026-09-23T19:36:51.922949+00:00",
+  "balance_decrease_usd": {
+    "2captcha": 1.29391,
+    "anticaptcha": 0.8728
+  },
+  "caveat": "This invocation only; concurrent account activity or refunds can affect deltas."
+}

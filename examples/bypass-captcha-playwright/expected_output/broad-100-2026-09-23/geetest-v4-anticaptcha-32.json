@@ -1,0 +1,43 @@
+{
+  "id": "geetest-v4-anticaptcha-32",
+  "case": "geetest-v4",
+  "provider": "anticaptcha",
+  "trial": 32,
+  "tested_at": "2026-09-23T18:54:20.918208+00:00",
+  "target": "https://2captcha.com/demo/geetest-v4",
+  "criterion": "demo-server-verification",
+  "outcome": "accepted",
+  "task_create_requests": 1,
+  "paid_tasks_created": 1,
+  "task_creation_uncertain": false,
+  "solution_delivered": true,
+  "server_acceptance_tested": true,
+  "server_accepted": true,
+  "provider_reported_cost_usd": "0.00180",
+  "control": false,
+  "headless": true,
+  "process_timeout_seconds": 400,
+  "configured_batch_workers": 12,
+  "configured_provider_workers": 6,
+  "package": "anticaptchaofficial",
+  "package_version": "1.0.70",
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "provider_elapsed_seconds": 16.907,
+  "solution_length": null,
+  "solution_fields": [
+    "captcha_id",
+    "captcha_output",
+    "gen_time",
+    "lot_number",
+    "pass_token"
+  ],
+  "rejection_observed": false,
+  "verification": {
+    "result": "success",
+    "status": "success"
+  },
+  "submission_status": 200,
+  "workflow_elapsed_seconds": 20.152,
+  "elapsed_seconds": 20.264
+}
