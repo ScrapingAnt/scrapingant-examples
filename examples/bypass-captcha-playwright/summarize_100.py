@@ -5,6 +5,7 @@ from math import ceil
 from pathlib import Path
 
 from summarize_broad import latency, summarize, summarize_cell
+from recover_setup import eligible_setup_failure
 
 
 def summarize_extended_cell(jobs, rows):
@@ -52,6 +53,16 @@ def summarize_100(directory):
     result['blocks_of_ten'] = [{'trial_range': [first, first + 9],
                               'cells': phase_cells(plan, rows, first, first + 9)}
                              for first in range(1, 101, 10)]
+    diagnostics = []
+    for path in sorted((directory / 'setup_diagnostics').glob('*.json')):
+        row = json.loads(path.read_text())
+        if not eligible_setup_failure(row):
+            raise ValueError('Recovery archive contains an ambiguous or provider-paid attempt')
+        diagnostics.append({**{k: row.get(k) for k in ('id', 'case', 'provider', 'trial',
+                            'tested_at', 'error_class', 'elapsed_seconds', 'task_create_requests',
+                            'paid_tasks_created')}, 'source': str(path.relative_to(directory))})
+    result['uncharged_setup_diagnostics'] = diagnostics
+    result['browser_workflow_attempts'] = len(rows) + len(diagnostics)
     result['percentile_method'] = 'Nearest rank: sorted returned-solution latencies at ceil(p*n); failures excluded and summarized separately.'
     result['comparison_scope'] = 'Initial10 and added90 are separate phases. Pooled timings mix invocation times and settings; consult per-cell concurrency metadata and the dated report. Legacy records omit concurrency fields.'
     return result
