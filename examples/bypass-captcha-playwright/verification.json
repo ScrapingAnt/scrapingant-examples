@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-09-23",
-  "source_commit": "5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc",
+  "source_commit": "68ebb2c085d008df88b397c0751842e8eed30714",
   "fresh_node_install": {
     "command": "npm ci --ignore-scripts --no-audit --no-fund",
     "exit_code": 0,
@@ -167,8 +167,14 @@
     "scope": "Five test-key fixture checks and three SDK import/preflight checks only."
   },
   "linux_ci": {
-    "conclusion": "pending",
-    "scope": "Updated source: five offline boundary tests, five test-key fixture cases, three SDK preflights; no paid jobs."
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35846632283",
+    "source_commit": "68ebb2c085d008df88b397c0751842e8eed30714",
+    "conclusion": "success",
+    "offline_boundary_tests_passed": 5,
+    "fixture_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "scope": "Default credential-free checks only. Paid observations are local and separately recorded."
   },
   "local_default_after_paid_runner": {
     "exit_code": 0,
@@ -194,6 +200,11 @@
   },
   "paid_runner_review": {
     "blocking_findings_remaining": 0,
-    "caveat": "SIGALRM is intended interruption, not a strict process deadline. External400-second subprocess timeout used and documented."
+    "caveat": "SIGALRM is intended interruption, not a strict process deadline. External400-second subprocess timeout used and documented.",
+    "resolved": [
+      "Explicit distinction between intended SIGALRM and external process deadline",
+      "Current paid task count and historical Linux scope separated",
+      "Paid trial ordering distinguished from overlapping negative control"
+    ]
   }
 }
