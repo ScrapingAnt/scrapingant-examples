@@ -60,6 +60,11 @@
       "id": "playwright-scraping-undetectable",
       "needs_api_key": false,
       "note": "Default run checks three local Python Chromium fixture adapters only; CI uses bundled Chromium. --all also needs Node dependencies, a separate Camoufox environment and its Firefox builds. Dated public detector observations are not monthly pass/fail gates."
+    },
+    {
+      "id": "bypass-captcha-playwright",
+      "needs_api_key": false,
+      "note": "Default checks use public Google/Turnstile test keys and real verification endpoints plus three SDK import/preflight checks. No paid solving, audio demo trials or ScrapingAnt request in monthly CI; production solving is not measured."
     }
   ]
 }

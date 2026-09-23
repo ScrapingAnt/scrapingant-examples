@@ -1,0 +1,47 @@
+[
+  {
+    "full_name": "Xewdy444/Playwright-reCAPTCHA",
+    "html_url": "https://github.com/Xewdy444/Playwright-reCAPTCHA",
+    "archived": false,
+    "pushed_at": "2026-09-21T08:04:25Z",
+    "default_branch": "main",
+    "head": "086d8407c0eb22a60ce50201d53e4298b90d492d",
+    "head_date": "2026-09-16T03:24:14Z"
+  },
+  {
+    "full_name": "2captcha/2captcha-python",
+    "html_url": "https://github.com/2captcha/2captcha-python",
+    "archived": false,
+    "pushed_at": "2026-08-28T09:15:18Z",
+    "default_branch": "master",
+    "head": "b49b9080fceb611a33e2da1c3d1afbc5bbd06c19",
+    "head_date": "2026-08-28T09:11:18Z"
+  },
+  {
+    "full_name": "anti-captcha/anticaptcha-python",
+    "html_url": "https://github.com/anti-captcha/anticaptcha-python",
+    "archived": false,
+    "pushed_at": "2026-06-19T12:33:17Z",
+    "default_branch": "master",
+    "head": "ffda9339c2503a5c0a75cc65eac19d94ba328aa7",
+    "head_date": "2026-06-19T12:33:02Z"
+  },
+  {
+    "full_name": "capsolver/capsolver-python",
+    "html_url": "https://github.com/capsolver/capsolver-python",
+    "archived": false,
+    "pushed_at": "2024-11-19T08:52:55Z",
+    "default_branch": "main",
+    "head": "8f2ffda36bf201346af9c3c90931372abcfffe28",
+    "head_date": "2024-11-19T08:52:55Z"
+  },
+  {
+    "full_name": "berstend/puppeteer-extra",
+    "html_url": "https://github.com/berstend/puppeteer-extra",
+    "archived": false,
+    "pushed_at": "2024-07-18T12:28:02Z",
+    "default_branch": "master",
+    "head": "39248f1f5deeb21b1e7eb6ae07b8ef73f1231ab9",
+    "head_date": "2023-03-01T12:18:55Z"
+  }
+]

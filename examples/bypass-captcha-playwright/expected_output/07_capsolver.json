@@ -1,0 +1,13 @@
+{
+  "provider": "capsolver",
+  "package": "capsolver",
+  "version": "1.0.7",
+  "import_ok": true,
+  "method": "solve",
+  "signature": "(params: dict)",
+  "credential_present": false,
+  "credential_variable": "CAPSOLVER_API_KEY",
+  "paid_tasks_created": 0,
+  "solve_outcome": "not_run",
+  "reason": "Missing funded credentials; package/interface check only."
+}

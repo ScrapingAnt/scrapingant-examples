@@ -1,0 +1,12 @@
+{
+  "os": "macOS-26.6.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "Python 3.12.11",
+  "node": "v22.20.0",
+  "browser_reported": "153.0.8010.12",
+  "headless_binary": "Playwright bundled chromium_headless_shell-1243",
+  "headed_binary": "Playwright bundled chromium-1243",
+  "personal_profiles_used": false,
+  "proxy_configured": false,
+  "tested_at": "2026-09-23"
+}

@@ -1,0 +1,18 @@
+{
+  "method": "playwright-recaptcha-audio",
+  "test_mode": false,
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "headed": false,
+  "repeat": 1,
+  "tested_at": "2026-09-23T08:47:05.721437+00:00",
+  "server_accepted": false,
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "error": "RecaptchaRateLimitError",
+  "detail": "The reCAPTCHA rate limit has been exceeded.",
+  "visible_text": "Sample Form with ReCAPTCHA\nFirst Name\nLast Name\nEmail\n\nPick your favorite color:\n\nRed\nGreen",
+  "challenge_text": [
+    "Try again later\nYour computer or network may be sending automated queries. To protect our users, we can't process your request right now. For more details visit our help page.\nVERIFY"
+  ],
+  "elapsed_seconds": 2.18
+}

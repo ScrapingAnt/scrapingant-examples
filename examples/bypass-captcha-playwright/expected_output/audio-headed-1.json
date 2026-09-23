@@ -1,0 +1,18 @@
+{
+  "method": "playwright-recaptcha-audio",
+  "test_mode": false,
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "headed": true,
+  "repeat": 1,
+  "tested_at": "2026-09-23T08:48:17.119422+00:00",
+  "server_accepted": false,
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "error": "RecaptchaSolveError",
+  "detail": "The reCAPTCHA could not be solved.",
+  "visible_text": "Sample Form with ReCAPTCHA\nFirst Name\nLast Name\nEmail\n\nPick your favorite color:\n\nRed\nGreen",
+  "challenge_text": [
+    "Multiple correct solutions required - please solve more.\nPress PLAY to listen\nPLAY\nEnter what you hear\nVERIFY"
+  ],
+  "elapsed_seconds": 4.18
+}

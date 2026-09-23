@@ -1,0 +1,17 @@
+{
+  "method": "plain-checkbox",
+  "test_mode": false,
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "headed": true,
+  "repeat": 1,
+  "tested_at": "2026-09-23T08:48:08.281935+00:00",
+  "server_accepted": false,
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "token_length": 0,
+  "visible_text": "Sample Form with ReCAPTCHA\nFirst Name\nLast Name\nEmail\n\nPick your favorite color:\n\nRed\nGreen",
+  "challenge_text": [
+    "Select all squares with\nmotorcycles\nIf there are none, click skip\n\t\n\t\n\t\n\n\n\t\n\t\n\t\n\n\n\t\n\t\n\t\n\n\n\t\n\t\n\t\nSKIP"
+  ],
+  "elapsed_seconds": 8.64
+}
