@@ -1,1 +1,17 @@
-{"outcome": "unavailable", "reason": "SCRAPINGANT_API_KEY missing"}
+{
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "browser": true,
+  "proxy_type": "datacenter",
+  "tested_at": "2026-09-23T09:10:44.027476+00:00",
+  "server_acceptance_tested": false,
+  "api_http_status": 200,
+  "target_http_status": "200",
+  "credits_cost": "10",
+  "response_bytes": 2399,
+  "raw_sha256": "3704fc6ef605763a0ebff77bc9d20abb16dd5ecad16eac170be2061ffd5af127",
+  "widget_present": true,
+  "token_length": null,
+  "success_message_present": false,
+  "outcome": "html_returned",
+  "elapsed_seconds": 5.09
+}

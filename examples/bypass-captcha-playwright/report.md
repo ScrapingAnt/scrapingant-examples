@@ -21,7 +21,7 @@ The official [CapSolver SDK](https://github.com/capsolver/capsolver-python) inst
 - Three audio-helper workflows: headless/one-attempt budget → `RecaptchaRateLimitError` in2.18s; headed/one-attempt budget → `RecaptchaSolveError` with a visible request for more solutions in4.18s; headed/default-five-attempt budget → `RecaptchaRateLimitError` in6.30s. These are elapsed workflow times, **not solve latencies**. A budget of five does not mean five challenges were completed. No solution was submitted to the demo server.
 - One Node-plugin discovery trial: one widget found, zero returned solutions, explicit missing-provider error. Its1.05s duration measures detection/error handling, not paid solving.
 - Three official paid SDKs installed/imported and had their entry-point signatures checked. Zero funded solve jobs; no account balance calls, provider prices, throughput or success rates measured.
-- ScrapingAnt key unavailable: preflight exited2 before any HTTP request. No product result may be inferred from this missing measurement.
+- One later ScrapingAnt browser/datacenter fetch: API200, target200,10 credits,2399 response bytes,5.09s. Widget markup was present; a response textarea and success message were absent. No form submission or server acceptance was tested. The original missing-key preflight is retained separately.
 
 Trials ran sequentially on one macOS host/network using fresh contexts. Ordering, shared IP reputation, headed/headless executable differences and the small sample prevent a causal or statistical ranking. We did not introduce proxy rotation, personal browser profiles, login cookies or a human solver to improve the observed result. The final headed trial checked the attempt-budget limitation; it was rate-limited, after which trials stopped.
 
@@ -33,10 +33,14 @@ Trials ran sequentially on one macOS host/network using fresh contexts. Ordering
 
 ## ScrapingAnt scope
 
-The [CAPTCHA/Cloudflare documentation](https://docs.scrapingant.com/captcha-and-cloudflare) describes browser fingerprints, regional routing and session data. That page does not supply evidence that this particular reCAPTCHA form will be automatically solved and submitted. `06_scrapingant.py` is ready to capture a bounded browser fetch once a key is available; its current result is explicitly unavailable. Automatic CAPTCHA solving remains unsupported by this experiment.
+The [CAPTCHA/Cloudflare documentation](https://docs.scrapingant.com/captcha-and-cloudflare) describes browser fingerprints, regional routing and session data. That page does not supply evidence that this particular reCAPTCHA form will be automatically solved and submitted. `06_scrapingant.py` subsequently ran locally with a key. Its captured response metadata shows a successful fetch of CAPTCHA widget markup, not an accepted protected-form workflow. No response textarea or success message was found. Automatic CAPTCHA solving remains unsupported by this experiment; a200 response must not be advertised as a solve.
 
 ## Follow-up experiment needed
 
 Use funded provider keys and an explicit small budget on the same authorized demo. For every job, record task errors, token acquisition, submission outcome, elapsed time and charged amount where exposed; store no raw key/token. Keep per-provider task counts and browser/IP/session conditions comparable. A larger sample is required before comparing reliability. Until then, retain the SDK shortlist and the observed integration/failure results without naming a paid winner.
 
 All external documentation accessed September23,2026. Exact registry versions/release timestamps and repository revisions are recorded in packages.json and repositories.json; public-source metadata is not evidence of successful solving.
+
+## Free trials
+
+See [free-trials.md](free-trials.md) for dated official offers. CapSolver advertises a trial, and Anti-Captcha advertises15 demo solves for its Chrome extension. Neither observation establishes a recurring free API quota, and no trial was redeemed here. 2Captcha explicitly says it offers no free testing period.

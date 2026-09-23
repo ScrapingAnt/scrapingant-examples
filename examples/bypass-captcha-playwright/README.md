@@ -1,6 +1,6 @@
 # CAPTCHA handling with Playwright: dated research
 
-Tested September 23, 2026. This packet compares browser integration approaches and records failures. **It does not establish a winning paid solver or a production CAPTCHA bypass rate.** Paid solver credentials and a ScrapingAnt key were unavailable in this run.
+Tested September 23, 2026. This packet compares browser integration approaches and records failures. **It does not establish a winning paid solver or a production CAPTCHA bypass rate.** Paid solver credentials were unavailable. A subsequently supplied ScrapingAnt key enabled one local API fetch.
 
 ## What was actually executed
 
@@ -13,7 +13,7 @@ Tested September 23, 2026. This packet compares browser integration approaches a
 | `2captcha-python` | 2.1.1 | Install/import, method signature, async-client presence, credential preflight | Passed interface checks; live paid solving not run |
 | `anticaptchaofficial` | 1.0.70 | Install/import, method signature, credential preflight | Passed interface checks; live paid solving not run |
 | `capsolver` | 1.0.7 | Install/import, method signature, credential preflight | Passed interface checks; live paid solving not run |
-| ScrapingAnt browser API | n/a | Credential preflight | Not requested: key unavailable; there is no captured API response |
+| ScrapingAnt browser API | n/a | One local browser/datacenter fetch of the Google demo | API200/target200;10 credits; widget markup present, response textarea absent, no success message; no form submission tested |
 
 See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. Zero paid tasks were created. A provider preflight passing does **not** mean a solve succeeded.
 
@@ -55,14 +55,16 @@ An audio/control script exits1 if no server-accepted workflow is observed, inclu
 
 `04_2captcha.py`, `05_anticaptcha.py` and `07_capsolver.py` perform preflight only. Even if their named key is present, they do not spend funds or create a solve task. Live paid comparison remains unimplemented/unmeasured in this packet; a funded trial must validate the target's submission result, not just log a token.
 
-The separate ScrapingAnt probe is prepared but has **not been exercised with a key**:
+The separate ScrapingAnt probe was exercised locally after a key became available:
 
 ```bash
 # Supply SCRAPINGANT_API_KEY through your environment or secret manager.
 ./run.sh --scrapingant
 ```
 
-Without a key it exits2 and explicitly reports unavailable. With a key it makes one browser/datacenter request to Google's official CAPTCHA demo, records only status/credit headers, response byte count/hash and widget/token-length indicators. Raw HTML, tokens and cookies are never saved. This is a fetch observation, not a form-submission test, and cannot establish automatic solving. It uses the documented query-parameter authentication; request URLs and exception messages containing them are never logged.
+Without a key it exits2 and explicitly reports unavailable (preserved as the initial capture). With a key it makes one browser/datacenter request to Google's official CAPTCHA demo, records only status/credit headers, response byte count/hash and widget/token-length indicators. Raw HTML, tokens and cookies are never saved. This is a fetch observation, not a form-submission test, and cannot establish automatic solving. It uses the documented query-parameter authentication; request URLs and exception messages containing them are never logged.
+
+See [free-trials.md](free-trials.md) for separately checked trial offers; none was redeemed during this experiment.
 
 ## Interpretation
 
