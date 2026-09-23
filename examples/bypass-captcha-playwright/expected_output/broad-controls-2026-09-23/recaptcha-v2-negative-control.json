@@ -1,0 +1,32 @@
+{
+  "id": "recaptcha-v2-negative-control",
+  "case": "recaptcha-v2",
+  "provider": "none",
+  "trial": 1,
+  "tested_at": "2026-09-23T10:45:55.467515+00:00",
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "criterion": "server-accepted-form",
+  "outcome": "rejected",
+  "task_create_requests": 0,
+  "paid_tasks_created": 0,
+  "task_creation_uncertain": false,
+  "solution_delivered": false,
+  "server_acceptance_tested": true,
+  "server_accepted": false,
+  "provider_reported_cost_usd": null,
+  "control": true,
+  "headless": true,
+  "process_timeout_seconds": 400,
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "rejection_observed": true,
+  "verification": {
+    "success": false,
+    "error-codes": []
+  },
+  "submission_status": 200,
+  "control_assertion_passed": true,
+  "workflow_elapsed_seconds": 0.959,
+  "screenshot": "screenshots/recaptcha-v2-negative-control.png",
+  "elapsed_seconds": 1.019
+}

@@ -1,8 +1,8 @@
 # CAPTCHA handling with Playwright: dated research
 
-Tested September 23, 2026. This packet compares browser integration approaches and records failures. **It does not establish a winning paid solver or a production CAPTCHA bypass rate.** Funded keys subsequently enabled two Google-demo submissions each through 2Captcha and Anti-Captcha; all four were accepted. CapSolver remains unavailable without a key. A separate ScrapingAnt key enabled one local API fetch.
+Tested September 23, 2026. The latest [six-case comparison](broad-report.md) contains **120 new paid tasks**, ten per provider/case, through 2Captcha and Anti-Captcha. It separates verified server acceptance, synthetic image recognition and unverified Turnstile token delivery. The earlier four paid Google-demo tasks and browser-library experiments remain below as a separate cohort. CapSolver remains unavailable without a key. **Public-demo observations do not establish a production bypass rate or an overall winning provider.**
 
-## What was actually executed
+## Earlier library comparison and four-task cohort
 
 | Approach | Version | Execution scope | Result |
 |---|---|---|---|
@@ -15,7 +15,7 @@ Tested September 23, 2026. This packet compares browser integration approaches a
 | `capsolver` | 1.0.7 | Install/import, method signature, credential preflight | Passed interface checks; live API unavailable without a key |
 | ScrapingAnt browser API | n/a | One local browser/datacenter fetch of the Google demo | API200/target200;10 credits; widget markup present, response textarea absent, no success message; no form submission tested |
 
-See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. Four paid tasks were created in total. The initial SDK preflight captures are retained as historical checks. A preflight passing does **not** mean a solve succeeded. See [paid-comparison.json](paid-comparison.json) for the later funded observations.
+See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. This initial cohort created four paid tasks; the later six-case cohort adds120, for124 across both experiments. The initial SDK preflight captures are retained as historical checks. A preflight passing does **not** mean a solve succeeded. See [paid-comparison.json](paid-comparison.json) for the later funded observations.
 
 ## Reproduce the credential-free checks
 
@@ -32,7 +32,7 @@ npm ci
 
 On Linux, use `python -m playwright install --with-deps chromium` to install browser system dependencies. Windows has not been tested; the live audio and paid runners use POSIX `SIGALRM`.
 
-Default `run.sh` runs five offline spending/privacy assertions, checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
+Default `run.sh` runs16 offline spending/privacy/evidence assertions, checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
 
 A failed fixture request is not a production-solver result. The forced Turnstile duplicate test uses the documented dummy secret, not a replay of a real production token. The Google test secret is deliberately permissive; missing tokens are rejected locally before Siteverify.
 
@@ -51,7 +51,7 @@ node 03_extra_recaptcha.cjs
 
 An audio/control script exits1 if no server-accepted workflow is observed, including when an image challenge remains. The plugin script exits0 only if it detects one widget and reports the expected missing-provider error; this is an integration assertion, not a solving success. The audio experiment has a90-second total deadline,15-second Playwright action timeout and an explicit attempt budget. Stop if the service rate-limits the browser; do not loop these scripts to obtain a favorable result. The dated sequence includes one later headed trial to check whether the initial one-attempt limit explained its incomplete result; that final trial was rate-limited, and testing stopped.
 
-## Opt-in funded comparison
+## Initial four-task funded comparison
 
 `04_2captcha.py` and `05_anticaptcha.py` perform preflight by default, even with a key present. Only explicit `--live` creates a task, with at most one creation request per invocation and no automatic task retry. `07_capsolver.py` remains preflight-only because no CapSolver key was available.
 
@@ -94,3 +94,9 @@ See [free-trials.md](free-trials.md) for separately checked trial offers; none w
 Use provider test keys for your own application's automated tests. Both official Python service clients completed the measured demo flow. 2Captcha also exposes an async client, but these trials exercised its synchronous client; no async behavior or throughput is claimed. Keep both as integration candidates without naming a winner. The Node plugin provides useful detection/provider plumbing but still needs a funded provider. Treat the free audio helper as an experiment with observed failures. CapSolver's older Python SDK deserves an explicit compatibility/timeout check against its current API before adoption. These are engineering choices, not measured accuracy or price rankings.
 
 No raw solution tokens, account keys, account balances, cookies, private-repository references or user profile paths are intentionally included. Public provider test keys and demo sitekeys are not credentials.
+
+## Expanded paid matrix
+
+See [broad-report.md](broad-report.md) for the six fixture definitions, measured counts, latency ranges, costs, negative controls, replay observations and reproduction commands. [broad-comparison.json](broad-comparison.json) is generated from the dated per-trial JSON files by `summarize_broad.py`.
+
+`python broad_matrix.py` prints a plan without network calls. Explicit `--live --rounds 10` permits at most120 tasks in one output directory; first use `--rounds 1` for a12-task pilot, then resume in the same directory. Existing records are never automatically repeated, including failures. Use one batch controller per output directory. Each paid child has a400-second external deadline; POSIX/macOS and Linux are the supported environments. Paid matrix runs are excluded from default and recurring CI.

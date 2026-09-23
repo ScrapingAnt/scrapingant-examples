@@ -1,0 +1,593 @@
+{
+  "scope": "Six-case cohort only; earlier four paid tasks excluded.",
+  "planned": 120,
+  "records": 120,
+  "tasks_created": 120,
+  "uncertain_task_creations": 0,
+  "unfinished": [],
+  "started_at": "2026-09-23T10:46:31.391471+00:00",
+  "cells": [
+    {
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 30.751,
+        "min": 0.284,
+        "max": 61.327
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 31.681,
+        "min": 1.174,
+        "max": 62.224
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02990"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 26.099,
+        "min": 16.829,
+        "max": 125.889
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 27.637,
+        "min": 17.655,
+        "max": 126.841
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02000"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 10.495,
+        "min": 0.257,
+        "max": 61.213
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 11.773,
+        "min": 1.563,
+        "max": 62.987
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02990"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 32.474,
+        "min": 10.925,
+        "max": 196.552
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 33.989,
+        "min": 12.16,
+        "max": 198.461
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02000"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 20.576,
+        "min": 10.436,
+        "max": 20.695
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 21.544,
+        "min": 11.448,
+        "max": 22.764
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02990"
+      },
+      "v3_scores": [
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9
+      ],
+      "provider_errors": {},
+      "replay_results": [
+        {
+          "trial": 1,
+          "server_acceptance_tested": true,
+          "server_accepted": true,
+          "rejection_observed": false,
+          "verification": {
+            "success": true,
+            "score": 0.9,
+            "action": "examples/v3scores",
+            "hostname": "recaptcha-demo.appspot.com",
+            "error-codes": []
+          },
+          "submission_status": 200
+        }
+      ]
+    },
+    {
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 16.831,
+        "min": 10.678,
+        "max": 16.895
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 17.843,
+        "min": 11.664,
+        "max": 18.359
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.01500"
+      },
+      "v3_scores": [
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9
+      ],
+      "provider_errors": {},
+      "replay_results": [
+        {
+          "trial": 1,
+          "server_acceptance_tested": true,
+          "server_accepted": true,
+          "rejection_observed": false,
+          "verification": {
+            "success": true,
+            "score": 0.9,
+            "action": "examples/v3scores",
+            "hostname": "recaptcha-demo.appspot.com",
+            "error-codes": []
+          },
+          "submission_status": 200
+        }
+      ]
+    },
+    {
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 10,
+      "server_accepted": 10,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 15.541,
+        "min": 10.403,
+        "max": 40.949
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 17.889,
+        "min": 12.722,
+        "max": 43.259
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02990"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": [
+        {
+          "trial": 1,
+          "server_acceptance_tested": true,
+          "server_accepted": false,
+          "rejection_observed": true,
+          "verification": {
+            "result": "fail",
+            "status": "success"
+          },
+          "submission_status": 200
+        }
+      ]
+    },
+    {
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "accepted": 5,
+        "error": 5
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 5,
+      "server_verifications": 5,
+      "server_accepted": 5,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 5,
+        "median": 23.024,
+        "min": 16.86,
+        "max": 47.716
+      },
+      "completed_workflow_seconds": {
+        "n": 5,
+        "median": 25.352,
+        "min": 19.132,
+        "max": 55.943
+      },
+      "reported_cost": {
+        "coverage": 5,
+        "total_usd": "0.00900"
+      },
+      "v3_scores": [],
+      "provider_errors": {
+        "ERROR_TOKEN_EXPIRED": 5
+      },
+      "replay_results": [
+        {
+          "trial": 1,
+          "server_acceptance_tested": true,
+          "server_accepted": false,
+          "rejection_observed": true,
+          "verification": {
+            "result": "fail",
+            "status": "success"
+          },
+          "submission_status": 200
+        }
+      ]
+    },
+    {
+      "case": "turnstile",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "token_delivered_unverified": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 0,
+      "server_accepted": 0,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 10,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 10.463,
+        "min": 10.417,
+        "max": 20.722
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 11.101,
+        "min": 10.903,
+        "max": 21.167
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.01450"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "token_delivered_unverified": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 0,
+      "server_accepted": 0,
+      "server_rejected": 0,
+      "ocr_correct": 0,
+      "ocr_wrong": 0,
+      "token_only_observations": 10,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 13.783,
+        "min": 10.688,
+        "max": 23.001
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 14.319,
+        "min": 11.191,
+        "max": 23.49
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.02000"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "image-text",
+      "provider": "2captcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "correct_text": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 0,
+      "server_accepted": 0,
+      "server_rejected": 0,
+      "ocr_correct": 10,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 10.495,
+        "min": 10.424,
+        "max": 10.579
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 10.812,
+        "min": 10.729,
+        "max": 11.029
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.010"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    },
+    {
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "planned": 10,
+      "records": 10,
+      "missing_records": 0,
+      "outcomes": {
+        "correct_text": 10
+      },
+      "execution_outcomes": {},
+      "task_create_requests": 10,
+      "tasks_created": 10,
+      "uncertain_task_creations": 0,
+      "solutions_delivered": 10,
+      "server_verifications": 0,
+      "server_accepted": 0,
+      "server_rejected": 0,
+      "ocr_correct": 10,
+      "ocr_wrong": 0,
+      "token_only_observations": 0,
+      "solution_latency_seconds": {
+        "n": 10,
+        "median": 7.838,
+        "min": 7.701,
+        "max": 14.051
+      },
+      "completed_workflow_seconds": {
+        "n": 10,
+        "median": 8.138,
+        "min": 8.001,
+        "max": 14.324
+      },
+      "reported_cost": {
+        "coverage": 10,
+        "total_usd": "0.00600"
+      },
+      "v3_scores": [],
+      "provider_errors": {},
+      "replay_results": []
+    }
+  ],
+  "spending_observations": [
+    {
+      "started_at": "2026-09-23T10:46:31.256383+00:00",
+      "finished_at": "2026-09-23T10:47:59.331426+00:00",
+      "balance_decrease_usd": {
+        "2captcha": 0.01441,
+        "anticaptcha": 0.0079
+      },
+      "caveat": "This invocation only; concurrent account activity or refunds can affect deltas."
+    },
+    {
+      "started_at": "2026-09-23T10:50:33.664930+00:00",
+      "finished_at": "2026-09-23T11:06:50.723677+00:00",
+      "balance_decrease_usd": {
+        "2captcha": 0.12969,
+        "anticaptcha": 0.0801
+      },
+      "caveat": "This invocation only; concurrent account activity or refunds can affect deltas."
+    }
+  ],
+  "latency_scope": "SDK call wall time for returned solutions, including creation and polling; failures excluded and counted separately.",
+  "workflow_scope": "Completed browser workflows; first v3/GeeTest trial also includes optional immediate replay.",
+  "cost_scope": "Provider-reported task costs with explicit receipt coverage; balances/deltas are separate observations."
+}

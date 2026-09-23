@@ -1,0 +1,764 @@
+{
+  "planned_tasks": 120,
+  "rounds": 10,
+  "max_concurrency": 4,
+  "max_concurrency_per_provider": 2,
+  "cases": {
+    "recaptcha-v2": {
+      "url": "https://www.google.com/recaptcha/api2/demo",
+      "sitekey": "6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-",
+      "criterion": "server-accepted-form"
+    },
+    "recaptcha-invisible": {
+      "url": "https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php",
+      "sitekey": "6LcmDCcUAAAAAL5QmnMvDFnfPTP4iCUYRk2MwC0-",
+      "criterion": "server-accepted-form"
+    },
+    "recaptcha-v3": {
+      "url": "https://recaptcha-demo.appspot.com/recaptcha-v3-request-scores.php",
+      "sitekey": "6LdKlZEpAAAAAAOQjzC2v_d36tWxCl6dWsozdSy9",
+      "action": "examples/v3scores",
+      "min_score": 0.5,
+      "criterion": "server-valid-token-action-hostname-score-at-least-0.5"
+    },
+    "geetest-v4": {
+      "url": "https://2captcha.com/demo/geetest-v4",
+      "sitekey": "e392e1d7fd421dc63325744d5a2b9c73",
+      "criterion": "demo-server-verification"
+    },
+    "turnstile": {
+      "url": "https://peet.ws/turnstile-test/non-interactive.html",
+      "sitekey": "0x4AAAAAAABS7vwvV6VFfMcD",
+      "criterion": "token-delivery-only-no-server-verifier"
+    },
+    "image-text": {
+      "url": null,
+      "criterion": "case-insensitive-exact-ground-truth"
+    }
+  },
+  "jobs": [
+    {
+      "id": "geetest-v4-2captcha-01",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "geetest-v4-anticaptcha-01",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-v2-2captcha-01",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-01",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "turnstile-2captcha-01",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "turnstile-anticaptcha-01",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "image-text-2captcha-01",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "image-text-anticaptcha-01",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-01",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-01",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-v3-2captcha-01",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 1
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-01",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 1
+    },
+    {
+      "id": "turnstile-anticaptcha-02",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "turnstile-2captcha-02",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-02",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-v3-2captcha-02",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-02",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-v2-2captcha-02",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-02",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-02",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "image-text-anticaptcha-02",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "image-text-2captcha-02",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "geetest-v4-anticaptcha-02",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 2
+    },
+    {
+      "id": "geetest-v4-2captcha-02",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 2
+    },
+    {
+      "id": "recaptcha-v3-2captcha-03",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-03",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "geetest-v4-2captcha-03",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "geetest-v4-anticaptcha-03",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "image-text-2captcha-03",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "image-text-anticaptcha-03",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "recaptcha-v2-2captcha-03",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-03",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-03",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-03",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "turnstile-2captcha-03",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 3
+    },
+    {
+      "id": "turnstile-anticaptcha-03",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 3
+    },
+    {
+      "id": "turnstile-anticaptcha-04",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "turnstile-2captcha-04",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "geetest-v4-anticaptcha-04",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "geetest-v4-2captcha-04",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "image-text-anticaptcha-04",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "image-text-2captcha-04",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-04",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-04",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-04",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-v3-2captcha-04",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-04",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 4
+    },
+    {
+      "id": "recaptcha-v2-2captcha-04",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 4
+    },
+    {
+      "id": "turnstile-2captcha-05",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "turnstile-anticaptcha-05",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "geetest-v4-2captcha-05",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "geetest-v4-anticaptcha-05",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "image-text-2captcha-05",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "image-text-anticaptcha-05",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-05",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-05",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-v2-2captcha-05",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-05",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-v3-2captcha-05",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-05",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 5
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-06",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-06",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-06",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "recaptcha-v2-2captcha-06",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "image-text-anticaptcha-06",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "image-text-2captcha-06",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "geetest-v4-anticaptcha-06",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "geetest-v4-2captcha-06",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-06",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "recaptcha-v3-2captcha-06",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "turnstile-anticaptcha-06",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 6
+    },
+    {
+      "id": "turnstile-2captcha-06",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 6
+    },
+    {
+      "id": "geetest-v4-2captcha-07",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "geetest-v4-anticaptcha-07",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "turnstile-2captcha-07",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "turnstile-anticaptcha-07",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-07",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-07",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-v2-2captcha-07",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-07",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-v3-2captcha-07",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-07",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "image-text-2captcha-07",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 7
+    },
+    {
+      "id": "image-text-anticaptcha-07",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 7
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-08",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-08",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "geetest-v4-anticaptcha-08",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "geetest-v4-2captcha-08",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "turnstile-anticaptcha-08",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "turnstile-2captcha-08",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-08",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-v3-2captcha-08",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-08",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-v2-2captcha-08",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "image-text-anticaptcha-08",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 8
+    },
+    {
+      "id": "image-text-2captcha-08",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 8
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-09",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-09",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-v2-2captcha-09",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-09",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-v3-2captcha-09",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-09",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "turnstile-2captcha-09",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "turnstile-anticaptcha-09",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "geetest-v4-2captcha-09",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "geetest-v4-anticaptcha-09",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "image-text-2captcha-09",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 9
+    },
+    {
+      "id": "image-text-anticaptcha-09",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 9
+    },
+    {
+      "id": "recaptcha-v2-anticaptcha-10",
+      "case": "recaptcha-v2",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "recaptcha-v2-2captcha-10",
+      "case": "recaptcha-v2",
+      "provider": "2captcha",
+      "trial": 10
+    },
+    {
+      "id": "image-text-anticaptcha-10",
+      "case": "image-text",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "image-text-2captcha-10",
+      "case": "image-text",
+      "provider": "2captcha",
+      "trial": 10
+    },
+    {
+      "id": "recaptcha-v3-anticaptcha-10",
+      "case": "recaptcha-v3",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "recaptcha-v3-2captcha-10",
+      "case": "recaptcha-v3",
+      "provider": "2captcha",
+      "trial": 10
+    },
+    {
+      "id": "turnstile-anticaptcha-10",
+      "case": "turnstile",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "turnstile-2captcha-10",
+      "case": "turnstile",
+      "provider": "2captcha",
+      "trial": 10
+    },
+    {
+      "id": "recaptcha-invisible-anticaptcha-10",
+      "case": "recaptcha-invisible",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "recaptcha-invisible-2captcha-10",
+      "case": "recaptcha-invisible",
+      "provider": "2captcha",
+      "trial": 10
+    },
+    {
+      "id": "geetest-v4-anticaptcha-10",
+      "case": "geetest-v4",
+      "provider": "anticaptcha",
+      "trial": 10
+    },
+    {
+      "id": "geetest-v4-2captcha-10",
+      "case": "geetest-v4",
+      "provider": "2captcha",
+      "trial": 10
+    }
+  ],
+  "task_creation_retries": 0,
+  "process_timeout_seconds": 400,
+  "created_at": "2026-09-23T10:50:33.664930+00:00"
+}

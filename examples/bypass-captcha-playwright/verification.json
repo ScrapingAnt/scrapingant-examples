@@ -24,7 +24,7 @@
     "stage": "npm ci",
     "cause": "Generated lockfile contained temporary absolute/symlink paths; regenerated from package directory before successful rerun."
   },
-  "paid_tasks_created": 4,
+  "paid_tasks_created": 124,
   "scrapingant_requests_made": 1,
   "local_scrapingant_probe": {
     "exit_code": 0,
@@ -206,5 +206,34 @@
       "Current paid task count and historical Linux scope separated",
       "Paid trial ordering distinguished from overlapping negative control"
     ]
+  },
+  "local_broad_comparison": {
+    "output": "broad-comparison.json",
+    "tasks_created": 120,
+    "planned_tasks": 120,
+    "initial_four_tasks_excluded": true,
+    "negative_control_assertions_passed": 5,
+    "turnstile_no_server_verifier": true,
+    "credentials_or_raw_solutions_published": false,
+    "external_child_timeout_seconds": 400,
+    "task_creation_retries": 0,
+    "prepilot_control_fixes": [
+      "Fill both invisible-v2 response fields",
+      "Use well-formed GeeTest gen_time before checking solution rejection"
+    ],
+    "artifact_redaction": "Invisible-v2 screenshots and their file references omitted after visual mask-overflow finding; outcomes unchanged."
+  },
+  "local_default_after_broad_runner": {
+    "exit_code": 0,
+    "offline_tests_passed": 16,
+    "test_key_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "isolated_copy_matches_executable_sources": true
+  },
+  "broad_summary_reproduction": {
+    "byte_identical": true,
+    "command": "python summarize_broad.py --output run_output/rebuilt.json",
+    "fixture_hashes_verified": 10
   }
 }

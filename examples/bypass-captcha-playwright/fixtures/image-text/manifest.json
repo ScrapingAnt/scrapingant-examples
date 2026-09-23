@@ -1,0 +1,67 @@
+{
+  "scope": "Synthetic OCR fixtures; case-insensitive exact answer",
+  "seed": 20260923,
+  "renderer": "Playwright Chromium 153.0.8010.12",
+  "images": [
+    {
+      "trial": 1,
+      "file": "01.png",
+      "answer": "YRUZR4",
+      "sha256": "48d0f6ae4dcc1fb73d66546d145039dc3b0f9fde20e34fc63fefdd0fa21e14ec"
+    },
+    {
+      "trial": 2,
+      "file": "02.png",
+      "answer": "KSGVXD",
+      "sha256": "e724ed5e6e965366a782279e0d3feb78b7e62602e9036e1d4781e3db5482d5f1"
+    },
+    {
+      "trial": 3,
+      "file": "03.png",
+      "answer": "BUUPA8",
+      "sha256": "143567575e4eb7db9deaaa920af5e344658a5b89e68efb6cea51edeface1d416"
+    },
+    {
+      "trial": 4,
+      "file": "04.png",
+      "answer": "SP8YCY",
+      "sha256": "d7204e6e8b1f78d8a4da12de332a71c07f762e848c2214a2158e80ffb84d6243"
+    },
+    {
+      "trial": 5,
+      "file": "05.png",
+      "answer": "UQKYER",
+      "sha256": "5f740c53fb72d57a8f857f1447a84f1cc8922078887a85978e283f051b54e912"
+    },
+    {
+      "trial": 6,
+      "file": "06.png",
+      "answer": "5XXAQJ",
+      "sha256": "cc3ba219a1bdad5f755310804d0b96e84cb04f7c5d175bb0c1ba4614b15df82d"
+    },
+    {
+      "trial": 7,
+      "file": "07.png",
+      "answer": "U2JLV3",
+      "sha256": "c7bb611d89bf07ce997e4479bd96952c01841ad45d58e2b562e2086ac8b8fe21"
+    },
+    {
+      "trial": 8,
+      "file": "08.png",
+      "answer": "4ZLKP7",
+      "sha256": "3947963d0565d1bf3116495bfedcab90aad82c8b74a819d5c6874a35371e71ca"
+    },
+    {
+      "trial": 9,
+      "file": "09.png",
+      "answer": "EXRTUE",
+      "sha256": "580fe72772e01a0713f7ed943831f6e9be624bd5f1045a92383fb648aebe5417"
+    },
+    {
+      "trial": 10,
+      "file": "10.png",
+      "answer": "UJGN9T",
+      "sha256": "3eea1e73c5dfeff68381e8c4423d923e731163bff53f0142ecc36bbc1cd8dcf2"
+    }
+  ]
+}
