@@ -1,0 +1,122 @@
+article_id: bypass-captcha-playwright
+canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
+owner: Oleg Kulyk
+examples_repo_commit: ed21458bfd79651b1c320671b3055e5dfafd61b6
+commit_scope: Source snapshot for reproduction; no claim that unexecuted credentialed
+  paths have passed. Default checks rerun on this implementation before publication.
+tested_at: '2026-09-23'
+status: partial-research-missing-credentials
+requires_api_key: true
+default_checks_require_api_key: false
+environment:
+  os: macOS-26.6.2-arm64-arm-64bit
+  architecture: arm64
+  python: Python 3.12.11
+  node: v22.20.0
+  browser_reported: 153.0.8010.12
+  headless_binary: Playwright bundled chromium_headless_shell-1243
+  headed_binary: Playwright bundled chromium-1243
+  personal_profiles_used: false
+  proxy_configured: false
+  tested_at: '2026-09-23'
+dependencies:
+  playwright: 1.63.0
+  playwright-recaptcha: 0.5.1
+  2captcha-python: 2.1.1
+  anticaptchaofficial: 1.0.70
+  capsolver: 1.0.7
+  playwright-extra: 4.3.6
+  puppeteer-extra-plugin-recaptcha: 3.6.8
+run_command: ./run.sh
+fixtures:
+- fixture_server.py
+outputs:
+- expected_output/01_test_keys.initial.json
+- expected_output/01_test_keys.json
+- expected_output/03_extra_recaptcha.json
+- expected_output/04_2captcha.json
+- expected_output/05_anticaptcha.json
+- expected_output/06_scrapingant.json
+- expected_output/07_capsolver.json
+- expected_output/audio-headed-1.json
+- expected_output/audio-headed-default-budget.json
+- expected_output/audio-headless-1.json
+- expected_output/baseline-headed-1.json
+- expected_output/baseline-headless-1.json
+- expected_output/ffmpeg-version.txt
+- expected_output/node-version.txt
+measurements:
+- name: Expected test-key fixture results
+  value: 5
+  denominator: 5
+  unit: fixture cases
+  source: expected_output/01_test_keys.json
+- name: Plain checkbox demo controls producing tokens
+  value: 0
+  denominator: 2
+  unit: fresh browser visits
+  source:
+  - expected_output/baseline-headless-1.json
+  - expected_output/baseline-headed-1.json
+- name: Audio workflows reaching accepted submission
+  value: 0
+  denominator: 3
+  unit: workflows with unequal explicit attempt budgets; not success probability
+  source:
+  - expected_output/audio-headless-1.json
+  - expected_output/audio-headed-1.json
+  - expected_output/audio-headed-default-budget.json
+- name: Plugin widgets found
+  value: 1
+  denominator: 1
+  unit: demo page
+  source: expected_output/03_extra_recaptcha.json
+- name: Funded solver tasks created
+  value: 0
+  denominator: 0
+  unit: tasks; not attempted
+  source: provider_preflight.py
+limitations:
+- Test keys intentionally bypass real challenge uncertainty; successes establish application
+  integration only.
+- Three SDKs were installed/imported but not exercised with funded credentials. No
+  paid service comparison, accuracy, cost or latency measured.
+- SCRAPINGANT_API_KEY unavailable; probe exited2 before HTTP; no product API response
+  exists. Credentialed probe code is prepared, not validated.
+- Three audio trials use different attempt budgets. Fresh browser contexts share one
+  host/IP and sequential ordering; no causal headed/headless claim. Headless shell
+  differs from headed Chromium.
+- No production-demo token was submitted. Rate limits and solve errors are preserved,
+  not counted as successes.
+- Python audio library uses external Google speech recognition and needs FFmpeg; not
+  a purely local solution.
+- 'Default CI scope: provider test-key integration and SDK interface/preflight only.
+  No live demo, audio, paid service or product API run.'
+- No claim that browser stealth implies CAPTCHA solving.
+- Dated historical screenshots/results remain illustrative observations; external
+  widgets may change.
+claims:
+- id: C1
+  text: The five test-key paths produced their expected acceptance/rejection state
+    and exact error codes.
+  type: measured
+  source: expected_output/01_test_keys.json
+- id: C2
+  text: Three bounded audio workflows produced no accepted demo submission, with rate-limit
+    or solve errors.
+  type: measured
+  source: expected_output/audio-headed-default-budget.json; expected_output/audio-headed-1.json;
+    expected_output/audio-headless-1.json
+- id: C3
+  text: The Node plugin found one demo widget but required a provider; zero solutions.
+  type: measured
+  source: expected_output/03_extra_recaptcha.json
+- id: C4
+  text: Official SDK packages import; live paid paths are unavailable and unmeasured.
+  type: measured
+  source: expected_output/04_2captcha.json; expected_output/05_anticaptcha.json; expected_output/07_capsolver.json
+- id: C5
+  text: Provider test keys produce controlled outcomes, not production bypass evidence.
+  type: documented
+  source: https://developers.cloudflare.com/turnstile/troubleshooting/testing/; https://developers.google.com/recaptcha/docs/faq
+  accessed_at: '2026-09-23'
