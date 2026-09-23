@@ -2,11 +2,10 @@ article_id: bypass-captcha-playwright
 canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
 owner: Oleg Kulyk
 examples_repo_commit: 68ebb2c085d008df88b397c0751842e8eed30714
-commit_scope: Runnable implementation snapshot. Default checks passed locally and
-  on Linux. Four funded demo workflows and the public-demo rejection control were
-  exercised locally; subsequent commits update metadata/docs only.
+commit_scope: Earlier implementation SHA retained until the broader implementation is committed and
+  verified; see broad-comparison.json for the new local cohort.
 tested_at: '2026-09-23'
-status: research-two-paid-providers-tested-capsolver-unavailable
+status: research-six-case-120-task-comparison-capsolver-unavailable
 requires_api_key: true
 default_checks_require_api_key: false
 environment:
@@ -31,6 +30,7 @@ dependencies:
 run_command: ./run.sh
 fixtures:
 - fixture_server.py
+- fixtures/image-text/manifest.json
 outputs:
 - expected_output/01_test_keys.initial.json
 - expected_output/01_test_keys.json
@@ -54,6 +54,9 @@ outputs:
 - expected_output/08_demo_rejection.json
 - expected_output/08_demo_rejection.initial-assertion.json
 - paid-comparison.json
+- broad-comparison.json
+- expected_output/broad-2026-09-23/
+- expected_output/broad-controls-2026-09-23/
 measurements:
 - name: Expected test-key fixture results
   value: 5
@@ -80,7 +83,7 @@ measurements:
   denominator: 1
   unit: demo page
   source: expected_output/03_extra_recaptcha.json
-- name: Funded solver tasks created
+- name: Initial funded solver tasks created (separate cohort)
   value: 4
   denominator: 4
   unit: one-task invocations; two per provider
@@ -109,43 +112,119 @@ measurements:
   denominator: 1
   unit: final control assertion; earlier wrong-message assertion retained separately
   source: expected_output/08_demo_rejection.json
+- name: 2captcha / recaptcha-v2 / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / recaptcha-v2 / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: 2captcha / recaptcha-invisible / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / recaptcha-invisible / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: 2captcha / recaptcha-v3 / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / recaptcha-v3 / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: 2captcha / geetest-v4 / server_accepted
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / geetest-v4 / server_accepted
+  value: 5
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: 2captcha / turnstile / token_only_observations
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / turnstile / token_only_observations
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: 2captcha / image-text / ocr_correct
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: anticaptcha / image-text / ocr_correct
+  value: 10
+  denominator: 10
+  unit: new paid tasks in the broad cohort; criterion-specific observations
+  source: broad-comparison.json
+- name: Broad cohort tasks created
+  value: 120
+  denominator: 120
+  unit: six cases x two providers x ten trials; initial four tasks excluded
+  source: broad-comparison.json
 limitations:
-- Test keys intentionally bypass real challenge uncertainty; successes establish application
-  integration only.
-- One ScrapingAnt browser/datacenter fetch returned the demo widget markup; no response
-  textarea or success message was found. No form submission or server acceptance was
-  tested; this is not CAPTCHA solving evidence.
-- Three audio trials use different attempt budgets. Fresh browser contexts share one
-  host/IP and sequential ordering; no causal headed/headless claim. Headless shell
-  differs from headed Chromium.
-- Python audio library uses external Google speech recognition and needs FFmpeg; not
-  a purely local solution.
-- 'Default CI scope: offline spending/privacy assertions, provider test-key integration
-  and SDK interface/preflight only. No live demo, audio, paid service or product API
-  run.'
+- Test keys intentionally bypass real challenge uncertainty; successes establish application integration
+  only.
+- One ScrapingAnt browser/datacenter fetch returned the demo widget markup; no response textarea
+  or success message was found. No form submission or server acceptance was tested; this is not CAPTCHA
+  solving evidence.
+- Three audio trials use different attempt budgets. Fresh browser contexts share one host/IP and
+  sequential ordering; no causal headed/headless claim. Headless shell differs from headed Chromium.
+- Python audio library uses external Google speech recognition and needs FFmpeg; not a purely local
+  solution.
+- 'Default CI scope: offline spending/privacy assertions, provider test-key integration and SDK interface/preflight
+  only. No live demo, audio, paid service or product API run.'
 - No claim that browser stealth implies CAPTCHA solving.
-- Dated historical screenshots/results remain illustrative observations; external
-  widgets may change.
-- Two trials per provider on one public demo; no reliability, speed or price ranking.
-- Proxyless providers use their own solver infrastructure/IPs; only the submitting
-  browser host is shared.
+- Dated historical screenshots/results remain illustrative observations; external widgets may change.
+- 'Initial four-task cohort only: Two trials per provider on one public demo; no reliability, speed
+  or price ranking.'
+- Proxyless providers use their own solver infrastructure/IPs; only the submitting browser host is
+  shared.
 - Synchronous SDK entry points tested; no async throughput measurement.
-- SIGALRM is an intended interruption; the separate process timeout bounded local
-  execution.
-- 2Captcha task charges were not exposed in the captured SDK response; no total combined
-  cost inferred.
+- SIGALRM is an intended interruption; the separate process timeout bounded local execution.
+- 'Initial four-task cohort only: 2Captcha task charges were not exposed in the captured SDK response;
+  no total combined cost inferred.'
 - CapSolver installed/imported but remains unavailable without a key.
-- The initial public-demo rejection assertion checked the wrong message; corrected
-  to observed wording and rerun successfully. Both captures are retained.
+- The initial public-demo rejection assertion checked the wrong message; corrected to observed wording
+  and rerun successfully. Both captures are retained.
+- Broad matrix has ten trials per provider/case on one host/network; up to four concurrent child
+  processes, at most two per provider. SDK polling differs. No causal speed or population reliability
+  ranking.
+- 'Turnstile broad observations measure token delivery only: the selected fixture has no server verifier.'
+- Image-text trials use ten simple synthetic OCR images, not a representative production CAPTCHA
+  dataset.
+- GeeTest verification is hosted by one compared provider. v3/GeeTest use demo verification endpoints
+  rather than a full form flow.
+- Immediate v3 token replays were accepted by the demo; cause unestablished. Do not infer production
+  replay resistance. GeeTest rejected both replay probes.
+- Provider errors are retained without replacement; missing cost receipts remain unknown. Balance
+  deltas may include other account activity or refunds.
+- Invisible-v2 screenshots were excluded because token text overflowed the mask. Structured outcomes
+  are retained; future runner captures omit these screenshots.
 claims:
 - id: C1
-  text: The five test-key paths produced their expected acceptance/rejection state
-    and exact error codes.
+  text: The five test-key paths produced their expected acceptance/rejection state and exact error
+    codes.
   type: measured
   source: expected_output/01_test_keys.json
 - id: C2
-  text: Three bounded audio workflows produced no accepted demo submission, with rate-limit
-    or solve errors.
+  text: Three bounded audio workflows produced no accepted demo submission, with rate-limit or solve
+    errors.
   type: measured
   source: expected_output/audio-headed-default-budget.json; expected_output/audio-headed-1.json;
     expected_output/audio-headless-1.json
@@ -154,8 +233,8 @@ claims:
   type: measured
   source: expected_output/03_extra_recaptcha.json
 - id: C4
-  text: Official SDK packages import; these initial preflight captures were followed
-    by paid 2Captcha and Anti-Captcha trials. CapSolver remains unavailable.
+  text: Official SDK packages import; these initial preflight captures were followed by paid 2Captcha
+    and Anti-Captcha trials. CapSolver remains unavailable.
   type: measured
   source: expected_output/04_2captcha.json; expected_output/05_anticaptcha.json; expected_output/07_capsolver.json
 - id: C5
@@ -164,19 +243,78 @@ claims:
   source: https://developers.cloudflare.com/turnstile/troubleshooting/testing/; https://developers.google.com/recaptcha/docs/faq
   accessed_at: '2026-09-23'
 - id: C6
-  text: One browser/datacenter fetch returned API200 and target200, cost10 credits,
-    and contained widget markup but no response textarea or success message. No protected-form
-    submission was attempted.
+  text: One browser/datacenter fetch returned API200 and target200, cost10 credits, and contained
+    widget markup but no response textarea or success message. No protected-form submission was attempted.
   type: measured
   source: expected_output/06_scrapingant.json
 - id: C7
-  text: Two tasks per funded provider returned tokens, and all four Google-demo form
-    submissions were accepted. No reliability ranking follows from this sample.
+  text: Two tasks per funded provider returned tokens, and all four Google-demo form submissions
+    were accepted. No reliability ranking follows from this sample.
   type: measured
   source: paid-comparison.json
 - id: C8
-  text: The deliberately invalid-token control returned HTTP200 but a rejection message,
-    with no success message.
+  text: The deliberately invalid-token control returned HTTP200 but a rejection message, with no
+    success message.
   type: measured
   source: expected_output/08_demo_rejection.json
+- id: C9
+  type: measured
+  text: In the broader cohort, 2captcha / recaptcha-v2 recorded 10 server_accepted observations from
+    10 paid tasks.
+  source: broad-comparison.json
+- id: C10
+  type: measured
+  text: In the broader cohort, anticaptcha / recaptcha-v2 recorded 10 server_accepted observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C11
+  type: measured
+  text: In the broader cohort, 2captcha / recaptcha-invisible recorded 10 server_accepted observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C12
+  type: measured
+  text: In the broader cohort, anticaptcha / recaptcha-invisible recorded 10 server_accepted observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C13
+  type: measured
+  text: In the broader cohort, 2captcha / recaptcha-v3 recorded 10 server_accepted observations from
+    10 paid tasks.
+  source: broad-comparison.json
+- id: C14
+  type: measured
+  text: In the broader cohort, anticaptcha / recaptcha-v3 recorded 10 server_accepted observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C15
+  type: measured
+  text: In the broader cohort, 2captcha / geetest-v4 recorded 10 server_accepted observations from
+    10 paid tasks.
+  source: broad-comparison.json
+- id: C16
+  type: measured
+  text: In the broader cohort, anticaptcha / geetest-v4 recorded 5 server_accepted observations from
+    10 paid tasks.
+  source: broad-comparison.json
+- id: C17
+  type: measured
+  text: In the broader cohort, 2captcha / turnstile recorded 10 token_only_observations observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C18
+  type: measured
+  text: In the broader cohort, anticaptcha / turnstile recorded 10 token_only_observations observations
+    from 10 paid tasks.
+  source: broad-comparison.json
+- id: C19
+  type: measured
+  text: In the broader cohort, 2captcha / image-text recorded 10 ocr_correct observations from 10
+    paid tasks.
+  source: broad-comparison.json
+- id: C20
+  type: measured
+  text: In the broader cohort, anticaptcha / image-text recorded 10 ocr_correct observations from
+    10 paid tasks.
+  source: broad-comparison.json
 verification: verification.json

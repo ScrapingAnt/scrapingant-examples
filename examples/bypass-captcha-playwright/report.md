@@ -1,5 +1,7 @@
 # Playwright CAPTCHA approaches — September 23, 2026
 
+**Later evidence:** [Six-case comparison,120 new tasks](broad-report.md). This report retains the earlier library selection and four-task cohort; the broader report supplies the repeated CAPTCHA-type results and costs.
+
 The useful distinction is between **avoiding a challenge**, **detecting a widget**, **obtaining a token**, and **having the target accept a submission**. A browser-detector pass or HTTP200 does not join those stages automatically.
 
 ## Recommendation
