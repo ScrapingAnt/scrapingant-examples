@@ -30,13 +30,17 @@ class BroadBoundaries(unittest.TestCase):
                     self.assertEqual(run_one(job, output), record)
 
     def test_schedule_is_bounded_and_each_cell_is_balanced(self):
-        rows = make_schedule(10)
-        self.assertEqual(len(rows), 120)
-        self.assertEqual(len({r['id'] for r in rows}), 120)
+        rows = make_schedule(100)
+        self.assertEqual(len(rows), 1200)
+        self.assertEqual(len({r['id'] for r in rows}), 1200)
         for provider in ('2captcha', 'anticaptcha'):
-            self.assertEqual(sum(r['provider'] == provider for r in rows), 60)
+            self.assertEqual(sum(r['provider'] == provider for r in rows), 600)
+        # Historical IDs/order must remain reusable, never reissued as new trials.
+        recorded = json.loads(Path('expected_output/broad-2026-09-23/plan.json').read_text())['jobs']
+        self.assertEqual(rows[:120], recorded)
+        self.assertEqual(sum(r['trial'] > 10 for r in rows), 1080)
         with self.assertRaises(ValueError):
-            make_schedule(11)
+            make_schedule(101)
 
     def test_v3_token_or_success_without_score_is_not_an_accepted_threshold(self):
         for payload in ({'success': True}, {'success': 'true', 'score': 0.9},
