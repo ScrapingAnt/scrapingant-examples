@@ -62,7 +62,7 @@ The separate ScrapingAnt probe is prepared but has **not been exercised with a k
 ./run.sh --scrapingant
 ```
 
-Without a key it exits2 and explicitly reports unavailable. With a key it makes one browser/datacenter request to Google's official CAPTCHA demo, records only status/credit headers, response byte count/hash and widget/token-length indicators. Raw HTML, tokens and cookies are never saved. This is a fetch observation, not a form-submission test, and cannot establish automatic solving. It uses the documented query-parameter authentication; request URLs and exception messages containing them are never logged. 
+Without a key it exits2 and explicitly reports unavailable. With a key it makes one browser/datacenter request to Google's official CAPTCHA demo, records only status/credit headers, response byte count/hash and widget/token-length indicators. Raw HTML, tokens and cookies are never saved. This is a fetch observation, not a form-submission test, and cannot establish automatic solving. It uses the documented query-parameter authentication; request URLs and exception messages containing them are never logged.
 
 ## Interpretation
 
