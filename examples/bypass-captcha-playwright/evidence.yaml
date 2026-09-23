@@ -1,9 +1,10 @@
 article_id: bypass-captcha-playwright
 canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
 owner: Oleg Kulyk
-examples_repo_commit: 5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc
-commit_scope: Runnable source snapshot. Default checks and four opt-in local paid
-  demo workflows are recorded separately; no paid jobs are scheduled.
+examples_repo_commit: 68ebb2c085d008df88b397c0751842e8eed30714
+commit_scope: Runnable implementation snapshot. Default checks passed locally and
+  on Linux. Four funded demo workflows and the public-demo rejection control were
+  exercised locally; subsequent commits update metadata/docs only.
 tested_at: '2026-09-23'
 status: research-two-paid-providers-tested-capsolver-unavailable
 requires_api_key: true
