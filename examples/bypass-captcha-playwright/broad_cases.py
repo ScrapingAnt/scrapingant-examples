@@ -152,7 +152,7 @@ def make_images():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={'width': 300, 'height': 100}, device_scale_factor=1)
-        for trial in range(1, 11):
+        for trial in range(1, 101):
             answer = ''.join(rng.choice('ABCDEFGHJKLMNPQRSTUVWXYZ23456789') for _ in range(6))
             shapes = ['<rect width="300" height="100" fill="#faf8f2"/>']
             for _ in range(6):
@@ -163,7 +163,12 @@ def make_images():
             svg = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="100">' + ''.join(shapes) + '</svg>'
             page.set_content('<style>body{margin:0}</style>' + svg)
             path = IMAGE_DIR / f'{trial:02}.png'
-            page.screenshot(path=str(path))
+            rendered = page.screenshot()
+            if path.exists():
+                if path.read_bytes() != rendered:
+                    raise ValueError('Existing image differs; refusing to replace a measured fixture')
+            else:
+                path.write_bytes(rendered)
             records.append({'trial': trial, 'file': path.name, 'answer': answer,
                             'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         version = browser.version

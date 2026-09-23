@@ -1,4 +1,4 @@
-"""Opt-in six-case comparison: at most 120 tasks; durable no-retry job records.
+"""Opt-in six-case comparison: at most 1200 tasks; durable no-retry job records.
 
 Default prints a plan and performs no network calls. --live spends funds.
 Each child gets a 400-second external process deadline. Existing job records,
@@ -26,11 +26,12 @@ from broad_providers import (ENV, balance, bounded_transport, solver_for, solve,
                              extra_cost_receipt, safe_error)
 
 PROCESS_TIMEOUT = 400
+MAX_ROUNDS = 100
 
 
 def make_schedule(rounds):
-    if type(rounds) is not int or not 1 <= rounds <= 10:
-        raise ValueError('Choose 1 to 10 trials per cell; maximum120 paid tasks')
+    if type(rounds) is not int or not 1 <= rounds <= MAX_ROUNDS:
+        raise ValueError('Choose 1 to 100 trials per cell; maximum1200 paid tasks')
     rows = []
     rng = random.Random(20260923)
     for trial in range(1, rounds + 1):
@@ -50,7 +51,7 @@ def write_record(path, record):
     temp.replace(path)
 
 
-def execute_job(job, path, control=False):
+def execute_job(job, path, control=False, workers=4, per_provider=2):
     spec = CASES[job['case']]
     result = {**job, 'tested_at': datetime.now(timezone.utc).isoformat(),
               'target': spec['url'], 'criterion': spec['criterion'],
@@ -58,7 +59,8 @@ def execute_job(job, path, control=False):
               'task_creation_uncertain': False, 'solution_delivered': False,
               'server_acceptance_tested': False, 'server_accepted': None,
               'provider_reported_cost_usd': None, 'control': control,
-              'headless': True, 'process_timeout_seconds': PROCESS_TIMEOUT}
+              'headless': True, 'process_timeout_seconds': PROCESS_TIMEOUT,
+              'configured_batch_workers': workers, 'configured_provider_workers': per_provider}
     # Atomic reservation means concurrent invocations cannot spend twice on an ID.
     with path.open('x') as file:
         file.write(json.dumps(result, indent=2) + '\n')
@@ -160,12 +162,13 @@ def execute_job(job, path, control=False):
     return result
 
 
-def run_one(job, output, semaphore=None):
+def run_one(job, output, semaphore=None, workers=4, per_provider=2):
     path = output / (job['id'] + '.json')
     if path.exists():
         return json.loads(path.read_text())
     with semaphore or nullcontext():
-        command = [sys.executable, str(Path(__file__).resolve()), '--live', '--job', job['id'], '--output', str(output)]
+        command = [sys.executable, str(Path(__file__).resolve()), '--live', '--job', job['id'],
+                   '--output', str(output), '--workers', str(workers), '--per-provider', str(per_provider)]
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                    text=True, start_new_session=True)
         try:
@@ -194,9 +197,10 @@ def main():
     parser.add_argument('--live', action='store_true')
     parser.add_argument('--controls', action='store_true')
     parser.add_argument('--rounds', type=int, default=10)
-    parser.add_argument('--workers', type=int, choices=(1, 2, 3, 4), default=4)
+    parser.add_argument('--workers', type=int, choices=(1, 2, 3, 4, 6, 8, 12), default=4)
+    parser.add_argument('--per-provider', type=int, choices=(1, 2, 3, 4, 5, 6), default=2)
     parser.add_argument('--output', type=Path, default=Path('run_output/broad'))
-    parser.add_argument('--job', choices=[r['id'] for r in make_schedule(10)])
+    parser.add_argument('--job', choices=[r['id'] for r in make_schedule(MAX_ROUNDS)])
     args = parser.parse_args()
     rows = make_schedule(args.rounds)
     if not args.live and not args.controls:
@@ -214,22 +218,24 @@ def main():
             failures += record.get('outcome') == 'error' or record.get('control_assertion_passed') is False
         return 1 if failures else 0
     if args.job:
-        job = next(r for r in make_schedule(10) if r['id'] == args.job)
-        record = execute_job(job, args.output / (job['id'] + '.json'))
+        job = next(r for r in make_schedule(MAX_ROUNDS) if r['id'] == args.job)
+        record = execute_job(job, args.output / (job['id'] + '.json'),
+                             workers=args.workers, per_provider=args.per_provider)
         return 1 if record['outcome'] in ('error', 'unavailable') else 0
     initial = {}
     for provider in ENV:
         initial[provider] = balance(provider)
         if initial[provider] <= 0:
             raise SystemExit('No positive provider balance; no tasks started')
-    gate = {provider: threading.Semaphore(2) for provider in ENV}
+    gate = {provider: threading.Semaphore(args.per_provider) for provider in ENV}
     plan = {'planned_tasks': len(rows), 'rounds': args.rounds, 'max_concurrency': args.workers,
-            'max_concurrency_per_provider': 2, 'cases': CASES, 'jobs': rows,
+            'max_concurrency_per_provider': args.per_provider, 'cases': CASES, 'jobs': rows,
             'task_creation_retries': 0, 'process_timeout_seconds': PROCESS_TIMEOUT,
             'created_at': datetime.now(timezone.utc).isoformat()}
     write_record(args.output / 'plan.json', plan)
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = [pool.submit(run_one, job, args.output, gate[job['provider']]) for job in rows]
+        futures = [pool.submit(run_one, job, args.output, gate[job['provider']],
+                               args.workers, args.per_provider) for job in rows]
         for future in as_completed(futures):
             record = future.result()
             print(json.dumps({k: record.get(k) for k in ('id', 'outcome', 'paid_tasks_created',
