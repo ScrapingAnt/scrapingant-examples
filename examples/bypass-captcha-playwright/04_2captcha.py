@@ -1,2 +1,2 @@
-from provider_preflight import main
-if __name__ == "__main__": raise SystemExit(main("2captcha"))
+from paid_demo import cli
+if __name__ == "__main__": raise SystemExit(cli("2captcha"))

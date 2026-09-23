@@ -2,11 +2,10 @@ article_id: bypass-captcha-playwright
 canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
 owner: Oleg Kulyk
 examples_repo_commit: 5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc
-commit_scope: Source snapshot for reproduction. Default checks passed locally and
-  on Linux; the optional ScrapingAnt probe was subsequently executed locally on the
-  same implementation.
+commit_scope: Runnable source snapshot. Default checks and four opt-in local paid
+  demo workflows are recorded separately; no paid jobs are scheduled.
 tested_at: '2026-09-23'
-status: partial-research-paid-solvers-not-run
+status: research-two-paid-providers-tested-capsolver-unavailable
 requires_api_key: true
 default_checks_require_api_key: false
 environment:
@@ -47,6 +46,13 @@ outputs:
 - expected_output/ffmpeg-version.txt
 - expected_output/node-version.txt
 - expected_output/06_scrapingant.initial-unavailable.json
+- expected_output/2captcha-paid-1.json
+- expected_output/2captcha-paid-2.json
+- expected_output/anticaptcha-paid-1.json
+- expected_output/anticaptcha-paid-2.json
+- expected_output/08_demo_rejection.json
+- expected_output/08_demo_rejection.initial-assertion.json
+- paid-comparison.json
 measurements:
 - name: Expected test-key fixture results
   value: 5
@@ -74,35 +80,62 @@ measurements:
   unit: demo page
   source: expected_output/03_extra_recaptcha.json
 - name: Funded solver tasks created
-  value: 0
-  denominator: 0
-  unit: tasks; not attempted
-  source: provider_preflight.py
+  value: 4
+  denominator: 4
+  unit: one-task invocations; two per provider
+  source: paid-comparison.json
 - name: ScrapingAnt API credits reported
   value: 10
   denominator: 1
   unit: browser/datacenter request to official Google CAPTCHA demo; not a solve
   source: expected_output/06_scrapingant.json
+- name: 2captcha accepted Google-demo submissions
+  value: 2
+  denominator: 2
+  unit: paid one-task workflows, not an estimated success rate
+  source:
+  - expected_output/2captcha-paid-1.json
+  - expected_output/2captcha-paid-2.json
+- name: anticaptcha accepted Google-demo submissions
+  value: 2
+  denominator: 2
+  unit: paid one-task workflows, not an estimated success rate
+  source:
+  - expected_output/anticaptcha-paid-1.json
+  - expected_output/anticaptcha-paid-2.json
+- name: Invalid-token public-demo rejection control
+  value: 1
+  denominator: 1
+  unit: final control assertion; earlier wrong-message assertion retained separately
+  source: expected_output/08_demo_rejection.json
 limitations:
 - Test keys intentionally bypass real challenge uncertainty; successes establish application
   integration only.
-- Three SDKs were installed/imported but not exercised with funded credentials. No
-  paid service comparison, accuracy, cost or latency measured.
 - One ScrapingAnt browser/datacenter fetch returned the demo widget markup; no response
   textarea or success message was found. No form submission or server acceptance was
   tested; this is not CAPTCHA solving evidence.
 - Three audio trials use different attempt budgets. Fresh browser contexts share one
   host/IP and sequential ordering; no causal headed/headless claim. Headless shell
   differs from headed Chromium.
-- No production-demo token was submitted. Rate limits and solve errors are preserved,
-  not counted as successes.
 - Python audio library uses external Google speech recognition and needs FFmpeg; not
   a purely local solution.
-- 'Default CI scope: provider test-key integration and SDK interface/preflight only.
-  No live demo, audio, paid service or product API run.'
+- 'Default CI scope: offline spending/privacy assertions, provider test-key integration
+  and SDK interface/preflight only. No live demo, audio, paid service or product API
+  run.'
 - No claim that browser stealth implies CAPTCHA solving.
 - Dated historical screenshots/results remain illustrative observations; external
   widgets may change.
+- Two trials per provider on one public demo; no reliability, speed or price ranking.
+- Proxyless providers use their own solver infrastructure/IPs; only the submitting
+  browser host is shared.
+- Synchronous SDK entry points tested; no async throughput measurement.
+- SIGALRM is an intended interruption; the separate process timeout bounded local
+  execution.
+- 2Captcha task charges were not exposed in the captured SDK response; no total combined
+  cost inferred.
+- CapSolver installed/imported but remains unavailable without a key.
+- The initial public-demo rejection assertion checked the wrong message; corrected
+  to observed wording and rerun successfully. Both captures are retained.
 claims:
 - id: C1
   text: The five test-key paths produced their expected acceptance/rejection state
@@ -120,7 +153,8 @@ claims:
   type: measured
   source: expected_output/03_extra_recaptcha.json
 - id: C4
-  text: Official SDK packages import; live paid paths are unavailable and unmeasured.
+  text: Official SDK packages import; these initial preflight captures were followed
+    by paid 2Captcha and Anti-Captcha trials. CapSolver remains unavailable.
   type: measured
   source: expected_output/04_2captcha.json; expected_output/05_anticaptcha.json; expected_output/07_capsolver.json
 - id: C5
@@ -134,4 +168,14 @@ claims:
     submission was attempted.
   type: measured
   source: expected_output/06_scrapingant.json
+- id: C7
+  text: Two tasks per funded provider returned tokens, and all four Google-demo form
+    submissions were accepted. No reliability ranking follows from this sample.
+  type: measured
+  source: paid-comparison.json
+- id: C8
+  text: The deliberately invalid-token control returned HTTP200 but a rejection message,
+    with no success message.
+  type: measured
+  source: expected_output/08_demo_rejection.json
 verification: verification.json

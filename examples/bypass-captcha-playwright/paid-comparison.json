@@ -1,0 +1,64 @@
+{
+  "tested_at": "2026-09-23",
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "execution_order": [
+    "2captcha-1",
+    "anticaptcha-1",
+    "2captcha-2",
+    "anticaptcha-2"
+  ],
+  "task_create_requests": 4,
+  "paid_tasks_created": 4,
+  "accepted_submissions": 4,
+  "providers": {
+    "2captcha": {
+      "tasks_created": 2,
+      "accepted_submissions": 2,
+      "provider_elapsed_seconds": [
+        40.88,
+        10.5
+      ],
+      "workflow_elapsed_seconds": [
+        42.52,
+        11.82
+      ],
+      "provider_reported_cost_usd": [
+        null,
+        null
+      ],
+      "outputs": [
+        "expected_output/2captcha-paid-1.json",
+        "expected_output/2captcha-paid-2.json"
+      ]
+    },
+    "anticaptcha": {
+      "tasks_created": 2,
+      "accepted_submissions": 2,
+      "provider_elapsed_seconds": [
+        22.71,
+        22.68
+      ],
+      "workflow_elapsed_seconds": [
+        24.1,
+        24.05
+      ],
+      "provider_reported_cost_usd": [
+        "0.00200",
+        "0.00200"
+      ],
+      "outputs": [
+        "expected_output/anticaptcha-paid-1.json",
+        "expected_output/anticaptcha-paid-2.json"
+      ]
+    }
+  },
+  "external_process_timeout_seconds": 400,
+  "negative_control": "expected_output/08_demo_rejection.json",
+  "limits": [
+    "Two trials per provider on one public demo; no reliability, speed or price ranking.",
+    "Proxyless providers use their own solver infrastructure/IPs; only the submitting browser host is shared.",
+    "Synchronous SDK entry points tested; no async throughput measurement.",
+    "SIGALRM is an intended interruption; the separate process timeout bounded local execution.",
+    "2Captcha task charges were not exposed in the captured SDK response; no total combined cost inferred."
+  ]
+}

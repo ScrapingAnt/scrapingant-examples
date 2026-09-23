@@ -1,0 +1,31 @@
+{
+  "provider": "2captcha",
+  "package": "2captcha-python",
+  "version": "2.1.1",
+  "trial": 2,
+  "tested_at": "2026-09-23T09:59:03.337131+00:00",
+  "target": "https://www.google.com/recaptcha/api2/demo",
+  "test_mode": false,
+  "headed": false,
+  "task_type": "recaptcha-v2-proxyless",
+  "task_budget": 1,
+  "task_create_requests": 1,
+  "paid_tasks_created": 1,
+  "task_creation_uncertain": false,
+  "server_acceptance_tested": true,
+  "server_accepted": true,
+  "token_length": 2489,
+  "provider_reported_cost_usd": null,
+  "whole_run_deadline_seconds": 360,
+  "http_timeout_seconds": {
+    "connect": 10,
+    "read": 30
+  },
+  "browser": "153.0.8010.12",
+  "navigation_status": 200,
+  "provider_elapsed_seconds": 10.5,
+  "submission_status": 200,
+  "outcome": "accepted",
+  "elapsed_seconds": 11.82,
+  "process_exit_code": 0
+}
