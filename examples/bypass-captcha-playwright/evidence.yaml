@@ -2,10 +2,11 @@ article_id: bypass-captcha-playwright
 canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
 owner: Oleg Kulyk
 examples_repo_commit: 5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc
-commit_scope: Source snapshot for reproduction; no claim that unexecuted credentialed
-  paths have passed. Default checks rerun on this implementation before publication.
+commit_scope: Source snapshot for reproduction. Default checks passed locally and
+  on Linux; the optional ScrapingAnt probe was subsequently executed locally on the
+  same implementation.
 tested_at: '2026-09-23'
-status: partial-research-missing-credentials
+status: partial-research-paid-solvers-not-run
 requires_api_key: true
 default_checks_require_api_key: false
 environment:
@@ -45,6 +46,7 @@ outputs:
 - expected_output/baseline-headless-1.json
 - expected_output/ffmpeg-version.txt
 - expected_output/node-version.txt
+- expected_output/06_scrapingant.initial-unavailable.json
 measurements:
 - name: Expected test-key fixture results
   value: 5
@@ -76,13 +78,19 @@ measurements:
   denominator: 0
   unit: tasks; not attempted
   source: provider_preflight.py
+- name: ScrapingAnt API credits reported
+  value: 10
+  denominator: 1
+  unit: browser/datacenter request to official Google CAPTCHA demo; not a solve
+  source: expected_output/06_scrapingant.json
 limitations:
 - Test keys intentionally bypass real challenge uncertainty; successes establish application
   integration only.
 - Three SDKs were installed/imported but not exercised with funded credentials. No
   paid service comparison, accuracy, cost or latency measured.
-- SCRAPINGANT_API_KEY unavailable; probe exited2 before HTTP; no product API response
-  exists. Credentialed probe code is prepared, not validated.
+- One ScrapingAnt browser/datacenter fetch returned the demo widget markup; no response
+  textarea or success message was found. No form submission or server acceptance was
+  tested; this is not CAPTCHA solving evidence.
 - Three audio trials use different attempt budgets. Fresh browser contexts share one
   host/IP and sequential ordering; no causal headed/headless claim. Headless shell
   differs from headed Chromium.
@@ -120,4 +128,10 @@ claims:
   type: documented
   source: https://developers.cloudflare.com/turnstile/troubleshooting/testing/; https://developers.google.com/recaptcha/docs/faq
   accessed_at: '2026-09-23'
+- id: C6
+  text: One browser/datacenter fetch returned API200 and target200, cost10 credits,
+    and contained widget markup but no response textarea or success message. No protected-form
+    submission was attempted.
+  type: measured
+  source: expected_output/06_scrapingant.json
 verification: verification.json
