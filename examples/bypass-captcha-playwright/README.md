@@ -1,6 +1,6 @@
 # CAPTCHA handling with Playwright: dated research
 
-Tested September 23, 2026. This packet compares browser integration approaches and records failures. **It does not establish a winning paid solver or a production CAPTCHA bypass rate.** Paid solver credentials were unavailable. A subsequently supplied ScrapingAnt key enabled one local API fetch.
+Tested September 23, 2026. This packet compares browser integration approaches and records failures. **It does not establish a winning paid solver or a production CAPTCHA bypass rate.** Funded keys subsequently enabled two Google-demo submissions each through 2Captcha and Anti-Captcha; all four were accepted. CapSolver remains unavailable without a key. A separate ScrapingAnt key enabled one local API fetch.
 
 ## What was actually executed
 
@@ -10,12 +10,12 @@ Tested September 23, 2026. This packet compares browser integration approaches a
 | Plain Playwright checkbox control | 1.63.0 | Google public demo, one headed and one headless visit | Both showed image challenges; no token or submitted solution |
 | `playwright-recaptcha` | 0.5.1 | Google public demo: two one-attempt trials, then one headed trial with the default five-attempt budget | No accepted workflow: headless rate-limited; first headed trial required more answers; final headed trial rate-limited |
 | `playwright-extra` + `puppeteer-extra-plugin-recaptcha` | 4.3.6 + 3.6.8 | One headless public-demo discovery and missing-provider check | Found one widget/sitekey; zero solutions; correctly reported absent provider |
-| `2captcha-python` | 2.1.1 | Install/import, method signature, async-client presence, credential preflight | Passed interface checks; live paid solving not run |
-| `anticaptchaofficial` | 1.0.70 | Install/import, method signature, credential preflight | Passed interface checks; live paid solving not run |
-| `capsolver` | 1.0.7 | Install/import, method signature, credential preflight | Passed interface checks; live paid solving not run |
+| `2captcha-python` | 2.1.1 | Interface checks, then two funded proxyless tasks and browser form submissions | Both tokens returned and both submissions accepted |
+| `anticaptchaofficial` | 1.0.70 | Interface checks, then two funded proxyless tasks and browser form submissions | Both tokens returned and both submissions accepted |
+| `capsolver` | 1.0.7 | Install/import, method signature, credential preflight | Passed interface checks; live API unavailable without a key |
 | ScrapingAnt browser API | n/a | One local browser/datacenter fetch of the Google demo | API200/target200;10 credits; widget markup present, response textarea absent, no success message; no form submission tested |
 
-See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. Zero paid tasks were created. A provider preflight passing does **not** mean a solve succeeded.
+See [report.md](report.md), [packages.json](packages.json), [repositories.json](repositories.json) and the dated JSON/screenshot captures. Four paid tasks were created in total. The initial SDK preflight captures are retained as historical checks. A preflight passing does **not** mean a solve succeeded. See [paid-comparison.json](paid-comparison.json) for the later funded observations.
 
 ## Reproduce the credential-free checks
 
@@ -30,9 +30,9 @@ npm ci
 ./run.sh
 ```
 
-On Linux, use `python -m playwright install --with-deps chromium` to install browser system dependencies. Windows has not been tested; the live audio runner uses POSIX `SIGALRM` for its total deadline.
+On Linux, use `python -m playwright install --with-deps chromium` to install browser system dependencies. Windows has not been tested; the live audio and paid runners use POSIX `SIGALRM`.
 
-Default `run.sh` checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
+Default `run.sh` runs five offline spending/privacy assertions, checks five fixture paths and imports the three official SDKs. It needs outbound HTTPS to Google and Cloudflare, but no account secrets. It exits nonzero on an unexpected fixture result or import failure. Generated JSON goes to ignored `run_output/`; dated captures in `expected_output/` are retained. Test screenshots are regenerated under `screenshots/`, so running the checks can change these tracked captures. Only provider TEST keys are embedded in the fixture.
 
 A failed fixture request is not a production-solver result. The forced Turnstile duplicate test uses the documented dummy secret, not a replay of a real production token. The Google test secret is deliberately permissive; missing tokens are rejected locally before Siteverify.
 
@@ -51,9 +51,32 @@ node 03_extra_recaptcha.cjs
 
 An audio/control script exits1 if no server-accepted workflow is observed, including when an image challenge remains. The plugin script exits0 only if it detects one widget and reports the expected missing-provider error; this is an integration assertion, not a solving success. The audio experiment has a90-second total deadline,15-second Playwright action timeout and an explicit attempt budget. Stop if the service rate-limits the browser; do not loop these scripts to obtain a favorable result. The dated sequence includes one later headed trial to check whether the initial one-attempt limit explained its incomplete result; that final trial was rate-limited, and testing stopped.
 
-## Credentials and unfinished measurements
+## Opt-in funded comparison
 
-`04_2captcha.py`, `05_anticaptcha.py` and `07_capsolver.py` perform preflight only. Even if their named key is present, they do not spend funds or create a solve task. Live paid comparison remains unimplemented/unmeasured in this packet; a funded trial must validate the target's submission result, not just log a token.
+`04_2captcha.py` and `05_anticaptcha.py` perform preflight by default, even with a key present. Only explicit `--live` creates a task, with at most one creation request per invocation and no automatic task retry. `07_capsolver.py` remains preflight-only because no CapSolver key was available.
+
+Supply `TWOCAPTCHA_API_KEY` or `ANTICAPTCHA_API_KEY` through your environment/secret manager. These commands spend funds; do not add them to scheduled checks:
+
+```bash
+# An outer deadline supplements the runner's intended 360-second SIGALRM.
+python -c 'import subprocess,sys; sys.exit(subprocess.run([sys.executable,"04_2captcha.py","--live","--trial","1"],timeout=400).returncode)'
+python -c 'import subprocess,sys; sys.exit(subprocess.run([sys.executable,"05_anticaptcha.py","--live","--trial","1"],timeout=400).returncode)'
+# No paid task: check that a deliberately invalid token is rejected.
+python 08_demo_rejection.py
+```
+
+`--trial 2` changes the capture label; it does not request retries. The dated sequence was 2Captcha1, Anti-Captcha1, 2Captcha2, Anti-Captcha2, each in a fresh headless Chromium session. The official synchronous SDK methods obtain a proxyless token, then Playwright assigns it to the demo response field and submits the form. Acceptance requires HTTP200 and `Verification Success` in the new document. An invalid-token control returned HTTP200 with a rejection message and no success message. Thus HTTP200 alone is insufficient.
+
+| Provider | Accepted submissions / tasks | Provider elapsed time per trial | Full workflow per trial | Reported task charge |
+|---|---|---|---|---|
+| 2Captcha | 2 / 2 | 40.88s; 10.50s | 42.52s; 11.82s | Not exposed in captured SDK response |
+| Anti-Captcha | 2 / 2 | 22.71s; 22.68s | 24.10s; 24.05s | $0.00200 each; $0.00400 for these two tasks |
+
+These are four observations, not success-rate estimates or a speed/price ranking. Provider time includes task creation and SDK polling (2Captcha10s interval; Anti-Captcha1s polling after its initial3s delay), so it is not pure worker time. The same browser host submits all forms, but each proxyless provider controls its own solver network.
+
+Both pinned SDKs omit HTTP request timeouts. A scoped transport patch supplies 10-second connect and30-second read timeouts; SDK solving/polling behavior is otherwise retained. The JSON field `whole_run_deadline_seconds` records the intended SIGALRM interrupt, which can be caught by lower layers; measured invocations also had an external400-second subprocess timeout. Stopping a process does not cancel an already accepted provider task. Error output retains class/code only; raw responses, keys, tokens, task IDs, balances, cookies and worker IPs are omitted. A network ambiguity during task creation is marked explicitly, and never retried automatically.
+
+## Separate ScrapingAnt observation
 
 The separate ScrapingAnt probe was exercised locally after a key became available:
 
@@ -68,6 +91,6 @@ See [free-trials.md](free-trials.md) for separately checked trial offers; none w
 
 ## Interpretation
 
-Use provider test keys for your own application's automated tests. For a future paid Python trial, the current official 2Captcha SDK is the first integration candidate: its published release is recent and it exposes an async client. Keep Anti-Captcha as a second service candidate. The Node plugin provides useful detection/provider plumbing but still needs a funded provider. Treat the free audio helper as an experiment with observed failures. CapSolver's older Python SDK deserves an explicit compatibility/timeout check against its current API before adoption. These are engineering choices, not measured accuracy or price rankings.
+Use provider test keys for your own application's automated tests. Both official Python service clients completed the measured demo flow. 2Captcha also exposes an async client, but these trials exercised its synchronous client; no async behavior or throughput is claimed. Keep both as integration candidates without naming a winner. The Node plugin provides useful detection/provider plumbing but still needs a funded provider. Treat the free audio helper as an experiment with observed failures. CapSolver's older Python SDK deserves an explicit compatibility/timeout check against its current API before adoption. These are engineering choices, not measured accuracy or price rankings.
 
 No raw solution tokens, account keys, account balances, cookies, private-repository references or user profile paths are intentionally included. Public provider test keys and demo sitekeys are not credentials.

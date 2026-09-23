@@ -1,7 +1,39 @@
 {
   "checked_at": "2026-09-23",
   "source_commit": "5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc",
-  "linux_ci": {
+  "fresh_node_install": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "exit_code": 0,
+    "playwright": "1.63.0",
+    "playwright-extra": "4.3.6",
+    "puppeteer-extra-plugin-recaptcha": "3.6.8"
+  },
+  "wrapper_failure_propagation": {
+    "python_bin": "/bin/false",
+    "exit_code": 1
+  },
+  "independent_review": {
+    "blocking_findings_remaining": 0,
+    "resolved": [
+      "Portable npm lockfile",
+      "Metadata-only API probe; no raw HTML persistence"
+    ]
+  },
+  "initial_ci_failure": {
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35840211225",
+    "stage": "npm ci",
+    "cause": "Generated lockfile contained temporary absolute/symlink paths; regenerated from package directory before successful rerun."
+  },
+  "paid_tasks_created": 4,
+  "scrapingant_requests_made": 1,
+  "local_scrapingant_probe": {
+    "exit_code": 0,
+    "source_commit": "5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc",
+    "result": "expected_output/06_scrapingant.json",
+    "scope": "Fetch only; no solving/submission claim",
+    "tested_at": "2026-09-23T09:10:44.027476+00:00"
+  },
+  "previous_linux_ci": {
     "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35840642618",
     "conclusion": "success",
     "fixture_cases": [
@@ -134,36 +166,34 @@
     ],
     "scope": "Five test-key fixture checks and three SDK import/preflight checks only."
   },
-  "fresh_node_install": {
-    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+  "linux_ci": {
+    "conclusion": "pending",
+    "scope": "Updated source: five offline boundary tests, five test-key fixture cases, three SDK preflights; no paid jobs."
+  },
+  "local_default_after_paid_runner": {
     "exit_code": 0,
-    "playwright": "1.63.0",
-    "playwright-extra": "4.3.6",
-    "puppeteer-extra-plugin-recaptcha": "3.6.8"
+    "offline_boundary_tests": 5,
+    "fixture_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "credential_free": true
   },
-  "wrapper_failure_propagation": {
-    "python_bin": "/bin/false",
-    "exit_code": 1
+  "local_paid_comparison": {
+    "output": "paid-comparison.json",
+    "tasks_created": 4,
+    "submissions_accepted": 4,
+    "external_process_timeout_seconds": 400,
+    "credentials_from_environment": true,
+    "credentials_or_raw_tokens_persisted": false,
+    "cap_solver": "unavailable-no-key"
   },
-  "independent_review": {
+  "negative_control": {
+    "output": "expected_output/08_demo_rejection.json",
+    "assertion_passed": true,
+    "initial_assertion": "Expected a different rejection string; fixed after viewing actual demo rejection and rerun. Initial output retained."
+  },
+  "paid_runner_review": {
     "blocking_findings_remaining": 0,
-    "resolved": [
-      "Portable npm lockfile",
-      "Metadata-only API probe; no raw HTML persistence"
-    ]
-  },
-  "initial_ci_failure": {
-    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35840211225",
-    "stage": "npm ci",
-    "cause": "Generated lockfile contained temporary absolute/symlink paths; regenerated from package directory before successful rerun."
-  },
-  "paid_tasks_created": 0,
-  "scrapingant_requests_made": 1,
-  "local_scrapingant_probe": {
-    "exit_code": 0,
-    "source_commit": "5ecf6dbeffe46687e9cdc299db6cfe167acd5cdc",
-    "result": "expected_output/06_scrapingant.json",
-    "scope": "Fetch only; no solving/submission claim",
-    "tested_at": "2026-09-23T09:10:44.027476+00:00"
+    "caveat": "SIGALRM is intended interruption, not a strict process deadline. External400-second subprocess timeout used and documented."
   }
 }
