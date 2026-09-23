@@ -1,9 +1,10 @@
 article_id: bypass-captcha-playwright
 canonical_url: https://scrapingant.com/blog/bypass-captcha-playwright
 owner: Oleg Kulyk
-examples_repo_commit: 68ebb2c085d008df88b397c0751842e8eed30714
-commit_scope: Earlier implementation SHA retained until the broader implementation is committed and
-  verified; see broad-comparison.json for the new local cohort.
+examples_repo_commit: 2cc69546eb0f1287d8f37e5dce5ef237b3708386
+commit_scope: Runnable broader implementation and120 local paid-trial records. Default checks passed
+  locally; Linux CI and the final research tag are recorded in verification.json. Later edits update
+  documentation, verification and diagnostic captures only.
 tested_at: '2026-09-23'
 status: research-six-case-120-task-comparison-capsolver-unavailable
 requires_api_key: true
@@ -316,5 +317,20 @@ claims:
   type: measured
   text: In the broader cohort, anticaptcha / image-text recorded 10 ocr_correct observations from
     10 paid tasks.
+  source: broad-comparison.json
+- id: C21
+  type: measured
+  text: All20 broader v3 observations returned score0.9 with the required action and hostname. Both
+    immediate v3 replays were accepted by the demo; production replay behavior is not established.
+  source: broad-comparison.json
+- id: C22
+  type: measured
+  text: Anti-Captcha returned five ERROR_TOKEN_EXPIRED responses for ten GeeTest tasks. Those tasks
+    were not replaced.
+  source: broad-comparison.json
+- id: C23
+  type: measured
+  text: Known receipts total0.23410USD across115/120 broad tasks. Observed account decreases total0.23210USD;
+    the0.00200USD difference is unreconciled.
   source: broad-comparison.json
 verification: verification.json

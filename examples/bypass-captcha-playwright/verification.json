@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-09-23",
-  "source_commit": "68ebb2c085d008df88b397c0751842e8eed30714",
+  "source_commit": "2cc69546eb0f1287d8f37e5dce5ef237b3708386",
   "fresh_node_install": {
     "command": "npm ci --ignore-scripts --no-audit --no-fund",
     "exit_code": 0,
@@ -167,14 +167,14 @@
     "scope": "Five test-key fixture checks and three SDK import/preflight checks only."
   },
   "linux_ci": {
-    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35846632283",
-    "source_commit": "68ebb2c085d008df88b397c0751842e8eed30714",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35852936610",
+    "source_commit": "2cc69546eb0f1287d8f37e5dce5ef237b3708386",
     "conclusion": "success",
-    "offline_boundary_tests_passed": 5,
+    "offline_boundary_and_evidence_tests_passed": 16,
     "fixture_cases_passed": 5,
     "sdk_preflights_passed": 3,
     "paid_tasks_created": 0,
-    "scope": "Default credential-free checks only. Paid observations are local and separately recorded."
+    "scope": "Default credential-free checks only. All120 broader paid observations are local and separately recorded."
   },
   "local_default_after_paid_runner": {
     "exit_code": 0,
@@ -235,5 +235,35 @@
     "byte_identical": true,
     "command": "python summarize_broad.py --output run_output/rebuilt.json",
     "fixture_hashes_verified": 10
+  },
+  "independent_broad_review": {
+    "blocking_findings_remaining": 0,
+    "records_checked": 120,
+    "offline_tests_passed": 16,
+    "summary_reproduced_exactly": true,
+    "retained_screenshots_visually_inspected": 3,
+    "resolved": [
+      "Require explicit rejection in negative controls",
+      "Persist primary verification before isolated optional replay",
+      "Exclude invisible-v2 token-overflow screenshots",
+      "Preserve execution timeouts alongside acceptance in summary",
+      "Represent zero cost-receipt coverage as unknown"
+    ]
+  },
+  "previous_paid_linux_ci": {
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/35846632283",
+    "source_commit": "68ebb2c085d008df88b397c0751842e8eed30714",
+    "conclusion": "success",
+    "offline_boundary_tests_passed": 5,
+    "fixture_cases_passed": 5,
+    "sdk_preflights_passed": 3,
+    "paid_tasks_created": 0,
+    "scope": "Default credential-free checks only. Paid observations are local and separately recorded."
+  },
+  "publication_privacy_scan": {
+    "files_scanned": 219,
+    "exact_supplied_credentials_absent": true,
+    "private_repository_names_absent": true,
+    "local_user_paths_absent": true
   }
 }
