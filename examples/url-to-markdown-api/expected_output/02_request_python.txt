@@ -1,0 +1,18 @@
+$ python 02_request_python.py
+status: 200 | Ant-credits-cost: 10 | Ant-page-status-code: None
+keys: ['markdown', 'url']
+url: https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html
+markdown characters: 1824
+[Home](/) · [Reviews](/reviews) · [Guides](/guides) · [Pricing](/pricing) ·
+[Contact](/contact)
+
+COOKIE-SENTINEL-2b8e: We use cookies to remember your preferences. [Manage
+settings](/cookies)
+
+# Ant Farm Deluxe review
+
+The Ant Farm Deluxe is a two-chamber acrylic habitat for harvester ants that
+ships with a sand block, a feeding tray and a magnifier, and after six weeks
+of daily observation it is the enclosure we would recommend to a first-time
+keeper who wants to watch tunnels form without cleaning sand off the kitchen
+exit=0

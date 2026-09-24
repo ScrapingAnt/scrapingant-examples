@@ -1,0 +1,13 @@
+$ python 08_errors.py
+wrong API key
+  status 403 | Ant-credits-cost None | Ant-page-status-code None | detail: API token is wrong. Please visit https://app.scrapingant.com/profile to check your token settings
+url=not-a-url
+  status 422 | Ant-credits-cost None | Ant-page-status-code None | detail: Wrong host part of url. Please check out the documentation: https://docs.scrapingant.com/
+unreachable host
+  status 404 | Ant-credits-cost None | Ant-page-status-code None | detail: This site can’t be reached
+target returns 404 (GitHub Pages)
+  status 200 | Ant-credits-cost 10 | Ant-page-status-code None | detail: None
+  markdown of the 404 page, first line: # 404
+wait_for_selector never appears, timeout=5
+  status 200 | Ant-credits-cost 10 | Ant-page-status-code None | detail: None
+exit=0

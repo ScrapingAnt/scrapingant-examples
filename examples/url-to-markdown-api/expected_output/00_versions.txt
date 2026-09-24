@@ -1,0 +1,8 @@
+python: Python 3.12.11
+node: v22.20.0
+curl: curl 8.7.1
+requests 2.34.2
+tiktoken 0.14.0
+html2text 2020.1.16
+beautifulsoup4 4.12.2
+fixture: 200

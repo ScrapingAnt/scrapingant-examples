@@ -1,0 +1,129 @@
+# Evidence manifest for https://scrapingant.com/llm-ready-data-extraction (landing page "URL to Markdown API")
+article_id: url-to-markdown-api
+canonical_url: https://scrapingant.com/llm-ready-data-extraction
+owner: Oleg Kulyk
+examples_repo_commit: "<sha, filled after commit>"
+tested_at: 2026-09-24
+requires_api_key: true   # every script prints "skipped" and exits 0 without SCRAPINGANT_API_KEY
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64, Apple Silicon)
+  python: "3.12.11 (.venv)"
+  node: "v22.20.0 (TypeScript via --experimental-strip-types)"
+  curl: "8.7.1"
+  client_location: "Kyiv, Ukraine, home broadband; one client, one day (2026-09-24)"
+dependencies:
+  requests: "2.34.2"
+  tiktoken: "0.14.0"
+  html2text: "2020.1.16"     # pinned to the extractor service's version for the local parity check
+  beautifulsoup4: "4.12.2"   # same
+run_command: ./run.sh        # LATENCY_N=3 in CI
+fixtures:
+  - fixtures/article.html (copy of the repo-level fixtures/markdown-article.html served at https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html)
+  - https://docs.python.org/3/tutorial/introduction.html, https://pandas.pydata.org/docs/reference/api/pandas.read_html.html, https://en.wikipedia.org/wiki/Markdown (04, through the API)
+outputs:
+  - expected_output/00_versions.txt … 10_methods.txt (one file per script)
+measurements:
+  - {name: tokens_per_page, value: "fixture 1.7x, python tutorial 3.5x, pandas read_html 8.4x, Wikipedia Markdown 10.0x (cl100k_base; o200k_base within 0.1x)", unit: ratio, denominator: "raw /v2/general HTML vs /v2/markdown output, browser=true, exact response bytes, 2026-09-24", source: expected_output/04_tokens.txt}
+  - {name: latency_fixture, value: "browser=true median 2.22 s / p90 2.81 s / max 6.12 s; browser=false median 0.99 s / p90 1.67 s / max 1.71 s", unit: s, denominator: "N=10 sequential full HTTP calls per mode, one client in Kyiv on home broadband, 2026-09-24", source: expected_output/07_latency.txt}
+  - {name: credits_per_call, value: "10 with browser=true, 1 with browser=false", unit: credits, denominator: "Ant-credits-cost header on every 200", source: expected_output/06_browser_false.txt}
+  - {name: local_conversion_parity, value: "identical", unit: bool, denominator: "html2text 2020.1.16 + bs4 4.12.2 on the /v2/general HTML of the fixture vs the API markdown", source: expected_output/05_keep_remove.txt}
+  - {name: browser_false_parity, value: "identical", unit: bool, denominator: "fixture markdown, browser=true vs browser=false", source: expected_output/06_browser_false.txt}
+  - {name: error_matrix, value: "403 wrong key (uncharged); 422 bad url (uncharged); 404 unreachable host (uncharged); target 404 -> 200 charged 10; wait_for_selector never appears -> 200 charged 10", unit: status, denominator: "one call per case, 2026-09-24", source: expected_output/08_errors.txt}
+limitations:
+  - Latency is one client, one day; token ratios depend on the page and the public pages change.
+  - Observed once on 2026-09-24 (first run of 04_tokens.py, docs.python.org tutorial): HTTP 200, Ant-credits-cost 10, markdown body of two newlines; the retry returned the full page. _common.cached() now retries once and prints a note; reported to the owner.
+  - /v2/markdown responses did not carry Ant-page-status-code in any run, although docs/custom-headers.md lists it; /v2/general responses did.
+  - POST is forwarded to the target; GitHub Pages answers 405, so 10_methods.txt records "# 405 Not Allowed" as the Markdown.
+claims:   # ids match briefs/url-to-markdown-api.ledger.md in seo_optimisation
+  - "id": "C1"
+    "text": "`GET https://api.scrapingant.com/v2/markdown?url=…` with `x-api-key` returns HTTP 200, `content-type: application/json`, `ant-credits-cost: 10` (default browser mode) and a JSON body with `url` and `markdown`"
+    "type": "measured + product"
+    "source": "01_request_curl.txt, 02_request_python.txt, 03_request_node.txt; registry `api.markdown_endpoint`"
+  - "id": "C2"
+    "text": "The fixture page (2,934 bytes of HTML) converts to 1,824 characters / 56 lines of Markdown; the page's response panel shows its first lines verbatim"
+    "type": "measured"
+    "source": "01_request_curl.txt, 05_keep_remove.txt"
+  - "id": "C3"
+    "text": "The Python and TypeScript snippets on the page are the executed packet scripts (`02_request_python.py`, `03_request_node.ts` run with `node --experimental-strip-types`)"
+    "type": "measured"
+    "source": "02_request_python.txt, 03_request_node.txt"
+  - "id": "C4"
+    "text": "What the conversion keeps: headings as `#`, inline links `[text](href)`, lists, tables as pipe rows, code blocks, images as `![alt](src)`, blockquotes; what it removes: `<script>` and `<noscript>`; navigation, cookie-banner, aside and footer text stay in the Markdown"
+    "type": "measured + product"
+    "source": "05_keep_remove.txt (13 checks ok); registry `api.markdown_conversion`"
+  - "id": "C5"
+    "text": "The API's Markdown for the fixture is byte-identical to running html2text 2020.1.16 locally (BeautifulSoup `html.parser`, script/noscript removed, `ignore_links=False`) on the `/v2/general` HTML"
+    "type": "measured"
+    "source": "05_keep_remove.txt (\"== API markdown: True\")"
+  - "id": "C6"
+    "text": "html2text wraps lines at 78 characters where it can break (1 of 56 fixture lines is longer); docs-only fact, not on the landing page"
+    "type": "measured + documented"
+    "source": "05_keep_remove.txt; registry `api.markdown_output_rules`"
+  - "id": "C7"
+    "text": "`browser=false` on the static fixture: HTTP 200, `Ant-credits-cost: 1`, Markdown identical to the `browser=true` run"
+    "type": "measured"
+    "source": "06_browser_false.txt"
+  - "id": "C8"
+    "text": "Credits: 10 per request with `browser=true` (default), 1 with `browser=false`, datacenter proxy; residential 25 / 125; the cost is in the `Ant-credits-cost` header of every successful response"
+    "type": "measured + product"
+    "source": "01, 02, 06, 07 outputs; registry `api.markdown_pricing_by_browser`, `credits.simple_residential`, `credits.browser_js_residential`, `api.credits_cost_header`"
+  - "id": "C9"
+    "text": "Latency on the fixture, N=10 sequential requests, one client, 2026-09-24: `browser=true` median 2.22 s, p90 2.81 s, max 6.12 s; `browser=false` median 0.99 s, p90 1.67 s, max 1.71 s; full HTTP call including TLS and download"
+    "type": "measured"
+    "source": "07_latency.txt"
+  - "id": "C10"
+    "text": "Token counts (tiktoken, exact response bytes, `browser=true`): fixture 864 → 498 cl100k (1.7×); docs.python.org tutorial 23,962 → 6,870 (3.5×); pandas `read_html` reference 30,032 → 3,576 (8.4×); Wikipedia \"Markdown\" 168,173 → 16,864 (10.0×); o200k within 0.1× of each"
+    "type": "measured"
+    "source": "04_tokens.txt"
+  - "id": "C11"
+    "text": "Wrong API key → 403 `API token is wrong. Please visit https://app.scrapingant.com/profile to check your token settings`, no cost header; `url=not-a-url` → 422 `Wrong host part of url…`; unreachable host → 404 `This site can't be reached`, no cost header"
+    "type": "measured"
+    "source": "08_errors.txt"
+  - "id": "C12"
+    "text": "A target that answers 404 (GitHub Pages) is a successful API response: HTTP 200, `Ant-credits-cost: 10`, Markdown `# 404`; `wait_for_selector` on a selector that never appears with `timeout=5` also returned 200 and was charged"
+    "type": "measured"
+    "source": "08_errors.txt"
+  - "id": "C13"
+    "text": "The Markdown endpoint's responses did not carry `Ant-page-status-code` in any run (the `/v2/general` responses did)"
+    "type": "measured"
+    "source": "02, 03, 06, 08 outputs (`None`/`null`), generated `*.general.*.json` (`\"page_status\": \"200\"`)"
+  - "id": "C14"
+    "text": "`js_snippet` (base64, `browser=true`, 10 credits) removing `nav, footer, .cookie, aside` before conversion returns Markdown without those blocks and with the article intact (1,458 characters vs 1,824)"
+    "type": "measured + documented"
+    "source": "09_js_snippet_cleanup.txt; docs `/javascript-execution`"
+  - "id": "C15"
+    "text": "POST is forwarded to the target: the fixture host answers 405 and the API returns 200 with `# 405 Not Allowed` as Markdown, charged 10"
+    "type": "measured + product"
+    "source": "10_methods.txt; registry `api.markdown_parameters`, `api.post_forwarding`"
+  - "id": "C16"
+    "text": "Parameters: url, x-api-key, browser (default true), proxy_type, proxy_country, timeout 5–60 s (default 60), return_page_source, cookies, js_snippet, wait_for_selector, block_resource; the last four need `browser=true`"
+    "type": "product"
+    "source": "registry `api.markdown_parameters`, `api.timeout_range`"
+  - "id": "C17"
+    "text": "Concurrency: no limit on paid plans; one concurrent request on the free plan; HTTP 409 beyond the limit"
+    "type": "product"
+    "source": "registry `api.concurrency_limit` (owner statement 2026-09-24; docs `/errors` 409 row)"
+  - "id": "C18"
+    "text": "Errors: JSON `detail`; documented codes 400/403/404/405/409/422/423/500"
+    "type": "product"
+    "source": "registry `api.error_codes`"
+  - "id": "C19"
+    "text": "Integrations: MCP `get_web_page_markdown` (url, browser, proxy_type, proxy_country) with the Claude Code install command; GitHub Action `output-type: markdown` (`content`, `url`); n8n \"Get Markdown\"; Make \"Get Page as Markdown\""
+    "type": "product"
+    "source": "registry `mcp.tool.get_web_page_markdown`, `mcp.install_command.claude_code`, `integrations.github_action_markdown`, `integrations.n8n_markdown`, `integrations.make_markdown`"
+  - "id": "C20"
+    "text": "The AI extractor uses the Markdown transformation as its input and its cost counts the Markdown characters"
+    "type": "product"
+    "source": "registry `api.extract_endpoint`, `api.extract_cost_formula`"
+  - "id": "C21"
+    "text": "Free tier: 10,000 free API credits every month, no credit card required"
+    "type": "product"
+    "source": "registry `free_tier.credits` (pricing block + signup page, 2026-09-24)"
+  - "id": "C22"
+    "text": "The Markdown endpoint returned an empty body once (HTTP 200, `Ant-credits-cost: 10`, `markdown` = two newlines) for the docs.python.org tutorial on 2026-09-24; the repeat returned 25,087 characters"
+    "type": "measured"
+    "source": "run log 2026-09-24 (first `04_tokens.py` run); `_common.cached()` retry guard"
+  - "id": "C23"
+    "text": "Capterra rating (5.0, 12 ratings) removed from this page's hero and Product JSON-LD: not verifiable on 2026-09-24"
+    "type": "product"
+    "source": "registry `reviews.capterra_rating` (unverified)"

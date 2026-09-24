@@ -1,0 +1,7 @@
+$ bash 10_methods.sh
+$ curl -X POST 'https://api.scrapingant.com/v2/markdown?url=https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html' -H 'x-api-key: ...' -H 'Ant-Content-Type: application/json' -d '{"probe": true}'
+HTTP/2 200 
+ant-credits-cost: 10
+--- body (first 200 characters)
+{"url":"https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html","markdown":"# 405 Not Allowed\n\n"}
+exit=0

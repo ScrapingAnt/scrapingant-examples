@@ -1,0 +1,8 @@
+$ python 04_tokens.py
+page                 html bytes  md bytes html cl100k md cl100k  ratio html o200k md o200k  ratio  cost(html,md)
+fixture                    2934      1832         864       498   1.7x        865      494   1.8x  10,10
+python-tutorial           81194     25087       23962      6870   3.5x      24019     6798   3.5x  10,10
+pandas-read_html          88611     13698       30032      3576   8.4x      30237     3640   8.3x  10,10
+wikipedia-markdown       522059     62711      168173     16864  10.0x     168950    16886  10.0x  10,10
+raw HTML = the /v2/general response body for the same URL with browser=true; tokens counted with tiktoken on the exact bytes returned
+exit=0

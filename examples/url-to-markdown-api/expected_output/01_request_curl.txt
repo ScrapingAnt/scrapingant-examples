@@ -1,0 +1,34 @@
+$ bash 01_request_curl.sh
+$ curl 'https://api.scrapingant.com/v2/markdown?url=https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html' -H 'x-api-key: $SCRAPINGANT_API_KEY'
+HTTP/2 200 
+ant-credits-cost: 10
+content-type: application/json
+--- body (jq): url, markdown length in characters, first 25 lines of markdown
+https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html
+1824
+[Home](/) · [Reviews](/reviews) · [Guides](/guides) · [Pricing](/pricing) ·
+[Contact](/contact)
+
+COOKIE-SENTINEL-2b8e: We use cookies to remember your preferences. [Manage
+settings](/cookies)
+
+# Ant Farm Deluxe review
+
+The Ant Farm Deluxe is a two-chamber acrylic habitat for harvester ants that
+ships with a sand block, a feeding tray and a magnifier, and after six weeks
+of daily observation it is the enclosure we would recommend to a first-time
+keeper who wants to watch tunnels form without cleaning sand off the kitchen
+table every morning.
+
+## What is in the box
+
+  * Two acrylic chambers connected by a 12 cm tube
+  * One sand block (blue, 400 g)
+  * Feeding tray, water dropper and a 3x magnifier
+
+## Setup in three steps
+
+  1. Soak the sand block for ten minutes and press it into the main chamber.
+  2. Connect the tube and check both seals with the supplied key.
+  3. Introduce the ants through the top hatch and close it within thirty seconds.
+exit=0

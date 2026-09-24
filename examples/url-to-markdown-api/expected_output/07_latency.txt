@@ -1,0 +1,5 @@
+$ python 07_latency.py
+browser=true  N=10  min 1.85 s  median 2.22 s  p90 2.81 s  max 6.12 s  statuses [200]  credits per call ['10']
+browser=false N=10  min 0.82 s  median 0.99 s  p90 1.67 s  max 1.71 s  statuses [200]  credits per call ['1']
+sequential calls, one client, full request time including TLS and JSON download; numbers are this client's on this day
+exit=0

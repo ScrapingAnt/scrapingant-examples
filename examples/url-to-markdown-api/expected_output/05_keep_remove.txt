@@ -1,0 +1,17 @@
+$ python 05_keep_remove.py
+ok  navigation link text present
+ok  cookie banner text present
+ok  aside (sponsored) text present
+ok  footer text present
+ok  script body absent
+ok  noscript text absent
+ok  h1 as '# '
+ok  h2 as '## '
+ok  inline link kept as [text](href)
+ok  table as pipe rows
+ok  image kept as ![alt](src)
+ok  code block indented 4 spaces, no fence
+ok  blockquote as '> '
+lines: 56 | characters: 1824 | lines over 78 chars: 1 (html2text wraps at 78 where it can break)
+local html2text 2020.1.16 on the /v2/general HTML == API markdown: True
+exit=0

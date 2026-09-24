@@ -1,0 +1,5 @@
+$ python 06_browser_false.py
+browser=true : status 200 cost 10 page None
+browser=false: status 200 cost 1 page None
+markdown identical: True
+exit=0

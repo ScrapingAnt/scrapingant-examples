@@ -1,0 +1,13 @@
+$ node --experimental-strip-types --no-warnings 03_request_node.ts
+status: 200 | Ant-credits-cost: 10 | Ant-page-status-code: null
+url: https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html
+markdown characters: 1824
+[Home](/) · [Reviews](/reviews) · [Guides](/guides) · [Pricing](/pricing) ·
+[Contact](/contact)
+
+COOKIE-SENTINEL-2b8e: We use cookies to remember your preferences. [Manage
+settings](/cookies)
+
+# Ant Farm Deluxe review
+
+exit=0
