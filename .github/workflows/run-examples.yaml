@@ -38,6 +38,7 @@ jobs:
         id: ${{ fromJson(needs.matrix.outputs.ids) }}
     env:
       SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
+      LATENCY_N: "3"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
