@@ -3,6 +3,8 @@ $ curl 'https://api.scrapingant.com/v2/markdown?url=https://scrapingant.github.i
 HTTP/2 200 
 ant-credits-cost: 10
 content-type: application/json
+--- body, first 400 bytes as returned
+{"url":"https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html","markdown":"[Home](/) · [Reviews](/reviews) · [Guides](/guides) · [Pricing](/pricing) ·\n[Contact](/contact)\n\nCOOKIE-SENTINEL-2b8e: We use cookies to remember your preferences. [Manage\nsettings](/cookies)\n\n# Ant Farm Deluxe review\n\nThe Ant Farm Deluxe is a two-chamber acrylic habitat for harvester
 --- body (jq): url, markdown length in characters, first 25 lines of markdown
 https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html
 1824

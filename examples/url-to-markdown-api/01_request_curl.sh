@@ -6,6 +6,8 @@ curl -sS -D headers.tmp -o body.tmp "https://api.scrapingant.com/v2/markdown?url
 echo "\$ curl 'https://api.scrapingant.com/v2/markdown?url=${URL}' -H 'x-api-key: \$SCRAPINGANT_API_KEY'"
 head -1 headers.tmp | tr -d '\r'
 grep -i -E "^(content-type|ant-credits-cost|ant-page-status-code):" headers.tmp | tr -d '\r' | sort
+echo "--- body, first 400 bytes as returned"
+head -c 400 body.tmp; echo
 echo "--- body (jq): url, markdown length in characters, first 25 lines of markdown"
 jq -r '.url' body.tmp
 jq -r '.markdown | length' body.tmp
