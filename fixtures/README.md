@@ -1,1 +1,2 @@
 Shared fixtures served via GitHub Pages at https://scrapingant.github.io/scrapingant-examples/fixtures/<file>. Keep them static and small; examples reference them by that URL when a real HTTP fetch is part of what is being demonstrated.
+- `markdown-article.html` — a deterministic article page (nav, cookie banner, article with table/code/image, aside, footer, script/noscript sentinels) for the url-to-markdown-api packet and the landing page example.
