@@ -30,6 +30,7 @@ measurements:
   - {name: browser_false_parity, value: "identical", unit: bool, denominator: "fixture markdown, browser=true vs browser=false", source: expected_output/06_browser_false.txt}
   - {name: error_matrix, value: "403 wrong key (uncharged); 422 bad url (uncharged); 404 unreachable host (uncharged); target 404 -> 200 charged 10; wait_for_selector never appears -> 200 charged 10", unit: status, denominator: "one call per case, 2026-09-24", source: expected_output/08_errors.txt}
 limitations:
+  - Outputs 01, 04, 05 and 09 were re-captured after the check scripts were corrected on 2026-09-24 (the first full run had two over-strict checks); the other outputs are from the first run. The monthly CI run re-executes the whole packet.
   - Latency is one client, one day; token ratios depend on the page and the public pages change.
   - Observed once on 2026-09-24 (first run of 04_tokens.py, docs.python.org tutorial): HTTP 200, Ant-credits-cost 10, markdown body of two newlines; the retry returned the full page. _common.cached() now retries once and prints a note; reported to the owner.
   - /v2/markdown responses did not carry Ant-page-status-code in any run, although docs/custom-headers.md lists it; /v2/general responses did.
@@ -68,7 +69,7 @@ claims:   # ids match briefs/url-to-markdown-api.ledger.md in seo_optimisation
     "type": "measured + product"
     "source": "01, 02, 06, 07 outputs; registry `api.markdown_pricing_by_browser`, `credits.simple_residential`, `credits.browser_js_residential`, `api.credits_cost_header`"
   - "id": "C9"
-    "text": "Latency on the fixture, N=10 sequential requests, one client, 2026-09-24: `browser=true` median 2.22 s, p90 2.81 s, max 6.12 s; `browser=false` median 0.99 s, p90 1.67 s, max 1.71 s; full HTTP call including TLS and download"
+    "text": "Latency on the fixture, N=10 sequential requests, one client in Kyiv on home broadband, 2026-09-24, full HTTP call including TLS and download: `browser=true` min 1.85 / median 2.22 / p90 2.81 / max 6.12 s; `browser=false` min 0.82 / median 0.99 / p90 1.67 / max 1.71 s"
     "type": "measured"
     "source": "07_latency.txt"
   - "id": "C10"
