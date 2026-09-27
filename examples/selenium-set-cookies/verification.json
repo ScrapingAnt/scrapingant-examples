@@ -1,0 +1,38 @@
+{
+  "tested_source_commit": "1a0e903809c3b4f233072b6d1b7a3856140d72a6",
+  "date": "2026-09-27",
+  "offline_tests": 16,
+  "offline_passed": true,
+  "primary_browser_checks": 78,
+  "primary_extraction_observations": 54,
+  "new_api_requests": 8,
+  "api_credits": 44,
+  "linux_ci": {
+    "run_id": 36331495585,
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36331495585",
+    "head_sha": "1a0e903809c3b4f233072b6d1b7a3856140d72a6",
+    "conclusion": "success",
+    "scope": "16 offline tests and3 local Chrome rounds; no API call"
+  },
+  "independent_code_review": {
+    "blocking": [],
+    "resolved": "Duplicate row false positive fixed with Counter intersection and regression; final primary suites rerun; earlier captures retained."
+  },
+  "privacy": {
+    "key_transport": "authentication header only",
+    "raw_cookie_values_published": false,
+    "exact_credential_scan": "pass",
+    "private_reference_scan": "pass"
+  },
+  "source_hashes": {
+    "browser_matrix.py": "fe0d47f813ba438aa52f3072300cc0e6d6672c6fe5e8f87a1fc11f75ca61243d",
+    "catalog_fixture.py": "f9fb3bdc62cbd10735b5e9ed52ecc090ea1e191f622a9c92e00d5858501f4826",
+    "cookie_state.py": "da54f78afec0371dc98e70cf8d5eb14182660de3ba2228c57e221ed96759f34b",
+    "quickstart.py": "35a35d8676143a49afbc90364921ee22d88c6561cefc131cbb8533b1b66dec8c",
+    "scrapingant_cookies.py": "ef391bf6ee46f730a07f9b40adbde4dd4518c3d4ea291dc4791e82ace6e5e4af",
+    "summarize.py": "2817171a65bfeb6661377fd8b1d9d6dbb0c5ba41ddc02b115f187b5d494d98f3",
+    "test_browser_matrix.py": "1aa5899fa032fcf9c84ad95cfcb04820df0054d34eb2902fc1a6cadb768f0fda",
+    "test_cookie_state.py": "3f4e0357c0004c263fab45aa834d3bf60e3c4ba645aa4e2ad2c67988dad643bc",
+    "test_scrapingant_cookies.py": "9e6d1fe4c9a25ef540e8a77767ea0c11ab4007b5d3e51909b671f436ede791dd"
+  }
+}

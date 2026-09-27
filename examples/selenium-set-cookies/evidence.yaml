@@ -1,6 +1,8 @@
 article_id: selenium-set-cookies
 canonical_url: https://scrapingant.com/blog/selenium-set-cookies
 owner: Oleg Kulyk
+examples_repo_commit: 1a0e903809c3b4f233072b6d1b7a3856140d72a6
+tested_source_commit: 1a0e903809c3b4f233072b6d1b7a3856140d72a6
 tested_at: 2026-09-27
 requires_api_key: false
 optional_live_requires_api_key: true
@@ -26,6 +28,7 @@ outputs:
   - expected_output/firefox.json
   - expected_output/quickstart.json
   - expected_output/scrapingant.json
+  - expected_output/offline-checks.json
   - comparison.json
 exploratory_outputs:
   - expected_output/exploratory/firefox-installed-109.json
@@ -99,3 +102,5 @@ claims:
     text: JSON helper preserves supported attributes, verifies the exact origin and filters expired cookies; defaults do not call the API.
     type: documented
     source: cookie_state.py; run.sh; test_cookie_state.py; test_scrapingant_cookies.py
+
+verification: verification.json
