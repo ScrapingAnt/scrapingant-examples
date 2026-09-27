@@ -75,6 +75,16 @@
       "id": "selenium-set-cookies",
       "needs_api_key": false,
       "note": "Local HTTPS catalog,16 offline safety/oracle assertions and 3 Chrome rounds. Needs Chrome/Selenium Manager and openssl; no API calls even if a key exists. Firefox and bounded product probe are explicit opt-ins."
+    },
+    {
+      "id": "playwright-set-cookies",
+      "needs_api_key": false,
+      "note": "Local synthetic catalog and bundled Chromium by default; optional Firefox captures are documented. No external target or API call, even when a key is configured."
+    },
+    {
+      "id": "manage-cookies-python-requests",
+      "needs_api_key": false,
+      "note": "Local synthetic catalog, Requests cookie scope/persistence matrix and offline regressions. No external target or API call, even when a key is configured."
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "tested_at": "2026-09-27T16:48:28.475029+00:00",
+  "command": "python -m unittest -v",
+  "tests_run": 19,
+  "failures": 0,
+  "errors": 0,
+  "all_passed": true,
+  "duplicate_oracle_mutation": {
+    "mutation": "Naive tuple-membership sum allows four copies of one SKU to count as four matches.",
+    "tests_run": 1,
+    "expected_failures_observed": 1,
+    "errors": 0,
+    "detected": true
+  }
+}

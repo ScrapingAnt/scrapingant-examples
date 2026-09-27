@@ -1,0 +1,140 @@
+article_id: manage-cookies-python-requests
+canonical_url: https://scrapingant.com/blog/manage-cookies-python-requests
+owner: Oleg Kulyk
+examples_repo_commit: PENDING_ROOT_COMMIT
+tested_source_commit: PENDING_ROOT_COMMIT
+tested_at: 2026-09-27
+requires_api_key: false
+run_command: ./run.sh
+environment:
+  os: macOS 26.6.2
+  architecture: arm64
+  python: 3.12.10
+  requests: 2.34.2
+  urllib3: 2.8.0
+dependencies:
+  requests: 2.34.2
+  certifi: 2026.7.22
+  charset-normalizer: 3.5.1
+  idna: '3.20'
+  urllib3: 2.8.0
+  transitive_lock: requirements-lock.txt
+fixtures:
+  - catalog_fixture.py
+  - "temporary HTTP server bound to 127.0.0.1 only; synthetic session and catalog"
+outputs:
+  - expected_output/requests.json
+  - expected_output/quickstart.json
+  - expected_output/checks.json
+  - expected_output/oracle-regression-red.txt
+  - comparison.json
+verification: verification.json
+measurements:
+  - name: extraction_observations
+    value: 36
+    denominator: 12 cases times 3 rounds
+    source: expected_output/requests.json
+  - name: diagnostic_observations
+    value: 18
+    denominator: 6 cases times 3 rounds
+    source: expected_output/requests.json
+  - name: matrix_checks_passed
+    value: 54
+    denominator: 54 designed positive and negative checks
+    source: expected_output/requests.json
+  - name: matching_records
+    value: 48
+    denominator: 144 expected tuple comparisons across 36 mixed-control extractions
+    source: comparison.json
+  - name: exact_extractions
+    value: 12
+    denominator: 36 observations; not a production success rate
+    source: comparison.json
+  - name: tests_passed
+    value: 24
+    denominator: 24 offline and loopback boundary/integration tests
+    source: expected_output/checks.json
+  - name: external_and_paid_calls
+    value: 0
+    denominator: entire local packet execution
+    source: run.sh; requests_matrix.py
+claims:
+  - id: C1
+    type: measured
+    text: All 36 extraction observations returned 200 and four rows, but only four case types matched all four independent expected records.
+    source: comparison.json
+  - id: C2
+    type: measured
+    text: Separate short-lived Sessions lost earlier cookie state; a persistent Session selected the expected member-EUR records in all three rounds.
+    source: expected_output/requests.json
+  - id: C3
+    type: measured
+    text: A per-call jar yielded 4/4 while the receiving Session stored zero cookies; the next call without that jar yielded 0/4 because this fixture sets no cookies on catalog responses.
+    source: expected_output/requests.json
+  - id: C4
+    type: measured
+    text: The redirect response had one session cookie and the final response had two region cookies; the Session accumulated all three. Restoring only the final response jar yielded retail-EUR records.
+    source: expected_output/requests.json
+  - id: C5
+    type: measured
+    text: LWP restoration retained three scoped entries and selected 4/4 EUR member records. A get_dict roundtrip collapsed duplicate region names to one and selected member-USD records at the EUR URL in this fixture insertion order.
+    source: expected_output/requests.json
+  - id: C6
+    type: measured
+    text: Name-only region lookup raised CookieConflictError; explicit domain/path lookup worked and clearing that exact region tuple retained the other region cookie.
+    source: expected_output/requests.json
+  - id: C7
+    type: measured
+    text: Request.prepare omitted the seeded Session cookies and matched 0/4; Session.prepare_request applied them and matched 4/4.
+    source: expected_output/requests.json
+  - id: C8
+    type: measured
+    text: A cookie with a past expiry and an explicitly cleared cookie were absent on the wire; a server-revoked session remained on the wire but no longer selected member prices.
+    source: expected_output/requests.json
+  - id: C9
+    type: measured
+    text: Direct httponly and samesite keyword arguments to RequestsCookieJar.set raised TypeError. Mounting an HTTPS adapter left an HTTP fixture request possible.
+    source: expected_output/requests.json
+  - id: C10
+    type: measured
+    text: The complete quickstart accumulated three cookies, restored them and validated four literal member-EUR records.
+    source: expected_output/quickstart.json
+  - id: C11
+    type: measured
+    text: Tests verify explicit session-cookie opt-in at save and load, expiry exclusion, duplicate path retention, new-file-only 0600 persistence, selected metadata retention and omission of a Secure cookie from a prepared HTTP request.
+    source: expected_output/checks.json; test_cookie_state.py
+  - id: C12
+    type: measured
+    text: The initial oracle overcounted duplicates; recorded failing regression tests now pass with Counter intersection and exact multiset equality. Final captures use the corrected oracle.
+    source: expected_output/oracle-regression-red.txt; expected_output/checks.json; oracle.py
+  - id: C13
+    type: documented
+    text: Sessions persist cookies; method-level cookies do not persist by themselves; Session.prepare_request applies Session state.
+    source: https://requests.readthedocs.io/en/latest/user/advanced/
+    accessed_at: 2026-09-27
+  - id: C14
+    type: documented
+    text: RequestsCookieJar provides domain/path-aware get and clear operations; duplicate names can require disambiguation.
+    source: https://requests.readthedocs.io/en/latest/api/#api-cookies
+    accessed_at: 2026-09-27
+  - id: C15
+    type: documented
+    text: FileCookieJar saving/loading omits discard/session and expired cookies by default; LWP is an explicit cookie-jar file format.
+    source: https://docs.python.org/3/library/http.cookiejar.html
+    accessed_at: 2026-09-27
+  - id: C16
+    type: documented
+    text: Requests create_cookie accepts the rest mapping for additional metadata rather than arbitrary httponly or samesite keyword arguments.
+    source: https://requests.readthedocs.io/en/latest/_modules/requests/cookies/
+    accessed_at: 2026-09-27
+limitations:
+  - Self-authored deterministic fixture; no production account, authentication renewal, anti-blocking or reliability estimate.
+  - Independent requests use a new short-lived Session for each call; top-level requests.get is not directly measured.
+  - Loopback HTTP only; no TLS, browser JavaScript, cross-site SameSite, storage, SSO, MFA or IP-bound session test.
+  - Expiry is assigned to the past; natural waiting is not measured. Server revocation is deliberately simulated.
+  - get_dict survivor depends on jar insertion/order; USD surviving here is fixture-specific, not a universal selection rule.
+  - LWP snapshots are plaintext; mode 0600 is measured on macOS, not a general security or Windows-permission guarantee.
+  - HttpOnly/SameSite metadata does not establish browser policy enforcement in Requests.
+  - Twenty-four tests include separate local integration observations; 36 plus 18 totals describe only the primary three-round matrix.
+  - No new ScrapingAnt call; any product claims must cite the separate Selenium cookie-echo packet, not this fixture.
+  - Commit provenance and Linux CI are pending the release coordinator's actual commit/run; no completed CI claim is made here.

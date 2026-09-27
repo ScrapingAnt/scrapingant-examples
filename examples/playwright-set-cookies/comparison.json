@@ -1,0 +1,319 @@
+{
+  "primary_browsers": {
+    "chromium": {
+      "python": "3.12.10",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "macos_version": "26.6.2",
+      "architecture": "arm64",
+      "packages": {
+        "playwright": "1.63.0",
+        "greenlet": "3.5.6",
+        "pyee": "13.0.1",
+        "typing_extensions": "4.16.0"
+      },
+      "browser_version": "153.0.8010.12"
+    },
+    "firefox": {
+      "python": "3.12.10",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "macos_version": "26.6.2",
+      "architecture": "arm64",
+      "packages": {
+        "playwright": "1.63.0",
+        "greenlet": "3.5.6",
+        "pyee": "13.0.1",
+        "typing_extensions": "4.16.0"
+      },
+      "browser_version": "155.0"
+    }
+  },
+  "primary_checks": 108,
+  "passed_checks": 108,
+  "primary_extraction_observations": 72,
+  "primary_diagnostic_observations": 36,
+  "records_per_extraction": 4,
+  "record_opportunities": 288,
+  "matching_record_observations": 120,
+  "exact_extraction_observations": 30,
+  "http_200_extraction_observations": 72,
+  "four_row_extraction_observations": 72,
+  "case_outcomes": {
+    "fresh_browser": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "retail"
+      ],
+      "regions": [
+        "US"
+      ],
+      "all_checks_passed": true
+    },
+    "cookie_before_navigation": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "server_seeded_browser": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "full_storage_state_restore": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "cookies_only_restore": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "US"
+      ],
+      "all_checks_passed": true
+    },
+    "shared_api_explicit_region": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "shared_api_missing_region": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "US"
+      ],
+      "all_checks_passed": true
+    },
+    "isolated_api_no_handoff": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "retail"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "isolated_api_state_handoff": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "audiences": [
+        "member"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "other_browser_context": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "retail"
+      ],
+      "regions": [
+        "US"
+      ],
+      "all_checks_passed": true
+    },
+    "api_set_cookie_changes_browser": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "retail"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    },
+    "wrong_cookie_path": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "audiences": [
+        "retail"
+      ],
+      "regions": [
+        "EU"
+      ],
+      "all_checks_passed": true
+    }
+  },
+  "diagnostic_outcomes": {
+    "cookie_inserted_before_first_navigation": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "httponly_visible_to_context_not_document": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "context_mutation_remains_isolated": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "route_normal": {
+      "observations": 6,
+      "all_checks_passed": true,
+      "server_hit_counts": [
+        1
+      ],
+      "total_server_hits": 6
+    },
+    "route_fetch_then_continue": {
+      "observations": 6,
+      "all_checks_passed": true,
+      "server_hit_counts": [
+        2
+      ],
+      "total_server_hits": 12
+    },
+    "route_fetch_then_fulfill": {
+      "observations": 6,
+      "all_checks_passed": true,
+      "server_hit_counts": [
+        1
+      ],
+      "total_server_hits": 6
+    }
+  },
+  "limitations": [
+    "Deterministic self-authored fixture, not a production reliability estimate.",
+    "Three repeats per browser share one host and fixture design.",
+    "Region in localStorage is an explicit fixture design, not a universal website rule.",
+    "API state handoff still needs this application-specific region query parameter.",
+    "HTTP loopback does not test Secure delivery or cross-site SameSite behavior.",
+    "No real login, MFA, SSO, IP-bound sessions, sessionStorage or IndexedDB test.",
+    "Quickstart and exploratory captures are excluded from primary denominators."
+  ]
+}

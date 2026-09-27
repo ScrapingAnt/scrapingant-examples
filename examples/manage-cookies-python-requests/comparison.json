@@ -1,0 +1,304 @@
+{
+  "source": "expected_output/requests.json",
+  "tested_at": "2026-09-27T16:44:17.210271+00:00",
+  "environment": {
+    "os": "macOS 26.6.2",
+    "architecture": "arm64",
+    "python": "3.12.10",
+    "dependencies": {
+      "requests": "2.34.2",
+      "urllib3": "2.8.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.1",
+      "idna": "3.20"
+    }
+  },
+  "rounds": 3,
+  "extraction_observations": 36,
+  "diagnostic_observations": 18,
+  "checks_total": 54,
+  "all_checks_passed": true,
+  "expected_record_comparisons": 144,
+  "matching_records": 48,
+  "all_extractions_http_200_and_four_rows": true,
+  "exact_extractions": 12,
+  "cases": [
+    {
+      "case": "independent_requests",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "USD"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        0
+      ]
+    },
+    {
+      "case": "persistent_session",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        4
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        true
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    },
+    {
+      "case": "per_call_cookies",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        4
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        true
+      ],
+      "stored_cookie_counts": [
+        0
+      ]
+    },
+    {
+      "case": "per_call_followup",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "USD"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        0
+      ]
+    },
+    {
+      "case": "final_response_cookies_only",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        2
+      ]
+    },
+    {
+      "case": "lwp_full_restore",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        4
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        true
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    },
+    {
+      "case": "get_dict_roundtrip",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "USD"
+      ],
+      "active_member": [
+        true
+      ],
+      "stored_cookie_counts": [
+        2
+      ]
+    },
+    {
+      "case": "request_prepare",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "USD"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    },
+    {
+      "case": "session_prepare_request",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        4
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        true
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    },
+    {
+      "case": "expired_session",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    },
+    {
+      "case": "clear_session",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        2
+      ]
+    },
+    {
+      "case": "server_revocation",
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_records_per_observation": [
+        0
+      ],
+      "expected_records_per_observation": 4,
+      "selected_currencies": [
+        "EUR"
+      ],
+      "active_member": [
+        false
+      ],
+      "stored_cookie_counts": [
+        3
+      ]
+    }
+  ],
+  "interpretation": "Designed positive and negative controls; totals are not production success rates."
+}
