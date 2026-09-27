@@ -1,0 +1,14 @@
+{
+  "eu": [
+    {"sku": "ATLAS-01", "currency": "EUR", "price": "12.50"},
+    {"sku": "BIRCH-02", "currency": "EUR", "price": "24.00"},
+    {"sku": "CORAL-03", "currency": "EUR", "price": "8.75"},
+    {"sku": "DELTA-04", "currency": "EUR", "price": "41.20"}
+  ],
+  "us": [
+    {"sku": "ATLAS-01", "currency": "USD", "price": "14.00"},
+    {"sku": "BIRCH-02", "currency": "USD", "price": "27.00"},
+    {"sku": "CORAL-03", "currency": "USD", "price": "10.00"},
+    {"sku": "DELTA-04", "currency": "USD", "price": "46.00"}
+  ]
+}

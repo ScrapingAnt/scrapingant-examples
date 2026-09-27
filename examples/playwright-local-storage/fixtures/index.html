@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Region preference catalog fixture</title>
+<h1>Region preference catalog</h1>
+<table><thead><tr><th>SKU</th><th>Currency</th><th>Price</th></tr></thead><tbody></tbody></table>
+<script>
+// Explicit fixture contract: read storage once at startup, then put it in a query.
+// A later storage change alone does not rerender this application's catalog.
+(async () => {
+  const region = new URL(location.href).searchParams.get('region')
+    || localStorage.getItem('region') || 'us';
+  const response = await fetch('/api/catalog?region=' + encodeURIComponent(region));
+  if (!response.ok) throw new Error('Catalog request failed: ' + response.status);
+  const data = await response.json();
+  for (const record of data.records) {
+    const row = document.createElement('tr');
+    for (const field of ['sku', 'currency', 'price']) {
+      const cell = document.createElement('td');
+      cell.textContent = record[field];
+      row.append(cell);
+    }
+    document.querySelector('tbody').append(row);
+  }
+  document.documentElement.dataset.ready = 'true';
+})().catch(error => { document.documentElement.dataset.error = error.message; });
+</script>

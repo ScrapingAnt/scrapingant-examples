@@ -1,0 +1,2486 @@
+{
+  "schema_version": 1,
+  "browser": "firefox",
+  "started_at": "2026-09-27T17:26:18.276778+00:00",
+  "rounds": 3,
+  "runs": [
+    {
+      "round": 1,
+      "cases": [
+        {
+          "case": "early_missing_only_seed",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:19.745329+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_without_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:20.139181+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:20.186890+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "fresh_isolated_context",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:20.529234+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_state_restore",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:20.832166+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:20.984704+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "changed_port_state_miss",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:21.299611+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64860",
+          "page_url": "http://127.0.0.1:64860/",
+          "request_url": "http://127.0.0.1:64860/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_origin_initializer",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:21.536927+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "missing_only_preserves_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:21.760605+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "us",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "unconditional_overwrites_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:22.078403+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_only_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:22.250076+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/?region=eu",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_missing_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:22.833812+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_round_trip",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:22.963091+00:00",
+          "observed": {
+            "input": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "raw": "{\"label\":\"quote \\\" slash \\\\ newline\\n </script>\",\"nested\":{\"enabled\":true,\"count\":2}}",
+            "parsed": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "stored_type": "string"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_crud",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:23.107651+00:00",
+          "observed": {
+            "initial": null,
+            "after_set": "first",
+            "after_update": "second",
+            "after_remove": null,
+            "count_before_clear": 2,
+            "count_after_clear": 0
+          },
+          "check_passed": true
+        },
+        {
+          "case": "session_storage_not_restored",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:23.663376+00:00",
+          "observed": {
+            "original_local": "eu",
+            "original_session": "tab-only",
+            "new_page_local": "eu",
+            "new_page_session": null,
+            "restored_local": "eu",
+            "restored_session": null,
+            "snapshot": {
+              "cookies": [],
+              "origins": [
+                {
+                  "origin": "http://127.0.0.1:64859",
+                  "localStorage": [
+                    {
+                      "name": "region",
+                      "value": "eu"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_other_page",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:24.063801+00:00",
+          "observed": {
+            "writer_events": [],
+            "reader_events": [
+              {
+                "key": "region",
+                "oldValue": null,
+                "newValue": "eu",
+                "storageArea": "localStorage"
+              }
+            ],
+            "writer_value": "eu",
+            "reader_value": "eu"
+          },
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "cases": [
+        {
+          "case": "early_missing_only_seed",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:24.261130+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_without_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:24.424253+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:24.464652+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "fresh_isolated_context",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:24.785929+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_state_restore",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:25.090865+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:25.897251+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "changed_port_state_miss",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:26.229203+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64860",
+          "page_url": "http://127.0.0.1:64860/",
+          "request_url": "http://127.0.0.1:64860/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_origin_initializer",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:26.413838+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "missing_only_preserves_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:26.617136+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "us",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "unconditional_overwrites_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:26.830515+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_only_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:26.995692+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/?region=eu",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_missing_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:27.414281+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_round_trip",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:27.563444+00:00",
+          "observed": {
+            "input": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "raw": "{\"label\":\"quote \\\" slash \\\\ newline\\n </script>\",\"nested\":{\"enabled\":true,\"count\":2}}",
+            "parsed": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "stored_type": "string"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_crud",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:27.686170+00:00",
+          "observed": {
+            "initial": null,
+            "after_set": "first",
+            "after_update": "second",
+            "after_remove": null,
+            "count_before_clear": 2,
+            "count_after_clear": 0
+          },
+          "check_passed": true
+        },
+        {
+          "case": "session_storage_not_restored",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:28.764237+00:00",
+          "observed": {
+            "original_local": "eu",
+            "original_session": "tab-only",
+            "new_page_local": "eu",
+            "new_page_session": null,
+            "restored_local": "eu",
+            "restored_session": null,
+            "snapshot": {
+              "cookies": [],
+              "origins": [
+                {
+                  "origin": "http://127.0.0.1:64859",
+                  "localStorage": [
+                    {
+                      "name": "region",
+                      "value": "eu"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_other_page",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:29.045288+00:00",
+          "observed": {
+            "writer_events": [],
+            "reader_events": [
+              {
+                "key": "region",
+                "oldValue": null,
+                "newValue": "eu",
+                "storageArea": "localStorage"
+              }
+            ],
+            "writer_value": "eu",
+            "reader_value": "eu"
+          },
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "cases": [
+        {
+          "case": "early_missing_only_seed",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:29.196306+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_without_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:29.338272+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:29.365341+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "fresh_isolated_context",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:29.648990+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_state_restore",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:29.960652+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:30.100695+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "changed_port_state_miss",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:30.369499+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64860",
+          "page_url": "http://127.0.0.1:64860/",
+          "request_url": "http://127.0.0.1:64860/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_origin_initializer",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:30.524915+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "missing_only_preserves_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:30.692940+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": "us",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "unconditional_overwrites_change",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:31.460850+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": "eu",
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_only_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:31.614291+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/?region=eu",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=eu",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "eu",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "EUR",
+              "price": "12.50"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "EUR",
+              "price": "24.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "EUR",
+              "price": "8.75"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "EUR",
+              "price": "41.20"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_missing_without_storage",
+          "kind": "extraction",
+          "captured_at": "2026-09-27T17:26:31.762775+00:00",
+          "mode": "browser_dom",
+          "origin": "http://127.0.0.1:64859",
+          "page_url": "http://127.0.0.1:64859/",
+          "request_url": "http://127.0.0.1:64859/api/catalog?region=us",
+          "page_status": 200,
+          "request_status": 200,
+          "response_region": "us",
+          "storage_region": null,
+          "records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "api_records": [
+            {
+              "sku": "ATLAS-01",
+              "currency": "USD",
+              "price": "14.00"
+            },
+            {
+              "sku": "BIRCH-02",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "CORAL-03",
+              "currency": "USD",
+              "price": "10.00"
+            },
+            {
+              "sku": "DELTA-04",
+              "currency": "USD",
+              "price": "46.00"
+            }
+          ],
+          "row_count": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_round_trip",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:31.887996+00:00",
+          "observed": {
+            "input": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "raw": "{\"label\":\"quote \\\" slash \\\\ newline\\n </script>\",\"nested\":{\"enabled\":true,\"count\":2}}",
+            "parsed": {
+              "label": "quote \" slash \\ newline\n </script>",
+              "nested": {
+                "enabled": true,
+                "count": 2
+              }
+            },
+            "stored_type": "string"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_crud",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:32.013772+00:00",
+          "observed": {
+            "initial": null,
+            "after_set": "first",
+            "after_update": "second",
+            "after_remove": null,
+            "count_before_clear": 2,
+            "count_after_clear": 0
+          },
+          "check_passed": true
+        },
+        {
+          "case": "session_storage_not_restored",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:32.550080+00:00",
+          "observed": {
+            "original_local": "eu",
+            "original_session": "tab-only",
+            "new_page_local": "eu",
+            "new_page_session": null,
+            "restored_local": "eu",
+            "restored_session": null,
+            "snapshot": {
+              "cookies": [],
+              "origins": [
+                {
+                  "origin": "http://127.0.0.1:64859",
+                  "localStorage": [
+                    {
+                      "name": "region",
+                      "value": "eu"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_other_page",
+          "kind": "diagnostic",
+          "captured_at": "2026-09-27T17:26:32.833513+00:00",
+          "observed": {
+            "writer_events": [],
+            "reader_events": [
+              {
+                "key": "region",
+                "oldValue": null,
+                "newValue": "eu",
+                "storageArea": "localStorage"
+              }
+            ],
+            "writer_value": "eu",
+            "reader_value": "eu"
+          },
+          "check_passed": true
+        }
+      ]
+    }
+  ],
+  "fixture_origins": {
+    "primary": "http://127.0.0.1:64859",
+    "secondary": "http://127.0.0.1:64860"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Darwin 25.6.0",
+    "machine": "arm64",
+    "playwright": "1.63.0",
+    "browser": "155.0"
+  },
+  "completed_at": "2026-09-27T17:26:33.813121+00:00"
+}

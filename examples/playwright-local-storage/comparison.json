@@ -1,0 +1,133 @@
+{
+  "browsers": {
+    "chromium": {
+      "python": "3.12.10",
+      "platform": "Darwin 25.6.0",
+      "machine": "arm64",
+      "playwright": "1.63.0",
+      "browser": "153.0.8010.12"
+    },
+    "firefox": {
+      "python": "3.12.10",
+      "platform": "Darwin 25.6.0",
+      "machine": "arm64",
+      "playwright": "1.63.0",
+      "browser": "155.0"
+    }
+  },
+  "rounds_per_browser": 3,
+  "checks": 96,
+  "passed_checks": 96,
+  "extraction_observations": 72,
+  "diagnostic_observations": 24,
+  "records_per_extraction": 4,
+  "record_opportunities": 288,
+  "matching_record_observations": 144,
+  "exact_extraction_observations": 36,
+  "http_200_extraction_observations": 72,
+  "four_row_extraction_observations": 72,
+  "cases": {
+    "early_missing_only_seed": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "late_write_without_reload": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "late_write_then_reload": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "fresh_isolated_context": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "storage_state_restore": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "same_context_new_page": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "changed_port_state_miss": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "wrong_origin_initializer": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "missing_only_preserves_change": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "unconditional_overwrites_change": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "query_only_without_storage": {
+      "observations": 6,
+      "matching_record_counts": [
+        4
+      ],
+      "all_checks_passed": true
+    },
+    "query_missing_without_storage": {
+      "observations": 6,
+      "matching_record_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    }
+  },
+  "diagnostics": {
+    "json_argument_round_trip": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "session_storage_not_restored": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "storage_crud": {
+      "observations": 6,
+      "all_checks_passed": true
+    },
+    "storage_event_other_page": {
+      "observations": 6,
+      "all_checks_passed": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "browser": "chromium",
+  "started_at": "2026-09-27T17:24:45.750634+00:00",
+  "rounds": 3,
+  "runs": [],
+  "completed_at": "2026-09-27T17:24:45.750768+00:00",
+  "error_type": "PermissionError"
+}
