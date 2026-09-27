@@ -1,9 +1,9 @@
 article_id: puppeteer-local-storage
 canonical_url: https://scrapingant.com/blog/puppeteer-local-storage
 owner: Oleg Kulyk
-source_commit: PENDING_ROOT_SOURCE_COMMIT
-tested_source_commit: PENDING_ROOT_SOURCE_COMMIT
-examples_repo_commit: PENDING_ROOT_SOURCE_COMMIT
+source_commit: a49ef7dcf8a8b43cb769f8bc8a98b695e5bbb58c
+tested_source_commit: a49ef7dcf8a8b43cb769f8bc8a98b695e5bbb58c
+examples_repo_commit: a49ef7dcf8a8b43cb769f8bc8a98b695e5bbb58c
 tested_at: 2026-09-27
 requires_api_key: false
 external_runtime_targets: false
@@ -136,3 +136,13 @@ claims:
     type: implementation_limit
     source: matrix.mjs; report.md
 verification: verification.json
+
+publication_provenance:
+  commit_fields_describe: Tested source revision, not the later metadata snapshot; article links pin the final immutable snapshot.
+  linux_ci_status: passed
+  linux_ci_url: https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36338111840
+  linux_ci_browser: Chrome
+  linux_ci_checks: 48
+  linux_ci_boundary_tests: 24
+  independent_local_rerun: passed
+  exact_secret_and_private_reference_scan: passed

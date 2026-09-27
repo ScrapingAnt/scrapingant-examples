@@ -1,5 +1,5 @@
 {
-  "tested_source_commit": "pending_publishing_step",
+  "tested_source_commit": "ffdd66b11af9a49780b1e94410b21001afdd3a39",
   "date": "2026-09-27",
   "generated_at": "2026-09-27T17:34:21.935038+00:00",
   "local_regression_tests": 22,
@@ -11,16 +11,28 @@
   "diagnostic_observations": 48,
   "new_api_requests": 0,
   "linux_ci": {
-    "status": "pending_publishing_step"
+    "status": "passed",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36337884841",
+    "head_sha": "ffdd66b11af9a49780b1e94410b21001afdd3a39",
+    "command": "./run.sh",
+    "browser": "Chrome",
+    "scenario_checks": 60,
+    "boundary_tests": 22
   },
   "independent_review": {
-    "status": "pending_publishing_step"
+    "status": "passed",
+    "reviewed_at": "2026-09-27",
+    "reviewer": "Coordinator agent independent of implementation",
+    "open_blockers": 0,
+    "independent_full_rerun": true,
+    "scope": "All captured local browsers rerun; observations match after timestamp/ephemeral-port normalization; independent literal multiset rescore agrees. Real browser checks and regression suite passed."
   },
   "privacy": {
-    "absolute_local_path_scan": "pass",
+    "exact_secret_scan": "passed",
+    "private_reference_scan": "passed",
     "key_or_credential_variables_read": false,
     "external_target_requests": false,
-    "exact_secret_scan": "pending_publishing_step"
+    "paid_api_requests": 0
   },
   "hash_scope": "All packet files except verification.json, ignored run_output, bytecode and virtual environments.",
   "sha256": {
@@ -30,7 +42,7 @@
     "browser_support.py": "2f211ff10bb757693c658f6af37746f95bb9541fe7dc9bcab658d73d1cda6cb5",
     "case_contract.py": "f4f5ed35e27fcacee9ba0c46ba0a46f3da47cdf601d7cfa861beeaf7c8d8eb3f",
     "catalog_fixture.py": "38d786b7db8a90635afa0c578ed24011afb40a53567f64bd6c9e8d50e507ac9b",
-    "evidence.yaml": "417d3dff02930e755ba7cbc41d778a5b45f9dcb22c6391cc780aef578e188abd",
+    "evidence.yaml": "56815cc63e39b4ce20176947edd13fc797e0ef3bbb24d321384c56e8ab34c092",
     "expected_output/chrome.json": "e78cb23c1450dcf7dd2e7834f0f7817575149ba7b3006fd77a17be45a2ceaad3",
     "expected_output/firefox.json": "43ba27b8b3a04736d76a4f6e9433b4935232d2b988cd0dec278d5d04648de214",
     "expected_output/quickstart.json": "7634ad2661d1b0a3dadd836f99d8a84452a6f810b84f1307b680c96932fe29f8",
@@ -70,5 +82,6 @@
     "summarize.py": "166f0f878a6a5357ac4959033ac7d8e3367552d442f2e14ecfe1c52b9f2068ce",
     "test_packet.py": "36e2b2492245d00788dbe42c8a930a22a4fe2e67b47c6dc4edd221ab06ed989c",
     "verify_hashes.py": "1a18b5991cae53fd934cf7e70626c1faea97d8907b3cfe7be797b6eb7eb154b9"
-  }
+  },
+  "publication_note": "Source revision is the successful Linux CI revision. Later metadata-only snapshot records provenance without changing tested executable or captured measurements. Local primary results and Linux smoke counts are separate."
 }
