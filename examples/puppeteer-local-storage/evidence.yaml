@@ -64,6 +64,7 @@ measurements:
     denominator: Complete Node test suite; development red tests excluded
     source: expected_output/test-results.json
 limitations:
+  - Initial hosted Ubuntu launch failed with No usable sandbox; corrected CI explicitly opts out for this loopback packet only, while local captures keep the sandbox.
   - Synthetic deterministic application, not a production performance or reliability estimate.
   - One bundled Chrome version and one host; no Firefox measurement.
   - LocalStorage-to-query conversion and URL preference override are explicit fixture application behavior.

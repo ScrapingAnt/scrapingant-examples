@@ -39,6 +39,9 @@ jobs:
     env:
       SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
       LATENCY_N: "3"
+      # The hosted Ubuntu runner denies bundled Chrome's user-namespace sandbox.
+      # This opt-out is limited to the synthetic loopback-only Puppeteer packet.
+      PUPPETEER_NO_SANDBOX: ${{ matrix.id == 'puppeteer-local-storage' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
