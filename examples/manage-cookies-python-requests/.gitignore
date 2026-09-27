@@ -1,0 +1,4 @@
+run_output/
+__pycache__/
+.venv/
+*.lwp

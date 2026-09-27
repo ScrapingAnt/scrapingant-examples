@@ -1,0 +1,26 @@
+test_duplicate_cannot_replace_missing_products (test_oracle.OracleTests.test_duplicate_cannot_replace_missing_products) ... FAIL
+test_empty_is_not_success (test_oracle.OracleTests.test_empty_is_not_success) ... ok
+test_extra_duplicate_rejects_exact_match (test_oracle.OracleTests.test_extra_duplicate_rejects_exact_match) ... FAIL
+test_four_correct_rows_match (test_oracle.OracleTests.test_four_correct_rows_match) ... ok
+test_wrong_currency_or_price_is_not_correct (test_oracle.OracleTests.test_wrong_currency_or_price_is_not_correct) ... ok
+
+======================================================================
+FAIL: test_duplicate_cannot_replace_missing_products (test_oracle.OracleTests.test_duplicate_cannot_replace_missing_products)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_oracle.py", line 18, in test_duplicate_cannot_replace_missing_products
+    self.assertEqual(score([row] * 4)["matching_records"], 1)
+AssertionError: 4 != 1
+
+======================================================================
+FAIL: test_extra_duplicate_rejects_exact_match (test_oracle.OracleTests.test_extra_duplicate_rejects_exact_match)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_oracle.py", line 28, in test_extra_duplicate_rejects_exact_match
+    self.assertEqual(score(rows + rows[:1])["matching_records"], 4)
+AssertionError: 5 != 4
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=2)

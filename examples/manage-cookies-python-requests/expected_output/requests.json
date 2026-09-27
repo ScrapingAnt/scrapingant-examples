@@ -1,0 +1,1719 @@
+{
+  "tested_at": "2026-09-27T16:44:17.210271+00:00",
+  "environment": {
+    "os": "macOS 26.6.2",
+    "architecture": "arm64",
+    "python": "3.12.10",
+    "dependencies": {
+      "requests": "2.34.2",
+      "urllib3": "2.8.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.1",
+      "idna": "3.20"
+    }
+  },
+  "fixture": "self-authored loopback HTTP catalog",
+  "rounds": [
+    {
+      "round": 1,
+      "observations": [
+        {
+          "case": "independent_requests",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "persistent_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_cookies",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_followup",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "final_response_cookies_only",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "lwp_full_restore",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "get_dict_roundtrip",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "request_prepare",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "session_prepare_request",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "expired_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "clear_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "server_revocation",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        }
+      ],
+      "diagnostics": [
+        {
+          "case": "redirect_cookie_accumulation",
+          "history_responses": 1,
+          "redirect_cookie_count": 1,
+          "final_response_cookie_count": 2,
+          "session_cookie_count": 3,
+          "check_passed": true
+        },
+        {
+          "case": "second_catalog_scope",
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "domain_path_lookup_and_clear",
+          "ambiguous_lookup_exception": "CookieConflictError",
+          "explicit_eu_lookup_correct": true,
+          "eu_cookie_removed": true,
+          "us_cookie_retained": true,
+          "check_passed": true
+        },
+        {
+          "case": "https_mount_still_allows_http",
+          "http_adapter_present": true,
+          "http_status": 200,
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_httponly_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_samesite_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "observations": [
+        {
+          "case": "independent_requests",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "persistent_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_cookies",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_followup",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "final_response_cookies_only",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "lwp_full_restore",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "get_dict_roundtrip",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "request_prepare",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "session_prepare_request",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "expired_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "clear_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "server_revocation",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        }
+      ],
+      "diagnostics": [
+        {
+          "case": "redirect_cookie_accumulation",
+          "history_responses": 1,
+          "redirect_cookie_count": 1,
+          "final_response_cookie_count": 2,
+          "session_cookie_count": 3,
+          "check_passed": true
+        },
+        {
+          "case": "second_catalog_scope",
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "domain_path_lookup_and_clear",
+          "ambiguous_lookup_exception": "CookieConflictError",
+          "explicit_eu_lookup_correct": true,
+          "eu_cookie_removed": true,
+          "us_cookie_retained": true,
+          "check_passed": true
+        },
+        {
+          "case": "https_mount_still_allows_http",
+          "http_adapter_present": true,
+          "http_status": 200,
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_httponly_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_samesite_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "observations": [
+        {
+          "case": "independent_requests",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "persistent_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_cookies",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "per_call_followup",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 0,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "final_response_cookies_only",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "lwp_full_restore",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "get_dict_roundtrip",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "request_prepare",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 2199
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 1199
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 3199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 6199
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 0,
+            "region_is_eur": false,
+            "region_is_usd": false,
+            "selected_currency": "USD"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "session_prepare_request",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1499
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 799
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2199
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 4299
+            }
+          ],
+          "matching_records": 4,
+          "expected_records": 4,
+          "exact_match": true,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "expired_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "clear_session",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": false,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 2,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "server_revocation",
+          "status": 200,
+          "row_count": 4,
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "EUR",
+              "price_minor": 1999
+            },
+            {
+              "sku": "PN-202",
+              "currency": "EUR",
+              "price_minor": 1099
+            },
+            {
+              "sku": "NB-303",
+              "currency": "EUR",
+              "price_minor": 2899
+            },
+            {
+              "sku": "BG-404",
+              "currency": "EUR",
+              "price_minor": 5699
+            }
+          ],
+          "matching_records": 0,
+          "expected_records": 4,
+          "exact_match": false,
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": false,
+            "region_cookie_count": 1,
+            "region_is_eur": true,
+            "region_is_usd": false,
+            "selected_currency": "EUR"
+          },
+          "stored_cookie_count": 3,
+          "expected_matching_records": 0,
+          "check_passed": true
+        }
+      ],
+      "diagnostics": [
+        {
+          "case": "redirect_cookie_accumulation",
+          "history_responses": 1,
+          "redirect_cookie_count": 1,
+          "final_response_cookie_count": 2,
+          "session_cookie_count": 3,
+          "check_passed": true
+        },
+        {
+          "case": "second_catalog_scope",
+          "records": [
+            {
+              "sku": "BK-101",
+              "currency": "USD",
+              "price_minor": 1699
+            },
+            {
+              "sku": "PN-202",
+              "currency": "USD",
+              "price_minor": 899
+            },
+            {
+              "sku": "NB-303",
+              "currency": "USD",
+              "price_minor": 2399
+            },
+            {
+              "sku": "BG-404",
+              "currency": "USD",
+              "price_minor": 4699
+            }
+          ],
+          "wire": {
+            "session_cookie_received": true,
+            "active_member": true,
+            "region_cookie_count": 1,
+            "region_is_eur": false,
+            "region_is_usd": true,
+            "selected_currency": "USD"
+          },
+          "check_passed": true
+        },
+        {
+          "case": "domain_path_lookup_and_clear",
+          "ambiguous_lookup_exception": "CookieConflictError",
+          "explicit_eu_lookup_correct": true,
+          "eu_cookie_removed": true,
+          "us_cookie_retained": true,
+          "check_passed": true
+        },
+        {
+          "case": "https_mount_still_allows_http",
+          "http_adapter_present": true,
+          "http_status": 200,
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_httponly_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        },
+        {
+          "case": "unsupported_samesite_keyword",
+          "exception": "TypeError",
+          "check_passed": true
+        }
+      ]
+    }
+  ],
+  "extraction_observations": 36,
+  "diagnostic_observations": 18,
+  "checks_passed": 54,
+  "checks_total": 54,
+  "all_checks_passed": true,
+  "external_requests": 0
+}

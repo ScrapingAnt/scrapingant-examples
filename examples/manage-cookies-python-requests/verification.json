@@ -1,0 +1,49 @@
+{
+  "tested_source_commit": "PENDING_ROOT_COMMIT",
+  "tested_at": "2026-09-27T16:44:17.210271+00:00",
+  "command": "./run.sh",
+  "tests": 24,
+  "tests_passed": true,
+  "matrix_checks": 54,
+  "matrix_checks_passed": true,
+  "extraction_observations": 36,
+  "diagnostic_observations": 18,
+  "new_api_requests": 0,
+  "external_requests": 0,
+  "linux_ci": {
+    "status": "pending",
+    "note": "Release coordinator must fill actual run URL, commit and conclusion."
+  },
+  "independent_review": {
+    "status": "in_progress",
+    "resolved_findings": [
+      "Disabled ambient credential lookup in prepared-request boundary tests.",
+      "Summary rejects updated scores hiding extra rows and inconsistent expected counts; both regression tests were observed failing before the fix."
+    ]
+  },
+  "capture_normalization": {
+    "oracle-regression-red.txt": "Only absolute source directory prefixes removed from captured tracebacks."
+  },
+  "privacy": {
+    "raw_cookie_headers_published": false,
+    "real_credentials_used": false,
+    "synthetic_values_only": true
+  },
+  "source_hashes": {
+    "catalog_fixture.py": "9e7a5bea2f25c17532dd4f049aaf24698c4993fd3ddcd3566f5a5e3ef8213d69",
+    "cookie_state.py": "cb8251afc21ae8c7d4b73d46678c6ff279ae78834de442d3836761f61bc5782f",
+    "oracle.py": "bdf5c463c7453a57be233260c7c64573e7fead7b370a447d57bb863ed97159fd",
+    "quickstart.py": "b980ad39434c2dd8545353d95a257eca70f4fa99e5187245bf8ea4982de1939b",
+    "requests_matrix.py": "434a646355b92157d77a4d3fce60f2b3fb3bb34cf89275205a583ebe195adb0b",
+    "requirements-lock.txt": "be134a700830b368181325f137077a6aa327da09df628317e5302897f43e8807",
+    "requirements.txt": "c5c47ecfbac90e9ce72b9e8a547f723374dc09af7dd51685093d122c8199671f",
+    "run.sh": "d81da85e41dbd90b8988dcf4db5c0ce56fcb66f96e62172d338dca5c1ff02cab",
+    "run_checks.py": "2fe455211030c34187202f8ae27f8582e5720c20e926f9934a49a5c9f46bd26d",
+    "summarize.py": "299b9f7c27a7d6057817598042ad5d000bad244db948aded2a6be2156933cb72",
+    "test_catalog.py": "7f4a289f58c20db09405c1c967955ee03203e4b44a3f7a44a877c7f4d92f623b",
+    "test_cookie_state.py": "c347cd63bf93929e658966f6d9f209bb6e2a879999799d97b7384b8b3a7bbc27",
+    "test_matrix.py": "d2d2d3c02f218b153bb54ec2d989a1ad8e7c265fbed7ab11d30a5245d77a2a81",
+    "test_oracle.py": "91a7e2bc7f8a21f71f1efc766f70b7df88f4ea5395cefa96d48ee58f46691406",
+    "test_summary.py": "f95d10c7fcc56e5fec72380e09cda1b6ec17b3690c8f36f4c7a0b28cc372fad2"
+  }
+}

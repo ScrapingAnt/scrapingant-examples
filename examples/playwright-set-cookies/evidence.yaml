@@ -1,0 +1,144 @@
+article_id: playwright-set-cookies
+canonical_url: https://scrapingant.com/blog/playwright-set-cookies
+owner: Oleg Kulyk
+source_commit: PENDING_ROOT_SOURCE_COMMIT
+tested_source_commit: PENDING_ROOT_SOURCE_COMMIT
+examples_repo_commit: PENDING_ROOT_SOURCE_COMMIT
+tested_at: 2026-09-27
+requires_api_key: false
+external_targets: false
+paid_requests: 0
+run_command: ./run.sh
+all_browsers_command: ./run.sh --all-browsers
+environment:
+  os: macOS 26.6.2 arm64
+  os_kernel_release: Darwin 25.6.0
+  python: 3.12.10
+  playwright: 1.63.0
+  bundled_chromium: 153.0.8010.12
+  bundled_firefox: '155.0'
+dependencies:
+  playwright: 1.63.0
+  greenlet: 3.5.6
+  pyee: 13.0.1
+  typing_extensions: 4.16.0
+  transitive_lock: requirements-lock.txt
+fixtures:
+  - catalog_fixture.py
+  - self-authored HTTP loopback server on 127.0.0.1 with an ephemeral port
+outputs:
+  - expected_output/chromium.json
+  - expected_output/firefox.json
+  - expected_output/quickstart.json
+  - expected_output/offline-checks.json
+  - comparison.json
+exploratory_outputs:
+  - path: expected_output/exploratory/chromium-handler-signature-bug.json
+    excluded: true
+    reason: Optional callback parameter received Playwright request object; both interception branches fulfilled; corrected and complete matrices rerun.
+measurements:
+  - name: primary_checks
+    value: 108
+    passed: 108
+    denominator: 18 checks per round multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: extraction_observations
+    value: 72
+    denominator: 12 extraction cases multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: diagnostic_observations
+    value: 36
+    denominator: 6 diagnostics multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: matching_record_observations
+    value: 120
+    denominator: 288 repeated record opportunities; 4 expected tuples per extraction
+    source: comparison.json
+  - name: exact_extractions
+    value: 30
+    denominator: 72 extraction observations, including deliberately wrong-state controls
+    source: comparison.json
+  - name: extraction_http_200_and_four_rows
+    value: 72
+    denominator: 72 extraction observations
+    source: comparison.json
+  - name: route_server_hits
+    value: 'normal: 1; fetch/continue: 2; fetch/fulfill: 1'
+    denominator: One navigation per diagnostic; six observations per mode
+    source: comparison.json
+  - name: boundary_tests
+    value: 19
+    passed: 19
+    denominator: Full unittest suite; deliberate failing mutant is separate
+    source: expected_output/offline-checks.json
+limitations:
+  - Synthetic deterministic catalog; no production reliability estimate or real authentication.
+  - Three repeats per browser share one host and fixture design.
+  - HTTP loopback does not test Secure-cookie delivery, cross-site SameSite or partitioned cookies.
+  - Region-in-localStorage and its translation to an API query are explicit application behavior.
+  - Cookie and localStorage preservation are exercised; no sessionStorage, IndexedDB, OPFS or passkey persistence test.
+  - No login, MFA, SSO, server-bound, IP-bound or cross-origin authentication portability test.
+  - Fresh browser contexts use the same running fixture origin; persistence across an origin/port change is not claimed.
+  - Quickstart and exploratory captures are excluded from primary denominators.
+  - Default CI requires bundled Chromium; optional Firefox must be installed explicitly.
+claims:
+  - id: P1
+    text: All 72 primary extractions returned HTTP 200 and four rows, but only 30 matched all four independent expected tuples.
+    type: measured
+    source: comparison.json
+  - id: P2
+    text: Cookies were installed before first navigation in both browsers; seeded and full-restored contexts matched four member-EUR tuples.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json
+  - id: P3
+    text: Cookies-only restoration selected member-USD records because this fixture stores region in localStorage.
+    type: measured
+    source: comparison.json; catalog_fixture.py
+  - id: P4
+    text: The shared API jar selected member pricing; omitting the application-specific region query still selected USD.
+    type: measured
+    source: comparison.json
+  - id: P5
+    text: A fresh standalone API context selected retail prices; explicit state handoff plus an explicit region query selected member-EUR records.
+    type: measured
+    source: comparison.json
+  - id: P6
+    text: Set-Cookie received by context.request changed the following browser extraction to retail-EUR; another browser context's mutation stayed isolated.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json
+  - id: P7
+    text: For this endpoint the actual server counted two requests with fetch/continue and one with normal navigation or fetch/fulfill, in six observations per mode.
+    type: measured
+    source: comparison.json
+  - id: P8
+    text: The context exposed the synthetic HttpOnly cookie while document.cookie did not; wrong cookie path produced retail-EUR records.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json
+  - id: P9
+    text: The complete quickstart restored synthetic state and extracted four matching records through both DOM and shared API; the temporary state file was removed.
+    type: measured
+    source: expected_output/quickstart.json
+  - id: P10
+    text: Counter-based matching rejects duplicate-row substitutes; the summary rescans records and rejects incomplete or contradictory captures.
+    type: verified_implementation
+    source: state.py; summarize.py; test_state.py; test_summary.py; expected_output/offline-checks.json
+  - id: P11
+    text: add_cookies requires either url or both domain and path; cookies(urls) filters cookies relevant to those URLs.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-browsercontext
+    accessed_at: 2026-09-27
+  - id: P12
+    text: BrowserContext.request shares its browser context cookie jar; a standalone APIRequestContext has isolated cookie storage.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-apirequestcontext
+    accessed_at: 2026-09-27
+  - id: P13
+    text: storage_state supports browser storage snapshots and optional additional fields; this experiment tests cookies and localStorage only.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-browsercontext#browser-context-storage-state
+    accessed_at: 2026-09-27
+  - id: P14
+    text: route.fetch fetches a response for subsequent fulfillment; the docs show route.fulfill using the fetched response.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-route#route-fetch
+    accessed_at: 2026-09-27

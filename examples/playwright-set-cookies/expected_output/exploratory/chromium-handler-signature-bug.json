@@ -1,0 +1,1520 @@
+{
+  "tested_at": "2026-09-27T16:39:57.148299+00:00",
+  "browser": "chromium",
+  "environment": {
+    "python": "3.12.10",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "macos_version": "26.6.2",
+    "architecture": "arm64",
+    "packages": {
+      "playwright": "1.63.0",
+      "greenlet": "3.5.6",
+      "pyee": "13.0.1",
+      "typing_extensions": "4.16.0"
+    },
+    "browser_version": "153.0.8010.12"
+  },
+  "fixture": "self-authored HTTP loopback catalog; synthetic state only",
+  "records_per_extraction": 4,
+  "runs": [
+    {
+      "round": 1,
+      "cases": [
+        {
+          "case": "fresh_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "cookie_inserted_before_first_navigation",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "page_url": "about:blank",
+          "fixture_navigation_delta": 0,
+          "cookie_names": [
+            "demo_session"
+          ]
+        },
+        {
+          "case": "cookie_before_navigation",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "server_seeded_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "httponly_visible_to_context_not_document",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "context_cookie_names": [
+            "demo_session"
+          ],
+          "document_cookie": ""
+        },
+        {
+          "case": "full_storage_state_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "cookies_only_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_explicit_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_missing_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_no_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_state_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "other_browser_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "context_mutation_remains_isolated",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "other_session": "guest-v1",
+          "seeded_session": "member-v1"
+        },
+        {
+          "case": "api_set_cookie_changes_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_cookie_path",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "route_normal",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_continue",
+          "kind": "diagnostic",
+          "check_passed": false,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 2,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_fulfill",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "cases": [
+        {
+          "case": "fresh_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "cookie_inserted_before_first_navigation",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "page_url": "about:blank",
+          "fixture_navigation_delta": 0,
+          "cookie_names": [
+            "demo_session"
+          ]
+        },
+        {
+          "case": "cookie_before_navigation",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "server_seeded_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "httponly_visible_to_context_not_document",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "context_cookie_names": [
+            "demo_session"
+          ],
+          "document_cookie": ""
+        },
+        {
+          "case": "full_storage_state_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "cookies_only_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_explicit_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_missing_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_no_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_state_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "other_browser_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "context_mutation_remains_isolated",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "other_session": "guest-v1",
+          "seeded_session": "member-v1"
+        },
+        {
+          "case": "api_set_cookie_changes_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_cookie_path",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "route_normal",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_continue",
+          "kind": "diagnostic",
+          "check_passed": false,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 2,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_fulfill",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "cases": [
+        {
+          "case": "fresh_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "cookie_inserted_before_first_navigation",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "page_url": "about:blank",
+          "fixture_navigation_delta": 0,
+          "cookie_names": [
+            "demo_session"
+          ]
+        },
+        {
+          "case": "cookie_before_navigation",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "server_seeded_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "httponly_visible_to_context_not_document",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "context_cookie_names": [
+            "demo_session"
+          ],
+          "document_cookie": ""
+        },
+        {
+          "case": "full_storage_state_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "cookies_only_restore",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_explicit_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "shared_api_missing_region",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_no_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_api_state_handoff",
+          "kind": "extraction",
+          "transport": "api_json",
+          "target_status": 200,
+          "audience": "member",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "expected_matching_records": 4,
+          "check_passed": true
+        },
+        {
+          "case": "other_browser_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "US",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "12.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "24.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "36.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "48.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "context_mutation_remains_isolated",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "other_session": "guest-v1",
+          "seeded_session": "member-v1"
+        },
+        {
+          "case": "api_set_cookie_changes_browser",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "wrong_cookie_path",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "target_status": 200,
+          "audience": "retail",
+          "region": "EU",
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "10.80"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "21.60"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "32.40"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "43.20"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "expected_matching_records": 0,
+          "check_passed": true
+        },
+        {
+          "case": "route_normal",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_continue",
+          "kind": "diagnostic",
+          "check_passed": false,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 2,
+          "navigations": 1
+        },
+        {
+          "case": "route_fetch_then_fulfill",
+          "kind": "diagnostic",
+          "check_passed": true,
+          "target_status": 200,
+          "server_hits": 1,
+          "expected_server_hits": 1,
+          "navigations": 1
+        }
+      ]
+    }
+  ],
+  "checks": 54,
+  "passed_checks": 51,
+  "extraction_observations": 36,
+  "diagnostic_observations": 18
+}

@@ -1,0 +1,2 @@
+# Full runtime lock, including playwright, for the browser installer in CI.
+-r requirements-lock.txt
