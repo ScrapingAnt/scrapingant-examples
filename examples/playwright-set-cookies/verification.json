@@ -1,0 +1,61 @@
+{
+  "tested_source_commit": "daa3b8bfe914b160e622be41fbf05ef161f4f2c6",
+  "tests": 19,
+  "tests_passed": true,
+  "matrix_checks": 108,
+  "matrix_checks_passed": true,
+  "extraction_observations": 72,
+  "diagnostic_observations": 36,
+  "new_api_requests": 0,
+  "external_requests": 0,
+  "tested_at": "2026-09-27",
+  "command": "./run.sh --all-browsers",
+  "local_browsers": [
+    "chromium",
+    "firefox"
+  ],
+  "linux_ci": {
+    "status": "passed",
+    "conclusion": "success",
+    "run_url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36334989959",
+    "head_sha": "daa3b8bfe914b160e622be41fbf05ef161f4f2c6",
+    "command": "./run.sh",
+    "tests": 19,
+    "matrix_checks": 54,
+    "browsers": [
+      "chromium"
+    ],
+    "note": "Completed before evidence pull request creation. Linux execution corroborates the local captures; committed primary captures are from macOS."
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewed_at": "2026-09-27",
+    "reviewer": "Separate automated technical review agent",
+    "open_blockers": 0,
+    "independent_full_rerun": true,
+    "scope": "Executable source, dependency lock, raw captures, oracle, summaries, boundary tests and scope limits. Independent local rerun reproduced all primary observations."
+  },
+  "source_hashes": {
+    "browser_matrix.py": "9dcec16f96d2ebf1a7dc0aec6ad2f29b25269ae0c9343b9f64c8353ae189b11c",
+    "catalog_fixture.py": "21e321eaef04336c7995767dee2460b9e24eb7b76868389475703893dbb6e3af",
+    "offline_checks.py": "22c0aaff91aa748134cea5fe5d934c6de46eed5f16a310c4f9e96522287ff307",
+    "quickstart.py": "41b6fa676a88ec93f09eafb412f76161ecccd1217c0c3d0d9360ddfa7896d261",
+    "requirements-lock.txt": "68d40ba88621e6858be892daff60b289a7a5d3a304eb68a4ff6506f2cc04b067",
+    "requirements.txt": "7e380ed057434f7859b94ac8d78bac0af3e32d60f13265048893e192bcd15815",
+    "run.sh": "e1fa948f2f08626d2fe406f99c766743b1938ac8b4eceadef988fd8205fd176b",
+    "state.py": "d847d887538fe323d738b120fbabccbb7b7993187a11fa72e58c98590eeae15a",
+    "summarize.py": "9853bae45906d008627b9dfa502b0383784d84d0797f8cfa9b95b9b649eb579b",
+    "test_fixture.py": "04a5ae0e63b3dce5999544fd213278d1c886db48a209ae53bb7c5ae43b56c204",
+    "test_state.py": "53d09e5673581b3a3986c56bf4071c7788d95e38950f498d15c9c3dbefe9894d",
+    "test_summary.py": "3272518e1bfca713c5e152a9336d6ed83e863f39280920805195aeaf5156995b"
+  },
+  "capture_hashes": {
+    "expected_output/chromium.json": "a64e78bab70b3683e74733df07fca6dfd2e30d3a940e1f307ae42f732b267900",
+    "expected_output/exploratory/chromium-handler-signature-bug.json": "23f666adc9bd8f3036033e345c6276b07a7313f9b9a972e70514b3f8baee137f",
+    "expected_output/firefox.json": "980647f791adb5299625ca0cac8b46404aa0b7fc6c72f620c1c63da538719ffa",
+    "expected_output/offline-checks.json": "0e33b4e8c72c713ab8a91dc1ec55cd6e01aa7b93faca97aaa0175de435b1425b",
+    "expected_output/quickstart.json": "3d085c3c3e3aee49b290e6bb358ec83dbcf053dfd242affa0a08a17a08fded13",
+    "comparison.json": "f97bf6fd2c9ba2da6509a00d6b77d94a06583a5f6e3c33d458f3dd3c7f103613"
+  },
+  "publication_note": "This metadata records the tested executable source commit; a later metadata-only snapshot does not change tested code or captures."
+}

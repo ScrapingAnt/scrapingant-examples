@@ -1,5 +1,5 @@
 {
-  "tested_source_commit": "PENDING_ROOT_COMMIT",
+  "tested_source_commit": "daa3b8bfe914b160e622be41fbf05ef161f4f2c6",
   "tested_at": "2026-09-27T16:44:17.210271+00:00",
   "command": "./run.sh",
   "tests": 24,
@@ -11,15 +11,27 @@
   "new_api_requests": 0,
   "external_requests": 0,
   "linux_ci": {
-    "status": "pending",
-    "note": "Release coordinator must fill actual run URL, commit and conclusion."
+    "status": "passed",
+    "conclusion": "success",
+    "run_url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36334992162",
+    "head_sha": "daa3b8bfe914b160e622be41fbf05ef161f4f2c6",
+    "command": "./run.sh",
+    "tests": 24,
+    "matrix_checks": 54,
+    "browsers": [],
+    "note": "Completed before evidence pull request creation. Linux execution corroborates the local captures; committed primary captures are from macOS."
   },
   "independent_review": {
-    "status": "in_progress",
+    "status": "passed",
     "resolved_findings": [
       "Disabled ambient credential lookup in prepared-request boundary tests.",
       "Summary rejects updated scores hiding extra rows and inconsistent expected counts; both regression tests were observed failing before the fix."
-    ]
+    ],
+    "reviewed_at": "2026-09-27",
+    "reviewer": "Separate automated technical review agent",
+    "open_blockers": 0,
+    "independent_full_rerun": true,
+    "scope": "Executable source, dependency lock, raw captures, oracle, summaries, boundary tests and scope limits. Independent local rerun reproduced all primary observations."
   },
   "capture_normalization": {
     "oracle-regression-red.txt": "Only absolute source directory prefixes removed from captured tracebacks."
@@ -45,5 +57,13 @@
     "test_matrix.py": "d2d2d3c02f218b153bb54ec2d989a1ad8e7c265fbed7ab11d30a5245d77a2a81",
     "test_oracle.py": "91a7e2bc7f8a21f71f1efc766f70b7df88f4ea5395cefa96d48ee58f46691406",
     "test_summary.py": "f95d10c7fcc56e5fec72380e09cda1b6ec17b3690c8f36f4c7a0b28cc372fad2"
-  }
+  },
+  "capture_hashes": {
+    "expected_output/checks.json": "4510be0340894fa5bb72a8ce2c372070d5939a16ee81b0a04e118d3f4e4caf73",
+    "expected_output/oracle-regression-red.txt": "3b2c51f89caf858e8275edecab915b59dbd30c19012163985735d0dcf91e9773",
+    "expected_output/quickstart.json": "5781d85f0ead5d33ac6dabce8792fabc75564e20a3ed9fe35c60309e896d4ce0",
+    "expected_output/requests.json": "17d16ad9646c877045dcfcbfc0768ca4df44bfa572f072b52e25110e154f50a9",
+    "comparison.json": "076b7fa165d894459444cc31cc28f34673047d3492cad16df2e71d16920ba1da"
+  },
+  "publication_note": "This metadata records the tested executable source commit; a later metadata-only snapshot does not change tested code or captures."
 }

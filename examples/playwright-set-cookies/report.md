@@ -65,3 +65,7 @@ An earlier Chromium diagnostic run used a two-argument callback whose optional m
 This small self-authored catalog isolates browser/API state boundaries. It provides no estimate for a production site's reliability, login portability or anti-bot behavior. Three repetitions per browser share one machine and fixture design. There are no real users, credentials or production cookies.
 
 “Full state” in this report means the full `storage_state()` snapshot used by this fixture, whose relevant state is cookies plus localStorage. It is not a promise to export a whole browser profile. LocalStorage determines a region query only because this application implements that behavior; an API state file alone does not recreate arbitrary JavaScript application logic. The experiment does not exercise sessionStorage, IndexedDB, OPFS, passkeys, MFA, SSO, cross-origin or IP-bound sessions, partitioned cookies, cross-site SameSite behavior, or Secure cookies over HTTPS.
+
+## Publication verification
+
+Executable source: `daa3b8bfe914b160e622be41fbf05ef161f4f2c6`. [Linux CI passed](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36334989959) before the evidence pull request was opened: 19 tests and 54/54 designed matrix checks using bundled Chromium. The separately captured and independently rerun local Chromium plus Firefox matrix contains 108/108 checks. See [verification.json](verification.json) for hashes and the exact CI source. No executable code or primary captures changed when this provenance was recorded.

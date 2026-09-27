@@ -1,8 +1,8 @@
 article_id: manage-cookies-python-requests
 canonical_url: https://scrapingant.com/blog/manage-cookies-python-requests
 owner: Oleg Kulyk
-examples_repo_commit: PENDING_ROOT_COMMIT
-tested_source_commit: PENDING_ROOT_COMMIT
+examples_repo_commit: daa3b8bfe914b160e622be41fbf05ef161f4f2c6
+tested_source_commit: daa3b8bfe914b160e622be41fbf05ef161f4f2c6
 tested_at: 2026-09-27
 requires_api_key: false
 run_command: ./run.sh
@@ -137,4 +137,3 @@ limitations:
   - HttpOnly/SameSite metadata does not establish browser policy enforcement in Requests.
   - Twenty-four tests include separate local integration observations; 36 plus 18 totals describe only the primary three-round matrix.
   - No new ScrapingAnt call; any product claims must cite the separate Selenium cookie-echo packet, not this fixture.
-  - Commit provenance and Linux CI are pending the release coordinator's actual commit/run; no completed CI claim is made here.
