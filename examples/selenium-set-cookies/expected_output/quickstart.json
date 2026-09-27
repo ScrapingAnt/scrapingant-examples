@@ -1,0 +1,29 @@
+{
+  "restored": {
+    "restored": 2,
+    "skipped_expired": 0
+  },
+  "matching_records": 4,
+  "records": [
+    {
+      "sku": "SKU-1",
+      "currency": "EUR",
+      "price_minor": 800
+    },
+    {
+      "sku": "SKU-2",
+      "currency": "EUR",
+      "price_minor": 1600
+    },
+    {
+      "sku": "SKU-3",
+      "currency": "EUR",
+      "price_minor": 2400
+    },
+    {
+      "sku": "SKU-4",
+      "currency": "EUR",
+      "price_minor": 3200
+    }
+  ]
+}

@@ -1,0 +1,1044 @@
+{
+  "tested_at": "2026-09-27T15:50:06.161567+00:00",
+  "browser": "firefox",
+  "python": "3.12.10",
+  "selenium": "4.49.0",
+  "os": "macOS-26.6.2-arm64-arm-64bit",
+  "expected_member_eur": [
+    {
+      "sku": "SKU-1",
+      "currency": "EUR",
+      "price_minor": 800
+    },
+    {
+      "sku": "SKU-2",
+      "currency": "EUR",
+      "price_minor": 1600
+    },
+    {
+      "sku": "SKU-3",
+      "currency": "EUR",
+      "price_minor": 2400
+    },
+    {
+      "sku": "SKU-4",
+      "currency": "EUR",
+      "price_minor": 3200
+    }
+  ],
+  "runs": [
+    {
+      "round": 1,
+      "environment": {
+        "browser": "firefox",
+        "browser_version": "156.0.1",
+        "driver_version": "0.37.1"
+      },
+      "cases": [
+        {
+          "case": "about_blank",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "anonymous",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 1200
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 3600
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 4800
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "server_seeded",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "httponly_visibility",
+          "kind": "diagnostic",
+          "webdriver_names": [
+            "demo_region",
+            "demo_session"
+          ],
+          "javascript_names": [
+            "demo_region"
+          ],
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_domain",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "full_restore_fresh_browser",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "restore": {
+            "restored": 2,
+            "skipped_expired": 0
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "auth_cookie_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 900
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 1800
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 2700
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 3600
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "javascript_visible_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_session_path",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "expired_session_filtered",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "restore": {
+            "restored": 1,
+            "skipped_expired": 1
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "server_revoked_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "cookie_still_in_browser": true,
+          "assertion_passed": true
+        },
+        {
+          "case": "deleted_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "delete_all",
+          "kind": "diagnostic",
+          "remaining_cookie_count": 0,
+          "assertion_passed": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "environment": {
+        "browser": "firefox",
+        "browser_version": "156.0.1",
+        "driver_version": "0.37.1"
+      },
+      "cases": [
+        {
+          "case": "about_blank",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "anonymous",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 1200
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 3600
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 4800
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "server_seeded",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "httponly_visibility",
+          "kind": "diagnostic",
+          "webdriver_names": [
+            "demo_region",
+            "demo_session"
+          ],
+          "javascript_names": [
+            "demo_region"
+          ],
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_domain",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "full_restore_fresh_browser",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "restore": {
+            "restored": 2,
+            "skipped_expired": 0
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "auth_cookie_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 900
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 1800
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 2700
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 3600
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "javascript_visible_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_session_path",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "expired_session_filtered",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "restore": {
+            "restored": 1,
+            "skipped_expired": 1
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "server_revoked_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "cookie_still_in_browser": true,
+          "assertion_passed": true
+        },
+        {
+          "case": "deleted_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "delete_all",
+          "kind": "diagnostic",
+          "remaining_cookie_count": 0,
+          "assertion_passed": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "environment": {
+        "browser": "firefox",
+        "browser_version": "156.0.1",
+        "driver_version": "0.37.1"
+      },
+      "cases": [
+        {
+          "case": "about_blank",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "anonymous",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 1200
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 3600
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 4800
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "server_seeded",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "httponly_visibility",
+          "kind": "diagnostic",
+          "webdriver_names": [
+            "demo_region",
+            "demo_session"
+          ],
+          "javascript_names": [
+            "demo_region"
+          ],
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_domain",
+          "kind": "diagnostic",
+          "error": "InvalidCookieDomainException",
+          "assertion_passed": true
+        },
+        {
+          "case": "full_restore_fresh_browser",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 4,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 800
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1600
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2400
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3200
+            }
+          ],
+          "tier": "member",
+          "restore": {
+            "restored": 2,
+            "skipped_expired": 0
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "auth_cookie_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 900
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 1800
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 2700
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 3600
+            }
+          ],
+          "tier": "member",
+          "assertion_passed": true
+        },
+        {
+          "case": "javascript_visible_only",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "wrong_session_path",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "expired_session_filtered",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "restore": {
+            "restored": 1,
+            "skipped_expired": 1
+          },
+          "assertion_passed": true
+        },
+        {
+          "case": "server_revoked_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "cookie_still_in_browser": true,
+          "assertion_passed": true
+        },
+        {
+          "case": "deleted_session",
+          "kind": "extraction",
+          "target_status": 200,
+          "row_count": 4,
+          "matching_records": 0,
+          "expected_records": 4,
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 1000
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 2000
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 3000
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 4000
+            }
+          ],
+          "tier": "retail",
+          "assertion_passed": true
+        },
+        {
+          "case": "delete_all",
+          "kind": "diagnostic",
+          "remaining_cookie_count": 0,
+          "assertion_passed": true
+        }
+      ]
+    }
+  ],
+  "assertions": 39,
+  "passed": 39
+}

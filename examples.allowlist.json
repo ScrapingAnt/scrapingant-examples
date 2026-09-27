@@ -70,6 +70,11 @@
       "id": "url-to-markdown-api",
       "needs_api_key": true,
       "note": "about 190 credits per run with LATENCY_N=3 (set in the workflow env); 04 and 07 are informational; needs Node 22 for the TypeScript script"
+    },
+    {
+      "id": "selenium-set-cookies",
+      "needs_api_key": false,
+      "note": "Local HTTPS catalog,16 offline safety/oracle assertions and 3 Chrome rounds. Needs Chrome/Selenium Manager and openssl; no API calls even if a key exists. Firefox and bounded product probe are explicit opt-ins."
     }
   ]
 }
