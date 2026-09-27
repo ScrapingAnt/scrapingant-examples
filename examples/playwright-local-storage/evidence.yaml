@@ -1,9 +1,9 @@
 article_id: playwright-local-storage
 canonical_url: https://scrapingant.com/blog/playwright-local-storage
 owner: Oleg Kulyk
-source_commit: pending
-tested_source_commit: pending
-examples_repo_commit: pending
+source_commit: ffdd66b11af9a49780b1e94410b21001afdd3a39
+tested_source_commit: ffdd66b11af9a49780b1e94410b21001afdd3a39
+examples_repo_commit: ffdd66b11af9a49780b1e94410b21001afdd3a39
 tested_at: 2026-09-27
 requires_api_key: false
 external_targets: false
@@ -179,3 +179,13 @@ claims:
     confirmed_at: 2026-09-27
     source: Product-owner clarification; no API experiment performed
 verification: verification.json
+
+publication_provenance:
+  commit_fields_describe: Tested source revision, not the later metadata snapshot; article links pin the final immutable snapshot.
+  linux_ci_status: passed
+  linux_ci_url: https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36337882588
+  linux_ci_browser: Chromium
+  linux_ci_checks: 48
+  linux_ci_boundary_tests: 15
+  independent_local_rerun: passed
+  exact_secret_and_private_reference_scan: passed

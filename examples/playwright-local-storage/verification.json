@@ -1,5 +1,5 @@
 {
-  "tested_source_commit": "pending",
+  "tested_source_commit": "ffdd66b11af9a49780b1e94410b21001afdd3a39",
   "tested_at": "2026-09-27",
   "command": "./run.sh --all-browsers",
   "tests": 15,
@@ -14,11 +14,13 @@
   ],
   "external_target_requests": 0,
   "linux_ci": {
-    "status": "pending",
+    "status": "passed",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36337882588",
+    "head_sha": "ffdd66b11af9a49780b1e94410b21001afdd3a39",
     "command": "./run.sh",
-    "browsers": [
-      "chromium"
-    ]
+    "browser": "Chromium",
+    "scenario_checks": 48,
+    "boundary_tests": 15
   },
   "independent_review": {
     "status": "passed",
@@ -26,7 +28,7 @@
     "reviewer": "Coordinator agent independent of implementation",
     "open_blockers": 0,
     "independent_full_rerun": true,
-    "scope": "Complete two-browser runner passed 15 tests and 96 checks. All primary observations matched after normalization of timestamps and ephemeral loopback origins. Literal Counter rescore confirmed 72 extractions, 24 diagnostics, 36 exact EU extractions and 144 matching record observations."
+    "scope": "All captured local browsers rerun; observations match after timestamp/ephemeral-port normalization; independent literal multiset rescore agrees. Real browser checks and regression suite passed."
   },
   "source_hashes": {
     "browser_matrix.py": "c98a813624f9d61316a0d8df82f23373e35f7eb279c90d6f91c2bf9368b19360",
@@ -54,6 +56,13 @@
     "expected_output/offline-checks.json": "a547de41787dc6a5ba8733845dbcbdbf98c71c95ad88e83cc6b35dbffdb8f7ea",
     "expected_output/quickstart.json": "37df4de9d3c39541d87c2d71ea52110b537ef095b8e7536493a6272d9e4bbd0c"
   },
-  "publication_note": "Source revision and Linux CI are pending publication checks. Source and capture hashes identify the tested local snapshot; metadata-only updates do not change the tested executable files.",
-  "scrapingant_api_requests": 0
+  "publication_note": "Source revision is the successful Linux CI revision. Later metadata-only snapshot records provenance without changing tested executable or captured measurements. Local primary results and Linux smoke counts are separate.",
+  "scrapingant_api_requests": 0,
+  "privacy": {
+    "exact_secret_scan": "passed",
+    "private_reference_scan": "passed",
+    "key_or_credential_variables_read": false,
+    "external_target_requests": false,
+    "paid_api_requests": 0
+  }
 }

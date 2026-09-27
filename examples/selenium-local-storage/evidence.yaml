@@ -1,8 +1,8 @@
 article_id: selenium-local-storage
 canonical_url: https://scrapingant.com/blog/selenium-local-storage
 owner: Oleg Kulyk
-examples_repo_commit: pending_publishing_step
-tested_source_commit: pending_publishing_step
+examples_repo_commit: ffdd66b11af9a49780b1e94410b21001afdd3a39
+tested_source_commit: ffdd66b11af9a49780b1e94410b21001afdd3a39
 tested_at: 2026-09-27
 requires_api_key: false
 run_command: ./run.sh
@@ -157,3 +157,13 @@ claims:
     text: No ScrapingAnt API request occurs in this packet; the product decision boundary is a supported URL or cookies for retrieval, while localStorage operations remain with browser automation.
     type: scope_and_owner_confirmed_capability
     source: run.sh; README.md
+
+publication_provenance:
+  commit_fields_describe: Tested source revision, not the later metadata snapshot; article links pin the final immutable snapshot.
+  linux_ci_status: passed
+  linux_ci_url: https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36337884841
+  linux_ci_browser: Chrome
+  linux_ci_checks: 60
+  linux_ci_boundary_tests: 22
+  independent_local_rerun: passed
+  exact_secret_and_private_reference_scan: passed

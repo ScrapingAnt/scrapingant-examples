@@ -8,7 +8,7 @@
     "browser_helpers.mjs": "28daa53790af214ea84e01be2d14a79ab8d34466fc5ab76c948f29a11ade3028",
     "cases.mjs": "289d8b65fc8396576eb6d87270cb1d86e616e98d7265fd75d4a8d6234b16a456",
     "comparison.json": "01e39055d9b0b04c6854ce1554344c5175e1c953d424cefee5f5e363407b60aa",
-    "evidence.yaml": "d0d77e555d02f968110a0a2c82a430a7018ee07dd572894c00cd45328946bc7c",
+    "evidence.yaml": "f82f5d7aca3a199d667bf2c6ccfff68d4b82fff210ab200742137160ffe7a7ee",
     "expected_output/chrome.json": "a62fb3705335a0e40c7eeb7dd28e0fb175cf997a3091126d8f319a4b19c23787",
     "expected_output/development-red-checks.json": "6a6eae6afe13038f3f5a85198b973a7d6622a4734bcfe78bff2353465b631b2b",
     "expected_output/quickstart.json": "570306ff731c0d5948ea996c95edb461c80f5f55d9b26f8dfeb46716aca65c37",
@@ -27,5 +27,34 @@
     "test/summary.test.mjs": "3116fb8c9259c351bcda132d935e57b0d07c20be4ac572ab4b7db9d434d59616",
     "test_suite.mjs": "9029a03dda9322f3999783d935d7682f3eced6a05ca333007322f9bc8f90ef62",
     "verify.mjs": "e4a421b066085eed38ba6a5730c96d62c2311024997db7f1a13c1ae3ac6191ae"
-  }
+  },
+  "tested_source_commit": "a49ef7dcf8a8b43cb769f8bc8a98b695e5bbb58c",
+  "linux_ci": {
+    "status": "passed",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36338111840",
+    "head_sha": "a49ef7dcf8a8b43cb769f8bc8a98b695e5bbb58c",
+    "command": "./run.sh",
+    "browser": "Chrome",
+    "scenario_checks": 48,
+    "boundary_tests": 24,
+    "sandbox_disabled": true,
+    "scope": "Explicit workflow opt-out for synthetic loopback packet only; local captures retain sandbox.",
+    "earlier_failed_launch_url": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36337887132"
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewed_at": "2026-09-27",
+    "reviewer": "Coordinator agent independent of implementation",
+    "open_blockers": 0,
+    "independent_full_rerun": true,
+    "scope": "All captured local browsers rerun; observations match after timestamp/ephemeral-port normalization; independent literal multiset rescore agrees. Real browser checks and regression suite passed."
+  },
+  "privacy": {
+    "exact_secret_scan": "passed",
+    "private_reference_scan": "passed",
+    "key_or_credential_variables_read": false,
+    "external_target_requests": false,
+    "paid_api_requests": 0
+  },
+  "publication_note": "Source revision is the successful Linux CI revision. Later metadata-only snapshot records provenance without changing tested executable or captured measurements. Local primary results and Linux smoke counts are separate."
 }
