@@ -1,0 +1,27 @@
+test_json_reader_rejects_duplicates_and_nonfinite (test_packet.CaptureTests.test_json_reader_rejects_duplicates_and_nonfinite) ... ok
+test_recompute_complete_capture (test_packet.CaptureTests.test_recompute_complete_capture) ... ok
+test_reject_cross_diagnostic_origin_contradiction (test_packet.CaptureTests.test_reject_cross_diagnostic_origin_contradiction) ... ok
+test_reject_duplicate_browser_and_empty_capture (test_packet.CaptureTests.test_reject_duplicate_browser_and_empty_capture) ... ok
+test_reject_forged_counts_environment_diagnostics_and_request (test_packet.CaptureTests.test_reject_forged_counts_environment_diagnostics_and_request) ... ok
+test_reject_missing_round_missing_case_duplicate_case (test_packet.CaptureTests.test_reject_missing_round_missing_case_duplicate_case) ... ok
+test_reject_tampered_records_despite_passing_flags (test_packet.CaptureTests.test_reject_tampered_records_despite_passing_flags) ... ok
+test_direct_request_rejects_non_fixture_urls (test_packet.DirectRequestTests.test_direct_request_rejects_non_fixture_urls) ... ok
+test_loopback_request_ignores_poisoned_proxy_environment (test_packet.DirectRequestTests.test_loopback_request_ignores_poisoned_proxy_environment) ... ok
+test_literal_expected_and_order_independent (test_packet.OracleTests.test_literal_expected_and_order_independent) ... ok
+test_reject_duplicate_missing_extra_and_wrong_price (test_packet.OracleTests.test_reject_duplicate_missing_extra_and_wrong_price) ... ok
+test_reject_malformed_schema_and_boolean_number (test_packet.OracleTests.test_reject_malformed_schema_and_boolean_number) ... ok
+test_failed_round_preserves_observations_without_exception_text (test_packet.PartialCaptureTests.test_failed_round_preserves_observations_without_exception_text) ... ok
+test_arguments_are_not_interpolated (test_packet.StorageTests.test_arguments_are_not_interpolated) ... ok
+test_origin_port_and_scheme_are_part_of_identity (test_packet.StorageTests.test_origin_port_and_scheme_are_part_of_identity) ... ok
+test_reject_paths_queries_fragments_and_opaque_snapshot_origins (test_packet.StorageTests.test_reject_paths_queries_fragments_and_opaque_snapshot_origins) ... ok
+test_restore_checks_current_origin_before_mutation (test_packet.StorageTests.test_restore_checks_current_origin_before_mutation) ... ok
+test_restore_checks_selected_script_document_not_only_top_url (test_packet.StorageTests.test_restore_checks_selected_script_document_not_only_top_url) ... ok
+test_restore_checks_snapshot_origin_before_mutation (test_packet.StorageTests.test_restore_checks_snapshot_origin_before_mutation) ... ok
+test_restore_passes_pairs_as_arguments (test_packet.StorageTests.test_restore_passes_pairs_as_arguments) ... ok
+test_snapshot_rejects_duplicate_nonstring_and_bad_schema_before_writing (test_packet.StorageTests.test_snapshot_rejects_duplicate_nonstring_and_bad_schema_before_writing) ... ok
+test_storage_alone_does_not_satisfy_wait (test_packet.WaitTests.test_storage_alone_does_not_satisfy_wait) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.636s
+
+OK

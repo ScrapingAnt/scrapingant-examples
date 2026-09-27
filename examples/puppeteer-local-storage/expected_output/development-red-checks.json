@@ -1,0 +1,49 @@
+{
+  "purpose": "Observed failing development tests before corresponding implementations; not primary browser observations.",
+  "runs": [
+    {
+      "name": "oracle_and_snapshot_initial_red",
+      "tests": 9,
+      "passed": 1,
+      "failed": 8,
+      "failed_tests": [
+        "four literal tuples match in any order",
+        "four copies of one SKU count as one match",
+        "an extra duplicate invalidates an otherwise complete result",
+        "a missing SKU and wrong currency do not count as matching records",
+        "snapshot rejects non-origin URLs and credentials",
+        "snapshot rejects duplicate keys before any browser mutation",
+        "snapshot rejects nonstring values instead of coercing them",
+        "snapshot restore rejects a different scheme host or port"
+      ]
+    },
+    {
+      "name": "capture_validation_initial_red",
+      "tests": 11,
+      "passed": 0,
+      "failed": 11,
+      "failed_tests": [
+        "separate record and diagnostic denominators reflect the complete capture",
+        "duplicate records with stale saved scores are rejected",
+        "changed record price with stale saved scores is rejected",
+        "duplicate case cannot replace a missing case",
+        "missing case is rejected",
+        "duplicate or nonconsecutive rounds are rejected",
+        "missing whole round is rejected despite internally consistent records",
+        "wrong case kind cannot change the denominator",
+        "a stale DOM observation cannot masquerade as a reload",
+        "contradictory diagnostic check flag is rejected",
+        "serialized headline totals must agree with recomputed totals"
+      ]
+    },
+    {
+      "name": "usd_control_regression_red",
+      "tests": 13,
+      "passed": 12,
+      "failed": 1,
+      "failed_tests": [
+        "zero desired matches cannot conceal a corrupted USD control record"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "browsers": [
+    "chrome",
+    "firefox"
+  ],
+  "rounds_per_browser": 3,
+  "extraction_observations": 72,
+  "browser_extraction_observations": 60,
+  "direct_http_observations": 12,
+  "diagnostic_observations": 48,
+  "cases": {
+    "empty_startup": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "bootstrap_seed": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "late_write_without_reload": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "reload_after_late_write": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "wrong_port": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "query_page_without_storage": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "session_storage_only": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "delayed_application_update": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "fresh_driver_empty": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "manual_snapshot_restore": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "browser"
+    },
+    "query_parameter_only": {
+      "observations": 6,
+      "desired_dataset": 6,
+      "matching_records": 24,
+      "expected_records": 24,
+      "transport": "http"
+    },
+    "query_parameter_missing": {
+      "observations": 6,
+      "desired_dataset": 0,
+      "matching_records": 0,
+      "expected_records": 24,
+      "transport": "http"
+    }
+  },
+  "interpretation": "Observed fixture outcomes, including expected wrong-state controls; no production success estimate."
+}

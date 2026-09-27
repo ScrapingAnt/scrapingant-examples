@@ -85,6 +85,21 @@
       "id": "manage-cookies-python-requests",
       "needs_api_key": false,
       "note": "Local synthetic catalog, Requests cookie scope/persistence matrix and offline regressions. No external target or API call, even when a key is configured."
+    },
+    {
+      "id": "playwright-local-storage",
+      "needs_api_key": false,
+      "note": "Local catalog, three bundled Chromium rounds and strict capture/oracle tests. Firefox is an explicit local option. No API calls or external targets."
+    },
+    {
+      "id": "selenium-local-storage",
+      "needs_api_key": false,
+      "note": "Local catalog, three Chrome rounds and 22 regression tests. Needs Chrome/Selenium Manager; Firefox is an explicit option. No API calls or external targets."
+    },
+    {
+      "id": "puppeteer-local-storage",
+      "needs_api_key": false,
+      "note": "Local catalog, three bundled Chrome rounds and 24 boundary tests. Needs Node22.12+ and npm ci. No API calls or external targets."
     }
   ]
 }

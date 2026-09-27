@@ -1,0 +1,159 @@
+article_id: selenium-local-storage
+canonical_url: https://scrapingant.com/blog/selenium-local-storage
+owner: Oleg Kulyk
+examples_repo_commit: pending_publishing_step
+tested_source_commit: pending_publishing_step
+tested_at: 2026-09-27
+requires_api_key: false
+run_command: ./run.sh
+full_capture_command: OUTPUT_DIR=expected_output ./run.sh --all-browsers
+scope: Self-authored loopback fixture; no external target, account, paid request, or ScrapingAnt API call.
+environment:
+  os: macOS 26.6.2 arm64
+  python: 3.12.10
+  selenium: 4.49.0
+  chrome: 154.0.8037.57
+  chromedriver: 154.0.8037.57
+  firefox: '156.0'
+  geckodriver: 0.37.1
+  chrome_sandbox: enabled
+  browser_profiles: fresh temporary profiles
+  browser_binary_selection: Installed Chrome; explicitly selected Firefox and GeckoDriver via non-secret binary-path variables.
+dependencies:
+  selenium: 4.49.0
+  transitive_lock: requirements-lock.txt
+fixtures:
+  - catalog_fixture.py
+  - fixtures/catalog.html
+outputs:
+  - expected_output/chrome.json
+  - expected_output/firefox.json
+  - expected_output/quickstart.json
+  - expected_output/summary.json
+  - expected_output/tests.txt
+  - expected_output/run.log
+exploratory_outputs:
+  - exploratory_output/chrome-smoke.json
+  - exploratory_output/chrome-smoke.log
+  - exploratory_output/pre-hardening/chrome.json
+  - exploratory_output/pre-hardening/firefox.json
+  - exploratory_output/pre-document-origin-guard/chrome.json
+  - exploratory_output/pre-document-origin-guard/firefox.json
+measurements:
+  - name: extraction_observations
+    value: 72
+    denominator: 12 cases x 3 rounds x 2 browsers
+    source: expected_output/summary.json
+  - name: browser_page_observations
+    value: 60
+    denominator: 10 browser-page cases x 3 rounds x 2 browsers
+    source: expected_output/summary.json
+  - name: direct_http_controls
+    value: 12
+    denominator: 2 HTTP cases x 3 rounds x 2 browser-run groups; these are not engine observations
+    source: expected_output/summary.json
+  - name: diagnostic_observations
+    value: 48
+    denominator: 8 diagnostic cases x 3 rounds x 2 browsers; excluded from extraction denominator
+    source: expected_output/summary.json
+  - name: scenario_assertions
+    value: 120
+    denominator: 72 extraction expectations including wrong-state controls plus 48 diagnostics
+    source: expected_output/run.log
+  - name: target_record_matches
+    value: 24/24 per target-state case; 0/24 per wrong-state control
+    denominator: 4 literal SKU/currency/price tuples x 6 observations of each case
+    source: expected_output/summary.json
+  - name: regression_tests
+    value: 22
+    denominator: 22 local helper, capture integrity, partial-failure, wait, and HTTP proxy regression tests
+    source: expected_output/tests.txt
+  - name: paid_api_requests
+    value: 0
+    denominator: Entire packet; no live API mode exists
+    source: run.sh
+limitations:
+  - Controlled loopback catalog on one macOS host, not a production reliability estimate or timing benchmark.
+  - Only the captured Chrome and Firefox versions are measured; Linux CI is a publishing-stage check.
+  - Query-selection is the explicit fixture contract and is not universal localStorage-to-URL or cookie conversion.
+  - No ScrapingAnt call, rendered-page service comparison, authentication handoff, or arbitrary-JSON service compatibility measurement.
+  - Direct HTTP controls are repeated with each browser group and must not be interpreted as browser behavior.
+  - Fresh WebDriver profiles start empty; persistent-profile behavior is not measured.
+  - Manual snapshots export only localStorage on one exact origin and replace that origin's localStorage on restoration.
+  - No real account, SSO, encryption, quota, persistent-profile, service-worker, frame, or cross-tab event browser experiment.
+  - The guard checks the currently selected script document; frame mismatch is a helper regression rather than a browser experiment.
+  - Provisioning dependencies or drivers may download files; explicit fixture requests stay on loopback and ignore ambient HTTP proxies.
+  - Exploratory and superseded captures are preserved separately and excluded from primary counts.
+claims:
+  - id: C1
+    text: Bootstrap on the correct origin, seed via execute_script arguments, then navigate returned all four literal EUR records in each of six observations.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json; expected_output/summary.json
+  - id: C2
+    text: A late write changed the stored value to eu but left US records; reload reread the preference and returned the EUR dataset in each round.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C3
+    text: The fixture explicitly reads a URL query or stored preference and includes it in a catalog request; storage is not the request transport.
+    type: implementation_and_measured
+    source: fixtures/catalog.html; expected_output/chrome.json
+  - id: C4
+    text: Apostrophe, newline and Unicode strings survived execute_script argument passing, while controlled legacy interpolation raised JavascriptException.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C5
+    text: Manual JSON snapshot restoration in a fresh driver restored all three stored string entries and the four desired records.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C6
+    text: A different port had empty localStorage and US records; the helper rejected restoration there without changing storage.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C7
+    text: SessionStorage-only state and a fresh WebDriver profile without restoration both returned the USD control dataset.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C8
+    text: The deliberately asynchronous application update was observed before completion and then awaited using stored preference plus full dataset predicates.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json; browser_support.py
+  - id: C9
+    text: A fresh driver visiting the supported URL-selected rendered page returned the desired records while localStorage remained empty.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C10
+    text: Direct loopback HTTP with the supported query returned the desired four records; omission returned the independently validated USD control.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C11
+    text: Opaque data-document localStorage access raised SecurityError; selective removal retained an unrelated key; JSON decoded identically in Python and JavaScript.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C12
+    text: The rescan rejects incomplete, contradictory, malformed and duplicate captures and recomputes record matches independently of cached flags.
+    type: tested_implementation
+    source: summarize.py; test_packet.py; expected_output/tests.txt
+  - id: C13
+    text: execute_script runs JavaScript in the current window or frame and accepts separate arguments.
+    type: documented
+    source: https://www.selenium.dev/selenium/docs/api/py/selenium_webdriver_remote/selenium.webdriver.remote.webdriver.html#selenium.webdriver.remote.webdriver.WebDriver.execute_script
+    accessed_at: 2026-09-27
+  - id: C14
+    text: Explicit waits poll a specified condition until success or timeout; page-load completion alone does not imply asynchronous application readiness.
+    type: documented
+    source: https://www.selenium.dev/documentation/webdriver/waits/
+    accessed_at: 2026-09-27
+  - id: C15
+    text: localStorage is origin-scoped string storage; sessionStorage has a page-session lifetime, and browser policy or an invalid origin can prevent access.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    accessed_at: 2026-09-27
+  - id: C16
+    text: The storage event is not fired on the window that performed the storage change; no cross-tab event measurement is claimed here.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+    accessed_at: 2026-09-27
+  - id: C17
+    text: No ScrapingAnt API request occurs in this packet; the product decision boundary is a supported URL or cookies for retrieval, while localStorage operations remain with browser automation.
+    type: scope_and_owner_confirmed_capability
+    source: run.sh; README.md

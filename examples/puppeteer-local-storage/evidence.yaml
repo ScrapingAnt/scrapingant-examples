@@ -1,0 +1,137 @@
+article_id: puppeteer-local-storage
+canonical_url: https://scrapingant.com/blog/puppeteer-local-storage
+owner: Oleg Kulyk
+source_commit: PENDING_ROOT_SOURCE_COMMIT
+tested_source_commit: PENDING_ROOT_SOURCE_COMMIT
+examples_repo_commit: PENDING_ROOT_SOURCE_COMMIT
+tested_at: 2026-09-27
+requires_api_key: false
+external_runtime_targets: false
+paid_requests: 0
+run_command: ./run.sh
+install_command: npm ci
+environment:
+  node: 22.20.0
+  npm: 10.9.3
+  puppeteer: 25.12.0
+  bundled_chrome: 154.0.8037.57
+  os: macOS 26.6.2 arm64
+  kernel: Darwin 25.6.0
+  sandbox_disabled: false
+  browser_coverage: Chrome only; Firefox not measured
+dependencies:
+  puppeteer: 25.12.0
+  transitive_lock: package-lock.json
+  node_requirement: '>=22.12.0'
+fixtures:
+  - fixture.mjs
+  - Two ephemeral HTTP ports on 127.0.0.1; no real accounts, cookies or credentials
+outputs:
+  - expected_output/chrome.json
+  - expected_output/quickstart.json
+  - expected_output/test-results.json
+  - expected_output/development-red-checks.json
+  - comparison.json
+  - verification.json
+measurements:
+  - name: primary_checks
+    value: 48
+    passed: 48
+    denominator: 16 checks per round multiplied by 3 rounds in one browser
+    source: comparison.json
+  - name: extraction_observations
+    value: 36
+    denominator: 12 extraction cases multiplied by 3 rounds
+    source: comparison.json
+  - name: diagnostic_observations
+    value: 12
+    denominator: 4 diagnostics multiplied by 3 rounds
+    source: comparison.json
+  - name: exact_eur_extractions
+    value: 21
+    denominator: 36 primary observations including 15 independently validated USD controls
+    source: comparison.json
+  - name: matching_eur_record_observations
+    value: 84
+    denominator: 144 repeated record opportunities; 4 literal expected tuples per observation
+    source: comparison.json
+  - name: primary_catalog_requests
+    value: 33
+    denominator: Sum of per-operation request counts; 3 stale-DOM observations send no new request
+    source: expected_output/chrome.json
+  - name: passing_boundary_tests
+    value: 24
+    denominator: Complete Node test suite; development red tests excluded
+    source: expected_output/test-results.json
+limitations:
+  - Synthetic deterministic application, not a production performance or reliability estimate.
+  - One bundled Chrome version and one host; no Firefox measurement.
+  - LocalStorage-to-query conversion and URL preference override are explicit fixture application behavior.
+  - No ScrapingAnt or other external retrieval service was called; no generic storage-to-cookie conversion is claimed.
+  - Return-to-original-origin retains the initializer, so it does not isolate persistence from reapplication.
+  - Initializer runs for every matching new document and can overwrite later changed keys until removed.
+  - Writer storage-event absence is bounded by receipt of the other-page acknowledgement.
+  - No real authentication, browser profile restart, sessionStorage, IndexedDB, cookies, quota or encryption efficacy test.
+  - Snapshots are scoped to the same running origin; an origin or port change is not a transferable storage scope.
+claims:
+  - id: U1
+    text: All 36 extraction observations contained four rows with a captured HTTP 200 status; 21 matched the desired EUR tuples and 15 matched the literal USD controls.
+    type: measured
+    source: comparison.json; state.mjs
+  - id: U2
+    text: A late localStorage write changed the stored region to EU but left USD DOM rows and made zero new requests; reload selected the four EUR records.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U3
+    text: A guarded pre-app initializer and JSON restoration into a fresh context produced four EUR records.
+    type: measured
+    source: expected_output/chrome.json; expected_output/quickstart.json
+  - id: U4
+    text: A new same-origin page in the same context read EU state; a separate context and second-port origin started without it.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U5
+    text: The fresh-context catalog URL with region=EU rendered the desired records while localStorage remained empty.
+    type: measured
+    source: expected_output/chrome.json; expected_output/quickstart.json
+  - id: U6
+    text: Direct fixture JSON retrieval with the explicit region query matched the desired records; omitting the query selected the USD control dataset.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U7
+    text: About-blank localStorage access produced SecurityError; the owned HTTP origin allowed the subsequent EU write/read.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U8
+    text: The other same-origin page received one probe storage event and the writer received none by the acknowledgement boundary, in all three rounds.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U9
+    text: A Node-side lexical helper was unavailable inside evaluate, while an explicitly passed computed string and structured JSON value round-tripped.
+    type: measured
+    source: expected_output/chrome.json
+  - id: U10
+    text: The oracle rejects duplicate, extra and missing records; the summary independently rescans desired/control datasets and validates complete case coverage and boundaries.
+    type: verified_implementation
+    source: state.mjs; summarize.mjs; test/summary.test.mjs; expected_output/test-results.json
+  - id: U11
+    text: evaluateOnNewDocument runs after document creation and before its page scripts; its function accepts explicit arguments.
+    type: documented
+    source: https://pptr.dev/api/puppeteer.page.evaluateonnewdocument
+    accessed_at: 2026-09-27
+  - id: U12
+    text: Evaluated functions run in the page environment and cannot implicitly use lexical functions or variables from the Node script.
+    type: documented
+    source: https://pptr.dev/guides/javascript-execution
+    accessed_at: 2026-09-27
+  - id: U13
+    text: localStorage belongs to an origin and stores strings; storage events notify other documents sharing that storage area.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    related_source: https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+    accessed_at: 2026-09-27
+  - id: U14
+    text: The return-to-origin test keeps the initializer installed and cannot isolate retained storage from another initializer write.
+    type: implementation_limit
+    source: matrix.mjs; report.md
+verification: verification.json

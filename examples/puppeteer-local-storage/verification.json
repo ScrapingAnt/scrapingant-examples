@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-09-27T17:37:47.501Z",
+  "algorithm": "sha256",
+  "scope": "All packet files except rerun/dependency output and this manifest; commit metadata may require regeneration.",
+  "files": {
+    ".gitignore": "149fe1dd50409c564b77ae2309e1648b460fab704b88ed93af48391cb87029cd",
+    "README.md": "e27e122ffb22b0691e46f49d8fd37ccaa30188b04fcfd8103593f6a7fe3cf470",
+    "browser_helpers.mjs": "28daa53790af214ea84e01be2d14a79ab8d34466fc5ab76c948f29a11ade3028",
+    "cases.mjs": "289d8b65fc8396576eb6d87270cb1d86e616e98d7265fd75d4a8d6234b16a456",
+    "comparison.json": "01e39055d9b0b04c6854ce1554344c5175e1c953d424cefee5f5e363407b60aa",
+    "evidence.yaml": "f3812adeb16bc50bc2d741fb0f1169c43f34887e72bd75284aad2e38e6874183",
+    "expected_output/chrome.json": "a62fb3705335a0e40c7eeb7dd28e0fb175cf997a3091126d8f319a4b19c23787",
+    "expected_output/development-red-checks.json": "6a6eae6afe13038f3f5a85198b973a7d6622a4734bcfe78bff2353465b631b2b",
+    "expected_output/quickstart.json": "570306ff731c0d5948ea996c95edb461c80f5f55d9b26f8dfeb46716aca65c37",
+    "expected_output/test-results.json": "24bdc6050b4749f7f12df167c2a5cefd1ee494d536c698f0e5f9edd6e8657575",
+    "fixture.mjs": "9d86935828b2d488f337cdfd4f717668486b4608756281bf063d76a7e45efb7b",
+    "matrix.mjs": "be99fe3e61a8b9797834fe4c45e3bc08a7ed6b479ae25477beb4d24f62011416",
+    "package-lock.json": "bff416436be7f8687ccdfe65b35f7d5ff1a321514fd094282f5c3b6570d868e7",
+    "package.json": "9c2cbf12ce619ffa6326e120a4450997fd83f50fb4a2ce760ab20da81e5c011b",
+    "quickstart.mjs": "7b82136915d62f9b2d21df137ee90c0e6719cd51ff8f4f3aebc3d9660f7b0aa2",
+    "report.md": "029c60a0aa4e8b98825478957cc49d7b77592322f7374711ca23313affab365b",
+    "run.sh": "6481aa936d389367f787f75c0ae493da7770fab7c0f7c00ceb10e0fa7a792c49",
+    "state.mjs": "31d869e93883d6d82af9caa8568cda188927a4bd3dc659d065e2f899ccc4ab41",
+    "summarize.mjs": "12a749abbf94ab17ff403790ebb251750f0491c094d3fd1f5541587aa55d1d8f",
+    "test/fixture.test.mjs": "f01a333bb594c3e599300c453e13fd14e72f4cd9b2a79a7f9bfd14086f9dead3",
+    "test/state.test.mjs": "98cf1a25d1142f59103879a10720c9aaadafdd6e73134eb848e8af6f1a4ce1c8",
+    "test/summary.test.mjs": "3116fb8c9259c351bcda132d935e57b0d07c20be4ac572ab4b7db9d434d59616",
+    "test_suite.mjs": "9029a03dda9322f3999783d935d7682f3eced6a05ca333007322f9bc8f90ef62",
+    "verify.mjs": "e4a421b066085eed38ba6a5730c96d62c2311024997db7f1a13c1ae3ac6191ae"
+  }
+}

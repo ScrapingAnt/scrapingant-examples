@@ -1,0 +1,1692 @@
+{
+  "tested_at": "2026-09-27T17:34:10.524Z",
+  "browser": "chrome",
+  "environment": {
+    "node": "v22.20.0",
+    "puppeteer": "25.12.0",
+    "browser": "Chrome/154.0.8037.57",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64",
+    "sandbox_disabled": false
+  },
+  "fixture": "self-authored loopback catalog; two distinct HTTP ports; synthetic localStorage only",
+  "rounds": 3,
+  "runs": [
+    {
+      "round": 1,
+      "cases": [
+        {
+          "case": "fresh_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "about_blank_storage",
+          "kind": "diagnostic",
+          "page_url": "about:blank",
+          "error_name": "SecurityError",
+          "after_navigation_value": "EU",
+          "after_navigation_origin": "http://127.0.0.1:50187",
+          "check_passed": true
+        },
+        {
+          "case": "late_write_stale_dom",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 0,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "pre_app_seed",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "snapshot_fresh_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "second_origin_guarded",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50188",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "return_to_original_origin",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_url_without_storage",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog?region=EU",
+          "startup_region": "EU",
+          "startup_source": "query",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_query_without_browser",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog?region=EU",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "EU",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_missing_query",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "US",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_handshake",
+          "kind": "diagnostic",
+          "writer_probe_events": [],
+          "ack_received": true,
+          "other_probe_events": [
+            {
+              "key": "probe",
+              "oldValue": null,
+              "newValue": "synthetic-event-value",
+              "local_storage": true
+            }
+          ],
+          "observation_boundary": "writer received other-page acknowledgement",
+          "check_passed": true
+        },
+        {
+          "case": "node_browser_boundary",
+          "kind": "diagnostic",
+          "error_name": "ReferenceError",
+          "node_value": "node-computed:synthetic",
+          "stored_argument": "node-computed:synthetic",
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_transport",
+          "kind": "diagnostic",
+          "returned": {
+            "text": "quote'\"\\\n雪</script>;window.injected=true;//",
+            "options": {
+              "language": "uk",
+              "enabled": true
+            },
+            "count": 3
+          },
+          "raw_storage": "{\"text\":\"quote'\\\"\\\\\\n雪</script>;window.injected=true;//\",\"options\":{\"language\":\"uk\",\"enabled\":true},\"count\":3}",
+          "injected": false,
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "cases": [
+        {
+          "case": "fresh_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "about_blank_storage",
+          "kind": "diagnostic",
+          "page_url": "about:blank",
+          "error_name": "SecurityError",
+          "after_navigation_value": "EU",
+          "after_navigation_origin": "http://127.0.0.1:50187",
+          "check_passed": true
+        },
+        {
+          "case": "late_write_stale_dom",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 0,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "pre_app_seed",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "snapshot_fresh_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "second_origin_guarded",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50188",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "return_to_original_origin",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_url_without_storage",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog?region=EU",
+          "startup_region": "EU",
+          "startup_source": "query",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_query_without_browser",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog?region=EU",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "EU",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_missing_query",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "US",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_handshake",
+          "kind": "diagnostic",
+          "writer_probe_events": [],
+          "ack_received": true,
+          "other_probe_events": [
+            {
+              "key": "probe",
+              "oldValue": null,
+              "newValue": "synthetic-event-value",
+              "local_storage": true
+            }
+          ],
+          "observation_boundary": "writer received other-page acknowledgement",
+          "check_passed": true
+        },
+        {
+          "case": "node_browser_boundary",
+          "kind": "diagnostic",
+          "error_name": "ReferenceError",
+          "node_value": "node-computed:synthetic",
+          "stored_argument": "node-computed:synthetic",
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_transport",
+          "kind": "diagnostic",
+          "returned": {
+            "text": "quote'\"\\\n雪</script>;window.injected=true;//",
+            "options": {
+              "language": "uk",
+              "enabled": true
+            },
+            "count": 3
+          },
+          "raw_storage": "{\"text\":\"quote'\\\"\\\\\\n雪</script>;window.injected=true;//\",\"options\":{\"language\":\"uk\",\"enabled\":true},\"count\":3}",
+          "injected": false,
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "cases": [
+        {
+          "case": "fresh_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "about_blank_storage",
+          "kind": "diagnostic",
+          "page_url": "about:blank",
+          "error_name": "SecurityError",
+          "after_navigation_value": "EU",
+          "after_navigation_origin": "http://127.0.0.1:50187",
+          "check_passed": true
+        },
+        {
+          "case": "late_write_stale_dom",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 0,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "late_write_then_reload",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "pre_app_seed",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "snapshot_fresh_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "same_context_new_page",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "isolated_context",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "second_origin_guarded",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50188",
+          "request_path": "/catalog",
+          "startup_region": "US",
+          "startup_source": "default",
+          "target_status": 200,
+          "response_region": "US",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "return_to_original_origin",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog",
+          "startup_region": "EU",
+          "startup_source": "localStorage",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": "EU",
+          "storage_length": 1,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "query_url_without_storage",
+          "kind": "extraction",
+          "transport": "browser_dom",
+          "navigation_status": 200,
+          "page_origin": "http://127.0.0.1:50187",
+          "request_path": "/catalog?region=EU",
+          "startup_region": "EU",
+          "startup_source": "query",
+          "target_status": 200,
+          "response_region": "EU",
+          "storage_region": null,
+          "storage_length": 0,
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_query_without_browser",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog?region=EU",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "EU",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "EUR",
+              "price": "8.10"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "EUR",
+              "price": "16.20"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "EUR",
+              "price": "24.30"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "EUR",
+              "price": "32.40"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 4,
+          "exact_match": true,
+          "check_passed": true
+        },
+        {
+          "case": "direct_missing_query",
+          "kind": "extraction",
+          "transport": "node_http_json",
+          "navigation_status": null,
+          "target_status": 200,
+          "page_origin": null,
+          "request_path": "/api/catalog",
+          "startup_region": null,
+          "startup_source": "no_browser",
+          "storage_region": null,
+          "storage_length": null,
+          "response_region": "US",
+          "catalog_requests_during_operation": 1,
+          "records": [
+            {
+              "sku": "SKU-101",
+              "currency": "USD",
+              "price": "9.00"
+            },
+            {
+              "sku": "SKU-202",
+              "currency": "USD",
+              "price": "18.00"
+            },
+            {
+              "sku": "SKU-303",
+              "currency": "USD",
+              "price": "27.00"
+            },
+            {
+              "sku": "SKU-404",
+              "currency": "USD",
+              "price": "36.00"
+            }
+          ],
+          "row_count": 4,
+          "expected_records": 4,
+          "matching_records": 0,
+          "exact_match": false,
+          "check_passed": true
+        },
+        {
+          "case": "storage_event_handshake",
+          "kind": "diagnostic",
+          "writer_probe_events": [],
+          "ack_received": true,
+          "other_probe_events": [
+            {
+              "key": "probe",
+              "oldValue": null,
+              "newValue": "synthetic-event-value",
+              "local_storage": true
+            }
+          ],
+          "observation_boundary": "writer received other-page acknowledgement",
+          "check_passed": true
+        },
+        {
+          "case": "node_browser_boundary",
+          "kind": "diagnostic",
+          "error_name": "ReferenceError",
+          "node_value": "node-computed:synthetic",
+          "stored_argument": "node-computed:synthetic",
+          "check_passed": true
+        },
+        {
+          "case": "json_argument_transport",
+          "kind": "diagnostic",
+          "returned": {
+            "text": "quote'\"\\\n雪</script>;window.injected=true;//",
+            "options": {
+              "language": "uk",
+              "enabled": true
+            },
+            "count": 3
+          },
+          "raw_storage": "{\"text\":\"quote'\\\"\\\\\\n雪</script>;window.injected=true;//\",\"options\":{\"language\":\"uk\",\"enabled\":true},\"count\":3}",
+          "injected": false,
+          "check_passed": true
+        }
+      ]
+    }
+  ],
+  "checks": 48,
+  "passed_checks": 48,
+  "extraction_observations": 36,
+  "diagnostic_observations": 12
+}
