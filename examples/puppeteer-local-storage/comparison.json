@@ -1,0 +1,396 @@
+{
+  "browser": "chrome",
+  "environment": {
+    "node": "v22.20.0",
+    "puppeteer": "25.12.0",
+    "browser": "Chrome/154.0.8037.57",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64",
+    "sandbox_disabled": false
+  },
+  "rounds": 3,
+  "checks": 48,
+  "passed_checks": 48,
+  "extraction_observations": 36,
+  "diagnostic_observations": 12,
+  "records_per_extraction": 4,
+  "record_opportunities": 144,
+  "exact_extractions": 21,
+  "matching_record_observations": 84,
+  "http_200_extractions": 36,
+  "four_row_extractions": 36,
+  "case_outcomes": {
+    "fresh_page": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        "US"
+      ],
+      "response_regions": [
+        "US"
+      ],
+      "startup_sources": [
+        "default"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "pre_app_seed": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "localStorage"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "late_write_stale_dom": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "US"
+      ],
+      "response_regions": [
+        "US"
+      ],
+      "startup_sources": [
+        "default"
+      ],
+      "operation_request_counts": [
+        0
+      ],
+      "all_checks_passed": true
+    },
+    "late_write_then_reload": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "localStorage"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "snapshot_fresh_context": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "localStorage"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "same_context_new_page": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "localStorage"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "isolated_context": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        "US"
+      ],
+      "response_regions": [
+        "US"
+      ],
+      "startup_sources": [
+        "default"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "second_origin_guarded": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        "US"
+      ],
+      "response_regions": [
+        "US"
+      ],
+      "startup_sources": [
+        "default"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "return_to_original_origin": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        "EU"
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "localStorage"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "query_url_without_storage": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        "EU"
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "query"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "direct_query_without_browser": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        null
+      ],
+      "response_regions": [
+        "EU"
+      ],
+      "startup_sources": [
+        "no_browser"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    },
+    "direct_missing_query": {
+      "observations": 3,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "storage_regions": [
+        null
+      ],
+      "startup_regions": [
+        null
+      ],
+      "response_regions": [
+        "US"
+      ],
+      "startup_sources": [
+        "no_browser"
+      ],
+      "operation_request_counts": [
+        1
+      ],
+      "all_checks_passed": true
+    }
+  },
+  "diagnostic_outcomes": {
+    "about_blank_storage": {
+      "observations": 3,
+      "all_checks_passed": true
+    },
+    "storage_event_handshake": {
+      "observations": 3,
+      "all_checks_passed": true,
+      "event_counts": {
+        "writer_probe_counts": [
+          0
+        ],
+        "other_probe_counts": [
+          1
+        ]
+      }
+    },
+    "node_browser_boundary": {
+      "observations": 3,
+      "all_checks_passed": true
+    },
+    "json_argument_transport": {
+      "observations": 3,
+      "all_checks_passed": true
+    }
+  },
+  "limitations": [
+    "Self-authored deterministic fixture, not a production reliability or performance estimate.",
+    "One bundled Chrome version, three repetitions on one host; Firefox not measured.",
+    "The application explicitly maps localStorage.region or a URL query to its catalog request.",
+    "Direct URL and JSON retrieval are fixture controls, not an external service test or generic state conversion.",
+    "No cookies, login, account state, browser profile persistence, IndexedDB or sessionStorage experiment.",
+    "Storage-event writer absence is bounded by receiving the other page acknowledgement.",
+    "Quickstart, unit tests and development red tests are excluded from primary observation counts."
+  ]
+}

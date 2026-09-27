@@ -1,0 +1,27 @@
+{
+  "stored_region": "eu",
+  "request_path": "/api/catalog?region=eu",
+  "records": [
+    {
+      "currency": "EUR",
+      "price_minor": 825,
+      "sku": "SKU-1"
+    },
+    {
+      "currency": "EUR",
+      "price_minor": 1675,
+      "sku": "SKU-2"
+    },
+    {
+      "currency": "EUR",
+      "price_minor": 2425,
+      "sku": "SKU-3"
+    },
+    {
+      "currency": "EUR",
+      "price_minor": 3350,
+      "sku": "SKU-4"
+    }
+  ],
+  "matching_records": 4
+}

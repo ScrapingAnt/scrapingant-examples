@@ -1,0 +1,849 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-09-27T17:22:00.763045+00:00",
+  "browser": "chrome",
+  "python": "3.12.10",
+  "selenium": "4.49.0",
+  "os": "macOS-26.6.2-arm64-arm-64bit",
+  "runs": [
+    {
+      "round": 1,
+      "environment": {
+        "browser": "chrome",
+        "browser_version": "154.0.8037.57",
+        "driver_version": "154.0.8037.57 (73c14f6228d7cd537c855007e8f88678969cc0eb-refs/branch-heads/8037@{#1293})"
+      },
+      "cases": [
+        {
+          "case": "opaque_origin",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "error": "SecurityError"
+        },
+        {
+          "case": "empty_startup",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "bootstrap_seed",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": "eu",
+          "session_region": null,
+          "rendered_region": "eu",
+          "request_path": "/api/catalog?region=eu",
+          "request_event": {
+            "path": "/api/catalog?region=eu",
+            "region": "eu",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "EUR",
+                "price_minor": 825
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "EUR",
+                "price_minor": 1675
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "EUR",
+                "price_minor": 2425
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "EUR",
+                "price_minor": 3350
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "EUR",
+              "price_minor": 825,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 1675,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 2425,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 3350,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 4,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "argument_roundtrip",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "key": "pref'line\nλ",
+          "value": "O'Reilly\nКиїв 🕷"
+        },
+        {
+          "case": "legacy_interpolation_failure",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "error": "JavascriptException",
+          "legacy_value": null
+        },
+        {
+          "case": "json_roundtrip",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "python_value": {
+            "name": "O'Reilly\nКиїв 🕷",
+            "enabled": false,
+            "tags": [
+              "eu",
+              null,
+              3
+            ]
+          },
+          "browser_value": {
+            "enabled": false,
+            "name": "O'Reilly\nКиїв 🕷",
+            "tags": [
+              "eu",
+              null,
+              3
+            ]
+          }
+        },
+        {
+          "case": "wrong_origin_restore_rejected",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "error": "ValueError",
+          "unchanged": true,
+          "before_items": [],
+          "after_items": [],
+          "source_origin": "http://127.0.0.1:63974",
+          "current_origin": "http://127.0.0.1:63975"
+        },
+        {
+          "case": "wrong_port",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "late_write_without_reload",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": "eu",
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "reload_after_late_write",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": "eu",
+          "session_region": null,
+          "rendered_region": "eu",
+          "request_path": "/api/catalog?region=eu",
+          "request_event": {
+            "path": "/api/catalog?region=eu",
+            "region": "eu",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "EUR",
+                "price_minor": 825
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "EUR",
+                "price_minor": 1675
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "EUR",
+                "price_minor": 2425
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "EUR",
+                "price_minor": 3350
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "EUR",
+              "price_minor": 825,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 1675,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 2425,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 3350,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 4,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "crud_selective_removal",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "removed_value": null,
+          "retained_value": "retained"
+        },
+        {
+          "case": "selective_region_removal",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "session_storage_only",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": null,
+          "session_region": "eu",
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "async_precondition",
+          "kind": "diagnostic",
+          "assertion_passed": true,
+          "observed": {
+            "region": "us",
+            "stage": "scheduled",
+            "storedRegion": null
+          }
+        },
+        {
+          "case": "delayed_application_update",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": "eu",
+          "session_region": null,
+          "rendered_region": "eu",
+          "request_path": "/api/catalog?region=eu",
+          "request_event": {
+            "path": "/api/catalog?region=eu",
+            "region": "eu",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "EUR",
+                "price_minor": 825
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "EUR",
+                "price_minor": 1675
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "EUR",
+                "price_minor": 2425
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "EUR",
+                "price_minor": 3350
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "EUR",
+              "price_minor": 825,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 1675,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 2425,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 3350,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 4,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "fresh_driver_empty",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog?region=us",
+          "request_event": {
+            "path": "/api/catalog?region=us",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "USD",
+              "price_minor": 1100,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 2200,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 3300,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "USD",
+              "price_minor": 4400,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "manual_snapshot_restore",
+          "kind": "extraction",
+          "transport": "browser",
+          "stored_region": "eu",
+          "session_region": null,
+          "rendered_region": "eu",
+          "request_path": "/api/catalog?region=eu",
+          "request_event": {
+            "path": "/api/catalog?region=eu",
+            "region": "eu",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "EUR",
+                "price_minor": 825
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "EUR",
+                "price_minor": 1675
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "EUR",
+                "price_minor": 2425
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "EUR",
+                "price_minor": 3350
+              }
+            ]
+          },
+          "records": [
+            {
+              "currency": "EUR",
+              "price_minor": 825,
+              "sku": "SKU-1"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 1675,
+              "sku": "SKU-2"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 2425,
+              "sku": "SKU-3"
+            },
+            {
+              "currency": "EUR",
+              "price_minor": 3350,
+              "sku": "SKU-4"
+            }
+          ],
+          "ready": true,
+          "matching_records": 4,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "query_parameter_only",
+          "kind": "extraction",
+          "transport": "http",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "eu",
+          "request_path": "/api/catalog?region=eu",
+          "request_event": {
+            "path": "/api/catalog?region=eu",
+            "region": "eu",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "EUR",
+                "price_minor": 825
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "EUR",
+                "price_minor": 1675
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "EUR",
+                "price_minor": 2425
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "EUR",
+                "price_minor": 3350
+              }
+            ]
+          },
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "EUR",
+              "price_minor": 825
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "EUR",
+              "price_minor": 1675
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "EUR",
+              "price_minor": 2425
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "EUR",
+              "price_minor": 3350
+            }
+          ],
+          "ready": true,
+          "matching_records": 4,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        },
+        {
+          "case": "query_parameter_missing",
+          "kind": "extraction",
+          "transport": "http",
+          "stored_region": null,
+          "session_region": null,
+          "rendered_region": "us",
+          "request_path": "/api/catalog",
+          "request_event": {
+            "path": "/api/catalog",
+            "region": "us",
+            "status": 200,
+            "records": [
+              {
+                "sku": "SKU-1",
+                "currency": "USD",
+                "price_minor": 1100
+              },
+              {
+                "sku": "SKU-2",
+                "currency": "USD",
+                "price_minor": 2200
+              },
+              {
+                "sku": "SKU-3",
+                "currency": "USD",
+                "price_minor": 3300
+              },
+              {
+                "sku": "SKU-4",
+                "currency": "USD",
+                "price_minor": 4400
+              }
+            ]
+          },
+          "records": [
+            {
+              "sku": "SKU-1",
+              "currency": "USD",
+              "price_minor": 1100
+            },
+            {
+              "sku": "SKU-2",
+              "currency": "USD",
+              "price_minor": 2200
+            },
+            {
+              "sku": "SKU-3",
+              "currency": "USD",
+              "price_minor": 3300
+            },
+            {
+              "sku": "SKU-4",
+              "currency": "USD",
+              "price_minor": 4400
+            }
+          ],
+          "ready": true,
+          "matching_records": 0,
+          "row_count": 4,
+          "expected_records": 4,
+          "assertion_passed": true
+        }
+      ]
+    }
+  ],
+  "assertions": 19,
+  "passed": 19
+}

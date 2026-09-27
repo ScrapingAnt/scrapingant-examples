@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Local storage catalog fixture</title>
+<h1>Catalog</h1><p id="region">Loading</p><button id="delayed-eu">Apply EU preference asynchronously</button>
+<table><tbody id="products"></tbody></table>
+<script>
+window.catalog = {ready: false, region: null, requestPath: null, error: null, stage: 'startup'};
+async function renderCatalog() {
+  window.catalog.ready = false;
+  // This explicit application contract converts a storage preference to a query.
+  const region = new URLSearchParams(location.search).get('region') || localStorage.getItem('demo_region') || 'us';
+  const requestPath = '/api/catalog?region=' + encodeURIComponent(region);
+  window.catalog.requestPath = requestPath;
+  try {
+    const response = await fetch(requestPath, {cache: 'no-store'});
+    if (!response.ok) throw new Error('catalog HTTP ' + response.status);
+    const data = await response.json();
+    document.querySelector('#region').textContent = data.region;
+    const body = document.querySelector('#products'); body.replaceChildren();
+    for (const item of data.records) {
+      const row = document.createElement('tr'); row.dataset.sku = item.sku;
+      for (const [name, value] of Object.entries(item)) {
+        const cell = document.createElement('td'); cell.className = name; cell.textContent = value;
+        row.appendChild(cell);
+      }
+      body.appendChild(row);
+    }
+    Object.assign(window.catalog, {region: data.region, ready: true, stage: 'rendered'});
+  } catch (error) { window.catalog.error = String(error); }
+}
+// Timer deliberately models an asynchronous application change; the runner uses predicates.
+window.scheduleEu = function () {
+  window.catalog.stage = 'scheduled';
+  const before = {storedRegion: localStorage.getItem('demo_region'), region: window.catalog.region,
+                  stage: window.catalog.stage};
+  setTimeout(async () => { localStorage.setItem('demo_region', 'eu'); await renderCatalog(); }, 150);
+  return before;
+};
+document.querySelector('#delayed-eu').addEventListener('click', window.scheduleEu);
+renderCatalog();
+</script></html>

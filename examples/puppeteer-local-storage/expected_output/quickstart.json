@@ -1,0 +1,90 @@
+{
+  "environment": {
+    "node": "v22.20.0",
+    "puppeteer": "25.12.0",
+    "browser": "Chrome/154.0.8037.57",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64",
+    "sandbox_disabled": false
+  },
+  "restored": {
+    "transport": "browser_dom",
+    "navigation_status": 200,
+    "page_origin": "http://127.0.0.1:50180",
+    "request_path": "/catalog",
+    "startup_region": "EU",
+    "startup_source": "localStorage",
+    "target_status": 200,
+    "response_region": "EU",
+    "storage_region": "EU",
+    "storage_length": 1,
+    "catalog_requests_during_operation": 1,
+    "records": [
+      {
+        "sku": "SKU-101",
+        "currency": "EUR",
+        "price": "8.10"
+      },
+      {
+        "sku": "SKU-202",
+        "currency": "EUR",
+        "price": "16.20"
+      },
+      {
+        "sku": "SKU-303",
+        "currency": "EUR",
+        "price": "24.30"
+      },
+      {
+        "sku": "SKU-404",
+        "currency": "EUR",
+        "price": "32.40"
+      }
+    ],
+    "row_count": 4,
+    "expected_records": 4,
+    "matching_records": 4,
+    "exact_match": true
+  },
+  "query_url": {
+    "transport": "browser_dom",
+    "navigation_status": 200,
+    "page_origin": "http://127.0.0.1:50180",
+    "request_path": "/catalog?region=EU",
+    "startup_region": "EU",
+    "startup_source": "query",
+    "target_status": 200,
+    "response_region": "EU",
+    "storage_region": null,
+    "storage_length": 0,
+    "catalog_requests_during_operation": 1,
+    "records": [
+      {
+        "sku": "SKU-101",
+        "currency": "EUR",
+        "price": "8.10"
+      },
+      {
+        "sku": "SKU-202",
+        "currency": "EUR",
+        "price": "16.20"
+      },
+      {
+        "sku": "SKU-303",
+        "currency": "EUR",
+        "price": "24.30"
+      },
+      {
+        "sku": "SKU-404",
+        "currency": "EUR",
+        "price": "32.40"
+      }
+    ],
+    "row_count": 4,
+    "expected_records": 4,
+    "matching_records": 4,
+    "exact_match": true
+  },
+  "temporary_snapshot_removed": true
+}
