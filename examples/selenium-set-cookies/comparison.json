@@ -1,0 +1,159 @@
+{
+  "primary_browsers": {
+    "chrome": {
+      "environment": {
+        "browser": "chrome",
+        "browser_version": "154.0.8037.57",
+        "driver_version": "154.0.8037.57 (73c14f6228d7cd537c855007e8f88678969cc0eb-refs/branch-heads/8037@{#1293})"
+      },
+      "assertions": 39,
+      "passed": 39
+    },
+    "firefox": {
+      "environment": {
+        "browser": "firefox",
+        "browser_version": "156.0.1",
+        "driver_version": "0.37.1"
+      },
+      "assertions": 39,
+      "passed": 39
+    }
+  },
+  "case_outcomes": {
+    "anonymous": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "server_seeded": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "all_assertions_passed": true
+    },
+    "full_restore_fresh_browser": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        4
+      ],
+      "all_assertions_passed": true
+    },
+    "auth_cookie_only": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "javascript_visible_only": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "wrong_session_path": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "expired_session_filtered": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "server_revoked_session": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    },
+    "deleted_session": {
+      "observations": 6,
+      "statuses": [
+        200
+      ],
+      "row_counts": [
+        4
+      ],
+      "matching_record_counts": [
+        0
+      ],
+      "all_assertions_passed": true
+    }
+  },
+  "primary_assertions": 78,
+  "primary_extraction_observations": 54,
+  "records_per_observation": 4,
+  "limitations": [
+    "Synthetic deterministic dataset, not a production-site reliability estimate.",
+    "Three repeats per browser share one host and fixture design.",
+    "Exploratory installed Firefox109.0.1 results are archived separately and excluded from the primary comparison.",
+    "Cross-site SameSite behavior, partitioned cookies, browser profiles, SSO and real account portability were not tested."
+  ],
+  "api": {
+    "requests": 8,
+    "known_credits": 44,
+    "missing_credit_receipts": 0,
+    "replay_confirmed_modes": [
+      false,
+      true
+    ]
+  }
+}

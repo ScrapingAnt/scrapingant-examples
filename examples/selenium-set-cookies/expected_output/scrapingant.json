@@ -1,0 +1,150 @@
+{
+  "tested_at": "2026-09-27T15:49:36.744570+00:00",
+  "target": "https://httpbingo.org",
+  "synthetic_cookie_names": [
+    "sa_region",
+    "sa_tier"
+  ],
+  "maximum_requests": 8,
+  "calls": [
+    {
+      "call": 1,
+      "case": "baseline",
+      "browser": false,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 1,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [],
+      "received_all_expected": false,
+      "echoed_demo_names": [],
+      "echo_matches_expected": false
+    },
+    {
+      "call": 2,
+      "case": "receive_after_set",
+      "browser": false,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 1,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "received_all_expected": true,
+      "echoed_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "echo_matches_expected": true
+    },
+    {
+      "call": 3,
+      "case": "without_replay",
+      "browser": false,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 1,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [],
+      "received_all_expected": false,
+      "echoed_demo_names": [],
+      "echo_matches_expected": false
+    },
+    {
+      "call": 4,
+      "case": "explicit_replay",
+      "browser": false,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 1,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "received_all_expected": true,
+      "echoed_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "echo_matches_expected": true
+    },
+    {
+      "call": 5,
+      "case": "baseline",
+      "browser": true,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 10,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [],
+      "received_all_expected": false,
+      "echoed_demo_names": [],
+      "echo_matches_expected": false
+    },
+    {
+      "call": 6,
+      "case": "receive_after_set",
+      "browser": true,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 10,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "received_all_expected": true,
+      "echoed_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "echo_matches_expected": true
+    },
+    {
+      "call": 7,
+      "case": "without_replay",
+      "browser": true,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 10,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [],
+      "received_all_expected": false,
+      "echoed_demo_names": [],
+      "echo_matches_expected": false
+    },
+    {
+      "call": 8,
+      "case": "explicit_replay",
+      "browser": true,
+      "request_sent": true,
+      "api_status": 200,
+      "credits": 10,
+      "target_status": 200,
+      "body_field": "html",
+      "received_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "received_all_expected": true,
+      "echoed_demo_names": [
+        "sa_region",
+        "sa_tier"
+      ],
+      "echo_matches_expected": true
+    }
+  ],
+  "requests_sent": 8,
+  "known_credits": 44,
+  "missing_credit_receipts": 0
+}

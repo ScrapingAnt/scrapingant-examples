@@ -1,0 +1,101 @@
+article_id: selenium-set-cookies
+canonical_url: https://scrapingant.com/blog/selenium-set-cookies
+owner: Oleg Kulyk
+tested_at: 2026-09-27
+requires_api_key: false
+optional_live_requires_api_key: true
+run_command: ./run.sh
+environment:
+  os: macOS 26.6.2 arm64
+  python: 3.12.10
+  selenium: 4.49.0
+  chrome: 154.0.8037.57
+  chromedriver: 154.0.8037.57
+  firefox: 156.0.1
+  geckodriver: 0.37.1
+dependencies:
+  selenium: 4.49.0
+  requests: 2.34.2
+  transitive_lock: requirements-lock.txt
+fixtures:
+  - catalog_fixture.py
+  - https://httpbingo.org/cookies
+  - https://httpbingo.org/cookies/set
+outputs:
+  - expected_output/chrome.json
+  - expected_output/firefox.json
+  - expected_output/quickstart.json
+  - expected_output/scrapingant.json
+  - comparison.json
+exploratory_outputs:
+  - expected_output/exploratory/firefox-installed-109.json
+  - expected_output/exploratory/chrome-before-oracle-fix.json
+  - expected_output/exploratory/firefox-before-oracle-fix.json
+measurements:
+  - {name: primary_browser_assertions, value: 78, denominator: "13 cases × 3 rounds × 2 browsers", source: comparison.json}
+  - {name: extraction_observations, value: 54, denominator: "9 extraction cases × 3 rounds × 2 browsers", source: comparison.json}
+  - {name: matching_records, value: "4/4 for server-seeded and full restoration; 0/4 in seven failure/control states", denominator: four synthetic SKU/currency/price tuples per observation, source: comparison.json}
+  - {name: api_requests, value: 8, denominator: four calls per mode across two modes, source: expected_output/scrapingant.json}
+  - {name: api_credits, value: 44, denominator: eight captured credit receipts with none missing, source: expected_output/scrapingant.json}
+limitations:
+  - Deterministic synthetic catalog with a literal independent product oracle; no real account or production reliability estimate.
+  - Three repeats share the same host and fixture design; browser/runtime versions are measured, not a latest-version promise.
+  - Exploratory installed Firefox109 output is excluded from primary counts; stable Firefox156 is the main comparison.
+  - Expired-cookie case filters an expired snapshot before insertion; no natural-expiry waiting experiment.
+  - Exact-origin helper is deliberately restricted and does not export a complete browser profile, local/session storage or partition metadata.
+  - No cross-site SameSite, SSO, MFA, IP-bound authentication or production login-portability test.
+  - API test is a separate public echo chain, not the local catalog; one chain per mode is not an efficacy benchmark.
+  - Default CI does not execute the API probe, even when a key exists.
+  - Duplicate-row oracle defect found during review was fixed with multiset matching; all54 earlier scores were independently recomputed unchanged, and both final primary browser suites were rerun successfully.
+claims:
+  - id: C1
+    text: All54 primary extraction observations returned200 and four rows; only the seeded/full-restored member-EUR states matched all four expected records.
+    type: measured
+    source: comparison.json
+  - id: C2
+    text: Session-only restoration retained member pricing in USD; JavaScript-only restoration lost the HttpOnly session and selected retail EUR prices.
+    type: measured
+    source: expected_output/chrome.json
+  - id: C3
+    text: Wrong path, filtered expiry, server revocation and cookie deletion produced wrong records; a revoked session cookie remained in the browser.
+    type: measured
+    source: expected_output/firefox.json
+  - id: C4
+    text: About-blank and foreign-domain insertion raised InvalidCookieDomainException in all six primary observations per diagnostic.
+    type: measured
+    source: comparison.json; expected_output/chrome.json; expected_output/firefox.json
+  - id: C5
+    text: WebDriver saw the demo HttpOnly cookie while document.cookie did not; delete-all left zero associated cookies.
+    type: measured
+    source: expected_output/chrome.json; expected_output/firefox.json
+  - id: C6
+    text: The minimal example restored two cookies and extracted four correct member-EUR records.
+    type: measured
+    source: expected_output/quickstart.json
+  - id: C7
+    text: ScrapingAnt received and explicitly resent both synthetic cookie pairs in each mode; independent no-replay calls did not echo them; eight calls cost44 credits.
+    type: measured
+    source: expected_output/scrapingant.json
+  - id: C8
+    text: Selenium cookie operations act on the current document; navigation to the correct domain is required before insertion.
+    type: documented
+    source: https://www.selenium.dev/documentation/webdriver/interactions/cookies/
+    accessed_at: 2026-09-27
+  - id: C9
+    text: Domain/path/expiry/Secure/HttpOnly/SameSite govern cookie scope and visibility; local/session storage are separate mechanisms.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+    accessed_at: 2026-09-27
+  - id: C10
+    text: ScrapingAnt accepts name/value cookie pairs through its cookies parameter and returns received pairs through the extended endpoint.
+    type: product
+    source: https://docs.scrapingant.com/custom-cookies
+    accessed_at: 2026-09-27
+  - id: C11
+    text: The extended output's html, cookies and status_code fields were observed in both measured modes.
+    type: measured
+    source: expected_output/scrapingant.json
+  - id: C12
+    text: JSON helper preserves supported attributes, verifies the exact origin and filters expired cookies; defaults do not call the API.
+    type: documented
+    source: cookie_state.py; run.sh; test_cookie_state.py; test_scrapingant_cookies.py
