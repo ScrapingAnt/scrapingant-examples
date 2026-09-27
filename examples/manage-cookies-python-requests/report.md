@@ -43,4 +43,8 @@ The servers bind loopback only, and all clients ignore ambient proxy and `.netrc
 
 The independent-requests control uses one short-lived Session per request; it does not directly exercise the top-level `requests.get()` convenience function. The expiry check assigns a past timestamp instead of waiting. Revocation is simulated by fixture state. The fixture has no JavaScript, browser storage, cross-site request or TLS handshake. LWP roundtrip and file mode were measured on macOS; production session reuse, OS-independent permissions and browser-security equivalence are not claimed.
 
-`verification.json` identifies source hashes and leaves the repository commit and CI fields pending for the release coordinator. These fields must be filled from actual commits/runs before publication.
+`verification.json` binds executable source and captures by SHA-256 and records the completed independent automated review and Linux CI. The committed primary captures remain the macOS observations described above.
+
+## Publication verification
+
+Executable source: `daa3b8bfe914b160e622be41fbf05ef161f4f2c6`. [Linux CI passed](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36334992162) before the evidence pull request was opened: 24 tests and 54/54 designed matrix checks. See [verification.json](verification.json) for hashes and the exact CI source. No executable code or primary captures changed when this provenance was recorded.
