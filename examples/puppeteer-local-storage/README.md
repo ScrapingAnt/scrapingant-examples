@@ -12,7 +12,7 @@ npm ci
 ./run.sh
 ```
 
-Puppeteer's normal install supplies its bundled Chrome. Linux also needs Chrome's system libraries; consult the [official troubleshooting guide](https://pptr.dev/troubleshooting). The default runner retains Chrome's sandbox. On a CI runner that requires an explicit opt-out, the supported override is `CI=true PUPPETEER_NO_SANDBOX=1 ./run.sh`; the runner rejects this opt-out outside an explicitly marked CI run. The local capture used the sandbox and did not need that override.
+Puppeteer's normal install supplies its bundled Chrome. Linux also needs Chrome's system libraries; consult the [official troubleshooting guide](https://pptr.dev/troubleshooting). The default runner retains Chrome's sandbox. On a CI runner that requires an explicit opt-out, the supported override is `CI=true PUPPETEER_NO_SANDBOX=1 ./run.sh`; the runner rejects this opt-out outside an explicitly marked CI run. The local capture used the sandbox and did not need that override. The GitHub-hosted Ubuntu workflow sets this explicit override only for this synthetic loopback packet after its sandboxed launch failed; other examples and ordinary local runs retain their defaults.
 
 `PUPPETEER_CACHE_DIR` can select an alternate browser cache. `NODE_BIN` selects Node; `OUTPUT_DIR` changes the output folder. Reruns write to ignored `run_output/`, leaving the committed `expected_output/` captures unchanged. Runtime targets are two temporary HTTP servers bound to `127.0.0.1`; no external site, account, cookie, API key, paid API or storage service is used.
 
