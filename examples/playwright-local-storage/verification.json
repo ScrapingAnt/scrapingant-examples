@@ -1,0 +1,59 @@
+{
+  "tested_source_commit": "pending",
+  "tested_at": "2026-09-27",
+  "command": "./run.sh --all-browsers",
+  "tests": 15,
+  "tests_passed": true,
+  "matrix_checks": 96,
+  "matrix_checks_passed": true,
+  "extraction_observations": 72,
+  "diagnostic_observations": 24,
+  "local_browsers": [
+    "chromium",
+    "firefox"
+  ],
+  "external_target_requests": 0,
+  "linux_ci": {
+    "status": "pending",
+    "command": "./run.sh",
+    "browsers": [
+      "chromium"
+    ]
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewed_at": "2026-09-27",
+    "reviewer": "Coordinator agent independent of implementation",
+    "open_blockers": 0,
+    "independent_full_rerun": true,
+    "scope": "Complete two-browser runner passed 15 tests and 96 checks. All primary observations matched after normalization of timestamps and ephemeral loopback origins. Literal Counter rescore confirmed 72 extractions, 24 diagnostics, 36 exact EU extractions and 144 matching record observations."
+  },
+  "source_hashes": {
+    "browser_matrix.py": "c98a813624f9d61316a0d8df82f23373e35f7eb279c90d6f91c2bf9368b19360",
+    "catalog_fixture.py": "52ddcd5ffbf0d927a1d98b9027589549589391299a48e13e6acdf17b30387d08",
+    "fixtures/catalog.json": "042de4999c07e72dca029f93809818352d60b508f09768026947564c529256cc",
+    "fixtures/index.html": "052a9eefefbaee203e11e68ecdf5561e34ea3ab0b53b0e2e1c779521fd772111",
+    "offline_checks.py": "cb82b24924efa66d3f81788cd9f80fe4c41bfcb2f14da5d2084f04d05824fe32",
+    "quickstart.py": "cddd6db66213d366dfaee5f3faf12faa6cf010062bbef712b26615ccfcd417f5",
+    "requirements-lock.txt": "68d40ba88621e6858be892daff60b289a7a5d3a304eb68a4ff6506f2cc04b067",
+    "requirements.txt": "852008c6c134845926625892a248563fe02a96a91e769e6735af1bad49ab2cef",
+    "run.sh": "404af3b1cfd01dafbd3e43c7d461a5efb15366866b59684b9185e6eb4469e6b1",
+    "spec.py": "1e9e0eeed8b96f96638708559c130907a153dd45ffd9b156cee8b2b36c2e10ae",
+    "state.py": "6ef20451e421ca0dad2ce825943646faa9d6fdccae337aaad5d61012cc8c6226",
+    "summarize.py": "37864599987fc8e2237986e3551b35900a10e7a21d51b43e2790cbd6627d8a41",
+    "test_fixture.py": "229ecae583e3d92ae05dbe141ec093f53a32dc5c499d3931f66ccbeb4a9c2c05",
+    "test_state.py": "5265c9b504fe7331aef4e35603ad7cf36251a26a3dc7afcadae79075b3eb488b",
+    "test_summary.py": "b17fd9fcdc2ff2cbfa96ab5b3ecb0a8be209ca52a62f5629bbfa9e5c1907d199"
+  },
+  "capture_hashes": {
+    "comparison.json": "917e4978f7eda76ba9a29cb3e713b9075ace382e139b67d6188f10b835855a1b",
+    "expected_output/chromium.json": "143c863eb143ebb3eb64a80462d402022c0273a626dfa9d1a96b6b2294b16eef",
+    "expected_output/dependencies.txt": "68d40ba88621e6858be892daff60b289a7a5d3a304eb68a4ff6506f2cc04b067",
+    "expected_output/exploratory/sandbox-loopback-denied.json": "c6d42ce23491a273572002d52d1358afe2e1112ee118883d8f1c2e2d89ae50a6",
+    "expected_output/firefox.json": "9c06206b6aeabe7770d3bb14aba20fa3130977cce38b1f98f168e6ef6477e484",
+    "expected_output/offline-checks.json": "a547de41787dc6a5ba8733845dbcbdbf98c71c95ad88e83cc6b35dbffdb8f7ea",
+    "expected_output/quickstart.json": "37df4de9d3c39541d87c2d71ea52110b537ef095b8e7536493a6272d9e4bbd0c"
+  },
+  "publication_note": "Source revision and Linux CI are pending publication checks. Source and capture hashes identify the tested local snapshot; metadata-only updates do not change the tested executable files.",
+  "scrapingant_api_requests": 0
+}

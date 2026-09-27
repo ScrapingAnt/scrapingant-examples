@@ -1,0 +1,181 @@
+article_id: playwright-local-storage
+canonical_url: https://scrapingant.com/blog/playwright-local-storage
+owner: Oleg Kulyk
+source_commit: pending
+tested_source_commit: pending
+examples_repo_commit: pending
+tested_at: 2026-09-27
+requires_api_key: false
+external_targets: false
+paid_requests: 0
+run_command: ./run.sh
+all_browsers_command: ./run.sh --all-browsers
+environment:
+  os_kernel_release: Darwin 25.6.0
+  machine: arm64
+  python: 3.12.10
+  playwright: 1.63.0
+  bundled_chromium: 153.0.8010.12
+  bundled_firefox: '155.0'
+dependencies:
+  playwright: 1.63.0
+  greenlet: 3.5.6
+  pyee: 13.0.1
+  typing_extensions: 4.16.0
+  transitive_lock: requirements-lock.txt
+  captured_freeze: expected_output/dependencies.txt
+fixtures:
+  - catalog_fixture.py
+  - fixtures/index.html
+  - fixtures/catalog.json
+  - Two self-authored HTTP loopback origins on ephemeral 127.0.0.1 ports
+oracle:
+  source: state.py
+  independent_of_fixture: true
+  desired_tuple_fields: [sku, currency, price]
+  desired_tuple_count: 4
+  wrong_state_oracle: Separate literal US tuples required for negative controls
+outputs:
+  - expected_output/chromium.json
+  - expected_output/firefox.json
+  - expected_output/quickstart.json
+  - expected_output/offline-checks.json
+  - expected_output/dependencies.txt
+  - comparison.json
+exploratory_outputs:
+  - path: expected_output/exploratory/sandbox-loopback-denied.json
+    excluded: true
+    reason: Sandbox rejected loopback bind before browser startup; final authorized local runner completed outside that restriction.
+measurements:
+  - name: primary_checks
+    value: 96
+    passed: 96
+    denominator: 16 checks per round multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: extraction_observations
+    value: 72
+    denominator: 12 extraction cases multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: diagnostic_observations
+    value: 24
+    passed: 24
+    denominator: 4 diagnostics multiplied by 3 rounds and 2 browsers
+    source: comparison.json
+  - name: matching_record_observations
+    value: 144
+    denominator: 288 repeated record opportunities; 4 literal tuples per extraction
+    source: comparison.json
+  - name: exact_extractions
+    value: 36
+    denominator: 72 observations including deliberate wrong-state controls
+    source: comparison.json
+  - name: extraction_http_200_and_four_rows
+    value: 72
+    denominator: 72 extraction observations
+    source: comparison.json
+  - name: boundary_tests
+    value: 15
+    passed: 15
+    denominator: Full unittest suite, separate from browser observations
+    source: expected_output/offline-checks.json
+limitations:
+  - Deterministic synthetic catalog; no production reliability, speed or real authentication measurement.
+  - Three repeats per browser share one host and one fixture design.
+  - URL selector and storage-to-query translation are explicit application behavior, not universal website behavior.
+  - Only local Chromium and Firefox are captured; default CI command requires Chromium only.
+  - A changed port and wrong-origin initializer are tested; HTTPS transitions and third-party partitioning are not.
+  - State restoration is same-browser, same-running-origin; no cross-browser login or browser-restart persistence claim.
+  - Synthetic sessionStorage non-restoration is tested with a new page without an opener; opener-copy behavior is outside scope.
+  - No real login, MFA, SSO, quota, blocked-storage, IndexedDB, OPFS or passkey tests.
+  - Quickstart, offline tests and the exploratory failure are excluded from primary browser denominators.
+  - No ScrapingAnt request, localStorage operation or state handoff was performed; product retrieval is only a documented conditional connection.
+claims:
+  - id: PL1
+    text: All 72 extraction observations returned HTTP 200 and four rows; 36 matched all four intended EU tuples.
+    type: measured
+    source: comparison.json
+  - id: PL2
+    text: Exact-origin missing-only initialization before startup selected four EU records in all six early-seed observations.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; early_missing_only_seed
+  - id: PL3
+    text: A late storage write changed the stored region to eu but the reread DOM remained US until reload in this fixture.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; late_write_without_reload; late_write_then_reload
+  - id: PL4
+    text: A new page shared the source context's same-origin preference; a fresh isolated context did not, while explicit storage_state restoration did.
+    type: measured
+    source: comparison.json; fresh_isolated_context; storage_state_restore; same_context_new_page
+  - id: PL5
+    text: A changed port did not receive the original origin's restored localStorage; an initializer guarded for the other origin skipped this page.
+    type: measured
+    source: comparison.json; changed_port_state_miss; wrong_origin_initializer
+  - id: PL6
+    text: On reload, missing-only initialization preserved a later us preference; unconditional initialization replaced it with eu.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; missing_only_preserves_change; unconditional_overwrites_change
+  - id: PL7
+    text: The explicit page URL selector rendered four intended EU tuples in a fresh context while localStorage stayed empty; the no-selector control rendered US tuples.
+    type: measured
+    source: comparison.json; query_only_without_storage; query_missing_without_storage; fixtures/index.html
+  - id: PL8
+    text: Browser argument passing and JSON stringify/parse preserved the diagnostic object; localStorage returned a string, and isolated CRUD operations produced the expected values.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; json_argument_round_trip; storage_crud
+  - id: PL9
+    text: The synthetic sessionStorage value was absent in a new same-context page without an opener and in a state-restored fresh context; localStorage was present.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; session_storage_not_restored
+  - id: PL10
+    text: The sibling same-origin page received one localStorage event while the writing page recorded none.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; storage_event_other_page
+  - id: PL11
+    text: Independent literal tuple scoring rejects duplicate, missing, extra and malformed rows; summary validation rejects incomplete or contradictory captures.
+    type: verified_implementation
+    source: state.py; summarize.py; test_state.py; test_summary.py; expected_output/offline-checks.json
+  - id: PL12
+    text: The complete quickstart extracted four exact EU tuples using an origin-guarded missing-only initializer.
+    type: measured
+    source: expected_output/quickstart.json
+  - id: PL13
+    text: Playwright evaluates context initialization scripts before document scripts and on subsequent navigations; ordering between multiple installed scripts is not defined.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-browsercontext#browser-context-add-init-script
+    accessed_at: 2026-09-27
+  - id: PL14
+    text: storage_state exposes an origin-indexed localStorage snapshot and can be supplied to a new browser context; this test restores only synthetic state.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-browsercontext#browser-context-storage-state
+    accessed_at: 2026-09-27
+  - id: PL15
+    text: page.evaluate accepts an argument separate from the JavaScript expression, enabling values to be passed without source interpolation.
+    type: documented
+    source: https://playwright.dev/python/docs/evaluating#evaluation-argument
+    accessed_at: 2026-09-27
+  - id: PL16
+    text: localStorage is origin-specific and stores string keys and values; file URL behavior is not a portable basis for examples.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    accessed_at: 2026-09-27
+  - id: PL17
+    text: A localStorage event reaches other documents sharing the storage area, not the document that performed the write.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+    accessed_at: 2026-09-27
+  - id: PL18
+    text: Playwright's normal reusable storage-state API does not persist sessionStorage.
+    type: documented
+    source: https://playwright.dev/python/docs/auth#session-storage
+    accessed_at: 2026-09-27
+  - id: PL19
+    text: ScrapingAnt documents browser-enabled JavaScript rendering and returning page HTML; this packet does not measure that service.
+    type: documented
+    source: https://docs.scrapingant.com/headless-browser
+    accessed_at: 2026-09-27
+  - id: PL20
+    text: ScrapingAnt does not support localStorage operations; retain browser automation when those operations are necessary.
+    type: owner_confirmed_scope
+    confirmed_at: 2026-09-27
+    source: Product-owner clarification; no API experiment performed
+verification: verification.json
