@@ -1,0 +1,76 @@
+{
+  "tests": 16,
+  "failures": 19,
+  "errors": 0,
+  "cases": [
+    {
+      "test": "test_oracle.RecordTests.test_duplicate_record_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_literal_catalog_is_accepted",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_missing_record_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_unknown_field_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_wrong_price_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_changed_diagnostic_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_changed_record_rejected_even_if_pass_flag_added",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_complete_matrix_has_exact_denominators",
+      "status": "failed",
+      "error": "0 != 72"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_duplicate_browser_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_duplicate_case_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_missing_case_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_missing_round_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_unexpected_case_is_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_wrong_schema_rejected",
+      "status": "failed",
+      "error": "ValueError not raised"
+    }
+  ]
+}

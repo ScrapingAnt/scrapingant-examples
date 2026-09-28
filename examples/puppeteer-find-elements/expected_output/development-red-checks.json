@@ -1,0 +1,7 @@
+{
+  "stage": "test-first",
+  "expected_failure": true,
+  "reason": "oracle.mjs and summarize.mjs not implemented",
+  "missing_module_detected": true,
+  "failed_test_files": 1
+}

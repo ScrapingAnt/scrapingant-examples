@@ -1,0 +1,21 @@
+test_active_is_not_a_substring_match_for_inactive (test_packet.OracleTests.test_active_is_not_a_substring_match_for_inactive) ... ok
+test_complete_records_accept_optional_null_and_reordered_rows (test_packet.OracleTests.test_complete_records_accept_optional_null_and_reordered_rows) ... ok
+test_empty_missing_duplicate_and_extra_are_rejected (test_packet.OracleTests.test_empty_missing_duplicate_and_extra_are_rejected) ... ok
+test_schema_missing_extra_numeric_price_and_null_are_rejected (test_packet.OracleTests.test_schema_missing_extra_numeric_price_and_null_are_rejected) ... ok
+test_wrong_value_in_every_field_is_rejected (test_packet.OracleTests.test_wrong_value_in_every_field_is_rejected) ... ok
+test_declared_success_without_observations_is_rejected (test_packet.SummaryTests.test_declared_success_without_observations_is_rejected) ... ok
+test_diagnostic_value_tamper_rejected (test_packet.SummaryTests.test_diagnostic_value_tamper_rejected) ... ok
+test_duplicate_browser_capture_rejected (test_packet.SummaryTests.test_duplicate_browser_capture_rejected) ... ok
+test_empty_capture_is_not_evidence (test_packet.SummaryTests.test_empty_capture_is_not_evidence) ... ok
+test_exact_case_round_counts_and_separate_diagnostics (test_packet.SummaryTests.test_exact_case_round_counts_and_separate_diagnostics) ... ok
+test_missing_duplicate_unknown_round_and_forged_success_rejected (test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected) ... ok
+test_missing_environment_is_rejected (test_packet.SummaryTests.test_missing_environment_is_rejected) ... ok
+test_missing_environment_version_and_changed_source_rejected (test_packet.SummaryTests.test_missing_environment_version_and_changed_source_rejected) ... ok
+test_stale_without_exception_and_failed_refind_are_rejected (test_packet.SummaryTests.test_stale_without_exception_and_failed_refind_are_rejected) ... ok
+test_wrong_control_must_return_its_literal_wrong_records (test_packet.SummaryTests.test_wrong_control_must_return_its_literal_wrong_records) ... ok
+test_wrong_target_record_is_rejected (test_packet.SummaryTests.test_wrong_target_record_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.020s
+
+OK

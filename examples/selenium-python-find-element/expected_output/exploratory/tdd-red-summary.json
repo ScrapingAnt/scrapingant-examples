@@ -1,0 +1,23 @@
+{
+  "phase": "red_before_summary_implementation",
+  "tests_run": 16,
+  "failures": [
+    "test_packet.SummaryTests.test_declared_success_without_observations_is_rejected",
+    "test_packet.SummaryTests.test_diagnostic_value_tamper_rejected",
+    "test_packet.SummaryTests.test_duplicate_browser_capture_rejected",
+    "test_packet.SummaryTests.test_empty_capture_is_not_evidence",
+    "test_packet.SummaryTests.test_exact_case_round_counts_and_separate_diagnostics",
+    "test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected (value='first_scoped')",
+    "test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected (value='first_scoped')",
+    "test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected (value='unknown')",
+    "test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected (value='first_scoped')",
+    "test_packet.SummaryTests.test_missing_duplicate_unknown_round_and_forged_success_rejected (value='first_scoped')",
+    "test_packet.SummaryTests.test_missing_environment_is_rejected",
+    "test_packet.SummaryTests.test_missing_environment_version_and_changed_source_rejected",
+    "test_packet.SummaryTests.test_stale_without_exception_and_failed_refind_are_rejected (case='stale_handle')",
+    "test_packet.SummaryTests.test_stale_without_exception_and_failed_refind_are_rejected (case='refind_after_replacement')",
+    "test_packet.SummaryTests.test_wrong_control_must_return_its_literal_wrong_records",
+    "test_packet.SummaryTests.test_wrong_target_record_is_rejected"
+  ],
+  "errors": []
+}

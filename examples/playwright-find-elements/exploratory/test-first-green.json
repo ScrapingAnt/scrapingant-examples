@@ -1,0 +1,71 @@
+{
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    {
+      "test": "test_oracle.RecordTests.test_duplicate_record_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_literal_catalog_is_accepted",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_missing_record_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_null_and_numeric_price_are_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_unknown_field_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.RecordTests.test_wrong_price_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_changed_diagnostic_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_changed_record_rejected_even_if_pass_flag_added",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_complete_matrix_has_exact_denominators",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_duplicate_browser_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_duplicate_case_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_environment_missing_or_wrong_version_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_missing_case_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_missing_round_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_unexpected_case_is_rejected",
+      "status": "passed"
+    },
+    {
+      "test": "test_oracle.SummaryTests.test_wrong_schema_rejected",
+      "status": "passed"
+    }
+  ]
+}

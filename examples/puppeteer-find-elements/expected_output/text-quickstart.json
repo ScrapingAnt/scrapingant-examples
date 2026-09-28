@@ -1,0 +1,52 @@
+{
+  "body_inner_text": {
+    "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00",
+    "sentinels": {
+      "visible": true,
+      "hidden": false,
+      "script": false,
+      "style": false,
+      "catalog": true
+    }
+  },
+  "body_text_content": {
+    "text": "\nVISIBLE_SENTINEL\nHIDDEN_SENTINEL\n/* STYLE_SENTINEL */ .offscreen-probe { display: none; }\nPromotional decoy0.01\nAnt Field Kit 19.95Sugar & Water Feeder 7.50Tunnel Kit — Mini 12.00\n\n\n\n// SCRIPT_SENTINEL: script text is intentionally inside body.\nconst entries = [\n {sku:'A101', title:'Ant Field Kit', currency:'USD', price:'19.95', href:'/p/a101', stock:'in'},\n {sku:'B202', title:'Sugar & Water Feeder', currency:'USD', price:'7.50', href:'/p/b202', stock:null},\n {sku:'C303', title:'Tunnel Kit — Mini', currency:'USD', price:'12.00', href:'/p/c303', stock:'out'}\n];\nfunction makeCard(row) {\n const card=document.createElement('article'); card.className='card'; card.dataset.sku=row.sku;\n const link=document.createElement('a'); link.className='title'; link.href=row.href; link.textContent=row.title;\n if(row.stock !== null) link.dataset.stock=row.stock;\n const price=document.createElement('span'); price.className='price'; price.dataset.currency=row.currency; price.textContent=row.price;\n card.append(link, document.createTextNode(' '), price); return card;\n}\nwindow.releaseCatalog=()=>new Promise(resolve=>requestAnimationFrame(()=>{\n const catalog=document.querySelector('#catalog'); catalog.replaceChildren(...entries.map(makeCard)); catalog.dataset.ready='yes'; resolve('populated');\n}));\nwindow.replaceFirst=()=>{\n const row={...entries[0],title:'Ant Field Kit — revised'};\n document.querySelector('#catalog .card').replaceWith(makeCard(row));\n return 'replaced';\n};\nconst shadow=document.querySelector('#shadow-host').attachShadow({mode:'open'});\nshadow.append(makeCard({sku:'SHADOW',title:'Shadow product',currency:'USD',price:'4.00',href:'/p/shadow',stock:null}));\n\n\n",
+    "sentinels": {
+      "visible": true,
+      "hidden": true,
+      "script": true,
+      "style": true,
+      "catalog": true
+    }
+  },
+  "body_selection": {
+    "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00\n",
+    "sentinels": {
+      "visible": true,
+      "hidden": false,
+      "script": false,
+      "style": false,
+      "catalog": true
+    }
+  },
+  "raw_html_to_text": {
+    "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\n/p/a101\n/p/b202\n/p/c303",
+    "sentinels": {
+      "visible": true,
+      "hidden": true,
+      "script": false,
+      "style": false,
+      "catalog": false
+    }
+  },
+  "rendered_html_to_text": {
+    "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\nAnt Field Kit [/p/a101] 19.95\nSugar & Water Feeder [/p/b202] 7.50\nTunnel Kit — Mini [/p/c303] 12.00",
+    "sentinels": {
+      "visible": true,
+      "hidden": true,
+      "script": false,
+      "style": false,
+      "catalog": true
+    }
+  }
+}

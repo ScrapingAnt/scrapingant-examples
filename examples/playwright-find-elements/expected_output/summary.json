@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "environments": [
+    {
+      "browser": "chromium",
+      "browser_version": "153.0.8010.12",
+      "python": "3.12.10",
+      "playwright": "1.63.0",
+      "os": "macOS-26.6.2-arm64-arm-64bit",
+      "architecture": "arm64"
+    },
+    {
+      "browser": "firefox",
+      "browser_version": "155.0",
+      "python": "3.12.10",
+      "playwright": "1.63.0",
+      "os": "macOS-26.6.2-arm64-arm-64bit",
+      "architecture": "arm64"
+    }
+  ],
+  "browsers": 2,
+  "rounds_per_browser": 3,
+  "extraction_cases": 12,
+  "extraction_observations": 72,
+  "diagnostic_cases": 4,
+  "diagnostic_observations": 24,
+  "passed": 96,
+  "failed": 0
+}

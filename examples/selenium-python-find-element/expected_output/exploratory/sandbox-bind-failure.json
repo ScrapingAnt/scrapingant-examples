@@ -1,0 +1,7 @@
+{
+  "stage": "loopback_fixture_server_bind",
+  "exception": "PermissionError",
+  "errno": 1,
+  "message": "Operation not permitted",
+  "browser_started": false
+}

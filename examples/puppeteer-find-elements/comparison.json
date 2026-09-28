@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "browser": "chrome",
+  "environment": {
+    "node": "v22.20.0",
+    "puppeteer": "25.12.0",
+    "html_to_text": "9.0.5",
+    "browser": "Chrome/154.0.8037.57",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64",
+    "sandbox_disabled": false
+  },
+  "rounds": 3,
+  "checks": 63,
+  "passed_checks": 63,
+  "extraction_observations": 39,
+  "diagnostic_observations": 9,
+  "text_diagnostic_observations": 15,
+  "exact_three_record_catalogue_observations": 12,
+  "extraction_cases": {
+    "global_first": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "DECOY"
+      ],
+      "all_passed": true
+    },
+    "global_all": {
+      "observations": 3,
+      "expected_rows": 4,
+      "expected_skus": [
+        "DECOY",
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "scoped_css": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "scoped_handles": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "xpath_all": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "text_selector": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "B202"
+      ],
+      "all_passed": true
+    },
+    "eval_first": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "A101"
+      ],
+      "all_passed": true
+    },
+    "presence_only": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "populated_wait": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "replaced_old_handle": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "A101"
+      ],
+      "all_passed": true
+    },
+    "replaced_fresh": {
+      "observations": 3,
+      "expected_rows": 3,
+      "expected_skus": [
+        "A101",
+        "B202",
+        "C303"
+      ],
+      "all_passed": true
+    },
+    "open_shadow": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "SHADOW"
+      ],
+      "all_passed": true
+    },
+    "iframe": {
+      "observations": 3,
+      "expected_rows": 1,
+      "expected_skus": [
+        "FRAME"
+      ],
+      "all_passed": true
+    }
+  },
+  "text_cases": {
+    "body_inner_text": {
+      "observations": 3,
+      "expected_sentinels": {
+        "visible": true,
+        "hidden": false,
+        "script": false,
+        "style": false,
+        "catalog": true
+      },
+      "all_passed": true
+    },
+    "body_text_content": {
+      "observations": 3,
+      "expected_sentinels": {
+        "visible": true,
+        "hidden": true,
+        "script": true,
+        "style": true,
+        "catalog": true
+      },
+      "all_passed": true
+    },
+    "body_selection": {
+      "observations": 3,
+      "expected_sentinels": {
+        "visible": true,
+        "hidden": false,
+        "script": false,
+        "style": false,
+        "catalog": true
+      },
+      "all_passed": true
+    },
+    "raw_html_to_text": {
+      "observations": 3,
+      "expected_sentinels": {
+        "visible": true,
+        "hidden": true,
+        "script": false,
+        "style": false,
+        "catalog": false
+      },
+      "all_passed": true
+    },
+    "rendered_html_to_text": {
+      "observations": 3,
+      "expected_sentinels": {
+        "visible": true,
+        "hidden": true,
+        "script": false,
+        "style": false,
+        "catalog": true
+      },
+      "all_passed": true
+    }
+  },
+  "limitations": [
+    "Synthetic loopback fixture; no production performance or reliability inference.",
+    "One bundled Chrome version and host, three repetitions; Firefox not measured.",
+    "Application population is released by an explicit test handshake; no arbitrary delay.",
+    "Raw HTML conversion does not execute the page script or apply browser CSS.",
+    "A detached handle can still read its old node in this same-document replacement case; this does not promise survival across navigation.",
+    "Text diagnostics assert declared sentinels; they do not claim identical whitespace across engines or platforms.",
+    "No Bing or display-optimization recovery claim; no clipboard or keyboard action.",
+    "Quickstarts and boundary tests are outside primary matrix denominators.",
+    "ScrapingAnt evidence belongs to the shared javascript-dom-extraction packet."
+  ]
+}

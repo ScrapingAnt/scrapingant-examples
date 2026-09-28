@@ -1,0 +1,102 @@
+article_id: playwright-find-elements
+canonical_url: https://scrapingant.com/blog/playwright-find-elements
+owner: Oleg Kulyk
+examples_repo_commit: pending
+source_binding: manifest.json
+ci_status: pending_linux_source_ci
+independent_review: pending
+tested_at: 2026-09-28
+requires_api_key: false
+environment:
+  os: macOS-26.6.2-arm64-arm-64bit
+  architecture: arm64
+  python: 3.12.10
+  playwright: 1.63.0
+  browsers:
+    chromium: 153.0.8010.12
+    firefox: '155.0'
+dependencies:
+  playwright: 1.63.0
+  greenlet: 3.5.6
+  pyee: 13.0.1
+  typing_extensions: 4.16.0
+run_command: ./run.sh
+fixtures:
+  - fixtures/catalog.html
+  - fixtures/frame.html
+outputs:
+  - expected_output/chromium.json
+  - expected_output/firefox.json
+  - expected_output/quickstart.json
+  - expected_output/offline-checks.json
+  - expected_output/summary.json
+  - expected_output/dependencies.txt
+measurements:
+  - name: extraction_case_observations_matching_oracle
+    value: 72
+    unit: observations
+    denominator: 12 cases x 3 rounds x 2 browsers
+    source: expected_output/summary.json
+  - name: diagnostic_observations_matching_oracle
+    value: 24
+    unit: observations
+    denominator: 4 diagnostic cases x 3 rounds x 2 browsers
+    source: expected_output/summary.json
+  - name: offline_regression_test_methods
+    value: 25
+    unit: passing_test_methods
+    denominator: 25 final test methods; historical red runs counted separately
+    source: expected_output/offline-checks.json
+  - name: quickstart_validated_records
+    value: 3
+    unit: records
+    denominator: 3 independently specified catalog records in one Chromium invocation
+    source: expected_output/quickstart.json
+limitations:
+  - Controlled loopback fixture only; no production success-rate or speed inference.
+  - Three rounds per browser are repeated observations, not an independent-site sample.
+  - Same-origin frame and open shadow root only; no closed shadow root or cross-origin access claim.
+  - Browser sandbox enabled; execution host must allow loopback sockets and browser processes.
+  - Complete ready state is a fixture contract, not a generic guarantee from locator count or element presence.
+  - Initial failed locator experiment and sandbox startup failure preserved in exploratory/.
+  - Source commit, independent rerun/review, and Linux CI pending; no product API calls in this packet.
+claims:
+  - id: P1
+    text: Singular title reads rejected four matches; first selected the sponsored decoy in this fixture.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; cases strict_duplicate and first_masks_decoy
+  - id: P2
+    text: During gated loading, count and all returned one placeholder; scoped reads after the ready contract returned three intended records.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; cases eager_count_all and scoped_records
+  - id: P3
+    text: A saved locator resolved the replacement node and browser-side evaluate_all returned the expected record tuples.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; cases locator_reresolution and evaluate_all
+  - id: P4
+    text: Role, relative text, CSS attribute and scoped XPath queries produced the specified record sets; the ancestor-prefixed has filter failed its intended match.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; cases role_records, text_exact, css_attribute, xpath_records
+  - id: P5
+    text: Explicit frame scope found the framed record; the Playwright CSS locator entered the open shadow root while raw document querySelectorAll and XPath did not.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; cases frame_scope and shadow_scope
+  - id: P6
+    text: The captured diagnostics distinguish timeout, hidden descendant text, raw attributes, resolved properties, and optional-attribute absence.
+    type: measured
+    source: expected_output/chromium.json; expected_output/firefox.json; diagnostics
+  - id: D1
+    text: Locator all returns current matches without waiting for a dynamically loaded list to finish.
+    type: documented
+    source: https://playwright.dev/python/docs/api/class-locator#locator-all
+    accessed_at: 2026-09-28
+  - id: D2
+    text: Locator filters are evaluated relative to candidate matches; XPath does not pierce shadow roots.
+    type: documented
+    source: https://playwright.dev/python/docs/locators
+    accessed_at: 2026-09-28
+  - id: D3
+    text: Evaluated JavaScript runs in the browser environment, separate from Python.
+    type: documented
+    source: https://playwright.dev/python/docs/evaluating
+    accessed_at: 2026-09-28

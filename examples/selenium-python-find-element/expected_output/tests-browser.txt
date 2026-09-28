@@ -1,0 +1,6 @@
+test_stale_during_projection_requeries_locator (test_browser.BrowserRegression.test_stale_during_projection_requeries_locator) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.832s
+
+OK

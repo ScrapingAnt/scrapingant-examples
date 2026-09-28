@@ -1,0 +1,1199 @@
+{
+  "schema_version": 1,
+  "browser": "chrome",
+  "tested_at": "2026-09-28T09:11:38.791Z",
+  "rounds": 3,
+  "environment": {
+    "node": "v22.20.0",
+    "puppeteer": "25.12.0",
+    "html_to_text": "9.0.5",
+    "browser": "Chrome/154.0.8037.57",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64",
+    "sandbox_disabled": false
+  },
+  "runs": [
+    {
+      "round": 1,
+      "navigation_status": 200,
+      "raw_html_http_status": 200,
+      "cases": [
+        {
+          "case": "presence_only",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "card exists; application population gate still closed",
+          "check_passed": true
+        },
+        {
+          "case": "populated_wait",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "explicit release acknowledged; every title and decimal price populated",
+          "check_passed": true
+        },
+        {
+          "case": "global_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "global_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            },
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_css",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_handles",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "xpath_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "text_selector",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "eval_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "open_shadow",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "SHADOW",
+              "title": "Shadow product",
+              "currency": "USD",
+              "price": "4.00",
+              "href": "/p/shadow"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "iframe",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "FRAME",
+              "title": "Frame product",
+              "currency": "USD",
+              "price": "6.00",
+              "href": "/p/frame"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "missing_apis",
+          "kind": "diagnostic",
+          "single": null,
+          "all": [],
+          "eval_error": {
+            "name": "Error",
+            "message": "Error: failed to find element matching selector \"#missing\""
+          },
+          "multi_eval": [],
+          "check_passed": true
+        },
+        {
+          "case": "attributes_properties",
+          "kind": "diagnostic",
+          "missing_attribute": null,
+          "raw_href": "/p/b202",
+          "resolved_href_path": "/p/b202",
+          "resolved_href_is_absolute": true,
+          "text": "Sugar & Water Feeder",
+          "check_passed": true
+        },
+        {
+          "case": "boundary_queries",
+          "kind": "diagnostic",
+          "main_shadow": 0,
+          "main_frame": 0,
+          "shadow_open": "open",
+          "check_passed": true
+        },
+        {
+          "case": "body_inner_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_text_content",
+          "kind": "text_diagnostic",
+          "text": "\nVISIBLE_SENTINEL\nHIDDEN_SENTINEL\n/* STYLE_SENTINEL */ .offscreen-probe { display: none; }\nPromotional decoy0.01\nAnt Field Kit 19.95Sugar & Water Feeder 7.50Tunnel Kit — Mini 12.00\n\n\n\n// SCRIPT_SENTINEL: script text is intentionally inside body.\nconst entries = [\n {sku:'A101', title:'Ant Field Kit', currency:'USD', price:'19.95', href:'/p/a101', stock:'in'},\n {sku:'B202', title:'Sugar & Water Feeder', currency:'USD', price:'7.50', href:'/p/b202', stock:null},\n {sku:'C303', title:'Tunnel Kit — Mini', currency:'USD', price:'12.00', href:'/p/c303', stock:'out'}\n];\nfunction makeCard(row) {\n const card=document.createElement('article'); card.className='card'; card.dataset.sku=row.sku;\n const link=document.createElement('a'); link.className='title'; link.href=row.href; link.textContent=row.title;\n if(row.stock !== null) link.dataset.stock=row.stock;\n const price=document.createElement('span'); price.className='price'; price.dataset.currency=row.currency; price.textContent=row.price;\n card.append(link, document.createTextNode(' '), price); return card;\n}\nwindow.releaseCatalog=()=>new Promise(resolve=>requestAnimationFrame(()=>{\n const catalog=document.querySelector('#catalog'); catalog.replaceChildren(...entries.map(makeCard)); catalog.dataset.ready='yes'; resolve('populated');\n}));\nwindow.replaceFirst=()=>{\n const row={...entries[0],title:'Ant Field Kit — revised'};\n document.querySelector('#catalog .card').replaceWith(makeCard(row));\n return 'replaced';\n};\nconst shadow=document.querySelector('#shadow-host').attachShadow({mode:'open'});\nshadow.append(makeCard({sku:'SHADOW',title:'Shadow product',currency:'USD',price:'4.00',href:'/p/shadow',stock:null}));\n\n\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": true,
+            "style": true,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_selection",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "raw_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\n/p/a101\n/p/b202\n/p/c303",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": false
+          },
+          "check_passed": true
+        },
+        {
+          "case": "rendered_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\nAnt Field Kit [/p/a101] 19.95\nSugar & Water Feeder [/p/b202] 7.50\nTunnel Kit — Mini [/p/c303] 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "replaced_old_handle",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "connected": false,
+          "check_passed": true
+        },
+        {
+          "case": "replaced_fresh",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit — revised",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "navigation_status": 200,
+      "raw_html_http_status": 200,
+      "cases": [
+        {
+          "case": "presence_only",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "card exists; application population gate still closed",
+          "check_passed": true
+        },
+        {
+          "case": "populated_wait",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "explicit release acknowledged; every title and decimal price populated",
+          "check_passed": true
+        },
+        {
+          "case": "global_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "global_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            },
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_css",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_handles",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "xpath_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "text_selector",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "eval_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "open_shadow",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "SHADOW",
+              "title": "Shadow product",
+              "currency": "USD",
+              "price": "4.00",
+              "href": "/p/shadow"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "iframe",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "FRAME",
+              "title": "Frame product",
+              "currency": "USD",
+              "price": "6.00",
+              "href": "/p/frame"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "missing_apis",
+          "kind": "diagnostic",
+          "single": null,
+          "all": [],
+          "eval_error": {
+            "name": "Error",
+            "message": "Error: failed to find element matching selector \"#missing\""
+          },
+          "multi_eval": [],
+          "check_passed": true
+        },
+        {
+          "case": "attributes_properties",
+          "kind": "diagnostic",
+          "missing_attribute": null,
+          "raw_href": "/p/b202",
+          "resolved_href_path": "/p/b202",
+          "resolved_href_is_absolute": true,
+          "text": "Sugar & Water Feeder",
+          "check_passed": true
+        },
+        {
+          "case": "boundary_queries",
+          "kind": "diagnostic",
+          "main_shadow": 0,
+          "main_frame": 0,
+          "shadow_open": "open",
+          "check_passed": true
+        },
+        {
+          "case": "body_inner_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_text_content",
+          "kind": "text_diagnostic",
+          "text": "\nVISIBLE_SENTINEL\nHIDDEN_SENTINEL\n/* STYLE_SENTINEL */ .offscreen-probe { display: none; }\nPromotional decoy0.01\nAnt Field Kit 19.95Sugar & Water Feeder 7.50Tunnel Kit — Mini 12.00\n\n\n\n// SCRIPT_SENTINEL: script text is intentionally inside body.\nconst entries = [\n {sku:'A101', title:'Ant Field Kit', currency:'USD', price:'19.95', href:'/p/a101', stock:'in'},\n {sku:'B202', title:'Sugar & Water Feeder', currency:'USD', price:'7.50', href:'/p/b202', stock:null},\n {sku:'C303', title:'Tunnel Kit — Mini', currency:'USD', price:'12.00', href:'/p/c303', stock:'out'}\n];\nfunction makeCard(row) {\n const card=document.createElement('article'); card.className='card'; card.dataset.sku=row.sku;\n const link=document.createElement('a'); link.className='title'; link.href=row.href; link.textContent=row.title;\n if(row.stock !== null) link.dataset.stock=row.stock;\n const price=document.createElement('span'); price.className='price'; price.dataset.currency=row.currency; price.textContent=row.price;\n card.append(link, document.createTextNode(' '), price); return card;\n}\nwindow.releaseCatalog=()=>new Promise(resolve=>requestAnimationFrame(()=>{\n const catalog=document.querySelector('#catalog'); catalog.replaceChildren(...entries.map(makeCard)); catalog.dataset.ready='yes'; resolve('populated');\n}));\nwindow.replaceFirst=()=>{\n const row={...entries[0],title:'Ant Field Kit — revised'};\n document.querySelector('#catalog .card').replaceWith(makeCard(row));\n return 'replaced';\n};\nconst shadow=document.querySelector('#shadow-host').attachShadow({mode:'open'});\nshadow.append(makeCard({sku:'SHADOW',title:'Shadow product',currency:'USD',price:'4.00',href:'/p/shadow',stock:null}));\n\n\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": true,
+            "style": true,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_selection",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "raw_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\n/p/a101\n/p/b202\n/p/c303",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": false
+          },
+          "check_passed": true
+        },
+        {
+          "case": "rendered_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\nAnt Field Kit [/p/a101] 19.95\nSugar & Water Feeder [/p/b202] 7.50\nTunnel Kit — Mini [/p/c303] 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "replaced_old_handle",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "connected": false,
+          "check_passed": true
+        },
+        {
+          "case": "replaced_fresh",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit — revised",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "navigation_status": 200,
+      "raw_html_http_status": 200,
+      "cases": [
+        {
+          "case": "presence_only",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "",
+              "currency": "USD",
+              "price": "",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "card exists; application population gate still closed",
+          "check_passed": true
+        },
+        {
+          "case": "populated_wait",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "boundary": "explicit release acknowledged; every title and decimal price populated",
+          "check_passed": true
+        },
+        {
+          "case": "global_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "global_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "DECOY",
+              "title": "Promotional decoy",
+              "currency": "USD",
+              "price": "0.01",
+              "href": "/promotion"
+            },
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_css",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "scoped_handles",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "xpath_all",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "text_selector",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "eval_first",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "open_shadow",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "SHADOW",
+              "title": "Shadow product",
+              "currency": "USD",
+              "price": "4.00",
+              "href": "/p/shadow"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "iframe",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "FRAME",
+              "title": "Frame product",
+              "currency": "USD",
+              "price": "6.00",
+              "href": "/p/frame"
+            }
+          ],
+          "check_passed": true
+        },
+        {
+          "case": "missing_apis",
+          "kind": "diagnostic",
+          "single": null,
+          "all": [],
+          "eval_error": {
+            "name": "Error",
+            "message": "Error: failed to find element matching selector \"#missing\""
+          },
+          "multi_eval": [],
+          "check_passed": true
+        },
+        {
+          "case": "attributes_properties",
+          "kind": "diagnostic",
+          "missing_attribute": null,
+          "raw_href": "/p/b202",
+          "resolved_href_path": "/p/b202",
+          "resolved_href_is_absolute": true,
+          "text": "Sugar & Water Feeder",
+          "check_passed": true
+        },
+        {
+          "case": "boundary_queries",
+          "kind": "diagnostic",
+          "main_shadow": 0,
+          "main_frame": 0,
+          "shadow_open": "open",
+          "check_passed": true
+        },
+        {
+          "case": "body_inner_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_text_content",
+          "kind": "text_diagnostic",
+          "text": "\nVISIBLE_SENTINEL\nHIDDEN_SENTINEL\n/* STYLE_SENTINEL */ .offscreen-probe { display: none; }\nPromotional decoy0.01\nAnt Field Kit 19.95Sugar & Water Feeder 7.50Tunnel Kit — Mini 12.00\n\n\n\n// SCRIPT_SENTINEL: script text is intentionally inside body.\nconst entries = [\n {sku:'A101', title:'Ant Field Kit', currency:'USD', price:'19.95', href:'/p/a101', stock:'in'},\n {sku:'B202', title:'Sugar & Water Feeder', currency:'USD', price:'7.50', href:'/p/b202', stock:null},\n {sku:'C303', title:'Tunnel Kit — Mini', currency:'USD', price:'12.00', href:'/p/c303', stock:'out'}\n];\nfunction makeCard(row) {\n const card=document.createElement('article'); card.className='card'; card.dataset.sku=row.sku;\n const link=document.createElement('a'); link.className='title'; link.href=row.href; link.textContent=row.title;\n if(row.stock !== null) link.dataset.stock=row.stock;\n const price=document.createElement('span'); price.className='price'; price.dataset.currency=row.currency; price.textContent=row.price;\n card.append(link, document.createTextNode(' '), price); return card;\n}\nwindow.releaseCatalog=()=>new Promise(resolve=>requestAnimationFrame(()=>{\n const catalog=document.querySelector('#catalog'); catalog.replaceChildren(...entries.map(makeCard)); catalog.dataset.ready='yes'; resolve('populated');\n}));\nwindow.replaceFirst=()=>{\n const row={...entries[0],title:'Ant Field Kit — revised'};\n document.querySelector('#catalog .card').replaceWith(makeCard(row));\n return 'replaced';\n};\nconst shadow=document.querySelector('#shadow-host').attachShadow({mode:'open'});\nshadow.append(makeCard({sku:'SHADOW',title:'Shadow product',currency:'USD',price:'4.00',href:'/p/shadow',stock:null}));\n\n\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": true,
+            "style": true,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "body_selection",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\nPromotional decoy0.01\nAnt Field Kit 19.95\nSugar & Water Feeder 7.50\nTunnel Kit — Mini 12.00\n",
+          "sentinels": {
+            "visible": true,
+            "hidden": false,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "raw_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\n/p/a101\n/p/b202\n/p/c303",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": false
+          },
+          "check_passed": true
+        },
+        {
+          "case": "rendered_html_to_text",
+          "kind": "text_diagnostic",
+          "text": "VISIBLE_SENTINEL\n\nHIDDEN_SENTINEL\nPromotional decoy [/promotion]0.01\nAnt Field Kit [/p/a101] 19.95\nSugar & Water Feeder [/p/b202] 7.50\nTunnel Kit — Mini [/p/c303] 12.00",
+          "sentinels": {
+            "visible": true,
+            "hidden": true,
+            "script": false,
+            "style": false,
+            "catalog": true
+          },
+          "check_passed": true
+        },
+        {
+          "case": "replaced_old_handle",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            }
+          ],
+          "connected": false,
+          "check_passed": true
+        },
+        {
+          "case": "replaced_fresh",
+          "kind": "extraction",
+          "records": [
+            {
+              "sku": "A101",
+              "title": "Ant Field Kit — revised",
+              "currency": "USD",
+              "price": "19.95",
+              "href": "/p/a101"
+            },
+            {
+              "sku": "B202",
+              "title": "Sugar & Water Feeder",
+              "currency": "USD",
+              "price": "7.50",
+              "href": "/p/b202"
+            },
+            {
+              "sku": "C303",
+              "title": "Tunnel Kit — Mini",
+              "currency": "USD",
+              "price": "12.00",
+              "href": "/p/c303"
+            }
+          ],
+          "check_passed": true
+        }
+      ]
+    }
+  ],
+  "extraction_observations": 39,
+  "diagnostic_observations": 9,
+  "text_diagnostic_observations": 15,
+  "checks": 63,
+  "passed_checks": 63
+}

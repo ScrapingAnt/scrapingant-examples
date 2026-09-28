@@ -1,0 +1,25 @@
+{
+  "records": [
+    {
+      "sku": "A101",
+      "title": "Ant Field Kit",
+      "currency": "USD",
+      "price": "19.95",
+      "href": "/p/a101"
+    },
+    {
+      "sku": "B202",
+      "title": "Sugar & Water Feeder",
+      "currency": "USD",
+      "price": "7.50",
+      "href": "/p/b202"
+    },
+    {
+      "sku": "C303",
+      "title": "Tunnel Kit — Mini",
+      "currency": "USD",
+      "price": "12.00",
+      "href": "/p/c303"
+    }
+  ]
+}

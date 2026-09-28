@@ -1,0 +1,1245 @@
+{
+  "schema_version": 1,
+  "rounds": 3,
+  "environment": {
+    "browser": "firefox",
+    "browser_version": "156.0",
+    "driver_version": "0.37.1",
+    "python": "3.12.10",
+    "selenium": "4.49.0",
+    "os": "Darwin",
+    "os_release": "25.6.0",
+    "architecture": "arm64"
+  },
+  "source_hashes": {
+    "browser_matrix.py": "756932831eb8c5193a8946c931d09f855d8fd6be6642a70e36f80024912b1dc7",
+    "browser_support.py": "60e4ed06851436ba5b8063f00d07d3ee36813c9f627d479965b7916bfffdfcf5",
+    "case_contract.py": "9cd785194dc96e599627af702ef131e15e0291a61212eb51c4295147b55a6ad8",
+    "extraction.py": "b006e6b1cffeae548721b848d46fbf2315f51c583e2fa4d780f11ebcc35483ee",
+    "fixtures/catalog.html": "e0388b72f7e38be58b8102960abe198ed1c86effdfeb00e38e968699548ae3bb",
+    "fixtures/frame.html": "f21a8cac43239407f7837336adbacb767375ad8035be70c9f6bcb47b195ce485",
+    "oracle.py": "ac0389cdeee47dba2126d57377b24cd1fb09fac2613f845e50efded9c4cb693e",
+    "quickstart.py": "d884893075c41b8fb423b7b1b77f29b213b1efa412469ba142d2ed1fdb80c0c1",
+    "requirements-lock.txt": "70fed7bd11034debe775a6feee91f7ee4fc82a2b0f213c949eba8df060261256",
+    "requirements.txt": "5e8dd4c3f1e7e77eca311c0237d07c9ba6d2e4582c3313face1e0e578a3d2908",
+    "run.sh": "12020e00013e492c03268203af5108f542983f6aced955f8426887878e0b164a",
+    "summarize.py": "25c64f61a141ef8dcd4f0e6db4de7516306a6936de08346220f5959938200b52",
+    "test_browser.py": "893bfb42abfa3980e00bfb499d019c16f7fceee064224fe3e27df2c39c048d93",
+    "test_packet.py": "f54bfd3ffd863c0ed1d8f96c955db83d1db0cf12ec63b203c5b5394d564d4b78",
+    "verify_hashes.py": "7ad78eeace1f4912bc4cfeb1ce892cdae88577c2e232fa51d51aa4a574af439d"
+  },
+  "observations": [
+    {
+      "round": 1,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "D-OUT",
+          "title": "Outside decoy",
+          "currency": "USD",
+          "price": "0.01",
+          "href": "/products/outside",
+          "badge": null
+        },
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "class_token",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        },
+        {
+          "sku": "D-IN",
+          "title": "Inactive decoy",
+          "currency": "USD",
+          "price": "0.02",
+          "href": "/products/inactive",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "presence_only",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "T-202",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "records": [],
+      "error": "StaleElementReferenceException"
+    },
+    {
+      "round": 1,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 1,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "values": {
+        "error": "NoSuchElementException"
+      }
+    },
+    {
+      "round": 1,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "values": {
+        "count": 0
+      }
+    },
+    {
+      "round": 1,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "values": {
+        "error": "InvalidSelectorException"
+      }
+    },
+    {
+      "round": 1,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "values": {
+        "visible_text": "Visible",
+        "text_content": "VisibleHidden"
+      }
+    },
+    {
+      "round": 1,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "values": {
+        "value_attribute": "initial",
+        "value_property": "edited",
+        "value_get_attribute": "edited",
+        "href_attribute": "/products/cafe",
+        "href_property_is_absolute_loopback": true
+      }
+    },
+    {
+      "round": 2,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "D-OUT",
+          "title": "Outside decoy",
+          "currency": "USD",
+          "price": "0.01",
+          "href": "/products/outside",
+          "badge": null
+        },
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "class_token",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        },
+        {
+          "sku": "D-IN",
+          "title": "Inactive decoy",
+          "currency": "USD",
+          "price": "0.02",
+          "href": "/products/inactive",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "presence_only",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "T-202",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "records": [],
+      "error": "StaleElementReferenceException"
+    },
+    {
+      "round": 2,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "values": {
+        "error": "NoSuchElementException"
+      }
+    },
+    {
+      "round": 2,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "values": {
+        "count": 0
+      }
+    },
+    {
+      "round": 2,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "values": {
+        "error": "InvalidSelectorException"
+      }
+    },
+    {
+      "round": 2,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "values": {
+        "visible_text": "Visible",
+        "text_content": "VisibleHidden"
+      }
+    },
+    {
+      "round": 2,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "values": {
+        "value_attribute": "initial",
+        "value_property": "edited",
+        "value_get_attribute": "edited",
+        "href_attribute": "/products/cafe",
+        "href_property_is_absolute_loopback": true
+      }
+    },
+    {
+      "round": 3,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "D-OUT",
+          "title": "Outside decoy",
+          "currency": "USD",
+          "price": "0.01",
+          "href": "/products/outside",
+          "badge": null
+        },
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "class_token",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        },
+        {
+          "sku": "D-IN",
+          "title": "Inactive decoy",
+          "currency": "USD",
+          "price": "0.02",
+          "href": "/products/inactive",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "presence_only",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "T-202",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "",
+          "currency": "",
+          "price": "",
+          "href": "",
+          "badge": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "records": [],
+      "error": "StaleElementReferenceException"
+    },
+    {
+      "round": 3,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "records": [
+        {
+          "sku": "C-101",
+          "title": "Café & Cocoa",
+          "currency": "USD",
+          "price": "12.50",
+          "href": "/products/cafe",
+          "badge": "New"
+        },
+        {
+          "sku": "T-202",
+          "title": "Tea \"No. 2\"",
+          "currency": "EUR",
+          "price": "8.00",
+          "href": "/products/tea",
+          "badge": null
+        },
+        {
+          "sku": "N-303",
+          "title": "Notebook <A5>",
+          "currency": "GBP",
+          "price": "5.25",
+          "href": "/products/notebook",
+          "badge": "Sale"
+        }
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "values": {
+        "error": "NoSuchElementException"
+      }
+    },
+    {
+      "round": 3,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "values": {
+        "count": 0
+      }
+    },
+    {
+      "round": 3,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "values": {
+        "error": "InvalidSelectorException"
+      }
+    },
+    {
+      "round": 3,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "values": {
+        "visible_text": "Visible",
+        "text_content": "VisibleHidden"
+      }
+    },
+    {
+      "round": 3,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "values": {
+        "value_attribute": "initial",
+        "value_property": "edited",
+        "value_get_attribute": "edited",
+        "href_attribute": "/products/cafe",
+        "href_property_is_absolute_loopback": true
+      }
+    }
+  ]
+}
