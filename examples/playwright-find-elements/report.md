@@ -46,7 +46,7 @@ Role lookup excluded the hidden button by default and included it when requested
 
 `summarize.py` rejects absent/duplicated case-round pairs, unexpected cases, missing browser captures, schema changes, inconsistent runtimes, altered record tuples, and wrong diagnostic values. It recomputes results and ignores no supplied pass flag: extra row fields are rejected. Record validation requires exact fields, nonempty strings, SKU uniqueness, formatted decimal price strings, and the independent ordered oracle.
 
-`manifest.json` hashes the source and artifact inventory; `integrity.py` rejects changed/missing files, inventory changes, escaping paths, and symlink artifacts. The manifest is an integrity aid, not a signature. Source commit binding and Linux CI are pending, and independent rerun/review remains required before publication.
+`manifest.json` hashes the source and artifact inventory; `integrity.py` rejects changed/missing files, inventory changes, escaping paths, and symlink artifacts. The manifest is an integrity aid, not a signature. Tested source binding, passing Linux CI and completed independent rerun/review are recorded in `evidence.yaml`.
 
 Only Chromium and Firefox in the captured macOS environment were measured. The frame is same-origin, the shadow root is open, and the data is finite and deliberately controlled. No WebKit, closed shadow roots, cross-origin frame access, virtualized/infinite lists, authentication, anti-bot behavior, remote API, or production site was tested. The ready marker is meaningful because this fixture defines it; adapt readiness to the actual application's contract. `all()` and raw browser DOM queries must not be described as automatic dataset-completeness checks.
 

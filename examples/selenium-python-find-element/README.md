@@ -81,7 +81,7 @@ python summarize.py expected_output/chrome.json expected_output/firefox.json --o
 python verify_hashes.py
 ```
 
-The committed `verification.json` covers source, documentation, fixtures and captured artifacts (including exploratory records); it excludes itself to avoid a recursive hash. Runtime source hashes are also embedded in each browser capture. Commit references in `evidence.yaml` are filled by the integration step. `expected_output/exploratory/` preserves the initial restricted-sandbox bind failure, the test-first summary failures, and the intentionally broken stale-recovery mutation. Those are excluded from the final matrix denominator.
+The committed `verification.json` covers source, documentation, fixtures and captured artifacts (including exploratory records); it excludes itself to avoid a recursive hash. Runtime source hashes are also embedded in each browser capture. Commit references in `evidence.yaml` identify the tested runtime source; its publication provenance links the passing Linux run. `expected_output/exploratory/` preserves the initial restricted-sandbox bind failure, the test-first summary failures, and the intentionally broken stale-recovery mutation. Those are excluded from the final matrix denominator.
 
 ## Primary references checked 2026-09-28
 
@@ -93,3 +93,7 @@ The committed `verification.json` covers source, documentation, fixtures and cap
 - [Selenium stale-reference troubleshooting](https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/#stale-element-reference-exception): re-locating after DOM changes.
 
 These are controlled correctness observations on a local fixture. They do not measure locator speed, production success rates, scraping evasion, closed shadow roots, cross-origin frames, or every browser/version. AI assisted implementation; the saved outputs come from actual executions.
+
+## Publication verification
+
+Independent local rerun and Linux source CI passed before the evidence pull request was opened. [Linux run](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36403582284). The immutable tested source is recorded in `evidence.yaml`; later changes bind metadata and artifact hashes without changing the measured extraction logic. The default command makes no paid API requests.

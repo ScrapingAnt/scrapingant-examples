@@ -93,3 +93,7 @@ python verify.py
 - No localStorage operation or storage-state import is tested or implied.
 
 Primary references checked 2026-09-28: [ScrapingAnt JavaScript execution](https://docs.scrapingant.com/javascript-execution), [request/response format](https://docs.scrapingant.com/request-response-format), [HTML script data restrictions](https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements), [JSON.stringify](https://tc39.es/ecma262/multipage/structured-data.html#sec-json.stringify). AI assisted implementation; measurements come from the saved executions.
+
+## Publication verification
+
+Independent local rerun and Linux source CI passed before the evidence pull request was opened. [Linux run](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36403593055). The immutable tested source is recorded in `evidence.yaml`; later changes bind metadata and artifact hashes without changing the measured extraction logic. The default command makes no paid API requests.

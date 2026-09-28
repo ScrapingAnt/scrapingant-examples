@@ -17,7 +17,7 @@
     "test/summary.test.mjs": "251b7ad587d401de566425f6ab2488f41075e1394cb876c1a6d2d27004411db1",
     "test_suite.mjs": "9029a03dda9322f3999783d935d7682f3eced6a05ca333007322f9bc8f90ef62",
     "text-quickstart.mjs": "bef64bbca4f912210aa41f5b84d7c985e6c05ebd927b5d86c4e4eb514dbc6c20",
-    "verify.mjs": "068f07845d2cb292390f5c6cbe53ab2fa593b0cfb6555995e876dc0a14dbad6b"
+    "verify.mjs": "08a90670a42ae10baf4f7543413ad1d44b764c290a934b205fcdbc844636174b"
   },
   "artifact_hashes": {
     "comparison.json": "36f7506dafe1ddb5098d32596944ce4bf375d8fd95189c5fd74ba433efdc65a0",
@@ -31,6 +31,6 @@
   "raw_capture_recomputed": true,
   "boundary_tests": 31,
   "checks": 63,
-  "source_commit": "pending",
-  "linux_ci": "pending"
+  "source_commit": "ec6d98bbbcee501ebf4d1d137d572e36060dfc2c",
+  "linux_ci": "https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36403589363"
 }
