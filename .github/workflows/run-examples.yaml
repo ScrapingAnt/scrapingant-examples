@@ -59,10 +59,12 @@ jobs:
           if grep -q playwright requirements.txt 2>/dev/null; then python -m playwright install --with-deps chromium; fi
           if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then python -m playwright install --with-deps chromium firefox; fi
           if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then
-            # Use the hosted runner's installed Chrome sandbox helper, per Chromium's
-            # Ubuntu guidance; keep chromium_sandbox=True in the actual example.
-            test -u /opt/google/chrome/chrome-sandbox
-            export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+            # Allow user namespaces for this installed test binary only, following
+            # Chromium's AppArmor guidance; keep chromium_sandbox=True in the example.
+            chromium_shell=$(python -c 'from pathlib import Path; print(next((Path.home()/".cache/ms-playwright").glob("chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell")))')
+            test -x "$chromium_shell"
+            printf 'abi <abi/4.0>,\ninclude <tunables/global>\nprofile playwright-evidence "%s" flags=(unconfined) {\n  userns,\n}\n' "$chromium_shell" | sudo tee /etc/apparmor.d/playwright-evidence >/dev/null
+            sudo apparmor_parser -r /etc/apparmor.d/playwright-evidence
           fi
           chmod +x run.sh && ./run.sh 2>&1 | tee run.log
           test "${PIPESTATUS[0]}" -eq 0
