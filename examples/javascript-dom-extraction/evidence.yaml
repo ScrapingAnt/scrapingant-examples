@@ -1,8 +1,8 @@
 article_id: javascript-dom-extraction
 owner: Oleg Kulyk
-source_commit: pending
-tested_source_commit: pending
-examples_repo_commit: pending
+source_commit: 9c90ed71461366210ec0239a62714519bb4c67e9
+tested_source_commit: 9c90ed71461366210ec0239a62714519bb4c67e9
+examples_repo_commit: 9c90ed71461366210ec0239a62714519bb4c67e9
 tested_at: 2026-09-28
 requires_api_key: false
 live_probe_requires_api_key: true
@@ -22,84 +22,99 @@ dependencies:
   python_parser: standard library
   node_parser: parse5 7.1.2, native JSON.parse and exact framing regex
 fixtures:
-  - fixtures/html-tables.html
-  - fixtures/dynamic-delayed.html
-  - fixture-check.json
+- fixtures/html-tables.html
+- fixtures/dynamic-delayed.html
+- fixture-check.json
 outputs:
-  - expected_output/local/local.json
-  - expected_output/live/live.json
-  - expected_output/node-quickstart.json
-  - expected_output/python-tests.txt
-  - expected_output/node-tests.txt
-  - comparison.json
+- expected_output/local/local.json
+- expected_output/live/live.json
+- expected_output/node-quickstart.json
+- expected_output/python-tests.txt
+- expected_output/node-tests.txt
+- comparison.json
 measurements:
-  - name: local_browser_cases
-    value: 6
-    passed: 6
-    denominator: Three catalog repeats and three distinct contract diagnostics
-    source: comparison.json
-  - name: live_requests
-    value: 6
-    matched_expected_outcome: 6
-    denominator: Three catalog repeats, return-only control, missing-selector control and delayed-result case
-    source: expected_output/live/live.json
-  - name: live_complete_catalog_extractions
-    value: 3
-    denominator: 3 catalog requests; each compared all four fields of three independent literal records
-    source: comparison.json
-  - name: live_successful_data_envelopes
-    value: 4
-    denominator: 6 calls including two deliberate non-success controls
-    source: expected_output/live/live.json
-  - name: live_credit_receipts
-    count: 6
-    total: 60
-    denominator: All six calls returned a 10-credit receipt
-    source: expected_output/live/live.json
-  - name: python_regression_methods
-    value: 21
-    passed: 21
-    source: expected_output/python-tests.txt
-  - name: node_tests
-    value: 8
-    passed: 8
-    source: expected_output/node-tests.txt
+- name: local_browser_cases
+  value: 6
+  passed: 6
+  denominator: Three catalog repeats and three distinct contract diagnostics
+  source: comparison.json
+- name: live_requests
+  value: 6
+  matched_expected_outcome: 6
+  denominator: Three catalog repeats, return-only control, missing-selector control and delayed-result case
+  source: expected_output/live/live.json
+- name: live_complete_catalog_extractions
+  value: 3
+  denominator: 3 catalog requests; each compared all four fields of three independent literal records
+  source: comparison.json
+- name: live_successful_data_envelopes
+  value: 4
+  denominator: 6 calls including two deliberate non-success controls
+  source: expected_output/live/live.json
+- name: live_credit_receipts
+  count: 6
+  total: 60
+  denominator: All six calls returned a 10-credit receipt
+  source: expected_output/live/live.json
+- name: python_regression_methods
+  value: 21
+  passed: 21
+  source: expected_output/python-tests.txt
+- name: node_tests
+  value: 8
+  passed: 8
+  source: expected_output/node-tests.txt
 claims:
-  - id: JS1
-    text: Three live catalog requests produced all three expected records through a DOM JSON carrier.
-    source: comparison.json; expected_output/live/catalog_1.html; expected_output/live/catalog_2.html; expected_output/live/catalog_3.html
-  - id: JS2
-    text: The return-only control returned HTTP 200 without a carrier; returning a JavaScript object alone did not create the HTML result.
-    source: expected_output/live/live.json; expected_output/live/return_only.html
-  - id: JS3
-    text: A missing selector returned HTTP 200 with a valid ok-false ELEMENT_MISSING envelope.
-    source: expected_output/live/live.json; expected_output/live/missing_selector.html
-  - id: JS4
-    text: The delayed fixture result and an awaited operation were present in the live returned DOM.
-    source: expected_output/live/delayed.html; expected_output/live/live.json
-  - id: JS5
-    text: Python and Node recovered the exact synthetic special-character probe from all three live catalog responses.
-    source: summarize.py; comparison.json; expected_output/node-quickstart.json
-  - id: JS6
-    text: Exact framing rejects absent or duplicate markers; schema validation is separate from application record validation.
-    source: protocol.py; parse-marker.mjs; state.py; expected_output/python-tests.txt; expected_output/node-tests.txt
-  - id: JS7
-    text: Python additionally rejects duplicate JSON object keys; native Node JSON.parse does not.
-    source: protocol.py; parse-marker.mjs; test_protocol.py
-  - id: JS8
-    text: Browser-enabled custom JavaScript is Base64 encoded, URL encoded as a query parameter and executed after page load; the general endpoint returns HTML.
-    source: https://docs.scrapingant.com/javascript-execution; https://docs.scrapingant.com/request-response-format
-    accessed_at: 2026-09-28
-  - id: JS9
-    text: Escaping less-than as a JSON unicode escape prevents literal closing-script text in the raw-text carrier while preserving the decoded value.
-    source: snippet.js; test_protocol.py; test-protocol.mjs; https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
-    accessed_at: 2026-09-28
+- id: JS1
+  text: Three live catalog requests produced all three expected records through a DOM JSON carrier.
+  source: comparison.json; expected_output/live/catalog_1.html; expected_output/live/catalog_2.html; expected_output/live/catalog_3.html
+- id: JS2
+  text: The return-only control returned HTTP 200 without a carrier; returning a JavaScript object alone did not
+    create the HTML result.
+  source: expected_output/live/live.json; expected_output/live/return_only.html
+- id: JS3
+  text: A missing selector returned HTTP 200 with a valid ok-false ELEMENT_MISSING envelope.
+  source: expected_output/live/live.json; expected_output/live/missing_selector.html
+- id: JS4
+  text: The delayed fixture result and an awaited operation were present in the live returned DOM.
+  source: expected_output/live/delayed.html; expected_output/live/live.json
+- id: JS5
+  text: Python and Node recovered the exact synthetic special-character probe from all three live catalog responses.
+  source: summarize.py; comparison.json; expected_output/node-quickstart.json
+- id: JS6
+  text: Exact framing rejects absent or duplicate markers; schema validation is separate from application record
+    validation.
+  source: protocol.py; parse-marker.mjs; state.py; expected_output/python-tests.txt; expected_output/node-tests.txt
+- id: JS7
+  text: Python additionally rejects duplicate JSON object keys; native Node JSON.parse does not.
+  source: protocol.py; parse-marker.mjs; test_protocol.py
+- id: JS8
+  text: Browser-enabled custom JavaScript is Base64 encoded, URL encoded as a query parameter and executed after
+    page load; the general endpoint returns HTML.
+  source: https://docs.scrapingant.com/javascript-execution; https://docs.scrapingant.com/request-response-format
+  accessed_at: 2026-09-28
+- id: JS9
+  text: Escaping less-than as a JSON unicode escape prevents literal closing-script text in the raw-text carrier
+    while preserving the decoded value.
+  source: snippet.js; test_protocol.py; test-protocol.mjs; https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+  accessed_at: 2026-09-28
 limitations:
-  - One run window and two self-authored public fixture URLs; no production reliability, latency or anti-bot measurement.
-  - Four success envelopes plus two deliberate controls; six expected outcomes are not six successful data extractions.
-  - Native DOM selectors only; automation-library-specific selector engines are not installed in the API page.
-  - A nonce reduces accidental collisions but does not authenticate data from a hostile page.
-  - No Markdown carrier, pagination, multi-step session, localStorage operation, closed shadow root or cross-origin frame test.
-  - Initial local charset failure is preserved separately and excluded from final denominators.
-  - Local browser version does not identify the API worker browser.
+- One run window and two self-authored public fixture URLs; no production reliability, latency or anti-bot measurement.
+- Four success envelopes plus two deliberate controls; six expected outcomes are not six successful data extractions.
+- Native DOM selectors only; automation-library-specific selector engines are not installed in the API page.
+- A nonce reduces accidental collisions but does not authenticate data from a hostile page.
+- No Markdown carrier, pagination, multi-step session, localStorage operation, closed shadow root or cross-origin
+  frame test.
+- Initial local charset failure is preserved separately and excluded from final denominators.
+- Local browser version does not identify the API worker browser.
 verification: verification.json
+ci_status: passed_linux_source_ci
+independent_review: passed
+publication_provenance:
+  commit_fields_describe: Tested runtime source revision; publication metadata and manifest updates are subsequent
+    snapshots.
+  linux_ci_status: passed
+  linux_ci_url: https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36403593055
+  independent_local_rerun: passed
+  exact_secret_and_private_reference_scan: passed
+  default_paid_requests: 0

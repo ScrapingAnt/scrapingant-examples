@@ -69,4 +69,8 @@ Accessed 2026-09-28:
 - [FrameLocator](https://playwright.dev/python/docs/api/class-framelocator): explicitly entering a frame.
 - [Browser installation](https://playwright.dev/python/docs/browsers): installing the browsers and system dependencies.
 
-The source commit and Linux CI are pending; see `evidence.yaml`. Measurements apply to this controlled fixture and captured versions, not production success rates or performance.
+The tested source and passing Linux CI are recorded in `evidence.yaml`. Measurements apply to this controlled fixture and captured versions, not production success rates or performance.
+
+## Publication verification
+
+Independent local rerun and Linux source CI passed before the evidence pull request was opened. [Linux run](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36404427667). The immutable tested source is recorded in `evidence.yaml`; later changes bind metadata and artifact hashes without changing the measured extraction logic. The default command makes no paid API requests.

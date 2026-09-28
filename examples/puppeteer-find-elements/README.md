@@ -44,7 +44,7 @@ Each of three fresh browser contexts runs 13 extraction observations, three API/
 - `expected_output/chrome.json`: all raw observations and complete diagnostic text.
 - `comparison.json`, `report.md`: recomputed results and interpretation.
 - `expected_output/development-red-checks.json`, `expected_output/development-failures.json`: initial test-first failure and exploratory failures retained separately from final observations.
-- `verification.json`: immutable source/artifact hashes; source commit and Linux CI remain pending publication orchestration.
+- `verification.json`: immutable source/artifact hashes; source/artifact snapshot binding; final CI and review provenance is recorded in `evidence.yaml`.
 
 The shared `javascript-dom-extraction` packet owns live ScrapingAnt `js_snippet`/HTML-marker evidence. This local packet does not establish an API capability, cost or response guarantee.
 
@@ -59,3 +59,7 @@ Checked 2026-09-28:
 - [MDN Range.selectNodeContents](https://developer.mozilla.org/en-US/docs/Web/API/Range/selectNodeContents).
 
 No Bing experiment, speed comparison, generic display-optimization workaround, cross-origin-frame access or closed-shadow-root result is claimed. The fixture proves only the captured APIs, records and declared text sentinels on the reported Chrome build.
+
+## Publication verification
+
+Independent local rerun and Linux source CI passed before the evidence pull request was opened. [Linux run](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/36403589363). The immutable tested source is recorded in `evidence.yaml`; later changes bind metadata and artifact hashes without changing the measured extraction logic. The default command makes no paid API requests.

@@ -2,9 +2,9 @@
   "algorithm": "sha256",
   "files": {
     ".gitignore": "439d8950cb277dd0cbbaa74af3ae62bd235916ba14fae76e5e4a3920c6a51b58",
-    "README.md": "b92ab150df63bf8d89f07e9168b53876364197daa02c91b1f0f903548a8de8f2",
+    "README.md": "171305c6ede9a705c216e0dec26fc033248a1065d3e19226dc12d52b91e789cc",
     "comparison.json": "64f8d43aa26a42e0e9ccb58afb2b0c761dc87fc8e1a98c9c70662d8e84771f4d",
-    "evidence.yaml": "49a6812f734461ab2245b049b09abc096269ac66222dddce793d4e3ad8046cae",
+    "evidence.yaml": "b450e0b3c580ff4aa86d5eea31547a62726f87ae4e3669a9fdcd6920e2f55667",
     "expected_output/dependencies.txt": "68d40ba88621e6858be892daff60b289a7a5d3a304eb68a4ff6506f2cc04b067",
     "expected_output/exploratory/local-missing-charset.json": "c488a4120bb441555af34994273a69123481c5a3f2164aa4d52a2ac824db5942",
     "expected_output/live/catalog_1.html": "d6ac850721d72d46e06fa1c8716474bc7569d54da6d56bdcb6e03ed2bda19c2b",
