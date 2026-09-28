@@ -57,7 +57,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           if [ -f package.json ]; then npm ci; fi
           if grep -q playwright requirements.txt 2>/dev/null; then python -m playwright install --with-deps chromium; fi
-          if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then python -m playwright install --with-deps firefox; fi
+          if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then python -m playwright install --with-deps chromium firefox; fi
           chmod +x run.sh && ./run.sh 2>&1 | tee run.log
           test "${PIPESTATUS[0]}" -eq 0
       - name: Open issue on failure
