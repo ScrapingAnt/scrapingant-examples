@@ -58,6 +58,12 @@ jobs:
           if [ -f package.json ]; then npm ci; fi
           if grep -q playwright requirements.txt 2>/dev/null; then python -m playwright install --with-deps chromium; fi
           if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then python -m playwright install --with-deps chromium firefox; fi
+          if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then
+            # Use the hosted runner's installed Chrome sandbox helper, per Chromium's
+            # Ubuntu guidance; keep chromium_sandbox=True in the actual example.
+            test -u /opt/google/chrome/chrome-sandbox
+            export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+          fi
           chmod +x run.sh && ./run.sh 2>&1 | tee run.log
           test "${PIPESTATUS[0]}" -eq 0
       - name: Open issue on failure
