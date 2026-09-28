@@ -1,0 +1,26 @@
+test_bad_json_duplicate_keys_and_nonfinite_values_are_rejected (test_protocol.ProtocolTests.test_bad_json_duplicate_keys_and_nonfinite_values_are_rejected) ... ok
+test_comment_carrier_and_unquoted_duplicate_are_rejected (test_protocol.ProtocolTests.test_comment_carrier_and_unquoted_duplicate_are_rejected) ... ok
+test_duplicate_marker_is_rejected (test_protocol.ProtocolTests.test_duplicate_marker_is_rejected) ... ok
+test_extraction_error_is_separate_from_transport (test_protocol.ProtocolTests.test_extraction_error_is_separate_from_transport) ... ok
+test_marker_id_input_cannot_change_regex_or_html (test_protocol.ProtocolTests.test_marker_id_input_cannot_change_regex_or_html) ... ok
+test_missing_marker_is_error_not_empty_result (test_protocol.ProtocolTests.test_missing_marker_is_error_not_empty_result) ... ok
+test_normalized_attribute_order_fails_strict_protocol_but_parser_handles_it (test_protocol.ProtocolTests.test_normalized_attribute_order_fails_strict_protocol_but_parser_handles_it) ... ok
+test_raw_script_json_preserves_special_text_without_entity_decoding (test_protocol.ProtocolTests.test_raw_script_json_preserves_special_text_without_entity_decoding) ... ok
+test_unescaped_closing_script_cannot_be_accepted (test_protocol.ProtocolTests.test_unescaped_closing_script_cannot_be_accepted) ... ok
+test_version_bool_status_string_or_wrong_shape_rejected (test_protocol.ProtocolTests.test_version_bool_status_string_or_wrong_shape_rejected) ... ok
+test_boolean_is_not_interchangeable_with_integer (test_state.OracleTests.test_boolean_is_not_interchangeable_with_integer) ... ok
+test_complete_literal_records (test_state.OracleTests.test_complete_literal_records) ... ok
+test_count_is_not_correctness (test_state.OracleTests.test_count_is_not_correctness) ... ok
+test_missing_extra_duplicate_and_reordered_records (test_state.OracleTests.test_missing_extra_duplicate_and_reordered_records) ... ok
+test_negative_controls_require_specific_outcomes (test_state.OracleTests.test_negative_controls_require_specific_outcomes) ... ok
+test_transport_probe_must_survive_exactly (test_state.OracleTests.test_transport_probe_must_survive_exactly) ... ok
+test_credit_and_request_totals_rejected (test_summary.SummaryTests.test_credit_and_request_totals_rejected) ... ok
+test_forged_results_and_flags_rejected (test_summary.SummaryTests.test_forged_results_and_flags_rejected) ... ok
+test_live_capture_matches_saved_html_and_node (test_summary.SummaryTests.test_live_capture_matches_saved_html_and_node) ... ok
+test_missing_credit_receipt_rejected (test_summary.SummaryTests.test_missing_credit_receipt_rejected) ... ok
+test_missing_duplicate_or_unknown_case (test_summary.SummaryTests.test_missing_duplicate_or_unknown_case) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.387s
+
+OK

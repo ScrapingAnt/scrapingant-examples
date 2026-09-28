@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+    "status": 200,
+    "bytes": 3688,
+    "sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+    "matches_repo": true
+  },
+  {
+    "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+    "status": 200,
+    "bytes": 752,
+    "sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+    "matches_repo": true
+  }
+]

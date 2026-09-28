@@ -1,0 +1,23 @@
+{
+  "local": {
+    "checks": 6,
+    "expected_outcomes": 6,
+    "catalog_extractions": 3,
+    "catalog_records": 9,
+    "return_only_missing_marker": 1,
+    "explicit_extraction_error": 1,
+    "delayed_dom_result": 1,
+    "python_and_node_parsers_agree": 6
+  },
+  "live": {
+    "checks": 6,
+    "expected_outcomes": 6,
+    "catalog_extractions": 3,
+    "catalog_records": 9,
+    "return_only_missing_marker": 1,
+    "explicit_extraction_error": 1,
+    "delayed_dom_result": 1,
+    "python_and_node_parsers_agree": 6,
+    "credits": 60
+  }
+}

@@ -40,8 +40,8 @@ jobs:
       SCRAPINGANT_API_KEY: ${{ secrets.SCRAPINGANT_API_KEY }}
       LATENCY_N: "3"
       # The hosted Ubuntu runner denies bundled Chrome's user-namespace sandbox.
-      # This opt-out is limited to the synthetic loopback-only Puppeteer packet.
-      PUPPETEER_NO_SANDBOX: ${{ matrix.id == 'puppeteer-local-storage' && '1' || '0' }}
+      # This opt-out is limited to the synthetic loopback-only Puppeteer packets.
+      PUPPETEER_NO_SANDBOX: ${{ (matrix.id == 'puppeteer-local-storage' || matrix.id == 'puppeteer-find-elements') && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -57,6 +57,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           if [ -f package.json ]; then npm ci; fi
           if grep -q playwright requirements.txt 2>/dev/null; then python -m playwright install --with-deps chromium; fi
+          if [ "${{ matrix.id }}" = "playwright-find-elements" ]; then python -m playwright install --with-deps firefox; fi
           chmod +x run.sh && ./run.sh 2>&1 | tee run.log
           test "${PIPESTATUS[0]}" -eq 0
       - name: Open issue on failure
