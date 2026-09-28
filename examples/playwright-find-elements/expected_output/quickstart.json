@@ -1,0 +1,23 @@
+[
+  {
+    "sku": "K-101",
+    "title": "Copper Kettle",
+    "currency": "USD",
+    "price": "24.50",
+    "href": "/products/kettle"
+  },
+  {
+    "sku": "M-202",
+    "title": "Café Mug",
+    "currency": "EUR",
+    "price": "12.00",
+    "href": "/products/mug"
+  },
+  {
+    "sku": "T-303",
+    "title": "Tea & Honey",
+    "currency": "GBP",
+    "price": "8.75",
+    "href": "/products/tea"
+  }
+]

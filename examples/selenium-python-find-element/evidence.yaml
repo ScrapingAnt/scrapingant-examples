@@ -1,0 +1,125 @@
+article_id: selenium-python-find-element
+canonical_url: https://scrapingant.com/blog/selenium-python-find-element
+owner: Oleg Kulyk
+examples_repo_commit: pending
+source_commit: pending
+tested_at: '2026-09-28'
+requires_api_key: false
+run_command: ./run.sh --all-browsers
+environment:
+  os: Darwin 25.6.0 arm64
+  python: 3.12.10
+  selenium: 4.49.0
+  chrome: 154.0.8037.57
+  chromedriver: 154.0.8037.57
+  firefox: '156.0'
+  geckodriver: 0.37.1
+dependencies:
+  selenium: 4.49.0
+  lock: requirements-lock.txt
+fixtures:
+  - fixtures/catalog.html
+  - fixtures/frame.html
+outputs:
+  - expected_output/quickstart.json
+  - expected_output/chrome.json
+  - expected_output/firefox.json
+  - expected_output/summary.json
+  - expected_output/tests.txt
+  - expected_output/tests-browser.txt
+  - expected_output/installed-dependencies.txt
+hash_manifest: verification.json
+runtime_source_hashes: embedded in each browser capture
+measurements:
+  - name: complete_target_observations
+    value: 42
+    denominator: 42
+    unit: seven extraction cases x three rounds x two browsers
+    source: expected_output/summary.json
+  - name: expected_wrong_observations
+    value: 30
+    denominator: 30
+    unit: five extraction controls x three rounds x two browsers
+    source: expected_output/summary.json
+  - name: diagnostic_observations
+    value: 30
+    denominator: 30
+    unit: five diagnostic cases x three rounds x two browsers
+    source: expected_output/summary.json
+  - name: offline_regressions
+    value: 16
+    denominator: 16
+    unit: unittest test methods, separate from browser matrix
+    source: expected_output/tests.txt
+  - name: stale_recovery_browser_regression
+    value: 1
+    denominator: 1
+    unit: actual Chrome regression, separate from browser matrix
+    source: expected_output/tests-browser.txt
+limitations:
+  - Self-authored loopback fixture; no production success-rate or speed inference.
+  - Only listed browser, driver and operating-system versions were captured here.
+  - Same-origin iframe and open shadow root only.
+  - Controlled delayed population and deterministic node replacement are not arbitrary production timing.
+  - Full expected three-record tuples are fixture-specific; real datasets need their own completeness contract.
+  - Independent rerun and Linux CI are pending integration and not counted here.
+  - No product API call or product claim is supported by this local packet.
+claims:
+  - id: SEL-ELEMENT-01
+    type: measured
+    text: Scoped plural CSS and relative XPath recovered all three expected records; singular lookup recovered only C-101.
+    source: expected_output/summary.json
+    cases: [first_scoped, all_scoped_css, relative_xpath]
+  - id: SEL-ELEMENT-02
+    type: measured
+    text: An unscoped selector included the outside decoy; an active substring check included the inactive decoy; token matching excluded it.
+    source: expected_output/summary.json
+    cases: [unscoped_css, class_token, class_substring_wrong]
+  - id: SEL-ELEMENT-03
+    type: measured
+    text: Presence returned three empty shells; waiting on complete projected tuples returned the complete catalog.
+    source: expected_output/summary.json
+    cases: [presence_only, complete_records_wait]
+  - id: SEL-ELEMENT-04
+    type: measured
+    text: Replaced-node handles raised StaleElementReferenceException; a fresh locator recovered the complete catalog.
+    source: expected_output/summary.json
+    cases: [stale_handle, refind_after_replacement]
+  - id: SEL-ELEMENT-05
+    type: measured
+    text: Frame switching and native host.shadow_root lookup recovered the three target records in the tested same-origin frame and open shadow root.
+    source: expected_output/summary.json
+    cases: [iframe_context, open_shadow_root]
+  - id: SEL-ELEMENT-06
+    type: measured
+    text: Missing singular lookup raised NoSuchElementException, missing plural lookup returned an empty list, and compound By.CLASS_NAME raised InvalidSelectorException.
+    source: expected_output/summary.json
+    cases: [missing_singular, missing_plural, compound_class_name]
+  - id: SEL-ELEMENT-07
+    type: measured
+    text: Visible text excluded hidden content; textContent included it. DOM attributes retained initial or relative values while properties reflected edits or absolute URLs.
+    source: expected_output/summary.json
+    cases: [text_boundaries, attribute_property]
+  - id: SEL-ELEMENT-08
+    type: measured
+    text: A real stale-during-projection regression recovered on its second search; removing the recovery handler caused the regression to fail.
+    source: expected_output/tests-browser.txt
+    mutation_source: expected_output/exploratory/stale-recovery-mutation.json
+  - id: SEL-ELEMENT-DOC-01
+    type: documented
+    text: Selenium documents singular and plural search contexts, scoped lookups, and native shadow-root access.
+    source: https://www.selenium.dev/documentation/webdriver/elements/finders/
+    accessed_at: '2026-09-28'
+  - id: SEL-ELEMENT-DOC-02
+    type: documented
+    text: get_attribute tries a property before an HTML attribute; get_property and get_dom_attribute select those meanings explicitly.
+    source: https://www.selenium.dev/selenium/docs/api/py/selenium_webdriver_remote/selenium.webdriver.remote.webelement.html
+    accessed_at: '2026-09-28'
+  - id: SEL-ELEMENT-DOC-03
+    type: documented
+    text: Selenium documents explicit waits, frame context switching, and re-location following stale references.
+    sources:
+      - https://www.selenium.dev/documentation/webdriver/waits/
+      - https://www.selenium.dev/documentation/webdriver/interactions/frames/
+      - https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/#stale-element-reference-exception
+    accessed_at: '2026-09-28'

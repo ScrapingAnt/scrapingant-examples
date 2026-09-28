@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Ant Supply selection fixture</title></head>
+<body>
+<h1>VISIBLE_SENTINEL</h1>
+<div hidden>HIDDEN_SENTINEL</div>
+<style>/* STYLE_SENTINEL */ .offscreen-probe { display: none; }</style>
+<aside class="card" data-sku="DECOY"><a class="title" href="/promotion">Promotional decoy</a><span class="price" data-currency="USD">0.01</span></aside>
+<section id="catalog" aria-label="Products" data-ready="no">
+<article class="card" data-sku="A101"><a class="title" href="/p/a101"></a><span class="price" data-currency="USD"></span></article>
+<article class="card" data-sku="B202"><a class="title" href="/p/b202"></a><span class="price" data-currency="USD"></span></article>
+<article class="card" data-sku="C303"><a class="title" href="/p/c303"></a><span class="price" data-currency="USD"></span></article>
+</section>
+<catalog-widget id="shadow-host"></catalog-widget>
+<iframe id="catalog-frame" title="Separate product document" src="/frame"></iframe>
+<script>
+// SCRIPT_SENTINEL: script text is intentionally inside body.
+const entries = [
+ {sku:'A101', title:'Ant Field Kit', currency:'USD', price:'19.95', href:'/p/a101', stock:'in'},
+ {sku:'B202', title:'Sugar & Water Feeder', currency:'USD', price:'7.50', href:'/p/b202', stock:null},
+ {sku:'C303', title:'Tunnel Kit — Mini', currency:'USD', price:'12.00', href:'/p/c303', stock:'out'}
+];
+function makeCard(row) {
+ const card=document.createElement('article'); card.className='card'; card.dataset.sku=row.sku;
+ const link=document.createElement('a'); link.className='title'; link.href=row.href; link.textContent=row.title;
+ if(row.stock !== null) link.dataset.stock=row.stock;
+ const price=document.createElement('span'); price.className='price'; price.dataset.currency=row.currency; price.textContent=row.price;
+ card.append(link, document.createTextNode(' '), price); return card;
+}
+window.releaseCatalog=()=>new Promise(resolve=>requestAnimationFrame(()=>{
+ const catalog=document.querySelector('#catalog'); catalog.replaceChildren(...entries.map(makeCard)); catalog.dataset.ready='yes'; resolve('populated');
+}));
+window.replaceFirst=()=>{
+ const row={...entries[0],title:'Ant Field Kit — revised'};
+ document.querySelector('#catalog .card').replaceWith(makeCard(row));
+ return 'replaced';
+};
+const shadow=document.querySelector('#shadow-host').attachShadow({mode:'open'});
+shadow.append(makeCard({sku:'SHADOW',title:'Shadow product',currency:'USD',price:'4.00',href:'/p/shadow',stock:null}));
+</script>
+</body></html>

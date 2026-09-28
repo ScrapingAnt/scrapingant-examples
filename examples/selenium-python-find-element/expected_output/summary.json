@@ -1,0 +1,851 @@
+{
+  "schema_version": 1,
+  "environments": [
+    {
+      "browser": "chrome",
+      "browser_version": "154.0.8037.57",
+      "driver_version": "154.0.8037.57",
+      "python": "3.12.10",
+      "selenium": "4.49.0",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "architecture": "arm64"
+    },
+    {
+      "browser": "firefox",
+      "browser_version": "156.0",
+      "driver_version": "0.37.1",
+      "python": "3.12.10",
+      "selenium": "4.49.0",
+      "os": "Darwin",
+      "os_release": "25.6.0",
+      "architecture": "arm64"
+    }
+  ],
+  "rounds_per_browser": 3,
+  "extraction_cases": 12,
+  "diagnostic_cases": 5,
+  "extraction_observations": 72,
+  "complete_target_observations": 42,
+  "expected_wrong_observations": 30,
+  "diagnostic_observations": 30,
+  "expected_observations": 102,
+  "results": [
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 1,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 2,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "chrome",
+      "round": 3,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 1,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 2,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "first_scoped",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "all_scoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "relative_xpath",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "unscoped_css",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "class_token",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "class_substring_wrong",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "presence_only",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "complete_records_wait",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "stale_handle",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": false
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "refind_after_replacement",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "iframe_context",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "open_shadow_root",
+      "kind": "extraction",
+      "expected_observation": true,
+      "complete_target": true
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "missing_singular",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "missing_plural",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "compound_class_name",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "text_boundaries",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    },
+    {
+      "browser": "firefox",
+      "round": 3,
+      "case": "attribute_property",
+      "kind": "diagnostic",
+      "expected_observation": true,
+      "complete_target": null
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "stage": "first local quickstart launch",
+  "result": "failed before browser startup",
+  "operation": "bind an ephemeral HTTP port on 127.0.0.1",
+  "exception": "PermissionError: [Errno 1] Operation not permitted",
+  "interpretation": "Execution sandbox prevented a loopback listening socket; this is not a locator observation.",
+  "next_action": "Run the same no-key local packet with the required process/network sandbox permission."
+}

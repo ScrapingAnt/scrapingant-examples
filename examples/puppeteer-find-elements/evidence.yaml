@@ -1,0 +1,124 @@
+article_id: puppeteer-find-elements
+supports_articles:
+  - puppeteer-find-elements
+  - puppeteer-get-all-text
+owner: Oleg Kulyk
+tested_at: 2026-09-28
+source_commit: pending
+tested_source_commit: pending
+examples_repo_commit: pending
+requires_api_key: false
+external_runtime_targets: false
+paid_requests: 0
+run_command: ./run.sh
+install_command: npm ci
+environment:
+  node: 22.20.0
+  puppeteer: 25.12.0
+  html_to_text: 9.0.5
+  chrome: 154.0.8037.57
+  os: Darwin 25.6.0 arm64
+  sandbox_disabled: false
+dependencies:
+  puppeteer: 25.12.0
+  html-to-text: 9.0.5
+  transitive_lock: package-lock.json
+fixtures:
+  - fixtures/catalog.html
+  - fixtures/frame.html
+  - Self-authored ephemeral loopback HTTP server; explicit population handshake
+outputs:
+  - expected_output/chrome.json
+  - expected_output/quickstart.json
+  - expected_output/text-quickstart.json
+  - expected_output/test-results.json
+  - expected_output/development-red-checks.json
+  - expected_output/development-failures.json
+  - comparison.json
+  - verification.json
+measurements:
+  - name: primary_declared_outcome_checks
+    passed: 63
+    denominator: 13 extraction cases plus 3 API diagnostics plus 5 text diagnostics, each in 3 Chrome rounds
+    source: comparison.json
+  - name: extraction_observations
+    value: 39
+    denominator: 13 cases multiplied by 3 rounds, including explicit decoy and incomplete-data controls
+    source: expected_output/chrome.json
+  - name: api_boundary_diagnostics
+    value: 9
+    denominator: 3 diagnostics multiplied by 3 rounds
+    source: expected_output/chrome.json
+  - name: text_diagnostics
+    value: 15
+    denominator: 5 text methods multiplied by 3 rounds
+    source: expected_output/chrome.json
+  - name: exact_original_three_record_catalogue_observations
+    value: 12
+    denominator: 39 extraction observations; other cases deliberately select different records or states
+    source: comparison.json
+  - name: boundary_tests
+    passed: 31
+    denominator: 31 tests; separate from matrix, quickstarts and development red checks
+    source: expected_output/test-results.json
+claims:
+  - id: PE1
+    text: Global first/all selectors captured a preceding promotional decoy; scoped CSS, parent-handle queries and current XPath selected the three literal catalogue records.
+    type: measured
+    source: expected_output/chrome.json; oracle.mjs
+  - id: PE2
+    text: Missing selectors returned null for dollar, an empty list for double-dollar and tested double-dollar-eval mapping, and an Error for dollar-eval.
+    type: measured
+    source: expected_output/chrome.json
+  - id: PE3
+    text: Presence-only waiting returned empty title/price fields; waiting for populated fields returned the three exact records.
+    type: measured
+    source: expected_output/chrome.json
+  - id: PE4
+    text: After same-document node replacement, the old detached handle still read its old title and a fresh query read the revised title.
+    type: measured
+    source: expected_output/chrome.json
+  - id: PE5
+    text: The open-shadow selector and explicit frame query each read their separate record; ordinary main-document descendant CSS crossed neither boundary.
+    type: measured
+    source: expected_output/chrome.json
+  - id: PE6
+    text: The tested missing optional attribute returned null; raw href stayed relative and the DOM href property resolved to an absolute URL.
+    type: measured
+    source: expected_output/chrome.json
+  - id: PT1
+    text: In this fixture, innerText and browser Selection excluded the hidden/script/style sentinels; textContent included them.
+    type: measured
+    source: expected_output/chrome.json; expected_output/text-quickstart.json
+  - id: PT2
+    text: HTML-to-text on raw HTTP HTML lacked populated catalogue titles; conversion of rendered HTML included them, while both conversions included the hidden sentinel and excluded script/style sentinels.
+    type: measured
+    source: expected_output/chrome.json; expected_output/text-quickstart.json
+  - id: PT3
+    text: The selection implementation creates a DOM Range and reads Selection text without keyboard or clipboard interaction; no display-optimization recovery is established.
+    type: implementation_limit
+    source: text-quickstart.mjs; report.md
+  - id: PE7
+    text: The oracle rejects malformed or mismatched literal records and the strict summary rejects changed raw data, fields, counts and case/round coverage.
+    type: verified_implementation
+    source: test/boundaries.test.mjs; test/summary.test.mjs; expected_output/test-results.json
+  - id: PE8
+    text: Puppeteer documents current CSS, text, XPath and open-shadow selector forms and query methods that do not wait for populated page data.
+    type: documented
+    source: https://pptr.dev/guides/page-interactions
+    accessed_at: 2026-09-28
+limitations:
+  - Synthetic deterministic application on one Chrome build and host; no production reliability or speed inference.
+  - Chrome only; no Firefox, cross-origin iframe or closed-shadow-root measurement.
+  - Text checks assert declared sentinels, not identical whitespace across browsers/platforms.
+  - Population is released through an explicit fixture handshake; a real site's readiness predicate must match its data.
+  - Same-document detached-handle reading does not imply successful interaction or navigation survival.
+  - No Bing, keyboard, clipboard or generic display-optimization recovery test.
+  - No API called; shared javascript-dom-extraction packet owns ScrapingAnt behavior and live evidence.
+  - Development execution sandbox blocked DNS and loopback binding; authorized reruns kept Chrome's own sandbox enabled.
+publication_provenance:
+  source_commit: pending
+  linux_ci_status: pending
+  independent_rerun: pending
+  private_reference_scan: passed; 28 public packet files, no local paths or private checkout references
+verification: verification.json

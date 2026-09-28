@@ -1,0 +1,24 @@
+{
+  "failures": [
+    {
+      "stage": "dependency-install",
+      "observed_error": "ENOTFOUND registry.npmjs.org when retrieving html-to-text in the restricted network sandbox",
+      "resolution": "Retried the same pinned dependency installation with authorized network access; no runtime API requests."
+    },
+    {
+      "stage": "local-browser-run",
+      "observed_error": "listen EPERM: operation not permitted 127.0.0.1 in restricted execution sandbox",
+      "resolution": "Reran authorized loopback fixture/browser execution outside the execution sandbox; Chrome browser sandbox remained enabled."
+    },
+    {
+      "stage": "dependency-version-introspection",
+      "observed_error": "ERR_PACKAGE_PATH_NOT_EXPORTED when requiring html-to-text/package.json",
+      "resolution": "Read the installed dependency package metadata file directly; captured version remains 9.0.5."
+    },
+    {
+      "stage": "summary-regression-tests",
+      "observed_error": "Unexpected token closing parenthesis in newly added tamper-test expressions",
+      "resolution": "Removed extra closing parentheses and reran the full boundary suite."
+    }
+  ]
+}

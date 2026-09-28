@@ -1,0 +1,26 @@
+[
+  {
+    "sku": "C-101",
+    "title": "Café & Cocoa",
+    "currency": "USD",
+    "price": "12.50",
+    "href": "/products/cafe",
+    "badge": "New"
+  },
+  {
+    "sku": "T-202",
+    "title": "Tea \"No. 2\"",
+    "currency": "EUR",
+    "price": "8.00",
+    "href": "/products/tea",
+    "badge": null
+  },
+  {
+    "sku": "N-303",
+    "title": "Notebook <A5>",
+    "currency": "GBP",
+    "price": "5.25",
+    "href": "/products/notebook",
+    "badge": "Sale"
+  }
+]

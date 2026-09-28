@@ -1,0 +1,978 @@
+{
+  "schema": 1,
+  "environment": {
+    "browser": "firefox",
+    "browser_version": "155.0",
+    "python": "3.12.10",
+    "playwright": "1.63.0",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "architecture": "arm64"
+  },
+  "observations": [
+    {
+      "round": 1,
+      "case": "strict_duplicate",
+      "observation": {
+        "outcome": "strict_mode_violation",
+        "matched_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "first_masks_decoy",
+      "observation": {
+        "records": [
+          {
+            "sku": "AD-000",
+            "title": "Sponsored kettle",
+            "currency": "USD",
+            "price": "999.00",
+            "href": "/ads/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "eager_count_all",
+      "observation": {
+        "state": "loading",
+        "count": 1,
+        "all_length": 1,
+        "records": [
+          {
+            "sku": "PENDING",
+            "title": "Loading catalog",
+            "currency": "XXX",
+            "price": "0.00",
+            "href": "/pending"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "scoped_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "locator_reresolution",
+      "observation": {
+        "before": "Copper Kettle (archived)",
+        "after": "Copper Kettle",
+        "same_dom_node": false,
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "evaluate_all",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "role_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "text_exact",
+      "observation": {
+        "ancestor_prefixed_skus": [],
+        "records": [
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "css_attribute",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "xpath_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "frame_scope",
+      "observation": {
+        "top_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "records": [
+          {
+            "sku": "F-404",
+            "title": "Frame spoon",
+            "currency": "USD",
+            "price": "3.25",
+            "href": "/products/spoon"
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "case": "shadow_scope",
+      "observation": {
+        "locator_skus": [
+          "S-505"
+        ],
+        "raw_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "xpath_skus": [],
+        "records": [
+          {
+            "sku": "S-505",
+            "title": "Shadow strainer",
+            "currency": "EUR",
+            "price": "6.50",
+            "href": "/products/strainer"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "strict_duplicate",
+      "observation": {
+        "outcome": "strict_mode_violation",
+        "matched_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "first_masks_decoy",
+      "observation": {
+        "records": [
+          {
+            "sku": "AD-000",
+            "title": "Sponsored kettle",
+            "currency": "USD",
+            "price": "999.00",
+            "href": "/ads/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "eager_count_all",
+      "observation": {
+        "state": "loading",
+        "count": 1,
+        "all_length": 1,
+        "records": [
+          {
+            "sku": "PENDING",
+            "title": "Loading catalog",
+            "currency": "XXX",
+            "price": "0.00",
+            "href": "/pending"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "scoped_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "locator_reresolution",
+      "observation": {
+        "before": "Copper Kettle (archived)",
+        "after": "Copper Kettle",
+        "same_dom_node": false,
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "evaluate_all",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "role_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "text_exact",
+      "observation": {
+        "ancestor_prefixed_skus": [],
+        "records": [
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "css_attribute",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "xpath_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "frame_scope",
+      "observation": {
+        "top_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "records": [
+          {
+            "sku": "F-404",
+            "title": "Frame spoon",
+            "currency": "USD",
+            "price": "3.25",
+            "href": "/products/spoon"
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "shadow_scope",
+      "observation": {
+        "locator_skus": [
+          "S-505"
+        ],
+        "raw_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "xpath_skus": [],
+        "records": [
+          {
+            "sku": "S-505",
+            "title": "Shadow strainer",
+            "currency": "EUR",
+            "price": "6.50",
+            "href": "/products/strainer"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "strict_duplicate",
+      "observation": {
+        "outcome": "strict_mode_violation",
+        "matched_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "first_masks_decoy",
+      "observation": {
+        "records": [
+          {
+            "sku": "AD-000",
+            "title": "Sponsored kettle",
+            "currency": "USD",
+            "price": "999.00",
+            "href": "/ads/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "eager_count_all",
+      "observation": {
+        "state": "loading",
+        "count": 1,
+        "all_length": 1,
+        "records": [
+          {
+            "sku": "PENDING",
+            "title": "Loading catalog",
+            "currency": "XXX",
+            "price": "0.00",
+            "href": "/pending"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "scoped_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "locator_reresolution",
+      "observation": {
+        "before": "Copper Kettle (archived)",
+        "after": "Copper Kettle",
+        "same_dom_node": false,
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "evaluate_all",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "role_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "text_exact",
+      "observation": {
+        "ancestor_prefixed_skus": [],
+        "records": [
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "css_attribute",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "xpath_records",
+      "observation": {
+        "records": [
+          {
+            "sku": "K-101",
+            "title": "Copper Kettle",
+            "currency": "USD",
+            "price": "24.50",
+            "href": "/products/kettle"
+          },
+          {
+            "sku": "M-202",
+            "title": "Café Mug",
+            "currency": "EUR",
+            "price": "12.00",
+            "href": "/products/mug"
+          },
+          {
+            "sku": "T-303",
+            "title": "Tea & Honey",
+            "currency": "GBP",
+            "price": "8.75",
+            "href": "/products/tea"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "frame_scope",
+      "observation": {
+        "top_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "records": [
+          {
+            "sku": "F-404",
+            "title": "Frame spoon",
+            "currency": "USD",
+            "price": "3.25",
+            "href": "/products/spoon"
+          }
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "shadow_scope",
+      "observation": {
+        "locator_skus": [
+          "S-505"
+        ],
+        "raw_document_skus": [
+          "AD-000",
+          "K-101",
+          "M-202",
+          "T-303"
+        ],
+        "xpath_skus": [],
+        "records": [
+          {
+            "sku": "S-505",
+            "title": "Shadow strainer",
+            "currency": "EUR",
+            "price": "6.50",
+            "href": "/products/strainer"
+          }
+        ]
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "round": 1,
+      "case": "missing_selector",
+      "observation": {
+        "outcome": "TimeoutError",
+        "selector": "#never-present"
+      }
+    },
+    {
+      "round": 1,
+      "case": "text_readers",
+      "observation": {
+        "inner_text": "Tea & Honey",
+        "text_content": "Tea & HoneyHIDDEN"
+      }
+    },
+    {
+      "round": 1,
+      "case": "attribute_property",
+      "observation": {
+        "attribute_href": "/products/kettle",
+        "property_href": "{origin}/products/kettle",
+        "optional_present": "featured",
+        "optional_missing": null
+      }
+    },
+    {
+      "round": 1,
+      "case": "query_semantics",
+      "observation": {
+        "role_visible": [
+          "Visible offer"
+        ],
+        "role_include_hidden": [
+          "Visible offer",
+          "Hidden offer"
+        ],
+        "text_normalized": [
+          "whitespace"
+        ],
+        "css": [
+          "offer-visible",
+          "offer-hidden"
+        ],
+        "xpath": [
+          "offer-visible",
+          "offer-hidden"
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "case": "missing_selector",
+      "observation": {
+        "outcome": "TimeoutError",
+        "selector": "#never-present"
+      }
+    },
+    {
+      "round": 2,
+      "case": "text_readers",
+      "observation": {
+        "inner_text": "Tea & Honey",
+        "text_content": "Tea & HoneyHIDDEN"
+      }
+    },
+    {
+      "round": 2,
+      "case": "attribute_property",
+      "observation": {
+        "attribute_href": "/products/kettle",
+        "property_href": "{origin}/products/kettle",
+        "optional_present": "featured",
+        "optional_missing": null
+      }
+    },
+    {
+      "round": 2,
+      "case": "query_semantics",
+      "observation": {
+        "role_visible": [
+          "Visible offer"
+        ],
+        "role_include_hidden": [
+          "Visible offer",
+          "Hidden offer"
+        ],
+        "text_normalized": [
+          "whitespace"
+        ],
+        "css": [
+          "offer-visible",
+          "offer-hidden"
+        ],
+        "xpath": [
+          "offer-visible",
+          "offer-hidden"
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "case": "missing_selector",
+      "observation": {
+        "outcome": "TimeoutError",
+        "selector": "#never-present"
+      }
+    },
+    {
+      "round": 3,
+      "case": "text_readers",
+      "observation": {
+        "inner_text": "Tea & Honey",
+        "text_content": "Tea & HoneyHIDDEN"
+      }
+    },
+    {
+      "round": 3,
+      "case": "attribute_property",
+      "observation": {
+        "attribute_href": "/products/kettle",
+        "property_href": "{origin}/products/kettle",
+        "optional_present": "featured",
+        "optional_missing": null
+      }
+    },
+    {
+      "round": 3,
+      "case": "query_semantics",
+      "observation": {
+        "role_visible": [
+          "Visible offer"
+        ],
+        "role_include_hidden": [
+          "Visible offer",
+          "Hidden offer"
+        ],
+        "text_normalized": [
+          "whitespace"
+        ],
+        "css": [
+          "offer-visible",
+          "offer-hidden"
+        ],
+        "xpath": [
+          "offer-visible",
+          "offer-hidden"
+        ]
+      }
+    }
+  ]
+}

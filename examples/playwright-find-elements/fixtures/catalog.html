@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Local locator catalog</title>
+<style>[hidden]{display:none} .product{padding:8px} .title{display:inline}</style></head>
+<body>
+<button id="load">Load catalog</button><button id="replace">Replace kettle</button>
+<main id="main">
+  <aside><div class="product" data-sku="AD-000"><a class="title" href="/ads/kettle">Sponsored kettle</a><span class="price" data-currency="USD">999.00</span></div></aside>
+  <ul id="catalog" aria-label="Catalog" aria-busy="true" data-state="pending">
+    <li class="product" data-sku="PENDING"><a class="title" href="/pending">Loading catalog</a><span class="price" data-currency="XXX">0.00</span></li>
+  </ul>
+</main>
+<template id="catalog-source">
+  <li class="product" data-sku="K-101" data-badge="featured"><a class="title" href="/products/kettle">Copper Kettle</a><span class="price" data-currency="USD">24.50</span></li>
+  <li class="product" data-sku="M-202"><a class="title" href="/products/mug">Café Mug</a><span class="price" data-currency="EUR">12.00</span></li>
+  <li class="product" data-sku="T-303"><a class="title" href="/products/tea">Tea &amp; Honey<span hidden>HIDDEN</span></a><span class="price" data-currency="GBP">8.75</span></li>
+</template>
+<section id="query-examples">
+  <button id="offer-visible" class="offer">Visible offer</button>
+  <button id="offer-hidden" class="offer" hidden>Hidden offer</button>
+  <p id="whitespace">  Spaced
+      title  </p>
+</section>
+<iframe id="catalog-frame" title="Framed catalog" src="/frame.html"></iframe>
+<div id="shadow-host"></div>
+<script>
+const catalog = document.querySelector('#catalog');
+document.querySelector('#load').onclick = () => {
+  catalog.dataset.state = 'loading';
+  // Explicitly controlled asynchronous replacement: no network or third-party data.
+  const complete = () => {
+    if (window.holdCatalog) { setTimeout(complete, 25); return; }
+    catalog.replaceChildren(document.querySelector('#catalog-source').content.cloneNode(true));
+    catalog.dataset.state = 'ready';
+    catalog.setAttribute('aria-busy', 'false');
+  };
+  setTimeout(complete, 75);
+};
+window.stageArchived = () => {
+  window.previousNode = catalog.querySelector('[data-sku="K-101"]');
+  window.previousNode.querySelector('.title').textContent = 'Copper Kettle (archived)';
+};
+document.querySelector('#replace').onclick = () => {
+  const replacement = document.querySelector('#catalog-source').content.querySelector('[data-sku="K-101"]').cloneNode(true);
+  catalog.querySelector('[data-sku="K-101"]').replaceWith(replacement);
+  catalog.dataset.state = 'replaced';
+};
+document.querySelector('#shadow-host').attachShadow({mode:'open'}).innerHTML = '<div class="product" data-sku="S-505"><a class="title" href="/products/strainer">Shadow strainer</a><span class="price" data-currency="EUR">6.50</span></div>';
+</script></body></html>

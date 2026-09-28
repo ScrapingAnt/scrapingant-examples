@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_hashes": {
+    ".gitignore": "e4a99d5f1ffc2051a22c7403e081585f9b0c31b20572657d652ea5dfcd3168b6",
+    "browser.mjs": "6bc3dc068afbde397b76f9f24c686196a4eb2bf33e30d4438b1c6a8667fad3d9",
+    "fixture.mjs": "9a6dc2141e9b69725160e887eb74a91d97564e399955387d63a8bf8b6331bcc0",
+    "fixtures/catalog.html": "0078efb67edf3ea4915643ec75f6bb4b0d3e223465e8a12f1789dd10b69466c7",
+    "fixtures/frame.html": "c6d8cd4054e045f44e642b8949919e2ace749e2b40a17e3193fb504a1cc43c49",
+    "matrix.mjs": "b22c62a606ef50487fe0b40dc0e3e16f29b717bb666423d42975c39a89ebe25c",
+    "oracle.mjs": "857559129592a2eb146c1eb8c3f80f966be340d63340bf302dde6fa06454d9ca",
+    "package-lock.json": "a729ce09a756e0963903c2265c918ee587f797ee49f14d4c5b6522d2b61abd1d",
+    "package.json": "ea0179202a9857ac6bca6acc6f0f9779504ea6b16c30aed19b0a73afd8a26878",
+    "quickstart.mjs": "bcc5eb0877b86610d877d304124460e3c58180a63c79df1a7240f854b5500541",
+    "run.sh": "4f492f93444a57060560ee9a698a6eb6f99e5c2c2ac6eedb0ea870d78e93c5d1",
+    "summarize.mjs": "046d07a3dbec8d463e95d9fac518cec5fe0cdb8368ea1bbe0a2cdc28993f3edc",
+    "test/boundaries.test.mjs": "87974a714ed3796cd789ec47f0c0b42b88bc94e846010cb1bfcc821aec0a7b50",
+    "test/summary.test.mjs": "251b7ad587d401de566425f6ab2488f41075e1394cb876c1a6d2d27004411db1",
+    "test_suite.mjs": "9029a03dda9322f3999783d935d7682f3eced6a05ca333007322f9bc8f90ef62",
+    "text-quickstart.mjs": "bef64bbca4f912210aa41f5b84d7c985e6c05ebd927b5d86c4e4eb514dbc6c20",
+    "verify.mjs": "068f07845d2cb292390f5c6cbe53ab2fa593b0cfb6555995e876dc0a14dbad6b"
+  },
+  "artifact_hashes": {
+    "comparison.json": "36f7506dafe1ddb5098d32596944ce4bf375d8fd95189c5fd74ba433efdc65a0",
+    "expected_output/chrome.json": "14f44919d69171cbbef6f7bcbef919bf2f5ee598793d74b98174943ecd690cdb",
+    "expected_output/development-failures.json": "73be7947d5bea5adce77ca618655c79b6c71f3d7fb20d7649139caf757098114",
+    "expected_output/development-red-checks.json": "45c6b14b9415709cccf23b01bf59b4a4e7224a7c499634cfe4c24df758fde181",
+    "expected_output/quickstart.json": "9f24d7b2f257d75e2c99d110446955c71235a94629dbc6ec895c924a6ca4941c",
+    "expected_output/test-results.json": "8493f8af03d74f7429f26828208712619ab7a2f3da4c28f39e879decc0ad0fb3",
+    "expected_output/text-quickstart.json": "aa957311d8f5b374be0caac6bf9af20a5dcc6b140bb368d137b6f621d92facc5"
+  },
+  "raw_capture_recomputed": true,
+  "boundary_tests": 31,
+  "checks": 63,
+  "source_commit": "pending",
+  "linux_ci": "pending"
+}

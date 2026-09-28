@@ -1,0 +1,8 @@
+{
+  "mutation": "remove stale-reference recovery from wait_records",
+  "tests_run": 1,
+  "failures": 0,
+  "errors": 1,
+  "detected_exception": "StaleElementReferenceException",
+  "mutant_rejected": true
+}

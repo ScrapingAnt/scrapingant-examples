@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Local element extraction catalog</title>
+<style>body{font:16px sans-serif} article{margin:8px} .hidden{display:none} iframe{width:100%;height:230px}</style>
+<h1>Element extraction fixture</h1>
+<article class="product active" data-sku="D-OUT"><a class="title" href="/products/outside">Outside decoy</a> <span class="currency">USD</span> <span class="price">0.01</span></article>
+<button id="begin">Populate after a delay</button><button id="replace">Replace catalog nodes</button>
+<section id="catalog" aria-label="Catalog"></section>
+<p id="text-boundary">Visible<span class="hidden">Hidden</span></p>
+<input id="value-boundary" value="initial">
+<div id="shadow-host"></div><iframe id="catalog-frame" title="Catalog frame" src="/frame.html"></iframe>
+<template id="records">
+<article class="product active featured" data-sku="C-101"><a class="title" href="/products/cafe">Café &amp; Cocoa</a> <span class="currency">USD</span> <span class="price">12.50</span> <span class="badge">New</span></article>
+<article class="product active" data-sku="T-202"><a class="title" href="/products/tea">Tea "No. 2"</a> <span class="currency">EUR</span> <span class="price">8.00</span></article>
+<article class="product active" data-sku="N-303"><a class="title" href="/products/notebook">Notebook &lt;A5&gt;</a> <span class="currency">GBP</span> <span class="price">5.25</span> <span class="badge">Sale</span></article>
+<article class="product inactive" data-sku="D-IN"><a class="title" href="/products/inactive">Inactive decoy</a> <span class="currency">USD</span> <span class="price">0.02</span></article>
+</template>
+<script>
+const template = document.querySelector('#records');
+const catalog = document.querySelector('#catalog');
+function populate() { catalog.replaceChildren(template.content.cloneNode(true)); catalog.dataset.ready = 'true'; }
+function shells() {
+  catalog.innerHTML = ['C-101', 'T-202', 'N-303'].map(sku =>
+    `<article class="product active" data-sku="${sku}"><a class="title" href=""></a><span class="currency"></span><span class="price"></span></article>`).join('');
+  catalog.dataset.ready = 'false';
+}
+if (new URLSearchParams(location.search).has('delayed')) shells(); else populate();
+document.querySelector('#begin').onclick = () => setTimeout(populate, 100);
+document.querySelector('#replace').onclick = populate;
+document.querySelector('#value-boundary').value = 'edited';
+document.querySelector('#shadow-host').attachShadow({mode:'open'}).append(template.content.cloneNode(true));
+</script></html>
