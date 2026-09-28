@@ -1,0 +1,21 @@
+<html><head>
+    <title>Delayed Dynamic Web Page Example</title>
+    <script>
+        // Simulates content that arrives after an async request: the text is
+        // replaced 1500 ms after load, and a marker element is appended.
+        window.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById("test").innerHTML = "I ❤️ ScrapingAnt (after 1500 ms)";
+                var done = document.createElement("div");
+                done.id = "loaded";
+                done.textContent = "loaded";
+                document.body.appendChild(done);
+            }, 1500);
+        }, false);
+    </script>
+</head>
+<body>
+    <div id="test">I ❤️ ScrapingAnt (after 1500 ms)</div>
+
+
+<div id="loaded">loaded</div><script id="sa-extract-0820b9d8813a4da4b657e341906cbedf" type="application/json">{"version":1,"ok":true,"data":{"text":"I ❤️ ScrapingAnt (after 1500 ms)","awaited":true}}</script></body></html>

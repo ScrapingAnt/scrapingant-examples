@@ -100,6 +100,26 @@
       "id": "puppeteer-local-storage",
       "needs_api_key": false,
       "note": "Local catalog, three bundled Chrome rounds and 24 boundary tests. Needs Node22.12+ and npm ci. No API calls or external targets."
+    },
+    {
+      "id": "selenium-python-find-element",
+      "needs_api_key": false,
+      "note": "Local synthetic catalog; three Chrome rounds, strict tuple/oracle regressions and stale recovery. No API calls. Firefox is opt-in."
+    },
+    {
+      "id": "playwright-find-elements",
+      "needs_api_key": false,
+      "note": "Local synthetic catalog in bundled Chromium and Firefox; three rounds, readiness/locator controls and strict capture regressions. No API calls."
+    },
+    {
+      "id": "puppeteer-find-elements",
+      "needs_api_key": false,
+      "note": "Local synthetic catalog; three Chrome rounds, structured record and whole-page text cases. No API calls."
+    },
+    {
+      "id": "javascript-dom-extraction",
+      "needs_api_key": false,
+      "note": "Local DOM-to-JSON transport checks and offline replay of saved responses. Never calls the API by default; live six-call probe is explicit opt-in."
     }
   ]
 }

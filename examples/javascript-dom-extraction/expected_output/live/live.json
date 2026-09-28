@@ -1,0 +1,168 @@
+{
+  "tested_at": "2026-09-28T09:16:45.784186+00:00",
+  "maximum_requests": 6,
+  "automatic_retries": 0,
+  "calls": [
+    {
+      "call": 1,
+      "case": "catalog_1",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "marker": "sa-extract-7f629c671d7a466e9afcafaa2725f7e2",
+      "api_status": 200,
+      "credits": 10,
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "passed": true
+    },
+    {
+      "call": 2,
+      "case": "catalog_2",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "marker": "sa-extract-35f48f363ffa48c6b2f65b6b0aad8279",
+      "api_status": 200,
+      "credits": 10,
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "passed": true
+    },
+    {
+      "call": 3,
+      "case": "catalog_3",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "marker": "sa-extract-b73c0ade3fec453681c52c5f8dd9b163",
+      "api_status": 200,
+      "credits": 10,
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "passed": true
+    },
+    {
+      "call": 4,
+      "case": "return_only",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "marker": "sa-extract-94e725f64f004bfdb5ffd0b51236ff7c",
+      "api_status": 200,
+      "credits": 10,
+      "result": null,
+      "transport_error": "MARKER_COUNT",
+      "passed": true
+    },
+    {
+      "call": 5,
+      "case": "missing_selector",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "marker": "sa-extract-b4075f75c05446c58a28e3ca43373ffd",
+      "api_status": 200,
+      "credits": 10,
+      "result": {
+        "version": 1,
+        "ok": false,
+        "error": {
+          "code": "ELEMENT_MISSING"
+        }
+      },
+      "transport_error": null,
+      "passed": true
+    },
+    {
+      "call": 6,
+      "case": "delayed",
+      "target": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+      "marker": "sa-extract-fac03071764d46d2a63fdee69c693e5a",
+      "api_status": 200,
+      "credits": 10,
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "text": "I ❤️ ScrapingAnt (after 1500 ms)",
+          "awaited": true
+        }
+      },
+      "transport_error": null,
+      "passed": true
+    }
+  ],
+  "requests_sent": 6,
+  "known_credits": 60,
+  "missing_credit_receipts": 0,
+  "passed": true
+}

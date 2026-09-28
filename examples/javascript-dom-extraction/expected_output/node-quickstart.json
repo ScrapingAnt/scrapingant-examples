@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "ok": true,
+  "data": {
+    "records": [
+      {
+        "product": "Ant Farm Deluxe",
+        "price": "$1,234.50",
+        "units": "12,345",
+        "share": "45.5%"
+      },
+      {
+        "product": "Ant Farm Mini",
+        "price": "$99.00",
+        "units": "1,020",
+        "share": "3.8%"
+      },
+      {
+        "product": "Magnifier",
+        "price": "$12.25",
+        "units": "987,654",
+        "share": "50.7%"
+      }
+    ],
+    "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+  }
+}

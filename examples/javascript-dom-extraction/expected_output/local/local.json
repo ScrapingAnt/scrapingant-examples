@@ -1,0 +1,156 @@
+{
+  "tested_at": "2026-09-28T09:25:47.893897+00:00",
+  "python": "3.12.10",
+  "playwright": "1.63.0",
+  "chromium": "153.0.8010.12",
+  "node": "v22.20.0",
+  "api_requests": 0,
+  "observations": [
+    {
+      "case": "catalog_1",
+      "http_status": 200,
+      "marker": "sa-extract-ebce19aba3054beb8874451674030736",
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "node_matches": true,
+      "passed": true
+    },
+    {
+      "case": "catalog_2",
+      "http_status": 200,
+      "marker": "sa-extract-1b2d5336893e4e8dacfd1fbb05961e14",
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "node_matches": true,
+      "passed": true
+    },
+    {
+      "case": "catalog_3",
+      "http_status": 200,
+      "marker": "sa-extract-e0a7c52742424161a08d5dc84e07ab61",
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "records": [
+            {
+              "product": "Ant Farm Deluxe",
+              "price": "$1,234.50",
+              "units": "12,345",
+              "share": "45.5%"
+            },
+            {
+              "product": "Ant Farm Mini",
+              "price": "$99.00",
+              "units": "1,020",
+              "share": "3.8%"
+            },
+            {
+              "product": "Magnifier",
+              "price": "$12.25",
+              "units": "987,654",
+              "share": "50.7%"
+            }
+          ],
+          "transport_probe": "</script><!--<script> & &amp; \"quoted\" \\ newline\nКиїв 中文 🕷  "
+        }
+      },
+      "transport_error": null,
+      "node_matches": true,
+      "passed": true
+    },
+    {
+      "case": "return_only",
+      "http_status": 200,
+      "marker": "sa-extract-a70bae1d344741f7b52b28d162583cab",
+      "result": null,
+      "transport_error": "MARKER_COUNT",
+      "node_matches": true,
+      "passed": true
+    },
+    {
+      "case": "missing_selector",
+      "http_status": 200,
+      "marker": "sa-extract-bbf458ec3c8346d798f1f92a5303e317",
+      "result": {
+        "version": 1,
+        "ok": false,
+        "error": {
+          "code": "ELEMENT_MISSING"
+        }
+      },
+      "transport_error": null,
+      "node_matches": true,
+      "passed": true
+    },
+    {
+      "case": "delayed",
+      "http_status": 200,
+      "marker": "sa-extract-0820b9d8813a4da4b657e341906cbedf",
+      "result": {
+        "version": 1,
+        "ok": true,
+        "data": {
+          "text": "I ❤️ ScrapingAnt (after 1500 ms)",
+          "awaited": true
+        }
+      },
+      "transport_error": null,
+      "node_matches": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}
