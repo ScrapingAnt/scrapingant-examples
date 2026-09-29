@@ -6,7 +6,7 @@ requires_api_key: true
 requires_model_key: true
 offline_default: true
 fixture_commit: dbf3261c7d3960558ba52fa200f8136e9da28bb2
-examples_repo_commit: pending-final-evidence-commit
+examples_repo_commit: e1433ac52fbb21c5baa7d0492afecf1d933312e1
 environment:
   python: '3.12.11'
   lock_file: requirements.lock.txt
