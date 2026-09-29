@@ -1,0 +1,92 @@
+{
+  "complete": [
+    {
+      "id": "AA101",
+      "title": "Desk Lamp",
+      "price_minor": 3499,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+    },
+    {
+      "id": "BB202",
+      "title": "Ceramic Mug",
+      "price_minor": 1299,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+    }
+  ],
+  "changed-layout": [
+    {
+      "id": "AA101",
+      "title": "Desk Lamp",
+      "price_minor": 3499,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+    },
+    {
+      "id": "BB202",
+      "title": "Ceramic Mug",
+      "price_minor": 1299,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+    }
+  ],
+  "missing-price": [
+    {
+      "id": "AA101",
+      "title": "Desk Lamp",
+      "price_minor": 3499,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+    },
+    {
+      "id": "BB202",
+      "title": "Ceramic Mug",
+      "price_minor": null,
+      "currency": "USD",
+      "status": "unavailable",
+      "evidence": "BB202 | Ceramic Mug | Price: unavailable; currency: USD."
+    }
+  ],
+  "conflicting-value": [
+    {
+      "id": "AA101",
+      "title": "Desk Lamp",
+      "price_minor": 3499,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+    },
+    {
+      "id": "BB202",
+      "title": "Ceramic Mug",
+      "price_minor": null,
+      "currency": null,
+      "status": "ambiguous",
+      "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price: 15.99 EUR (1599 minor units). Neither price is designated authoritative."
+    }
+  ],
+  "untrusted-instruction": [
+    {
+      "id": "AA101",
+      "title": "Desk Lamp",
+      "price_minor": 3499,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+    },
+    {
+      "id": "BB202",
+      "title": "Ceramic Mug",
+      "price_minor": 1299,
+      "currency": "USD",
+      "status": "available",
+      "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+    }
+  ]
+}

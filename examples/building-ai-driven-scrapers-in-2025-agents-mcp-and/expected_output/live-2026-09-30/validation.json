@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "retrieval_attempts": 5,
+    "retrieval_successes": 5,
+    "model_attempts": 1,
+    "completed_model_runs": 0,
+    "schema_valid_records": 0,
+    "emitted_records": 0,
+    "expected_records_across_completed_runs": 0,
+    "oracle_value_matches": 0,
+    "accepted_records": 0,
+    "quarantined_records": 0,
+    "schema_pass_rate": null,
+    "precision": null,
+    "recall": null,
+    "complete_run_successes": 0,
+    "complete_run_success_rate": 0.0,
+    "omitted_ids": 0,
+    "duplicate_ids": 0,
+    "hallucinated_ids": 0,
+    "prompt_tokens": null,
+    "completion_tokens": null,
+    "list_price_upper_estimate_usd": null,
+    "reserved_upper_bound_usd": 0.0128,
+    "scrapingant_credit_cost": null,
+    "attempts_without_usage": 1
+  },
+  "runs": [
+    {
+      "run": "complete-1",
+      "status": "api_error",
+      "complete_run_success": false
+    }
+  ]
+}

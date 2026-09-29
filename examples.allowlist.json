@@ -135,6 +135,11 @@
       "id": "production-ready-scrapers-in-2025-what-broke-what-works-now",
       "needs_api_key": false,
       "note": "Loopback HTTP failure matrix, bounded retries and SQLite sink. No external targets or API calls; cooperative timing tolerances are explicit."
+    },
+    {
+      "id": "building-ai-driven-scrapers-in-2025-agents-mcp-and",
+      "needs_api_key": false,
+      "note": "Offline validator controls and saved MCP/model-attempt replay only. Live retrieval and generation are explicit opt-ins; current model evidence blocked by insufficient quota."
     }
   ]
 }
