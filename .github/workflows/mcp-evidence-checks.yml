@@ -1,0 +1,20 @@
+name: MCP evidence checks
+on:
+  pull_request:
+    paths:
+      - 'examples/building-ai-driven-scrapers-in-2025-agents-mcp-and/**'
+      - 'fixtures/mcp-catalog/**'
+      - '.github/workflows/mcp-evidence-checks.yml'
+  workflow_dispatch:
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned environment
+        run: pip install -r examples/building-ai-driven-scrapers-in-2025-agents-mcp-and/requirements.lock.txt
+      - name: Replay and injected controls (no API calls)
+        run: examples/building-ai-driven-scrapers-in-2025-agents-mcp-and/run.sh

@@ -1,0 +1,63 @@
+{
+  "tested_at": "2026-09-29T21:10:07.485527+00:00",
+  "fixture_commit": "dbf3261c7d3960558ba52fa200f8136e9da28bb2",
+  "python": "3.12.11",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "retrievals": [
+    {
+      "case": "complete",
+      "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+      "arguments": {
+        "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+        "browser": false,
+        "proxy_type": "datacenter"
+      },
+      "status": "ok",
+      "content_sha256": "6d0d0eec12486e8f1f3b70208d0b105a24f9ce8b0e244cfccf63c3bb8c7c678b"
+    },
+    {
+      "case": "changed-layout",
+      "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+      "arguments": {
+        "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+        "browser": false,
+        "proxy_type": "datacenter"
+      },
+      "status": "ok",
+      "content_sha256": "6d0d0eec12486e8f1f3b70208d0b105a24f9ce8b0e244cfccf63c3bb8c7c678b"
+    },
+    {
+      "case": "missing-price",
+      "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+      "arguments": {
+        "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+        "browser": false,
+        "proxy_type": "datacenter"
+      },
+      "status": "ok",
+      "content_sha256": "69493a2dc1216df4b24e010613980e428f8809c8e501936bc29ad50d881bd12e"
+    },
+    {
+      "case": "conflicting-value",
+      "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+      "arguments": {
+        "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+        "browser": false,
+        "proxy_type": "datacenter"
+      },
+      "status": "ok",
+      "content_sha256": "84d8338980f463669c525715727d068596e9e0de79ee2276cdf458006c10bbff"
+    },
+    {
+      "case": "untrusted-instruction",
+      "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+      "arguments": {
+        "url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+        "browser": false,
+        "proxy_type": "datacenter"
+      },
+      "status": "ok",
+      "content_sha256": "2927ac52b4f1a65bd512da3427a42dde8370addfe5cd2e856fbe591fb2f43ede"
+    }
+  ]
+}

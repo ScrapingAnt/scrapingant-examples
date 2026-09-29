@@ -1,0 +1,16 @@
+{
+  "_meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "# Owned synthetic catalog\n\nAA101 | Desk Lamp | Price: 34.99 USD (3499 minor units).\n\nBB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price:\n15.99 EUR (1599 minor units). Neither price is designated authoritative.\n\n",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "# Owned synthetic catalog\n\nAA101 | Desk Lamp | Price: 34.99 USD (3499 minor units).\n\nBB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price:\n15.99 EUR (1599 minor units). Neither price is designated authoritative.\n\n"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

@@ -1,41 +1,20 @@
 {
-  "tested_at": "2026-09-29",
   "python": "3.12.11",
   "platform": "macOS-26.6.2-arm64-arm-64bit",
-  "packages": {
-    "PyJWT": "2.15.1",
-    "annotated-types": "0.8.0",
-    "anyio": "4.15.1",
-    "attrs": "26.1.0",
-    "certifi": "2026.7.22",
-    "cffi": "2.1.1",
-    "click": "8.5.0",
-    "cryptography": "50.0.1",
-    "h11": "0.16.0",
-    "httpcore": "1.0.9",
-    "httpcore2": "2.13.1",
-    "httpx": "0.28.1",
-    "httpx2": "2.13.1",
-    "idna": "3.20",
-    "jsonschema": "4.25.1",
-    "jsonschema-specifications": "2025.9.1",
-    "mcp": "2.2.0",
-    "mcp-types": "2.2.0",
-    "opentelemetry-api": "1.45.0",
-    "pycparser": "3.0",
-    "pydantic": "2.13.5",
-    "pydantic_core": "2.46.5",
-    "python-multipart": "0.0.32",
-    "referencing": "0.37.0",
-    "rpds-py": "2026.6.3",
-    "sse-starlette": "3.5.0",
-    "starlette": "1.7.0",
-    "truststore": "0.10.4",
-    "typing-inspection": "0.4.4",
-    "typing_extensions": "4.16.0",
-    "uvicorn": "0.54.0"
+  "fixture_commit": "dbf3261c7d3960558ba52fa200f8136e9da28bb2",
+  "sha256": {
+    "schema.json": "5d941f31211b43465a7793a50a03fa128bf0befc10ebc15b5825de9eddaf9567",
+    "prompt.txt": "ea94a4a1e669ea92cd869d84e69fc954f9cbe9ab5bc3015550f81abdf8766993",
+    "oracle.json": "7b0eefba5669be7c9d7913ed8b6bcc13a945e1ba9ac7ac93c1a21f20b35c837e",
+    "fixtures/changed-layout.html": "2fdfcb07962391d610292e9f622ee4e92572a7e3b5cd14c5310f127466304a90",
+    "fixtures/complete.html": "ee10834f0f014b6001a1fa0c80b2a9e3c5fce94da380c476c728d7176ac279f9",
+    "fixtures/conflicting-value.html": "11d34a813e2615fc2cc4db655bf86987a476457b964eeeefeeaca448e7ed6ac3",
+    "fixtures/missing-price.html": "1e046945fb5c340705b10f66522912d8d8b043990f29a340905a3c10761aa0b9",
+    "fixtures/untrusted-instruction.html": "39e2167497a346a2de4c90f77961e619a769a9eeb98684c2e41871ae95469a82"
   },
-  "status": "partial-discovery-only",
-  "retrieval_calls": 0,
-  "model_calls": 0
+  "requirements_lock": "requirements.lock.txt",
+  "notes": [
+    "Initial runner import failed before network execution; fixed MCPError spelling.",
+    "Fixture HTML retrieved from immutable raw GitHub URLs with browser=false. No rendered-JavaScript or navigation benchmark."
+  ]
 }

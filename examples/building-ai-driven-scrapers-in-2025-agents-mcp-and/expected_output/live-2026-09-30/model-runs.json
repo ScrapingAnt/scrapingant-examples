@@ -1,0 +1,21 @@
+{
+  "model": "gpt-4.1-mini-2025-04-14",
+  "temperature": 0,
+  "max_completion_tokens": 2000,
+  "repetitions": 3,
+  "prompt_sha256": "6f19042399d4629748465bfaba627ce9cdae9bad84eb2b86697c971582d24c91",
+  "budget_usd": 10.0,
+  "reservation_usd_per_attempt": 0.0128,
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+  "pricing_checked_at": "2026-09-30",
+  "runs": [
+    {
+      "case": "complete",
+      "repeat": 1,
+      "status": "api_error",
+      "reserved_usd": 0.0128,
+      "http_status": 429,
+      "error_type": "insufficient_quota"
+    }
+  ]
+}
