@@ -2,7 +2,7 @@
   "article_id": "production-ready-scrapers-in-2025-what-broke-what-works-now",
   "canonical_url": "https://scrapingant.com/blog/production-ready-scrapers-in-2025-what-broke-what-works-now",
   "owner": "Oleg Kulyk",
-  "examples_repo_commit": "PENDING_ROOT_COMMIT",
+  "examples_repo_commit": "008c4424d299a22304b3f251f1f030c9fbefb05e",
   "tested_at": "2026-09-29",
   "requires_api_key": false,
   "environment": {
@@ -104,10 +104,10 @@
     "Async cancellation is cooperative; deadline observations do not prove preemption of CPU parsing/blocking database operations or remote cancellation.",
     "Local SQLite is in memory per scenario. Duplicate replay has the same ID and payload; no durability/restart/changed-record/distributed-exactly-once guarantee.",
     "The evaluator knows the fixture oracle; production unknown records do not come with a truth oracle.",
-    "A development run with tighter IO timing failed 56/57 assertions and is preserved in development_failure.json. Final results use widened lab settings.",
+    "A development run with tighter IO timing passed 56/57 assertions (one failed) and is preserved in development_failure.json. Final results use widened lab settings.",
     "Initial sandbox execution could not bind 127.0.0.1; the approved loopback-enabled run completed.",
     "No suite-wide CI run performed: root will handle shared allowlist and repository CI registration. This packet run executes all its tests.",
-    "A loaded-host intermediate run failed 55/57 expected-reason checks, including a 2.820-second observation for a 2.5-second deadline; preserved in development_scheduling_failure.json. Final settings use 1-second IO, 6-second job budget and explicit 1-second scheduling tolerance; this is not a hard runtime guarantee."
+    "A loaded-host intermediate run passed 55/57 expected-reason checks (two failed), including a 2.820-second observation for a 2.5-second deadline; preserved in development_scheduling_failure.json. Final settings use 1-second IO, 6-second job budget and explicit 1-second scheduling tolerance; this is not a hard runtime guarantee."
   ],
   "claims": [
     {
