@@ -4,7 +4,7 @@ Owned synthetic fixtures, not a market dataset or production IAB validator. The 
 
 ## Reproduce
 
-Recorded runtime: CPython 3.14.6 on macOS arm64. Python standard library only; no package installation or API key.
+Recorded runtime: CPython 3.10.2 on macOS arm64. Python standard library only; no package installation or API key.
 
 ```bash
 cd examples/web-scraping-ad-exchanges
