@@ -1,0 +1,118 @@
+article_id: what-is-web-scraping
+canonical_url: https://scrapingant.com/blog/what-is-web-scraping
+owner: Oleg Kulyk
+examples_repo_commit: pending-coordinator-commit
+tested_at: 2026-09-29
+requires_api_key: false
+environment:
+  os: macOS-26.6.2-arm64-arm-64bit-Mach-O
+  python: 3.14.6
+  node: not used
+  browser: not used
+dependencies:
+  beautifulsoup4: 4.15.0
+  soupsieve: 2.9.2
+  typing_extensions: 4.15.0
+run_command: ./run.sh
+fixtures:
+  - fixtures/catalog.html
+  - fixtures/expected-records.json
+  - fixtures/missing-price.html
+  - fixtures/javascript-only.html
+outputs:
+  - expected_output/catalog.json
+  - expected_output/missing-price.txt
+  - expected_output/javascript-only.txt
+  - expected_output/verification.txt
+  - expected_output/environment.json
+measurements:
+  - name: records_matching_independent_oracle
+    value: 3
+    unit: records
+    denominator: all 3 independently expected catalog records, with exact structure and values
+    source: expected_output/verification.txt
+  - name: fields_matching_independent_oracle
+    value: 9
+    unit: field values
+    denominator: all 9 expected values (id, title, price for each of 3 records)
+    source: expected_output/verification.txt
+  - name: verification_checks_passed
+    value: 8
+    unit: checks
+    denominator: 1 catalog comparison, 1 included text observation, 2 CLI negative controls, 4 function negative controls
+    source: expected_output/verification.txt
+  - name: target_http_requests
+    value: 0
+    unit: requests
+    denominator: entire local verification run; excludes dependency installation
+    source: expected_output/environment.json
+  - name: paid_api_requests
+    value: 0
+    unit: requests
+    denominator: entire local verification run
+    source: expected_output/environment.json
+limitations:
+  - Synthetic owned fixtures only; no production accuracy, speed or success-rate benchmark.
+  - Reads local HTML only; no HTTP fetching, crawling or browser rendering tested.
+  - Prices remain text; no numeric, currency or locale inference.
+  - Fixed selectors and unique IDs assumed; failures have no partial stdout JSON.
+  - Unicode/entity observation shares the same oracle comparison, not an independent dataset.
+  - Product capabilities are documented registry claims, not measured by this packet.
+claims:
+  - id: C1
+    text: The owned catalog extracts to three records with nine matching field values.
+    type: measured
+    source: expected_output/catalog.json; expected_output/verification.txt; fixtures/expected-records.json
+  - id: C2
+    text: The missing-price control exits 1 and emits no partial JSON.
+    type: measured
+    source: expected_output/missing-price.txt
+  - id: C3
+    text: The HTML parser does not execute the JavaScript-only fixture to create product cards.
+    type: measured
+    source: expected_output/javascript-only.txt; fixtures/javascript-only.html
+  - id: C4
+    text: Unicode and HTML entity text become Café & tea mug in the output.
+    type: measured
+    source: fixtures/catalog.html; expected_output/catalog.json
+  - id: C5
+    text: The extractor rejects blank prices, missing IDs or titles and duplicate IDs.
+    type: measured
+    source: expected_output/verification.txt; verify.py
+  - id: C6
+    text: Beautiful Soup selects elements and retrieves text from a parsed HTML document.
+    type: documented
+    source: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+    accessed_at: 2026-09-29
+  - id: C7
+    text: Python json.dumps serializes the extracted records to JSON.
+    type: documented
+    source: https://docs.python.org/3/library/json.html
+    accessed_at: 2026-09-29
+  - id: C8
+    text: The DOM represents a document for programmatic access and modification.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+    accessed_at: 2026-09-29
+  - id: C9
+    text: APIs provide programmatic interfaces; a data-source API and a scraping service API serve different roles.
+    type: documented
+    source: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs/Introduction
+    accessed_at: 2026-09-29
+  - id: C10
+    text: Crawling concerns discovering and fetching pages; extracting fields is a separate step.
+    type: documented
+    source: https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers
+    accessed_at: 2026-09-29
+  - id: C11
+    text: This exercise uses local files and needs no ScrapingAnt API calls.
+    type: measured
+    source: extract.py; expected_output/environment.json
+  - id: C12
+    text: With browser=true, ScrapingAnt renders the target page with JavaScript and returns its HTML.
+    type: product
+    source: registry/product-facts.yaml key api.rendered_html in seo_optimisation
+  - id: C13
+    text: A request with JavaScript rendering through a datacenter proxy costs 10 API credits.
+    type: product
+    source: registry/product-facts.yaml key credits.browser_js_datacenter in seo_optimisation

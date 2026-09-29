@@ -1,0 +1,18 @@
+{
+  "python": "3.14.6",
+  "os": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "dependencies": {
+    "beautifulsoup4": "4.15.0",
+    "soupsieve": "2.9.2",
+    "typing_extensions": "4.15.0"
+  },
+  "fixture_sha256": {
+    "catalog.html": "fa4cc814484f43191f83e578dbe115c2815fe29667f178802ed420aeec9f9c0b",
+    "expected-records.json": "0368ee0ec09b976498a748f9efce17ebb80f7dac530b2c25c3603a3124771ace",
+    "javascript-only.html": "e768049035a6582ec642512f212a905a76acfe0914dee62214d1e2e63c6c45e3",
+    "missing-price.html": "bc30e2a453e2a7142c9837920c5de4d3e5d17d62617db19b80019c6d9d1a36ae"
+  },
+  "target_http_requests": 0,
+  "paid_api_requests": 0,
+  "api_credits": 0
+}
