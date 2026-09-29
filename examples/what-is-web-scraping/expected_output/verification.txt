@@ -1,0 +1,9 @@
+PASS catalog: 3/3 expected records; 9/9 fields exactly match the independent oracle
+PASS text: Unicode é and HTML entity &amp; preserved as Café & tea mug
+PASS missing-price: exit 1, expected error, no partial JSON
+PASS javascript-only: exit 1, expected error, no partial JSON
+PASS blank price: expected validation error
+PASS missing id: expected validation error
+PASS missing title: expected validation error
+PASS duplicate id: expected validation error
+PASS 8/8 verification checks; target HTTP requests=0; paid API requests=0; API credits=0
