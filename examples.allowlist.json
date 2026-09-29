@@ -120,6 +120,21 @@
       "id": "javascript-dom-extraction",
       "needs_api_key": false,
       "note": "Local DOM-to-JSON transport checks and offline replay of saved responses. Never calls the API by default; live six-call probe is explicit opt-in."
+    },
+    {
+      "id": "what-is-web-scraping",
+      "needs_api_key": false,
+      "note": "Owned local HTML-to-JSON fixtures and oracle checks; no API calls."
+    },
+    {
+      "id": "web-scraping-ad-exchanges",
+      "needs_api_key": false,
+      "note": "Owned ads.txt/sellers.json diagnostic fixtures; standard library; no network or API calls."
+    },
+    {
+      "id": "production-ready-scrapers-in-2025-what-broke-what-works-now",
+      "needs_api_key": false,
+      "note": "Loopback HTTP failure matrix, bounded retries and SQLite sink. No external targets or API calls; cooperative timing tolerances are explicit."
     }
   ]
 }
