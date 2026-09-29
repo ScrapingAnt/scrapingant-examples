@@ -1,0 +1,9 @@
+Naive control: valid=200, empty=200, malformed=200, missing_price=200, wrong_type=200, wrong_price=200
+Cases: 19 x 3 repetitions = 57 checks
+Passed: 57/57
+Jobs: 60; HTTP attempts: 78; terminal events: 60
+Schema-valid: 24/30 extracted records
+Oracle matches: 12/15 stored records
+Wrong-price deliveries despite valid schema: 3
+Deadline violations beyond 6.0 s + 1.0 s tolerance: 0
+Outcomes: {"attempt_limit": 6, "business_invalid": 3, "content_invalid": 9, "deadline": 3, "delivered": 15, "delivery_failed": 3, "duplicate": 3, "retry_deferred": 3, "schema_invalid": 6, "terminal_http": 9}

@@ -1,0 +1,422 @@
+[
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.923184416,
+    "path": "/naive/valid"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.944990375,
+    "path": "/naive/empty"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.955235,
+    "path": "/naive/malformed"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.96388625,
+    "path": "/naive/missing_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.975476291,
+    "path": "/naive/wrong_type"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549984.985104333,
+    "path": "/naive/wrong_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549985.00882075,
+    "path": "/r1/valid"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549985.030827125,
+    "path": "/r1/503_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549985.093552125,
+    "path": "/r1/503_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549985.114461375,
+    "path": "/r1/503_always"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549985.18225775,
+    "path": "/r1/503_always"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1549985.249283791,
+    "path": "/r1/503_always"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549985.2732265,
+    "path": "/r1/429_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549986.329059541,
+    "path": "/r1/429_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549986.350195208,
+    "path": "/r1/429_long"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549986.366381375,
+    "path": "/r1/stall"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549987.438984208,
+    "path": "/r1/stall"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1549988.518509583,
+    "path": "/r1/stall"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549989.550802541,
+    "path": "/r1/trickle"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.59018125,
+    "path": "/r1/401"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.608084791,
+    "path": "/r1/403"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.63050125,
+    "path": "/r1/404"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.654099125,
+    "path": "/r1/empty"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.672010125,
+    "path": "/r1/challenge"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.679993958,
+    "path": "/r1/malformed"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.691727208,
+    "path": "/r1/missing_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.714683875,
+    "path": "/r1/wrong_type"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.732378708,
+    "path": "/r1/wrong_currency"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.739555791,
+    "path": "/r1/wrong_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.755359958,
+    "path": "/r1/duplicate"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549995.771297916,
+    "path": "/r1/duplicate"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.808621458,
+    "path": "/r1/sink_failure"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.825592166,
+    "path": "/r2/valid"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.848059166,
+    "path": "/r2/503_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549995.913504625,
+    "path": "/r2/503_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549995.937466416,
+    "path": "/r2/503_always"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549996.006173458,
+    "path": "/r2/503_always"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1549996.065502833,
+    "path": "/r2/503_always"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549996.076907708,
+    "path": "/r2/429_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549997.092661916,
+    "path": "/r2/429_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549997.107563666,
+    "path": "/r2/429_long"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1549997.119393125,
+    "path": "/r2/stall"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1549998.231126416,
+    "path": "/r2/stall"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1549999.292798875,
+    "path": "/r2/stall"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550000.337543833,
+    "path": "/r2/trickle"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.392965708,
+    "path": "/r2/401"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.4077515,
+    "path": "/r2/403"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.417761375,
+    "path": "/r2/404"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.43018675,
+    "path": "/r2/empty"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.448124291,
+    "path": "/r2/challenge"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.454258291,
+    "path": "/r2/malformed"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.464409375,
+    "path": "/r2/missing_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.477884458,
+    "path": "/r2/wrong_type"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.491909916,
+    "path": "/r2/wrong_currency"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.499467708,
+    "path": "/r2/wrong_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.507840166,
+    "path": "/r2/duplicate"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550006.512682166,
+    "path": "/r2/duplicate"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.522304958,
+    "path": "/r2/sink_failure"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.532794208,
+    "path": "/r3/valid"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.545930208,
+    "path": "/r3/503_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550006.605474083,
+    "path": "/r3/503_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.619936833,
+    "path": "/r3/503_always"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550006.677870375,
+    "path": "/r3/503_always"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1550006.731229125,
+    "path": "/r3/503_always"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550006.743475583,
+    "path": "/r3/429_then_ok"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550007.774599125,
+    "path": "/r3/429_then_ok"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550007.789135333,
+    "path": "/r3/429_long"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550007.804082666,
+    "path": "/r3/stall"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550008.911061875,
+    "path": "/r3/stall"
+  },
+  {
+    "attempt": 3,
+    "monotonic_s": 1550010.209540291,
+    "path": "/r3/stall"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550011.297123666,
+    "path": "/r3/trickle"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.269653541,
+    "path": "/r3/401"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.280941625,
+    "path": "/r3/403"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.289916875,
+    "path": "/r3/404"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.301571166,
+    "path": "/r3/empty"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.31866125,
+    "path": "/r3/challenge"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.331413291,
+    "path": "/r3/malformed"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.346783208,
+    "path": "/r3/missing_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.362632083,
+    "path": "/r3/wrong_type"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.370785666,
+    "path": "/r3/wrong_currency"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.376711291,
+    "path": "/r3/wrong_price"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.388928291,
+    "path": "/r3/duplicate"
+  },
+  {
+    "attempt": 2,
+    "monotonic_s": 1550017.39977625,
+    "path": "/r3/duplicate"
+  },
+  {
+    "attempt": 1,
+    "monotonic_s": 1550017.417214916,
+    "path": "/r3/sink_failure"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["id","title","price_minor","currency","source_url"],
+  "properties":{
+    "id":{"type":"string","minLength":1},
+    "title":{"type":"string","minLength":1},
+    "price_minor":{"type":"integer","minimum":0},
+    "currency":{"type":"string","pattern":"^[A-Z]{3}$"},
+    "source_url":{"type":"string","pattern":"^https://example\\.test/catalog/[a-z0-9-]+$"}
+  }
+}

@@ -1,0 +1,21 @@
+[
+  {"id":"valid","outcome":"delivered","attempts":1,"rows":1,"oracle_match":true},
+  {"id":"503_then_ok","outcome":"delivered","attempts":2,"rows":1,"oracle_match":true},
+  {"id":"503_always","outcome":"attempt_limit","attempts":3,"rows":0,"oracle_match":null},
+  {"id":"429_then_ok","outcome":"delivered","attempts":2,"rows":1,"oracle_match":true,"minimum_retry_gap_s":1},
+  {"id":"429_long","outcome":"retry_deferred","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"stall","outcome":"attempt_limit","attempts":3,"rows":0,"oracle_match":null},
+  {"id":"trickle","outcome":"deadline","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"401","outcome":"terminal_http","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"403","outcome":"terminal_http","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"404","outcome":"terminal_http","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"empty","outcome":"content_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"challenge","outcome":"content_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"malformed","outcome":"content_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"missing_price","outcome":"schema_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"wrong_type","outcome":"schema_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"wrong_currency","outcome":"business_invalid","attempts":1,"rows":0,"oracle_match":null},
+  {"id":"wrong_price","outcome":"delivered","attempts":1,"rows":1,"oracle_match":false},
+  {"id":"duplicate","outcome":"duplicate","attempts":1,"rows":1,"oracle_match":true,"replay":true},
+  {"id":"sink_failure","outcome":"delivery_failed","attempts":1,"rows":0,"oracle_match":null}
+]

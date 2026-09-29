@@ -1,0 +1,407 @@
+[
+  {
+    "case_id": "valid",
+    "repeat": 1,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_then_ok",
+    "repeat": 1,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_always",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "429_then_ok",
+    "repeat": 1,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "429_long",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "stall",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "trickle",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "401",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "403",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "404",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "empty",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "challenge",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "malformed",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "missing_price",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_type",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_currency",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_price",
+    "repeat": 1,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 9999,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "duplicate",
+    "repeat": 1,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "sink_failure",
+    "repeat": 1,
+    "rows": []
+  },
+  {
+    "case_id": "valid",
+    "repeat": 2,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_then_ok",
+    "repeat": 2,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_always",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "429_then_ok",
+    "repeat": 2,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "429_long",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "stall",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "trickle",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "401",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "403",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "404",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "empty",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "challenge",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "malformed",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "missing_price",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_type",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_currency",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_price",
+    "repeat": 2,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 9999,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "duplicate",
+    "repeat": 2,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "sink_failure",
+    "repeat": 2,
+    "rows": []
+  },
+  {
+    "case_id": "valid",
+    "repeat": 3,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_then_ok",
+    "repeat": 3,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "503_always",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "429_then_ok",
+    "repeat": 3,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "429_long",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "stall",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "trickle",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "401",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "403",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "404",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "empty",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "challenge",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "malformed",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "missing_price",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_type",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_currency",
+    "repeat": 3,
+    "rows": []
+  },
+  {
+    "case_id": "wrong_price",
+    "repeat": 3,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 9999,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "duplicate",
+    "repeat": 3,
+    "rows": [
+      {
+        "currency": "USD",
+        "id": "sku-1",
+        "price_minor": 1299,
+        "source_url": "https://example.test/catalog/sku-1",
+        "title": "Fixture mug"
+      }
+    ]
+  },
+  {
+    "case_id": "sink_failure",
+    "repeat": 3,
+    "rows": []
+  }
+]
