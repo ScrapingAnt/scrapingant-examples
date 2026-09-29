@@ -7,7 +7,7 @@
   "requires_api_key": false,
   "environment": {
     "os": "macOS / Darwin arm64",
-    "python": "3.14.6",
+    "python": "3.10.2",
     "browser": "none"
   },
   "dependencies": {},
@@ -195,7 +195,7 @@
     },
     {
       "id": "C11",
-      "text": "The standard-library run used Python 3.14.6, no API key, 0 calls and 0 credits on 2026-09-29.",
+      "text": "The standard-library run used Python 3.10.2, no API key, 0 calls and 0 credits on 2026-09-29.",
       "type": "measured",
       "source": "expected_output/run-meta.json"
     },
