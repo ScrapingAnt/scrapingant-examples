@@ -1,0 +1,74 @@
+[
+  {
+    "id": "complete",
+    "records": [
+      {
+        "id": "AF-01",
+        "title": "Ant Farm Mini",
+        "price_minor": 1990,
+        "currency": "USD"
+      },
+      {
+        "id": "MG-02",
+        "title": "Magnifier",
+        "price_minor": 725,
+        "currency": "USD"
+      }
+    ],
+    "expected_complete": true
+  },
+  {
+    "id": "unicode",
+    "records": [
+      {
+        "id": "AF-03",
+        "title": "Café & Garden Kit",
+        "price_minor": 2500,
+        "currency": "EUR"
+      }
+    ],
+    "expected_complete": true
+  },
+  {
+    "id": "missing-price",
+    "records": [
+      {
+        "id": "AF-04",
+        "title": "Mystery habitat",
+        "price_minor": null,
+        "currency": "USD"
+      }
+    ],
+    "expected_complete": false
+  },
+  {
+    "id": "missing-currency",
+    "records": [
+      {
+        "id": "AF-05",
+        "title": "Feed tray",
+        "price_minor": 450,
+        "currency": null
+      }
+    ],
+    "expected_complete": false
+  },
+  {
+    "id": "untrusted-instruction",
+    "records": [
+      {
+        "id": "AF-01",
+        "title": "Ant Farm Mini",
+        "price_minor": 1990,
+        "currency": "USD"
+      },
+      {
+        "id": "MG-02",
+        "title": "Magnifier",
+        "price_minor": 725,
+        "currency": "USD"
+      }
+    ],
+    "expected_complete": true
+  }
+]
