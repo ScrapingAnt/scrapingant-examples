@@ -1,0 +1,328 @@
+{
+  "kind": "owned_synthetic",
+  "diagnostic_only": true,
+  "sources": {
+    "ads": {
+      "file": "fixtures/publisher.ads.txt",
+      "sha256": "beb3dbb70b2bdcf2521cc9d9f26e0a240a0d2f28312fd698b7855c537c4c6fa6"
+    },
+    "sellers": {
+      "exchange.example": {
+        "file": "fixtures/exchange.sellers.json",
+        "sha256": "e66e2ead7a8719e67ce1328f8345120bbd6e8bd99c196ba77172302b39cb2790"
+      },
+      "broken.example": {
+        "file": "fixtures/broken.sellers.json",
+        "sha256": "d196f61b1adc5b158a54b9cb550aff1e4966d1d4b83ae2ffddd7a9e74e75daf8"
+      },
+      "unavailable.example": {
+        "file": "fixtures/missing.sellers.json",
+        "sha256": null
+      },
+      "bad-schema.example": {
+        "file": "fixtures/bad-schema.sellers.json",
+        "sha256": "9fc08652d4f7953116045f864c2a7c822718993c50a4fc284f6d43c055e79fd9"
+      },
+      "numeric.example": {
+        "file": "fixtures/numeric.sellers.json",
+        "sha256": "eadb5bd2e8d9a342b771df27eaebd776fe54545cc40fc0ad014667bdaaf2dbe5"
+      },
+      "falseflag.example": {
+        "file": "fixtures/falseflag.sellers.json",
+        "sha256": "7557ad2b77846f040f84dd7e5ab15cd89cf0132e984be413198f58e1262c508e"
+      }
+    }
+  },
+  "variables": [
+    {
+      "line": 2,
+      "name": "OWNERDOMAIN",
+      "value": "publisher-business.example",
+      "interpreted": false
+    },
+    {
+      "line": 19,
+      "name": "MANAGERDOMAIN",
+      "value": "manager.example, GB",
+      "interpreted": false
+    }
+  ],
+  "rows": [
+    {
+      "line": 3,
+      "raw": " EXCHANGE.EXAMPLE , 00123 , direct , cert-demo # whitespace and a leading-zero ID",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "00123",
+      "relationship": "DIRECT",
+      "certification_id": "cert-demo",
+      "status": "matching",
+      "reason": "seller_id_found",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": [
+        {
+          "seller_index": 0,
+          "seller_id": "00123",
+          "seller_type": "PUBLISHER",
+          "is_confidential": 0,
+          "name": "Publisher Business",
+          "business_domain": "publisher-business.example"
+        }
+      ]
+    },
+    {
+      "line": 4,
+      "raw": "exchange.example, reseller-a, RESELLER",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "reseller-a",
+      "relationship": "RESELLER",
+      "certification_id": null,
+      "status": "matching",
+      "reason": "seller_id_found",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": [
+        {
+          "seller_index": 1,
+          "seller_id": "reseller-a",
+          "seller_type": "INTERMEDIARY",
+          "is_confidential": 0,
+          "name": "Reseller A",
+          "business_domain": "reseller-business.example"
+        }
+      ]
+    },
+    {
+      "line": 5,
+      "raw": "exchange.example, missing, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "missing",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "absent",
+      "reason": "seller_id_not_in_complete_fixture",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 6,
+      "raw": "exchange.example, private, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "private",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "confidential",
+      "reason": "identity_withheld",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": [
+        {
+          "seller_index": 2,
+          "seller_id": "private",
+          "seller_type": "PUBLISHER",
+          "is_confidential": 1,
+          "name": null,
+          "business_domain": null
+        }
+      ]
+    },
+    {
+      "line": 7,
+      "raw": "exchange.example, duplicate, RESELLER",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "duplicate",
+      "relationship": "RESELLER",
+      "certification_id": null,
+      "status": "ambiguous",
+      "reason": "multiple_seller_records",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": [
+        {
+          "seller_index": 3,
+          "seller_id": "duplicate",
+          "seller_type": "PUBLISHER",
+          "is_confidential": 0,
+          "name": "Entity One",
+          "business_domain": "one.example"
+        },
+        {
+          "seller_index": 4,
+          "seller_id": "duplicate",
+          "seller_type": "INTERMEDIARY",
+          "is_confidential": 0,
+          "name": "Entity Two",
+          "business_domain": "two.example"
+        }
+      ]
+    },
+    {
+      "line": 8,
+      "raw": "exchange.example, 00123, DIRECT, cert-demo",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "00123",
+      "relationship": "DIRECT",
+      "certification_id": "cert-demo",
+      "status": "duplicate",
+      "reason": "repeated_ads_record",
+      "duplicate_of": 3
+    },
+    {
+      "line": 9,
+      "raw": "broken.example, one, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "broken.example",
+      "seller_id": "one",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "invalid_json",
+      "sellers_source": "fixtures/broken.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 10,
+      "raw": "unavailable.example, one, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "unavailable.example",
+      "seller_id": "one",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "input_unavailable",
+      "sellers_source": "fixtures/missing.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 11,
+      "raw": "unmapped.example, one, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "unmapped.example",
+      "seller_id": "one",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "domain_not_allowlisted",
+      "matches": []
+    },
+    {
+      "line": 12,
+      "raw": "exchange.example, 123, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "123",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "absent",
+      "reason": "seller_id_not_in_complete_fixture",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 13,
+      "raw": "bad-schema.example, schema, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "bad-schema.example",
+      "seller_id": "schema",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "invalid_sellers_schema",
+      "sellers_source": "fixtures/bad-schema.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 14,
+      "raw": "malformed, line",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "status": "invalid",
+      "reason": "invalid_ads_record"
+    },
+    {
+      "line": 15,
+      "raw": "exchange.example, one, UNKNOWN",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "status": "invalid",
+      "reason": "invalid_ads_record"
+    },
+    {
+      "line": 16,
+      "raw": "numeric.example, 007, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "numeric.example",
+      "seller_id": "007",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "invalid_sellers_schema",
+      "sellers_source": "fixtures/numeric.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 17,
+      "raw": "falseflag.example, x, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "falseflag.example",
+      "seller_id": "x",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "uncheckable",
+      "reason": "invalid_sellers_schema",
+      "sellers_source": "fixtures/falseflag.sellers.json",
+      "matches": []
+    },
+    {
+      "line": 18,
+      "raw": "exchange.example, both, DIRECT",
+      "publisher": "publisher.example",
+      "ads_source": "fixtures/publisher.ads.txt",
+      "advertising_system": "exchange.example",
+      "seller_id": "both",
+      "relationship": "DIRECT",
+      "certification_id": null,
+      "status": "matching",
+      "reason": "seller_id_found",
+      "sellers_source": "fixtures/exchange.sellers.json",
+      "matches": [
+        {
+          "seller_index": 5,
+          "seller_id": "both",
+          "seller_type": "BOTH",
+          "is_confidential": 0,
+          "name": "Hybrid Entity",
+          "business_domain": "hybrid.example"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "parsed_data_rows": 16,
+    "valid_join_candidates": 13,
+    "invalid_rows": 2,
+    "duplicate_rows": 1,
+    "variable_rows": 2,
+    "unavailable_sellers_inputs": 1,
+    "matching": 3,
+    "absent": 2,
+    "confidential": 1,
+    "ambiguous": 1,
+    "uncheckable": 6
+  }
+}

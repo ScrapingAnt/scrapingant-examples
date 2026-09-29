@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "sellers": [
+    {
+      "seller_id": 7,
+      "seller_type": "PUBLISHER",
+      "name": "Numeric ID"
+    }
+  ]
+}

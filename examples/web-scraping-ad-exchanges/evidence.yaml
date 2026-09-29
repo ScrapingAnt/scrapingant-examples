@@ -1,0 +1,209 @@
+{
+  "article_id": "web-scraping-ad-exchanges",
+  "canonical_url": "https://scrapingant.com/blog/web-scraping-ad-exchanges",
+  "owner": "Oleg Kulyk",
+  "examples_repo_commit": "PENDING_ROOT_COMMIT",
+  "tested_at": "2026-09-29",
+  "requires_api_key": false,
+  "environment": {
+    "os": "macOS / Darwin arm64",
+    "python": "3.14.6",
+    "browser": "none"
+  },
+  "dependencies": {},
+  "run_command": "./run.sh",
+  "fixtures": [
+    "fixtures/bad-schema.sellers.json",
+    "fixtures/broken.sellers.json",
+    "fixtures/exchange.sellers.json",
+    "fixtures/falseflag.sellers.json",
+    "fixtures/numeric.sellers.json",
+    "fixtures/oracle.json",
+    "fixtures/publisher.ads.txt",
+    "fixtures/sources.json"
+  ],
+  "outputs": [
+    "expected_output/report.json",
+    "expected_output/report.txt",
+    "expected_output/run-meta.json",
+    "expected_output/verification.txt"
+  ],
+  "measurements": [
+    {
+      "name": "fixture classifications matched",
+      "value": 16,
+      "unit": "cases",
+      "denominator": 16,
+      "source": "expected_output/verification.txt"
+    },
+    {
+      "name": "malformed-input regressions rejected",
+      "value": 5,
+      "unit": "cases",
+      "denominator": 5,
+      "source": "expected_output/verification.txt"
+    },
+    {
+      "name": "valid unique join candidates",
+      "value": 13,
+      "unit": "rows",
+      "denominator": 16,
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "uncheckable candidates",
+      "value": 6,
+      "unit": "rows",
+      "denominator": 13,
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "network requests during executable run",
+      "value": 0,
+      "unit": "requests",
+      "denominator": "one offline run",
+      "source": "expected_output/run-meta.json"
+    },
+    {
+      "name": "unavailable sellers inputs",
+      "value": 1,
+      "unit": "mapped inputs",
+      "denominator": 6,
+      "source": "expected_output/report.json"
+    }
+  ],
+  "limitations": [
+    "Owned synthetic complete fixtures only; not industry measurements or live advertising data.",
+    "Diagnostic ads subset deliberately continues past malformed rows; no overall file authorization decision.",
+    "Strict sellers.json 1.0 integer confidentiality; booleans or strings are uncheckable.",
+    "No HTTP, freshness/completeness validation, recursive discovery, PSL validation, variables interpretation, extensions or SupplyChain validation.",
+    "No fraud, legality, bids, users, ads served, performance or payment-path inference.",
+    "Public domain is optional for sellers lacking web presence; this checker cannot determine actual web presence.",
+    "Spec research requests were separate from the zero-network fixture run."
+  ],
+  "external_sources": [
+    {
+      "id": "ads_overview",
+      "url": "https://iabtechlab.com/ads-txt/",
+      "accessed_at": "2026-09-29"
+    },
+    {
+      "id": "ads_spec",
+      "url": "https://github.com/InteractiveAdvertisingBureau/Supply-Chain-Validation/blob/7682963ae241fe93a488f9508f28bcf9cdf50118/ads.txt%20v1.1.md",
+      "version": "1.1",
+      "commit": "7682963ae241fe93a488f9508f28bcf9cdf50118",
+      "sha256": "de5544b9b9bfbe42bb257c2e74ff4b596a3ce76b220b4fa0d759b51e946e56ab",
+      "accessed_at": "2026-09-29",
+      "sections": "3.3, 3.4, 3.5"
+    },
+    {
+      "id": "guidance",
+      "url": "https://github.com/InteractiveAdvertisingBureau/Supply-Chain-Validation/blob/7682963ae241fe93a488f9508f28bcf9cdf50118/Implementation%20Guidance.md",
+      "commit": "7682963ae241fe93a488f9508f28bcf9cdf50118",
+      "sha256": "fe92b8850fa8e9dac4693d438b8fbb281f2982e2bb1aede6a5ab3e245e6f839e",
+      "accessed_at": "2026-09-29",
+      "sections": "Case A and manager examples"
+    },
+    {
+      "id": "sellers_overview",
+      "url": "https://iabtechlab.com/sellers-json/",
+      "accessed_at": "2026-09-29"
+    },
+    {
+      "id": "sellers_spec",
+      "url": "https://iabtechlab.com/wp-content/uploads/2019/07/Sellers.json_Final.pdf",
+      "version": "1.0 July 2019",
+      "sha256": "962ecceefd72252fc9c3c8a6a8d53e8087808eb220b5d97a8854af3388a3716a",
+      "accessed_at": "2026-09-29",
+      "sections": "Printed pages 6-9, Parent and Seller objects"
+    },
+    {
+      "id": "supplychain",
+      "url": "https://github.com/InteractiveAdvertisingBureau/openrtb/blob/f3fb64bb9e5fb0ae65bbf71feff6b7596e1e7d1a/supplychainobject.md",
+      "commit": "f3fb64bb9e5fb0ae65bbf71feff6b7596e1e7d1a",
+      "sha256": "95f94bcf5bf53fef1dd59cf5275d0fa4f2a77460baf4f518f45794fb8c988109",
+      "accessed_at": "2026-09-29",
+      "sections": "Introduction and SupplyChain object"
+    },
+    {
+      "id": "google_sellers",
+      "url": "https://support.google.com/admanager/answer/9761171?hl=en",
+      "accessed_at": "2026-09-29",
+      "sections": "Your business domain; Publisher transparency; Google-specific guidance"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "ads.txt declares advertising-system domain, account ID and DIRECT/RESELLER account-control relationship.",
+      "type": "external",
+      "source": "ads_spec"
+    },
+    {
+      "id": "C2",
+      "text": "sellers.json resolves seller IDs to identity records; seller type is separate from ads.txt account control.",
+      "type": "external",
+      "source": "sellers_spec"
+    },
+    {
+      "id": "C3",
+      "text": "Confidential records still contain IDs and types, while name/domain can be omitted; seller IDs are strings.",
+      "type": "external",
+      "source": "sellers_spec"
+    },
+    {
+      "id": "C4",
+      "text": "Business and inventory domains can differ; a domain difference alone is not an error in this checker.",
+      "type": "external",
+      "source": "guidance"
+    },
+    {
+      "id": "C5",
+      "text": "SupplyChain describes a particular bid request; these static files alone do not reconstruct transactions.",
+      "type": "external",
+      "source": "supplychain"
+    },
+    {
+      "id": "C6",
+      "text": "The run matched 16/16 hand-authored classifications and rejected 5/5 malformed-input regressions.",
+      "type": "measured",
+      "source": "expected_output/verification.txt"
+    },
+    {
+      "id": "C7",
+      "text": "16 data rows yielded 13 unique valid join candidates, 2 invalid rows and 1 duplicate; 2 variables were separate.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C8",
+      "text": "Candidate outcomes were 3 matching, 2 absent, 1 confidential, 1 ambiguous, 6 uncheckable.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C9",
+      "text": "The exact-string join retains 00123 distinct from 123, tracks line/source/hash/array index and retains relationship/type separately.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C10",
+      "text": "Malformed or missing sellers input is uncheckable, not negative evidence; duplicate seller IDs are ambiguous.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/verification.txt"
+    },
+    {
+      "id": "C11",
+      "text": "The standard-library run used Python 3.14.6, no API key, 0 calls and 0 credits on 2026-09-29.",
+      "type": "measured",
+      "source": "expected_output/run-meta.json"
+    },
+    {
+      "id": "C12",
+      "text": "Variables are stored but not interpreted; diagnostic parsing is a subset, not authorization or conformance validation.",
+      "type": "documented",
+      "source": "README.md; check_declarations.py; ads_spec"
+    }
+  ]
+}

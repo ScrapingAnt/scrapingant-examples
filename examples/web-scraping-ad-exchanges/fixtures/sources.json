@@ -1,0 +1,14 @@
+{
+  "publisher": "publisher.example",
+  "ads_file": "publisher.ads.txt",
+  "kind": "owned_synthetic",
+  "complete_fixture_inputs": true,
+  "seller_files": {
+    "exchange.example": "exchange.sellers.json",
+    "broken.example": "broken.sellers.json",
+    "unavailable.example": "missing.sellers.json",
+    "bad-schema.example": "bad-schema.sellers.json",
+    "numeric.example": "numeric.sellers.json",
+    "falseflag.example": "falseflag.sellers.json"
+  }
+}

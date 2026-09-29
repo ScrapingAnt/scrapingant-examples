@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "sellers": [
+    {
+      "seller_id": "schema",
+      "seller_type": "PUBLISHER"
+    }
+  ]
+}

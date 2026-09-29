@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-09-29T18:25:06.373068+00:00",
+  "python": "3.10.2",
+  "os": "Darwin",
+  "machine": "arm64",
+  "command": "./run.sh",
+  "completed_steps_exit_status": 0,
+  "network_requests_during_run": 0,
+  "api_calls": 0,
+  "api_credits": 0,
+  "sha256": {
+    "fixtures/bad-schema.sellers.json": "9fc08652d4f7953116045f864c2a7c822718993c50a4fc284f6d43c055e79fd9",
+    "fixtures/broken.sellers.json": "d196f61b1adc5b158a54b9cb550aff1e4966d1d4b83ae2ffddd7a9e74e75daf8",
+    "fixtures/exchange.sellers.json": "e66e2ead7a8719e67ce1328f8345120bbd6e8bd99c196ba77172302b39cb2790",
+    "fixtures/falseflag.sellers.json": "7557ad2b77846f040f84dd7e5ab15cd89cf0132e984be413198f58e1262c508e",
+    "fixtures/numeric.sellers.json": "eadb5bd2e8d9a342b771df27eaebd776fe54545cc40fc0ad014667bdaaf2dbe5",
+    "fixtures/oracle.json": "ce3868232129ce84587d2d671a38a8662a0de6facf829bcd71beb0b29c70c621",
+    "fixtures/publisher.ads.txt": "beb3dbb70b2bdcf2521cc9d9f26e0a240a0d2f28312fd698b7855c537c4c6fa6",
+    "fixtures/sources.json": "0aca4dc2b336e4a52301ff7d0557229c89c9051f1e3564bacd923c26bdb7468d"
+  }
+}

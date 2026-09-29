@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "sellers": [
+    {
+      "seller_id": "x",
+      "seller_type": "PUBLISHER",
+      "name": "Wrong Flag",
+      "is_confidential": false
+    }
+  ]
+}
