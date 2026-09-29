@@ -1,7 +1,7 @@
 article_id: what-is-web-scraping
 canonical_url: https://scrapingant.com/blog/what-is-web-scraping
 owner: Oleg Kulyk
-examples_repo_commit: pending-coordinator-commit
+examples_repo_commit: 6c9b270eaa8499be09b23441459eb03b6cc94c8f
 tested_at: 2026-09-29
 requires_api_key: false
 environment:
