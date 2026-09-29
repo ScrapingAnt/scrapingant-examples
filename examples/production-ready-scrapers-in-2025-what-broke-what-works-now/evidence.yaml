@@ -232,7 +232,7 @@
     },
     {
       "id": "C21",
-      "text": "A loaded-host development run finished one job at 2.820 seconds despite a 2.5-second deadline; deadlines are cooperative, not hard real-time guarantees.",
+      "text": "A loaded-host development run logged one job's terminal event at 2.820 seconds despite a 2.5-second deadline; its recorded job elapsed time was 2.82573 seconds. Deadlines are cooperative, not hard real-time guarantees.",
       "type": "measured",
       "source": "expected_output/development_scheduling_failure.json"
     }
