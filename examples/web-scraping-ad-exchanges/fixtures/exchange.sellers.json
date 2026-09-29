@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "sellers": [
+    {
+      "seller_id": "00123",
+      "seller_type": "PUBLISHER",
+      "name": "Publisher Business",
+      "domain": "publisher-business.example"
+    },
+    {
+      "seller_id": "reseller-a",
+      "seller_type": "INTERMEDIARY",
+      "name": "Reseller A",
+      "domain": "reseller-business.example"
+    },
+    {
+      "seller_id": "private",
+      "seller_type": "PUBLISHER",
+      "is_confidential": 1
+    },
+    {
+      "seller_id": "duplicate",
+      "seller_type": "PUBLISHER",
+      "name": "Entity One",
+      "domain": "one.example"
+    },
+    {
+      "seller_id": "duplicate",
+      "seller_type": "INTERMEDIARY",
+      "name": "Entity Two",
+      "domain": "two.example"
+    },
+    {
+      "seller_id": "both",
+      "seller_type": "both",
+      "name": "Hybrid Entity",
+      "domain": "hybrid.example"
+    }
+  ]
+}

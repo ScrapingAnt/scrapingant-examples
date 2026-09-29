@@ -1,0 +1,81 @@
+{
+  "by_line": {
+    "3": [
+      "matching",
+      "seller_id_found"
+    ],
+    "4": [
+      "matching",
+      "seller_id_found"
+    ],
+    "5": [
+      "absent",
+      "seller_id_not_in_complete_fixture"
+    ],
+    "6": [
+      "confidential",
+      "identity_withheld"
+    ],
+    "7": [
+      "ambiguous",
+      "multiple_seller_records"
+    ],
+    "8": [
+      "duplicate",
+      "repeated_ads_record"
+    ],
+    "9": [
+      "uncheckable",
+      "invalid_json"
+    ],
+    "10": [
+      "uncheckable",
+      "input_unavailable"
+    ],
+    "11": [
+      "uncheckable",
+      "domain_not_allowlisted"
+    ],
+    "12": [
+      "absent",
+      "seller_id_not_in_complete_fixture"
+    ],
+    "13": [
+      "uncheckable",
+      "invalid_sellers_schema"
+    ],
+    "14": [
+      "invalid",
+      "invalid_ads_record"
+    ],
+    "15": [
+      "invalid",
+      "invalid_ads_record"
+    ],
+    "16": [
+      "uncheckable",
+      "invalid_sellers_schema"
+    ],
+    "17": [
+      "uncheckable",
+      "invalid_sellers_schema"
+    ],
+    "18": [
+      "matching",
+      "seller_id_found"
+    ]
+  },
+  "counts": {
+    "parsed_data_rows": 16,
+    "valid_join_candidates": 13,
+    "invalid_rows": 2,
+    "duplicate_rows": 1,
+    "variable_rows": 2,
+    "matching": 3,
+    "absent": 2,
+    "confidential": 1,
+    "ambiguous": 1,
+    "uncheckable": 6,
+    "unavailable_sellers_inputs": 1
+  }
+}

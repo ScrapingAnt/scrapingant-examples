@@ -1,0 +1,3 @@
+Fixture classifications: 16/16 matched the independent oracle.
+Malformed-input regressions: 5/5 rejected before lookup.
+Leading-zero IDs, independent relationship/type labels, provenance, variables and duplicate handling: passed.

@@ -1,0 +1,19 @@
+# Owned synthetic publisher fixture; no live advertising relationships.
+OWNERDOMAIN = publisher-business.example
+ EXCHANGE.EXAMPLE , 00123 , direct , cert-demo # whitespace and a leading-zero ID
+exchange.example, reseller-a, RESELLER
+exchange.example, missing, DIRECT
+exchange.example, private, DIRECT
+exchange.example, duplicate, RESELLER
+exchange.example, 00123, DIRECT, cert-demo
+broken.example, one, DIRECT
+unavailable.example, one, DIRECT
+unmapped.example, one, DIRECT
+exchange.example, 123, DIRECT
+bad-schema.example, schema, DIRECT
+malformed, line
+exchange.example, one, UNKNOWN
+numeric.example, 007, DIRECT
+falseflag.example, x, DIRECT
+exchange.example, both, DIRECT
+MANAGERDOMAIN = manager.example, GB

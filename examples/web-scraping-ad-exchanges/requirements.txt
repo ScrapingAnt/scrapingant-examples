@@ -1,0 +1,2 @@
+# Python standard library only; no third-party packages to install.
+# Recorded runtime: CPython 3.14.6; code requires Python 3.10+.
