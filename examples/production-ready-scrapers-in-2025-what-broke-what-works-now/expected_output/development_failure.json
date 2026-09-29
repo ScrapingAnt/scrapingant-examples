@@ -1,0 +1,121 @@
+{
+  "note": "A 0.15s inactivity timeout was too close to local scheduling jitter. Preserve failure, widen laboratory IO timeout, keep assertions unchanged.",
+  "summary": {
+    "case_checks_passed": 56,
+    "case_checks_total": 57,
+    "clock_tolerance_s": 0.15,
+    "deadline_s": 1.6,
+    "deadline_violations_with_tolerance": 0,
+    "environment": {
+      "httpx": "0.28.1",
+      "jsonschema": "4.25.1",
+      "os": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.12.11"
+    },
+    "extracted_records": 30,
+    "fixture_cases": 19,
+    "http_attempts": 79,
+    "jobs_started": 60,
+    "max_observed_job_elapsed_s": 1.603276,
+    "oracle_matching_stored_records": 12,
+    "outcomes": {
+      "attempt_limit": 6,
+      "business_invalid": 3,
+      "content_invalid": 9,
+      "deadline": 3,
+      "delivered": 15,
+      "delivery_failed": 3,
+      "duplicate": 3,
+      "retry_deferred": 3,
+      "schema_invalid": 6,
+      "terminal_http": 9
+    },
+    "per_io_timeout_s": 0.15,
+    "repetitions": 3,
+    "retry_amplification": 1.3166666666666667,
+    "schema_valid_records": 24,
+    "schema_valid_wrong_price_deliveries": 3,
+    "stored_records_across_isolated_cases": 15,
+    "terminal_events": 60
+  },
+  "failed_checks": [
+    {
+      "assertions": {
+        "attempt_count": false,
+        "deadline_bound": true,
+        "oracle_result": true,
+        "row_count": true,
+        "server_attempt_count": false,
+        "terminal_outcome": true
+      },
+      "case_id": "trickle",
+      "oracle_match": null,
+      "passed": false,
+      "repeat": 3
+    }
+  ],
+  "events": [
+    {
+      "attempt": 1,
+      "case_id": "trickle",
+      "elapsed_s": 2.6e-05,
+      "event": "attempt_started",
+      "job_id": "r3/trickle/delivery1",
+      "run_id": "r3"
+    },
+    {
+      "attempt": 1,
+      "case_id": "trickle",
+      "elapsed_s": 0.005694,
+      "event": "response",
+      "job_id": "r3/trickle/delivery1",
+      "run_id": "r3",
+      "status": 200
+    },
+    {
+      "attempt": 1,
+      "case_id": "trickle",
+      "elapsed_s": 1.19716,
+      "error": "ReadTimeout",
+      "event": "transport_error",
+      "job_id": "r3/trickle/delivery1",
+      "run_id": "r3"
+    },
+    {
+      "attempt": 1,
+      "case_id": "trickle",
+      "elapsed_s": 1.19718,
+      "event": "retry_wait",
+      "job_id": "r3/trickle/delivery1",
+      "reason": "ReadTimeout",
+      "run_id": "r3",
+      "seconds": 0.048322676784606944
+    },
+    {
+      "attempt": 2,
+      "case_id": "trickle",
+      "elapsed_s": 1.246841,
+      "event": "attempt_started",
+      "job_id": "r3/trickle/delivery1",
+      "run_id": "r3"
+    },
+    {
+      "attempt": 2,
+      "case_id": "trickle",
+      "elapsed_s": 1.25206,
+      "event": "response",
+      "job_id": "r3/trickle/delivery1",
+      "run_id": "r3",
+      "status": 200
+    },
+    {
+      "attempt": 2,
+      "case_id": "trickle",
+      "elapsed_s": 1.602072,
+      "event": "terminal",
+      "job_id": "r3/trickle/delivery1",
+      "outcome": "deadline",
+      "run_id": "r3"
+    }
+  ]
+}

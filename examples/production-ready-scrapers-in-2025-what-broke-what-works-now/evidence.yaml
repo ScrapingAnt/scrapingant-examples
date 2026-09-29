@@ -1,0 +1,253 @@
+{
+  "article_id": "production-ready-scrapers-in-2025-what-broke-what-works-now",
+  "canonical_url": "https://scrapingant.com/blog/production-ready-scrapers-in-2025-what-broke-what-works-now",
+  "owner": "Oleg Kulyk",
+  "examples_repo_commit": "PENDING_ROOT_COMMIT",
+  "tested_at": "2026-09-29",
+  "requires_api_key": false,
+  "environment": {
+    "httpx": "0.28.1",
+    "jsonschema": "4.25.1",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.11"
+  },
+  "dependencies": {
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "certifi": "2026.7.22",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "jsonschema-specifications": "2025.9.1",
+    "jsonschema": "4.25.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.6.3",
+    "typing_extensions": "4.16.0"
+  },
+  "run_command": "./run.sh",
+  "captured_run_command": "PYTHON=/private/tmp/production-scraper-evidence-venv/bin/python ./run.sh",
+  "fixtures": [
+    "fixtures/catalog.html",
+    "fixtures/expected_cases.json",
+    "fixtures/oracle.json",
+    "fixtures/record.schema.json"
+  ],
+  "outputs": [
+    "expected_output/development_failure.json",
+    "expected_output/development_scheduling_failure.json",
+    "expected_output/events.jsonl",
+    "expected_output/fixture_requests.json",
+    "expected_output/naive_control.json",
+    "expected_output/policy_tests.txt",
+    "expected_output/report.json",
+    "expected_output/run.txt",
+    "expected_output/stored_records.json"
+  ],
+  "measurements": [
+    {
+      "name": "expected_case_behavior",
+      "value": 57,
+      "denominator": 57,
+      "unit": "case-repetitions",
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "retry_amplification",
+      "value": 1.3,
+      "numerator": 78,
+      "denominator": 60,
+      "unit": "HTTP attempts per started matrix job",
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "terminal_events",
+      "value": 60,
+      "denominator": 60,
+      "unit": "events per started matrix job",
+      "source": "expected_output/events.jsonl"
+    },
+    {
+      "name": "schema_pass",
+      "value": 24,
+      "denominator": 30,
+      "unit": "schema-valid extracted records; extraction failures excluded",
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "oracle_matches",
+      "value": 12,
+      "denominator": 15,
+      "unit": "correct stored records across isolated scenario sinks",
+      "source": "expected_output/stored_records.json"
+    },
+    {
+      "name": "wrong_price_deliveries",
+      "value": 3,
+      "denominator": 3,
+      "unit": "wrong-price jobs; intentionally demonstrates validation insufficiency",
+      "source": "expected_output/report.json"
+    },
+    {
+      "name": "deadline_violations",
+      "value": 0,
+      "denominator": 60,
+      "unit": "jobs exceeding 6s plus 1s scheduling tolerance",
+      "source": "expected_output/report.json"
+    }
+  ],
+  "limitations": [
+    "Owned synthetic loopback fixtures only; no real sites, paid APIs, browsers, CAPTCHA efficacy, model extraction or production success-rate measurement.",
+    "Expected-behavior success includes intentional demonstration of wrong-price delivery. It is not 57 successful scrapes or proof that stored data is correct.",
+    "Nineteen scenarios times three yields 57 case checks; duplicate replay adds one job per repetition, yielding 60 jobs.78 matrix requests exclude 6 naive-control requests.",
+    "HTTP-date Retry-After is unit tested; the network matrix uses seconds. Max-body-size code is present but no oversized-body network case is claimed.",
+    "Async cancellation is cooperative; deadline observations do not prove preemption of CPU parsing/blocking database operations or remote cancellation.",
+    "Local SQLite is in memory per scenario. Duplicate replay has the same ID and payload; no durability/restart/changed-record/distributed-exactly-once guarantee.",
+    "The evaluator knows the fixture oracle; production unknown records do not come with a truth oracle.",
+    "A development run with tighter IO timing failed 56/57 assertions and is preserved in development_failure.json. Final results use widened lab settings.",
+    "Initial sandbox execution could not bind 127.0.0.1; the approved loopback-enabled run completed.",
+    "No suite-wide CI run performed: root will handle shared allowlist and repository CI registration. This packet run executes all its tests.",
+    "A loaded-host intermediate run failed 55/57 expected-reason checks, including a 2.820-second observation for a 2.5-second deadline; preserved in development_scheduling_failure.json. Final settings use 1-second IO, 6-second job budget and explicit 1-second scheduling tolerance; this is not a hard runtime guarantee."
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "text": "The six naive-control responses all returned HTTP 200, including empty, malformed, missing-price, wrong-type and wrong-price cases.",
+      "type": "measured",
+      "source": "expected_output/naive_control.json"
+    },
+    {
+      "id": "C02",
+      "text": "The matrix ran 19 scenarios three times, with 57 of 57 expected-behavior checks passing.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C03",
+      "text": "The matrix started 60 jobs and made 78 HTTP attempts, with exactly 60 terminal events; six separate naive-control requests are excluded.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/events.jsonl; expected_output/fixture_requests.json"
+    },
+    {
+      "id": "C04",
+      "text": "The configured client uses three total attempts, a 1-second IO timeout, a 6-second total deadline and a 65536-byte body cap.",
+      "type": "documented",
+      "source": "scraper.py; run_matrix.py"
+    },
+    {
+      "id": "C05",
+      "text": "A transient 503 was retried once; a persistent 503 exhausted three attempts in each repetition.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/fixture_requests.json"
+    },
+    {
+      "id": "C06",
+      "text": "A one-second Retry-After was respected before retry; a 60-second wait was deferred rather than shortened.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/fixture_requests.json; expected_output/events.jsonl"
+    },
+    {
+      "id": "C07",
+      "text": "The stalled body exhausted three read-timeout attempts; the trickling body hit the total deadline with one attempt in each repetition.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/events.jsonl"
+    },
+    {
+      "id": "C08",
+      "text": "No final-config job exceeded its 6-second deadline plus the explicitly allowed 1-second scheduling tolerance.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C09",
+      "text": "Direct-target 401, 403 and 404 fixtures were terminal after one attempt.",
+      "type": "measured",
+      "source": "expected_output/report.json"
+    },
+    {
+      "id": "C10",
+      "text": "Empty, synthetic-challenge and malformed-JSON pages were content failures; missing and string prices were schema failures.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/events.jsonl"
+    },
+    {
+      "id": "C11",
+      "text": "The schema accepted 24 of 30 extracted records; a separate USD-only rule rejected the EUR fixture.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/events.jsonl"
+    },
+    {
+      "id": "C12",
+      "text": "Only 12 of 15 stored fixture records matched the independent oracle: three wrong-price deliveries passed the schema and the USD rule.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/stored_records.json; fixtures/oracle.json"
+    },
+    {
+      "id": "C13",
+      "text": "Replaying the same fixture record kept one SQLite row; a query-only SQLite connection caused a write failure without a refetch.",
+      "type": "measured",
+      "source": "expected_output/report.json; expected_output/stored_records.json; expected_output/events.jsonl"
+    },
+    {
+      "id": "C14",
+      "text": "Logs distinguish attempts, status, retry waits, transport errors, body hashes, schema results, delivery and terminal outcome.",
+      "type": "documented",
+      "source": "scraper.py; expected_output/events.jsonl"
+    },
+    {
+      "id": "C15",
+      "text": "A development run using a 0.15-second IO timeout passed 56/57 checks: scheduling jitter triggered an extra trickle retry; the failure was retained before widening laboratory timeouts.",
+      "type": "measured",
+      "source": "expected_output/development_failure.json"
+    },
+    {
+      "id": "C16",
+      "text": "HTTPX separates connect, read, write and pool timeouts; its read timeout limits inactivity while waiting for response data.",
+      "type": "external",
+      "source": "https://www.python-httpx.org/advanced/timeouts/ (accessed 2026-09-29)"
+    },
+    {
+      "id": "C17",
+      "text": "asyncio.timeout_at uses an absolute event-loop deadline and cooperative cancellation; it cannot preempt arbitrary synchronous code.",
+      "type": "external",
+      "source": "https://docs.python.org/3.12/library/asyncio-task.html#asyncio.timeout_at (accessed 2026-09-29)"
+    },
+    {
+      "id": "C18",
+      "text": "Retry-After can carry delay seconds or an HTTP-date; parser unit tests cover these plus past/malformed values.",
+      "type": "external",
+      "source": "https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3 (accessed 2026-09-29); expected_output/policy_tests.txt"
+    },
+    {
+      "id": "C19",
+      "text": "The packet was run with Python 3.12.11, HTTPX 0.28.1 and jsonschema 4.25.1 on macOS; it makes no paid API calls.",
+      "type": "measured",
+      "source": "expected_output/report.json; requirements.txt; fixture_server.py; run_matrix.py"
+    },
+    {
+      "id": "C20",
+      "text": "The client checks a versioned Draft 2020-12 JSON Schema without coercing string prices into integers.",
+      "type": "documented",
+      "source": "fixtures/record.schema.json; scraper.py; expected_output/events.jsonl"
+    },
+    {
+      "id": "C21",
+      "text": "A loaded-host development run finished one job at 2.820 seconds despite a 2.5-second deadline; deadlines are cooperative, not hard real-time guarantees.",
+      "type": "measured",
+      "source": "expected_output/development_scheduling_failure.json"
+    }
+  ],
+  "source_sha256": {
+    "README.md": "6c4a312efc0faf407fb85c883f3bfc75f66da8df2d0fc202373ed4a0dc64831d",
+    "fixture_server.py": "b4ab3d4c6dd9c738431e81075818f05ccbe8de30cd8907086daa6453b0e04fad",
+    "fixtures/catalog.html": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931",
+    "fixtures/expected_cases.json": "39e1964804ebad0d102e6692d1bcb1ed82807bcb5346dca180122c1030814858",
+    "fixtures/oracle.json": "6605bc7e8c5bcba1af303819c54ba4e247fc6c60c0bbb8c600bd12f6cf6338ae",
+    "fixtures/record.schema.json": "0a0a9c93119815686abdc08c7479df9322cf5a7c46b1f6541789b808bb4d2a7b",
+    "requirements.txt": "30a1da6ff82ceb1ac4ab353897f367c21287a0dded8ceb40e2007b122183bbf2",
+    "run.sh": "395e42fc950714e411073962b601d72102024b8035294d3da028ddc03cb26f81",
+    "run_matrix.py": "aec5d231b59e715cd3592a024e2aad916a76863e7eb5cd9860e00e443504db02",
+    "scraper.py": "a2fafdc6c28b267a117d7faca7a2b63ed785eea13c34526e0161406f5cd482ee",
+    "test_policy.py": "0a3803ee339f16c38f43a322c216ffb4d485f253a7a795af0501ac7ae5455476"
+  }
+}

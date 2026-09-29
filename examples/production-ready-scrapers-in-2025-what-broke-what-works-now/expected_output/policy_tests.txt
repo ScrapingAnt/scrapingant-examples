@@ -1,0 +1,9 @@
+test_http_date (test_policy.RetryAfterTests.test_http_date) ... ok
+test_invalid_values (test_policy.RetryAfterTests.test_invalid_values) ... ok
+test_past_date (test_policy.RetryAfterTests.test_past_date) ... ok
+test_valid_seconds (test_policy.RetryAfterTests.test_valid_seconds) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK

@@ -1,0 +1,330 @@
+{"attempt": 1, "case_id": "valid", "elapsed_s": 5.7e-05, "event": "attempt_started", "job_id": "r1/valid/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.004578, "event": "response", "job_id": "r1/valid/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "valid", "elapsed_s": 0.007009, "event": "body", "job_id": "r1/valid/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.015187, "errors": [], "event": "schema", "job_id": "r1/valid/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.015351, "event": "delivery", "inserted": 1, "job_id": "r1/valid/delivery1", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.015359, "event": "terminal", "job_id": "r1/valid/delivery1", "outcome": "delivered", "run_id": "r1"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 4.9e-05, "event": "attempt_started", "job_id": "r1/503_then_ok/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.011001, "event": "response", "job_id": "r1/503_then_ok/delivery1", "run_id": "r1", "status": 503}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.012461, "event": "retry_wait", "job_id": "r1/503_then_ok/delivery1", "reason": "http_503", "run_id": "r1", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.061973, "event": "attempt_started", "job_id": "r1/503_then_ok/delivery1", "run_id": "r1"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.073369, "event": "response", "job_id": "r1/503_then_ok/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "503_then_ok", "elapsed_s": 0.078788, "event": "body", "job_id": "r1/503_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.08017, "errors": [], "event": "schema", "job_id": "r1/503_then_ok/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.080441, "event": "delivery", "inserted": 1, "job_id": "r1/503_then_ok/delivery1", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.080447, "event": "terminal", "job_id": "r1/503_then_ok/delivery1", "outcome": "delivered", "run_id": "r1"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 4e-05, "event": "attempt_started", "job_id": "r1/503_always/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.013075, "event": "response", "job_id": "r1/503_always/delivery1", "run_id": "r1", "status": 503}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.013818, "event": "retry_wait", "job_id": "r1/503_always/delivery1", "reason": "http_503", "run_id": "r1", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.068268, "event": "attempt_started", "job_id": "r1/503_always/delivery1", "run_id": "r1"}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.08122, "event": "response", "job_id": "r1/503_always/delivery1", "run_id": "r1", "status": 503}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.083201, "event": "retry_wait", "job_id": "r1/503_always/delivery1", "reason": "http_503", "run_id": "r1", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.131086, "event": "attempt_started", "job_id": "r1/503_always/delivery1", "run_id": "r1"}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.147095, "event": "response", "job_id": "r1/503_always/delivery1", "run_id": "r1", "status": 503}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.149127, "event": "terminal", "job_id": "r1/503_always/delivery1", "outcome": "attempt_limit", "reason": "http_503", "run_id": "r1"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 2.1e-05, "event": "attempt_started", "job_id": "r1/429_then_ok/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.021494, "event": "response", "job_id": "r1/429_then_ok/delivery1", "run_id": "r1", "status": 429}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.025219, "event": "retry_wait", "job_id": "r1/429_then_ok/delivery1", "reason": "http_429", "run_id": "r1", "seconds": 1.0}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.034029, "event": "attempt_started", "job_id": "r1/429_then_ok/delivery1", "run_id": "r1"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.081146, "event": "response", "job_id": "r1/429_then_ok/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "429_then_ok", "elapsed_s": 1.082848, "event": "body", "job_id": "r1/429_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.088403, "errors": [], "event": "schema", "job_id": "r1/429_then_ok/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.08889, "event": "delivery", "inserted": 1, "job_id": "r1/429_then_ok/delivery1", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.088904, "event": "terminal", "job_id": "r1/429_then_ok/delivery1", "outcome": "delivered", "run_id": "r1"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 4.3e-05, "event": "attempt_started", "job_id": "r1/429_long/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.011529, "event": "response", "job_id": "r1/429_long/delivery1", "run_id": "r1", "status": 429}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.012741, "event": "terminal", "job_id": "r1/429_long/delivery1", "outcome": "retry_deferred", "reason": "http_429", "requested_wait_s": 60.0, "run_id": "r1"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 3.3e-05, "event": "attempt_started", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 0.009292, "event": "response", "job_id": "r1/stall/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.016175, "error": "ReadTimeout", "event": "transport_error", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.016517, "event": "retry_wait", "job_id": "r1/stall/delivery1", "reason": "ReadTimeout", "run_id": "r1", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.067618, "event": "attempt_started", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.083091, "event": "response", "job_id": "r1/stall/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.100969, "error": "ReadTimeout", "event": "transport_error", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.101525, "event": "retry_wait", "job_id": "r1/stall/delivery1", "reason": "ReadTimeout", "run_id": "r1", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.146833, "event": "attempt_started", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.161534, "event": "response", "job_id": "r1/stall/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.168174, "error": "ReadTimeout", "event": "transport_error", "job_id": "r1/stall/delivery1", "run_id": "r1"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.168206, "event": "terminal", "job_id": "r1/stall/delivery1", "outcome": "attempt_limit", "reason": "ReadTimeout", "run_id": "r1"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.000351, "event": "attempt_started", "job_id": "r1/trickle/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.01707, "event": "response", "job_id": "r1/trickle/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 6.012165, "event": "terminal", "job_id": "r1/trickle/delivery1", "outcome": "deadline", "run_id": "r1"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 4.4e-05, "event": "attempt_started", "job_id": "r1/401/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.036503, "event": "response", "job_id": "r1/401/delivery1", "run_id": "r1", "status": 401}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.036517, "event": "terminal", "job_id": "r1/401/delivery1", "outcome": "terminal_http", "run_id": "r1", "status": 401}
+{"attempt": 1, "case_id": "403", "elapsed_s": 7.6e-05, "event": "attempt_started", "job_id": "r1/403/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.011144, "event": "response", "job_id": "r1/403/delivery1", "run_id": "r1", "status": 403}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.011158, "event": "terminal", "job_id": "r1/403/delivery1", "outcome": "terminal_http", "run_id": "r1", "status": 403}
+{"attempt": 1, "case_id": "404", "elapsed_s": 3.4e-05, "event": "attempt_started", "job_id": "r1/404/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.027582, "event": "response", "job_id": "r1/404/delivery1", "run_id": "r1", "status": 404}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.027599, "event": "terminal", "job_id": "r1/404/delivery1", "outcome": "terminal_http", "run_id": "r1", "status": 404}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 8e-05, "event": "attempt_started", "job_id": "r1/empty/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.012942, "event": "response", "job_id": "r1/empty/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 0, "case_id": "empty", "elapsed_s": 0.023234, "event": "body", "job_id": "r1/empty/delivery1", "preview_utf8": "", "run_id": "r1", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.023548, "event": "terminal", "job_id": "r1/empty/delivery1", "outcome": "content_invalid", "run_id": "r1"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 4.6e-05, "event": "attempt_started", "job_id": "r1/challenge/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.005104, "event": "response", "job_id": "r1/challenge/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 45, "case_id": "challenge", "elapsed_s": 0.007095, "event": "body", "job_id": "r1/challenge/delivery1", "preview_utf8": "<h1>Synthetic challenge page; no catalog</h1>", "run_id": "r1", "sha256": "ee5ebc00d4e23ef66042233bd3a1bef39cd3f4559fc2ea6b97fd5cb0ca104088"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.007227, "event": "terminal", "job_id": "r1/challenge/delivery1", "outcome": "content_invalid", "run_id": "r1"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 2.4e-05, "event": "attempt_started", "job_id": "r1/malformed/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.006685, "event": "response", "job_id": "r1/malformed/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 39, "case_id": "malformed", "elapsed_s": 0.007911, "event": "body", "job_id": "r1/malformed/delivery1", "preview_utf8": "<script id=\"record\">{not-json}</script>", "run_id": "r1", "sha256": "965dec00a7ee2c9fe04f23b2628884508d4a7f57b044f917c482d9c998900b32"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.008247, "event": "terminal", "job_id": "r1/malformed/delivery1", "outcome": "content_invalid", "run_id": "r1"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 4.5e-05, "event": "attempt_started", "job_id": "r1/missing_price/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.006436, "event": "response", "job_id": "r1/missing_price/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 232, "case_id": "missing_price", "elapsed_s": 0.007372, "event": "body", "job_id": "r1/missing_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "67fa5a235edb50d94e0290d4736a07671e6672db54ae6be7edb37cf9a8f427b5"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.015669, "errors": ["'price_minor' is a required property"], "event": "schema", "job_id": "r1/missing_price/delivery1", "passed": false, "run_id": "r1"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.015699, "event": "terminal", "job_id": "r1/missing_price/delivery1", "outcome": "schema_invalid", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.000125, "event": "attempt_started", "job_id": "r1/wrong_type/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.010639, "event": "response", "job_id": "r1/wrong_type/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 253, "case_id": "wrong_type", "elapsed_s": 0.011539, "event": "body", "job_id": "r1/wrong_type/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":\"1299\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "a15d4d690b37fdc7ec4f1f238bbec0ce149a2ad07ddfc1e4dd26df92220db41f"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.01243, "errors": ["'1299' is not of type 'integer'"], "event": "schema", "job_id": "r1/wrong_type/delivery1", "passed": false, "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.012441, "event": "terminal", "job_id": "r1/wrong_type/delivery1", "outcome": "schema_invalid", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 4.9e-05, "event": "attempt_started", "job_id": "r1/wrong_currency/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.014902, "event": "response", "job_id": "r1/wrong_currency/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_currency", "elapsed_s": 0.017857, "event": "body", "job_id": "r1/wrong_currency/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"EUR\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "13135efc94c3a1722c0835d511072c51e235c088459f54fabaf41e15e6e14fe1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.01808, "errors": [], "event": "schema", "job_id": "r1/wrong_currency/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.018087, "event": "terminal", "job_id": "r1/wrong_currency/delivery1", "outcome": "business_invalid", "reason": "this feed requires USD", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 2.7e-05, "event": "attempt_started", "job_id": "r1/wrong_price/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.003506, "event": "response", "job_id": "r1/wrong_price/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_price", "elapsed_s": 0.004646, "event": "body", "job_id": "r1/wrong_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":9999,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "2557c2ba4fce52d556caa499719d7a9791c5a6e94b71d552fb230ba8531c8bb7"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.00497, "errors": [], "event": "schema", "job_id": "r1/wrong_price/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.005395, "event": "delivery", "inserted": 1, "job_id": "r1/wrong_price/delivery1", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.0054, "event": "terminal", "job_id": "r1/wrong_price/delivery1", "outcome": "delivered", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 2.9e-05, "event": "attempt_started", "job_id": "r1/duplicate/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.013211, "event": "response", "job_id": "r1/duplicate/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.014163, "event": "body", "job_id": "r1/duplicate/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.014445, "errors": [], "event": "schema", "job_id": "r1/duplicate/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.014771, "event": "delivery", "inserted": 1, "job_id": "r1/duplicate/delivery1", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.014798, "event": "terminal", "job_id": "r1/duplicate/delivery1", "outcome": "delivered", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 5.4e-05, "event": "attempt_started", "job_id": "r1/duplicate/delivery2", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.021574, "event": "response", "job_id": "r1/duplicate/delivery2", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.030713, "event": "body", "job_id": "r1/duplicate/delivery2", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.031166, "errors": [], "event": "schema", "job_id": "r1/duplicate/delivery2", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.031311, "event": "delivery", "inserted": 0, "job_id": "r1/duplicate/delivery2", "record_id": "sku-1", "run_id": "r1"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.031319, "event": "terminal", "job_id": "r1/duplicate/delivery2", "outcome": "duplicate", "run_id": "r1"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 4.8e-05, "event": "attempt_started", "job_id": "r1/sink_failure/delivery1", "run_id": "r1"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.020813, "event": "response", "job_id": "r1/sink_failure/delivery1", "run_id": "r1", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "sink_failure", "elapsed_s": 0.023323, "event": "body", "job_id": "r1/sink_failure/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r1", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.023814, "errors": [], "event": "schema", "job_id": "r1/sink_failure/delivery1", "passed": true, "run_id": "r1"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.024208, "error": "OperationalError", "event": "terminal", "job_id": "r1/sink_failure/delivery1", "outcome": "delivery_failed", "run_id": "r1"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 2.8e-05, "event": "attempt_started", "job_id": "r2/valid/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.010634, "event": "response", "job_id": "r2/valid/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "valid", "elapsed_s": 0.012849, "event": "body", "job_id": "r2/valid/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.013113, "errors": [], "event": "schema", "job_id": "r2/valid/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.013232, "event": "delivery", "inserted": 1, "job_id": "r2/valid/delivery1", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.013236, "event": "terminal", "job_id": "r2/valid/delivery1", "outcome": "delivered", "run_id": "r2"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.000267, "event": "attempt_started", "job_id": "r2/503_then_ok/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.015946, "event": "response", "job_id": "r2/503_then_ok/delivery1", "run_id": "r2", "status": 503}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.018446, "event": "retry_wait", "job_id": "r2/503_then_ok/delivery1", "reason": "http_503", "run_id": "r2", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.069675, "event": "attempt_started", "job_id": "r2/503_then_ok/delivery1", "run_id": "r2"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.081067, "event": "response", "job_id": "r2/503_then_ok/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "503_then_ok", "elapsed_s": 0.090419, "event": "body", "job_id": "r2/503_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.090826, "errors": [], "event": "schema", "job_id": "r2/503_then_ok/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.090957, "event": "delivery", "inserted": 1, "job_id": "r2/503_then_ok/delivery1", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.090962, "event": "terminal", "job_id": "r2/503_then_ok/delivery1", "outcome": "delivered", "run_id": "r2"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.000946, "event": "attempt_started", "job_id": "r2/503_always/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.014777, "event": "response", "job_id": "r2/503_always/delivery1", "run_id": "r2", "status": 503}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.015379, "event": "retry_wait", "job_id": "r2/503_always/delivery1", "reason": "http_503", "run_id": "r2", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.065683, "event": "attempt_started", "job_id": "r2/503_always/delivery1", "run_id": "r2"}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.082287, "event": "response", "job_id": "r2/503_always/delivery1", "run_id": "r2", "status": 503}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.088861, "event": "retry_wait", "job_id": "r2/503_always/delivery1", "reason": "http_503", "run_id": "r2", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.136968, "event": "attempt_started", "job_id": "r2/503_always/delivery1", "run_id": "r2"}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.142978, "event": "response", "job_id": "r2/503_always/delivery1", "run_id": "r2", "status": 503}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.145589, "event": "terminal", "job_id": "r2/503_always/delivery1", "outcome": "attempt_limit", "reason": "http_503", "run_id": "r2"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 3.3e-05, "event": "attempt_started", "job_id": "r2/429_then_ok/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.005983, "event": "response", "job_id": "r2/429_then_ok/delivery1", "run_id": "r2", "status": 429}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.00789, "event": "retry_wait", "job_id": "r2/429_then_ok/delivery1", "reason": "http_429", "run_id": "r2", "seconds": 1.0}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.009115, "event": "attempt_started", "job_id": "r2/429_then_ok/delivery1", "run_id": "r2"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.021505, "event": "response", "job_id": "r2/429_then_ok/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "429_then_ok", "elapsed_s": 1.022744, "event": "body", "job_id": "r2/429_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.022993, "errors": [], "event": "schema", "job_id": "r2/429_then_ok/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.023107, "event": "delivery", "inserted": 1, "job_id": "r2/429_then_ok/delivery1", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.023111, "event": "terminal", "job_id": "r2/429_then_ok/delivery1", "outcome": "delivered", "run_id": "r2"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 2.7e-05, "event": "attempt_started", "job_id": "r2/429_long/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.01122, "event": "response", "job_id": "r2/429_long/delivery1", "run_id": "r2", "status": 429}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.012567, "event": "terminal", "job_id": "r2/429_long/delivery1", "outcome": "retry_deferred", "reason": "http_429", "requested_wait_s": 60.0, "run_id": "r2"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 3.4e-05, "event": "attempt_started", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 0.009677, "event": "response", "job_id": "r2/stall/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.03732, "error": "ReadTimeout", "event": "transport_error", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.038295, "event": "retry_wait", "job_id": "r2/stall/delivery1", "reason": "ReadTimeout", "run_id": "r2", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.088419, "event": "attempt_started", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.129942, "event": "response", "job_id": "r2/stall/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.132148, "error": "ReadTimeout", "event": "transport_error", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.132188, "event": "retry_wait", "job_id": "r2/stall/delivery1", "reason": "ReadTimeout", "run_id": "r2", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.17814, "event": "attempt_started", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.183643, "event": "response", "job_id": "r2/stall/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.200861, "error": "ReadTimeout", "event": "transport_error", "job_id": "r2/stall/delivery1", "run_id": "r2"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.201019, "event": "terminal", "job_id": "r2/stall/delivery1", "outcome": "attempt_limit", "reason": "ReadTimeout", "run_id": "r2"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.000396, "event": "attempt_started", "job_id": "r2/trickle/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.016929, "event": "response", "job_id": "r2/trickle/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 6.020235, "event": "terminal", "job_id": "r2/trickle/delivery1", "outcome": "deadline", "run_id": "r2"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 6.8e-05, "event": "attempt_started", "job_id": "r2/401/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.038613, "event": "response", "job_id": "r2/401/delivery1", "run_id": "r2", "status": 401}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.038631, "event": "terminal", "job_id": "r2/401/delivery1", "outcome": "terminal_http", "run_id": "r2", "status": 401}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.000354, "event": "attempt_started", "job_id": "r2/403/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.005551, "event": "response", "job_id": "r2/403/delivery1", "run_id": "r2", "status": 403}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.005581, "event": "terminal", "job_id": "r2/403/delivery1", "outcome": "terminal_http", "run_id": "r2", "status": 403}
+{"attempt": 1, "case_id": "404", "elapsed_s": 2.9e-05, "event": "attempt_started", "job_id": "r2/404/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.009266, "event": "response", "job_id": "r2/404/delivery1", "run_id": "r2", "status": 404}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.00928, "event": "terminal", "job_id": "r2/404/delivery1", "outcome": "terminal_http", "run_id": "r2", "status": 404}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 4.6e-05, "event": "attempt_started", "job_id": "r2/empty/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.009513, "event": "response", "job_id": "r2/empty/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 0, "case_id": "empty", "elapsed_s": 0.014408, "event": "body", "job_id": "r2/empty/delivery1", "preview_utf8": "", "run_id": "r2", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.014724, "event": "terminal", "job_id": "r2/empty/delivery1", "outcome": "content_invalid", "run_id": "r2"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 3.2e-05, "event": "attempt_started", "job_id": "r2/challenge/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.006897, "event": "response", "job_id": "r2/challenge/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 45, "case_id": "challenge", "elapsed_s": 0.007481, "event": "body", "job_id": "r2/challenge/delivery1", "preview_utf8": "<h1>Synthetic challenge page; no catalog</h1>", "run_id": "r2", "sha256": "ee5ebc00d4e23ef66042233bd3a1bef39cd3f4559fc2ea6b97fd5cb0ca104088"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.007595, "event": "terminal", "job_id": "r2/challenge/delivery1", "outcome": "content_invalid", "run_id": "r2"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 6e-05, "event": "attempt_started", "job_id": "r2/malformed/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.004578, "event": "response", "job_id": "r2/malformed/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 39, "case_id": "malformed", "elapsed_s": 0.005346, "event": "body", "job_id": "r2/malformed/delivery1", "preview_utf8": "<script id=\"record\">{not-json}</script>", "run_id": "r2", "sha256": "965dec00a7ee2c9fe04f23b2628884508d4a7f57b044f917c482d9c998900b32"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.005695, "event": "terminal", "job_id": "r2/malformed/delivery1", "outcome": "content_invalid", "run_id": "r2"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 4.6e-05, "event": "attempt_started", "job_id": "r2/missing_price/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.007938, "event": "response", "job_id": "r2/missing_price/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 232, "case_id": "missing_price", "elapsed_s": 0.00852, "event": "body", "job_id": "r2/missing_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "67fa5a235edb50d94e0290d4736a07671e6672db54ae6be7edb37cf9a8f427b5"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.013548, "errors": ["'price_minor' is a required property"], "event": "schema", "job_id": "r2/missing_price/delivery1", "passed": false, "run_id": "r2"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.013563, "event": "terminal", "job_id": "r2/missing_price/delivery1", "outcome": "schema_invalid", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.000716, "event": "attempt_started", "job_id": "r2/wrong_type/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.005093, "event": "response", "job_id": "r2/wrong_type/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 253, "case_id": "wrong_type", "elapsed_s": 0.006943, "event": "body", "job_id": "r2/wrong_type/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":\"1299\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "a15d4d690b37fdc7ec4f1f238bbec0ce149a2ad07ddfc1e4dd26df92220db41f"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.007278, "errors": ["'1299' is not of type 'integer'"], "event": "schema", "job_id": "r2/wrong_type/delivery1", "passed": false, "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.007284, "event": "terminal", "job_id": "r2/wrong_type/delivery1", "outcome": "schema_invalid", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 3.4e-05, "event": "attempt_started", "job_id": "r2/wrong_currency/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.010078, "event": "response", "job_id": "r2/wrong_currency/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_currency", "elapsed_s": 0.011329, "event": "body", "job_id": "r2/wrong_currency/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"EUR\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "13135efc94c3a1722c0835d511072c51e235c088459f54fabaf41e15e6e14fe1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.011563, "errors": [], "event": "schema", "job_id": "r2/wrong_currency/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.011571, "event": "terminal", "job_id": "r2/wrong_currency/delivery1", "outcome": "business_invalid", "reason": "this feed requires USD", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 2.4e-05, "event": "attempt_started", "job_id": "r2/wrong_price/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.005983, "event": "response", "job_id": "r2/wrong_price/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_price", "elapsed_s": 0.008693, "event": "body", "job_id": "r2/wrong_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":9999,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "2557c2ba4fce52d556caa499719d7a9791c5a6e94b71d552fb230ba8531c8bb7"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.008993, "errors": [], "event": "schema", "job_id": "r2/wrong_price/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.009508, "event": "delivery", "inserted": 1, "job_id": "r2/wrong_price/delivery1", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.00952, "event": "terminal", "job_id": "r2/wrong_price/delivery1", "outcome": "delivered", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 3.7e-05, "event": "attempt_started", "job_id": "r2/duplicate/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.0034, "event": "response", "job_id": "r2/duplicate/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.004064, "event": "body", "job_id": "r2/duplicate/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.004262, "errors": [], "event": "schema", "job_id": "r2/duplicate/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.004379, "event": "delivery", "inserted": 1, "job_id": "r2/duplicate/delivery1", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.004384, "event": "terminal", "job_id": "r2/duplicate/delivery1", "outcome": "delivered", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 2.4e-05, "event": "attempt_started", "job_id": "r2/duplicate/delivery2", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.004193, "event": "response", "job_id": "r2/duplicate/delivery2", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.007531, "event": "body", "job_id": "r2/duplicate/delivery2", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.00913, "errors": [], "event": "schema", "job_id": "r2/duplicate/delivery2", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.009234, "event": "delivery", "inserted": 0, "job_id": "r2/duplicate/delivery2", "record_id": "sku-1", "run_id": "r2"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.00924, "event": "terminal", "job_id": "r2/duplicate/delivery2", "outcome": "duplicate", "run_id": "r2"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 3.3e-05, "event": "attempt_started", "job_id": "r2/sink_failure/delivery1", "run_id": "r2"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.004007, "event": "response", "job_id": "r2/sink_failure/delivery1", "run_id": "r2", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "sink_failure", "elapsed_s": 0.007188, "event": "body", "job_id": "r2/sink_failure/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r2", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.007409, "errors": [], "event": "schema", "job_id": "r2/sink_failure/delivery1", "passed": true, "run_id": "r2"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.008784, "error": "OperationalError", "event": "terminal", "job_id": "r2/sink_failure/delivery1", "outcome": "delivery_failed", "run_id": "r2"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 3.3e-05, "event": "attempt_started", "job_id": "r3/valid/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.006299, "event": "response", "job_id": "r3/valid/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "valid", "elapsed_s": 0.011646, "event": "body", "job_id": "r3/valid/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.011905, "errors": [], "event": "schema", "job_id": "r3/valid/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.012051, "event": "delivery", "inserted": 1, "job_id": "r3/valid/delivery1", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 1, "case_id": "valid", "elapsed_s": 0.012059, "event": "terminal", "job_id": "r3/valid/delivery1", "outcome": "delivered", "run_id": "r3"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 5.8e-05, "event": "attempt_started", "job_id": "r3/503_then_ok/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.004422, "event": "response", "job_id": "r3/503_then_ok/delivery1", "run_id": "r3", "status": 503}
+{"attempt": 1, "case_id": "503_then_ok", "elapsed_s": 0.005012, "event": "retry_wait", "job_id": "r3/503_then_ok/delivery1", "reason": "http_503", "run_id": "r3", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.056928, "event": "attempt_started", "job_id": "r3/503_then_ok/delivery1", "run_id": "r3"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.064489, "event": "response", "job_id": "r3/503_then_ok/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "503_then_ok", "elapsed_s": 0.066274, "event": "body", "job_id": "r3/503_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.066495, "errors": [], "event": "schema", "job_id": "r3/503_then_ok/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.06663, "event": "delivery", "inserted": 1, "job_id": "r3/503_then_ok/delivery1", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 2, "case_id": "503_then_ok", "elapsed_s": 0.066635, "event": "terminal", "job_id": "r3/503_then_ok/delivery1", "outcome": "delivered", "run_id": "r3"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 4.2e-05, "event": "attempt_started", "job_id": "r3/503_always/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.011247, "event": "response", "job_id": "r3/503_always/delivery1", "run_id": "r3", "status": 503}
+{"attempt": 1, "case_id": "503_always", "elapsed_s": 0.012131, "event": "retry_wait", "job_id": "r3/503_always/delivery1", "reason": "http_503", "run_id": "r3", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.06221, "event": "attempt_started", "job_id": "r3/503_always/delivery1", "run_id": "r3"}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.070832, "event": "response", "job_id": "r3/503_always/delivery1", "run_id": "r3", "status": 503}
+{"attempt": 2, "case_id": "503_always", "elapsed_s": 0.072794, "event": "retry_wait", "job_id": "r3/503_always/delivery1", "reason": "http_503", "run_id": "r3", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.117836, "event": "attempt_started", "job_id": "r3/503_always/delivery1", "run_id": "r3"}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.122788, "event": "response", "job_id": "r3/503_always/delivery1", "run_id": "r3", "status": 503}
+{"attempt": 3, "case_id": "503_always", "elapsed_s": 0.127832, "event": "terminal", "job_id": "r3/503_always/delivery1", "outcome": "attempt_limit", "reason": "http_503", "run_id": "r3"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 3.5e-05, "event": "attempt_started", "job_id": "r3/429_then_ok/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.007061, "event": "response", "job_id": "r3/429_then_ok/delivery1", "run_id": "r3", "status": 429}
+{"attempt": 1, "case_id": "429_then_ok", "elapsed_s": 0.008178, "event": "retry_wait", "job_id": "r3/429_then_ok/delivery1", "reason": "http_429", "run_id": "r3", "seconds": 1.0}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.014636, "event": "attempt_started", "job_id": "r3/429_then_ok/delivery1", "run_id": "r3"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.036777, "event": "response", "job_id": "r3/429_then_ok/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 2, "bytes": 251, "case_id": "429_then_ok", "elapsed_s": 1.038308, "event": "body", "job_id": "r3/429_then_ok/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.038895, "errors": [], "event": "schema", "job_id": "r3/429_then_ok/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.039018, "event": "delivery", "inserted": 1, "job_id": "r3/429_then_ok/delivery1", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 2, "case_id": "429_then_ok", "elapsed_s": 1.039023, "event": "terminal", "job_id": "r3/429_then_ok/delivery1", "outcome": "delivered", "run_id": "r3"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 3.4e-05, "event": "attempt_started", "job_id": "r3/429_long/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.011062, "event": "response", "job_id": "r3/429_long/delivery1", "run_id": "r3", "status": 429}
+{"attempt": 1, "case_id": "429_long", "elapsed_s": 0.012876, "event": "terminal", "job_id": "r3/429_long/delivery1", "outcome": "retry_deferred", "reason": "http_429", "requested_wait_s": 60.0, "run_id": "r3"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 2.8e-05, "event": "attempt_started", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 0.012309, "event": "response", "job_id": "r3/stall/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.034326, "error": "ReadTimeout", "event": "transport_error", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "stall", "elapsed_s": 1.034907, "event": "retry_wait", "job_id": "r3/stall/delivery1", "reason": "ReadTimeout", "run_id": "r3", "seconds": 0.048322676784606944}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.084661, "event": "attempt_started", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 1.121226, "event": "response", "job_id": "r3/stall/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.289966, "error": "ReadTimeout", "event": "transport_error", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 2, "case_id": "stall", "elapsed_s": 2.294645, "event": "retry_wait", "job_id": "r3/stall/delivery1", "reason": "ReadTimeout", "run_id": "r3", "seconds": 0.044073259917535273}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.352107, "event": "attempt_started", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 2.418142, "event": "response", "job_id": "r3/stall/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.436805, "error": "ReadTimeout", "event": "transport_error", "job_id": "r3/stall/delivery1", "run_id": "r3"}
+{"attempt": 3, "case_id": "stall", "elapsed_s": 3.436903, "event": "terminal", "job_id": "r3/stall/delivery1", "outcome": "attempt_limit", "reason": "ReadTimeout", "run_id": "r3"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.000151, "event": "attempt_started", "job_id": "r3/trickle/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 0.073304, "event": "response", "job_id": "r3/trickle/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "case_id": "trickle", "elapsed_s": 6.006827, "event": "terminal", "job_id": "r3/trickle/delivery1", "outcome": "deadline", "run_id": "r3"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 6.9e-05, "event": "attempt_started", "job_id": "r3/401/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.016164, "event": "response", "job_id": "r3/401/delivery1", "run_id": "r3", "status": 401}
+{"attempt": 1, "case_id": "401", "elapsed_s": 0.016204, "event": "terminal", "job_id": "r3/401/delivery1", "outcome": "terminal_http", "run_id": "r3", "status": 401}
+{"attempt": 1, "case_id": "403", "elapsed_s": 6e-05, "event": "attempt_started", "job_id": "r3/403/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.007631, "event": "response", "job_id": "r3/403/delivery1", "run_id": "r3", "status": 403}
+{"attempt": 1, "case_id": "403", "elapsed_s": 0.007645, "event": "terminal", "job_id": "r3/403/delivery1", "outcome": "terminal_http", "run_id": "r3", "status": 403}
+{"attempt": 1, "case_id": "404", "elapsed_s": 3.2e-05, "event": "attempt_started", "job_id": "r3/404/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.007795, "event": "response", "job_id": "r3/404/delivery1", "run_id": "r3", "status": 404}
+{"attempt": 1, "case_id": "404", "elapsed_s": 0.007811, "event": "terminal", "job_id": "r3/404/delivery1", "outcome": "terminal_http", "run_id": "r3", "status": 404}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 3.7e-05, "event": "attempt_started", "job_id": "r3/empty/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.004756, "event": "response", "job_id": "r3/empty/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 0, "case_id": "empty", "elapsed_s": 0.008032, "event": "body", "job_id": "r3/empty/delivery1", "preview_utf8": "", "run_id": "r3", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+{"attempt": 1, "case_id": "empty", "elapsed_s": 0.008213, "event": "terminal", "job_id": "r3/empty/delivery1", "outcome": "content_invalid", "run_id": "r3"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 3.3e-05, "event": "attempt_started", "job_id": "r3/challenge/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.007012, "event": "response", "job_id": "r3/challenge/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 45, "case_id": "challenge", "elapsed_s": 0.008221, "event": "body", "job_id": "r3/challenge/delivery1", "preview_utf8": "<h1>Synthetic challenge page; no catalog</h1>", "run_id": "r3", "sha256": "ee5ebc00d4e23ef66042233bd3a1bef39cd3f4559fc2ea6b97fd5cb0ca104088"}
+{"attempt": 1, "case_id": "challenge", "elapsed_s": 0.008373, "event": "terminal", "job_id": "r3/challenge/delivery1", "outcome": "content_invalid", "run_id": "r3"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 4.2e-05, "event": "attempt_started", "job_id": "r3/malformed/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.006149, "event": "response", "job_id": "r3/malformed/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 39, "case_id": "malformed", "elapsed_s": 0.008334, "event": "body", "job_id": "r3/malformed/delivery1", "preview_utf8": "<script id=\"record\">{not-json}</script>", "run_id": "r3", "sha256": "965dec00a7ee2c9fe04f23b2628884508d4a7f57b044f917c482d9c998900b32"}
+{"attempt": 1, "case_id": "malformed", "elapsed_s": 0.011955, "event": "terminal", "job_id": "r3/malformed/delivery1", "outcome": "content_invalid", "run_id": "r3"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 5.5e-05, "event": "attempt_started", "job_id": "r3/missing_price/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.006348, "event": "response", "job_id": "r3/missing_price/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 232, "case_id": "missing_price", "elapsed_s": 0.00715, "event": "body", "job_id": "r3/missing_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "67fa5a235edb50d94e0290d4736a07671e6672db54ae6be7edb37cf9a8f427b5"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.013938, "errors": ["'price_minor' is a required property"], "event": "schema", "job_id": "r3/missing_price/delivery1", "passed": false, "run_id": "r3"}
+{"attempt": 1, "case_id": "missing_price", "elapsed_s": 0.013975, "event": "terminal", "job_id": "r3/missing_price/delivery1", "outcome": "schema_invalid", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 9.5e-05, "event": "attempt_started", "job_id": "r3/wrong_type/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.006249, "event": "response", "job_id": "r3/wrong_type/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 253, "case_id": "wrong_type", "elapsed_s": 0.008221, "event": "body", "job_id": "r3/wrong_type/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":\"1299\",\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "a15d4d690b37fdc7ec4f1f238bbec0ce149a2ad07ddfc1e4dd26df92220db41f"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.008531, "errors": ["'1299' is not of type 'integer'"], "event": "schema", "job_id": "r3/wrong_type/delivery1", "passed": false, "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_type", "elapsed_s": 0.008537, "event": "terminal", "job_id": "r3/wrong_type/delivery1", "outcome": "schema_invalid", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.000159, "event": "attempt_started", "job_id": "r3/wrong_currency/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.004255, "event": "response", "job_id": "r3/wrong_currency/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_currency", "elapsed_s": 0.005424, "event": "body", "job_id": "r3/wrong_currency/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"EUR\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "13135efc94c3a1722c0835d511072c51e235c088459f54fabaf41e15e6e14fe1"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.005648, "errors": [], "event": "schema", "job_id": "r3/wrong_currency/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_currency", "elapsed_s": 0.005654, "event": "terminal", "job_id": "r3/wrong_currency/delivery1", "outcome": "business_invalid", "reason": "this feed requires USD", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 1.6e-05, "event": "attempt_started", "job_id": "r3/wrong_price/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.00453, "event": "response", "job_id": "r3/wrong_price/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "wrong_price", "elapsed_s": 0.005677, "event": "body", "job_id": "r3/wrong_price/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":9999,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "2557c2ba4fce52d556caa499719d7a9791c5a6e94b71d552fb230ba8531c8bb7"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.008334, "errors": [], "event": "schema", "job_id": "r3/wrong_price/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.009225, "event": "delivery", "inserted": 1, "job_id": "r3/wrong_price/delivery1", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 1, "case_id": "wrong_price", "elapsed_s": 0.009265, "event": "terminal", "job_id": "r3/wrong_price/delivery1", "outcome": "delivered", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 3.5e-05, "event": "attempt_started", "job_id": "r3/duplicate/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.002693, "event": "response", "job_id": "r3/duplicate/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.004126, "event": "body", "job_id": "r3/duplicate/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.005846, "errors": [], "event": "schema", "job_id": "r3/duplicate/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.00602, "event": "delivery", "inserted": 1, "job_id": "r3/duplicate/delivery1", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.006027, "event": "terminal", "job_id": "r3/duplicate/delivery1", "outcome": "delivered", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 2.1e-05, "event": "attempt_started", "job_id": "r3/duplicate/delivery2", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.008306, "event": "response", "job_id": "r3/duplicate/delivery2", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "duplicate", "elapsed_s": 0.012994, "event": "body", "job_id": "r3/duplicate/delivery2", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.013248, "errors": [], "event": "schema", "job_id": "r3/duplicate/delivery2", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.014505, "event": "delivery", "inserted": 0, "job_id": "r3/duplicate/delivery2", "record_id": "sku-1", "run_id": "r3"}
+{"attempt": 1, "case_id": "duplicate", "elapsed_s": 0.014522, "event": "terminal", "job_id": "r3/duplicate/delivery2", "outcome": "duplicate", "run_id": "r3"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 5.9e-05, "event": "attempt_started", "job_id": "r3/sink_failure/delivery1", "run_id": "r3"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.007314, "event": "response", "job_id": "r3/sink_failure/delivery1", "run_id": "r3", "status": 200}
+{"attempt": 1, "bytes": 251, "case_id": "sink_failure", "elapsed_s": 0.00794, "event": "body", "job_id": "r3/sink_failure/delivery1", "preview_utf8": "<!doctype html><html><body><h1>Owned synthetic catalog</h1>\n<script id=\"record\" type=\"application/json\">{\"id\":\"sku-1\",\"title\":\"Fixture mug\",\"price_minor\":1299,\"currency\":\"USD\",\"source_url\":\"https://example.test/catalog/sku-1\"}</script>\n</body></html>\n", "run_id": "r3", "sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.008147, "errors": [], "event": "schema", "job_id": "r3/sink_failure/delivery1", "passed": true, "run_id": "r3"}
+{"attempt": 1, "case_id": "sink_failure", "elapsed_s": 0.008763, "error": "OperationalError", "event": "terminal", "job_id": "r3/sink_failure/delivery1", "outcome": "delivery_failed", "run_id": "r3"}

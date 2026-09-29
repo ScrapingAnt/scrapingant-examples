@@ -1,0 +1,38 @@
+[
+  {
+    "body_sha256": "11fa0c2632a6f0faf90841f89cbda958e883a3e8c2a4eccfd1da8d756ed93931",
+    "case": "valid",
+    "naive_status_success": true,
+    "status": 200
+  },
+  {
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "case": "empty",
+    "naive_status_success": true,
+    "status": 200
+  },
+  {
+    "body_sha256": "965dec00a7ee2c9fe04f23b2628884508d4a7f57b044f917c482d9c998900b32",
+    "case": "malformed",
+    "naive_status_success": true,
+    "status": 200
+  },
+  {
+    "body_sha256": "67fa5a235edb50d94e0290d4736a07671e6672db54ae6be7edb37cf9a8f427b5",
+    "case": "missing_price",
+    "naive_status_success": true,
+    "status": 200
+  },
+  {
+    "body_sha256": "a15d4d690b37fdc7ec4f1f238bbec0ce149a2ad07ddfc1e4dd26df92220db41f",
+    "case": "wrong_type",
+    "naive_status_success": true,
+    "status": 200
+  },
+  {
+    "body_sha256": "2557c2ba4fce52d556caa499719d7a9791c5a6e94b71d552fb230ba8531c8bb7",
+    "case": "wrong_price",
+    "naive_status_success": true,
+    "status": 200
+  }
+]
