@@ -1,0 +1,94 @@
+article_id: web-scraping-playwright-java
+canonical_url: https://scrapingant.com/blog/web-scraping-playwright-java
+owner: Oleg Kulyk
+examples_repo_commit: pending-root-commit
+tested_at: 2026-09-30
+requires_api_key: false
+environment:
+  os: Ubuntu 24.04 container, Linux aarch64
+  java: OpenJDK 25.0.4+7-1-24.04-Ubuntu
+  compiler_release: '21'
+  maven: 3.9.12
+  browser: Chromium 153.0.8010.12
+  container: mcr.microsoft.com/playwright/java:v1.63.0-noble
+  container_digest: sha256:013e2595272806f887d91041fbf26be71dda2f48a805c717cc7de3bbca5339c8
+dependencies:
+  playwright: 1.63.0
+  jackson-databind: 2.18.3
+  junit-jupiter: 5.12.1
+run_command: ./run.sh
+fixtures:
+  - fixtures/catalog.html
+outputs:
+  - expected_output/environment.txt
+  - expected_output/tests.txt
+  - expected_output/dependencies.txt
+  - expected_output/classpath-build.txt
+  - expected_output/cases.tsv
+  - expected_output/catalog.json
+  - expected_output/fresh-container-without-dependencies.stdout.txt
+  - expected_output/fresh-container-without-dependencies.stderr.txt
+  - expected_output/readme-single.stdout.txt
+  - expected_output/readme-single.stderr.txt
+  - expected_output/success.stdout.txt
+  - expected_output/success.stderr.txt
+  - expected_output/empty.stdout.txt
+  - expected_output/empty.stderr.txt
+  - expected_output/missing-field.stdout.txt
+  - expected_output/missing-field.stderr.txt
+  - expected_output/timeout.stdout.txt
+  - expected_output/timeout.stderr.txt
+  - expected_output/duplicate.stdout.txt
+  - expected_output/duplicate.stderr.txt
+  - expected_output/mismatch.stdout.txt
+  - expected_output/mismatch.stderr.txt
+measurements:
+  - name: controlled_scenarios_passing
+    value: 6
+    denominator: 6
+    unit: owned fixture scenarios
+    source: expected_output/cases.tsv
+  - name: junit_tests_passing
+    value: 3
+    denominator: 3
+    unit: tests
+    source: expected_output/tests.txt
+  - name: lifecycle_controls_without_new_live_descendants
+    value: 6
+    denominator: 6
+    unit: scraper invocations observed in JVM process tree
+    source: expected_output/tests.txt
+limitations:
+  - Owned synthetic loopback fixture only; no third-party reliability or performance claim.
+  - Observed Linux ARM64 container; CI runs the same pinned image on Linux AMD64 but its result must be checked separately.
+  - Java 21 is the compiler release target; actual tested runtime was Java 25.0.4.
+  - Readiness is the fixture application contract and assumes stable contents after the marker.
+  - Process-tree and reusable-port checks do not prove absence of all OS resource leaks.
+  - Native installation commands are documented but were not executed.
+  - A raw Java invocation in a new container without resolving Maven dependencies failed; run.sh then the raw command in the same container succeeded.
+  - Original article defects were inspected in source, not reproduced by this packet.
+claims:
+  - id: J1
+    text: The complete Maven project compiles and its three JUnit tests pass in the recorded container.
+    type: measured
+    source: expected_output/tests.txt
+  - id: J2
+    text: Delayed readiness produces two exact validated records including Unicode titles in UTF-8 JSON.
+    type: measured
+    source: expected_output/catalog.json
+  - id: J3
+    text: Six owned scenarios return the independently expected process statuses; a legitimate empty catalog succeeds.
+    type: measured
+    source: expected_output/cases.tsv
+  - id: J4
+    text: Invalid or timed-out scenarios create no new output; an invalid run preserves previous output.
+    type: measured
+    source: expected_output/tests.txt
+  - id: J5
+    text: Each matrix invocation leaves no new live JVM-descendant process and the server port can be reused after close in the tested environment.
+    type: measured
+    source: expected_output/tests.txt
+  - id: J6
+    text: Playwright 1.63.0 runs Chromium 153.0.8010.12 in the recorded image.
+    type: measured
+    source: expected_output/success.stdout.txt

@@ -1,0 +1,25 @@
+<!doctype html>
+<meta charset="utf-8"><title>Owned synthetic catalog</title>
+<div id="catalog" data-state="loading"></div>
+<script>
+const scenario = new URLSearchParams(location.search).get('case');
+if (scenario !== 'timeout') setTimeout(() => {
+  const catalog = document.querySelector('#catalog');
+  const products = scenario === 'empty' ? [] : [
+    { id: 'mug-001', title: 'Café mug ☕', price: '12.50', currency: 'EUR' },
+    { id: 'book-002', title: 'Field notes — Київ', price: '8.00', currency: 'EUR' }
+  ];
+  if (scenario === 'duplicate') products[1].id = products[0].id;
+  for (const [i, product] of products.entries()) {
+    const card = document.createElement('article');
+    card.className = 'product'; card.dataset.id = product.id; card.dataset.currency = product.currency;
+    for (const field of ['title', 'price']) {
+      if (scenario === 'missing-field' && i === 1 && field === 'price') continue;
+      const span = document.createElement('span'); span.className = field; span.textContent = product[field]; card.append(span);
+    }
+    catalog.append(card);
+  }
+  catalog.dataset.count = scenario === 'mismatch' ? '3' : String(products.length);
+  catalog.dataset.state = 'ready';
+}, 250);
+</script>

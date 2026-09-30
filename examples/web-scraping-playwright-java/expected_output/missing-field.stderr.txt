@@ -1,0 +1,1 @@
+case=missing-field outcome=invalid reason=Missing or repeated field: price

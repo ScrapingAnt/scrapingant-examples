@@ -1,0 +1,27 @@
+name: Playwright Java evidence
+on:
+  pull_request:
+    paths:
+      - 'examples/web-scraping-playwright-java/**'
+      - '.github/workflows/playwright-java-evidence.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'examples/web-scraping-playwright-java/**'
+      - '.github/workflows/playwright-java-evidence.yml'
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Run pinned Java browser evidence
+        run: |
+          docker run --rm --ipc=host \
+            -v "$GITHUB_WORKSPACE/examples/web-scraping-playwright-java:/work" -w /work \
+            mcr.microsoft.com/playwright/java@sha256:013e2595272806f887d91041fbf26be71dda2f48a805c717cc7de3bbca5339c8 ./run.sh
