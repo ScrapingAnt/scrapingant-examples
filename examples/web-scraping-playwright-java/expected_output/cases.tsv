@@ -1,0 +1,7 @@
+case	expected_exit	actual_exit
+success	0	0
+empty	0	0
+missing-field	2	2
+timeout	3	3
+duplicate	2	2
+mismatch	2	2

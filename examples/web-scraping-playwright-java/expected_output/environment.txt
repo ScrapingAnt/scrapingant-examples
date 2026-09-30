@@ -1,0 +1,10 @@
+2026-09-30T14:19:59Z
+Linux ec112060d2c4 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Thu May  7 17:26:37 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+openjdk version "25.0.4" 2026-07-21
+OpenJDK Runtime Environment (build 25.0.4+7-1-24.04-Ubuntu)
+OpenJDK 64-Bit Server VM (build 25.0.4+7-1-24.04-Ubuntu, mixed mode, sharing)
+Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)
+Maven home: /opt/apache-maven-3.9.12
+Java version: 25.0.4, vendor: Ubuntu, runtime: /usr/lib/jvm/java-25-openjdk-arm64
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "6.8.0-117-generic", arch: "aarch64", family: "unix"

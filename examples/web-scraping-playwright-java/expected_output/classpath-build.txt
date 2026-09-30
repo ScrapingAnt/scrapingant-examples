@@ -1,0 +1,15 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.scrapingant.examples:playwright-java-catalog >----------
+[INFO] Building playwright-java-catalog 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.8.1:build-classpath (default-cli) @ playwright-java-catalog ---
+[INFO] Wrote classpath file '/work/target/classpath.txt'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.436 s
+[INFO] Finished at: 2026-09-30T14:20:28Z
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,1 @@
+case=duplicate outcome=invalid reason=Duplicate id: mug-001
