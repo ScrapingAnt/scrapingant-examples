@@ -1,7 +1,8 @@
 article_id: web-scraping-playwright-java
 canonical_url: https://scrapingant.com/blog/web-scraping-playwright-java
 owner: Oleg Kulyk
-examples_repo_commit: pending-root-commit
+examples_repo_commit: 7f1780fe62699d70598a7998e352af51965219e5
+commit_note: Source and captures at this commit; subsequent commit only records this immutable reference.
 tested_at: 2026-09-30
 requires_api_key: false
 environment:
