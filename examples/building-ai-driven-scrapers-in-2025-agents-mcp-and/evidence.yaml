@@ -1,5 +1,5 @@
 example_id: building-ai-driven-scrapers-in-2025-agents-mcp-and
-status: partial-model-quota-blocked
+status: executed-anthropic-reviewed-pending-article
 tested_at: '2026-09-30'
 timezone: Europe/Kyiv
 requires_api_key: true
@@ -12,34 +12,44 @@ environment:
   lock_file: requirements.lock.txt
   metadata: expected_output/environment.json
 measurements:
-  source: expected_output/live-2026-09-30/validation.json
+  source: expected_output/anthropic-2026-09-30/validation.json
   retrieval_successes: 5
   retrieval_attempts: 5
-  completed_model_runs: 0
-  model_attempts: 1
-  model_http_status: 429
-  model_error_type: insufficient_quota
-  schema_pass_rate: null
-  precision: null
-  recall: null
+  completed_model_runs: 15
+  model_attempts: 15
+  raw_json_parse_successes: 0
+  single_json_fences_decoded: 15
+  emitted_records: 30
+  schema_valid_records: 30
+  oracle_value_matches: 30
+  accepted_records: 24
+  quarantined_records: 6
+  complete_run_successes: 9
+  prompt_tokens: 9228
+  completion_tokens: 4632
+  list_price_estimate_usd: 0.032388
+  schema_pass_rate: 1.0
+  precision: 1.0
+  recall: 1.0
   actual_model_cost_usd: null
   scrapingant_credits: null
-  offline_tests_passed: 22
+  offline_tests_passed: 27
 model_configuration:
-  model: gpt-4.1-mini-2025-04-14
+  model: claude-haiku-4-5-20251001
   temperature: 0
   max_completion_tokens: 2000
   repetitions_per_fixture: 3
   authorized_ceiling_usd: 10
-  current_per_attempt_reservation_usd: 0.4222304
-  first_rejected_attempt_reservation_usd: 0.0128
+  current_per_attempt_reservation_usd: 0.21
+  historical_openai_rejected_attempt_reservation_usd: 0.0128
 limitations:
-  - No successful model response; do not publish an AI extraction result or restore the article yet.
+  - Raw JSON parsing failed for all 15 responses; explicit single-fence decoding was applied offline without changing values.
+  - Fixture accuracy is not production accuracy; three repeated runs per case are not independent web samples.
   - Five static owned fixtures fetched as Markdown from immutable raw GitHub URLs with browser false.
   - Offline controls are injected; they do not demonstrate live model behavior.
   - Oracle is private to the extractor process inputs, not a production truth service.
   - MCP responses did not expose billed credits; model rejection did not return token usage.
-  - Authorized budget is not evidence that the provider account has available quota.
+  - The historical OpenAI request failed for insufficient_quota; Anthropic completed the replacement experiment.
 claims:
   - claim: Five live MCP retrievals succeeded.
     evidence: expected_output/live-2026-09-30/retrievals.json
@@ -47,3 +57,8 @@ claims:
     evidence: expected_output/live-2026-09-30/model-runs.json
   - claim: The validator handles structural, provenance, duplicate, omission and oracle-value failures offline.
     evidence: test_validate.py
+
+  - claim: Fifteen Anthropic calls completed; raw JSON parsing failed until explicit fence decoding.
+    evidence: expected_output/anthropic-2026-09-30/validation.json
+  - claim: After decoding, 24 records were accepted and six null-valued records quarantined.
+    evidence: expected_output/anthropic-2026-09-30/validation.json

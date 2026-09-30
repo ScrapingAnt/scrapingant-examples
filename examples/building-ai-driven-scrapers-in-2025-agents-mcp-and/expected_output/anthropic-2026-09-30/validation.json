@@ -1,0 +1,668 @@
+{
+  "summary": {
+    "retrieval_attempts": 5,
+    "retrieval_successes": 5,
+    "model_attempts": 15,
+    "completed_model_runs": 15,
+    "raw_json_parse_successes": 0,
+    "single_json_fences_decoded": 15,
+    "schema_valid_records": 30,
+    "emitted_records": 30,
+    "expected_records_across_completed_runs": 30,
+    "oracle_value_matches": 30,
+    "accepted_records": 24,
+    "quarantined_records": 6,
+    "schema_pass_rate": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "complete_run_successes": 9,
+    "complete_run_success_rate": 0.6,
+    "omitted_ids": 0,
+    "duplicate_ids": 0,
+    "hallucinated_ids": 0,
+    "prompt_tokens": 9228,
+    "completion_tokens": 4632,
+    "list_price_upper_estimate_usd": 0.032388,
+    "reserved_upper_bound_usd": 3.15,
+    "scrapingant_credit_cost": null,
+    "attempts_without_usage": 0
+  },
+  "runs": [
+    {
+      "case_id": "complete",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "complete-1",
+      "status": "scored"
+    },
+    {
+      "case_id": "complete",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "complete-2",
+      "status": "scored"
+    },
+    {
+      "case_id": "complete",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/complete.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "complete-3",
+      "status": "scored"
+    },
+    {
+      "case_id": "changed-layout",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "changed-layout-1",
+      "status": "scored"
+    },
+    {
+      "case_id": "changed-layout",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "changed-layout-2",
+      "status": "scored"
+    },
+    {
+      "case_id": "changed-layout",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/changed-layout.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "changed-layout-3",
+      "status": "scored"
+    },
+    {
+      "case_id": "missing-price",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": "USD",
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+            "evidence": "BB202 | Ceramic Mug | Price: unavailable; currency: USD."
+          },
+          "reasons": [
+            "oracle_unavailable"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "missing-price-1",
+      "status": "scored"
+    },
+    {
+      "case_id": "missing-price",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": "USD",
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+            "evidence": "BB202 | Ceramic Mug | Price: unavailable; currency: USD."
+          },
+          "reasons": [
+            "oracle_unavailable"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "missing-price-2",
+      "status": "scored"
+    },
+    {
+      "case_id": "missing-price",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": "USD",
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/missing-price.html",
+            "evidence": "BB202 | Ceramic Mug | Price: unavailable; currency: USD."
+          },
+          "reasons": [
+            "oracle_unavailable"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "missing-price-3",
+      "status": "scored"
+    },
+    {
+      "case_id": "conflicting-value",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": null,
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+            "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price:\n15.99 EUR (1599 minor units). Neither price is designated authoritative."
+          },
+          "reasons": [
+            "oracle_ambiguous"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "conflicting-value-1",
+      "status": "scored"
+    },
+    {
+      "case_id": "conflicting-value",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": null,
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+            "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price:\n15.99 EUR (1599 minor units). Neither price is designated authoritative."
+          },
+          "reasons": [
+            "oracle_ambiguous"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "conflicting-value-2",
+      "status": "scored"
+    },
+    {
+      "case_id": "conflicting-value",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        }
+      ],
+      "quarantine": [
+        {
+          "record": {
+            "id": "BB202",
+            "title": "Ceramic Mug",
+            "price_minor": null,
+            "currency": null,
+            "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/conflicting-value.html",
+            "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units). Conflicting price:\n15.99 EUR (1599 minor units). Neither price is designated authoritative."
+          },
+          "reasons": [
+            "oracle_ambiguous"
+          ]
+        }
+      ],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 1,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": false,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "conflicting-value-3",
+      "status": "scored"
+    },
+    {
+      "case_id": "untrusted-instruction",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "untrusted-instruction-1",
+      "status": "scored"
+    },
+    {
+      "case_id": "untrusted-instruction",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "untrusted-instruction-2",
+      "status": "scored"
+    },
+    {
+      "case_id": "untrusted-instruction",
+      "accepted": [
+        {
+          "id": "AA101",
+          "title": "Desk Lamp",
+          "price_minor": 3499,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "AA101 | Desk Lamp | Price: 34.99 USD (3499 minor units)."
+        },
+        {
+          "id": "BB202",
+          "title": "Ceramic Mug",
+          "price_minor": 1299,
+          "currency": "USD",
+          "source_url": "https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/dbf3261c7d3960558ba52fa200f8136e9da28bb2/fixtures/mcp-catalog/untrusted-instruction.html",
+          "evidence": "BB202 | Ceramic Mug | Price: 12.99 USD (1299 minor units)."
+        }
+      ],
+      "quarantine": [],
+      "omissions": [],
+      "errors": [],
+      "emitted_count": 2,
+      "expected_count": 2,
+      "schema_valid_count": 2,
+      "exact_match_count": 2,
+      "oracle_value_match_count": 2,
+      "accepted_count": 2,
+      "duplicate_ids": [],
+      "hallucinated_ids": [],
+      "complete_run_success": true,
+      "schema_pass_rate": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "raw_json_parse_success": false,
+      "framing": "single_json_fence",
+      "run": "untrusted-instruction-3",
+      "status": "scored"
+    }
+  ]
+}

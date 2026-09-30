@@ -96,19 +96,23 @@ async def retrieve(out, fixture_commit):
                     print(case,row['status'],flush=True)
 
 
-def extract(out):
+def extract(out, provider="openai"):
+    anthropic = provider == "anthropic"
+    model = "claude-haiku-4-5-20251001" if anthropic else MODEL
+    input_rate, output_rate = (1.0, 5.0) if anthropic else (INPUT_USD_PER_M, OUTPUT_USD_PER_M)
+    reservation = (200000 * input_rate + MAX_OUTPUT * output_rate) / 1000000 if anthropic else RESERVATION
     manifest=json.loads((out/'retrievals.json').read_text())
     prompt=(ROOT/'prompt.txt').read_text()
     schema=json.loads((ROOT/'schema.json').read_text())
     system=prompt+'\nApplication JSON Schema:\n'+json.dumps(schema)
-    key=os.environ['OPENAI_API_KEY']
+    key=os.environ['ANTHROPIC_API_KEY' if anthropic else 'OPENAI_API_KEY']
     budget=float(os.environ.get('MODEL_BUDGET_USD','0'))
     if not 0 < budget <= 10:
         raise ValueError('MODEL_BUDGET_USD must be >0 and <=10')
     ledger=out/'model-runs.json'
     if ledger.exists():
         raise ValueError('model-runs.json already exists; refusing accidental repeat spend')
-    runs={'model':MODEL,'temperature':0,'max_completion_tokens':MAX_OUTPUT,'repetitions':3,'prompt_sha256':sha(system),'budget_usd':budget,'reservation_usd_per_attempt':RESERVATION,'pricing_source':'https://developers.openai.com/api/docs/models/gpt-4.1-mini','pricing_checked_at':'2026-09-30','runs':[]}
+    runs={'provider':provider,'model':model,'temperature':0,'max_completion_tokens':MAX_OUTPUT,'repetitions':3,'prompt_sha256':sha(system),'budget_usd':budget,'reservation_usd_per_attempt':reservation,'pricing_source':'https://platform.claude.com/docs/en/models/overview' if anthropic else 'https://developers.openai.com/api/docs/models/gpt-4.1-mini','pricing_checked_at':'2026-09-30','runs':[]}
     save(ledger,runs)
     with httpx.Client(timeout=90,follow_redirects=False) as client:
         for retrieval in manifest['retrievals']:
@@ -121,23 +125,27 @@ def extract(out):
             if len((system+user).encode()) > MAX_INPUT_BYTES:
                 raise ValueError('input byte budget exceeded')
             for repeat in range(1,4):
-                if (len(runs['runs'])+1)*RESERVATION > budget:
+                if (len(runs['runs'])+1)*reservation > budget:
                     raise ValueError('budget exhausted before next attempt')
                 name=f'{case}-{repeat}'
-                row={'case':case,'repeat':repeat,'status':'attempted','reserved_usd':RESERVATION}
+                row={'case':case,'repeat':repeat,'status':'attempted','reserved_usd':reservation}
                 runs['runs'].append(row);save(ledger,runs)
                 try:
-                    response=client.post('https://api.openai.com/v1/chat/completions',headers={'Authorization':'Bearer '+key},json={'model':MODEL,'temperature':0,'max_completion_tokens':MAX_OUTPUT,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':user}]})
+                    if anthropic:
+                        response=client.post('https://api.anthropic.com/v1/messages',headers={'x-api-key':key,'anthropic-version':'2023-06-01'},json={'model':model,'temperature':0,'max_tokens':MAX_OUTPUT,'system':system,'messages':[{'role':'user','content':user}]})
+                    else:
+                        response=client.post('https://api.openai.com/v1/chat/completions',headers={'Authorization':'Bearer '+key},json={'model':model,'temperature':0,'max_completion_tokens':MAX_OUTPUT,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':system},{'role':'user','content':user}]})
                     row['http_status']=response.status_code
                     if response.status_code != 200:
                         row['status']='api_error'
                         # Do not print raw error messages, which can echo credentials.
-                        body=response.json(); row['error_type']=body.get('error',{}).get('type'); row['error_code']=body.get('error',{}).get('code')
+                        body=response.json(); row['error_type']=body.get('error',{}).get('type'); row['error_code']=body.get('error',{}).get('code'); row['error_message']=body.get('error',{}).get('message','').replace(key,'[REDACTED]')
                     else:
                         data=response.json()
                         save(out/f'{name}.model.json',json.loads(json.dumps(data).replace(key,'[REDACTED]')))
-                        row.update(status='ok',id=data['id'],usage=data['usage'],finish_reason=data['choices'][0]['finish_reason'])
-                        usage=data['usage'];row['list_price_upper_estimate_usd']=(usage['prompt_tokens']*INPUT_USD_PER_M+usage['completion_tokens']*OUTPUT_USD_PER_M)/1_000_000
+                        usage={'prompt_tokens':data['usage']['input_tokens'],'completion_tokens':data['usage']['output_tokens']} if anthropic else data['usage']
+                        row.update(status='ok',id=data['id'],usage=usage,finish_reason=data.get('stop_reason') if anthropic else data['choices'][0]['finish_reason'])
+                        row['list_price_upper_estimate_usd']=(usage['prompt_tokens']*input_rate+usage['completion_tokens']*output_rate)/1_000_000
                 except Exception as exc:
                     row.update(status='transport_or_response_error',error_type=type(exc).__name__)
                 save(ledger,runs)
@@ -147,7 +155,7 @@ def extract(out):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('stage',choices=['retrieve','extract']);parser.add_argument('--output',required=True,type=Path);parser.add_argument('--fixture-commit');parser.add_argument('--retrieval-capture',type=Path)
+    parser=argparse.ArgumentParser();parser.add_argument('stage',choices=['retrieve','extract']);parser.add_argument('--output',required=True,type=Path);parser.add_argument('--fixture-commit');parser.add_argument('--retrieval-capture',type=Path);parser.add_argument('--provider',choices=['openai','anthropic'],default='openai')
     args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     if args.stage=='retrieve':
         if (args.output/'retrievals.json').exists():raise ValueError('retrieval capture exists; use a new output directory')
@@ -159,6 +167,6 @@ def main():
             for pattern in ('retrievals.json','discovery.json','*.md','*.tool.json'):
                 for source in args.retrieval_capture.glob(pattern):
                     shutil.copy2(source,args.output/source.name)
-        extract(args.output)
+        extract(args.output,args.provider)
 
 if __name__=='__main__':main()

@@ -139,7 +139,7 @@
     {
       "id": "building-ai-driven-scrapers-in-2025-agents-mcp-and",
       "needs_api_key": false,
-      "note": "Offline validator controls and saved MCP/model-attempt replay only. Live retrieval and generation are explicit opt-ins; current model evidence blocked by insufficient quota."
+      "note": "Offline validator controls and replay of five MCP retrievals plus 15 Anthropic responses. No API calls; live acquisition/generation are explicit opt-ins."
     }
   ]
 }

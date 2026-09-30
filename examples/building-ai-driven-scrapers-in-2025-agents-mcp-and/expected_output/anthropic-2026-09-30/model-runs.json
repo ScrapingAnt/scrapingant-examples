@@ -1,0 +1,224 @@
+{
+  "provider": "anthropic",
+  "model": "claude-haiku-4-5-20251001",
+  "temperature": 0,
+  "max_completion_tokens": 2000,
+  "repetitions": 3,
+  "prompt_sha256": "6f19042399d4629748465bfaba627ce9cdae9bad84eb2b86697c971582d24c91",
+  "budget_usd": 10.0,
+  "reservation_usd_per_attempt": 0.21,
+  "pricing_source": "https://platform.claude.com/docs/en/models/overview",
+  "pricing_checked_at": "2026-09-30",
+  "runs": [
+    {
+      "case": "complete",
+      "repeat": 1,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhFyTqCR5QHQtprZvM",
+      "usage": {
+        "prompt_tokens": 600,
+        "completion_tokens": 302
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00211
+    },
+    {
+      "case": "complete",
+      "repeat": 2,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhQAaS4MYLwNjUfDbA",
+      "usage": {
+        "prompt_tokens": 600,
+        "completion_tokens": 302
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00211
+    },
+    {
+      "case": "complete",
+      "repeat": 3,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhY1sJRsHziKbFwsYH",
+      "usage": {
+        "prompt_tokens": 600,
+        "completion_tokens": 302
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00211
+    },
+    {
+      "case": "changed-layout",
+      "repeat": 1,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhgAGLjrHg6fTmQ7N6",
+      "usage": {
+        "prompt_tokens": 602,
+        "completion_tokens": 306
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002132
+    },
+    {
+      "case": "changed-layout",
+      "repeat": 2,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhoyJyntJcM2SwG39W",
+      "usage": {
+        "prompt_tokens": 602,
+        "completion_tokens": 306
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002132
+    },
+    {
+      "case": "changed-layout",
+      "repeat": 3,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNhwq5qKLr6AN4kzFd5",
+      "usage": {
+        "prompt_tokens": 602,
+        "completion_tokens": 306
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002132
+    },
+    {
+      "case": "missing-price",
+      "repeat": 1,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNi5mZuYzp8DHLjzBTk",
+      "usage": {
+        "prompt_tokens": 595,
+        "completion_tokens": 297
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00208
+    },
+    {
+      "case": "missing-price",
+      "repeat": 2,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNiDbNNJ3FyvziLfjjp",
+      "usage": {
+        "prompt_tokens": 595,
+        "completion_tokens": 297
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00208
+    },
+    {
+      "case": "missing-price",
+      "repeat": 3,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNiMEzX5jpKYavmYvnt",
+      "usage": {
+        "prompt_tokens": 595,
+        "completion_tokens": 297
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.00208
+    },
+    {
+      "case": "conflicting-value",
+      "repeat": 1,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNiVTMhz9fV8yqfj8bY",
+      "usage": {
+        "prompt_tokens": 627,
+        "completion_tokens": 329
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002272
+    },
+    {
+      "case": "conflicting-value",
+      "repeat": 2,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNie6WKRt6rFeJ2CRt9",
+      "usage": {
+        "prompt_tokens": 627,
+        "completion_tokens": 329
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002272
+    },
+    {
+      "case": "conflicting-value",
+      "repeat": 3,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNixkRP98TQ7oZA3N6S",
+      "usage": {
+        "prompt_tokens": 627,
+        "completion_tokens": 329
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002272
+    },
+    {
+      "case": "untrusted-instruction",
+      "repeat": 1,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNj7M6zkQhKtK5ENnin",
+      "usage": {
+        "prompt_tokens": 652,
+        "completion_tokens": 310
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002202
+    },
+    {
+      "case": "untrusted-instruction",
+      "repeat": 2,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNjFeBE4AY9pEkTrZdx",
+      "usage": {
+        "prompt_tokens": 652,
+        "completion_tokens": 310
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002202
+    },
+    {
+      "case": "untrusted-instruction",
+      "repeat": 3,
+      "status": "ok",
+      "reserved_usd": 0.21,
+      "http_status": 200,
+      "id": "msg_011CfZNjQRmJRxuaogVn1mig",
+      "usage": {
+        "prompt_tokens": 652,
+        "completion_tokens": 310
+      },
+      "finish_reason": "end_turn",
+      "list_price_upper_estimate_usd": 0.002202
+    }
+  ]
+}
