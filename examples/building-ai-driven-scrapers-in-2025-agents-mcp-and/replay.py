@@ -2,12 +2,22 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from validate import validate_json
 from live import unpack
 
 ROOT=Path(__file__).resolve().parent
 DEFAULT=ROOT/'expected_output/live-2026-09-30'
+
+def decode_framing(text):
+    """Accept raw JSON or one complete JSON Markdown fence, never search prose."""
+    stripped=text.strip()
+    match=re.fullmatch(r"```json\r?\n([\s\S]*?)\r?\n```",stripped)
+    if match and "```" not in match.group(1):
+        return match.group(1), 'single_json_fence'
+    return text, 'raw'
+
 
 def replay(capture):
     retrievals=json.loads((capture/'retrievals.json').read_text())
@@ -30,9 +40,18 @@ def replay(capture):
         markdown=(capture/f'{case}.md').read_text()
         assert hashlib.sha256(markdown.encode()).hexdigest()==by_case[case]['content_sha256'], 'content hash mismatch'
         response=json.loads((capture/f'{name}.model.json').read_text())
-        text=response['choices'][0]['message']['content']
-        result=validate_json(text,markdown,by_case[case]['url'],case)
-        if response['choices'][0]['finish_reason']!='stop':
+        if runs.get('provider')=='anthropic':
+            text=''.join(b['text'] for b in response['content'] if b.get('type')=='text')
+            finished=response.get('stop_reason')=='end_turn'
+        else:
+            text=response['choices'][0]['message']['content']
+            finished=response['choices'][0]['finish_reason']=='stop'
+        raw=validate_json(text,markdown,by_case[case]['url'],case)
+        decoded,framing=decode_framing(text)
+        result=validate_json(decoded,markdown,by_case[case]['url'],case)
+        result['raw_json_parse_success']=not any(e.startswith('malformed_json:') for e in raw['errors'])
+        result['framing']=framing
+        if not finished:
             result['errors'].append('incomplete_model_output')
             result['quarantine'].extend({'record':r,'reasons':['incomplete_model_output']} for r in result['accepted'])
             result['accepted']=[];result['accepted_count']=0;result['complete_run_success']=False
@@ -43,7 +62,7 @@ def replay(capture):
     scored=[r for r in results if r['status']=='scored']
     def total(key):return sum(r[key] for r in scored)
     emitted=total('emitted_count');expected=total('expected_count');matches=total('oracle_value_match_count')
-    summary={'retrieval_attempts':len(retrievals['retrievals']), 'retrieval_successes':sum(r['status']=='ok' for r in retrievals['retrievals']), 'model_attempts':len(runs['runs']), 'completed_model_runs':len(scored), 'schema_valid_records':total('schema_valid_count'),'emitted_records':emitted,'expected_records_across_completed_runs':expected,'oracle_value_matches':matches,'accepted_records':len(accepted),'quarantined_records':len(quarantine),'schema_pass_rate':total('schema_valid_count')/emitted if emitted else None,'precision':matches/emitted if emitted else None,'recall':matches/expected if expected else None,'complete_run_successes':sum(r['complete_run_success'] for r in results),'complete_run_success_rate':sum(r['complete_run_success'] for r in results)/len(results) if results else None,'omitted_ids':sum(len(r['omissions']) for r in scored),'duplicate_ids':sum(len(r['duplicate_ids']) for r in scored),'hallucinated_ids':sum(len(r['hallucinated_ids']) for r in scored),'prompt_tokens':sum(r.get('usage',{}).get('prompt_tokens',0) for r in runs['runs']),'completion_tokens':sum(r.get('usage',{}).get('completion_tokens',0) for r in runs['runs']),'list_price_upper_estimate_usd':sum(r.get('list_price_upper_estimate_usd',0) for r in runs['runs']),'reserved_upper_bound_usd':len(runs['runs'])*runs['reservation_usd_per_attempt'],'scrapingant_credit_cost':None}
+    summary={'retrieval_attempts':len(retrievals['retrievals']), 'retrieval_successes':sum(r['status']=='ok' for r in retrievals['retrievals']), 'model_attempts':len(runs['runs']), 'completed_model_runs':len(scored), 'raw_json_parse_successes':sum(r['raw_json_parse_success'] for r in scored), 'single_json_fences_decoded':sum(r['framing']=='single_json_fence' for r in scored), 'schema_valid_records':total('schema_valid_count'),'emitted_records':emitted,'expected_records_across_completed_runs':expected,'oracle_value_matches':matches,'accepted_records':len(accepted),'quarantined_records':len(quarantine),'schema_pass_rate':total('schema_valid_count')/emitted if emitted else None,'precision':matches/emitted if emitted else None,'recall':matches/expected if expected else None,'complete_run_successes':sum(r['complete_run_success'] for r in results),'complete_run_success_rate':sum(r['complete_run_success'] for r in results)/len(results) if results else None,'omitted_ids':sum(len(r['omissions']) for r in scored),'duplicate_ids':sum(len(r['duplicate_ids']) for r in scored),'hallucinated_ids':sum(len(r['hallucinated_ids']) for r in scored),'prompt_tokens':sum(r.get('usage',{}).get('prompt_tokens',0) for r in runs['runs']),'completion_tokens':sum(r.get('usage',{}).get('completion_tokens',0) for r in runs['runs']),'list_price_upper_estimate_usd':sum(r.get('list_price_upper_estimate_usd',0) for r in runs['runs']),'reserved_upper_bound_usd':len(runs['runs'])*runs['reservation_usd_per_attempt'],'scrapingant_credit_cost':None}
     unknown_usage=sum(not all(k in r.get('usage',{}) for k in ('prompt_tokens','completion_tokens')) or 'list_price_upper_estimate_usd' not in r for r in runs['runs'])
     summary['attempts_without_usage']=unknown_usage
     if unknown_usage or not runs['runs']:
