@@ -16,7 +16,7 @@ For a pinned reproduction use the executable-packet commit in `evidence.yaml` be
 python3 diagnose.py fixtures/denied-200.json
 ```
 
-This prints diagnostics and exits 2 (`stop`), without a `records` value. Accepting the valid snapshot exits 0. The example expects a non-empty JSON catalog with unique string ids/names and finite, nonnegative decimal-string prices. It rejects any unexpected envelope/record keys. Adapt the schema to your actual permitted endpoint; this is not a universal HTML parser or block detector.
+This prints diagnostics and exits 2 (`stop`), without a `records` value. Accepting the valid snapshot exits 0. The example expects a non-empty JSON catalog with unique non-empty string IDs, non-empty string names and finite, nonnegative decimal-string prices. It rejects any unexpected envelope/record keys. Adapt the schema to your actual permitted endpoint; this is not a universal HTML parser or block detector.
 
 ## Limits and operational use
 
