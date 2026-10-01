@@ -1,8 +1,8 @@
 article_id: cloudflare-banned-solution
 canonical_url: https://scrapingant.com/blog/cloudflare-banned-solution
 owner: Oleg Kulyk
-examples_repo_commit: null
-commit_scope: Executable offline packet; metadata commit pointer is filled after initial commit.
+examples_repo_commit: 4b927a1eb927f1eb64d7e512c15e1b9824242700
+commit_scope: Executable code, fixtures and captured output at this immutable commit; later metadata changes do not imply a new provider run.
 tested_at: '2026-10-01'
 status: offline-owned-snapshots-only
 requires_api_key: false
