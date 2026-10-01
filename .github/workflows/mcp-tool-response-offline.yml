@@ -1,0 +1,22 @@
+name: MCP tool response offline tests
+on:
+  pull_request:
+    paths:
+      - 'examples/what-is-mcp-server/02_tool_call.py'
+      - 'examples/what-is-mcp-server/test_tool_call.py'
+      - '.github/workflows/mcp-tool-response-offline.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test response handling without dependencies, keys or HTTP
+        run: python -m unittest discover -s examples/what-is-mcp-server -p 'test_tool_call.py' -v
