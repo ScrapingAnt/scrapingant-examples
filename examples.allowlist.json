@@ -140,6 +140,11 @@
       "id": "building-ai-driven-scrapers-in-2025-agents-mcp-and",
       "needs_api_key": false,
       "note": "Offline validator controls and replay of five MCP retrievals plus 15 Anthropic responses. No API calls; live acquisition/generation are explicit opt-ins."
+    },
+    {
+      "id": "cloudflare-banned-solution",
+      "needs_api_key": false,
+      "note": "Owned offline JSON snapshots and response-acceptance regressions. Standard library only; no network/API calls even if a key is configured."
     }
   ]
 }

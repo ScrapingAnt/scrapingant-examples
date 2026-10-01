@@ -1,0 +1,56 @@
+[
+  {
+    "case": "valid-json",
+    "status": 200,
+    "content_type": "application/json",
+    "ray_id": "synthetic-ray",
+    "action": "accept",
+    "records": [
+      {
+        "id": "A1",
+        "name": "Widget",
+        "price": "12.50"
+      }
+    ]
+  },
+  {
+    "case": "denied-403",
+    "status": 403,
+    "content_type": "text/html",
+    "ray_id": "synthetic-ray",
+    "action": "stop",
+    "reason": "http_failure"
+  },
+  {
+    "case": "denied-200",
+    "status": 200,
+    "content_type": "text/html",
+    "ray_id": "synthetic-ray",
+    "action": "stop",
+    "reason": "possible_1005_page"
+  },
+  {
+    "case": "challenge-200",
+    "status": 200,
+    "content_type": "text/html",
+    "ray_id": "synthetic-ray",
+    "action": "stop",
+    "reason": "unexpected_content_type"
+  },
+  {
+    "case": "error-json-200",
+    "status": 200,
+    "content_type": "application/json",
+    "ray_id": "synthetic-ray",
+    "action": "stop",
+    "reason": "invalid_records"
+  },
+  {
+    "case": "duplicate-json",
+    "status": 200,
+    "content_type": "application/json",
+    "ray_id": "synthetic-ray",
+    "action": "stop",
+    "reason": "invalid_records"
+  }
+]

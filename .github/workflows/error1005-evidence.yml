@@ -1,0 +1,17 @@
+name: Error 1005 offline evidence
+on:
+  pull_request:
+    paths:
+      - 'examples/cloudflare-banned-solution/**'
+      - '.github/workflows/error1005-evidence.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: examples/cloudflare-banned-solution/run.sh
