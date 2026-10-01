@@ -1,10 +1,12 @@
 """Offline protocol regression tests: no requests, credentials or provider credits."""
 import importlib.util
+import builtins
 import contextlib
 import io
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 SOURCE = Path(__file__).with_name('02_tool_call.py')
 def load_definitions():
@@ -42,6 +44,19 @@ class ProtocolTests(unittest.TestCase):
     def test_multiline_sse_and_comments(self):
         r=Response(': heartbeat\r\nevent: message\r\ndata: {"jsonrpc":"2.0",\r\ndata: "id":2,"result":{"content":[]}}\r\n\r\n',mime='text/event-stream; charset=utf-8')
         self.assertEqual(self.parse(r)['id'],2)
+    def test_sse_unicode_text_is_not_an_event_boundary(self):
+        value=rpc({'content':[{'type':'text','text':'first\u2028middle\u0085last'}]})
+        response=Response('data: '+json.dumps(value,ensure_ascii=False)+'\n\n',mime='text/event-stream')
+        try: actual=self.parse(response)
+        except ValueError:self.fail('Valid Unicode JSON text was split as an SSE event')
+        self.assertEqual(actual,value)
+    def test_import_does_not_read_key_or_load_http_dependency(self):
+        original_import=builtins.__import__
+        def guarded(name,*args,**kwargs):
+            if name=='requests':raise AssertionError('HTTP dependency loaded at import')
+            return original_import(name,*args,**kwargs)
+        with patch('os.environ.get',side_effect=AssertionError('Environment read at import')),patch('builtins.__import__',side_effect=guarded):
+            self.assertTrue(callable(load_definitions()['main']))
     def test_sse_final_event_without_blank_line(self):
         self.assertEqual(self.parse(Response('data:'+json.dumps(rpc()),mime='text/event-stream'))['id'],2)
     def test_jsonrpc_error_is_safe(self):

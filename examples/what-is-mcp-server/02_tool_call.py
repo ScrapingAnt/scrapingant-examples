@@ -22,7 +22,8 @@ def header(response, name):
 def sse_data(text):
     """Join data lines within each SSE event; ignore comments and event metadata."""
     data = []
-    for line in text.splitlines():
+    # SSE recognizes CR/LF only; Unicode separators may be valid JSON text.
+    for line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
         if not line:
             if data:
                 yield '\n'.join(data)
