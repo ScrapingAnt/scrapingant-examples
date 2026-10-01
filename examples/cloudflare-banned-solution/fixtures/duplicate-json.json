@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "CF-Ray": "synthetic-ray"
+  },
+  "body": "{\"records\": [{\"id\": \"A1\", \"name\": \"Widget\", \"price\": \"12.50\"}, {\"id\": \"A1\", \"name\": \"Widget\", \"price\": \"12.50\"}]}"
+}

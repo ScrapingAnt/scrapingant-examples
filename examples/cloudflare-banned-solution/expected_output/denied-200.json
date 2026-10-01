@@ -1,0 +1,7 @@
+{
+  "status": 200,
+  "content_type": "text/html",
+  "ray_id": "synthetic-ray",
+  "action": "stop",
+  "reason": "possible_1005_page"
+}

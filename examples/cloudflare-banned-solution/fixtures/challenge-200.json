@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "headers": {
+    "Content-Type": "text/html",
+    "CF-Ray": "synthetic-ray"
+  },
+  "body": "<h1>Checking your browser \u2014 synthetic fixture</h1>"
+}

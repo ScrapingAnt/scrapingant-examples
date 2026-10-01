@@ -1,0 +1,8 @@
+{
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "CF-Ray": "synthetic-ray"
+  },
+  "body": "{\"error\": \"access denied\"}"
+}

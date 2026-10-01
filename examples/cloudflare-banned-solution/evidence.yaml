@@ -1,0 +1,37 @@
+article_id: cloudflare-banned-solution
+canonical_url: https://scrapingant.com/blog/cloudflare-banned-solution
+owner: Oleg Kulyk
+examples_repo_commit: null
+commit_scope: Executable offline packet; metadata commit pointer is filled after initial commit.
+tested_at: '2026-10-01'
+status: offline-owned-snapshots-only
+requires_api_key: false
+default_checks_require_api_key: false
+environment:
+  python: '3.10.2'
+  os: macOS
+  dependencies: Python standard library only
+run_command: ./run.sh
+measurements:
+  designed_snapshots: 6
+  accepted: 1
+  stopped: 5
+  regression_test_methods: 12
+  outbound_requests: 0
+claims:
+  - fact: Error 1005 identifies owner ASN blocking; use visitor and owner resolution paths.
+    source: https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1005/
+    accessed_at: '2026-10-01'
+  - fact: HTTP 403 has multiple causes and is not alone a 1005 diagnosis.
+    source: https://developers.cloudflare.com/support/troubleshooting/http-status-codes/4xx-client-error/error-403/
+    accessed_at: '2026-10-01'
+  - fact: Local classifier accepts one designed catalog and stops five invalid or denied snapshots.
+    source: expected_output/matrix.json
+  - fact: Synthetic 200 denial yields stop and no records, CLI exit 2.
+    source: expected_output/denied-200.json
+limitations:
+  - Owned synthetic snapshots, not captured Cloudflare or provider responses.
+  - No bypass success, latency, availability, billing or production error distribution measured.
+  - JSON catalog acceptance schema is application-specific, not a universal extractor.
+  - Error text and headers do not authenticate a response origin.
+  - No automatic access recovery, retry, network request or output sink.
