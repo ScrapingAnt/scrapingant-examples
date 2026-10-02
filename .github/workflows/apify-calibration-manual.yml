@@ -28,6 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Reserve execution and cleanup time within the job limit
+        run: |
+          python3 - <<'PYTIME'
+          import os
+          import time
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
+              output.write(f'APIFY_CALIBRATION_WALL_DEADLINE={time.monotonic() + 540:.6f}\n')
+          PYTIME
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
@@ -57,3 +65,11 @@ jobs:
           APIFY_CALIBRATION_BUILD: ${{ inputs.build }}
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python calibration.py --execute --build "$APIFY_CALIBRATION_BUILD"
+      - name: Retain sanitized calibration receipt even after a stopped run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-calibration-sanitized-receipt
+          path: examples/apify-calibration/calibration-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,11 +1,17 @@
 """Offline plan by default. Live execution requires a later reviewed cost-guard update."""
 import argparse
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, localcontext
 import json
+import hashlib
 import os
+from pathlib import Path
 import re
 import sys
+import tempfile
+from time import monotonic
 from urllib.parse import parse_qsl, urlencode, urlsplit
+from urllib.error import HTTPError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ACTOR = "apify/web-scraper"
@@ -17,6 +23,28 @@ FIXTURES = {
 FIELDS = ("fixture", "sku", "name", "price_minor", "currency")
 POLL_LIMIT = 3
 RESPONSE_LIMIT = 131072
+STORE_FIELDS = {"dataset": ("defaultDatasetId", "datasets"),
+                "kv": ("defaultKeyValueStoreId", "key-value-stores"),
+                "queue": ("defaultRequestQueueId", "request-queues")}
+TERMINAL = ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED")
+MAX_CLEANUP_HOURS = Decimal("0.25")
+CREATION_TOLERANCE_SECONDS = 5
+MAX_WALL_SECONDS = 480
+MINIMUM_START_SECONDS = 360
+CLEANUP_RESERVE_SECONDS = 100
+TIMEOUTS = {"start": 30, "poll": 65, "export": 10, "metadata": 10, "delete": 10, "absence": 10}
+# Public build metadata verified separately; source/runtime/cost review is still pending.
+PUBLIC_BUILD_CANDIDATE = {"number": "3.0.25", "git_commit_id": "21de8bf52ca7a587e680635a4198abfada472a8e"}
+PUBLIC_ACTOR_ID = "moJRLRc85AitArpNN"  # Public Actor identity verified from its public build metadata.
+USAGE_FIELDS = ("ACTOR_COMPUTE_UNITS", "DATASET_READS", "DATASET_WRITES", "KEY_VALUE_STORE_READS",
+                "KEY_VALUE_STORE_WRITES", "KEY_VALUE_STORE_LISTS", "REQUEST_QUEUE_READS",
+                "REQUEST_QUEUE_WRITES", "DATA_TRANSFER_INTERNAL_GBYTES", "DATA_TRANSFER_EXTERNAL_GBYTES",
+                "PROXY_RESIDENTIAL_TRANSFER_GBYTES", "PROXY_SERPS")
+STAT_FIELDS = ("inputBodyLen", "migrationCount", "rebootCount", "restartCount", "resurrectCount",
+               "memAvgBytes", "memMaxBytes", "memCurrentBytes", "cpuAvgUsage", "cpuMaxUsage",
+               "cpuCurrentUsage", "netRxBytes", "netTxBytes", "durationMillis", "runTimeSecs",
+               "metamorph", "computeUnits")
+STORAGE_STAT_FIELDS = ("storageBytes", "readCount", "writeCount", "deleteCount", "listCount")
 
 # This is source-controlled policy, not a CLI flag, secret, or environment override.
 # Enabling it requires a reviewed all-meter bound, pinned build and retention/cleanup policy.
@@ -28,7 +56,7 @@ REVIEWED_GUARD = {
     "retention_policy": None,
 }
 BLOCKERS = (
-    "Actual immutable public build and resolved SDK behavior have not been verified.",
+    "Public build 3.0.25 exists; its resolved SDK/runtime behavior and all-meter bound still need review.",
     "Retained KV, queue, session/statistics/error metadata bytes have no reviewed upper bound.",
     "Seven-day unnamed expiry is not guaranteed: official latest-ten retention guidance conflicts.",
     "Post-run export/read/transfer volumes and termination accounting are not fully bounded.",
@@ -56,6 +84,20 @@ class PolicyError(Exception):
     """A safe, local policy diagnostic, never a provider response."""
 
 
+class CalibrationFailure(PolicyError):
+    def __init__(self, message, receipt):
+        super().__init__(message)
+        self.receipt = receipt
+
+
+class MissingStorage:
+    """Typed transport evidence of HTTP 404, never inferred from JSON error text."""
+
+
+class WallDeadline(PolicyError):
+    """A local wall budget was exhausted; no request was made."""
+
+
 def build_plan(build=None):
     if build is not None:
         validate_build(build)
@@ -68,6 +110,15 @@ def build_plan(build=None):
         "provider_calls_performed": 0,
         "actor": ACTOR,
         "source_checked_on": "2026-10-02",
+        "public_build_candidate": dict(PUBLIC_BUILD_CANDIDATE),
+        "maximum_provider_calls": 14,
+        "maximum_runner_wall_seconds": MAX_WALL_SECONDS,
+        "minimum_remaining_start_seconds": MINIMUM_START_SECONDS,
+        "request_timeouts_seconds": dict(TIMEOUTS),
+        "cleanup_reserved_seconds": CLEANUP_RESERVE_SECONDS,
+        "metrics_collection_enabled": False,
+        "cleanup_preparation": {"approval": False, "maximum_lifetime_hours": "0.25",
+                                "scope": "Only the initial run's three verified new unnamed default stores"},
         "fixture_body_bytes": {"complete": 290, "changed-layout": 422},
         "options": {"build": build, "memory": "1024", "timeout": "120",
                     "maxTotalChargeUsd": "0.10", "restartOnError": "false"},
@@ -98,7 +149,7 @@ def build_plan(build=None):
             "This payload has not been executed and provides no consumption, invoice or savings evidence.",
             "A run cap does not bound storage retention or later export/operation charges.",
             "1024MB times 120 seconds is only a nominal compute calculation; overhead is unresolved.",
-            "No build, account ceiling, storage deletion or cleanup has been configured by this package.",
+            "The live cost guard and deletion approval remain closed; no account ceiling or cleanup has been configured.",
         ],
     }
 
@@ -129,20 +180,35 @@ def require_readiness(build):
         raise PolicyError("Live execution blocked: reviewed all-in bound is outside the approved budget.")
 
 
-def execute_live(build, *, opt_in=False, environ=None, transport=None):
+def execute_live(build, *, opt_in=False, environ=None, transport=None, persist=None, emit=None):
     if opt_in is not True:
         raise PolicyError("Live execution requires explicit opt-in.")
     plan = build_plan(build)
     require_readiness(build)  # Must precede even reading the token environment variable.
+    require_cleanup_policy()  # This runner's live path requires the reviewed short cleanup policy.
     environment = os.environ if environ is None else environ
+    began = monotonic()
+    deadline = began + MAX_WALL_SECONDS
+    supplied_deadline = environment.get("APIFY_CALIBRATION_WALL_DEADLINE")
+    if supplied_deadline is not None:
+        try:
+            supplied = float(supplied_deadline)
+            if not 0 < supplied < float("inf"): raise ValueError
+            deadline = min(deadline, supplied)
+        except (ValueError, TypeError):
+            raise PolicyError("The job wall deadline is invalid.") from None
+    if deadline - monotonic() < MINIMUM_START_SECONDS:
+        raise PolicyError("Insufficient job time remains for a run and reserved cleanup; token not read.")
     token = environment.get("APIFY_TOKEN")
     if not isinstance(token, str) or not token or len(token) > 4096 or any(
             ord(character) < 33 or ord(character) > 126 for character in token):
         raise PolicyError("The narrowly supplied token environment variable is missing or invalid.")
-    return orchestrate(plan, token, HttpTransport(build) if transport is None else transport)
+    return orchestrate(plan, token, HttpTransport(build, deadline) if transport is None else transport,
+                       wall_deadline=deadline, persist=persist_receipt_atomic if persist is None else persist,
+                       emit=emit_receipt if emit is None else emit)
 
 
-def orchestrate(plan, token, transport):
+def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emit=None):
     """One run with bounded reads. A real transport independently enforces readiness."""
     try:
         build = plan["options"]["build"]
@@ -151,35 +217,297 @@ def orchestrate(plan, token, transport):
             raise PolicyError("The plan differs from the fixed owned-fixture scope.")
     except (KeyError, TypeError):
         raise PolicyError("The plan is invalid.") from None
+    result = {"evidence_type": "transport_receipt_not_an_invoice", "status": "UNKNOWN",
+              "wall_budget_exhausted": False,
+              "extraction_outcome": "not_attempted", "pre_cleanup_capture": None,
+              "pre_cleanup_capture_sha256": None, "pre_cleanup_evidence_verified": False,
+              "returned_output_count": None, "accepted_output_count": 0, "records": [],
+              "all_in_cost_reconciled": False,
+              "receipts": {"run": None, "usage": None, "usage_usd": None, "storage": {}},
+              "cleanup": {"absence_confirmed": False, "owner_attention_required": True,
+                          "state": "not_attempted", "stores": {}},
+              "request_counts": {key: 0 for key in ("start", "poll", "export", "metadata", "delete", "absence")},
+              "limitations": ["Run receipts exclude later export, metadata, deletion and absence-read charges.",
+                              "Residual storage or ambiguous network outcomes leave total cost unknown; do not rerun."]}
+    began = monotonic()
+    deadline = began + MAX_WALL_SECONDS
+    if wall_deadline is not None: deadline = min(deadline, wall_deadline)
+
+    def request(kind, method, url, payload=None):
+        if kind in ("metadata", "delete", "absence"):
+            remaining_cleanup = 9 - sum(result["request_counts"][key] for key in ("metadata", "delete", "absence"))
+            needed = remaining_cleanup * 10 + 10
+        else:
+            needed = TIMEOUTS[kind] + (CLEANUP_RESERVE_SECONDS if cleanup_requested else 0)
+            if kind == "start" and cleanup_requested: needed = MINIMUM_START_SECONDS
+        if monotonic() + needed > deadline:
+            result["wall_budget_exhausted"] = True
+            raise WallDeadline("Wall deadline reached; request skipped to preserve cleanup time.")
+        result["request_counts"][kind] += 1
+        return safe_request(transport, method, url, payload, token)
+
+    cleanup_requested = isinstance(REVIEWED_GUARD.get("retention_policy"), dict)
+    if cleanup_requested:
+        try: require_cleanup_policy()
+        except PolicyError:
+            raise CalibrationFailure("Cleanup approval/policy is incomplete; no run started.", result) from None
     start_url = API + "/actors/apify~web-scraper/runs?" + urlencode(plan["options"])
-    run = safe_request(transport, "POST", start_url, plan["input"], token)
-    run = validate_run(run, build)
-    run_id = safe_identifier(run.get("id"))
-    for _ in range(POLL_LIMIT):
-        if run["status"] in ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED"):
-            break
-        run = validate_run(safe_request(transport, "GET", API + "/actor-runs/" + run_id +
-                                       "?waitForFinish=60", None, token), build)
-        if safe_identifier(run.get("id")) != run_id:
-            raise PolicyError("Run polling returned an inconsistent response.")
-    if run["status"] != "SUCCEEDED":
-        raise PolicyError("The single run did not report success within the bounded poll count; no restart attempted.")
-    dataset_id = safe_identifier(run.get("defaultDatasetId"))
-    query = urlencode({"format": "json", "limit": "2", "fields": ",".join(FIELDS)})
-    items = safe_request(transport, "GET", API + "/datasets/" + dataset_id + "/items?" + query, None, token)
-    accepted = validate_output(items)
-    return {
-        "evidence_type": "transport_result_not_an_invoice",
-        "status": "SUCCEEDED", "returned_output_count": len(items),
-        "accepted_output_count": len(accepted), "records": accepted,
-        "all_in_cost_reconciled": False,
-        "limitations": ["Post-run charges are not reconciled; no account/provider identifiers are exported."],
-    }
+    try:
+        initial = validate_run(request("start", "POST", start_url, plan["input"]), build)
+        run_id = safe_identifier(initial.get("id"))
+        run = initial
+        result["status"] = run["status"]
+        if cleanup_requested:
+            verify_initial_references(initial)
+            if hasattr(transport, "bind_run"): transport.bind_run(initial)
+        for _ in range(POLL_LIMIT):
+            if run["status"] in TERMINAL: break
+            candidate = validate_run(request("poll", "GET", API + "/actor-runs/" + run_id +
+                                             "?waitForFinish=60"), build)
+            fields = ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values())
+            if any(candidate.get(field) != initial.get(field) for field in fields):
+                raise PolicyError("Run polling returned inconsistent scope references.")
+            run = candidate
+            result["status"] = run["status"]
+    except Exception:
+        result["cleanup"]["state"] = "unknown_run_or_poll_outcome"
+        persist_final(result, persist)
+        raise CalibrationFailure("Start/polling is ambiguous; owner attention required, no retry or deletion attempted.", result) from None
+    if run["status"] not in TERMINAL:
+        result["receipts"].update(run_receipts(run))
+        result["cleanup"]["state"] = "run_still_active"
+        persist_final(result, persist)
+        raise CalibrationFailure("Run remains active after bounded polling; owner attention required, no abort or deletion attempted.", result)
+    result["receipts"].update(run_receipts(run))
+    failure = None
+    try:
+        if run["status"] != "SUCCEEDED":
+            raise PolicyError("The terminal run did not succeed.")
+        dataset_id = safe_identifier(initial.get("defaultDatasetId"))
+        query = urlencode({"format": "json", "limit": "2", "fields": ",".join(FIELDS)})
+        items = request("export", "GET", API + "/datasets/" + dataset_id + "/items?" + query)
+        result["returned_output_count"] = len(items) if isinstance(items, list) else None
+        result["records"] = validate_output(items)
+        result["accepted_output_count"] = len(result["records"])
+        result["extraction_outcome"] = "accepted"
+    except Exception:
+        failure = "Terminal run or bounded export/extraction validation failed."
+        result["extraction_outcome"] = "failed"
+    finally:
+        if cleanup_requested:
+            cleanup_terminal(initial, run, transport, request, result, persist, emit)
+        else:
+            result["cleanup"]["state"] = "not_authorized"
+    result["local_elapsed_seconds"] = safe_number(monotonic() - began)
+    if not persist_final(result, persist): failure = "Final sanitized evidence could not be persisted; owner attention required."
+    if failure or (cleanup_requested and not result["cleanup"]["absence_confirmed"]):
+        raise CalibrationFailure(failure or "Cleanup is incomplete; residual storage and total cost require owner attention.", result)
+    return result
+
+
+def utc_now():
+    return datetime.now(timezone.utc)
+
+
+def timestamp(value):
+    try:
+        if not isinstance(value, str) or len(value) > 40: raise ValueError
+        result = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if result.tzinfo is None: raise ValueError
+        return result.astimezone(timezone.utc)
+    except (ValueError, TypeError):
+        raise PolicyError("A required provider timestamp is missing or invalid.") from None
+
+
+def require_cleanup_policy():
+    policy = REVIEWED_GUARD.get("retention_policy")
+    if (not isinstance(policy, dict) or policy.get("mode") != "cleanup" or
+            policy.get("cleanup_approved") is not True or not policy.get("review_reference") or
+            not Decimal("0") < quantity(policy.get("upper_bound_hours")) <= MAX_CLEANUP_HOURS):
+        raise PolicyError("The code-defined short-lifetime cleanup policy lacks approval or a valid bound.")
+    return policy
+
+
+def verify_initial_references(initial):
+    for field in ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values()):
+        safe_identifier(initial.get(field))
+    if PUBLIC_ACTOR_ID is not None and initial["actId"] != PUBLIC_ACTOR_ID:
+        raise PolicyError("Run Actor identity differs from the reviewed public identity.")
+    if len({initial[value[0]] for value in STORE_FIELDS.values()}) != 3:
+        raise PolicyError("The initial default storage references are not distinct.")
+    timestamp(initial.get("startedAt"))
+
+
+def verify_store(kind, response, initial, terminal):
+    data = response.get("data") if isinstance(response, dict) else None
+    if (not isinstance(data, dict) or data.get("id") != initial[STORE_FIELDS[kind][0]] or
+            data.get("userId") != initial["userId"] or "name" not in data or data["name"] is not None or
+            data.get("actRunId") != initial["id"] or data.get("actId") != initial["actId"]):
+        raise PolicyError("Storage metadata did not prove the new unnamed owned default scope.")
+    started, finished, created = map(timestamp, (initial.get("startedAt"), terminal.get("finishedAt"), data.get("createdAt")))
+    tolerance = timedelta(seconds=CREATION_TOLERANCE_SECONDS)
+    if finished < started or not started - tolerance <= created <= finished + tolerance:
+        raise PolicyError("Storage creation is outside the verified run lifetime.")
+    return data
+
+
+def cleanup_terminal(initial, terminal, transport, request, result, persist, emit):
+    metadata, valid = {}, True
+    for kind, (_, route) in STORE_FIELDS.items():
+        url = API + "/" + route + "/" + initial[STORE_FIELDS[kind][0]]
+        try:
+            response = request("metadata", "GET", url)
+            data = verify_store(kind, response, initial, terminal)
+            metadata[kind] = data
+            result["receipts"]["storage"][kind] = {"association_verified": True,
+                                                  "stats": number_fields(data.get("stats"), STORAGE_STAT_FIELDS)}
+        except Exception:
+            valid = False
+            result["receipts"]["storage"][kind] = {"association_verified": False, "stats": None}
+    try:
+        policy = require_cleanup_policy()
+        deadline = timestamp(initial["startedAt"]) + timedelta(hours=float(quantity(policy["upper_bound_hours"])))
+        if utc_now() > deadline or terminal["status"] not in TERMINAL or not valid:
+            raise PolicyError("Cleanup metadata, terminal status or lifetime policy could not be proved.")
+        if hasattr(transport, "authorize_cleanup"): transport.authorize_cleanup(initial, terminal, metadata)
+    except Exception:
+        result["cleanup"]["state"] = "scope_or_deadline_unverified"
+        return
+    capture = {"captured_at": utc_now().isoformat(), "status": result["status"],
+               "returned_output_count": result["returned_output_count"],
+               "accepted_output_count": result["accepted_output_count"], "records": result["records"],
+               "extraction_outcome": result["extraction_outcome"],
+               "receipts": result["receipts"], "request_counts": dict(result["request_counts"])}
+    result["pre_cleanup_capture"] = json.loads(canonical_bytes(capture))
+    result["pre_cleanup_capture_sha256"] = digest(capture)
+    try:
+        result["pre_cleanup_file_sha256"] = save_verified(result, "pre_cleanup", persist)
+        result["pre_cleanup_evidence_verified"] = True
+        if emit is not None: emit({"phase": "pre_cleanup_verified", "receipt": result})
+    except Exception:
+        result["cleanup"]["state"] = "evidence_not_durable"
+        return
+    for kind, (_, route) in STORE_FIELDS.items():
+        try:
+            reply = request("delete", "DELETE", API + "/" + route + "/" + initial[STORE_FIELDS[kind][0]])
+            state = "acknowledged" if reply is None else ("already_absent" if isinstance(reply, MissingStorage) else "unexpected_reply")
+        except Exception:
+            state = "ambiguous_failure"
+        result["cleanup"]["stores"][kind] = {"delete_outcome": state, "absence_confirmed": False}
+    for kind, (_, route) in STORE_FIELDS.items():
+        try:
+            reply = request("absence", "GET", API + "/" + route + "/" + initial[STORE_FIELDS[kind][0]])
+            absent = isinstance(reply, MissingStorage)
+        except Exception:
+            absent = False
+        result["cleanup"]["stores"][kind]["absence_confirmed"] = absent
+    complete = all(store["absence_confirmed"] for store in result["cleanup"]["stores"].values())
+    result["cleanup"].update(absence_confirmed=complete, owner_attention_required=not complete,
+                             state="absence_confirmed" if complete else "residual_or_unknown_storage")
+    completed = utc_now()
+    result["receipts"]["cleanup"] = {"attempts_finished_at": completed.isoformat(),
+                                     "since_run_started_seconds": safe_number((completed - timestamp(initial["startedAt"])).total_seconds())}
+
+
+def safe_number(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float, str, Decimal)): return None
+    try:
+        number = Decimal(str(value))
+        if not number.is_finite() or number < 0 or number > Decimal("1e18") or len(str(value)) > 48: return None
+        return value if type(value) is int else str(number)
+    except InvalidOperation:
+        return None
+
+
+def number_fields(value, fields):
+    if not isinstance(value, dict): return None
+    return {field: safe_number(value.get(field)) for field in fields}
+
+
+def run_receipts(run):
+    events = run.get("chargedEventCounts")
+    event_counts = None if not isinstance(events, dict) or len(events) > 64 else [safe_number(value) for value in events.values()]
+    def safe_time(value):
+        try: return timestamp(value).isoformat()
+        except PolicyError: return None
+    return {"run": {"build_number": run.get("buildNumber"),
+                    "started_at": safe_time(run.get("startedAt")), "finished_at": safe_time(run.get("finishedAt")),
+                    "usage_total_usd": safe_number(run.get("usageTotalUsd")),
+                    "charged_event_counts_without_labels": event_counts, "stats": number_fields(run.get("stats"), STAT_FIELDS)},
+            "usage": number_fields(run.get("usage"), USAGE_FIELDS),
+            "usage_usd": number_fields(run.get("usageUsd"), USAGE_FIELDS)}
+
+
+def canonical_bytes(value):
+    return (json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n").encode("utf-8")
+
+
+def digest(value):
+    return hashlib.sha256(canonical_bytes(value)).hexdigest()
+
+
+def save_verified(result, phase, persist):
+    if persist is None: raise PolicyError("Sanitized evidence has no durability callback.")
+    snapshot = json.loads(canonical_bytes(result))
+    expected = digest(snapshot)
+    if persist(snapshot, phase) != expected:
+        raise PolicyError("Sanitized evidence persistence did not verify its expected digest.")
+    return expected
+
+
+def persist_final(result, persist):
+    if persist is None: return True  # Direct mock-only orchestration can omit persistence when no cleanup is configured.
+    try:
+        result["final_file_sha256"] = save_verified(result, "final", persist)
+        return True
+    except Exception:
+        result["final_evidence_persistence_failed"] = True
+        result["cleanup"]["owner_attention_required"] = True
+        return False
+
+
+def persist_receipt_atomic(receipt, phase):
+    """Fixed local sanitized file, atomic replace, file+directory fsync, exact readback/hash verification."""
+    target = Path("calibration-receipt.json").resolve()
+    data, temporary = canonical_bytes(receipt), None
+    try:
+        with tempfile.NamedTemporaryFile(mode="wb", dir=target.parent, prefix=".calibration-receipt-", delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, target)
+        temporary = None
+        directory = os.open(target.parent, os.O_RDONLY)
+        try: os.fsync(directory)
+        finally: os.close(directory)
+        saved = target.read_bytes()
+        if saved != data or hashlib.sha256(saved).hexdigest() != hashlib.sha256(data).hexdigest():
+            raise PolicyError("Local sanitized evidence readback did not verify.")
+        return hashlib.sha256(saved).hexdigest()
+    except Exception:
+        raise PolicyError("Local sanitized evidence durability failed; details are not printed.") from None
+    finally:
+        if temporary is not None:
+            try: temporary.unlink()
+            except OSError: pass
+
+
+def emit_receipt(value):
+    print(json.dumps(value, indent=2), flush=True)
 
 
 def safe_request(transport, method, url, payload, token):
     try:
         return transport.request(method, url, payload, token)
+    except HTTPError as error:
+        parsed = urlsplit(url)
+        if error.code == 404 and parsed.netloc == "api.apify.com" and re.fullmatch(
+                r"/v2/(?:datasets|key-value-stores|request-queues)/[A-Za-z0-9]{1,64}", parsed.path) and not parsed.query:
+            error.close()
+            return MissingStorage()
+        error.close()
+        raise PolicyError("HTTP request failed; no automatic retry attempted.") from None
     except Exception:
         # Even exceptions from HTTP libraries may contain URLs, tokens, headers or full bodies.
         raise PolicyError("HTTP request failed or returned an invalid response; no automatic retry attempted.") from None
@@ -249,11 +577,51 @@ class NoRedirect(HTTPRedirectHandler):
         raise PolicyError("HTTP redirects are rejected; authorization remains on the fixed API host.")
 
 
+def read_bounded(response, deadline):
+    chunks, total = [], 0
+    while total <= RESPONSE_LIMIT:
+        if monotonic() >= deadline: raise WallDeadline("Response read exceeded its route deadline.")
+        chunk = response.read1(min(65536, RESPONSE_LIMIT + 1 - total))
+        if monotonic() > deadline: raise WallDeadline("Response read exceeded its route deadline.")
+        if not chunk: break
+        chunks.append(chunk)
+        total += len(chunk)
+    if total > RESPONSE_LIMIT: raise PolicyError("HTTP response exceeded its bounded read size.")
+    return b"".join(chunks)
+
+
 class HttpTransport:
     """No redirects or retries, bounded response bytes, fixed API routes, closed readiness gate."""
-    def __init__(self, build):
+    def __init__(self, build, wall_deadline=None):
         require_readiness(build)
         self.build = build
+        self.deadline = monotonic() + MAX_WALL_SECONDS
+        if wall_deadline is not None: self.deadline = min(self.deadline, wall_deadline)
+        self.initial, self.last_run = None, None
+        self.metadata, self.cleanup_urls = {}, set()
+        self.start_attempted = False
+        self.seen = {key: set() for key in TIMEOUTS}
+
+    def bind_run(self, initial):
+        require_readiness(self.build)
+        if self.initial is None or initial != self.initial:
+            raise PolicyError("The cleanup scope was not returned by this transport's single start.")
+        verify_initial_references(initial)
+
+    def authorize_cleanup(self, initial, terminal, metadata):
+        require_readiness(self.build)
+        policy = require_cleanup_policy()
+        self.bind_run(initial)
+        if terminal != self.last_run or terminal.get("status") not in TERMINAL or set(metadata) != set(STORE_FIELDS):
+            raise PolicyError("Cleanup lacks a confirmed terminal run and complete metadata.")
+        for kind in STORE_FIELDS:
+            if metadata[kind] != self.metadata.get(kind):
+                raise PolicyError("Cleanup metadata was not returned by this transport.")
+            verify_store(kind, {"data": metadata[kind]}, initial, terminal)
+        self.cleanup_deadline = timestamp(initial["startedAt"]) + timedelta(hours=float(quantity(policy["upper_bound_hours"])))
+        if utc_now() > self.cleanup_deadline:
+            raise PolicyError("The approved short cleanup lifetime has expired.")
+        self.cleanup_urls = {API + "/" + route + "/" + initial[field] for field, route in STORE_FIELDS.values()}
 
     def request(self, method, url, payload, token):
         require_readiness(self.build)
@@ -262,28 +630,73 @@ class HttpTransport:
         pairs = parse_qsl(parsed.query, keep_blank_values=True)
         query = dict(pairs)
         start = (method == "POST" and parsed.path == "/v2/actors/apify~web-scraper/runs" and
-                 query == plan["options"] and payload == plan["input"])
+                 query == plan["options"] and payload == plan["input"] and not self.start_attempted)
         poll = (method == "GET" and re.fullmatch(r"/v2/actor-runs/[A-Za-z0-9]{1,64}", parsed.path) and
-                query == {"waitForFinish": "60"} and payload is None)
+                query == {"waitForFinish": "60"} and payload is None and self.initial is not None and
+                parsed.path == "/v2/actor-runs/" + self.initial["id"] and len(self.seen["poll"]) < POLL_LIMIT)
         export = (method == "GET" and re.fullmatch(r"/v2/datasets/[A-Za-z0-9]{1,64}/items", parsed.path) and
-                  query == {"format": "json", "limit": "2", "fields": ",".join(FIELDS)} and payload is None)
+                  query == {"format": "json", "limit": "2", "fields": ",".join(FIELDS)} and payload is None and
+                  self.initial is not None and parsed.path == "/v2/datasets/" + self.initial["defaultDatasetId"] + "/items")
+        storage_kind = None
+        if self.initial is not None:
+            for kind, (field, route) in STORE_FIELDS.items():
+                if parsed.path == "/v2/" + route + "/" + self.initial[field]: storage_kind = kind
+        storage = storage_kind is not None and not query and payload is None and method in ("GET", "DELETE")
         if (parsed.scheme != "https" or parsed.netloc != "api.apify.com" or parsed.fragment or
-                len(pairs) != len(query) or not (start or poll or export)):
+                len(pairs) != len(query) or not (start or poll or export or storage)):
             raise PolicyError("HTTP route is outside the fixed calibration scope.")
+        kind = "start" if start else "poll" if poll else "export" if export else (
+            "delete" if method == "DELETE" else "absence" if url in self.cleanup_urls else "metadata")
+        if kind == "delete":
+            require_cleanup_policy()
+            if url not in self.cleanup_urls or utc_now() > self.cleanup_deadline:
+                raise PolicyError("Deletion lacks verified terminal scope or its approved lifetime.")
+        if kind != "poll" and url in self.seen[kind]:
+            raise PolicyError("Duplicate boundary operation rejected; no retry is permitted.")
+        if kind in ("metadata", "delete", "absence"):
+            needed = (9 - sum(len(self.seen[key]) for key in ("metadata", "delete", "absence"))) * 10 + 10
+        else:
+            needed = TIMEOUTS[kind] + CLEANUP_RESERVE_SECONDS
+            if kind == "start": needed = MINIMUM_START_SECONDS
+        if monotonic() + needed > self.deadline:
+            raise WallDeadline("Transport wall deadline reached before another operation.")
+        self.seen[kind].add(url if kind != "poll" else str(len(self.seen[kind])))
+        if start: self.start_attempted = True
         body = json.dumps(payload).encode("utf-8") if payload is not None else None
         request = Request(url, data=body, method=method,
                           headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"})
+        route_deadline = min(self.deadline, monotonic() + TIMEOUTS[kind])
         try:
-            with build_opener(NoRedirect()).open(request, timeout=65) as response:
-                data = response.read(RESPONSE_LIMIT + 1)
+            with build_opener(NoRedirect()).open(request, timeout=TIMEOUTS[kind]) as response:
+                status = response.getcode()
+                if kind == "delete":
+                    if status != 204: raise PolicyError("Deletion did not return its documented empty success response.")
+                    return None
+                if status != (201 if start else 200): raise PolicyError("HTTP success status is unexpected.")
+                data = read_bounded(response, route_deadline)
             if len(data) > RESPONSE_LIMIT:
                 raise PolicyError("HTTP response exceeded the bounded local read size.")
-            return json.loads(data.decode("utf-8"))
+            parsed_response = json.loads(data.decode("utf-8"), parse_float=Decimal)
+            if start:
+                self.initial = validate_run(parsed_response, self.build)
+                verify_initial_references(self.initial)
+                self.last_run = self.initial
+            elif poll:
+                self.last_run = validate_run(parsed_response, self.build)
+            elif kind == "metadata" and isinstance(parsed_response, dict) and isinstance(parsed_response.get("data"), dict):
+                self.metadata[storage_kind] = parsed_response["data"]
+            return parsed_response
+        except HTTPError as error:
+            if storage and error.code == 404:
+                error.close()
+                return MissingStorage()
+            error.close()
+            raise PolicyError("HTTP transport stopped; response details are not printed.") from None
         except Exception:
             raise PolicyError("HTTP transport stopped; response bodies, headers and identifiers are not printed.") from None
 
 
-def main(argv=None, *, environ=None, transport=None):
+def main(argv=None, *, environ=None, transport=None, persist=None, emit=None):
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--plan", action="store_true", help="Offline only; this is the default")
@@ -296,11 +709,15 @@ def main(argv=None, *, environ=None, transport=None):
             require_readiness(args.build)
             result = {"ready": True}
         elif args.execute:
-            result = execute_live(args.build, opt_in=True, environ=environ, transport=transport)
+            result = execute_live(args.build, opt_in=True, environ=environ, transport=transport, persist=persist, emit=emit)
         else:
             result = build_plan(args.build)
         print(json.dumps(result, indent=2))
         return 0
+    except CalibrationFailure as error:
+        print(json.dumps(error.receipt, indent=2))
+        print("Calibration stopped: " + str(error), file=sys.stderr)
+        return 2
     except PolicyError as error:
         print("Calibration stopped: " + str(error), file=sys.stderr)
         return 2
