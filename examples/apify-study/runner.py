@@ -8,6 +8,7 @@ bounded redacted error responses. Public callers must use public_result(), never
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, localcontext
+from functools import cached_property
 import base64
 import copy
 import hashlib
@@ -20,10 +21,14 @@ from time import monotonic, sleep
 from urllib.error import HTTPError, URLError
 from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
+import billing_projection
 
 RUNNER_READY = False
 REVIEWED_PLAN_SHA256 = "df4697d71f086921e715f80c4590b8b478c7d16b9dcd5f77deaedee965e0381d"
 REVIEWED_PLAN_FILE_SHA256 = "5480d5863ab1267b8f2437a7333cc2a12d00aa61accd97c6de47d3876701477b"
+# Root installs the separately reviewed fixed capability file and pins. No fallback.
+REVIEWED_CAPABILITY_PLAN_SHA256 = "253afef63e7774d2e36c0a862e8b8e5fc90f3e0b7b99eb81b1b8a2495379a874"
+REVIEWED_CAPABILITY_PLAN_FILE_SHA256 = "b1b409024d3391bc9a73a506e8722c5227861083907cb98e4441b7b3dc557bcc"
 API = "https://api.apify.com/v2"
 OWNED_HOST = "scrapingant.github.io"
 OWNED_PATH_PREFIX = "/scrapingant-examples/fixtures/"
@@ -33,6 +38,13 @@ REVIEWED_ACTORS = (("cheerio-scraper", "YrQuEkowkNCLdk4j2"),
                    ("puppeteer-scraper", "YJCnS9qogi9XxDgLB"),
                    ("website-content-crawler", "aYG0l9s7dbB7j3gbS"),
                    ("rag-web-browser", "3ox4R101TgZz67sLr"))
+CAPABILITY_CELL_IDENTITIES = tuple(
+    ("cap-r%d-%s" % (rep, suffix), REVIEWED_ACTORS[index][0], REVIEWED_ACTORS[index][1])
+    for rep in (1, 2, 3)
+    for suffix, index in (("cheerio-static", 0), ("cheerio-dynamic", 0), ("web-static", 1), ("web-dynamic", 1),
+                          ("playwright-static", 2), ("playwright-dynamic", 2), ("puppeteer-static", 3),
+                          ("puppeteer-dynamic", 3), ("website-content-crawler", 4),
+                          ("rag-web-browser-static", 5), ("rag-web-browser-dynamic", 5), ("rag-web-browser-formatting", 5)))
 TERMINAL = ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED")
 ACTIVE = ("READY", "RUNNING", "TIMING-OUT", "ABORTING")
 STORES = {"dataset": ("defaultDatasetId", "datasets"),
@@ -50,6 +62,7 @@ SETTLE_SECONDS = 10
 APPROVAL_AGE_SECONDS = 25 * 60
 DELETE_AGE_SECONDS = 30 * 60
 RESPONSE_LIMIT = 131072
+CAPABILITY_EXPORT_LIMIT = 614400
 ERROR_RESPONSE_LIMIT = 16384
 ERROR_NORMALIZATION_PASSES = 6
 # Exact, source-verified 403 codes; other provider strings stay private.
@@ -162,18 +175,24 @@ def owned_url(value):
             and u.path.startswith(OWNED_PATH_PREFIX) and not any(s in u.path for s in ("..", "%", "\\")))
 
 
-def require_guard():
-    if RUNNER_READY is not True or not digest(REVIEWED_PLAN_SHA256):
+def require_guard(stage="SMOKE", plan_sha256=None):
+    pin = REVIEWED_PLAN_SHA256 if stage == "SMOKE" else REVIEWED_CAPABILITY_PLAN_SHA256 if stage == "CAPABILITY" else None
+    if RUNNER_READY is not True or not digest(pin):
         raise Fault("guard_closed")
+    if plan_sha256 is not None and plan_sha256 != pin:
+        raise Fault("unreviewed_plan")
 
 
 def validate_plan(plan):
-    if not isinstance(plan, dict) or not digest(REVIEWED_PLAN_SHA256) or sha(canonical(plan)) != REVIEWED_PLAN_SHA256:
+    stage = plan.get("stage") if isinstance(plan, dict) else None
+    pin = REVIEWED_PLAN_SHA256 if stage == "SMOKE" else REVIEWED_CAPABILITY_PLAN_SHA256 if stage == "CAPABILITY" else None
+    if not isinstance(plan, dict) or not digest(pin) or sha(canonical(plan)) != pin:
         raise Fault("unreviewed_plan")
-    if plan.get("schema_version") != 1 or plan.get("stage") != "SMOKE" or plan.get("aggregate_reserved_usd") != "0.84":
+    capability = stage == "CAPABILITY"
+    if plan.get("schema_version") != 1 or plan.get("aggregate_reserved_usd") != ("3.60" if capability else "0.84"):
         raise Fault("invalid_plan")
     cells = plan.get("cells")
-    if not isinstance(cells, list) or len(cells) != 6:
+    if not isinstance(cells, list) or len(cells) != (36 if capability else 6):
         raise Fault("invalid_plan")
     names, actors = set(), set()
     for index, spec in enumerate(cells):
@@ -187,13 +206,19 @@ def validate_plan(plan):
         # An override can target only these six identities in the reviewed order.
         # Historical plans without overrides remain restorable; capture requires
         # the explicit limited intent separately, without a default fallback.
-        reviewed_name, reviewed_id = REVIEWED_ACTORS[index]
-        if "force_permission_level" in spec and (
+        if capability:
+            reviewed_cell, reviewed_name, reviewed_id = CAPABILITY_CELL_IDENTITIES[index]
+            if (name != reviewed_cell or spec.get("actor") != "apify/" + reviewed_name or actor != reviewed_id
+                    or spec.get("force_permission_level") != "LIMITED_PERMISSIONS"):
+                raise Fault("invalid_cell")
+        else:
+            reviewed_name, reviewed_id = REVIEWED_ACTORS[index]
+        if not capability and "force_permission_level" in spec and (
                 spec["force_permission_level"] != "LIMITED_PERMISSIONS"
                 or name != "smoke-" + reviewed_name or spec.get("actor") != "apify/" + reviewed_name
                 or actor != reviewed_id):
             raise Fault("invalid_cell")
-        if actor in actors:
+        if not capability and actor in actors:
             raise Fault("invalid_cell")
         actors.add(actor)
         build = spec.get("build")
@@ -204,15 +229,15 @@ def validate_plan(plan):
             raise Fault("invalid_cell")
         if (opts["build"] != build or type(opts["memoryMbytes"]) is not int or opts["memoryMbytes"] not in (4096, 8192)
                 or type(opts["timeoutSecs"]) is not int or opts["timeoutSecs"] != 120
-                or opts["maxTotalChargeUsd"] != "0.12" or opts["restartOnError"] is not False
+                or opts["maxTotalChargeUsd"] != ("0.08" if capability else "0.12") or opts["restartOnError"] is not False
                 or spec.get("ancillary_reserve_usd") != "0.02"):
             raise Fault("invalid_cell")
         if not isinstance(spec.get("input"), dict) or len(canonical(spec["input"])) > 131072:
             raise Fault("invalid_cell")
         out = spec.get("output")
-        if not isinstance(out, dict) or type(out.get("max_records")) is not int or out["max_records"] not in (1, 3):
+        if not isinstance(out, dict) or type(out.get("max_records")) is not int or out["max_records"] not in ((1, 30) if capability else (1, 3)):
             raise Fault("invalid_cell")
-        if type(out.get("max_bytes")) is not int or not 1 <= out["max_bytes"] <= 65536:
+        if type(out.get("max_bytes")) is not int or not 1 <= out["max_bytes"] <= (524288 if capability else 65536):
             raise Fault("invalid_cell")
         fields = out.get("fields")
         if (not isinstance(fields, list) or not fields or len(set(fields)) != len(fields)
@@ -235,7 +260,7 @@ def validate_plan(plan):
                 contract_urls = list(contracts)
             else:
                 contract_urls = []
-            if (len(contract_urls) != len(urls) or set(contract_urls) != set(urls) or "url" not in fields
+            if ((not (capability and contracts == []) and (len(contract_urls) != len(urls) or set(contract_urls) != set(urls))) or "url" not in fields
                     or not (set(fields) & {"text", "markdown"})):
                 raise Fault("invalid_cell")
     return plan
@@ -243,12 +268,19 @@ def validate_plan(plan):
 
 def load_reviewed_plan(raw):
     """Root reads the fixed file; both its bytes and canonical dictionary are pinned."""
-    if not isinstance(raw, bytes) or len(raw) > 262144 or not digest(REVIEWED_PLAN_FILE_SHA256) or sha(raw) != REVIEWED_PLAN_FILE_SHA256:
+    if not isinstance(raw, bytes):
+        raise Fault("unreviewed_plan")
+    file_sha = sha(raw)
+    smoke = digest(REVIEWED_PLAN_FILE_SHA256) and file_sha == REVIEWED_PLAN_FILE_SHA256 and len(raw) <= 262144
+    capability = digest(REVIEWED_CAPABILITY_PLAN_FILE_SHA256) and file_sha == REVIEWED_CAPABILITY_PLAN_FILE_SHA256 and len(raw) <= 1048576
+    if not (smoke or capability):
         raise Fault("unreviewed_plan")
     try:
         plan = json.loads(raw)
     except (ValueError, UnicodeDecodeError, RecursionError):
         raise Fault("invalid_plan") from None
+    if not isinstance(plan, dict) or plan.get("stage") != ("CAPABILITY" if capability else "SMOKE"):
+        raise Fault("unreviewed_plan")
     return validate_plan(plan)
 
 
@@ -256,6 +288,9 @@ def load_reviewed_plan(raw):
 class Cell:
     plan_bytes: bytes
     cell_id: str
+    @cached_property
+    def stage(self):
+        return validate_plan(json.loads(self.plan_bytes))["stage"]
     @property
     def spec(self):
         plan = validate_plan(json.loads(self.plan_bytes))
@@ -264,7 +299,7 @@ class Cell:
             raise Fault("invalid_cell")
         return choices[0]
     def __repr__(self):
-        return "<reviewed smoke cell>"
+        return "<reviewed study cell>"
 
 
 def prepare_cell(plan, cell_id):
@@ -281,15 +316,17 @@ class StudyBudget:
         self.plan_sha256 = sha(canonical(plan))
         self.claimed = set()
         self.reserved_usd = Decimal(0)
+        self.max_cells = len(plan["cells"])
+        self.maximum_usd = Decimal(plan["aggregate_reserved_usd"])
     def claim(self, cell):
         if (not isinstance(cell, Cell) or sha(cell.plan_bytes) != self.plan_sha256
-                or cell.cell_id in self.claimed or len(self.claimed) >= 6):
+                or cell.cell_id in self.claimed or len(self.claimed) >= self.max_cells):
             raise Fault("budget_exhausted")
-        cell.spec
+        spec = cell.spec
         with localcontext() as ctx:
             ctx.prec = 50
-            amount = self.reserved_usd + Decimal("0.14")
-        if amount > Decimal("0.84"):
+            amount = self.reserved_usd + Decimal(spec["options"]["maxTotalChargeUsd"]) + Decimal(spec["ancillary_reserve_usd"])
+        if amount > self.maximum_usd:
             raise Fault("budget_exhausted")
         self.claimed.add(cell.cell_id)
         self.reserved_usd = amount
@@ -390,7 +427,7 @@ def validate_run(data, cell, initial=None, required_status=None):
     if (not isinstance(opts, dict) or opts.get("build") != spec["build"]
             or type(opts.get("memoryMbytes")) is not int or opts["memoryMbytes"] != spec["options"]["memoryMbytes"]
             or type(opts.get("timeoutSecs")) is not int or opts["timeoutSecs"] != 120
-            or number(opts.get("maxTotalChargeUsd")) != Decimal("0.12")
+            or number(opts.get("maxTotalChargeUsd")) != Decimal(spec["options"]["maxTotalChargeUsd"])
             or ("restartOnError" in opts and opts["restartOnError"] is not False)):
         raise Fault("options_mismatch", "run_validation")
     start = timestamp(data.get("startedAt"))
@@ -426,6 +463,7 @@ def run_receipt(data, cell):
             "usage_usd": numeric_fields(data.get("usageUsd"), USAGE_FIELDS),
             "stats": numeric_fields(data.get("stats"), STAT_FIELDS),
             "charged_event_counts": numeric_fields(data.get("chargedEventCounts"), events),
+            "billing_evidence": billing_projection.project_run_billing(data, events),
             "meters_state": "preliminary", "invoice_finality": False}
 
 
@@ -577,7 +615,7 @@ def persist_capture(state, callback):
 
 def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monotonic,
                       utcnow=lambda: datetime.now(timezone.utc), wait=sleep, deadline=None):
-    require_guard()
+    require_guard(cell.stage if isinstance(cell, Cell) else "SMOKE")
     if not isinstance(cell, Cell):
         raise Fault("invalid_cell")
     cell.spec
@@ -589,7 +627,7 @@ def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monot
         raise Fault("budget_exhausted")
     budget.claim(cell)  # A start attempt consumes the full per-cell reserve.
     state = PrivateState(cell)
-    state.evidence = {"schema_version": 1, "stage": "SMOKE", "cell_id": cell.cell_id,
+    state.evidence = {"schema_version": 1, "stage": cell.stage, "cell_id": cell.cell_id,
                       "actor_id": cell.spec["actor_id"], "invoice_finality": False, "all_in_cost_reconciled": False,
                       "run": None, "records": [], "extraction_state": "not_attempted", "storage": {},
                       "owner_association_verified": False, "captured_at": None}
@@ -679,7 +717,7 @@ def public_result(state):
               for k in empty_counts()}
     return {"cell_id": state.cell.cell_id, "actor_id": spec["actor_id"],
             "status": state.status if state.status in TERMINAL + ACTIVE else "UNKNOWN",
-            "stage": "SMOKE", "request_counts": counts,
+            "stage": state.cell.stage, "request_counts": counts,
             "ciphertext_sha256": state.ciphertext_sha256 if digest(state.ciphertext_sha256) else None,
             "diagnostic": diagnostic, "cleanup_state": state.cleanup_state if state.cleanup_state in ("not_attempted", "blocked", "residual", "complete") else "blocked",
             "owner_attention_required": bool(state.latest_active or not state.capture_verified or not state.encrypted_verified
@@ -701,7 +739,7 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
             result["http_error_responses"].append(copy.deepcopy(exc.error_response))
     try:
         deadline = min(deadline, clock() + CLEANUP_WALL_SECONDS) if deadline is not None else clock() + CLEANUP_WALL_SECONDS
-        require_guard()
+        require_guard(state.cell.stage if isinstance(state, PrivateState) else "SMOKE")
         if (not isinstance(state, PrivateState) or not state.capture_verified or not state.encrypted_verified
                 or state.latest_active or state.cleanup_state != "not_attempted"):
             raise Fault("state_mismatch", "approval")
@@ -789,7 +827,7 @@ def private_state_bytes(state):
     data = {"schema_version": 1, "plan_sha256": sha(state.cell.plan_bytes), "cell_id": state.cell.cell_id,
             **{k: copy.deepcopy(getattr(state, k)) for k in PRIVATE_STATE_KEYS if k not in ("schema_version", "plan_sha256", "cell_id")}}
     raw = canonical(data)
-    if len(raw) > 262144:
+    if len(raw) > (1048576 if state.cell.stage == "CAPABILITY" else 262144):
         raise Fault("state_mismatch")
     restore_private_state(raw, json.loads(state.cell.plan_bytes))
     return raw
@@ -803,7 +841,7 @@ def serialize_private_state(state):
 def restore_private_state(raw, plan):
     """Verify the exact frozen scope/receipt/counts before creating cleanup transport."""
     try:
-        if not isinstance(raw, bytes) or len(raw) > 262144:
+        if not isinstance(raw, bytes) or len(raw) > (1048576 if plan.get("stage") == "CAPABILITY" else 262144):
             raise Fault("state_mismatch")
         def unique(pairs):
             d = {}
@@ -845,10 +883,10 @@ def restore_private_state(raw, plan):
                 raise Fault("state_mismatch")
             api_copy = copy.deepcopy(identity)
             api_copy["buildNumber"] = identity["build"]
-            api_copy["options"]["maxTotalChargeUsd"] = Decimal("0.12")
+            api_copy["options"]["maxTotalChargeUsd"] = Decimal(cell.spec["options"]["maxTotalChargeUsd"])
             validate_run(api_copy, cell)
         ev = data["evidence"]
-        if (ev.get("scope_association_sha256") != (scope_commitment(identity) if identity else None)
+        if (ev.get("stage") != cell.stage or ev.get("scope_association_sha256") != (scope_commitment(identity) if identity else None)
                 or ev.get("cell_id") != cell.cell_id or ev.get("actor_id") != cell.spec["actor_id"]
                 or (data["cleanup_state"] == "not_attempted" and ev.get("request_counts") != data["request_counts"])):
             raise Fault("state_mismatch")
@@ -871,7 +909,7 @@ def restore_private_state(raw, plan):
 
 def execute(plan, cell_id, *, opt_in=False, environ=None, persist_encrypted=None, budget=None,
             transport_factory=None, clock=monotonic, utcnow=lambda: datetime.now(timezone.utc), wait=sleep, deadline=None):
-    require_guard()
+    require_guard(plan.get("stage") if isinstance(plan, dict) else None)
     if opt_in is not True:
         raise Fault("opt_in_required")
     cell = prepare_cell(plan, cell_id)
@@ -1031,7 +1069,7 @@ class HttpTransport:
     enable_terminal_settling = True
     def __init__(self, cell, token, *, mode="capture", identity=None, request_counts=None,
                  opener=None, clock=monotonic, deadline=None):
-        require_guard()
+        require_guard(cell.stage if isinstance(cell, Cell) else "SMOKE")
         if not isinstance(cell, Cell) or mode not in ("capture", "cleanup"):
             raise Fault("invalid_cell")
         self.cell, self.spec, self.mode = cell, cell.spec, mode
@@ -1108,7 +1146,7 @@ class HttpTransport:
         return Fault(category, stage if category == "deadline_exceeded" else "response_status", code,
                      machine_error_type=machine, response_format=response_format, error_response=evidence)
     def request(self, operation, identity, timeout):
-        require_guard()
+        require_guard(self.cell.stage, sha(self.cell.plan_bytes))
         if self.latest_active:
             raise Fault("latest_run_active", "run_validation")
         if operation not in TIMEOUTS or timeout != TIMEOUTS[operation]:
@@ -1125,7 +1163,7 @@ class HttpTransport:
         if operation == "start":
             opts = self.spec["options"]
             query = {"build": self.spec["build"], "memory": opts["memoryMbytes"], "timeout": 120,
-                     "maxTotalChargeUsd": "0.12", "restartOnError": "false"}
+                     "maxTotalChargeUsd": self.spec["options"]["maxTotalChargeUsd"], "restartOnError": "false"}
             if "force_permission_level" in self.spec:
                 query["forcePermissionLevel"] = self.spec["force_permission_level"]
             url = API + "/acts/" + self.spec["actor_id"] + "/runs?" + urlencode(query)
@@ -1176,14 +1214,15 @@ class HttpTransport:
             if status != expected:
                 raise Fault("unexpected_http_status", "response_status", status)
             body = bytearray()
+            limit = CAPABILITY_EXPORT_LIMIT if operation == "export" and self.cell.stage == "CAPABILITY" else RESPONSE_LIMIT
             while True:
                 route_time("response_read")
-                chunk = response.read1(min(8192, RESPONSE_LIMIT + 1 - len(body)))
+                chunk = response.read1(min(8192, limit + 1 - len(body)))
                 route_time("response_read")
                 if not chunk:
                     break
                 body.extend(chunk)
-                if len(body) > RESPONSE_LIMIT:
+                if len(body) > limit:
                     raise Fault("response_too_large", "response_read", status)
             route_time("json_decode")
             def reject_constant(value):

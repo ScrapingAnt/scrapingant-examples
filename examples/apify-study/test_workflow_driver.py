@@ -26,6 +26,64 @@ class WorkflowTests(unittest.TestCase):
     def setUp(self):
         self.approval={'plaintext_sha256':'a'*64,'ciphertext_sha256':'b'*64,'scope_approved':True}
 
+    def test_capability_scopes_are_exact_first_twelve_and_remaining_twenty_four_offline(self):
+        expected=[v['cell_id'] for v in fixture.capability_plan_fixture()['cells']]
+        with patch.object(driver.os, 'environ', fixture.ForbiddenEnvironment()), patch.object(driver, 'plan', side_effect=AssertionError('Manifest reads plan')):
+            first=driver.smoke_manifest('capability-first-repetition')
+            later=driver.smoke_manifest('capability-remaining-repetitions')
+        self.assertEqual(first, expected[:12]); self.assertEqual(later, expected[12:])
+        self.assertEqual(len(set(first+later)),36)
+        for bad in ('capability-core','capability-r4','cap-r1-cheerio-static'):
+            with self.assertRaises(driver.runner.Fault): driver.smoke_manifest(bad)
+
+    def test_capability_file_and_scope_are_selected_before_environment_and_limited_is_required(self):
+        r=driver.runner; reviewed=fixture.capability_plan_fixture(); raw=json.dumps(reviewed,indent=2).encode()
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'capability-plan.json').write_bytes(raw)
+            with patch.object(driver,'ROOT',root), patch.object(r,'REVIEWED_CAPABILITY_PLAN_SHA256',r.sha(r.canonical(reviewed)),create=True),\
+                 patch.object(r,'REVIEWED_CAPABILITY_PLAN_FILE_SHA256',r.sha(raw),create=True):
+                self.assertEqual(driver.plan('cap-r1-cheerio-static'),reviewed)
+                with self.assertRaises(r.Fault):driver.plan('cap-r4-cheerio-static')
+        with patch.object(r,'RUNNER_READY',False), patch.object(driver,'plan',side_effect=AssertionError('Closed guard reads plan')):
+            with self.assertRaises(r.Fault) as error:driver.capture('cap-r1-cheerio-static',environ=fixture.ForbiddenEnvironment())
+        self.assertEqual(error.exception.category,'guard_closed')
+        reviewed['cells'][0].pop('force_permission_level')
+        with patch.object(r,'RUNNER_READY',True), patch.object(r,'REVIEWED_CAPABILITY_PLAN_SHA256',r.sha(r.canonical(reviewed)),create=True),\
+             patch.object(driver,'plan',return_value=reviewed):
+            with self.assertRaises(r.Fault):driver.capture('cap-r1-cheerio-static',environ=fixture.ForbiddenEnvironment())
+
+    def test_capability_approval_route_keeps_one_fixed_cell_and_no_credentials(self):
+        requested=[]; approval=self.approval
+        class Opener:
+            def open(self,req,timeout): requested.append(req.full_url); return Reply(json.dumps(approval).encode())
+        self.assertEqual(driver.fetch_approval('cap-r3-rag-web-browser-formatting',opener=Opener()),approval)
+        self.assertEqual(requested,[driver.APPROVAL_BASE+'cap-r3-rag-web-browser-formatting.json'])
+        for cell in ('cap-r4-rag-web-browser-formatting','../cap-r1-cheerio-static'):
+            with self.assertRaises(driver.runner.Fault):driver.fetch_approval(cell,opener=Opener())
+        self.assertEqual(len(requested),1)
+
+    def test_capability_manifest_cli_and_workflow_are_finite_and_fail_fast(self):
+        with patch('sys.argv',['workflow_driver.py','manifest','--smoke-scope','capability-first-repetition']),contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(driver.main(),0)
+        self.assertEqual(len(json.loads(out.getvalue())),12)
+        workflow=(driver.ROOT.parents[1]/'.github/workflows/apify-study-smoke.yml').read_text()
+        self.assertIn('capability-first-repetition',workflow)
+        self.assertIn('capability-remaining-repetitions',workflow)
+        self.assertIn('max-parallel: 1',workflow);self.assertIn('fail-fast: true',workflow)
+        self.assertIn("github.run_attempt == 1",workflow)
+
+    def test_closed_capability_cli_failure_reports_stage_without_reading_secret(self):
+        class NoSecret(dict):
+            def get(self,key,*args):
+                if key=='APIFY_TOKEN':raise AssertionError('secret read before guard')
+                return super().get(key,*args)
+        with patch.object(driver.runner,'RUNNER_READY',False),patch.object(driver.os,'environ',NoSecret()),\
+             patch('sys.argv',['workflow_driver.py','capture','--cell','cap-r1-cheerio-static','--execute']),contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(driver.main(),1)
+        public=json.loads(out.getvalue())
+        self.assertEqual(public.get('stage'),'CAPABILITY')
+        self.assertEqual(public['diagnostic']['category'],'guard_closed')
+
     def test_manifest_has_only_one_or_the_exact_five_cells_without_environment(self):
         self.assertTrue(callable(getattr(driver, 'smoke_manifest', None)), 'fixed offline manifest is missing')
         class Forbidden(dict):

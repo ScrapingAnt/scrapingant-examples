@@ -1,4 +1,4 @@
-name: Apify bounded smoke (guard closed)
+name: Apify bounded study (guard closed)
 on:
   push:
     paths:
@@ -7,13 +7,15 @@ on:
   workflow_dispatch:
     inputs:
       smoke_scope:
-        description: Fixed reviewed cell manifest; remaining five execute sequentially
+        description: Fixed reviewed manifest; one matrix job at a time, stop on failed proof
         type: choice
         required: true
         default: cheerio
         options:
           - cheerio
           - remaining-five
+          - capability-first-repetition
+          - capability-remaining-repetitions
       execute_reviewed_smoke:
         description: Execute the selected reviewed LIMITED manifest; encrypted capture then verified cleanup
         type: boolean

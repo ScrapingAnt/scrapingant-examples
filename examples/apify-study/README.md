@@ -1,4 +1,4 @@
-# Bounded owned-fixture smoke
+# Bounded owned-fixture study
 
 This directory implements fixed, source-reviewed prerequisite smokes against
 owned synthetic fixtures. Fixtures are ground truth; they are not Actor results.
@@ -104,3 +104,42 @@ Official parameter and resource references, checked2026-10-02:
   or purchase. This method performs neither.
 - [SDK3.7.2 proxy initialization](https://github.com/apify/apify-sdk-js/blob/v3.7.2/src/proxy_configuration.ts):
   first-party access checks, distinct from target page requests.
+
+
+The separately pinned `capability-plan.json` defines exactly 36 core capability
+cells: three identical repetitions of four structured Actors on each of 30
+static and 30 dynamic fixtures, WCC on all 30 content fixtures, and RAG on three
+matched content URLs in separate starts. `capability-first-repetition` selects
+12 fixed cells; `capability-remaining-repetitions` selects the other 24. These
+scopes retain one running job at a time and stop on failed capture/cleanup proof.
+Each cell requests a USD0.08 all-model run cap and holds a separate USD0.02
+ancillary reservation; the whole core method reserves USD3.60. These are holds,
+not predicted charges or an account-wide invoice guarantee.
+
+Structured captures allow at most 30 assigned rows plus an excess sentinel,
+16,384 projected bytes; content captures allow 30 WCC or one RAG row, at most
+524,288 projected bytes. The complete encrypted plaintext remains at most1MiB.
+Capability plan bytes and canonical content receive separate pins; changing
+that file, cell identity/build/options/URLs/inputs or stage invalidates execution
+before token access. SMOKE retains its original six-cell bounds and source pin.
+
+The synthetic fixture scope totals819 assigned repeated case observations,
+including90 explicitly unsupported Cheerio JavaScript assignments retained in
+the primary denominator. Source-supported structured admission/readiness hooks
+have same-version local browser replay evidence; that replay is not an Apify
+Linux runtime benchmark. Web/Puppeteer account for the native Puppeteer request
+observer before adding the controlled handler. WCC/RAG use exact owned resource
+graphs, supported finite native controls, zero request retries, concurrency one
+and a120s deadline. They do not establish an all-resource rate guarantee or
+unrestricted Internet throughput. A charge or timeout limit can censor output;
+missing assignments and accidental harness failures remain visible.
+
+Private run receipts additionally preserve documented billing-field presence,
+known pricing-model/event-price fields and the documented USER paying-party
+value. Missing, explicit null, numeric zero, invalid and unrecognized fields
+stay distinct. Unknown provider text/account IDs are omitted. No applied account
+tier, universal rental migration, inclusion rule or final invoice is inferred
+from an Actor Store label, event count or missing usage component. Refreshed
+cleanup snapshots preserve their own preliminary values; never add component
+charges to an already reported run total a second time. See the official
+[Get run schema](https://docs.apify.com/api/v2/actor-run-get), checked2026-10-02.

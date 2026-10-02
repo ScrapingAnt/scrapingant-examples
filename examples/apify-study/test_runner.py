@@ -63,6 +63,30 @@ def all_limited_plan_fixture():
     return plan
 
 
+def capability_plan_fixture():
+    """Thirty-six synthetic cells; native input behavior is not simulated."""
+    template = all_limited_plan_fixture()
+    per_rep = [('cheerio-static', 0), ('cheerio-dynamic', 0), ('web-static', 1), ('web-dynamic', 1),
+               ('playwright-static', 2), ('playwright-dynamic', 2), ('puppeteer-static', 3),
+               ('puppeteer-dynamic', 3), ('website-content-crawler', 4),
+               ('rag-web-browser-static', 5), ('rag-web-browser-dynamic', 5), ('rag-web-browser-formatting', 5)]
+    cells = []
+    for rep in range(1, 4):
+        for name, index in per_rep:
+            spec = copy.deepcopy(template['cells'][index])
+            spec['cell_id'] = 'cap-r%s-%s' % (rep, name)
+            spec['options']['maxTotalChargeUsd'] = '0.08'
+            urls = [URLS[0].replace('0.html', '%s.html' % i) for i in range(30 if index < 5 else 1)]
+            if index < 4:
+                records = [dict(RECORDS[0], fixture=str(i)) for i in range(30)]
+                spec['output'].update(max_records=30, max_bytes=16384, allowed_urls=urls, expected_records=records)
+            else:
+                spec['output'].update(fields=['url', 'text', 'markdown'], max_records=len(urls), max_bytes=524288,
+                                      allowed_urls=urls, expected_records=None, content_contracts=[])
+            cells.append(spec)
+    return dict(schema_version=1, stage='CAPABILITY', aggregate_reserved_usd='3.60', cells=cells)
+
+
 def response(status="SUCCEEDED", **changes):
     data = {"id": "PrivateRun", "userId": "PrivateOwner", "actId": "PublicActor0",
             "defaultDatasetId": "PrivateDataset", "defaultKeyValueStoreId": "PrivateKv",
@@ -96,6 +120,12 @@ class Clock:
         return self.value
     def wait(self, seconds):
         self.value += seconds
+
+
+class HttpReply:
+    def __init__(self, status, body): self.status = status; self.stream = io.BytesIO(body)
+    def read1(self, size): return self.stream.read(size)
+    def close(self): pass
 
 
 class ForbiddenEnvironment:
@@ -160,6 +190,126 @@ class TestTools:
         for status in statuses or [(204, 404)] * 3:
             replies += [r.Reply(status[0], None), r.Reply(status[1], None)]
         return FakeTransport(replies)
+
+
+class CapabilityTests(unittest.TestCase):
+    def setUp(self):
+        self.plan = capability_plan_fixture()
+        self.raw = json.dumps(self.plan, indent=2).encode()
+        for key, value in [('RUNNER_READY', True), ('REVIEWED_CAPABILITY_PLAN_SHA256', r.sha(canonical(self.plan))),
+                           ('REVIEWED_CAPABILITY_PLAN_FILE_SHA256', r.sha(self.raw))]:
+            guard = patch.object(r, key, value, create=True)
+            guard.start(); self.addCleanup(guard.stop)
+
+    def cell(self, index=0):
+        return r.prepare_cell(self.plan, self.plan['cells'][index]['cell_id'])
+
+    def test_capability_bytes_and_canonical_pin_are_separate_from_smoke(self):
+        self.assertEqual(r.load_reviewed_plan(self.raw), self.plan)
+        with self.assertRaises(r.Fault): r.load_reviewed_plan(canonical(self.plan))
+        smoke = plan_fixture()
+        with patch.object(r, 'REVIEWED_PLAN_SHA256', r.sha(canonical(smoke))):
+            self.assertEqual(r.validate_plan(smoke), smoke)
+        with patch.object(r, 'REVIEWED_CAPABILITY_PLAN_FILE_SHA256', None):
+            with self.assertRaises(r.Fault): r.load_reviewed_plan(self.raw)
+
+    def test_exact_repeated_actor_cells_reserve_all_thirty_six_and_never_repeat(self):
+        budget = r.StudyBudget(self.plan)
+        for spec in self.plan['cells']: budget.claim(r.prepare_cell(self.plan, spec['cell_id']))
+        self.assertEqual(budget.reserved_usd, Decimal('3.60'))
+        self.assertEqual(len(budget.claimed), 36)
+        with self.assertRaises(r.Fault): budget.claim(self.cell())
+
+    def test_capability_rehashed_wrong_order_actor_permission_and_caps_still_fail(self):
+        for key, value in [('cell_id', 'cap-r1-other-static'), ('actor_id', 'ForeignActor'),
+                           ('force_permission_level', 'FULL_PERMISSIONS')]:
+            bad = copy.deepcopy(self.plan); bad['cells'][0][key] = value
+            with self.subTest(key=key), patch.object(r, 'REVIEWED_CAPABILITY_PLAN_SHA256', r.sha(canonical(bad))):
+                with self.assertRaises(r.Fault): r.validate_plan(bad)
+        for change in ('order', 'cap', 'count'):
+            bad = copy.deepcopy(self.plan)
+            if change == 'order': bad['cells'][0], bad['cells'][1] = bad['cells'][1], bad['cells'][0]
+            elif change == 'cap': bad['cells'][0]['options']['maxTotalChargeUsd'] = '0.12'
+            else: bad['cells'].pop()
+            with self.subTest(change=change), patch.object(r, 'REVIEWED_CAPABILITY_PLAN_SHA256', r.sha(canonical(bad))):
+                with self.assertRaises(r.Fault): r.validate_plan(bad)
+
+    def test_spec_cap_is_sent_and_response_equivalence_is_checked(self):
+        cell = self.cell(); seen = []
+        data = response(actId=cell.spec['actor_id'])
+        data['data']['options']['maxTotalChargeUsd'] = 0.08
+        def opener(req, timeout):
+            seen.append(req); return HttpReply(201, canonical(data))
+        transport = r.HttpTransport(cell, TOKEN, opener=opener, clock=Clock(), deadline=500)
+        self.assertEqual(transport.request('start', {}, 30).status, 201)
+        self.assertEqual(parse_qs(urlsplit(seen[0].full_url).query)['maxTotalChargeUsd'], ['0.08'])
+        data['data']['options']['maxTotalChargeUsd'] = Decimal('0.08000')
+        self.assertEqual(r.validate_run(data['data'], cell)['options']['maxTotalChargeUsd'], '0.08')
+        for bad in (Decimal('0.12'), '0.08', None, True):
+            data['data']['options']['maxTotalChargeUsd'] = bad
+            with self.assertRaises(r.Fault): r.validate_run(data['data'], cell)
+
+    def test_large_content_export_state_roundtrip_and_sentinel_keep_exact_scope(self):
+        cell = self.cell(8); spec = cell.spec; clock = Clock()
+        rows = [dict(url=u, text='Owned ' + 'x' * 10000, markdown='Owned') for u in spec['output']['allowed_urls']]
+        run = response(actId=spec['actor_id'], buildNumber=spec['build'])
+        run['data']['options'] = dict(spec['options'], maxTotalChargeUsd=Decimal('0.08'))
+        transport = FakeTransport([r.Reply(201, run), r.Reply(200, rows)] +
+                                  [r.Reply(200, metadata(k, actId=spec['actor_id'])) for k in r.STORES])
+        persist = lambda blob: dict(plaintext_sha256=r.sha(blob), ciphertext_sha256='c'*64, remote_file_readback_verified=True)
+        state = r.run_until_capture(transport, cell, persist, budget=r.StudyBudget(self.plan), clock=clock,
+                                    wait=clock.wait, utcnow=lambda: STAMP + timedelta(seconds=40))
+        self.assertTrue(state.capture_verified)
+        self.assertEqual(state.evidence['stage'], 'CAPABILITY')
+        self.assertEqual(len(state.evidence['records']), 30)
+        self.assertEqual(r.public_result(state)['stage'], 'CAPABILITY')
+        raw = r.serialize_private_state(state)
+        self.assertGreater(len(raw), 262144)
+        self.assertEqual(r.restore_private_state(raw, self.plan).evidence, state.evidence)
+        with self.assertRaises(r.OutputFault) as extra: r.validate_output(rows + [rows[0]], cell)
+        self.assertLessEqual(len(extra.exception.records), 31)
+        tampered = json.loads(raw); tampered['evidence']['stage'] = 'SMOKE'
+        tampered['plaintext_sha256'] = r.sha(canonical(tampered['evidence']))
+        with self.assertRaises(r.Fault): r.restore_private_state(canonical(tampered), self.plan)
+
+    def test_export_http_larger_bound_does_not_widen_provider_metadata(self):
+        cell = self.cell(8); body = canonical([dict(url=u, text='x'*10000, markdown='Owned') for u in cell.spec['output']['allowed_urls']])
+        seen=[]
+        def opener(req, timeout): seen.append(req); return HttpReply(200, body)
+        transport = r.HttpTransport(cell, TOKEN, opener=opener, clock=Clock(), deadline=500)
+        identity = response(actId=cell.spec['actor_id'], buildNumber=cell.spec['build'])['data']
+        identity['options'] = dict(cell.spec['options'], maxTotalChargeUsd=Decimal('0.08'))
+        transport.bind_run(r.validate_run(identity, cell))
+        self.assertEqual(len(transport.request('export', transport.identity, 10).body), 30)
+        self.assertEqual(parse_qs(urlsplit(seen[0].full_url).query)['limit'], ['31'])
+        with self.assertRaises(r.Fault) as error: transport.request('metadata_dataset', transport.identity, 10)
+        self.assertEqual(error.exception.category, 'response_too_large')
+
+    def test_billing_projection_stays_private_and_distinguishes_null_zero(self):
+        cell = self.cell(); data = response()['data']
+        data.update(pricingInfo={'pricingModel':'PAY_PER_EVENT'}, platformUsageBillingModel='USER', usageTotalUsd=0, usage=None)
+        receipt = r.run_receipt(data, cell)
+        self.assertIn('billing_evidence', receipt)
+        self.assertEqual(receipt['billing_evidence'], __import__('billing_projection').project_run_billing(data, []))
+        state = r.PrivateState(cell); state.evidence = {'run':receipt}
+        public = canonical(r.public_result(state)).decode()
+        self.assertNotIn('billing_evidence', public)
+        self.assertNotIn('PAY_PER_EVENT', public)
+
+    def test_missing_capability_pin_and_closed_guard_precede_environment(self):
+        with patch.object(r, 'RUNNER_READY', False), self.assertRaises(r.Fault) as error:
+            r.execute(self.plan, self.plan['cells'][0]['cell_id'], opt_in=True, environ=ForbiddenEnvironment())
+        self.assertEqual(error.exception.category, 'guard_closed')
+        with patch.object(r, 'REVIEWED_CAPABILITY_PLAN_SHA256', None), self.assertRaises(r.Fault):
+            r.execute(self.plan, self.plan['cells'][0]['cell_id'], opt_in=True, environ=ForbiddenEnvironment())
+
+    def test_revoked_capability_pin_blocks_cached_transport_before_any_request(self):
+        called=[]
+        transport=r.HttpTransport(self.cell(),TOKEN,opener=lambda *args,**kwargs:called.append(True),clock=Clock(),deadline=500)
+        with patch.object(r,'REVIEWED_CAPABILITY_PLAN_SHA256',None), self.assertRaises(r.Fault):
+            transport.request('start',{},30)
+        self.assertEqual(called,[])
+        self.assertEqual(transport.counts['total'],0)
 
 
 class ContractTests(TestTools, unittest.TestCase):
