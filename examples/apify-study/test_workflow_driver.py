@@ -1,4 +1,6 @@
 """Offline workflow wiring tests; fake public approval responses only."""
+import contextlib
+import io
 import json
 from datetime import datetime,timedelta,timezone
 from pathlib import Path
@@ -23,6 +25,67 @@ class Reply:
 class WorkflowTests(unittest.TestCase):
     def setUp(self):
         self.approval={'plaintext_sha256':'a'*64,'ciphertext_sha256':'b'*64,'scope_approved':True}
+
+    def test_manifest_has_only_one_or_the_exact_five_cells_without_environment(self):
+        self.assertTrue(callable(getattr(driver, 'smoke_manifest', None)), 'fixed offline manifest is missing')
+        class Forbidden(dict):
+            def get(self, *args): raise AssertionError('Manifest must not read environment')
+        with patch.object(driver.os, 'environ', Forbidden()), patch.object(driver, 'plan', side_effect=AssertionError('Manifest must not read plan')):
+            self.assertEqual(driver.smoke_manifest('cheerio'), ['smoke-cheerio-scraper'])
+            self.assertEqual(driver.smoke_manifest('remaining-five'), ['smoke-web-scraper', 'smoke-playwright-scraper',
+                             'smoke-puppeteer-scraper', 'smoke-website-content-crawler', 'smoke-rag-web-browser'])
+            for value in ('all', '../other', None, 'remaining-five '):
+                with self.assertRaises(driver.runner.Fault): driver.smoke_manifest(value)
+
+    def test_manifest_cli_stays_offline_with_closed_guard(self):
+        self.assertTrue(callable(getattr(driver, 'smoke_manifest', None)), 'fixed offline manifest is missing')
+        with patch.object(driver.runner, 'RUNNER_READY', False), patch('sys.argv', ['workflow_driver.py', 'manifest', '--smoke-scope', 'remaining-five']), contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(driver.main(), 0)
+        self.assertEqual(json.loads(out.getvalue()), ['smoke-web-scraper', 'smoke-playwright-scraper',
+                         'smoke-puppeteer-scraper', 'smoke-website-content-crawler', 'smoke-rag-web-browser'])
+
+    def test_capture_requires_explicit_limited_before_environment_access(self):
+        class Forbidden(dict):
+            def get(self, *args): raise AssertionError('Environment read before permission validation')
+        reviewed = fixture.plan_fixture(); reviewed['cells'][0]['cell_id'] = 'smoke-cheerio-scraper'
+        with patch.object(driver.runner, 'RUNNER_READY', True), patch.object(driver.runner, 'REVIEWED_PLAN_SHA256', driver.runner.sha(driver.runner.canonical(reviewed))), patch.object(driver, 'plan', return_value=reviewed):
+            try: driver.capture('smoke-cheerio-scraper', environ=Forbidden())
+            except Exception as exc: problem = exc
+            else: problem = None
+        self.assertIsInstance(problem, driver.runner.Fault)
+        self.assertEqual(problem.category, 'invalid_cell')
+
+    def test_capture_scope_failure_and_incomplete_cleanup_exit_nonzero(self):
+        cases = [('capture', {'status':'RUNNING','capture_scope_verified':False,'encrypted_capture_verified':True,'owner_attention_required':True}),
+                 ('capture', {'status':'SUCCEEDED','capture_scope_verified':True,'encrypted_capture_verified':False,'owner_attention_required':True}),
+                 ('cleanup', {'cleanup_state':'blocked','owner_attention_required':True}),
+                 ('cleanup', {'cleanup_state':'residual','owner_attention_required':True}),
+                 ('cleanup', {'cleanup_state':'complete','owner_attention_required':True})]
+        for phase, value in cases:
+            with self.subTest(phase=phase, value=value), patch.object(driver, phase, return_value=value), patch('sys.argv', ['workflow_driver.py', phase, '--execute']), contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(driver.main(), 1)
+                self.assertEqual(json.loads(out.getvalue()), value)
+
+    def test_valid_terminal_failure_and_complete_cleanup_allow_next_job(self):
+        for status in ('SUCCEEDED','FAILED','TIMED-OUT','ABORTED'):
+            value = {'status':status,'capture_scope_verified':True,'encrypted_capture_verified':True,'owner_attention_required':False}
+            with self.subTest(status=status), patch.object(driver, 'capture', return_value=value), patch('sys.argv', ['workflow_driver.py', 'capture', '--execute']), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(driver.main(), 0)
+        with patch.object(driver, 'cleanup', return_value={'cleanup_state':'complete','owner_attention_required':False}), patch('sys.argv', ['workflow_driver.py','cleanup','--execute']), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(driver.main(), 0)
+
+    def test_each_pinned_cell_has_its_own_fixed_approval_route(self):
+        for cell in ('smoke-cheerio-scraper','smoke-web-scraper','smoke-playwright-scraper',
+                     'smoke-puppeteer-scraper','smoke-website-content-crawler','smoke-rag-web-browser'):
+            requested = []
+            approval = self.approval
+            class Opener:
+                def open(self, req, timeout):
+                    requested.append(req.full_url); return Reply(json.dumps(approval).encode())
+            try: result = driver.fetch_approval(cell, opener=Opener())
+            except driver.runner.Fault: result = None
+            self.assertEqual(result, self.approval)
+            self.assertEqual(requested, [driver.APPROVAL_BASE+cell+'.json'])
 
     def test_closed_guard_precedes_environment_or_provider(self):
         class Forbidden(dict):
@@ -49,7 +112,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(result,self.approval)
         self.assertEqual(requested[0].full_url,driver.APPROVAL_BASE+'smoke-cheerio-scraper.json')
         self.assertNotIn('Authorization',requested[0].headers)
-        for value in ['../secret','https://example.com','smoke-rag-web-browser']:
+        for value in ['../secret','https://example.com','smoke-rag-web-browser-extra']:
             with self.assertRaises(driver.runner.Fault):driver.fetch_approval(value,opener=Opener())
         self.assertEqual(len(requested),1)
 
@@ -93,17 +156,20 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(set(public),{'cleanup_state','owner_attention_required','diagnostic'})
         self.assertNotIn('PRIVATE',json.dumps(public))
 
-    def test_two_phase_driver_preserves_budget_state_and_private_meters(self):
+    def _exercise_two_phase_driver(self, *, status='SUCCEEDED', foreign_metadata=False, token_available=True):
         """Full offline wiring, real age/fsync, synthetic provider responses only."""
         r=driver.runner
         reviewed=fixture.plan_fixture()
-        reviewed['cells'][0]['cell_id']='smoke-cheerio-scraper'
+        reviewed['cells'][0].update(cell_id='smoke-cheerio-scraper',actor='apify/cheerio-scraper',
+                                    actor_id='YrQuEkowkNCLdk4j2',force_permission_level='LIMITED_PERMISSIONS')
         stamp=datetime.now(timezone.utc)-timedelta(seconds=3)
-        run=fixture.response()
+        run=fixture.response(status=status,actId='YrQuEkowkNCLdk4j2')
         run['data'].update(startedAt=stamp.isoformat(),finishedAt=(stamp+timedelta(seconds=1)).isoformat())
-        metas=[fixture.metadata(k) for k in ('dataset','kv','queue')]
+        metas=[fixture.metadata(k,actId='YrQuEkowkNCLdk4j2') for k in ('dataset','kv','queue')]
         for meta in metas:meta['data']['createdAt']=stamp.isoformat()
-        capture_calls=fixture.FakeTransport([r.Reply(201,run),r.Reply(200,fixture.RECORDS),
+        if foreign_metadata:metas[0]['data']['userId']='ForeignOwner'
+        exported=[r.Reply(200,fixture.RECORDS)] if status=='SUCCEEDED' else []
+        capture_calls=fixture.FakeTransport([r.Reply(201,run),*exported,
                                               *[r.Reply(200,m) for m in metas]])
         cleanup_calls=fixture.FakeTransport([r.Reply(200,run),*[r.Reply(200,m) for m in metas],
                                              *[reply for _ in range(3) for reply in (r.Reply(204,None),r.Reply(404,None))]])
@@ -118,7 +184,7 @@ class WorkflowTests(unittest.TestCase):
                                            budget=kwargs['budget'])
             def transport(cell,token,**kwargs):
                 self.assertEqual(kwargs['mode'],'cleanup')
-                self.assertEqual(kwargs['request_counts']['total'],5)
+                self.assertEqual(kwargs['request_counts']['total'],5 if status=='SUCCEEDED' else 4)
                 self.assertEqual(kwargs['identity']['id'],'PrivateRun')
                 return cleanup_calls
             with patch.object(r,'RUNNER_READY',True),patch.object(r,'REVIEWED_PLAN_SHA256',r.sha(r.canonical(reviewed))),\
@@ -126,20 +192,47 @@ class WorkflowTests(unittest.TestCase):
                  patch.object(driver,'private_paths',return_value=(private,binary)),\
                  patch.object(r,'execute',side_effect=execute):
                 public=driver.capture('smoke-cheerio-scraper',environ={})
-                self.assertTrue(public['capture_scope_verified'])
+                self.assertEqual(public['capture_scope_verified'],not foreign_metadata)
                 self.assertNotIn('PrivateRun',json.dumps(public))
                 self.assertEqual((private/'state.json').stat().st_mode&0o777,0o600)
+                self.assertTrue((root/'capture.age').is_file())
+                private_state=json.loads((private/'state.json').read_bytes())
                 approved={'plaintext_sha256':public['plaintext_sha256'],
                           'ciphertext_sha256':public['ciphertext_sha256'],'scope_approved':True}
                 with patch.object(driver,'await_approval',return_value=approved),patch.object(r,'HttpTransport',side_effect=transport):
-                    final=driver.cleanup('smoke-cheerio-scraper',environ={'APIFY_TOKEN':fixture.TOKEN})
-                self.assertEqual(final['cleanup_state'],'complete')
-                self.assertEqual(final['request_counts']['total'],15)
-                self.assertEqual(len(cleanup_calls.requests),10)
-                self.assertTrue(cleanup_calls.authorized)
+                    final=driver.cleanup('smoke-cheerio-scraper',environ={'APIFY_TOKEN':fixture.TOKEN} if token_available else {})
+                if foreign_metadata or not token_available:
+                    self.assertEqual(final['cleanup_state'],'blocked')
+                    self.assertEqual(cleanup_calls.requests,[])
+                else:
+                    self.assertEqual(final['cleanup_state'],'complete')
+                    self.assertEqual(final['request_counts']['total'],15 if status=='SUCCEEDED' else 14)
+                    self.assertEqual(len(cleanup_calls.requests),10)
+                    self.assertTrue(cleanup_calls.authorized)
                 self.assertNotIn('PrivateRun',json.dumps(final))
                 self.assertNotIn('usage_total_usd',json.dumps(final))
                 self.assertTrue((root/'final.age').is_file())
+                return public,final,private_state
+
+    def test_two_phase_driver_preserves_budget_state_and_private_meters(self):
+        self._exercise_two_phase_driver()
+
+    def test_terminal_failed_actor_preserves_capture_and_completes_cleanup(self):
+        public,final,state=self._exercise_two_phase_driver(status='FAILED')
+        self.assertEqual(public['status'],'FAILED')
+        self.assertEqual(state['evidence']['extraction_state'],'terminal_failure')
+        self.assertEqual(final['cleanup_state'],'complete')
+
+    def test_invalid_capture_scope_preserves_encrypted_initial_and_blocked_final(self):
+        public,final,state=self._exercise_two_phase_driver(foreign_metadata=True)
+        self.assertFalse(public['capture_scope_verified'])
+        self.assertEqual(final['cleanup_state'],'blocked')
+        self.assertTrue(final['owner_attention_required'])
+
+    def test_missing_cleanup_token_preserves_encrypted_blocked_final(self):
+        public,final,state=self._exercise_two_phase_driver(token_available=False)
+        self.assertEqual(final['cleanup_state'],'blocked')
+        self.assertEqual(final['diagnostic']['category'],'token_unavailable')
 
 
 if __name__=='__main__':unittest.main()

@@ -98,6 +98,7 @@
       "ancillary_reserve_usd": "0.02",
       "build": "3.0.25",
       "cell_id": "smoke-web-scraper",
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "breakpointLocation": "NONE",
         "browserLog": false,
@@ -199,6 +200,7 @@
       "ancillary_reserve_usd": "0.02",
       "build": "1.0.22",
       "cell_id": "smoke-playwright-scraper",
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "browserLog": false,
         "closeCookieModals": false,
@@ -296,6 +298,7 @@
       "ancillary_reserve_usd": "0.02",
       "build": "3.0.18",
       "cell_id": "smoke-puppeteer-scraper",
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "browserLog": false,
         "closeCookieModals": false,
@@ -394,6 +397,7 @@
       "ancillary_reserve_usd": "0.02",
       "build": "0.3.97",
       "cell_id": "smoke-website-content-crawler",
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "blockMedia": true,
         "crawlerType": "playwright:firefox",
@@ -667,6 +671,7 @@
         "fetch",
         "apify-actor-start"
       ],
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "debugMode": false,
         "desiredConcurrency": 1,
@@ -779,7 +784,7 @@
     }
   ],
   "cleanup_approved": true,
-  "evidence_type": "unexecuted_corrected_proxy_limited_permission_input_candidate",
+  "evidence_type": "unexecuted_remaining_five_limited_permission_candidate",
   "fixture_manifest_sha256": "89d02cd0d4347c2a40ef60432428fe5ea9177fdd4416023a04437f234ad16333",
   "schema_version": 1,
   "stage": "SMOKE"

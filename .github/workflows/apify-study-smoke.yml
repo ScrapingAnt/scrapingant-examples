@@ -6,8 +6,16 @@ on:
       - '.github/workflows/apify-study-smoke.yml'
   workflow_dispatch:
     inputs:
+      smoke_scope:
+        description: Fixed reviewed cell manifest; remaining five execute sequentially
+        type: choice
+        required: true
+        default: cheerio
+        options:
+          - cheerio
+          - remaining-five
       execute_reviewed_smoke:
-        description: One source-reviewed owned Cheerio smoke; encrypted capture then verified cleanup
+        description: Execute the selected reviewed LIMITED manifest; encrypted capture then verified cleanup
         type: boolean
         required: true
         default: false
@@ -22,8 +30,44 @@ concurrency:
   group: apify-study-smoke
   cancel-in-progress: false
 jobs:
+  manifest:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      cells: ${{ steps.manifest.outputs.cells }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Secret-free fixed manifest and mutually exclusive opt-in checks
+        id: manifest
+        working-directory: examples/apify-study
+        env:
+          SMOKE_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.smoke_scope || 'cheerio' }}
+          EXECUTE_SMOKE: ${{ github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke || false }}
+          EXECUTE_DIAGNOSIS: ${{ github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis || false }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$EXECUTE_DIAGNOSIS" == "true" && ( "$EXECUTE_SMOKE" == "true" || "$SMOKE_SCOPE" != "cheerio" ) ]]; then
+            printf '%s\n' '{"diagnostic":{"category":"invalid_cell"},"provider_calls":0}'
+            exit 1
+          fi
+          cells="$(python workflow_driver.py manifest --smoke-scope "$SMOKE_SCOPE")"
+          printf 'cells=%s\n' "$cells" >> "$GITHUB_OUTPUT"
   smoke:
     if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    needs: manifest
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        cell: ${{ fromJSON(needs.manifest.outputs.cells) }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -50,13 +94,13 @@ jobs:
           STUDY_TEST_AGE_BIN: ${{ runner.temp }}/age-v1.3.2/age/age
         run: python -m unittest discover -p 'test_*.py'
       - name: Narrow read-only access diagnosis with existing secret
-        if: github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke
+        if: github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke && matrix.cell == 'smoke-cheerio-scraper'
         working-directory: examples/apify-study
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python diagnose_readonly.py --execute
       - name: Encrypted read-only projection and fixed hashes only
-        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke && matrix.cell == 'smoke-cheerio-scraper'
         uses: actions/upload-artifact@v4
         with:
           name: apify-study-encrypted-access-diagnosis
@@ -65,33 +109,33 @@ jobs:
             examples/apify-study/diagnosis-public.json
           if-no-files-found: ignore
           retention-days: 7
-      - name: One reviewed smoke capture using existing secret
-        if: github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+      - name: One fixed reviewed LIMITED cell capture using existing secret
+        if: github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke && !inputs.execute_permission_diagnosis
         working-directory: examples/apify-study
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python workflow_driver.py capture --execute
+        run: python workflow_driver.py capture --cell '${{ matrix.cell }}' --execute
       - name: Authenticated encrypted capture and derived hashes only
-        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke && !inputs.execute_permission_diagnosis
         uses: actions/upload-artifact@v4
         with:
-          name: apify-study-encrypted-capture
+          name: apify-study-encrypted-capture-${{ matrix.cell }}
           path: |
             examples/apify-study/capture.age
             examples/apify-study/capture-public.json
           if-no-files-found: ignore
           retention-days: 7
       - name: Wait for exact local decrypted readback approval then bounded fresh cleanup
-        if: success() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke && !inputs.execute_permission_diagnosis
         working-directory: examples/apify-study
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python workflow_driver.py cleanup --execute
+        run: python workflow_driver.py cleanup --cell '${{ matrix.cell }}' --execute
       - name: Authenticated encrypted final receipt and safe cleanup status only
-        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke && !inputs.execute_permission_diagnosis
         uses: actions/upload-artifact@v4
         with:
-          name: apify-study-encrypted-final
+          name: apify-study-encrypted-final-${{ matrix.cell }}
           path: |
             examples/apify-study/final.age
             examples/apify-study/final-public.json

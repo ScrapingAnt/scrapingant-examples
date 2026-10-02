@@ -1,4 +1,4 @@
-"""One reviewed smoke cell per manual workflow; private state is never uploaded.
+"""One reviewed smoke cell per sequential manual job; private state is never uploaded.
 
 Phase1 writes encrypted evidence plus safe hashes/status. After the owner-side
 process decrypts, validates, fsyncs and reads back that exact evidence, it writes
@@ -20,7 +20,8 @@ import evidence_transport as crypto
 import runner
 
 ROOT=Path(__file__).resolve().parent
-ALLOWED_CELLS=('smoke-cheerio-scraper',)
+ALLOWED_CELLS=('smoke-cheerio-scraper','smoke-web-scraper','smoke-playwright-scraper',
+               'smoke-puppeteer-scraper','smoke-website-content-crawler','smoke-rag-web-browser')
 APPROVAL_BASE='https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/main/examples/apify-study/approvals/'
 MAX_APPROVAL_BYTES=16384
 MAX_APPROVAL_READS=75
@@ -33,6 +34,13 @@ class NoRedirect(HTTPRedirectHandler):
 
 def check_cell(cell):
     if cell not in ALLOWED_CELLS:raise runner.Fault('invalid_cell')
+
+
+def smoke_manifest(scope):
+    """Fixed finite cells only; no plan, environment, token or provider access."""
+    if scope=='cheerio':return [ALLOWED_CELLS[0]]
+    if scope=='remaining-five':return list(ALLOWED_CELLS[1:])
+    raise runner.Fault('invalid_cell')
 
 
 def matches_approval(value,plain_sha,cipher_sha):
@@ -101,6 +109,8 @@ def capture(cell,*,environ=None):
     runner.require_guard()
     check_cell(cell)
     reviewed=plan()
+    if runner.prepare_cell(reviewed,cell).spec.get('force_permission_level')!='LIMITED_PERMISSIONS':
+        raise runner.Fault('invalid_cell')
     environ=os.environ if environ is None else environ
     folder,binary=private_paths(environ)
     recipient=(ROOT/'recipient.txt').read_text().strip()
@@ -150,12 +160,17 @@ def cleanup(cell,*,environ=None):
         if approval is None:
             result=dict(blocked,diagnostic=runner.Fault('approval_missing','approval').safe())
         else:
-            token=environ.get('APIFY_TOKEN')
-            if not isinstance(token,str) or not token:raise runner.Fault('token_unavailable')
-            transport=runner.HttpTransport(state.cell,token,mode='cleanup',identity=state.identity,
-                                            request_counts=state.request_counts)
-            result=runner.cleanup_verified_capture(transport,state,approval,
-                verify_local_approval=lambda plain,cipher,record:matches_approval(record,plain,cipher) and record==approval)
+            try:
+                token=environ.get('APIFY_TOKEN')
+                if not isinstance(token,str) or not token:raise runner.Fault('token_unavailable')
+                transport=runner.HttpTransport(state.cell,token,mode='cleanup',identity=state.identity,
+                                                request_counts=state.request_counts)
+                result=runner.cleanup_verified_capture(transport,state,approval,
+                    verify_local_approval=lambda plain,cipher,record:matches_approval(record,plain,cipher) and record==approval)
+            except runner.Fault as exc:
+                result=dict(blocked,diagnostic=exc.safe())
+            except Exception:
+                result=dict(blocked,diagnostic=runner.Fault('transport_error','cleanup').safe())
     final={'schema_version':1,'stage':'SMOKE','cell_id':cell,'initial_capture':state.evidence,
            'cleanup':result,'request_counts':state.request_counts,'finalized_at':datetime.now(timezone.utc).isoformat()}
     recipient=(ROOT/'recipient.txt').read_text().strip()
@@ -169,17 +184,28 @@ def cleanup(cell,*,environ=None):
 
 def main():
     parser=argparse.ArgumentParser(description='Bounded reviewed smoke transport; default offline')
-    parser.add_argument('phase',choices=('capture','cleanup'))
+    parser.add_argument('phase',choices=('manifest','capture','cleanup'))
+    parser.add_argument('--smoke-scope',choices=('cheerio','remaining-five'))
     parser.add_argument('--cell',choices=ALLOWED_CELLS,default=ALLOWED_CELLS[0])
     parser.add_argument('--execute',action='store_true')
     args=parser.parse_args()
+    if args.phase=='manifest':
+        if args.execute:parser.error('manifest is offline only')
+        print(json.dumps(smoke_manifest(args.smoke_scope or 'cheerio')))
+        return 0
+    if args.smoke_scope is not None:parser.error('smoke scope applies only to the offline manifest')
     if not args.execute:
         print(json.dumps({'mode':'offline','provider_calls':0,'guard_closed':runner.RUNNER_READY is not True}))
         return 0
     try:
         value=capture(args.cell) if args.phase=='capture' else cleanup(args.cell)
         print(json.dumps(value,sort_keys=True))
-        return 0
+        if args.phase=='capture':
+            valid=(value.get('capture_scope_verified') is True and value.get('encrypted_capture_verified') is True
+                   and value.get('owner_attention_required') is False and value.get('status') in runner.TERMINAL)
+        else:
+            valid=value.get('cleanup_state')=='complete' and value.get('owner_attention_required') is False
+        return 0 if valid else 1
     except Exception as exc:
         fault=exc if isinstance(exc,runner.Fault) else runner.Fault('persistence_failed','evidence')
         print(json.dumps({'cell_id':args.cell,'diagnostic':fault.safe(),'owner_attention_required':True}))

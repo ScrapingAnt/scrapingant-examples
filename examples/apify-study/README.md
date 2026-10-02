@@ -1,10 +1,14 @@
 # Bounded owned-fixture smoke
 
-This directory implements one manual, source-reviewed Cheerio smoke against
-three owned synthetic static pages. Fixtures are ground truth; they are not
-Actor results. The committed default is offline and all live guards are closed.
-Other candidate cells are present for later review but the workflow accepts only
-`smoke-cheerio-scraper`.
+This directory implements fixed, source-reviewed prerequisite smokes against
+owned synthetic fixtures. Fixtures are ground truth; they are not Actor results.
+The committed default is offline and all live guards are closed. A manual run
+selects either the one Cheerio cell or the exact remaining five cells: Web
+Scraper, Playwright Scraper, Puppeteer Scraper, Website Content Crawler and RAG
+Web Browser. The five-cell manifest has one running job at a time and stops
+on unverified capture or cleanup; GitHub scheduling order is recorded as
+observed rather than assumed. Each cell requires its own authenticated local
+readback before its own hash-only cleanup approval.
 
 The first cell uses build3.0.22, query memory4096MB, concurrency1, a120s run
 timeout, aUSD0.12 total run cap and a separateUSD0.02 ancillary reservation.
@@ -13,10 +17,10 @@ then waits200ms before each of exactly three owned document requests. Cheerio
 does not execute scripts or fetch page subresources. These smoke inputs do not
 provide a runtime benchmark or an estimate of arbitrary-site success.
 
-The native required proxy field uses `{"useApifyProxy":true}` with no groups,
-country or custom URLs. This selects already allocated ordinary datacenter
+Five native required proxy fields use `{"useApifyProxy":true}` with no groups,
+country or custom URLs. RAG Web Browser keeps its optional proxy disabled. This selects already allocated ordinary datacenter
 proxies; no residential, SERP or Unblocker group or allocation purchase is
-requested. SDK3.7.2 may make up to two logical first-party proxy checks with
+requested. The audited Cheerio SDK3.7.2 may make up to two logical first-party proxy checks with
 four-second request timeouts before target crawling (transport retries zero).
 Inherited redirects mean those are not two total wire requests or an eight-second
 initialization deadline. A user-metadata lookup, with its client retry defaults,
@@ -24,8 +28,12 @@ also occurs if the injected proxy password is absent. These initialization reque
 separate from the three target documents and controller API counts. Actual
 network/storage quantities and account proxy availability require observation.
 
-The restricted candidate requests `forcePermissionLevel=LIMITED_PERMISSIONS`
-for this Cheerio run only. It does not approve persistent full account access.
+All six fixed cells request `forcePermissionLevel=LIMITED_PERMISSIONS`
+per run. Each remaining cell retains its pinned deployed build, native input,
+120s timeout, USD0.12 run cap and USD0.02 ancillary reservation. The separate
+five-cell dispatch reserves USD0.70; the six-cell executor envelope is USD0.84.
+The four structured scrapers use 4096MB; the two content Actors use 8192MB.
+This does not approve persistent full account access.
 Compatibility and the invoking token's Run/export/cleanup scope must be tested;
 there is no fallback to full permissions or changed credentials.
 

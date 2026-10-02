@@ -22,11 +22,17 @@ from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 RUNNER_READY = False
-REVIEWED_PLAN_SHA256 = "32c541cbe98aaf78d789b2b781f6437797525e84442f5afd52532d46924b6d76"
-REVIEWED_PLAN_FILE_SHA256 = "584bad259170f34088c09ca3e015a71a9a6184516adfdbc39a896c12aa5ce6b0"
+REVIEWED_PLAN_SHA256 = "df4697d71f086921e715f80c4590b8b478c7d16b9dcd5f77deaedee965e0381d"
+REVIEWED_PLAN_FILE_SHA256 = "5480d5863ab1267b8f2437a7333cc2a12d00aa61accd97c6de47d3876701477b"
 API = "https://api.apify.com/v2"
 OWNED_HOST = "scrapingant.github.io"
 OWNED_PATH_PREFIX = "/scrapingant-examples/fixtures/"
+REVIEWED_ACTORS = (("cheerio-scraper", "YrQuEkowkNCLdk4j2"),
+                   ("web-scraper", "moJRLRc85AitArpNN"),
+                   ("playwright-scraper", "MpRbnNmVAoj5RC1Ma"),
+                   ("puppeteer-scraper", "YJCnS9qogi9XxDgLB"),
+                   ("website-content-crawler", "aYG0l9s7dbB7j3gbS"),
+                   ("rag-web-browser", "3ox4R101TgZz67sLr"))
 TERMINAL = ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED")
 ACTIVE = ("READY", "RUNNING", "TIMING-OUT", "ABORTING")
 STORES = {"dataset": ("defaultDatasetId", "datasets"),
@@ -178,12 +184,14 @@ def validate_plan(plan):
             raise Fault("invalid_cell")
         names.add(name)
         actor = ident(spec.get("actor_id"))
-        # The separately reviewed limited test is allowed only for the first
-        # public Cheerio cell. Absence preserves the original five/default runs.
+        # An override can target only these six identities in the reviewed order.
+        # Historical plans without overrides remain restorable; capture requires
+        # the explicit limited intent separately, without a default fallback.
+        reviewed_name, reviewed_id = REVIEWED_ACTORS[index]
         if "force_permission_level" in spec and (
-                spec["force_permission_level"] != "LIMITED_PERMISSIONS" or index != 0
-                or name != "smoke-cheerio-scraper" or spec.get("actor") != "apify/cheerio-scraper"
-                or actor != "YrQuEkowkNCLdk4j2"):
+                spec["force_permission_level"] != "LIMITED_PERMISSIONS"
+                or name != "smoke-" + reviewed_name or spec.get("actor") != "apify/" + reviewed_name
+                or actor != reviewed_id):
             raise Fault("invalid_cell")
         if actor in actors:
             raise Fault("invalid_cell")

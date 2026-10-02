@@ -49,6 +49,20 @@ def limited_plan_fixture():
     return plan
 
 
+def all_limited_plan_fixture():
+    plan = plan_fixture()
+    actors = (("cheerio-scraper", "YrQuEkowkNCLdk4j2"),
+              ("web-scraper", "moJRLRc85AitArpNN"),
+              ("playwright-scraper", "MpRbnNmVAoj5RC1Ma"),
+              ("puppeteer-scraper", "YJCnS9qogi9XxDgLB"),
+              ("website-content-crawler", "aYG0l9s7dbB7j3gbS"),
+              ("rag-web-browser", "3ox4R101TgZz67sLr"))
+    for spec, (name, actor_id) in zip(plan["cells"], actors):
+        spec.update(cell_id="smoke-" + name, actor="apify/" + name, actor_id=actor_id,
+                    force_permission_level="LIMITED_PERMISSIONS")
+    return plan
+
+
 def response(status="SUCCEEDED", **changes):
     data = {"id": "PrivateRun", "userId": "PrivateOwner", "actId": "PublicActor0",
             "defaultDatasetId": "PrivateDataset", "defaultKeyValueStoreId": "PrivateKv",
@@ -149,6 +163,21 @@ class TestTools:
 
 
 class ContractTests(TestTools, unittest.TestCase):
+
+    def test_all_six_pinned_actor_overrides_accept_only_limited(self):
+        plan = all_limited_plan_fixture()
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(plan)).hexdigest()):
+            self.assertEqual(r.validate_plan(plan), plan)
+        for index in range(6):
+            for key, value in (("force_permission_level", "FULL_PERMISSIONS"),
+                               ("force_permission_level", None), ("actor_id", "ForeignActor"),
+                               ("actor", "apify/foreign-actor"), ("cell_id", "smoke-foreign")):
+                bad = copy.deepcopy(plan); bad["cells"][index][key] = value
+                with self.subTest(index=index, key=key), patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(bad)).hexdigest()):
+                    with self.assertRaises(r.Fault): r.validate_plan(bad)
+        swapped = copy.deepcopy(plan); swapped["cells"][4], swapped["cells"][5] = swapped["cells"][5], swapped["cells"][4]
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(swapped)).hexdigest()):
+            with self.assertRaises(r.Fault): r.validate_plan(swapped)
 
     def test_permission_override_rejects_other_modes_cells_or_actor_identities(self):
         cases=[]
@@ -671,6 +700,28 @@ class ContractTests(TestTools, unittest.TestCase):
 
 
 class TransportTests(TestTools, unittest.TestCase):
+    def test_each_pinned_actor_start_sends_only_explicit_limited_override(self):
+        plan = all_limited_plan_fixture(); seen = []
+        def opener(req, timeout):
+            seen.append((req.full_url, req.data, req.get_method(), timeout))
+            raise URLError(TOKEN)
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(plan)).hexdigest()):
+            for spec in plan["cells"]:
+                with self.subTest(cell=spec["cell_id"]):
+                    cell = r.prepare_cell(plan, spec["cell_id"])
+                    transport = r.HttpTransport(cell, TOKEN, opener=opener, clock=self.clock, deadline=self.clock()+480)
+                    with self.assertRaises(r.Fault): transport.request("start", None, 30)
+                    query = parse_qs(urlsplit(seen[-1][0]).query)
+                    self.assertEqual(query["forcePermissionLevel"], ["LIMITED_PERMISSIONS"])
+                    self.assertEqual(query["maxTotalChargeUsd"], ["0.12"])
+                    self.assertEqual(query["restartOnError"], ["false"])
+                    self.assertEqual(seen[-1][1:], (canonical(spec["input"]), "POST", 30))
+                    self.assertEqual(urlsplit(seen[-1][0]).path, "/v2/acts/"+spec["actor_id"]+"/runs")
+                    previous = len(seen)
+                    with self.assertRaises(r.Fault): transport.request("start", None, 30)
+                    self.assertEqual(len(seen), previous)
+        self.assertEqual(len(seen), 6)
+
     def http(self, opener):
         return r.HttpTransport(self.cell, TOKEN, opener=opener, clock=self.clock, deadline=self.clock() + 480)
 
