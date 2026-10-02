@@ -13,6 +13,17 @@ then waits200ms before each of exactly three owned document requests. Cheerio
 does not execute scripts or fetch page subresources. These smoke inputs do not
 provide a runtime benchmark or an estimate of arbitrary-site success.
 
+The native required proxy field uses `{"useApifyProxy":true}` with no groups,
+country or custom URLs. This selects already allocated ordinary datacenter
+proxies; no residential, SERP or Unblocker group or allocation purchase is
+requested. SDK3.7.2 may make up to two logical first-party proxy checks with
+four-second request timeouts before target crawling (transport retries zero).
+Inherited redirects mean those are not two total wire requests or an eight-second
+initialization deadline. A user-metadata lookup, with its client retry defaults,
+also occurs if the injected proxy password is absent. These initialization requests are
+separate from the three target documents and controller API counts. Actual
+network/storage quantities and account proxy availability require observation.
+
 The restricted candidate requests `forcePermissionLevel=LIMITED_PERMISSIONS`
 for this Cheerio run only. It does not approve persistent full account access.
 Compatibility and the invoking token's Run/export/cleanup scope must be tested;
@@ -80,3 +91,8 @@ Official parameter and resource references, checked2026-10-02:
   reviewed official binaries, release digests verified before use.
 - [Pinned Cheerio source](https://github.com/apify/actor-scraper/tree/236f190d6c3dc7ab660f97c9291382b77e204aae):
   deployed build/schema pin and raw HTTP extraction behavior.
+- [Datacenter proxy](https://docs.apify.com/proxy/datacenter-proxy): automatic
+  mode uses accessible allocations; additional allocation requires an upgrade
+  or purchase. This method performs neither.
+- [SDK3.7.2 proxy initialization](https://github.com/apify/apify-sdk-js/blob/v3.7.2/src/proxy_configuration.ts):
+  first-party access checks, distinct from target page requests.

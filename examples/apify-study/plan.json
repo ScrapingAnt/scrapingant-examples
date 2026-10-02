@@ -25,7 +25,7 @@
         "pageLoadTimeoutSecs": 20,
         "preNavigationHooks": "[async function beforeOwnedRequest(context,gotOptions){context.request.noRetry=true;gotOptions.followRedirect=false;gotOptions.retry={limit:0};await new Promise(resolve=>setTimeout(resolve,200));}]",
         "proxyConfiguration": {
-          "useApifyProxy": false
+          "useApifyProxy": true
         },
         "pseudoUrls": [],
         "respectRobotsTxtFile": false,
@@ -90,7 +90,7 @@
         "max_records": 3
       },
       "pricing_model_expected": "usage_only",
-      "target_load_scope": "Three owned raw-HTTP start URLs, no subresources or link discovery; 200ms pre-navigation throttle and concurrency1 bound navigation starts to5/s."
+      "target_load_scope": "Three owned raw-HTTP start URLs, no subresources or link discovery; 200 ms throttle and concurrency 1 bound navigation starts to 5/s. Existing allocated ordinary datacenter proxy only (automatic group selection); no residential/SERP/custom proxy or purchase. SDK initialization adds up to two logical first-party proxy checks (4 s each, transport retries 0), separately from target requests."
     },
     {
       "actor": "apify/web-scraper",
@@ -122,7 +122,7 @@
         "pageFunctionTimeoutSecs": 10,
         "pageLoadTimeoutSecs": 20,
         "proxyConfiguration": {
-          "useApifyProxy": false
+          "useApifyProxy": true
         },
         "pseudoUrls": [],
         "respectRobotsTxtFile": false,
@@ -191,7 +191,7 @@
         "max_records": 3
       },
       "pricing_model_expected": "usage_only",
-      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+      "target_load_scope": "At most three owned start URLs (RAG one), single concurrency, no link discovery. Required native proxy editors use existing allocated ordinary datacenter proxy, without groups/country/custom URLs or purchase; RAG optional proxy remains disabled. Native ancillary traffic and effective cost require separate review before activation."
     },
     {
       "actor": "apify/playwright-scraper",
@@ -222,7 +222,7 @@
         "pageFunctionTimeoutSecs": 10,
         "pageLoadTimeoutSecs": 20,
         "proxyConfiguration": {
-          "useApifyProxy": false
+          "useApifyProxy": true
         },
         "pseudoUrls": [],
         "respectRobotsTxtFile": false,
@@ -288,7 +288,7 @@
         "max_records": 3
       },
       "pricing_model_expected": "usage_only",
-      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+      "target_load_scope": "At most three owned start URLs (RAG one), single concurrency, no link discovery. Required native proxy editors use existing allocated ordinary datacenter proxy, without groups/country/custom URLs or purchase; RAG optional proxy remains disabled. Native ancillary traffic and effective cost require separate review before activation."
     },
     {
       "actor": "apify/puppeteer-scraper",
@@ -318,7 +318,7 @@
         "pageFunctionTimeoutSecs": 10,
         "pageLoadTimeoutSecs": 20,
         "proxyConfiguration": {
-          "useApifyProxy": false
+          "useApifyProxy": true
         },
         "pseudoUrls": [],
         "respectRobotsTxtFile": false,
@@ -386,7 +386,7 @@
         "max_records": 3
       },
       "pricing_model_expected": "usage_only",
-      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+      "target_load_scope": "At most three owned start URLs (RAG one), single concurrency, no link discovery. Required native proxy editors use existing allocated ordinary datacenter proxy, without groups/country/custom URLs or purchase; RAG optional proxy remains disabled. Native ancillary traffic and effective cost require separate review before activation."
     },
     {
       "actor": "apify/website-content-crawler",
@@ -412,7 +412,7 @@
         "maxScrollHeightPixels": 0,
         "maxSessionRotations": 0,
         "proxyConfiguration": {
-          "useApifyProxy": false
+          "useApifyProxy": true
         },
         "removeCookieWarnings": false,
         "requestTimeoutSecs": 30,
@@ -654,7 +654,7 @@
         "max_records": 3
       },
       "pricing_model_expected": "usage_only",
-      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+      "target_load_scope": "At most three owned start URLs (RAG one), single concurrency, no link discovery. Required native proxy editors use existing allocated ordinary datacenter proxy, without groups/country/custom URLs or purchase; RAG optional proxy remains disabled. Native ancillary traffic and effective cost require separate review before activation."
     },
     {
       "actor": "apify/rag-web-browser",
@@ -775,11 +775,11 @@
         "url_source": "metadata.url"
       },
       "pricing_model_expected": "events_plus_platform_usage",
-      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+      "target_load_scope": "At most three owned start URLs (RAG one), single concurrency, no link discovery. Required native proxy editors use existing allocated ordinary datacenter proxy, without groups/country/custom URLs or purchase; RAG optional proxy remains disabled. Native ancillary traffic and effective cost require separate review before activation."
     }
   ],
   "cleanup_approved": true,
-  "evidence_type": "unexecuted_limited_permission_input_candidate",
+  "evidence_type": "unexecuted_corrected_proxy_limited_permission_input_candidate",
   "fixture_manifest_sha256": "89d02cd0d4347c2a40ef60432428fe5ea9177fdd4416023a04437f234ad16333",
   "schema_version": 1,
   "stage": "SMOKE"

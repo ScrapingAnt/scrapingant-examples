@@ -22,8 +22,8 @@ from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 RUNNER_READY = False
-REVIEWED_PLAN_SHA256 = "711256854c044f484674e42464b3c1915e88d2069dfe7ccfd7e2ff228e1465f2"
-REVIEWED_PLAN_FILE_SHA256 = "47c3136c1ffeffd766826a29fd0d67ce32fe1c828032b49411f1713424ddaf98"
+REVIEWED_PLAN_SHA256 = "32c541cbe98aaf78d789b2b781f6437797525e84442f5afd52532d46924b6d76"
+REVIEWED_PLAN_FILE_SHA256 = "584bad259170f34088c09ca3e015a71a9a6184516adfdbc39a896c12aa5ce6b0"
 API = "https://api.apify.com/v2"
 OWNED_HOST = "scrapingant.github.io"
 OWNED_PATH_PREFIX = "/scrapingant-examples/fixtures/"
