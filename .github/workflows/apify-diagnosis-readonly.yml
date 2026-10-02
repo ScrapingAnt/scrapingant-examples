@@ -1,10 +1,10 @@
-name: Apify consumed attempt read-only diagnosis
+name: Apify read-only diagnosis (guard closed after single dispatch)
 
 on:
   workflow_dispatch:
     inputs:
       execute_read_only:
-        description: One separately approved bounded read-only diagnosis of workflow37018036109
+        description: Read-only authorization consumed by37021960829; do not execute again
         type: boolean
         required: true
         default: false

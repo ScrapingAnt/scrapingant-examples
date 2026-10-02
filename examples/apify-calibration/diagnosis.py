@@ -24,8 +24,8 @@ LIMIT = 5
 RESPONSE_LIMIT = 131072
 STAGES = ("identity", "runs", "run", "input")
 OUTPUT = "diagnosis-receipt.json"
-# This separately authorized, read-only dispatch is consumed once and then closed.
-DIAGNOSTIC_OPEN = True
+# Read-only authorization consumed by workflow37021960829; no further dispatch.
+DIAGNOSTIC_OPEN = False
 
 
 class ReadFailure(Exception):
