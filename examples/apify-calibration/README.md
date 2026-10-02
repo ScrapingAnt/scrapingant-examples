@@ -1,3 +1,11 @@
+# Apify calibration — single dispatch consumed, guard closed
+
+**Workflow37018036109 was dispatched once at commit7e6e4deb314e997c40f06194dc1e78ca88c92f1e on October2.** The source guard is now closed again to block any further execution. That workflow checks out its exact dispatch commit, so this closure does not interrupt its approved capture/cleanup. Outcome is pending verification; this note makes no consumption or cleanup claim. [Single workflow](https://github.com/ScrapingAnt/scrapingant-examples/actions/runs/37018036109).
+
+Do not rerun or start another dispatch. Default CLI operation and all tests remain offline and use no real token.
+
+## Historical activation record
+
 # Apify calibration — one authorized dispatch
 
 **October2 activation:** source build3.0.25 is pinned to official commit21de8bf52ca7a587e680635a4198abfada472a8e with frozen Crawlee3.18.1, Apify SDK3.7.2 and Puppeteer25.4.0 dependencies. Independent cleanup review passed39 mocked tests on Python3.10/3.12 and12 additional probes. Explicit approval covers one run on these two owned pages using existing credits, USD1 total, and permanent deletion of only its three newly created default stores after verified sanitized evidence capture. The implementation's15-minute cleanup window is tighter than the approved1h. No provider run has occurred at this activation commit.

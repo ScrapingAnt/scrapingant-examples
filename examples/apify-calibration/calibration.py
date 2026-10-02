@@ -49,9 +49,9 @@ STORAGE_STAT_FIELDS = ("storageBytes", "readCount", "writeCount", "deleteCount",
 # This is source-controlled policy, not a CLI flag, secret, or environment override.
 # Enabling it requires a reviewed all-meter bound, pinned build and retention/cleanup policy.
 REVIEWED_GUARD = {
-    "ready": True,
+    "ready": False,
     "public_build": "3.0.25",
-    "review_reference": "2026-10-02 cleanup-safety-review; source21de8bf; runner5c79675",
+    "review_reference": "2026-10-02 reviewed dispatch37018036109 consumed; source21de8bf; runner5c79675",
     # Conservative ordinary-operation planning reserve, not a strict metadata-byte guarantee.
     "all_in_upper_bound_usd": "0.11",
     "bound_basis": "ordinary_operation_planning_reserve; no arbitrary-provider-failure guarantee",
@@ -63,11 +63,9 @@ REVIEWED_GUARD = {
     },
 }
 BLOCKERS = (
-    "Public build 3.0.25 exists; its resolved SDK/runtime behavior and all-meter bound still need review.",
-    "Retained KV, queue, session/statistics/error metadata bytes have no reviewed upper bound.",
-    "Seven-day unnamed expiry is not guaranteed: official latest-ten retention guidance conflicts.",
-    "Post-run export/read/transfer volumes and termination accounting are not fully bounded.",
-    "Retention duration or cleanup deadline has no reviewed bound; deletion would require separate owner approval.",
+    "The single-run authorization was consumed by manual workflow37018036109; do not dispatch or rerun.",
+    "A new execution requires separately authorized scope and a fresh reviewed guard change.",
+    "The ordinary-operation reserve is not a strict metadata-byte or arbitrary-failure guarantee.",
 )
 
 # One small result per fixture. No page-function network requests, enqueueing or storage writes.
@@ -156,7 +154,7 @@ def build_plan(build=None):
         "authentication_preview": "Authorization: Bearer [REDACTED]; environment only after readiness",
         "acceptance_definition": "One validated AA101 record per owned fixture; fixture plus SKU is the unique key.",
         "limitations": [
-            "This payload has not been executed and provides no consumption, invoice or savings evidence.",
+            "This offline plan is not measured evidence; observations require the separately verified run receipt.",
             "A run cap does not bound storage retention or later export/operation charges.",
             "1024MB times 120 seconds is only a nominal compute calculation; overhead is unresolved.",
             "This is an unexecuted plan; eligibility does not report a run or cleanup. One authorized dispatch only; do not rerun.",
