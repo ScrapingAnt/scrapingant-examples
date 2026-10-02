@@ -1,3 +1,15 @@
+# Apify calibration — one authorized dispatch
+
+**October2 activation:** source build3.0.25 is pinned to official commit21de8bf52ca7a587e680635a4198abfada472a8e with frozen Crawlee3.18.1, Apify SDK3.7.2 and Puppeteer25.4.0 dependencies. Independent cleanup review passed39 mocked tests on Python3.10/3.12 and12 additional probes. Explicit approval covers one run on these two owned pages using existing credits, USD1 total, and permanent deletion of only its three newly created default stores after verified sanitized evidence capture. The implementation's15-minute cleanup window is tighter than the approved1h. No provider run has occurred at this activation commit.
+
+The reviewed guard temporarily permits this **one manual dispatch**. Do not start another distinct workflow or rerun it. The guard will close after this attempt. Default CLI operation remains an offline plan; no token is read by plan/tests.
+
+The ordinary-operation planning reserve is USD0.101542926832, rounded up to USD0.11: USD0.10 documented all-model run cap, USD0.000452984832 storage reserve, USD0.0007 client operations and USD0.000389942 transfer. Storage assumptions are dataset324MiB, KV36MiB and queue18MiB for1h; operations assume14 calls at the highest listed per-operation rate; transfer assumes14×(131073 response +8192 request/header bytes) at0.20/decimalGB. These are generous **supplied planning reserves**, not observed/source-enforced byte limits or a guarantee against arbitrary provider/network failure. The fixed source writes only a handful of ordinary JSON keys/records, but error/cookie metadata has no formal byte cap. Failed/ambiguous execution or cleanup is explicitly unresolved; stop without retry.
+
+The run cap and rates come from [Run Actor API](https://docs.apify.com/api/v2/actors-runs-post), [current official pricing](https://apify.com/pricing) and [Web Scraper usage pricing](https://apify.com/apify/web-scraper/pricing), checked2026-10-02. [Pinned Dockerfile](https://github.com/apify/actor-scraper/blob/21de8bf52ca7a587e680635a4198abfada472a8e/packages/actor-scraper/web-scraper/Dockerfile) and [lockfile](https://github.com/apify/actor-scraper/blob/21de8bf52ca7a587e680635a4198abfada472a8e/pnpm-lock.yaml) establish build-source provenance. This is a charge/input calibration, not a production runtime benchmark or an invoice.
+
+## Historical preparation record — guard closed before this activation
+
 # Apify calibration preparation — execution blocked
 
 This separate example prepares a manual calibration of two owned synthetic HTML fixtures with `apify/web-scraper`. It has **not executed an Actor**. Its plan and mock responses are not consumption measurements, invoices, savings evidence, or evidence of a cheapest plan. The existing modeled `apify-pricing` example is separate.

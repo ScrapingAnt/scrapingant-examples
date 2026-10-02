@@ -1,10 +1,10 @@
-name: Apify calibration manual (guard closed)
+name: Apify calibration manual (single authorized run)
 
 on:
   workflow_dispatch:
     inputs:
       execute:
-        description: Explicit live opt-in; the reviewed cost guard currently blocks execution
+        description: One authorized live opt-in only; do not dispatch or rerun again
         type: boolean
         required: true
         default: false
@@ -58,7 +58,7 @@ jobs:
         env:
           APIFY_CALIBRATION_BUILD: ${{ inputs.build }}
         run: python calibration.py --check-readiness --build "$APIFY_CALIBRATION_BUILD"
-      - name: Opted-in single run (unreachable while reviewed guard is closed)
+      - name: Opted-in single authorized run
         if: success() && inputs.execute && github.ref == 'refs/heads/main' && github.run_attempt == 1
         working-directory: examples/apify-calibration
         env:

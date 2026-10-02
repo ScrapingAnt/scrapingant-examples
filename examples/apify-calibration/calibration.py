@@ -1,4 +1,4 @@
-"""Offline plan by default. Live execution requires a later reviewed cost-guard update."""
+"""Offline plan by default. One explicitly authorized calibration uses a reviewed guard."""
 import argparse
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, localcontext
@@ -33,7 +33,7 @@ MAX_WALL_SECONDS = 480
 MINIMUM_START_SECONDS = 360
 CLEANUP_RESERVE_SECONDS = 100
 TIMEOUTS = {"start": 30, "poll": 65, "export": 10, "metadata": 10, "delete": 10, "absence": 10}
-# Public build metadata verified separately; source/runtime/cost review is still pending.
+# Public build, pinned source/dependencies and ordinary-operation reserve reviewed 2026-10-02.
 PUBLIC_BUILD_CANDIDATE = {"number": "3.0.25", "git_commit_id": "21de8bf52ca7a587e680635a4198abfada472a8e"}
 PUBLIC_ACTOR_ID = "moJRLRc85AitArpNN"  # Public Actor identity verified from its public build metadata.
 USAGE_FIELDS = ("ACTOR_COMPUTE_UNITS", "DATASET_READS", "DATASET_WRITES", "KEY_VALUE_STORE_READS",
@@ -49,11 +49,18 @@ STORAGE_STAT_FIELDS = ("storageBytes", "readCount", "writeCount", "deleteCount",
 # This is source-controlled policy, not a CLI flag, secret, or environment override.
 # Enabling it requires a reviewed all-meter bound, pinned build and retention/cleanup policy.
 REVIEWED_GUARD = {
-    "ready": False,
-    "public_build": None,
-    "review_reference": None,
-    "all_in_upper_bound_usd": None,
-    "retention_policy": None,
+    "ready": True,
+    "public_build": "3.0.25",
+    "review_reference": "2026-10-02 cleanup-safety-review; source21de8bf; runner5c79675",
+    # Conservative ordinary-operation planning reserve, not a strict metadata-byte guarantee.
+    "all_in_upper_bound_usd": "0.11",
+    "bound_basis": "ordinary_operation_planning_reserve; no arbitrary-provider-failure guarantee",
+    "retention_policy": {
+        "mode": "cleanup",
+        "upper_bound_hours": "0.25",
+        "cleanup_approved": True,
+        "review_reference": "2026-10-02 explicit owner yes; exact new run-owned default stores only",
+    },
 }
 BLOCKERS = (
     "Public build 3.0.25 exists; its resolved SDK/runtime behavior and all-meter bound still need review.",
@@ -104,6 +111,8 @@ def build_plan(build=None):
     with localcontext() as context:
         context.prec = 28
         nominal_compute = Decimal("120") * Decimal("0.20") / Decimal("3600")
+    eligible = (REVIEWED_GUARD["ready"] is True and build == REVIEWED_GUARD["public_build"])
+    policy = REVIEWED_GUARD.get("retention_policy") or {}
     return {
         "schema_version": 1,
         "evidence_type": "unexecuted_plan",
@@ -116,8 +125,8 @@ def build_plan(build=None):
         "minimum_remaining_start_seconds": MINIMUM_START_SECONDS,
         "request_timeouts_seconds": dict(TIMEOUTS),
         "cleanup_reserved_seconds": CLEANUP_RESERVE_SECONDS,
-        "metrics_collection_enabled": False,
-        "cleanup_preparation": {"approval": False, "maximum_lifetime_hours": "0.25",
+        "metrics_collection_enabled": eligible,
+        "cleanup_preparation": {"approval": policy.get("cleanup_approved") is True, "maximum_lifetime_hours": "0.25",
                                 "scope": "Only the initial run's three verified new unnamed default stores"},
         "fixture_body_bytes": {"complete": 290, "changed-layout": 422},
         "options": {"build": build, "memory": "1024", "timeout": "120",
@@ -138,18 +147,19 @@ def build_plan(build=None):
         },
         "owner_budget_usd": "1.00",
         "proposed_run_cap_usd": "0.10",
-        "all_in_upper_bound_usd": None,
+        "all_in_upper_bound_usd": REVIEWED_GUARD["all_in_upper_bound_usd"] if eligible else None,
+        "cost_bound_basis": REVIEWED_GUARD.get("bound_basis") if eligible else None,
         "nominal_compute_only_usd": str(nominal_compute),
         "nominal_compute_is_all_in_bound": False,
-        "retention_upper_bound_hours": None,
-        "readiness": {"ready": False, "blockers": list(BLOCKERS)},
+        "retention_upper_bound_hours": policy.get("upper_bound_hours") if eligible else None,
+        "readiness": {"ready": eligible, "blockers": [] if eligible else list(BLOCKERS)},
         "authentication_preview": "Authorization: Bearer [REDACTED]; environment only after readiness",
         "acceptance_definition": "One validated AA101 record per owned fixture; fixture plus SKU is the unique key.",
         "limitations": [
             "This payload has not been executed and provides no consumption, invoice or savings evidence.",
             "A run cap does not bound storage retention or later export/operation charges.",
             "1024MB times 120 seconds is only a nominal compute calculation; overhead is unresolved.",
-            "The live cost guard and deletion approval remain closed; no account ceiling or cleanup has been configured.",
+            "This is an unexecuted plan; eligibility does not report a run or cleanup. One authorized dispatch only; do not rerun.",
         ],
     }
 
