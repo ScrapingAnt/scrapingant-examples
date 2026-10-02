@@ -64,7 +64,7 @@ The only example event rate is the **configurable documented default** `apify-ac
 
 ## Synthetic examples and boundaries
 
-All cases use explicit synthetic inputs. Each Actor's run meter valuation is USD **21.64**, its post-run eligible amount **.584**, and (where applicable) 960 charged default start events total **.048**. Thus inclusion changes which known quantities are added; it does not demonstrate different Actor efficiency.
+All cases use explicit synthetic inputs. Each fully specified Actor scope has a run meter valuation of USD **21.64**, a post-run eligible amount of **.584**, and (where applicable) 960 charged default start events total **.048**. S4 deliberately omits residential proxy quantity, so its complete run valuation is unknown. Thus inclusion changes which known quantities are added; it does not demonstrate different Actor efficiency.
 
 | Synthetic scenario | Eligible workload charges | Modeled account cycle cash | Important distinction |
 |---|---:|---:|---|
