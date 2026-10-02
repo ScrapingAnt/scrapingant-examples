@@ -9,6 +9,7 @@ on:
       - .github/workflows/apify-calibration-offline.yml
       - .github/workflows/apify-diagnosis-readonly.yml
       - .github/workflows/apify-coverage-readonly.yml
+      - .github/workflows/apify-account-readonly.yml
   pull_request:
     paths:
       - examples/apify-calibration/**
@@ -16,6 +17,7 @@ on:
       - .github/workflows/apify-calibration-offline.yml
       - .github/workflows/apify-diagnosis-readonly.yml
       - .github/workflows/apify-coverage-readonly.yml
+      - .github/workflows/apify-account-readonly.yml
 
 permissions:
   contents: read
@@ -43,3 +45,6 @@ jobs:
       - name: Wider read-only coverage tests
         working-directory: examples/apify-calibration
         run: python -m unittest test_coverage.py
+      - name: Derived account capability projection tests
+        working-directory: examples/apify-calibration
+        run: python -m unittest test_account_capabilities.py

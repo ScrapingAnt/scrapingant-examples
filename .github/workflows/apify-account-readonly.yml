@@ -1,0 +1,44 @@
+name: Apify account derived capabilities (read only)
+on:
+  workflow_dispatch:
+    inputs:
+      execute_read_only:
+        description: Exactly two read-only capability GETs; derived states only
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-account-readonly
+  cancel-in-progress: false
+jobs:
+  capabilities:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline hostile-output and route tests
+        working-directory: examples/apify-calibration
+        run: python -m unittest test_account_capabilities.py
+      - name: Fixed read-only capability probe with existing secret
+        if: inputs.execute_read_only
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python account_capabilities.py --execute > account-capabilities-public.json
+      - name: Derived states only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-derived-capabilities
+          path: examples/apify-calibration/account-capabilities-public.json
+          if-no-files-found: ignore
+          retention-days: 7
