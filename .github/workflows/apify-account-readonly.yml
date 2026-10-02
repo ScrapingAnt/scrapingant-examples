@@ -1,4 +1,4 @@
-name: Apify account derived capabilities (read only)
+name: Apify account derived capabilities (guard closed)
 on:
   workflow_dispatch:
     inputs:
