@@ -8,7 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 # Review must change source before a separately approved read; no environment override.
-CAPABILITIES_READY = True  # Closed immediately after the one reviewed two-GET observation.
+CAPABILITIES_READY = False  # Closed immediately after the one reviewed two-GET observation.
 # The limits schema says Gbytes, without defining its relation to scheduled memory Mbytes.
 # None is deliberate. A later source review may approve an explicit 1000 or 1024 mapping.
 REVIEWED_MBYTES_PER_GBYTE = None
