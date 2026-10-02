@@ -1,4 +1,4 @@
-name: Apify corrected wider read-only coverage
+name: Apify wider read-only coverage (guard closed)
 on:
   workflow_dispatch:
     inputs:

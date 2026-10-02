@@ -16,7 +16,7 @@ START='2026-10-02T14:00:00Z'
 LIMIT=5
 MAX_PAGES=2
 MAX_READS=21  # Remaining from23 after the first wider check used2GETs.
-WIDE_OPEN=True  # One corrected read-only continuation; never enables an Actor start.
+WIDE_OPEN=False  # Closed after the single corrected read-only dispatch.
 ERROR_TYPES=('invalid-input','invalid-parameter','invalid-value','invalid-request','invalid-id',
              'parameter-required','param-not-one-of','schema-validation-error','invalid-token',
              'missing-api-token','insufficient-permissions')
