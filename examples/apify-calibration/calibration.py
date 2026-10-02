@@ -9,7 +9,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
-from time import monotonic
+from time import monotonic, sleep
 from urllib.parse import parse_qsl, urlencode, urlsplit
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -31,7 +31,7 @@ RUN_STATUSES = ("READY", "RUNNING", "TIMING-OUT", "ABORTING") + TERMINAL
 DIAGNOSTIC_CATEGORIES = ("http_error", "connection_error", "unexpected_http_status", "response_too_large",
                          "invalid_json", "invalid_response", "invalid_run_status", "build_mismatch",
                          "options_mismatch", "invalid_identifier", "scope_mismatch", "deadline_exceeded",
-                         "policy_error", "transport_error")
+                         "latest_run_active", "policy_error", "transport_error")
 DIAGNOSTIC_STAGES = ("request", "response_status", "response_read", "json_decode", "run_validation",
                      "build_validation", "options_validation", "identifier_validation", "scope_validation", "local_policy")
 MAX_CLEANUP_HOURS = Decimal("0.25")
@@ -39,6 +39,7 @@ CREATION_TOLERANCE_SECONDS = 5
 MAX_WALL_SECONDS = 480
 MINIMUM_START_SECONDS = 360
 CLEANUP_RESERVE_SECONDS = 100
+TERMINAL_METER_WAIT_SECONDS = 10
 TIMEOUTS = {"start": 30, "poll": 65, "export": 10, "metadata": 10, "delete": 10, "absence": 10}
 # Public build, pinned source/dependencies and ordinary-operation reserve reviewed 2026-10-02.
 PUBLIC_BUILD_CANDIDATE = {"number": "3.0.25", "git_commit_id": "21de8bf52ca7a587e680635a4198abfada472a8e"}
@@ -271,6 +272,8 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
               "pre_cleanup_capture_sha256": None, "pre_cleanup_evidence_verified": False,
               "returned_output_count": None, "accepted_output_count": 0, "records": [],
               "all_in_cost_reconciled": False,
+              "meter_refresh": {"state": "preliminary_not_enabled", "capture_wait_seconds": 0,
+                                "preliminary": True, "invoice_final": False, "diagnostic": None},
               "receipts": {"run": None, "usage": None, "usage_usd": None, "storage": {}},
               "cleanup": {"absence_confirmed": False, "owner_attention_required": True,
                           "state": "not_attempted", "stores": {}},
@@ -318,9 +321,7 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
             if run["status"] in TERMINAL: break
             candidate = validate_run(request("poll", "GET", API + "/actor-runs/" + run_id +
                                              "?waitForFinish=60"), build)
-            fields = ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values())
-            if any(candidate.get(field) != initial.get(field) for field in fields):
-                raise DiagnosticError("scope_mismatch", "scope_validation")
+            verify_poll_scope(candidate, initial)
             run = candidate
             result["status"] = run["status"]
     except Exception as error:
@@ -333,6 +334,39 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
         result["cleanup"]["state"] = "run_still_active"
         persist_final(result, persist)
         raise CalibrationFailure("Run remains active after bounded polling; owner attention required, no abort or deletion attempted.", result)
+    if getattr(transport, "refresh_terminal_meters", False) is True:
+        refresh = result["meter_refresh"]
+        needed = TERMINAL_METER_WAIT_SECONDS + TIMEOUTS["poll"] + CLEANUP_RESERVE_SECONDS
+        if result["request_counts"]["poll"] >= POLL_LIMIT:
+            refresh["state"] = "preliminary_no_poll_slot"
+        elif monotonic() + needed > min(deadline, getattr(transport, "deadline", deadline)):
+            refresh["state"] = "preliminary_insufficient_time"
+        else:
+            try:
+                response_context = None
+                transport.meter_wait(TERMINAL_METER_WAIT_SECONDS)
+                refresh["capture_wait_seconds"] = TERMINAL_METER_WAIT_SECONDS
+                response = request("poll", "GET", API + "/actor-runs/" + run_id + "?waitForFinish=60")
+                reject_active_refresh(response, initial)
+                candidate = validate_run(response, build)
+                verify_poll_scope(candidate, initial, run)
+                run = candidate
+                refresh.update(state="refreshed_after_wait", preliminary=False)
+            except Exception as error:
+                diagnostic = failure_diagnostic(error, "poll", response_context)
+                if diagnostic["category"] == "latest_run_active":
+                    result["historical_terminal_capture"] = {"status": run["status"], "preliminary": True,
+                                                              "invoice_final": False, "receipts": run_receipts(run)}
+                    result["status"] = diagnostic["run_status"]
+                    result["failure_diagnostic"] = diagnostic
+                    refresh.update(state="preliminary_latest_active", diagnostic=diagnostic)
+                else:
+                    refresh.update(state="preliminary_refresh_failed", diagnostic=diagnostic)
+    if result["status"] not in TERMINAL:
+        result["cleanup"]["state"] = "latest_run_active"
+        result["local_elapsed_seconds"] = safe_number(monotonic() - began)
+        persist_final(result, persist)
+        raise CalibrationFailure("Latest observation reports the original run active; owner attention required, no export or cleanup attempted.", result)
     result["receipts"].update(run_receipts(run))
     failure = None
     try:
@@ -393,6 +427,22 @@ def verify_initial_references(initial):
     timestamp(initial.get("startedAt"))
 
 
+def reject_active_refresh(response, initial):
+    """Original ID plus a known active status revokes terminal permission before other validation."""
+    data = response.get("data") if isinstance(response, dict) else None
+    if isinstance(data, dict) and data.get("id") == initial["id"]:
+        status = data.get("status")
+        if type(status) is str and status in RUN_STATUSES and status not in TERMINAL:
+            raise DiagnosticError("latest_run_active", "run_validation", run_status=status)
+
+
+def verify_poll_scope(candidate, initial, confirmed_terminal=None):
+    fields = ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values())
+    if (any(candidate.get(field) != initial.get(field) for field in fields) or
+            (confirmed_terminal is not None and candidate.get("status") != confirmed_terminal["status"])):
+        raise DiagnosticError("scope_mismatch", "scope_validation")
+
+
 def verify_store(kind, response, initial, terminal):
     data = response.get("data") if isinstance(response, dict) else None
     if (not isinstance(data, dict) or data.get("id") != initial[STORE_FIELDS[kind][0]] or
@@ -432,6 +482,7 @@ def cleanup_terminal(initial, terminal, transport, request, result, persist, emi
                "returned_output_count": result["returned_output_count"],
                "accepted_output_count": result["accepted_output_count"], "records": result["records"],
                "extraction_outcome": result["extraction_outcome"],
+               "meter_refresh": result["meter_refresh"],
                "receipts": result["receipts"], "request_counts": dict(result["request_counts"])}
     result["pre_cleanup_capture"] = json.loads(canonical_bytes(capture))
     result["pre_cleanup_capture_sha256"] = digest(capture)
@@ -580,6 +631,15 @@ def safe_identifier(value):
     return value
 
 
+def numeric_limit_equals(value, expected):
+    if type(value) not in (int, float, Decimal): return False
+    try:
+        number = Decimal(str(value))
+        return number.is_finite() and number == Decimal(expected)
+    except InvalidOperation:
+        return False
+
+
 def validate_run(response, build):
     if not isinstance(response, dict) or not isinstance(response.get("data"), dict):
         raise DiagnosticError("invalid_response", "run_validation")
@@ -588,13 +648,15 @@ def validate_run(response, build):
     if type(status) is not str or status not in RUN_STATUSES:
         raise DiagnosticError("invalid_run_status", "run_validation")
     options = run.get("options")
-    if run.get("buildNumber") != build or (isinstance(options, dict) and options.get("build") != build):
+    build_number = run.get("buildNumber")
+    pending_build = build_number is None and status not in TERMINAL
+    if ((build_number != build and not pending_build) or
+            (isinstance(options, dict) and options.get("build") != build)):
         raise DiagnosticError("build_mismatch", "build_validation", run_status=status)
     if (not isinstance(options, dict) or
             type(options.get("memoryMbytes")) is not int or options["memoryMbytes"] != 1024 or
             type(options.get("timeoutSecs")) is not int or options["timeoutSecs"] != 120 or
-            isinstance(options.get("maxTotalChargeUsd"), bool) or
-            str(options.get("maxTotalChargeUsd")) not in ("0.1", "0.10")):
+            not numeric_limit_equals(options.get("maxTotalChargeUsd"), "0.10")):
         raise DiagnosticError("options_mismatch", "options_validation", run_status=status)
     return run
 
@@ -654,15 +716,18 @@ def read_bounded(response, deadline):
 
 class HttpTransport:
     """No redirects or retries, bounded response bytes, fixed API routes, closed readiness gate."""
-    def __init__(self, build, wall_deadline=None):
+    def __init__(self, build, wall_deadline=None, *, meter_wait=None, refresh_terminal_meters=True):
         require_readiness(build)
         self.build = build
         self.deadline = monotonic() + MAX_WALL_SECONDS
         if wall_deadline is not None: self.deadline = min(self.deadline, wall_deadline)
         self.initial, self.last_run = None, None
+        self.latest_active_status = None
         self.metadata, self.cleanup_urls = {}, set()
         self.start_attempted = False
         self.last_response_diagnostic = None
+        self.refresh_terminal_meters = refresh_terminal_meters
+        self.meter_wait = sleep if meter_wait is None else meter_wait
         self.seen = {key: set() for key in TIMEOUTS}
 
     def bind_run(self, initial):
@@ -673,6 +738,8 @@ class HttpTransport:
 
     def authorize_cleanup(self, initial, terminal, metadata):
         require_readiness(self.build)
+        if self.latest_active_status is not None:
+            raise PolicyError("An active observation revoked terminal cleanup permission.")
         policy = require_cleanup_policy()
         self.bind_run(initial)
         if terminal != self.last_run or terminal.get("status") not in TERMINAL or set(metadata) != set(STORE_FIELDS):
@@ -689,6 +756,8 @@ class HttpTransport:
     def request(self, method, url, payload, token):
         self.last_response_diagnostic = None
         require_readiness(self.build)
+        if self.latest_active_status is not None:
+            raise DiagnosticError("latest_run_active", "local_policy", run_status=self.latest_active_status)
         plan = build_plan(self.build)
         parsed = urlsplit(url)
         pairs = parse_qsl(parsed.query, keep_blank_values=True)
@@ -752,7 +821,17 @@ class HttpTransport:
                 verify_initial_references(self.initial)
                 self.last_run = self.initial
             elif poll:
-                self.last_run = validate_run(parsed_response, self.build)
+                if self.last_run["status"] in TERMINAL:
+                    try:
+                        reject_active_refresh(parsed_response, self.initial)
+                    except DiagnosticError as error:
+                        self.latest_active_status = error.diagnostic["run_status"]
+                        self.cleanup_urls.clear()
+                        raise
+                candidate = validate_run(parsed_response, self.build)
+                verify_poll_scope(candidate, self.initial,
+                                  self.last_run if self.last_run["status"] in TERMINAL else None)
+                self.last_run = candidate
             elif kind == "metadata" and isinstance(parsed_response, dict) and isinstance(parsed_response.get("data"), dict):
                 self.metadata[storage_kind] = parsed_response["data"]
             return parsed_response

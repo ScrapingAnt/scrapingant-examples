@@ -481,7 +481,7 @@ class CleanupLifecycleTests(unittest.TestCase):
         deleted = [FakeResponse(b"", 204) for _ in range(3)]
         opener = SequenceOpener(responses + deleted + missing)
         with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
-            transport = c.HttpTransport(BUILD)
+            transport = c.HttpTransport(BUILD, meter_wait=lambda _: self.fail("no fourth poll or wait permitted"))
             result = self.invoke(transport)
         self.assertEqual(len(opener.requests), 14)
         self.assertTrue(result["cleanup"]["absence_confirmed"])
@@ -489,6 +489,286 @@ class CleanupLifecycleTests(unittest.TestCase):
         self.assertTrue(all(request.get_header("Authorization") == "Bearer " + TOKEN for request, _ in opener.requests))
         self.assertTrue(all(TOKEN not in request.full_url for request, _ in opener.requests))
         self.assertTrue(all(response.read_sizes == [] for response in deleted))
+        self.assertEqual(result["meter_refresh"]["state"], "preliminary_no_poll_slot")
+
+    def test_ready_null_build_binds_initial_scope_then_polls_pinned_terminal_and_cleans(self):
+        pending = run_response("READY")
+        pending["data"]["buildNumber"] = None
+        values = [pending, run_response(), [record("complete"), record("changed-layout")]] + [
+            storage_response(kind) for kind in c.STORE_FIELDS]
+        replies = [FakeResponse(json.dumps(value).replace('"maxTotalChargeUsd": 0.1',
+                                                          '"maxTotalChargeUsd": 0.1000').encode(),
+                                201 if index == 0 else 200) for index, value in enumerate(values)]
+        replies += [FakeResponse(b"", 204) for _ in range(3)] + [
+            HTTPError(c.API + "/" + route + "/" + pending["data"][field],
+                      404, TOKEN, {}, io.BytesIO(TOKEN.encode())) for field, route in c.STORE_FIELDS.values()]
+        opener = SequenceOpener(replies)
+        with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+            transport = c.HttpTransport(BUILD, refresh_terminal_meters=False)
+            with patch.object(transport, "bind_run", wraps=transport.bind_run) as binding:
+                result = self.invoke(transport)
+        self.assertIsNone(transport.initial["buildNumber"])
+        self.assertGreaterEqual(binding.call_count, 1)
+        self.assertEqual(result["receipts"]["run"]["build_number"], BUILD)
+        self.assertTrue(result["cleanup"]["absence_confirmed"])
+        self.assertEqual(result["accepted_output_count"], 2)
+        self.assertEqual(result["request_counts"], {"start": 1, "poll": 1, "export": 1,
+                                                  "metadata": 3, "delete": 3, "absence": 3})
+        self.assertEqual(len(opener.requests), 12)
+
+    def meter_responses(self, refresh):
+        values = [run_response(), refresh, [record("complete"), record("changed-layout")]] + [
+            storage_response(kind) for kind in c.STORE_FIELDS]
+        replies = [value if isinstance(value, Exception) else FakeResponse(json.dumps(value).encode(),
+                   201 if index == 0 else 200) for index, value in enumerate(values)]
+        return replies + [FakeResponse(b"", 204) for _ in range(3)] + [
+            HTTPError(c.API + "/" + route + "/" + run_response()["data"][field],
+                      404, TOKEN, {}, io.BytesIO(TOKEN.encode())) for field, route in c.STORE_FIELDS.values()]
+
+    def test_meter_refresh_waits_once_then_replaces_only_verified_terminal_meters(self):
+        refreshed = run_response()
+        refreshed["data"]["usageTotalUsd"] = 0.025
+        opener, waits = SequenceOpener(self.meter_responses(refreshed)), []
+        def wait(seconds):
+            self.assertEqual(len(opener.requests), 1)
+            waits.append(seconds)
+        with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+            result = self.invoke(c.HttpTransport(BUILD, meter_wait=wait))
+        self.assertEqual(waits, [10])
+        self.assertEqual(result["meter_refresh"], {"state": "refreshed_after_wait", "capture_wait_seconds": 10,
+                                                 "preliminary": False, "invoice_final": False, "diagnostic": None})
+        self.assertEqual(result["receipts"]["run"]["usage_total_usd"], "0.025")
+        self.assertEqual(result["pre_cleanup_capture"]["meter_refresh"], result["meter_refresh"])
+        self.assertEqual(result["request_counts"]["poll"], 1)
+        self.assertTrue(result["cleanup"]["absence_confirmed"])
+        self.assertEqual(len(opener.requests), 12)
+
+    def test_meter_refresh_failure_preserves_confirmed_terminal_for_cleanup(self):
+        for mutation in ("connection", "http", "id", "userId", "actId", "defaultDatasetId",
+                         "defaultKeyValueStoreId", "defaultRequestQueueId", "terminal_status", "build", "options"):
+            with self.subTest(mutation=mutation):
+                reply = run_response()
+                if mutation == "connection": reply = URLError(TOKEN + " private provider message")
+                elif mutation == "http": reply = HTTPError(c.API + "/" + TOKEN, 403, TOKEN,
+                                                            {"Authorization": TOKEN}, io.BytesIO(TOKEN.encode()))
+                elif mutation == "terminal_status": reply["data"]["status"] = "FAILED"
+                elif mutation == "build": reply["data"]["buildNumber"] = "3.0.124"
+                elif mutation == "options": reply["data"]["options"]["maxTotalChargeUsd"] = 0.2
+                else: reply["data"][mutation] = "DifferentScopeValue"
+                opener, waits = SequenceOpener(self.meter_responses(reply)), []
+                with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+                    transport = c.HttpTransport(BUILD, meter_wait=waits.append)
+                    result = self.invoke(transport)
+                self.assertEqual(waits, [10])
+                self.assertEqual(result["status"], "SUCCEEDED")
+                self.assertEqual(transport.last_run["status"], "SUCCEEDED")
+                self.assertEqual(result["receipts"]["run"]["usage_total_usd"], "0.012345")
+                self.assertEqual(result["meter_refresh"]["state"], "preliminary_refresh_failed")
+                self.assertTrue(result["meter_refresh"]["preliminary"])
+                self.assertFalse(result["meter_refresh"]["invoice_final"])
+                self.assertIsNotNone(result["meter_refresh"]["diagnostic"])
+                self.assertTrue(result["cleanup"]["absence_confirmed"])
+                self.assertEqual(result["request_counts"]["poll"], 1)
+                self.assertEqual(len(opener.requests), 12)
+                for private in (TOKEN, "OfflineRunIdentifier", "OfflineAccountIdentifier", "DifferentScopeValue"):
+                    self.assertNotIn(private, json.dumps(result))
+
+    def test_meter_refresh_latest_active_run_stops_export_and_all_cleanup(self):
+        for status in ("READY", "RUNNING", "TIMING-OUT", "ABORTING"):
+            for build_number in (BUILD, None):
+                with self.subTest(status=status, build_number=build_number):
+                    active = run_response(status)
+                    active["data"]["buildNumber"] = build_number
+                    active["data"]["usageTotalUsd"] = 0.099
+                    opener, waits = SequenceOpener(self.meter_responses(active)), []
+                    self.saved = []
+                    with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+                        transport = c.HttpTransport(BUILD, meter_wait=waits.append)
+                        with self.assertRaises(c.CalibrationFailure) as error:
+                            self.invoke(transport)
+                        with self.assertRaises(c.PolicyError):
+                            transport.authorize_cleanup(transport.initial, run_response()["data"], {})
+                    result = error.exception.receipt
+                    self.assertEqual(result["status"], status)
+                    self.assertEqual(transport.last_run["status"], "SUCCEEDED")
+                    self.assertEqual(transport.latest_active_status, status)
+                    self.assertEqual(waits, [10])
+                    self.assertEqual(len(opener.requests), 2)
+                    self.assertEqual(result["request_counts"], {"start": 1, "poll": 1, "export": 0,
+                                                               "metadata": 0, "delete": 0, "absence": 0})
+                    self.assertEqual(result["cleanup"]["state"], "latest_run_active")
+                    self.assertTrue(result["cleanup"]["owner_attention_required"])
+                    self.assertFalse(result["cleanup"]["absence_confirmed"])
+                    self.assertEqual(result["meter_refresh"]["state"], "preliminary_latest_active")
+                    self.assertTrue(result["meter_refresh"]["preliminary"])
+                    self.assertFalse(result["meter_refresh"]["invoice_final"])
+                    self.assertEqual(result["failure_diagnostic"], {"operation": "poll", "http_status": 200,
+                        "category": "latest_run_active", "stage": "run_validation", "run_status": status})
+                    self.assertEqual(result["extraction_outcome"], "not_attempted")
+                    self.assertEqual(result["accepted_output_count"], 0)
+                    self.assertIsNone(result["receipts"]["run"])
+                    historical = result["historical_terminal_capture"]
+                    self.assertEqual(historical["status"], "SUCCEEDED")
+                    self.assertTrue(historical["preliminary"])
+                    self.assertFalse(historical["invoice_final"])
+                    self.assertEqual(historical["receipts"]["run"]["usage_total_usd"], "0.012345")
+                    self.assertIsNone(result["pre_cleanup_capture"])
+                    self.assertEqual([phase for phase, _ in self.saved], ["final"])
+                    self.assertEqual(self.saved[0][1]["cleanup"]["state"], "latest_run_active")
+                    for private in (TOKEN, "OfflineRunIdentifier", "OfflineAccountIdentifier", "OfflineActorIdentifier"):
+                        self.assertNotIn(private, json.dumps(result))
+
+    def test_meter_refresh_latest_active_mock_also_stops_without_cleanup(self):
+        transport = ScriptedTransport([run_response(), run_response("RUNNING")] + self.replies()[1:])
+        transport.refresh_terminal_meters, waits = True, []
+        transport.meter_wait = waits.append
+        with self.assertRaises(c.CalibrationFailure) as error:
+            self.invoke(transport)
+        result = error.exception.receipt
+        self.assertEqual(result["status"], "RUNNING")
+        self.assertEqual(len(transport.requests), 2)
+        self.assertEqual(result["request_counts"]["delete"], 0)
+        self.assertEqual(result["cleanup"]["state"], "latest_run_active")
+        self.assertEqual(result["meter_refresh"]["diagnostic"]["run_status"], "RUNNING")
+        self.assertEqual(result["historical_terminal_capture"]["receipts"]["run"]["usage_total_usd"], "0.012345")
+
+    def conflicting_active(self, mutation):
+        response = run_response("RUNNING")
+        data = response["data"]
+        if mutation == "build": data["buildNumber"] = "3.0.124"
+        elif mutation == "cap": data["options"]["maxTotalChargeUsd"] = 0.2
+        elif mutation == "missing_options": data.pop("options")
+        elif mutation == "missing_owner": data.pop("userId")
+        else: data[mutation] = TOKEN
+        return response
+
+    def test_active_original_id_with_conflicting_fields_revokes_http_cleanup(self):
+        for mutation in ("build", "cap", "missing_options", "missing_owner", "userId", "actId",
+                         "defaultDatasetId", "defaultKeyValueStoreId", "defaultRequestQueueId"):
+            with self.subTest(mutation=mutation):
+                opener = SequenceOpener(self.meter_responses(self.conflicting_active(mutation)))
+                self.saved = []
+                with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+                    transport = c.HttpTransport(BUILD, meter_wait=lambda _: None)
+                    with self.assertRaises(c.CalibrationFailure) as error:
+                        self.invoke(transport)
+                    for method, route in (("GET", "/datasets/OfflineDatasetIdentifier/items?format=json&limit=2&fields=fixture%2Csku%2Cname%2Cprice_minor%2Ccurrency"),
+                                          ("GET", "/datasets/OfflineDatasetIdentifier"),
+                                          ("DELETE", "/datasets/OfflineDatasetIdentifier"),
+                                          ("GET", "/actor-runs/OfflineRunIdentifier?waitForFinish=60")):
+                        with self.assertRaises(c.PolicyError):
+                            transport.request(method, c.API + route, None, TOKEN)
+                result = error.exception.receipt
+                self.assertEqual(result["status"], "RUNNING")
+                self.assertEqual(result["cleanup"]["state"], "latest_run_active")
+                self.assertTrue(result["cleanup"]["owner_attention_required"])
+                self.assertEqual(result["request_counts"], {"start": 1, "poll": 1, "export": 0,
+                                                           "metadata": 0, "delete": 0, "absence": 0})
+                self.assertEqual(result["meter_refresh"]["diagnostic"]["category"], "latest_run_active")
+                self.assertEqual(result["historical_terminal_capture"]["receipts"]["run"]["usage_total_usd"], "0.012345")
+                self.assertIsNone(result["receipts"]["run"])
+                self.assertEqual([phase for phase, _ in self.saved], ["final"])
+                self.assertEqual(len(opener.requests), 2)
+                for private in (TOKEN, "OfflineRunIdentifier", "OfflineAccountIdentifier"):
+                    self.assertNotIn(private, json.dumps(result))
+
+    def test_active_original_id_with_conflicting_fields_revokes_mock_cleanup(self):
+        for mutation in ("build", "cap", "missing_options", "missing_owner", "userId", "actId",
+                         "defaultDatasetId", "defaultKeyValueStoreId", "defaultRequestQueueId"):
+            with self.subTest(mutation=mutation):
+                transport = ScriptedTransport([run_response(), self.conflicting_active(mutation)] + self.replies()[1:])
+                transport.refresh_terminal_meters = True
+                transport.meter_wait = lambda _: None
+                with self.assertRaises(c.CalibrationFailure) as error:
+                    self.invoke(transport)
+                result = error.exception.receipt
+                self.assertEqual(result["status"], "RUNNING")
+                self.assertEqual(result["cleanup"]["state"], "latest_run_active")
+                self.assertEqual(result["request_counts"]["delete"], 0)
+                self.assertEqual(result["request_counts"]["metadata"], 0)
+                self.assertEqual(len(transport.requests), 2)
+                self.assertNotIn(TOKEN, json.dumps(result))
+
+    def test_conflicting_active_observation_revokes_previously_granted_deletion(self):
+        values = [run_response()] + [storage_response(kind) for kind in c.STORE_FIELDS] + [self.conflicting_active("build")]
+        opener = SequenceOpener([FakeResponse(json.dumps(value).encode(), 201 if index == 0 else 200)
+                                 for index, value in enumerate(values)] + [FakeResponse(b"", 204)])
+        with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener), \
+                patch.object(c, "utc_now", return_value=datetime(2026, 10, 2, 12, 1, tzinfo=timezone.utc)):
+            transport = c.HttpTransport(BUILD, meter_wait=lambda _: None)
+            plan = c.build_plan(BUILD)
+            transport.request("POST", c.API + "/actors/apify~web-scraper/runs?" + c.urlencode(plan["options"]), plan["input"], TOKEN)
+            metadata = {kind: transport.request("GET", c.API + "/" + route + "/" + transport.initial[field], None, TOKEN)["data"]
+                        for kind, (field, route) in c.STORE_FIELDS.items()}
+            transport.authorize_cleanup(transport.initial, transport.last_run, metadata)
+            with self.assertRaises(c.DiagnosticError) as error:
+                transport.request("GET", c.API + "/actor-runs/OfflineRunIdentifier?waitForFinish=60", None, TOKEN)
+            self.assertEqual(error.exception.diagnostic["category"], "latest_run_active")
+            with self.assertRaises(c.PolicyError):
+                transport.authorize_cleanup(transport.initial, transport.last_run, metadata)
+            with self.assertRaises(c.PolicyError):
+                transport.request("DELETE", c.API + "/datasets/OfflineDatasetIdentifier", None, TOKEN)
+        self.assertEqual(len(opener.requests), 5)
+
+    def test_meter_refresh_skips_wait_and_read_when_no_slot_or_reserved_time(self):
+        for remaining in (174, 175):
+            with self.subTest(remaining=remaining):
+                refreshed = run_response()
+                replies = self.meter_responses(refreshed)
+                if remaining == 174: replies.pop(1)
+                opener, waits, clock = SequenceOpener(replies), [], [0]
+                def wait(seconds):
+                    self.assertEqual(seconds, 10)
+                    waits.append(seconds)
+                    clock[0] += seconds
+                with patch.object(c, "monotonic", side_effect=lambda: clock[0]), patch.object(c, "require_readiness"), \
+                        patch.object(c, "build_opener", return_value=opener):
+                    transport = c.HttpTransport(BUILD, meter_wait=wait)
+                    real_request = transport.request
+                    def request(method, url, payload, token):
+                        reply = real_request(method, url, payload, token)
+                        if method == "POST": clock[0] = 480 - remaining
+                        return reply
+                    with patch.object(transport, "request", side_effect=request):
+                        result = self.invoke(transport)
+                self.assertEqual(waits, [] if remaining == 174 else [10])
+                self.assertEqual(result["meter_refresh"]["state"], "preliminary_insufficient_time"
+                                 if remaining == 174 else "refreshed_after_wait")
+                self.assertTrue(result["cleanup"]["absence_confirmed"])
+
+    def test_meter_refresh_rechecks_deadline_after_wait_and_preserves_cleanup(self):
+        replies = self.meter_responses(run_response())
+        replies.pop(1)
+        opener, clock = SequenceOpener(replies), [0]
+        with patch.object(c, "monotonic", side_effect=lambda: clock[0]), patch.object(c, "require_readiness"), \
+                patch.object(c, "build_opener", return_value=opener):
+            def wait(seconds): clock[0] += seconds + 1
+            transport = c.HttpTransport(BUILD, meter_wait=wait)
+            real_request = transport.request
+            def request(method, url, payload, token):
+                reply = real_request(method, url, payload, token)
+                if method == "POST": clock[0] = 305
+                return reply
+            with patch.object(transport, "request", side_effect=request):
+                result = self.invoke(transport)
+        self.assertEqual(result["meter_refresh"]["state"], "preliminary_refresh_failed")
+        self.assertEqual(result["meter_refresh"]["diagnostic"]["category"], "deadline_exceeded")
+        self.assertEqual(result["request_counts"]["poll"], 0)
+        self.assertEqual(len(opener.requests), 11)
+        self.assertTrue(result["cleanup"]["absence_confirmed"])
+
+    def test_meter_refresh_wait_failure_never_reads_or_loses_terminal_cleanup_scope(self):
+        replies = self.meter_responses(run_response())
+        replies.pop(1)
+        opener = SequenceOpener(replies)
+        def wait(seconds): raise RuntimeError(TOKEN)
+        with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+            result = self.invoke(c.HttpTransport(BUILD, meter_wait=wait))
+        self.assertEqual(result["meter_refresh"]["state"], "preliminary_refresh_failed")
+        self.assertEqual(result["meter_refresh"]["capture_wait_seconds"], 0)
+        self.assertEqual(result["request_counts"]["poll"], 0)
+        self.assertTrue(result["cleanup"]["absence_confirmed"])
+        self.assertNotIn(TOKEN, json.dumps(result))
 
     def test_real_transport_deletion_requires_verified_terminal_scope_and_fixed_host(self):
         opener = SequenceOpener([FakeResponse(json.dumps(run_response("RUNNING")).encode(), 201)])
@@ -706,6 +986,65 @@ class DiagnosticTests(unittest.TestCase):
         self.assertEqual(receipt["failure_diagnostic"], {
             "operation": "poll", "http_status": 200, "category": "scope_mismatch",
             "stage": "scope_validation", "run_status": "SUCCEEDED"})
+
+    def test_unresolved_terminal_build_never_exports_or_deletes(self):
+        for status in c.TERMINAL:
+            for in_poll in (False, True):
+                with self.subTest(status=status, in_poll=in_poll):
+                    terminal = run_response(status)
+                    terminal["data"]["buildNumber"] = None
+                    replies = ([FakeResponse(json.dumps(run_response("RUNNING")).encode(), 201)]
+                               if in_poll else [])
+                    replies.append(FakeResponse(json.dumps(terminal).encode(), 200 if in_poll else 201))
+                    receipt = self.failure(replies)
+                    self.assertEqual(receipt["failure_diagnostic"]["category"], "build_mismatch")
+
+
+class RunSchemaTests(unittest.TestCase):
+    def test_numeric_equivalence_preserves_exact_effective_limits(self):
+        for literal in ("0.1", "0.10", "0.1000", "1e-1"):
+            with self.subTest(literal=literal):
+                encoded = json.dumps(run_response()).replace('"maxTotalChargeUsd": 0.1',
+                                                              '"maxTotalChargeUsd": ' + literal)
+                response = json.loads(encoded, parse_float=Decimal)
+                self.assertEqual(c.validate_run(response, BUILD)["options"]["maxTotalChargeUsd"], Decimal("0.10"))
+
+    def test_non_numeric_nonfinite_negative_missing_or_wrong_limit_rejected(self):
+        for value in (None, True, False, Decimal("NaN"), Decimal("Infinity"), Decimal("-0.1"),
+                      "0.1", Decimal("0.1001"), Decimal("0.09")):
+            with self.subTest(value=str(value)):
+                response = run_response()
+                response["data"]["options"]["maxTotalChargeUsd"] = value
+                with self.assertRaises(c.PolicyError): c.validate_run(response, BUILD)
+        response = run_response()
+        del response["data"]["options"]["maxTotalChargeUsd"]
+        with self.assertRaises(c.PolicyError): c.validate_run(response, BUILD)
+
+    def test_null_build_allowed_only_nonterminal_and_wrong_nonnull_never_allowed(self):
+        for status in c.RUN_STATUSES:
+            for build_number in (None, "3.0.124", "latest", False):
+                with self.subTest(status=status, build_number=build_number):
+                    response = run_response(status)
+                    response["data"]["buildNumber"] = build_number
+                    if build_number is None and status not in c.TERMINAL:
+                        c.validate_run(response, BUILD)
+                    else:
+                        with self.assertRaises(c.PolicyError): c.validate_run(response, BUILD)
+
+    def test_pending_run_still_requires_pinned_options_build_and_safe_original_identity(self):
+        for value in (None, "latest", "3.0.124"):
+            with self.subTest(options_build=value):
+                response = run_response("READY")
+                response["data"]["buildNumber"] = None
+                response["data"]["options"]["build"] = value
+                with self.assertRaises(c.PolicyError): c.validate_run(response, BUILD)
+        for field in ("id", "userId", "actId", "defaultDatasetId", "defaultKeyValueStoreId", "defaultRequestQueueId"):
+            with self.subTest(field=field):
+                response = run_response("READY")
+                response["data"]["buildNumber"] = None
+                response["data"][field] = TOKEN + "/"
+                with patch.object(c, "PUBLIC_ACTOR_ID", "OfflineActorIdentifier"), self.assertRaises(c.PolicyError):
+                    c.verify_initial_references(c.validate_run(response, BUILD))
 
 
 class EvidencePersistenceTests(unittest.TestCase):
