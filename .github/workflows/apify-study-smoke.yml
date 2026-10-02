@@ -15,7 +15,7 @@ on:
           - cheerio
           - remaining-five
           - capability-first-repetition
-          - capability-remaining-repetitions
+          - capability-remaining-without-wcc
       execute_reviewed_smoke:
         description: Execute the selected reviewed LIMITED manifest; encrypted capture then verified cleanup
         type: boolean

@@ -26,6 +26,15 @@ class WorkflowTests(unittest.TestCase):
     def setUp(self):
         self.approval={'plaintext_sha256':'a'*64,'ciphertext_sha256':'b'*64,'scope_approved':True}
 
+    def test_remaining_without_wcc_is_exact_twenty_two_with_unchanged_native_cells(self):
+        expected=[v['cell_id']for v in fixture.capability_plan_fixture()['cells'][12:]
+                  if not v['cell_id'].endswith('-website-content-crawler')]
+        with patch.object(driver.os,'environ',fixture.ForbiddenEnvironment()),patch.object(driver,'plan',side_effect=AssertionError('Manifest reads plan')):
+            selected=driver.smoke_manifest('capability-remaining-without-wcc')
+        self.assertEqual(selected,expected);self.assertEqual(len(selected),22)
+        self.assertTrue(all(not c.endswith('-website-content-crawler')for c in selected))
+        self.assertIn('capability-remaining-without-wcc',driver.MANIFEST_SCOPES)
+
     def test_capability_scopes_are_exact_first_twelve_and_remaining_twenty_four_offline(self):
         expected=[v['cell_id'] for v in fixture.capability_plan_fixture()['cells']]
         with patch.object(driver.os, 'environ', fixture.ForbiddenEnvironment()), patch.object(driver, 'plan', side_effect=AssertionError('Manifest reads plan')):
@@ -68,7 +77,8 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(len(json.loads(out.getvalue())),12)
         workflow=(driver.ROOT.parents[1]/'.github/workflows/apify-study-smoke.yml').read_text()
         self.assertIn('capability-first-repetition',workflow)
-        self.assertIn('capability-remaining-repetitions',workflow)
+        self.assertIn('capability-remaining-without-wcc',workflow)
+        self.assertNotIn('          - capability-remaining-repetitions',workflow)
         self.assertIn('max-parallel: 1',workflow);self.assertIn('fail-fast: true',workflow)
         self.assertIn("github.run_attempt == 1",workflow)
 

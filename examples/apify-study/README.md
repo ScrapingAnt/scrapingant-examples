@@ -110,7 +110,10 @@ The separately pinned `capability-plan.json` defines exactly 36 core capability
 cells: three identical repetitions of four structured Actors on each of 30
 static and 30 dynamic fixtures, WCC on all 30 content fixtures, and RAG on three
 matched content URLs in separate starts. `capability-first-repetition` selects
-12 fixed cells; `capability-remaining-repetitions` selects the other 24. These
+12 fixed cells; the historical offline `capability-remaining-repetitions` selector
+returns the other24. The current workflow offers `capability-remaining-without-wcc`,
+which selects exactly22 unchanged cells and defers the two Website Content Crawler
+repetitions for separate method review. These
 scopes retain one running job at a time and stop on failed capture/cleanup proof.
 Each cell requests a USD0.08 all-model run cap and holds a separate USD0.02
 ancillary reservation; the whole core method reserves USD3.60. These are holds,

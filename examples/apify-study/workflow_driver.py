@@ -23,7 +23,7 @@ ROOT=Path(__file__).resolve().parent
 ALLOWED_CELLS=('smoke-cheerio-scraper','smoke-web-scraper','smoke-playwright-scraper',
                'smoke-puppeteer-scraper','smoke-website-content-crawler','smoke-rag-web-browser')
 CAPABILITY_CELLS=tuple(value[0] for value in runner.CAPABILITY_CELL_IDENTITIES)
-MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions')
+MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions','capability-remaining-without-wcc')
 APPROVAL_BASE='https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/main/examples/apify-study/approvals/'
 MAX_APPROVAL_BYTES=16384
 MAX_APPROVAL_READS=75
@@ -45,6 +45,7 @@ def smoke_manifest(scope):
     if scope=='remaining-five':return list(ALLOWED_CELLS[1:])
     if scope=='capability-first-repetition':return list(CAPABILITY_CELLS[:12])
     if scope=='capability-remaining-repetitions':return list(CAPABILITY_CELLS[12:])
+    if scope=='capability-remaining-without-wcc':return [c for c in CAPABILITY_CELLS[12:]if not c.endswith('-website-content-crawler')]
     raise runner.Fault('invalid_cell')
 
 
