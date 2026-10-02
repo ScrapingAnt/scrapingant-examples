@@ -1,0 +1,59 @@
+name: Apify calibration manual (guard closed)
+
+on:
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: Explicit live opt-in; the reviewed cost guard currently blocks execution
+        type: boolean
+        required: true
+        default: false
+      build:
+        description: Immutable public apify/web-scraper build number; leave blank for an offline plan
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apify-calibration-manual
+  cancel-in-progress: false
+
+jobs:
+  calibration:
+    # Main only. Workflow re-runs cannot initiate another provider run.
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline tests and unexecuted plan
+        working-directory: examples/apify-calibration
+        run: ./run.sh
+      - name: Offline preview of requested build
+        if: inputs.build != ''
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_CALIBRATION_BUILD: ${{ inputs.build }}
+        run: python calibration.py --plan --build "$APIFY_CALIBRATION_BUILD"
+      - name: Secret-free reviewed guard check
+        if: inputs.execute
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_CALIBRATION_BUILD: ${{ inputs.build }}
+        run: python calibration.py --check-readiness --build "$APIFY_CALIBRATION_BUILD"
+      - name: Opted-in single run (unreachable while reviewed guard is closed)
+        if: success() && inputs.execute && github.ref == 'refs/heads/main' && github.run_attempt == 1
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_CALIBRATION_BUILD: ${{ inputs.build }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python calibration.py --execute --build "$APIFY_CALIBRATION_BUILD"

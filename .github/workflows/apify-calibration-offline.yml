@@ -1,0 +1,35 @@
+name: Apify calibration offline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - examples/apify-calibration/**
+      - .github/workflows/apify-calibration-manual.yml
+      - .github/workflows/apify-calibration-offline.yml
+  pull_request:
+    paths:
+      - examples/apify-calibration/**
+      - .github/workflows/apify-calibration-manual.yml
+      - .github/workflows/apify-calibration-offline.yml
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Standard-library tests and offline plan
+        working-directory: examples/apify-calibration
+        run: ./run.sh
