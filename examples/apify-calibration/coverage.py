@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timezone
 import json
 import os
+import re
 from pathlib import Path
 from time import monotonic
 from urllib.error import HTTPError, URLError
@@ -14,11 +15,28 @@ from diagnosis import BUILD, NoRedirect, ReadFailure, RESPONSE_LIMIT, identifier
 START='2026-10-02T14:00:00Z'
 LIMIT=5
 MAX_PAGES=2
-MAX_READS=23  # identity +2pages +2reads per at most10 listed runs
-WIDE_OPEN=False  # Consumed read-only workflow37024124313; no redispatch.
+MAX_READS=21  # Remaining from23 after the first wider check used2GETs.
+WIDE_OPEN=True  # One corrected read-only continuation; never enables an Actor start.
+ERROR_TYPES=('invalid-input','invalid-parameter','invalid-value','invalid-request','invalid-id',
+             'parameter-required','param-not-one-of','schema-validation-error','invalid-token',
+             'missing-api-token','insufficient-permissions')
+QUERY_KEYS=('startedAfter','startedBefore','desc','limit','offset')
+
+def freeze_end():
+    return datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00','Z')
+
+class SafeQueryFailure(ReadFailure):
+    def __init__(self,status,category,body):
+        super().__init__(status,category)
+        error=body.get('error') if isinstance(body,dict) else None
+        error=error if isinstance(error,dict) else {}
+        self.provider_error_type=error.get('type') if error.get('type') in ERROR_TYPES else None
+        message=error.get('message')
+        hints=[key for key in QUERY_KEYS if isinstance(message,str) and re.search(r'\b'+key+r'\b',message)]
+        self.parameter_hint=hints[0] if len(hints)==1 else None  # Hint only, never a causal claim.
 
 def page_path(offset,end):
-    return '/actors/apify~web-scraper/runs?'+urlencode({'limit':LIMIT,'offset':offset,'desc':'false',
+    return '/actors/apify~web-scraper/runs?'+urlencode({'limit':LIMIT,'offset':offset,
                                                      'startedAfter':START,'startedBefore':end})
 
 def page_data(response,offset,end,total=None):
@@ -53,10 +71,13 @@ def check_coverage(transport,end):
             'correlation_complete':False,'retry_eligible':False,'console_token_identity_match':None,
             'outcome':'unknown'}
     def read(stage,**kw):
+        if result['requests_attempted']>=MAX_READS: raise ReadFailure(None,'route_rejected')
         result['requests_attempted']+=1
         try: value=transport.get(stage,**kw)
         except ReadFailure as error:
-            result['reads'].append({'stage':stage,'http_status':error.status,'category':error.category})
+            result['reads'].append({'stage':stage,'http_status':error.status,'category':error.category,
+                                   'provider_error_type':getattr(error,'provider_error_type',None),
+                                   'parameter_hint':getattr(error,'parameter_hint',None)})
             raise
         result['reads'].append({'stage':stage,'http_status':200,'category':'ok'}); return value
     try:
@@ -127,9 +148,20 @@ class CoverageTransport:
                 try: parsed=json.loads(raw.decode('utf-8'),parse_constant=lambda _:(_ for _ in ()).throw(ValueError()))
                 except (ValueError,UnicodeError): raise ReadFailure(status,'invalid_json') from None
         except HTTPError as error:
-            status=error.code; error.close()
+            status=error.code; body=None
+            try:
+                raw=bytearray(); reader=getattr(error,'read1',error.read); stop=min(self._deadline,monotonic()+10)
+                while monotonic()<stop:
+                    chunk=reader(min(8192,RESPONSE_LIMIT+1-len(raw)))
+                    if not chunk: break
+                    raw.extend(chunk)
+                    if len(raw)>RESPONSE_LIMIT: raise ValueError
+                if monotonic()>=stop: raise ValueError
+                body=json.loads(raw.decode('utf-8'))
+            except Exception: pass
+            finally: error.close()
             category={401:'authentication_rejected',403:'forbidden',404:'not_found'}.get(status)
-            raise ReadFailure(status,category or ('provider_error' if status>=500 else 'request_rejected')) from None
+            raise SafeQueryFailure(status,category or ('provider_error' if status>=500 else 'request_rejected'),body) from None
         except ReadFailure: raise
         except (OSError,URLError): raise ReadFailure(None,'transport_error') from None
         try:
@@ -154,7 +186,7 @@ def main(argv=None):
                           'methods':['GET'],'all_statuses':True,'all_builds':True})); return 0
     if WIDE_OPEN is not True or REVIEWED_GUARD.get('ready') is not False:
         print(json.dumps({'outcome':'guard_closed','provider_requests':0})); return 1
-    end=datetime.now(timezone.utc).isoformat().replace('+00:00','Z')  # Freeze before token access.
+    end=freeze_end()  # Freeze documented millisecond UTC format before token access.
     try: transport=CoverageTransport(os.environ.get('APIFY_TOKEN'),end)
     except ReadFailure:
         print(json.dumps({'outcome':'token_invalid','provider_requests':0})); return 1

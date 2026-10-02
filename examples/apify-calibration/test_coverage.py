@@ -101,6 +101,7 @@ class CoverageTests(unittest.TestCase):
         query=c.page_path(5,END)
         self.assertIn('offset=5',query); self.assertIn('limit=5',query)
         self.assertNotIn('status=',query); self.assertNotIn('build',query)
+        self.assertNotIn('desc=',query)
         self.assertIn('14%3A00%3A00Z',query)
 
     def test_invalid_page_types_or_counts_do_not_claim_complete(self):
@@ -126,12 +127,30 @@ class CoverageTransportTests(unittest.TestCase):
                 else: value=fake.get('input',kv_id=path.split('/key-value-stores/')[1].split('/')[0])
                 response=io.BytesIO(json.dumps(value).encode()); response.status=200; return response
         opener=Opener(); transport=c.CoverageTransport('FAKE_TOKEN',END,opener=opener)
-        result=c.check_coverage(transport,END)
+        with patch.object(c,'MAX_READS',23): result=c.check_coverage(transport,END)
         self.assertTrue(result['correlation_complete']); self.assertEqual(len(opener.calls),23)
         self.assertTrue(all(r.get_method()=='GET' and 'FAKE_TOKEN' not in r.full_url for r in opener.calls))
         for stage in ('identity','page','run','input','POST','DELETE'):
             with self.assertRaises(c.ReadFailure): transport.get(stage)
         self.assertEqual(len(opener.calls),23)
+
+    def test_remaining21_limit_is_honored_after_failed_first_check(self):
+        fake=Fake([row(i) for i in range(10)])
+        result=c.check_coverage(fake,END)
+        self.assertEqual(len(fake.calls),21); self.assertEqual(result['requests_attempted'],21)
+        self.assertFalse(result['correlation_complete']); self.assertFalse(result['retry_eligible'])
+
+    def test_error_body_only_emits_known_type_and_query_hint(self):
+        body={'error':{'type':'invalid-input','message':'startedBefore wrong PRIVATE_TOKEN_VALUE'},
+              'proxy':{'password':'PRIVATE_PROXY'},'id':'PRIVATE_ACCOUNT'}
+        error=c.SafeQueryFailure(400,'request_rejected',body)
+        self.assertEqual(error.provider_error_type,'invalid-input'); self.assertEqual(error.parameter_hint,'startedBefore')
+        self.assertNotIn('PRIVATE',str(error))
+        unknown=c.SafeQueryFailure(400,'request_rejected',{'error':{'type':'PRIVATE_TOKEN','message':'PRIVATE_OTHER'}})
+        self.assertIsNone(unknown.provider_error_type); self.assertIsNone(unknown.parameter_hint)
+
+    def test_freeze_end_has_three_fractional_digits_and_utc(self):
+        self.assertRegex(c.freeze_end(),r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$')
 
     def test_failed_page_cannot_be_retried(self):
         class Opener:

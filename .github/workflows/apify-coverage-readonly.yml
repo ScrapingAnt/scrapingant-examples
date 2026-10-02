@@ -1,9 +1,9 @@
-name: Apify wider read-only coverage (guard closed)
+name: Apify corrected wider read-only coverage
 on:
   workflow_dispatch:
     inputs:
       execute_read_only:
-        description: Authorization consumed by37024124313; do not execute again
+        description: Corrected read-only continuation,21remainingGETs; no Actor start
         type: boolean
         required: true
         default: false
