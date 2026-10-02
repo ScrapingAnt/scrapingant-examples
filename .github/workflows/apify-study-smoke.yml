@@ -11,6 +11,11 @@ on:
         type: boolean
         required: true
         default: false
+      execute_permission_diagnosis:
+        description: Exactly two existing account GETs; encrypted private scope/headroom projection
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -44,6 +49,22 @@ jobs:
         env:
           STUDY_TEST_AGE_BIN: ${{ runner.temp }}/age-v1.3.2/age/age
         run: python -m unittest discover -p 'test_*.py'
+      - name: Narrow read-only access diagnosis with existing secret
+        if: github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke
+        working-directory: examples/apify-study
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python diagnose_readonly.py --execute
+      - name: Encrypted read-only projection and fixed hashes only
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_permission_diagnosis && !inputs.execute_reviewed_smoke
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-study-encrypted-access-diagnosis
+          path: |
+            examples/apify-study/diagnosis.age
+            examples/apify-study/diagnosis-public.json
+          if-no-files-found: ignore
+          retention-days: 7
       - name: One reviewed smoke capture using existing secret
         if: github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
         working-directory: examples/apify-study
