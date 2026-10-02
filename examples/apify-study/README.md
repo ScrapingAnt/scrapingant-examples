@@ -13,12 +13,18 @@ then waits200ms before each of exactly three owned document requests. Cheerio
 does not execute scripts or fetch page subresources. These smoke inputs do not
 provide a runtime benchmark or an estimate of arbitrary-site success.
 
+The restricted candidate requests `forcePermissionLevel=LIMITED_PERMISSIONS`
+for this Cheerio run only. It does not approve persistent full account access.
+Compatibility and the invoking token's Run/export/cleanup scope must be tested;
+there is no fallback to full permissions or changed credentials.
+
 The two phases are deliberately separate:
 
 1. Capture verifies the original run, exports at most four rows (three assigned
    rows plus an extra-row sentinel), and checks the three original unnamed
-   default-store associations. Only allowlisted numeric meters and controlled
-   outputs enter the private receipt. The standard age1.3.2 CLI encrypts it to a
+   default-store associations. Allowlisted numeric meters, controlled outputs
+   and bounded redacted HTTP-error evidence enter the private receipt.
+   The standard age1.3.2 CLI encrypts it to a
    public recipient; raw scope identifiers stay in memory or a0600 runner-temp
    state file. No plaintext receipt/state or private identity key is uploaded.
 2. The owner-side process downloads the ciphertext, authenticates/decrypts it
@@ -45,6 +51,14 @@ repository paths are excluded. The final encrypted receipt preserves refreshed
 preliminary run meters, storage quantities and cleanup confirmations. Neither
 API run meters nor this smoke establish a final invoice.
 
+HTTP errors retain at most16KiB of received body as redacted private evidence,
+with explicit truncation, malformed/unsupported encoding and read/deadline
+state. Credentials and private identifiers are removed, including supported
+reversible encodings; ambiguous encodings fail closed. Public diagnostics show
+only fixed status/stage/format and a narrow verified error-type allowlist.
+Phase2 errors enter the final encrypted receipt while the approved initial
+capture remains immutable. A discarded historical body cannot be recovered.
+
 Run offline tests with the official age binaries available:
 
 ```sh
@@ -55,7 +69,11 @@ python workflow_driver.py capture
 Official parameter and resource references, checked2026-10-02:
 
 - [Run Actor](https://docs.apify.com/api/v2/actors-runs-post): query `memory` is in
-  MB; `maxTotalChargeUsd` caps all pricing models; build/timeout/restart overrides.
+  MB; `maxTotalChargeUsd` caps all pricing models; build/timeout/restart overrides;
+  documented `forcePermissionLevel` per-run override and error-type identifiers.
+- [Actor permissions](https://docs.apify.com/actors/running/permissions): limited
+  runtime access includes default/new Actor storage; full access requires an
+  explicit persistent approval. Request intent and observed access are separate.
 - [Actor resources](https://docs.apify.com/actors/running/usage-and-resources):
   power-of-two memory allocations,4096MB per CPU core.
 - [Standard age tooling](https://github.com/FiloSottile/age/releases/tag/v1.3.2):

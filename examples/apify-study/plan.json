@@ -7,6 +7,7 @@
       "ancillary_reserve_usd": "0.02",
       "build": "3.0.22",
       "cell_id": "smoke-cheerio-scraper",
+      "force_permission_level": "LIMITED_PERMISSIONS",
       "input": {
         "debugLog": false,
         "excludes": [],
@@ -778,7 +779,7 @@
     }
   ],
   "cleanup_approved": true,
-  "evidence_type": "unexecuted_reviewed-input-candidate",
+  "evidence_type": "unexecuted_limited_permission_input_candidate",
   "fixture_manifest_sha256": "89d02cd0d4347c2a40ef60432428fe5ea9177fdd4416023a04437f234ad16333",
   "schema_version": 1,
   "stage": "SMOKE"

@@ -1,16 +1,18 @@
 """Offline smoke-runner tests. Every provider reply and clock is synthetic."""
 import contextlib
+import base64
 import copy
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 import hashlib
+import html
 import io
 import json
 from pathlib import Path
 import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit, parse_qs
+from urllib.parse import urlsplit, parse_qs, quote, unquote
 
 import runner as r
 
@@ -38,6 +40,13 @@ def plan_fixture():
                       "output": {"fields": FIELDS, "max_records": 3, "max_bytes": 65536,
                                  "expected_records": RECORDS, "allowed_urls": URLS}})
     return {"schema_version": 1, "stage": "SMOKE", "aggregate_reserved_usd": "0.84", "cells": cells}
+
+
+def limited_plan_fixture():
+    plan=plan_fixture()
+    plan["cells"][0].update(cell_id="smoke-cheerio-scraper",actor="apify/cheerio-scraper",
+                            actor_id="YrQuEkowkNCLdk4j2",force_permission_level="LIMITED_PERMISSIONS")
+    return plan
 
 
 def response(status="SUCCEEDED", **changes):
@@ -140,6 +149,44 @@ class TestTools:
 
 
 class ContractTests(TestTools, unittest.TestCase):
+
+    def test_permission_override_rejects_other_modes_cells_or_actor_identities(self):
+        cases=[]
+        for value in (None,"FULL_PERMISSIONS","limited_permissions",True,"LIMITED_PERMISSIONS "):
+            plan=limited_plan_fixture();plan["cells"][0]["force_permission_level"]=value;cases.append(plan)
+        for key,value in (("cell_id","other-cheerio"),("actor","apify/web-scraper"),("actor_id","OtherPublicActor")):
+            plan=limited_plan_fixture();plan["cells"][0][key]=value;cases.append(plan)
+        plan=limited_plan_fixture();plan["cells"][0],plan["cells"][1]=plan["cells"][1],plan["cells"][0];cases.append(plan)
+        plan=limited_plan_fixture();plan["cells"][1]["force_permission_level"]="LIMITED_PERMISSIONS";cases.append(plan)
+        for index,plan in enumerate(cases):
+            with self.subTest(case=index),patch.object(r,"REVIEWED_PLAN_SHA256",hashlib.sha256(canonical(plan)).hexdigest()):
+                with self.assertRaises(r.Fault):r.validate_plan(plan)
+
+    def test_permission_request_intent_is_private_and_observed_level_remains_unknown(self):
+        plan=limited_plan_fixture()
+        with patch.object(r,"REVIEWED_PLAN_SHA256",hashlib.sha256(canonical(plan)).hexdigest()):
+            cell=r.prepare_cell(plan,"smoke-cheerio-scraper")
+            replies=[r.Reply(201,response(actId=cell.spec["actor_id"],permissionLevel="FULL_PERMISSIONS")),r.Reply(200,RECORDS)]
+            replies += [r.Reply(200,metadata(k,actId=cell.spec["actor_id"])) for k in r.STORES]
+            state=r.run_until_capture(FakeTransport(replies),cell,self.persist,budget=r.StudyBudget(plan),
+                                      clock=self.clock,utcnow=lambda:STAMP+timedelta(seconds=40),wait=self.clock.wait)
+            receipt=state.evidence["run"]
+            self.assertEqual(receipt.get("requested_permission_level"),"LIMITED_PERMISSIONS")
+            self.assertIn("observed_permission_level",receipt)
+            self.assertIsNone(receipt["observed_permission_level"])
+            self.assertNotIn("permission_level",json.dumps(r.public_result(state)))
+            self.assertNotIn("LIMITED_PERMISSIONS",json.dumps(r.public_result(state)))
+        legacy=r.run_receipt(response()["data"],self.cell)
+        self.assertIsNone(legacy.get("requested_permission_level"))
+
+    def test_unreviewed_permission_override_changes_plan_commitment(self):
+        plan=limited_plan_fixture()
+        with self.assertRaises(r.Fault):r.prepare_cell(plan,"smoke-cheerio-scraper")
+        raw=canonical(plan)
+        with patch.object(r,"REVIEWED_PLAN_FILE_SHA256",hashlib.sha256(raw).hexdigest()):
+            with self.assertRaises(r.Fault):r.load_reviewed_plan(raw)
+            with patch.object(r,"REVIEWED_PLAN_SHA256",hashlib.sha256(raw).hexdigest()):
+                self.assertEqual(r.load_reviewed_plan(raw),plan)
 
     def test_private_json_state_roundtrip_preserves_original_scope_and_counts(self):
         self.assertTrue(callable(getattr(r, "private_state_bytes", None)), "bounded state serialization is missing")
@@ -627,6 +674,319 @@ class TransportTests(TestTools, unittest.TestCase):
     def http(self, opener):
         return r.HttpTransport(self.cell, TOKEN, opener=opener, clock=self.clock, deadline=self.clock() + 480)
 
+    def error_transport(self, body, content_type="application/json", status=403, slow=None):
+        class ErrorBody:
+            def __init__(inner):inner.stream=io.BytesIO(body);inner.closed=False;inner.read_sizes=[]
+            def read(inner,size):raise AssertionError("buffered error body read is forbidden")
+            def read1(inner,size):
+                inner.read_sizes.append(size)
+                if slow:self.clock.wait(slow)
+                return inner.stream.read(min(size,1) if slow else size)
+            def close(inner):inner.closed=True
+        stream=ErrorBody()
+        def opener(req,timeout):
+            raise HTTPError(req.full_url,status,TOKEN,{"Content-Type":content_type},stream)
+        return self.http(opener),stream
+
+    def test_limited_permission_is_only_one_post_query_parameter_with_unchanged_caps_input_and_options(self):
+        plan=limited_plan_fixture();seen=[]
+        def opener(req,timeout):
+            seen.append((req.full_url,req.get_method(),req.data,timeout))
+            raise URLError(TOKEN)
+        with patch.object(r,"REVIEWED_PLAN_SHA256",hashlib.sha256(canonical(plan)).hexdigest()):
+            cell=r.prepare_cell(plan,"smoke-cheerio-scraper")
+            transport=r.HttpTransport(cell,TOKEN,opener=opener,clock=self.clock,deadline=self.clock()+480)
+            with self.assertRaises(r.Fault):transport.request("start",None,30)
+            self.assertEqual(len(seen),1)
+            self.assertEqual(transport.counts["start"],1)
+            self.assertEqual(transport.counts["total"],1)
+            query=parse_qs(urlsplit(seen[0][0]).query)
+            self.assertEqual(query,{"build":["3.0.1"],"memory":["4096"],"timeout":["120"],
+                                    "maxTotalChargeUsd":["0.12"],"restartOnError":["false"],
+                                    "forcePermissionLevel":["LIMITED_PERMISSIONS"]})
+            self.assertEqual(seen[0][1],"POST")
+            self.assertEqual(seen[0][2],canonical(cell.spec["input"]))
+            self.assertEqual(seen[0][3],30)
+            self.assertNotIn("forcePermissionLevel",cell.spec["options"])
+            self.assertNotIn("force_permission_level",cell.spec["options"])
+            with self.assertRaises(r.Fault):transport.request("start",None,30)
+            self.assertEqual(len(seen),1)
+            for spec in plan["cells"][1:]:
+                other=r.HttpTransport(r.prepare_cell(plan,spec["cell_id"]),TOKEN,opener=opener,clock=self.clock,deadline=self.clock()+480)
+                with self.assertRaises(r.Fault):other.request("start",None,30)
+                self.assertNotIn("forcePermissionLevel",parse_qs(urlsplit(seen[-1][0]).query))
+
+    def test_json_403_body_preserved_redacted_privately_with_only_known_machine_type_public(self):
+        body={"error":{"type":"full-permission-actor-not-approved","message":"Review required " + TOKEN,
+                       "details":{"password":"password-value","Authorization":"Bearer auth-value",
+                                  "Cookie":"session=cookie-value; second=another-value","api-key":"api-value",
+                                  "url":"https://example.invalid/object?token=url-value&X-Amz-Signature=signed-value",
+                                  "elsewhere":"apify_api_" + "A"*40,"userId":"PrivateOwner"}}}
+        t,stream=self.error_transport(canonical(body))
+        state=self.capture(t)
+        self.assertIn("http_error_response",state.evidence)
+        error=state.evidence["http_error_response"]
+        self.assertEqual(error["read_state"],"complete")
+        self.assertFalse(error["truncated"])
+        self.assertFalse(error["malformed"])
+        self.assertEqual(error["response_format"],"json")
+        self.assertIn("Review required",error["body_redacted"])
+        self.assertEqual(state.diagnostic["machine_error_type"],"full-permission-actor-not-approved")
+        self.assertEqual(state.diagnostic["response_format"],"json")
+        private=self.saved[0].decode();public=json.dumps(r.public_result(state))
+        for secret in (TOKEN,"password-value","auth-value","cookie-value","another-value","api-value","url-value","signed-value","A"*40,"PrivateOwner"):
+            self.assertNotIn(secret,private)
+            self.assertNotIn(secret,public)
+        self.assertNotIn("Review required",public)
+        self.assertNotIn("body_redacted",public)
+        self.assertTrue(stream.closed)
+        self.assertEqual(state.request_counts["start"],1)
+
+    def test_html_error_body_secret_fields_and_signed_queries_never_reach_public_output(self):
+        body=("<html><h1>Forbidden</h1><input name='api_key' value='hidden-value'>"
+              "<div data-password=attribute-value>Authorization: Bearer bearer-value</div>"
+              "<a href='https://example.invalid/a?signature=signature-value&amp;token=query-value'>link</a>"
+              "<p>"+TOKEN+"</p></html>").encode()
+        t,stream=self.error_transport(body,"text/html; charset=utf-8")
+        state=self.capture(t)
+        self.assertIn("http_error_response",state.evidence)
+        error=state.evidence["http_error_response"]
+        self.assertEqual(error["response_format"],"html")
+        self.assertIn("Forbidden",error["body_redacted"])
+        for secret in (TOKEN,"hidden-value","attribute-value","bearer-value","signature-value","query-value"):
+            self.assertNotIn(secret,self.saved[0].decode())
+        self.assertNotIn("Forbidden",json.dumps(r.public_result(state)))
+        self.assertTrue(stream.closed)
+
+    def test_unknown_error_type_and_unknown_content_type_remain_private(self):
+        t,stream=self.error_transport(canonical({"error":{"type":TOKEN,"message":"private explanation"}}),"application/x-"+TOKEN)
+        state=self.capture(t)
+        self.assertIn("http_error_response",state.evidence)
+        self.assertIsNone(state.diagnostic.get("machine_error_type"))
+        self.assertEqual(state.diagnostic["response_format"],"unknown")
+        self.assertIn("private explanation",state.evidence["http_error_response"]["body_redacted"])
+        self.assertNotIn(TOKEN,self.saved[0].decode())
+        self.assertNotIn("private explanation",json.dumps(r.public_result(state)))
+
+    def test_malformed_json_keeps_redacted_bounded_text_and_malformed_label(self):
+        t,stream=self.error_transport(b'{"error":{"type":"unknown","api_key":"broken-value","message":"'+TOKEN.encode())
+        state=self.capture(t)
+        self.assertIn("http_error_response",state.evidence)
+        self.assertTrue(state.evidence["http_error_response"]["malformed"])
+        self.assertIsNone(state.diagnostic.get("machine_error_type"))
+        self.assertNotIn(TOKEN,self.saved[0].decode())
+        self.assertNotIn("broken-value",self.saved[0].decode())
+
+    def test_error_body_limit_and_route_deadline_preserve_only_bounded_received_prefix(self):
+        self.assertTrue(hasattr(r,"ERROR_RESPONSE_LIMIT"),"bounded HTTP error preservation is missing")
+        t,stream=self.error_transport(b"x"*(r.ERROR_RESPONSE_LIMIT+50),"text/plain")
+        state=self.capture(t);error=state.evidence["http_error_response"]
+        self.assertTrue(error["truncated"])
+        self.assertLessEqual(len(error["body_redacted"]),r.ERROR_RESPONSE_LIMIT)
+        self.assertLessEqual(sum(stream.read_sizes),r.ERROR_RESPONSE_LIMIT+1)
+        t,stream=self.error_transport(b"secret body not yet received","text/plain",slow=11)
+        state=self.capture(t);error=state.evidence["http_error_response"]
+        self.assertEqual(error["read_state"],"deadline")
+        self.assertTrue(error["truncated"])
+        self.assertEqual(state.diagnostic["category"],"deadline_exceeded")
+        self.assertEqual(state.diagnostic["http_status"],403)
+        self.assertLessEqual(len(stream.read_sizes),3)
+        self.assertTrue(stream.closed)
+
+    def test_error_exception_string_and_safe_mapping_never_contain_private_body(self):
+        t,stream=self.error_transport(canonical({"error":{"type":"insufficient-permissions","message":"private secret response " + TOKEN}}))
+        with self.assertRaises(r.Fault) as error:t.request("start",None,30)
+        self.assertEqual(error.exception.safe().get("machine_error_type"),"insufficient-permissions")
+        self.assertNotIn("private secret response",str(error.exception))
+        self.assertNotIn(TOKEN,str(error.exception))
+        self.assertNotIn("body_redacted",json.dumps(error.exception.safe()))
+
+    def test_only_verified_403_error_codes_are_public_other_statuses_do_not_infer(self):
+        for status,code,expected in ((403,"full-permission-actor-blocked-for-admin","full-permission-actor-blocked-for-admin"),
+                                     (400,"full-permission-actor-not-approved",None),(402,"payment-required",None)):
+            t,stream=self.error_transport(canonical({"error":{"type":code,"message":"private details"}}),status=status)
+            state=self.capture(t)
+            self.assertEqual(state.diagnostic.get("machine_error_type"),expected)
+            self.assertEqual(state.diagnostic["http_status"],status)
+            self.assertNotIn("private details",json.dumps(r.public_result(state)))
+
+    def test_escaped_json_keys_nested_secret_values_and_encoded_signed_url_are_redacted(self):
+        body=(b'{"error":{"type":"insufficient-permissions","api\\u005fkey":{"nested":"nested-value"},'
+              b'"cookie":["list-value"],"message":"https://example.invalid/a?%74oken=encoded-token&%73ignature=encoded-signature"}}')
+        t,stream=self.error_transport(body)
+        state=self.capture(t)
+        for secret in ("nested-value","list-value","encoded-token","encoded-signature"):
+            self.assertNotIn(secret,self.saved[0].decode())
+        self.assertEqual(state.diagnostic["machine_error_type"],"insufficient-permissions")
+
+    def test_reversibly_encoded_token_and_known_id_values_cannot_survive_private_redaction(self):
+        def encoded(value):return "".join("%%%02X"%ord(char) for char in value)
+        def recovered(value):
+            for _ in range(12):
+                value=html.unescape(unquote(value))
+            return value
+        vectors=["https://example.invalid/?context="+encoded(TOKEN),
+                 "https://example.invalid/?context="+quote(encoded(TOKEN),safe=""),
+                 "https://example.invalid/?context="+encoded(TOKEN).lower(),
+                 "https://api.apify.com/v2/actor-runs/"+encoded("PrivateRun"),
+                 "https://example.invalid/?runId="+encoded("PrivateRun"),
+                 "&#79;"+TOKEN[1:],
+                 "https://example.invalid/?context="+html.escape(encoded(TOKEN)).replace("%","&#37;")]
+        for value in vectors:
+            with self.subTest(vector=vectors.index(value)):
+                raw=canonical({"error":{"type":"insufficient-permissions","message":value}})
+                text,machine,malformed,truncated=r.redacted_error_body(raw,TOKEN,["PrivateRun"],"json")
+                self.assertNotIn(TOKEN,recovered(text))
+                self.assertNotIn("PrivateRun",recovered(text))
+                self.assertEqual(machine,"insufficient-permissions")
+
+    def test_malformed_json_fallback_normalizes_encoded_tokens_ids_and_secret_keys(self):
+        encoded=lambda value:"".join("%%%02X"%ord(char) for char in value)
+        values=[encoded(TOKEN),quote(encoded(TOKEN),safe=""),"&#79;"+TOKEN[1:],
+                "https://api.apify.com/v2/actor-runs/"+encoded("PrivateRun")]
+        for value in values:
+            raw=('{"error":{"api\\u005fkey":"generic-value","message":"'+value).encode()
+            text,machine,malformed,truncated=r.redacted_error_body(raw,TOKEN,["PrivateRun"],"json")
+            for _ in range(12):text=html.unescape(unquote(text))
+            self.assertNotIn(TOKEN,text)
+            self.assertNotIn("PrivateRun",text)
+            self.assertNotIn("generic-value",text)
+            self.assertTrue(malformed)
+
+    def test_normalization_depth_and_invalid_encoding_fail_closed_without_private_value(self):
+        self.assertTrue(hasattr(r,"ERROR_NORMALIZATION_PASSES"),"bounded encoding normalization is missing")
+        value="".join("%%%02X"%ord(char) for char in TOKEN)
+        for _ in range(r.ERROR_NORMALIZATION_PASSES+3):value=quote(value,safe="")
+        for payload in (value,"unsupported %u004F"+TOKEN[1:],"invalid %FF "+TOKEN):
+            text,machine,malformed,truncated=r.redacted_error_body(canonical({"error":{"type":"insufficient-permissions","message":payload}}),TOKEN,[],"json")
+            self.assertIn("REDACTED_UNRESOLVED_ENCODING",text)
+            for _ in range(12):text=html.unescape(unquote(text))
+            self.assertNotIn(TOKEN,text)
+            self.assertTrue(malformed)
+
+    def test_known_token_and_ids_base64_variants_are_redacted(self):
+        for value in (TOKEN,"PrivateRun"):
+            for encoder in (base64.b64encode,base64.urlsafe_b64encode):
+                encoded=encoder(value.encode()).decode()
+                for variant in (encoded,encoded.rstrip("="),quote(encoded,safe="")):
+                    text,_,_,_=r.redacted_error_body(canonical({"message":"context="+variant}),TOKEN,["PrivateRun"],"json")
+                    self.assertNotIn(encoded,text)
+                    self.assertNotIn(encoded.rstrip("="),text)
+
+    def test_truncated_encoded_known_secret_and_id_prefixes_are_masked(self):
+        for value in (TOKEN,"PrivateRun"):
+            for encoder in (base64.b64encode,base64.urlsafe_b64encode):
+                partial=encoder(value.encode()).decode()[:-4]
+                raw=('{"message":"https://example.invalid/?context='+partial).encode()
+                text,_,malformed,_=r.redacted_error_body(raw,TOKEN,["PrivateRun"],"json")
+                self.assertNotIn(partial,text)
+                self.assertIn("REDACTED",text)
+                self.assertTrue(malformed)
+
+    def test_unbound_private_resource_route_and_identifier_query_values_are_redacted(self):
+        values=["https://api.apify.com/v2/actor-runs/ForeignRun999",
+                "https://api.apify.com/v2/datasets/ForeignDataset999/items",
+                "/v2/key-value-stores/ForeignKv999/records/INPUT",
+                "https://api.apify.com/v2/request-queues/ForeignQueue999",
+                "https://example.invalid/?userId=ForeignOwner999&runId=ForeignRun999"]
+        text,_,_,_=r.redacted_error_body(canonical({"message":values}),TOKEN,[],"json")
+        for value in ("ForeignRun999","ForeignDataset999","ForeignKv999","ForeignQueue999","ForeignOwner999"):
+            self.assertNotIn(value,text)
+
+    def test_invalid_utf8_and_nul_interleaved_bodies_are_dropped_privately(self):
+        for raw in ((TOKEN+" PrivateRun").encode("utf-16-le"),(TOKEN+" PrivateRun").encode("utf-16-be"),
+                    b"\xff"+TOKEN.encode()):
+            text,machine,malformed,truncated=r.redacted_error_body(raw,TOKEN,["PrivateRun"],"unknown")
+            self.assertIn("REDACTED_UNRESOLVED_ENCODING",text)
+            self.assertNotIn(TOKEN,text.replace("\x00",""))
+            self.assertNotIn("PrivateRun",text.replace("\x00",""))
+            self.assertTrue(malformed)
+            self.assertIsNone(machine)
+
+    def test_cleanup_http_faults_retained_separately_without_mutating_approved_evidence(self):
+        for target in ("fresh_terminal","metadata_dataset","delete_dataset"):
+            with self.subTest(operation=target):
+                state=self.capture(self.normal())
+                approved=canonical(state.evidence);digest=state.plaintext_sha256
+                called=[]
+                def opener(req,timeout):
+                    called.append(req.get_method())
+                    if len(called)==1 and target!="fresh_terminal":body=response()
+                    elif len(called)<=4 and target=="delete_dataset":body=metadata(tuple(r.STORES)[len(called)-2])
+                    else:raise HTTPError(req.full_url,403,TOKEN,{"Content-Type":"application/json"},io.BytesIO(canonical({"error":{"type":"insufficient-permissions","message":"cleanup detail "+TOKEN+" PrivateRun"}})))
+                    class Body(io.BytesIO):
+                        status=200
+                    return Body(canonical(body))
+                transport=r.HttpTransport(self.cell,TOKEN,mode="cleanup",identity=state.identity,request_counts=state.request_counts,
+                                          opener=opener,clock=self.clock,deadline=self.clock()+120)
+                result=self.cleanup(transport,state)
+                self.assertIn("http_error_responses",result)
+                errors=result["http_error_responses"]
+                self.assertEqual(errors[0]["operation"],target)
+                self.assertIn("cleanup detail",errors[0]["body_redacted"])
+                self.assertNotIn(TOKEN,json.dumps(result))
+                self.assertNotIn("PrivateRun",json.dumps(result))
+                self.assertEqual(canonical(state.evidence),approved)
+                self.assertEqual(state.plaintext_sha256,digest)
+                self.assertNotIn("cleanup detail",json.dumps(r.public_result(state)))
+                if target!="delete_dataset":self.assertNotIn("DELETE",called)
+
+    def test_private_error_state_roundtrip_retains_machine_type_and_redacted_body(self):
+        t,stream=self.error_transport(canonical({"error":{"type":"full-permission-actor-not-approved","message":"preserved detail"}}))
+        state=self.capture(t)
+        restored=r.restore_private_state(r.serialize_private_state(state),self.plan)
+        self.assertEqual(restored.diagnostic,state.diagnostic)
+        self.assertEqual(restored.evidence["http_error_response"],state.evidence["http_error_response"])
+        self.assertNotIn("preserved detail",json.dumps(r.public_result(restored)))
+
+    def test_error_redaction_decode_deadline_is_labeled_without_losing_received_redacted_body(self):
+        t,stream=self.error_transport(canonical({"error":{"type":"insufficient-permissions","message":TOKEN}}))
+        self.assertTrue(callable(getattr(r,"redacted_error_body",None)),"redacted body capture is missing")
+        original=r.redacted_error_body
+        def slow(*args,**kwargs):
+            answer=original(*args,**kwargs)
+            self.clock.wait(31)
+            return answer
+        with patch.object(r,"redacted_error_body",side_effect=slow):state=self.capture(t)
+        self.assertEqual(state.diagnostic["category"],"deadline_exceeded")
+        self.assertEqual(state.diagnostic["stage"],"json_decode")
+        self.assertEqual(state.evidence["http_error_response"]["read_state"],"deadline")
+        self.assertNotIn(TOKEN,self.saved[0].decode())
+
+    def test_error_reader_failure_retains_partial_safe_body_and_explicit_read_failed(self):
+        class Broken:
+            closed=False
+            calls=0
+            def read1(inner,size):
+                inner.calls+=1
+                if inner.calls==1:return b"safe prefix " + TOKEN.encode()
+                raise OSError(TOKEN)
+            def close(inner):inner.closed=True
+        stream=Broken()
+        def opener(req,timeout):raise HTTPError(req.full_url,403,TOKEN,{"Content-Type":"text/plain"},stream)
+        state=self.capture(self.http(opener))
+        self.assertEqual(state.evidence["http_error_response"]["read_state"],"read_failed")
+        self.assertTrue(state.evidence["http_error_response"]["truncated"])
+        self.assertIn("safe prefix",state.evidence["http_error_response"]["body_redacted"])
+        self.assertNotIn(TOKEN,self.saved[0].decode())
+        self.assertTrue(stream.closed)
+
+    def test_typed_absence_404_still_never_reads_error_body_or_adds_http_calls(self):
+        state=self.capture(self.normal())
+        class ForbiddenBody:
+            closed=False
+            def read1(inner,size):raise AssertionError("absence proof must not read a response body")
+            def close(inner):inner.closed=True
+        body=ForbiddenBody()
+        def opener(req,timeout):raise HTTPError(req.full_url,404,TOKEN,{"Content-Type":"application/json"},body)
+        t=r.HttpTransport(self.cell,TOKEN,mode="cleanup",identity=state.identity,request_counts=state.request_counts,
+                          opener=opener,clock=self.clock,deadline=self.clock()+120)
+        t.authorize_cleanup(state.identity)
+        reply=t.request("absence_dataset",state.identity,10)
+        self.assertEqual((reply.status,reply.body),(404,None))
+        self.assertTrue(body.closed)
+        self.assertEqual(t.counts["absence_dataset"],1)
+
     def test_export_uses_extra_record_sentinel_and_fixed_fields(self):
         seen=[]
         def opener(req,timeout):
@@ -751,10 +1111,12 @@ class TransportTests(TestTools, unittest.TestCase):
             t.request("https://foreign.invalid", None, 30)
         self.assertEqual(len(seen), 1)
 
-    def test_http_error_body_is_not_read_and_numeric_status_is_preserved(self):
+    def test_unreadable_http_error_body_is_labeled_and_numeric_status_is_preserved(self):
         class BadBody:
             def read(self, *args):
-                raise AssertionError("HTTP error body must never be read")
+                raise AssertionError("buffered reads are forbidden")
+            def read1(self,*args):
+                raise OSError(TOKEN)
             def close(self):
                 pass
         for status in (400, 401, 403, 302):
@@ -764,6 +1126,7 @@ class TransportTests(TestTools, unittest.TestCase):
             with self.assertRaises(r.Fault) as ctx:
                 t.request("start", None, 30)
             self.assertEqual(ctx.exception.http_status, status)
+            self.assertEqual(ctx.exception.error_response["read_state"],"read_failed")
             self.assertNotIn(TOKEN, str(ctx.exception))
 
     def test_http_body_limit_json_failures_and_private_error_sanitization(self):

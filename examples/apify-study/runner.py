@@ -2,26 +2,28 @@
 
 Root integration owns plan files, workflow, 0600 temporary state, encryption/upload,
 and local decrypt/fsync/readback approval. This module never writes or prints raw
-state. A private encrypted receipt contains controlled records and numeric meters,
-but no provider identifiers. Public callers must use public_result(), never state.
+state. Private encrypted receipts contain controlled records, numeric meters and
+bounded redacted error responses. Public callers must use public_result(), never state.
 """
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, localcontext
+import base64
 import copy
 import hashlib
+import html
 import json
 import math
 import os
 import re
 from time import monotonic, sleep
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode, urlsplit
+from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 RUNNER_READY = False
-REVIEWED_PLAN_SHA256 = "b0c531f83da2a8206f98cb08401db2d6171a4da187be6e76364a9aa23d0180fd"
-REVIEWED_PLAN_FILE_SHA256 = "58042d797c8c0278bb0d6de9c94ac8ab7fd1b8e6ddd556cda094c01a80f6f442"
+REVIEWED_PLAN_SHA256 = "711256854c044f484674e42464b3c1915e88d2069dfe7ccfd7e2ff228e1465f2"
+REVIEWED_PLAN_FILE_SHA256 = "47c3136c1ffeffd766826a29fd0d67ce32fe1c828032b49411f1713424ddaf98"
 API = "https://api.apify.com/v2"
 OWNED_HOST = "scrapingant.github.io"
 OWNED_PATH_PREFIX = "/scrapingant-examples/fixtures/"
@@ -42,6 +44,12 @@ SETTLE_SECONDS = 10
 APPROVAL_AGE_SECONDS = 25 * 60
 DELETE_AGE_SECONDS = 30 * 60
 RESPONSE_LIMIT = 131072
+ERROR_RESPONSE_LIMIT = 16384
+ERROR_NORMALIZATION_PASSES = 6
+# Exact, source-verified 403 codes; other provider strings stay private.
+MACHINE_ERROR_TYPES = ("full-permission-actor-not-approved", "insufficient-permissions",
+                       "full-permission-actor-blocked-for-admin")
+ERROR_FORMATS = ("json", "html", "text", "unknown")
 TIMEOUTS = {"start": 30, "poll": 65, "settle": 65, "export": 10, "fresh_terminal": 10,
             **{p + "_" + k: 10 for p in ("metadata", "delete", "absence") for k in STORES}}
 USAGE_FIELDS = ("ACTOR_COMPUTE_UNITS", "DATASET_READS", "DATASET_WRITES", "KEY_VALUE_STORE_READS",
@@ -67,13 +75,20 @@ STAGES = ("policy", "request", "response_status", "response_read", "json_decode"
 
 class Fault(Exception):
     """Only fixed enums/numeric HTTP status survive a provider or callback failure."""
-    def __init__(self, category, stage="policy", http_status=None):
+    def __init__(self, category, stage="policy", http_status=None, *, machine_error_type=None,
+                 response_format=None, error_response=None):
         self.category = category if category in CATEGORIES else "transport_error"
         self.stage = stage if stage in STAGES else "request"
         self.http_status = http_status if type(http_status) is int and 100 <= http_status <= 599 else None
+        self.machine_error_type = machine_error_type if self.http_status == 403 and machine_error_type in MACHINE_ERROR_TYPES else None
+        self.response_format = response_format if response_format in ERROR_FORMATS else None
+        self.error_response = error_response  # PRIVATE redacted evidence; never exception text/safe().
         super().__init__(self.category)
     def safe(self):
-        return {"category": self.category, "stage": self.stage, "http_status": self.http_status}
+        result = {"category": self.category, "stage": self.stage, "http_status": self.http_status}
+        if self.response_format is not None or self.machine_error_type is not None:
+            result.update(response_format=self.response_format, machine_error_type=self.machine_error_type)
+        return result
 
 
 class OutputFault(Fault):
@@ -155,7 +170,7 @@ def validate_plan(plan):
     if not isinstance(cells, list) or len(cells) != 6:
         raise Fault("invalid_plan")
     names, actors = set(), set()
-    for spec in cells:
+    for index, spec in enumerate(cells):
         if not isinstance(spec, dict):
             raise Fault("invalid_cell")
         name = spec.get("cell_id")
@@ -163,6 +178,13 @@ def validate_plan(plan):
             raise Fault("invalid_cell")
         names.add(name)
         actor = ident(spec.get("actor_id"))
+        # The separately reviewed limited test is allowed only for the first
+        # public Cheerio cell. Absence preserves the original five/default runs.
+        if "force_permission_level" in spec and (
+                spec["force_permission_level"] != "LIMITED_PERMISSIONS" or index != 0
+                or name != "smoke-cheerio-scraper" or spec.get("actor") != "apify/cheerio-scraper"
+                or actor != "YrQuEkowkNCLdk4j2"):
+            raise Fault("invalid_cell")
         if actor in actors:
             raise Fault("invalid_cell")
         actors.add(actor)
@@ -388,6 +410,9 @@ def run_receipt(data, cell):
     events = events if isinstance(events, list) and len(events) <= 16 else []
     events = [e for e in events if isinstance(e, str) and re.fullmatch(r"[a-zA-Z0-9_-]{1,64}", e)]
     return {"status": data["status"], "build": cell.spec["build"], "started_at": data["startedAt"],
+            "requested_permission_level": cell.spec.get("force_permission_level"),
+            # There is no sourced run-response field proving effective permission.
+            "observed_permission_level": None,
             "finished_at": data.get("finishedAt"), "usage_total_usd": numeric_receipt(data.get("usageTotalUsd")),
             "usage": numeric_fields(data.get("usage"), USAGE_FIELDS),
             "usage_usd": numeric_fields(data.get("usageUsd"), USAGE_FIELDS),
@@ -519,6 +544,8 @@ class Session:
 
 def record_fault(state, fault):
     state.diagnostic = fault.safe()
+    if isinstance(fault.error_response, dict):
+        state.evidence["http_error_response"] = copy.deepcopy(fault.error_response)
 
 
 def persist_capture(state, callback):
@@ -638,7 +665,8 @@ def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monot
 def public_result(state):
     spec = state.cell.spec
     diagnostic = state.diagnostic if isinstance(state.diagnostic, dict) else None
-    diagnostic = Fault(diagnostic.get("category"), diagnostic.get("stage"), diagnostic.get("http_status")).safe() if diagnostic else None
+    diagnostic = Fault(diagnostic.get("category"), diagnostic.get("stage"), diagnostic.get("http_status"),
+                       machine_error_type=diagnostic.get("machine_error_type"), response_format=diagnostic.get("response_format")).safe() if diagnostic else None
     counts = {k: state.request_counts.get(k) if type(state.request_counts.get(k)) is int and 0 <= state.request_counts[k] <= MAX_CALLS else None
               for k in empty_counts()}
     return {"cell_id": state.cell.cell_id, "actor_id": spec["actor_id"],
@@ -656,7 +684,13 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
     # Public logs must project fixed state/diagnostic/counts only.
     phase_started = clock()
     result = {"cleanup_state": "blocked", "owner_attention_required": True, "stores": {}, "diagnostic": None,
-              "refreshed_run": None, "refreshed_storage": {}, "cleaned_at": None, "cleanup_elapsed_seconds": None}
+              "refreshed_run": None, "refreshed_storage": {}, "cleaned_at": None, "cleanup_elapsed_seconds": None,
+              "http_error_responses": []}
+    def retain_fault(exc):
+        result["diagnostic"] = exc.safe()
+        # Dedicated PRIVATE phase-two evidence; the approved capture is immutable.
+        if isinstance(exc.error_response, dict):
+            result["http_error_responses"].append(copy.deepcopy(exc.error_response))
     try:
         deadline = min(deadline, clock() + CLEANUP_WALL_SECONDS) if deadline is not None else clock() + CLEANUP_WALL_SECONDS
         require_guard()
@@ -699,7 +733,7 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
                 result["refreshed_storage"][kind] = validate_metadata(response_data(reply, 200), kind, state.identity)
             except Fault as exc:
                 all_verified = False
-                result["diagnostic"] = exc.safe()
+                retain_fault(exc)
         if not all_verified:
             raise Fault("metadata_invalid", "metadata_validation")
         transport.authorize_cleanup(state.identity)
@@ -717,11 +751,11 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
                 result["stores"][kind] = "absent"
             except Fault as exc:
                 result["stores"][kind] = exc.category if exc.category in ("delete_unconfirmed", "absence_unconfirmed") else "unknown"
-                result["diagnostic"] = exc.safe()
+                retain_fault(exc)
         result["cleanup_state"] = "complete" if all(result["stores"].get(k) == "absent" for k in STORES) else "residual"
         result["owner_attention_required"] = result["cleanup_state"] != "complete"
     except Fault as exc:
-        result["diagnostic"] = exc.safe()
+        retain_fault(exc)
     except Exception:
         result["diagnostic"] = Fault("transport_error", "cleanup").safe()
     if isinstance(state, PrivateState):
@@ -788,9 +822,11 @@ def restore_private_state(raw, plan):
             raise Fault("state_mismatch")
         diagnostic = data["diagnostic"]
         if diagnostic is not None:
-            if not isinstance(diagnostic, dict) or set(diagnostic) != {"category", "stage", "http_status"}:
+            if (not isinstance(diagnostic, dict) or not {"category", "stage", "http_status"} <= set(diagnostic)
+                    or set(diagnostic) - {"category", "stage", "http_status", "machine_error_type", "response_format"}):
                 raise Fault("state_mismatch")
-            if diagnostic != Fault(diagnostic.get("category"), diagnostic.get("stage"), diagnostic.get("http_status")).safe():
+            if diagnostic != Fault(diagnostic.get("category"), diagnostic.get("stage"), diagnostic.get("http_status"),
+                                   machine_error_type=diagnostic.get("machine_error_type"), response_format=diagnostic.get("response_format")).safe():
                 raise Fault("state_mismatch")
         identity = data["identity"]
         if not isinstance(identity, dict):
@@ -852,6 +888,132 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 
+def redacted_error_body(raw, token, references, response_format):
+    """Bounded UTF-8 projection, encrypted only. Known secrets/references, ordinary
+    URL/HTML/JSON escapes, one-layer base64 equivalents and semantic secret/ID
+    fields are masked. Unresolved encodings are dropped; arbitrary natural-language
+    identifiers or arbitrary custom encodings cannot be classified by this helper.
+    """
+    marker = "[REDACTED_UNRESOLVED_ENCODING]"
+    try:
+        text = raw.decode("utf-8", errors="strict")
+    except UnicodeDecodeError:
+        return marker, None, True, False
+    if "\x00" in text or "\ufffd" in text:
+        return marker, None, True, False
+    malformed = False
+    machine = None
+    secret_names = r"(?:token|secret|password|authorization|cookie|api[-_]?key|signature|credential)"
+    id_names = ("id", "userid", "accountid", "runid", "actrunid", "email", "username",
+                "defaultdatasetid", "defaultkeyvaluestoreid", "defaultrequestqueueid")
+    def normalize(value):
+        nonlocal malformed
+        try:
+            for _ in range(ERROR_NORMALIZATION_PASSES):
+                previous = value
+                value = html.unescape(value)
+                value = unquote(value, errors="strict")
+                value = re.sub(r"\\(?:u([0-9a-fA-F]{4})|x([0-9a-fA-F]{2}))",
+                               lambda m: chr(int(m.group(1) or m.group(2), 16)), value)
+                if len(value) > ERROR_RESPONSE_LIMIT or any(c in value for c in ("\x00", "\ufffd")):
+                    raise ValueError()
+                if value == previous:
+                    # Unsupported/truncated escapes cannot be retained reversibly.
+                    if re.search(r"%[0-9a-fA-FuU]|\\|&(?:#[^\s;]*|[A-Za-z][A-Za-z0-9]*);", value):
+                        raise ValueError()
+                    return value
+            raise ValueError()
+        except (ValueError, UnicodeError):
+            malformed = True
+            return marker
+    replacements = []
+    for value, replacement in [(token, "[REDACTED]")] + [(v, "[REDACTED_ID]") for v in references]:
+        if not isinstance(value, str) or not value:
+            continue
+        variants = {value}
+        for encoder in (base64.b64encode, base64.urlsafe_b64encode):
+            encoded = encoder(value.encode()).decode("ascii")
+            variants.update((encoded, encoded.rstrip("=")))
+        replacements.extend((v, replacement) for v in variants)
+    replacements.sort(key=lambda item: len(item[0]), reverse=True)
+    def sensitive(key):
+        normalized = re.sub(r"[^a-z0-9]", "", key.lower())
+        return (re.search(secret_names.replace("[-_]?", ""), normalized) is not None or normalized in id_names)
+    def redact_text(value):
+        value = normalize(value)
+        for equivalent, replacement in replacements:
+            value = value.replace(equivalent, replacement)
+        value = re.sub(r"\bapify_api_[A-Za-z0-9_-]+", "[REDACTED]", value)
+        value = re.sub(r"(?i)\bBearer\s+[^\s<\"'&,;]+", "Bearer [REDACTED]", value)
+        value = re.sub(r"(?im)\b(?:Authorization|(?:Set-)?Cookie)\s*:\s*[^\r\n<]+", "[REDACTED_HEADER]", value)
+        # Input/meta fields can carry secrets under name/id with a separate value.
+        def html_field(match):
+            tag = match.group(0)
+            if re.search(r"(?i)\b(?:name|id)\s*=\s*[\"']?[^\s>\"']*" + secret_names, tag):
+                tag = re.sub(r"(?i)\b(value|content)\s*=\s*(\"[^\"]*\"|'[^']*'|[^\s>]+)",
+                             lambda m: m.group(1) + "='[REDACTED]'", tag)
+            return tag
+        value = re.sub(r"(?is)<(?:input|meta)\b[^>]*>", html_field, value)
+        value = re.sub(r"(?i)\b([A-Za-z0-9_.-]*" + secret_names + r"[A-Za-z0-9_.-]*[\"']?\s*[:=]\s*)(\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|[^\s<>&;,}\]]+)",
+                       lambda m: m.group(1) + "[REDACTED]", value)
+        value = re.sub(r"(?i)([?&](?:amp;)?(?:sig|key|auth)\s*=)[^\s<>&\"']+", r"\1[REDACTED]", value)
+        def query_secret(match):
+            key = re.sub(r"[^a-z0-9]", "", match.group(2).lower())
+            if sensitive(key) or key in ("sig", "key", "auth"):
+                return match.group(1) + match.group(2) + "=[REDACTED]"
+            return match.group(0)
+        value = re.sub(r"([?&](?:amp;)?)([^=\s<>&\"']+)=([^\s<>&\"']*)", query_secret, value)
+        value = re.sub(r"(?i)(/v2/(?:actor-runs|datasets|key-value-stores|request-queues|users)/)[^/\s?&#\"']+",
+                       r"\1[REDACTED_ID]", value)
+        value = re.sub(r"(?i)(https?://)[^/\s?@]+@", r"\1[REDACTED]@", value)
+        # An interrupted read can end inside any known equivalent. Do not retain
+        # a reversibly encoded near-complete credential/reference at that boundary.
+        for equivalent, replacement in replacements:
+            for length in range(min(len(equivalent) - 1, len(value)), 0, -1):
+                if value.endswith(equivalent[:length]):
+                    value = value[:-length] + replacement
+                    break
+        return value
+    def redact_node(value):
+        if isinstance(value, dict):
+            return {redact_text(k): "[REDACTED]" if sensitive(normalize(k)) or normalize(k) == marker else redact_node(v)
+                    for k, v in value.items()}
+        if isinstance(value, list):
+            return [redact_node(v) for v in value]
+        return redact_text(value) if isinstance(value, str) else value
+    try:
+        def reject(value):
+            raise ValueError()
+        def unique(pairs):
+            d = {}
+            for key, value in pairs:
+                if key in d:
+                    raise ValueError()
+                d[key] = value
+            return d
+        parsed = json.loads(text, parse_float=Decimal, parse_constant=reject, object_pairs_hook=unique)
+        error = parsed.get("error") if isinstance(parsed, dict) else None
+        candidate = error.get("type") if isinstance(error, dict) else None
+        machine = candidate if candidate in MACHINE_ERROR_TYPES else None
+        text = json.dumps(redact_node(parsed), ensure_ascii=True, separators=(",", ":"),
+                          default=lambda v: str(v), allow_nan=False)
+    except (ValueError, TypeError, RecursionError):
+        malformed = malformed or response_format == "json"
+        text = redact_text(text)
+    # Keep the encoded private envelope finite even when replacement/escaping grows.
+    truncated = len(json.dumps(text, ensure_ascii=True)) > ERROR_RESPONSE_LIMIT
+    if truncated:
+        low, high = 0, len(text)
+        while low < high:
+            middle = (low + high + 1) // 2
+            if len(json.dumps(text[:middle], ensure_ascii=True)) <= ERROR_RESPONSE_LIMIT:
+                low = middle
+            else:
+                high = middle - 1
+        text = text[:low]
+    return text, machine, malformed, truncated
+
+
 class HttpTransport:
     """Fixed-host/header-auth transport. Root creates cleanup mode from 0600 state.
 
@@ -897,6 +1059,46 @@ class HttpTransport:
         if self.mode != "cleanup" or self.latest_active or self.identity.get("status") not in TERMINAL:
             raise Fault("latest_run_active" if self.latest_active else "state_mismatch", "cleanup")
         self.cleanup_authorized = True
+    def http_error_fault(self, exc, code, operation, route_deadline):
+        body, truncated, read_state = bytearray(), False, "complete"
+        category, stage = "http_error", "response_status"
+        content_type = exc.headers.get("Content-Type", "") if exc.headers is not None else ""
+        mime = content_type.split(";", 1)[0].strip().lower() if isinstance(content_type, str) else ""
+        response_format = ("json" if mime == "application/json" or mime.endswith("+json") else
+                           "html" if mime in ("text/html", "application/xhtml+xml") else
+                           "text" if mime == "text/plain" else "unknown")
+        try:
+            check_time(self.clock, route_deadline)
+            while True:
+                stage = "response_read"
+                check_time(self.clock, route_deadline)
+                chunk = exc.read1(min(8192, ERROR_RESPONSE_LIMIT + 1 - len(body)))
+                if not isinstance(chunk, bytes):
+                    raise ValueError()
+                body.extend(chunk)
+                check_time(self.clock, route_deadline)
+                if len(body) > ERROR_RESPONSE_LIMIT:
+                    truncated, read_state = True, "truncated"
+                    break
+                if not chunk:
+                    break
+        except Fault:
+            truncated, read_state, category = True, "deadline", "deadline_exceeded"
+        except Exception:
+            truncated, read_state = True, "read_failed"
+        finally:
+            exc.close()
+        refs = [v for k, v in self.identity.items() if k in IDENTITY_FIELDS and k != "actId" and isinstance(v, str)]
+        if read_state == "complete":
+            stage = "json_decode"
+        text, machine, malformed, grew = redacted_error_body(bytes(body[:ERROR_RESPONSE_LIMIT]), self._token, refs, response_format)
+        if self.clock() > route_deadline:
+            truncated, read_state, category = True, "deadline", "deadline_exceeded"
+        evidence = {"http_status": code, "operation": operation, "response_format": response_format,
+                    "body_redacted": text, "truncated": truncated or grew, "malformed": malformed,
+                    "read_state": read_state}
+        return Fault(category, stage if category == "deadline_exceeded" else "response_status", code,
+                     machine_error_type=machine, response_format=response_format, error_response=evidence)
     def request(self, operation, identity, timeout):
         require_guard()
         if self.latest_active:
@@ -916,6 +1118,8 @@ class HttpTransport:
             opts = self.spec["options"]
             query = {"build": self.spec["build"], "memory": opts["memoryMbytes"], "timeout": 120,
                      "maxTotalChargeUsd": "0.12", "restartOnError": "false"}
+            if "force_permission_level" in self.spec:
+                query["forcePermissionLevel"] = self.spec["force_permission_level"]
             url = API + "/acts/" + self.spec["actor_id"] + "/runs?" + urlencode(query)
             method, payload = "POST", canonical(self.spec["input"])
         elif operation in ("poll", "settle", "fresh_terminal"):
@@ -1001,12 +1205,14 @@ class HttpTransport:
             return Reply(status, decoded)
         except HTTPError as exc:
             code = exc.code if type(exc.code) is int else None
-            exc.close()
             status = code
-            route_time("response_status")
             if operation.startswith("absence_") and code == 404:
-                return Reply(404, None)
-            raise Fault("http_error", "response_status", code) from None
+                try:
+                    route_time("response_status")
+                    return Reply(404, None)
+                finally:
+                    exc.close()
+            raise self.http_error_fault(exc, code, operation, route_deadline) from None
         except (URLError, TimeoutError, OSError):
             raise Fault("connection_error", "request", status) from None
         except Fault:
