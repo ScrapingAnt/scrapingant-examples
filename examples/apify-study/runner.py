@@ -21,7 +21,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-RUNNER_READY = False
+RUNNER_READY = True
 REVIEWED_PLAN_SHA256 = "711256854c044f484674e42464b3c1915e88d2069dfe7ccfd7e2ff228e1465f2"
 REVIEWED_PLAN_FILE_SHA256 = "47c3136c1ffeffd766826a29fd0d67ce32fe1c828032b49411f1713424ddaf98"
 API = "https://api.apify.com/v2"
