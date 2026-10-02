@@ -1,0 +1,116 @@
+{
+  "billed_calls": 200,
+  "credits_consumed": 200,
+  "pilot_calls": 24,
+  "preregistered_calls": 176,
+  "balanced_settings": [
+    {
+      "setting": "article-main",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "article-whole",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "complete-catalog",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 14,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "delayed-js-wait-2500",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "immediate-js",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "missing-price",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 0,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "tables-main",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 14,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    },
+    {
+      "setting": "tables-whole",
+      "calls": 14,
+      "credits": 14,
+      "basic_preservation_pass": 14,
+      "html_structure_pass": 14,
+      "two_numeric_prices_pass": 0,
+      "visible_only_markdown_pass": 0
+    }
+  ],
+  "pairs": [
+    {
+      "subset": "delayed-corrective-pair",
+      "pairs": 8,
+      "calls": 16,
+      "credits": 16,
+      "accepted_delayed_outputs": 8,
+      "credits_per_accepted": 2.0
+    },
+    {
+      "subset": "delayed-same-pair",
+      "pairs": 8,
+      "calls": 16,
+      "credits": 16,
+      "accepted_delayed_outputs": 0,
+      "credits_per_accepted": null
+    },
+    {
+      "subset": "404-diagnostic-pair",
+      "pairs": 8,
+      "calls": 16,
+      "credits": 16,
+      "accepted_delayed_outputs": null,
+      "credits_per_accepted": null
+    },
+    {
+      "subset": "fresh-cache-pair",
+      "pairs": 8,
+      "calls": 16,
+      "credits": 16,
+      "accepted_delayed_outputs": null,
+      "credits_per_accepted": null
+    }
+  ],
+  "interpretation": "Fixture-specific contracts only. No mixed accuracy rate. null ratio means undefined or not applicable.",
+  "connector_attempts": 201
+}

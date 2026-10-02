@@ -145,6 +145,11 @@
       "id": "cloudflare-banned-solution",
       "needs_api_key": false,
       "note": "Owned offline JSON snapshots and response-acceptance regressions. Standard library only; no network/API calls even if a key is configured."
+    },
+    {
+      "id": "firecrawl-pricing",
+      "needs_api_key": false,
+      "note": "Stored-output replay, source-grounded acceptance tests and monthly budget model only. No network/provider calls; dedicated offline CI has no secrets."
     }
   ]
 }

@@ -1,0 +1,27 @@
+name: Firecrawl pricing offline evidence
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'examples/firecrawl-pricing/**'
+      - '.github/workflows/firecrawl-pricing-offline.yml'
+  pull_request:
+    paths:
+      - 'examples/firecrawl-pricing/**'
+      - '.github/workflows/firecrawl-pricing-offline.yml'
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+        working-directory: examples/firecrawl-pricing
+      - run: ./run.sh
+        working-directory: examples/firecrawl-pricing
+      - name: Confirm deterministic results
+        run: git diff --exit-code -- examples/firecrawl-pricing/expected_output

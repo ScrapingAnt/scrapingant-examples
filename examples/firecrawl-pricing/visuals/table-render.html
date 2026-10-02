@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Table output evidence</title><style>*{box-sizing:border-box}body{margin:0;background:#f7f9fa;color:#173042;font-family:Arial,sans-serif}main{padding:32px;width:760px}h1{font-size:36px;line-height:1.15;margin:0 0 12px}h2{font-size:30px;margin:0 0 18px}.note{font-size:25px;line-height:1.35;color:#465c69;margin:12px 0 26px}.panel{background:white;border:2px solid #c9d6de;border-radius:14px;padding:26px;margin:18px 0}.output{font-size:32px;line-height:1.45}.small{font-size:25px}.badge{font-size:26px;font-weight:bold;color:#196447;margin:22px 0 0}pre{font:25px/1.5 monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}table{border-collapse:collapse;width:100%;font-size:29px}th,td{border:2px solid #b7c8d3;padding:14px;text-align:center}th{background:#e6f2eb}</style><main><h1>One table, two representations</h1><p class="note">Saved output 36 · exact two-row-header extract</p><section class="panel"><h2>Returned HTML, rendered</h2><table id="two-row-header">
+  <thead>
+    <tr><th rowspan="2">Region</th><th colspan="2">2025</th><th colspan="2">2026</th></tr>
+    <tr><th>Q1</th><th>Q2</th><th>Q1</th><th>Q2</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>North</td><td>10</td><td>12</td><td>14</td><td>16</td></tr>
+    <tr><td>South</td><td>7</td><td>8</td><td>9</td><td>11</td></tr>
+  </tbody>
+</table>
+
+<p class="small">Region spans two header rows. Each year spans Q1 and Q2.</p></section><section class="panel"><h2>Returned Markdown, exact text</h2><pre>| Region | 2025 | 2026 |
+| --- | --- | --- |
+| Q1 | Q2 | Q1 | Q2 |
+| --- | --- | --- | --- |
+| North | 10 | 12 | 14 | 16 |
+| South | 7 | 8 | 9 | 11 |</pre><p class="small">Pipe rows have unequal cell counts. Reconstruct year/quarter labels before ingesting.</p></section><p class="note">Presentation CSS added. No cells, values or pipe delimiters changed.</p></main></html>

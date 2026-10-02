@@ -1,0 +1,32 @@
+example_id: firecrawl-pricing
+study_date: '2026-10-01'
+tested_at: '2026-10-02'
+requires_api_key: false
+network_in_default_run: false
+fixture_source_commit: 6e747492b7f81ff999439374d40aeb7d00e34f65
+environment:
+  python: 3.10.2
+  lxml: 6.1.1
+  optional_visuals_playwright: 1.58.0
+  optional_visuals_chromium: 145.0.7632.6
+measurements:
+  billed_retrievals: 200
+  observed_credits_consumed: 200
+  exploratory_calls: 24
+  preregistered_calls: 176
+  connector_attempts: 201
+  corrective_pairs: {credits: 16, accepted_outputs: 8, credits_per_accepted: 2}
+  identical_setting_pairs: {credits: 16, accepted_outputs: 0, credits_per_accepted: null}
+  cash_expenditure_measured: false
+claims:
+  - {source: expected_output/summary.json, claim: Separate subset results and credit consumption}
+  - {source: expected_output/ledger.csv, claim: Recomputed source-grounded acceptance and output hashes}
+  - {source: data/prices.json, claim: Documented monthly plan and top-up model inputs}
+  - {source: sources/manifest.json, claim: Exact pinned synthetic fixture source bytes}
+limitations:
+  - Free credits; no measured cash bill.
+  - Six synthetic fixtures plus one missing path on one origin.
+  - No source edits; cache freshness after mutation untested.
+  - No ScrapingAnt head-to-head or general success rate.
+  - No provider calls in offline replay.
+  - Receipt and API HTTP-status data were not surfaced.

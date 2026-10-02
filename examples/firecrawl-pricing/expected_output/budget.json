@@ -1,0 +1,12 @@
+{
+  "plan": "Standard",
+  "mode": "modeled_monthly_USD",
+  "credits_needed": 30000,
+  "accepted_outputs": 27000,
+  "base_bill_usd": 99,
+  "top_up_increments": 0,
+  "bill_usd": 99,
+  "unused_plan_credits": 70000,
+  "unused_purchased_credits": 0,
+  "usd_per_accepted": 0.0036666666666666666
+}

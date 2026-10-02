@@ -1,0 +1,4 @@
+Offline replay: 200 billed calls, 200 credits; 24 pilot + 176 preregistered; 201 connector attempts.
+delayed-corrective-pair: 16 credits / 8 accepted = 2.0
+delayed-same-pair: 16 credits / 0 accepted = undefined
+Eight balanced settings: 14/14 basic preservation per setting; stricter contracts reported separately.

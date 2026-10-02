@@ -1,0 +1,39 @@
+{
+  "accessed_at": "2026-10-02",
+  "currency": "USD",
+  "source": "https://www.firecrawl.dev/pricing.md",
+  "billing": "monthly",
+  "top_up_increment_usd": 5,
+  "plans": [
+    {
+      "name": "Free",
+      "price_usd": 0,
+      "monthly_credits": 1000,
+      "credits_per_topup": 0
+    },
+    {
+      "name": "Hobby",
+      "price_usd": 19,
+      "monthly_credits": 5000,
+      "credits_per_topup": 1000
+    },
+    {
+      "name": "Standard",
+      "price_usd": 99,
+      "monthly_credits": 100000,
+      "credits_per_topup": 2000
+    },
+    {
+      "name": "Growth",
+      "price_usd": 399,
+      "monthly_credits": 500000,
+      "credits_per_topup": 2500
+    },
+    {
+      "name": "Scale",
+      "price_usd": 749,
+      "monthly_credits": 1000000,
+      "credits_per_topup": 5000
+    }
+  ]
+}

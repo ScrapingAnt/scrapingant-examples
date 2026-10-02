@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "file": "data/captures.jsonl",
+      "sha256": "10934b2ae8f44657a45f9448f711c1bce4d8c1a1a4c3cb42a82fe9f63e67a1a8"
+    },
+    {
+      "file": "data/attempts.csv",
+      "sha256": "da7001b7732078f702269b22da87d2778afe360ce2bac9e088cdfbafc86bfcc6"
+    },
+    {
+      "file": "data/design.json",
+      "sha256": "e98f05e449bf4f8049226109baaf78d08aa64fc6c09549426eabc5779cb66502"
+    },
+    {
+      "file": "data/prices.json",
+      "sha256": "db54db31556016265459ddffeb8b07eaa5e4af466b430c9891acb631a83b2f94"
+    }
+  ]
+}

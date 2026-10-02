@@ -1,0 +1,4120 @@
+{
+  "preregisteredAt": "2026-10-01T21:08:07.797Z",
+  "additionalPlannedCalls": 176,
+  "seed": 20261001,
+  "randomization": "Mulberry32 Fisher-Yates shuffle of experimental units; pair steps remain consecutive",
+  "minimumScrapeStartIntervalMs": 7000,
+  "independentSettings": [
+    "complete-catalog",
+    "missing-price",
+    "article-main",
+    "article-whole",
+    "tables-main",
+    "tables-whole",
+    "immediate-js",
+    "delayed-js-wait-2500"
+  ],
+  "independentReplicatesPerSetting": 14,
+  "schedule": [
+    {
+      "sequence": 25,
+      "unitIndex": 1,
+      "unitId": "independent-complete-catalog-3",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 26,
+      "unitIndex": 2,
+      "unitId": "delayed-pair-same-4",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 4,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 27,
+      "unitIndex": 2,
+      "unitId": "delayed-pair-same-4",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 4,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 28,
+      "unitIndex": 3,
+      "unitId": "delayed-pair-same-5",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 5,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 29,
+      "unitIndex": 3,
+      "unitId": "delayed-pair-same-5",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 5,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 30,
+      "unitIndex": 4,
+      "unitId": "delayed-pair-same-8",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 8,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 31,
+      "unitIndex": 4,
+      "unitId": "delayed-pair-same-8",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 8,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 32,
+      "unitIndex": 5,
+      "unitId": "independent-complete-catalog-13",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 33,
+      "unitIndex": 6,
+      "unitId": "independent-immediate-js-1",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 34,
+      "unitIndex": 7,
+      "unitId": "independent-tables-whole-4",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 35,
+      "unitIndex": 8,
+      "unitId": "independent-missing-price-8",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 36,
+      "unitIndex": 9,
+      "unitId": "independent-tables-main-7",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 37,
+      "unitIndex": 10,
+      "unitId": "independent-tables-whole-10",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 38,
+      "unitIndex": 11,
+      "unitId": "independent-article-main-14",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 39,
+      "unitIndex": 12,
+      "unitId": "independent-missing-price-10",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 40,
+      "unitIndex": 13,
+      "unitId": "404-pair-8",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 8,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 41,
+      "unitIndex": 13,
+      "unitId": "404-pair-8",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 8,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 42,
+      "unitIndex": 14,
+      "unitId": "independent-tables-whole-6",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 43,
+      "unitIndex": 15,
+      "unitId": "independent-article-whole-14",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 44,
+      "unitIndex": 16,
+      "unitId": "independent-article-whole-3",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 45,
+      "unitIndex": 17,
+      "unitId": "independent-tables-whole-12",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 46,
+      "unitIndex": 18,
+      "unitId": "404-pair-6",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 6,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 47,
+      "unitIndex": 18,
+      "unitId": "404-pair-6",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 6,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 48,
+      "unitIndex": 19,
+      "unitId": "independent-tables-main-3",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 49,
+      "unitIndex": 20,
+      "unitId": "independent-missing-price-14",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 50,
+      "unitIndex": 21,
+      "unitId": "independent-tables-main-14",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 51,
+      "unitIndex": 22,
+      "unitId": "independent-immediate-js-12",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 52,
+      "unitIndex": 23,
+      "unitId": "independent-tables-whole-13",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 53,
+      "unitIndex": 24,
+      "unitId": "independent-immediate-js-2",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 54,
+      "unitIndex": 25,
+      "unitId": "independent-article-main-13",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 55,
+      "unitIndex": 26,
+      "unitId": "independent-tables-whole-8",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 56,
+      "unitIndex": 27,
+      "unitId": "delayed-pair-corrective-3",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 3,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 57,
+      "unitIndex": 27,
+      "unitId": "delayed-pair-corrective-3",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 3,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 58,
+      "unitIndex": 28,
+      "unitId": "independent-complete-catalog-7",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 59,
+      "unitIndex": 29,
+      "unitId": "independent-immediate-js-7",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 60,
+      "unitIndex": 30,
+      "unitId": "independent-tables-main-11",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 61,
+      "unitIndex": 31,
+      "unitId": "independent-complete-catalog-6",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 62,
+      "unitIndex": 32,
+      "unitId": "independent-tables-main-10",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 63,
+      "unitIndex": 33,
+      "unitId": "independent-tables-main-5",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 64,
+      "unitIndex": 34,
+      "unitId": "independent-delayed-js-wait-2500-7",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 65,
+      "unitIndex": 35,
+      "unitId": "independent-missing-price-7",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 66,
+      "unitIndex": 36,
+      "unitId": "independent-article-whole-4",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 67,
+      "unitIndex": 37,
+      "unitId": "delayed-pair-corrective-1",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 1,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 68,
+      "unitIndex": 37,
+      "unitId": "delayed-pair-corrective-1",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 1,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 69,
+      "unitIndex": 38,
+      "unitId": "independent-article-whole-7",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 70,
+      "unitIndex": 39,
+      "unitId": "independent-delayed-js-wait-2500-8",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 71,
+      "unitIndex": 40,
+      "unitId": "independent-complete-catalog-1",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 72,
+      "unitIndex": 41,
+      "unitId": "independent-immediate-js-5",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 73,
+      "unitIndex": 42,
+      "unitId": "cache-pair-4",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 4,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 74,
+      "unitIndex": 42,
+      "unitId": "cache-pair-4",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 4,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 75,
+      "unitIndex": 43,
+      "unitId": "independent-missing-price-9",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 76,
+      "unitIndex": 44,
+      "unitId": "independent-article-whole-2",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 77,
+      "unitIndex": 45,
+      "unitId": "independent-missing-price-6",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 78,
+      "unitIndex": 46,
+      "unitId": "independent-tables-main-12",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 79,
+      "unitIndex": 47,
+      "unitId": "delayed-pair-corrective-8",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 8,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 80,
+      "unitIndex": 47,
+      "unitId": "delayed-pair-corrective-8",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 8,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 81,
+      "unitIndex": 48,
+      "unitId": "independent-immediate-js-13",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 82,
+      "unitIndex": 49,
+      "unitId": "independent-complete-catalog-5",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 83,
+      "unitIndex": 50,
+      "unitId": "delayed-pair-corrective-6",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 6,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 84,
+      "unitIndex": 50,
+      "unitId": "delayed-pair-corrective-6",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 6,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 85,
+      "unitIndex": 51,
+      "unitId": "independent-article-main-9",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 86,
+      "unitIndex": 52,
+      "unitId": "independent-article-whole-1",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 87,
+      "unitIndex": 53,
+      "unitId": "independent-article-whole-11",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 88,
+      "unitIndex": 54,
+      "unitId": "independent-missing-price-5",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 89,
+      "unitIndex": 55,
+      "unitId": "independent-article-main-3",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 90,
+      "unitIndex": 56,
+      "unitId": "independent-article-main-7",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 91,
+      "unitIndex": 57,
+      "unitId": "independent-immediate-js-14",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 92,
+      "unitIndex": 58,
+      "unitId": "independent-article-whole-13",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 93,
+      "unitIndex": 59,
+      "unitId": "delayed-pair-same-6",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 6,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 94,
+      "unitIndex": 59,
+      "unitId": "delayed-pair-same-6",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 6,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 95,
+      "unitIndex": 60,
+      "unitId": "independent-missing-price-11",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 96,
+      "unitIndex": 61,
+      "unitId": "independent-article-main-2",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 97,
+      "unitIndex": 62,
+      "unitId": "independent-article-main-12",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 98,
+      "unitIndex": 63,
+      "unitId": "delayed-pair-corrective-7",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 7,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 99,
+      "unitIndex": 63,
+      "unitId": "delayed-pair-corrective-7",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 7,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 100,
+      "unitIndex": 64,
+      "unitId": "independent-article-main-4",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 101,
+      "unitIndex": 65,
+      "unitId": "cache-pair-1",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 1,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 102,
+      "unitIndex": 65,
+      "unitId": "cache-pair-1",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 1,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 103,
+      "unitIndex": 66,
+      "unitId": "independent-article-main-5",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 104,
+      "unitIndex": 67,
+      "unitId": "delayed-pair-same-2",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 2,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 105,
+      "unitIndex": 67,
+      "unitId": "delayed-pair-same-2",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 2,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 106,
+      "unitIndex": 68,
+      "unitId": "independent-tables-whole-14",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 107,
+      "unitIndex": 69,
+      "unitId": "independent-missing-price-12",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 108,
+      "unitIndex": 70,
+      "unitId": "delayed-pair-corrective-5",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 5,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 109,
+      "unitIndex": 70,
+      "unitId": "delayed-pair-corrective-5",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 5,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 110,
+      "unitIndex": 71,
+      "unitId": "independent-article-whole-8",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 111,
+      "unitIndex": 72,
+      "unitId": "independent-article-main-11",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 112,
+      "unitIndex": 73,
+      "unitId": "independent-tables-whole-1",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 113,
+      "unitIndex": 74,
+      "unitId": "delayed-pair-same-3",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 3,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 114,
+      "unitIndex": 74,
+      "unitId": "delayed-pair-same-3",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 3,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 115,
+      "unitIndex": 75,
+      "unitId": "independent-article-main-6",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 116,
+      "unitIndex": 76,
+      "unitId": "independent-delayed-js-wait-2500-1",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 117,
+      "unitIndex": 77,
+      "unitId": "independent-article-main-8",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 118,
+      "unitIndex": 78,
+      "unitId": "independent-tables-main-4",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 119,
+      "unitIndex": 79,
+      "unitId": "independent-complete-catalog-10",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 120,
+      "unitIndex": 80,
+      "unitId": "cache-pair-7",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 7,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 121,
+      "unitIndex": 80,
+      "unitId": "cache-pair-7",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 7,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 122,
+      "unitIndex": 81,
+      "unitId": "independent-delayed-js-wait-2500-2",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 123,
+      "unitIndex": 82,
+      "unitId": "cache-pair-2",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 2,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 124,
+      "unitIndex": 82,
+      "unitId": "cache-pair-2",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 2,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 125,
+      "unitIndex": 83,
+      "unitId": "independent-delayed-js-wait-2500-14",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 126,
+      "unitIndex": 84,
+      "unitId": "independent-immediate-js-4",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 127,
+      "unitIndex": 85,
+      "unitId": "cache-pair-6",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 6,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 128,
+      "unitIndex": 85,
+      "unitId": "cache-pair-6",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 6,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 129,
+      "unitIndex": 86,
+      "unitId": "404-pair-5",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 5,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 130,
+      "unitIndex": 86,
+      "unitId": "404-pair-5",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 5,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 131,
+      "unitIndex": 87,
+      "unitId": "independent-delayed-js-wait-2500-12",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 132,
+      "unitIndex": 88,
+      "unitId": "independent-complete-catalog-11",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 133,
+      "unitIndex": 89,
+      "unitId": "independent-tables-main-9",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 134,
+      "unitIndex": 90,
+      "unitId": "independent-complete-catalog-12",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 135,
+      "unitIndex": 91,
+      "unitId": "independent-article-main-10",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 136,
+      "unitIndex": 92,
+      "unitId": "independent-delayed-js-wait-2500-4",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 137,
+      "unitIndex": 93,
+      "unitId": "independent-article-whole-10",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 138,
+      "unitIndex": 94,
+      "unitId": "independent-tables-whole-9",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 139,
+      "unitIndex": 95,
+      "unitId": "independent-immediate-js-10",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 140,
+      "unitIndex": 96,
+      "unitId": "independent-delayed-js-wait-2500-10",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 10,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 141,
+      "unitIndex": 97,
+      "unitId": "independent-immediate-js-8",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 142,
+      "unitIndex": 98,
+      "unitId": "independent-delayed-js-wait-2500-3",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 143,
+      "unitIndex": 99,
+      "unitId": "independent-missing-price-3",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 144,
+      "unitIndex": 100,
+      "unitId": "independent-tables-whole-3",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 145,
+      "unitIndex": 101,
+      "unitId": "independent-tables-whole-7",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 7,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 146,
+      "unitIndex": 102,
+      "unitId": "independent-missing-price-13",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 147,
+      "unitIndex": 103,
+      "unitId": "independent-article-whole-6",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 148,
+      "unitIndex": 104,
+      "unitId": "404-pair-2",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 2,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 149,
+      "unitIndex": 104,
+      "unitId": "404-pair-2",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 2,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 150,
+      "unitIndex": 105,
+      "unitId": "404-pair-3",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 3,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 151,
+      "unitIndex": 105,
+      "unitId": "404-pair-3",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 3,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 152,
+      "unitIndex": 106,
+      "unitId": "independent-delayed-js-wait-2500-9",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 153,
+      "unitIndex": 107,
+      "unitId": "delayed-pair-corrective-4",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 4,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 154,
+      "unitIndex": 107,
+      "unitId": "delayed-pair-corrective-4",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 4,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 155,
+      "unitIndex": 108,
+      "unitId": "independent-tables-main-6",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 156,
+      "unitIndex": 109,
+      "unitId": "independent-tables-main-1",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 157,
+      "unitIndex": 110,
+      "unitId": "independent-tables-whole-5",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 158,
+      "unitIndex": 111,
+      "unitId": "delayed-pair-same-7",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 7,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 159,
+      "unitIndex": 111,
+      "unitId": "delayed-pair-same-7",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 7,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 160,
+      "unitIndex": 112,
+      "unitId": "404-pair-4",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 4,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 161,
+      "unitIndex": 112,
+      "unitId": "404-pair-4",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 4,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 162,
+      "unitIndex": 113,
+      "unitId": "independent-delayed-js-wait-2500-6",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 163,
+      "unitIndex": 114,
+      "unitId": "404-pair-1",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 1,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 164,
+      "unitIndex": 114,
+      "unitId": "404-pair-1",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 1,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 165,
+      "unitIndex": 115,
+      "unitId": "delayed-pair-corrective-2",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 2,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 166,
+      "unitIndex": 115,
+      "unitId": "delayed-pair-corrective-2",
+      "unitType": "delayed-corrective-pair",
+      "setting": "delayed-corrective-pair",
+      "rep": 2,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 167,
+      "unitIndex": 116,
+      "unitId": "independent-tables-main-13",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 168,
+      "unitIndex": 117,
+      "unitId": "independent-missing-price-4",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 169,
+      "unitIndex": 118,
+      "unitId": "independent-complete-catalog-14",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 14,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 170,
+      "unitIndex": 119,
+      "unitId": "cache-pair-3",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 3,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 171,
+      "unitIndex": 119,
+      "unitId": "cache-pair-3",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 3,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 172,
+      "unitIndex": 120,
+      "unitId": "independent-complete-catalog-9",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 173,
+      "unitIndex": 121,
+      "unitId": "independent-delayed-js-wait-2500-11",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 174,
+      "unitIndex": 122,
+      "unitId": "independent-delayed-js-wait-2500-13",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 13,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 175,
+      "unitIndex": 123,
+      "unitId": "independent-tables-main-8",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 176,
+      "unitIndex": 124,
+      "unitId": "independent-article-whole-12",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 12,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 177,
+      "unitIndex": 125,
+      "unitId": "independent-tables-whole-11",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 178,
+      "unitIndex": 126,
+      "unitId": "independent-immediate-js-11",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 11,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 179,
+      "unitIndex": 127,
+      "unitId": "independent-tables-main-2",
+      "unitType": "independent",
+      "setting": "tables-main",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 180,
+      "unitIndex": 128,
+      "unitId": "independent-missing-price-1",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 181,
+      "unitIndex": 129,
+      "unitId": "independent-delayed-js-wait-2500-5",
+      "unitType": "independent",
+      "setting": "delayed-js-wait-2500",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+        "waitFor": 2500
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 182,
+      "unitIndex": 130,
+      "unitId": "independent-article-whole-9",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 183,
+      "unitIndex": 131,
+      "unitId": "independent-tables-whole-2",
+      "unitType": "independent",
+      "setting": "tables-whole",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "html-tables",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 184,
+      "unitIndex": 132,
+      "unitId": "independent-article-main-1",
+      "unitType": "independent",
+      "setting": "article-main",
+      "rep": 1,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 185,
+      "unitIndex": 133,
+      "unitId": "cache-pair-8",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 8,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 186,
+      "unitIndex": 133,
+      "unitId": "cache-pair-8",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 8,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 187,
+      "unitIndex": 134,
+      "unitId": "independent-complete-catalog-4",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 4,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 188,
+      "unitIndex": 135,
+      "unitId": "independent-immediate-js-9",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 9,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 189,
+      "unitIndex": 136,
+      "unitId": "delayed-pair-same-1",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 1,
+      "pairPosition": 1,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 190,
+      "unitIndex": 136,
+      "unitId": "delayed-pair-same-1",
+      "unitType": "delayed-same-pair",
+      "setting": "delayed-same-pair",
+      "rep": 1,
+      "pairPosition": 2,
+      "fixture": "dynamic-delayed",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html"
+      },
+      "role": "conditional-retry-or-paired-repeat"
+    },
+    {
+      "sequence": 191,
+      "unitIndex": 137,
+      "unitId": "independent-article-whole-5",
+      "unitType": "independent",
+      "setting": "article-whole",
+      "rep": 5,
+      "pairPosition": null,
+      "fixture": "markdown-article",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": false,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/markdown-article.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 192,
+      "unitIndex": 138,
+      "unitId": "404-pair-7",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 7,
+      "pairPosition": 1,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "first-attempt"
+    },
+    {
+      "sequence": 193,
+      "unitIndex": 138,
+      "unitId": "404-pair-7",
+      "unitType": "404-diagnostic-pair",
+      "setting": "404-diagnostic-pair",
+      "rep": 7,
+      "pairPosition": 2,
+      "fixture": "missing-http-404",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/firecrawl-owned-missing-20261001.html"
+      },
+      "role": "diagnostic-repeat-permanent-404"
+    },
+    {
+      "sequence": 194,
+      "unitIndex": 139,
+      "unitId": "independent-complete-catalog-2",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 195,
+      "unitIndex": 140,
+      "unitId": "independent-complete-catalog-8",
+      "unitType": "independent",
+      "setting": "complete-catalog",
+      "rep": 8,
+      "pairPosition": null,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 196,
+      "unitIndex": 141,
+      "unitId": "cache-pair-5",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 5,
+      "pairPosition": 1,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "fresh-cache-primer"
+    },
+    {
+      "sequence": 197,
+      "unitIndex": 141,
+      "unitId": "cache-pair-5",
+      "unitType": "fresh-cache-pair",
+      "setting": "fresh-cache-pair",
+      "rep": 5,
+      "pairPosition": 2,
+      "fixture": "complete-catalog",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 3600000,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/complete.html",
+        "storeInCache": true
+      },
+      "role": "cache-allowed-repeat"
+    },
+    {
+      "sequence": 198,
+      "unitIndex": 142,
+      "unitId": "independent-missing-price-2",
+      "unitType": "independent",
+      "setting": "missing-price",
+      "rep": 2,
+      "pairPosition": null,
+      "fixture": "missing-price",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/mcp-catalog/missing-price.html"
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 199,
+      "unitIndex": 143,
+      "unitId": "independent-immediate-js-3",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 3,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    },
+    {
+      "sequence": 200,
+      "unitIndex": 144,
+      "unitId": "independent-immediate-js-6",
+      "unitType": "independent",
+      "setting": "immediate-js",
+      "rep": 6,
+      "pairPosition": null,
+      "fixture": "dynamic-domcontentloaded",
+      "params": {
+        "formats": [
+          "markdown",
+          "html"
+        ],
+        "maxAge": 0,
+        "proxy": "basic",
+        "onlyMainContent": true,
+        "domainTools": false,
+        "timeout": 60000,
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-domcontentloaded.html",
+        "waitFor": 0
+      },
+      "role": "independent"
+    }
+  ]
+}
