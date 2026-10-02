@@ -1,0 +1,33 @@
+example_id: apify-pricing
+schema_version: 1
+tested_at: '2026-10-02'
+official_sources_checked_on: '2026-10-02'
+requires_api_key: false
+network_in_default_run: false
+provider_calls: 0
+evidence_type: documented_rules_and_synthetic_arithmetic
+synthetic_ledgers: 7
+real_actor_runs: 0
+customer_invoices: 0
+environment:
+  python: ['3.10.2', '3.12.11']
+  dependencies: standard_library_only
+run_command: ./run.sh
+measurements:
+  arithmetic_test_methods: 38
+  deterministic_json_csv_files: 15
+  deterministic_svg_files: 3
+  realized_consumption_measured: false
+  accepted_record_counts_measured: false
+claims:
+  - {source: rates.json, claim: Documented monthly USD plan and resource snapshot}
+  - {source: sources.json, claim: Dated official public source provenance}
+  - {source: expected_output/scenario-summary.csv, claim: Explicitly synthetic charge arithmetic}
+  - {source: test_model.py, claim: Hand-derived boundary and unknown-input acceptance cases}
+limitations:
+  - No Actor execution, actual bill, accepted-output measurement or provider comparison.
+  - Rental retirement is documented policy; migration completion not observed.
+  - User-supplied scoped totals and event prices require independent verification.
+  - No annual/custom plans, proration, taxes/credits/adjustments or invoice-rounding simulation.
+  - Datacenter/add-on amounts and allowance eligibility must be known or unresolved.
+  - Source metadata does not automatically authenticate a supplied price.

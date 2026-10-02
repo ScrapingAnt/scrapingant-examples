@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "label": "TEMPLATE: unknown quantities, synthetic scaffolding only",
+  "input_type": "synthetic",
+  "currency": "USD",
+  "cadence": "monthly",
+  "period_start": "2026-10-02",
+  "period_end": "2026-11-02",
+  "plan": "starter",
+  "other_account_usage_usd": null,
+  "extra_cash_charges_usd": null,
+  "unresolved_items": [
+    "Confirm chosen Actor ID/build/version, dated event prices/discounts and usage inclusion",
+    "Supply billed meter totals; assess datacenter add-ons, limits and any account adjustments"
+  ],
+  "actors": [
+    {
+      "id": "synthetic/replace-with-actor-scope",
+      "version": null,
+      "pricing_model": null,
+      "price_source": null,
+      "events": null,
+      "run_usage": {
+        "compute": {
+          "quantity": null,
+          "unit": "CU"
+        },
+        "residential_proxy": {
+          "quantity": null,
+          "unit": "GB"
+        },
+        "serp_proxy": {
+          "quantity": null,
+          "unit": "SERP"
+        },
+        "unblocker": {
+          "quantity": null,
+          "unit": "request"
+        },
+        "dataset_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "dataset_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "dataset_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "kv_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_lists": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "queue_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "queue_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "queue_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "transfer_external": {
+          "quantity": null,
+          "unit": "GB"
+        },
+        "transfer_internal": {
+          "quantity": null,
+          "unit": "GB"
+        }
+      },
+      "post_run_usage": {
+        "dataset_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "dataset_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "dataset_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "kv_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "kv_lists": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "queue_storage": {
+          "quantity": null,
+          "unit": "GB-hour"
+        },
+        "queue_reads": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "queue_writes": {
+          "quantity": null,
+          "unit": "operation"
+        },
+        "transfer_external": {
+          "quantity": null,
+          "unit": "GB"
+        },
+        "transfer_internal": {
+          "quantity": null,
+          "unit": "GB"
+        }
+      }
+    }
+  ],
+  "accepted_outputs": {
+    "count": null,
+    "unit": "record",
+    "definition": "SYNTHETIC accepted records: unique IDs and nonempty required name/price/revision; no real validator run or customer bill"
+  }
+}

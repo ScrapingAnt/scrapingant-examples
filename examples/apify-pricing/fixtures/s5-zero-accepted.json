@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "label": "S5 Synthetic bill with zero accepted records",
+  "input_type": "synthetic",
+  "currency": "USD",
+  "cadence": "monthly",
+  "period_start": "2026-10-02",
+  "period_end": "2026-11-02",
+  "plan": "starter",
+  "other_account_usage_usd": "0",
+  "extra_cash_charges_usd": "0",
+  "unresolved_items": [],
+  "actors": [
+    {
+      "id": "synthetic/usage-extra",
+      "version": "synthetic-v1",
+      "pricing_model": "event_plus_usage",
+      "price_source": {
+        "url": "https://docs.apify.com/actors/publishing/monetize/pay-per-event",
+        "checked_on": "2026-10-02",
+        "note": "Synthetic Actor configured with documented default start-event price"
+      },
+      "events": [
+        {
+          "name": "apify-actor-start",
+          "charged_count": "960",
+          "unit": "event",
+          "unit_price_usd": "0.00005",
+          "price_per": "1",
+          "currency": "USD",
+          "source": {
+            "url": "https://docs.apify.com/actors/publishing/monetize/pay-per-event",
+            "checked_on": "2026-10-02",
+            "note": "Synthetic Actor configured with documented default start-event price"
+          }
+        }
+      ],
+      "run_usage": {
+        "compute": {
+          "quantity": "60",
+          "unit": "CU"
+        },
+        "residential_proxy": {
+          "quantity": "1",
+          "unit": "GB"
+        },
+        "serp_proxy": {
+          "quantity": "0",
+          "unit": "SERP"
+        },
+        "unblocker": {
+          "quantity": "0",
+          "unit": "request"
+        },
+        "dataset_storage": {
+          "quantity": "0",
+          "unit": "GB-hour"
+        },
+        "dataset_reads": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "dataset_writes": {
+          "quantity": "100000",
+          "unit": "operation"
+        },
+        "kv_storage": {
+          "quantity": "0",
+          "unit": "GB-hour"
+        },
+        "kv_reads": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "kv_writes": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "kv_lists": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "queue_storage": {
+          "quantity": "0",
+          "unit": "GB-hour"
+        },
+        "queue_reads": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "queue_writes": {
+          "quantity": "100000",
+          "unit": "operation"
+        },
+        "transfer_external": {
+          "quantity": "0.2",
+          "unit": "GB"
+        },
+        "transfer_internal": {
+          "quantity": "2",
+          "unit": "GB"
+        }
+      },
+      "post_run_usage": {
+        "dataset_storage": {
+          "quantity": "24",
+          "unit": "GB-hour"
+        },
+        "dataset_reads": {
+          "quantity": "100000",
+          "unit": "operation"
+        },
+        "dataset_writes": {
+          "quantity": "100000",
+          "unit": "operation"
+        },
+        "kv_storage": {
+          "quantity": "0",
+          "unit": "GB-hour"
+        },
+        "kv_reads": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "kv_writes": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "kv_lists": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "queue_storage": {
+          "quantity": "0",
+          "unit": "GB-hour"
+        },
+        "queue_reads": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "queue_writes": {
+          "quantity": "0",
+          "unit": "operation"
+        },
+        "transfer_external": {
+          "quantity": "0.1",
+          "unit": "GB"
+        },
+        "transfer_internal": {
+          "quantity": "0",
+          "unit": "GB"
+        }
+      }
+    }
+  ],
+  "accepted_outputs": {
+    "count": "0",
+    "unit": "record",
+    "definition": "SYNTHETIC accepted records: unique IDs and nonempty required name/price/revision; no real validator run or customer bill"
+  }
+}

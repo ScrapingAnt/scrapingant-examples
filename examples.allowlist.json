@@ -150,6 +150,11 @@
       "id": "firecrawl-pricing",
       "needs_api_key": false,
       "note": "Stored-output replay, source-grounded acceptance tests and monthly budget model only. No network/provider calls; dedicated offline CI has no secrets."
+    },
+    {
+      "id": "apify-pricing",
+      "needs_api_key": false,
+      "note": "Offline monthly USD charge-reconciliation model and seven explicitly synthetic ledgers. Standard library only; no network, keys, Actor runs or provider calls."
     }
   ]
 }

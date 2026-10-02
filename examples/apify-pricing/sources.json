@@ -1,0 +1,48 @@
+{
+  "sources": [
+    {
+      "id": "pricing",
+      "url": "https://apify.com/pricing",
+      "checked_on": "2026-10-02",
+      "read_method": "Unauthenticated ordinary public HTTPS GET; no Apify API or Actor run",
+      "capture_time_utc": "2026-10-02T12:01:26.167202+00:00",
+      "http_body_bytes": 449601,
+      "http_body_sha256": "9fad0c382f1f0e68a49db8ed74196bc26cb3357795e74084cdbd217bda8e919b",
+      "short_verified_excerpt": "Both models draw on the platform usage credits included in your plan, and excess usage is charged to your next invoice.",
+      "raw_body_retention": "Temporary local read only; full third-party page not redistributed in packet"
+    },
+    {
+      "id": "store",
+      "url": "https://docs.apify.com/actors/running/actors-in-store",
+      "checked_on": "2026-10-02",
+      "read_method": "Unauthenticated ordinary public HTTPS GET; no Apify API or Actor run",
+      "capture_time_utc": "2026-10-02T12:01:01.696116+00:00",
+      "http_body_bytes": 53511,
+      "http_body_sha256": "65d6d90191b771e3669777ad39fd8a200a435ea0dbea5e4b6521a9176576b40b",
+      "short_verified_excerpt": "October 1 - Rental Actors are fully retired. All remaining Actors are migrated to pay-per-usage pricing.",
+      "raw_body_retention": "Temporary local read only; full third-party page not redistributed in packet"
+    },
+    {
+      "id": "event",
+      "url": "https://docs.apify.com/actors/publishing/monetize/pay-per-event",
+      "checked_on": "2026-10-02",
+      "read_method": "Unauthenticated ordinary public HTTPS GET; no Apify API or Actor run",
+      "capture_time_utc": "2026-10-02T12:01:31.749880+00:00",
+      "http_body_bytes": 121080,
+      "http_body_sha256": "b641a3e42e40000398bea248c0a35b21b80405039a710dcfeda1280755e3ef4e",
+      "short_verified_excerpt": "The default price of the event is $0.00005, which equals to $0.05 per 1,000 starts.",
+      "raw_body_retention": "Temporary local read only; full third-party page not redistributed in packet"
+    },
+    {
+      "id": "usage",
+      "url": "https://docs.apify.com/actors/running/usage-and-resources",
+      "checked_on": "2026-10-02",
+      "read_method": "Unauthenticated ordinary public HTTPS GET; no Apify API or Actor run",
+      "capture_time_utc": "2026-10-02T12:01:37.136841+00:00",
+      "http_body_bytes": 56860,
+      "http_body_sha256": "6ffd3f129788a8ef894f02d19b43ec70559b21f2f34f4f233ca2d94b2427905c",
+      "short_verified_excerpt": "your current service pricing is used to compute the dollar amount.",
+      "raw_body_retention": "Temporary local read only; full third-party page not redistributed in packet"
+    }
+  ]
+}

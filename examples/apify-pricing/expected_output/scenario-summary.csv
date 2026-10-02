@@ -1,0 +1,8 @@
+label,input_type,status,known_workload_usage_usd,known_account_usage_usd,prepaid_applied_usd,unused_prepaid_usd,overage_next_invoice_usd,cycle_cash_cost_usd,known_cash_lower_bound_usd,incremental_workload_cash_usd,accepted_output_count,workload_usage_per_accepted_output_usd
+S1 Synthetic event price includes Actor-run usage,synthetic,complete,0.632,0.632,0.632,18.368,0,19,19,0,80,0.0079
+S2 Synthetic events plus separately billed Actor-run usage,synthetic,complete,22.272,22.272,19,0,3.272,22.272,22.272,3.272,80,0.2784
+S3 Synthetic usage-only Actor,synthetic,complete,22.224,22.224,19,0,3.224,22.224,22.224,3.224,80,0.2778
+S4 Synthetic extra-usage ledger missing residential proxy volume,synthetic,partial,14.272,14.272,,,,,19,,80,
+S5 Synthetic bill with zero accepted records,synthetic,complete,22.272,22.272,19,0,3.272,22.272,22.272,3.272,0,
+S6 Synthetic two-Actor account with other eligible usage,synthetic,complete,44.544,59.544,19,0,40.544,59.544,59.544,40.544,160,0.2784
+S7 Synthetic workload above Free allowance; infeasible on Free,synthetic,free_allowance_exceeded,22.272,22.272,,,,,,,80,

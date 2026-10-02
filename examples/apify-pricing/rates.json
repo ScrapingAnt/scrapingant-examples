@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-02",
+  "currency": "USD",
+  "cadence": "monthly",
+  "source_id": "pricing",
+  "source_url": "https://apify.com/pricing",
+  "plans": {
+    "free": {
+      "monthly_fee_usd": "0",
+      "prepaid_usage_usd": "5",
+      "compute_usd_per_cu": "0.20",
+      "overage_available": false
+    },
+    "starter": {
+      "monthly_fee_usd": "19",
+      "prepaid_usage_usd": "19",
+      "compute_usd_per_cu": "0.20",
+      "overage_available": true
+    },
+    "scale": {
+      "monthly_fee_usd": "199",
+      "prepaid_usage_usd": "199",
+      "compute_usd_per_cu": "0.16",
+      "overage_available": true
+    },
+    "business": {
+      "monthly_fee_usd": "999",
+      "prepaid_usage_usd": "999",
+      "compute_usd_per_cu": "0.13",
+      "overage_available": true
+    }
+  },
+  "meters": {
+    "compute": {
+      "unit": "CU",
+      "price_per": "1",
+      "prices_usd": {
+        "free": "0.20",
+        "starter": "0.20",
+        "scale": "0.16",
+        "business": "0.13"
+      },
+      "source_id": "pricing"
+    },
+    "residential_proxy": {
+      "unit": "GB",
+      "price_per": "1",
+      "prices_usd": {
+        "free": "8",
+        "starter": "8",
+        "scale": "7.5",
+        "business": "7"
+      },
+      "source_id": "pricing"
+    },
+    "serp_proxy": {
+      "unit": "SERP",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "2.5",
+        "starter": "2.5",
+        "scale": "2",
+        "business": "1.7"
+      },
+      "source_id": "pricing"
+    },
+    "unblocker": {
+      "unit": "request",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "1.5",
+        "starter": "1.5",
+        "scale": "1.25",
+        "business": "1"
+      },
+      "source_id": "pricing"
+    },
+    "dataset_storage": {
+      "unit": "GB-hour",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "1",
+        "starter": "1",
+        "scale": "0.9",
+        "business": "0.8"
+      },
+      "source_id": "pricing"
+    },
+    "dataset_reads": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.0004",
+        "starter": "0.0004",
+        "scale": "0.00036",
+        "business": "0.00032"
+      },
+      "source_id": "pricing"
+    },
+    "dataset_writes": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.005",
+        "starter": "0.005",
+        "scale": "0.0045",
+        "business": "0.004"
+      },
+      "source_id": "pricing"
+    },
+    "kv_storage": {
+      "unit": "GB-hour",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "1",
+        "starter": "1",
+        "scale": "0.9",
+        "business": "0.8"
+      },
+      "source_id": "pricing"
+    },
+    "kv_reads": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.005",
+        "starter": "0.005",
+        "scale": "0.0045",
+        "business": "0.004"
+      },
+      "source_id": "pricing"
+    },
+    "kv_writes": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.05",
+        "starter": "0.05",
+        "scale": "0.045",
+        "business": "0.04"
+      },
+      "source_id": "pricing"
+    },
+    "kv_lists": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.05",
+        "starter": "0.05",
+        "scale": "0.045",
+        "business": "0.04"
+      },
+      "source_id": "pricing"
+    },
+    "queue_storage": {
+      "unit": "GB-hour",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "4",
+        "starter": "4",
+        "scale": "3.6",
+        "business": "3.2"
+      },
+      "source_id": "pricing"
+    },
+    "queue_reads": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.004",
+        "starter": "0.004",
+        "scale": "0.0036",
+        "business": "0.0032"
+      },
+      "source_id": "pricing"
+    },
+    "queue_writes": {
+      "unit": "operation",
+      "price_per": "1000",
+      "prices_usd": {
+        "free": "0.01",
+        "starter": "0.01",
+        "scale": "0.009",
+        "business": "0.008"
+      },
+      "source_id": "pricing"
+    },
+    "transfer_external": {
+      "unit": "GB",
+      "price_per": "1",
+      "prices_usd": {
+        "free": "0.20",
+        "starter": "0.20",
+        "scale": "0.19",
+        "business": "0.18"
+      },
+      "source_id": "pricing"
+    },
+    "transfer_internal": {
+      "unit": "GB",
+      "price_per": "1",
+      "prices_usd": {
+        "free": "0.05",
+        "starter": "0.05",
+        "scale": "0.045",
+        "business": "0.04"
+      },
+      "source_id": "pricing"
+    }
+  },
+  "documented_start_event_default": {
+    "name": "apify-actor-start",
+    "unit": "event",
+    "price_per": "1",
+    "unit_price_usd": "0.00005",
+    "source_id": "event"
+  },
+  "not_automatically_modeled": [
+    "Datacenter IP subscriptions/add-ons: rates are public but prepaid eligibility and invoice cadence not resolved by this packet",
+    "Annual/custom plans, proration, taxes, refunds, credits, plan changes, usage limits, third-party direct fees",
+    "Actor-specific event prices and Store discounts; require dated Actor pricing input, never assume a generic result price"
+  ],
+  "documented_datacenter_ip_offer_not_modeled": {
+    "source_id": "pricing",
+    "reason": "Public included/excess IP offer verified; allowance eligibility, subscription/add-on cadence and account-specific adjustments not reconciled. Do not automatically apply these to an invoice.",
+    "plans": {
+      "free": {
+        "included_ips": 5,
+        "excess_usd_per_ip": null
+      },
+      "starter": {
+        "included_ips": 30,
+        "excess_usd_per_ip": "1"
+      },
+      "scale": {
+        "included_ips": 200,
+        "excess_usd_per_ip": "0.8"
+      },
+      "business": {
+        "included_ips": 500,
+        "excess_usd_per_ip": "0.6"
+      }
+    }
+  }
+}
