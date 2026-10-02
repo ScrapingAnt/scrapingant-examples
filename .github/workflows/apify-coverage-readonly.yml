@@ -1,0 +1,44 @@
+name: Apify wider read-only run coverage
+on:
+  workflow_dispatch:
+    inputs:
+      execute_read_only:
+        description: One approved all-status all-build check before any same-test recovery
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-coverage-readonly
+  cancel-in-progress: false
+jobs:
+  coverage:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline coverage tests
+        working-directory: examples/apify-calibration
+        run: python -m unittest test_coverage.py
+      - name: Bounded read-only coverage with existing secret
+        if: inputs.execute_read_only
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python coverage.py --execute-read-only
+      - name: Safe coverage artifact only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-wider-coverage
+          path: examples/apify-calibration/coverage-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7

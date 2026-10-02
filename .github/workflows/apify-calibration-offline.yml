@@ -8,12 +8,14 @@ on:
       - .github/workflows/apify-calibration-manual.yml
       - .github/workflows/apify-calibration-offline.yml
       - .github/workflows/apify-diagnosis-readonly.yml
+      - .github/workflows/apify-coverage-readonly.yml
   pull_request:
     paths:
       - examples/apify-calibration/**
       - .github/workflows/apify-calibration-manual.yml
       - .github/workflows/apify-calibration-offline.yml
       - .github/workflows/apify-diagnosis-readonly.yml
+      - .github/workflows/apify-coverage-readonly.yml
 
 permissions:
   contents: read
@@ -38,3 +40,6 @@ jobs:
       - name: Read-only diagnostic rejection tests
         working-directory: examples/apify-calibration
         run: python -m unittest test_diagnosis.py
+      - name: Wider read-only coverage tests
+        working-directory: examples/apify-calibration
+        run: python -m unittest test_coverage.py
