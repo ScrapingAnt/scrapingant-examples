@@ -15,7 +15,7 @@ START='2026-10-02T14:00:00Z'
 LIMIT=5
 MAX_PAGES=2
 MAX_READS=23  # identity +2pages +2reads per at most10 listed runs
-WIDE_OPEN=True
+WIDE_OPEN=False  # Consumed read-only workflow37024124313; no redispatch.
 
 def page_path(offset,end):
     return '/actors/apify~web-scraper/runs?'+urlencode({'limit':LIMIT,'offset':offset,'desc':'false',

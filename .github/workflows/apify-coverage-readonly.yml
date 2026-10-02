@@ -1,9 +1,9 @@
-name: Apify wider read-only run coverage
+name: Apify wider read-only coverage (guard closed)
 on:
   workflow_dispatch:
     inputs:
       execute_read_only:
-        description: One approved all-status all-build check before any same-test recovery
+        description: Authorization consumed by37024124313; do not execute again
         type: boolean
         required: true
         default: false
