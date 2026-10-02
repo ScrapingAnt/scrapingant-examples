@@ -1,0 +1,78 @@
+name: Apify bounded smoke (guard closed)
+on:
+  push:
+    paths:
+      - 'examples/apify-study/**'
+      - '.github/workflows/apify-study-smoke.yml'
+  workflow_dispatch:
+    inputs:
+      execute_reviewed_smoke:
+        description: One source-reviewed owned Cheerio smoke; encrypted capture then verified cleanup
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-study-smoke
+  cancel-in-progress: false
+jobs:
+  smoke:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install official authenticated age tool at reviewed version and digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/age-v1.3.2"
+          curl --fail --silent --show-error --location --max-time 60 \
+            https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \
+            --output "$RUNNER_TEMP/age-v1.3.2/age.tar.gz"
+          printf '%s  %s\n' cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10 "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" | sha256sum --check --status
+          tar -xzf "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" -C "$RUNNER_TEMP/age-v1.3.2" age/age age/age-keygen age/LICENSE
+      - name: Offline runner, privacy, encrypted roundtrip and workflow tests
+        working-directory: examples/apify-study
+        env:
+          STUDY_TEST_AGE_BIN: ${{ runner.temp }}/age-v1.3.2/age/age
+        run: python -m unittest discover -p 'test_*.py'
+      - name: One reviewed smoke capture using existing secret
+        if: github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        working-directory: examples/apify-study
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python workflow_driver.py capture --execute
+      - name: Authenticated encrypted capture and derived hashes only
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-study-encrypted-capture
+          path: |
+            examples/apify-study/capture.age
+            examples/apify-study/capture-public.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Wait for exact local decrypted readback approval then bounded fresh cleanup
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        working-directory: examples/apify-study
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python workflow_driver.py cleanup --execute
+      - name: Authenticated encrypted final receipt and safe cleanup status only
+        if: always() && github.event_name == 'workflow_dispatch' && inputs.execute_reviewed_smoke
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-study-encrypted-final
+          path: |
+            examples/apify-study/final.age
+            examples/apify-study/final-public.json
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,832 @@
+"""Offline smoke-runner tests. Every provider reply and clock is synthetic."""
+import contextlib
+import copy
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal
+import hashlib
+import io
+import json
+from pathlib import Path
+import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit, parse_qs
+
+import runner as r
+
+TOKEN = "OFFLINE_SECRET_NEVER_REAL"
+STAMP = datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc)
+URLS = ["https://scrapingant.github.io/scrapingant-examples/fixtures/study/%s.html" % i for i in range(3)]
+FIELDS = ["fixture", "sku", "name", "price_minor", "currency"]
+RECORDS = [{"fixture": str(i), "sku": "AA101", "name": "Desk Lamp", "price_minor": 3499,
+            "currency": "USD"} for i in range(3)]
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+
+
+def plan_fixture():
+    cells = []
+    for i in range(6):
+        cells.append({"cell_id": "smoke-%s" % i, "actor_id": "PublicActor%s" % i,
+                      "build": "3.0.%s" % (i + 1),
+                      "input": {"startUrls": [{"url": u} for u in URLS], "maxConcurrency": 1},
+                      "options": {"build": "3.0.%s" % (i + 1), "memoryMbytes": 4096,
+                                  "timeoutSecs": 120, "maxTotalChargeUsd": "0.12",
+                                  "restartOnError": False}, "ancillary_reserve_usd": "0.02",
+                      "output": {"fields": FIELDS, "max_records": 3, "max_bytes": 65536,
+                                 "expected_records": RECORDS, "allowed_urls": URLS}})
+    return {"schema_version": 1, "stage": "SMOKE", "aggregate_reserved_usd": "0.84", "cells": cells}
+
+
+def response(status="SUCCEEDED", **changes):
+    data = {"id": "PrivateRun", "userId": "PrivateOwner", "actId": "PublicActor0",
+            "defaultDatasetId": "PrivateDataset", "defaultKeyValueStoreId": "PrivateKv",
+            "defaultRequestQueueId": "PrivateQueue", "status": status,
+            "buildNumber": "3.0.1", "startedAt": STAMP.isoformat(),
+            "finishedAt": (STAMP + timedelta(seconds=30)).isoformat() if status in ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED") else None,
+            "options": {"build": "3.0.1", "memoryMbytes": 4096, "timeoutSecs": 120,
+                        "maxTotalChargeUsd": 0.12, "restartOnError": False},
+            "usageTotalUsd": 0.011, "usage": {"ACTOR_COMPUTE_UNITS": 0.01, "private-account": 19},
+            "usageUsd": {"ACTOR_COMPUTE_UNITS": 0.002}, "chargedEventCounts": {"owned_event": 3},
+            "stats": {"computeUnits": 0.01, "restartCount": 0, "urlSigningSecretKey": TOKEN},
+            "urlSigningSecretKey": TOKEN, "statusMessage": TOKEN}
+    data.update(changes)
+    return {"data": data}
+
+
+def metadata(kind, **changes):
+    identity = {"dataset": "PrivateDataset", "kv": "PrivateKv", "queue": "PrivateQueue"}
+    data = {"id": identity[kind], "userId": "PrivateOwner", "actId": "PublicActor0",
+            "actRunId": "PrivateRun", "name": None, "createdAt": STAMP.isoformat(),
+            "stats": {"storageBytes": 128, "readCount": 2, "writeCount": 3},
+            "generalAccess": "FOLLOW_USER_SETTING", "urlSigningSecretKey": TOKEN}
+    data.update(changes)
+    return {"data": data}
+
+
+class Clock:
+    def __init__(self, value=100.0):
+        self.value = value
+    def __call__(self):
+        return self.value
+    def wait(self, seconds):
+        self.value += seconds
+
+
+class ForbiddenEnvironment:
+    def get(self, *args):
+        raise AssertionError("environment access is forbidden in this offline test")
+
+
+class FakeTransport:
+    def __init__(self, replies, settle=False):
+        self.replies = list(replies)
+        self.requests = []
+        self.enable_terminal_settling = settle
+        self.authorized = False
+    def request(self, operation, identity, timeout):
+        self.requests.append((operation, copy.deepcopy(identity), timeout))
+        reply = self.replies.pop(0)
+        if isinstance(reply, Exception):
+            raise reply
+        return copy.deepcopy(reply)
+    def bind_run(self, identity):
+        self.bound = copy.deepcopy(identity)
+    def authorize_cleanup(self, identity):
+        self.authorized = True
+
+
+class TestTools:
+    def setUp(self):
+        self.assertTrue(callable(getattr(r, "prepare_cell", None)), "reviewed-plan validation is missing")
+        self.plan = plan_fixture()
+        self.pin = hashlib.sha256(canonical(self.plan)).hexdigest()
+        for name, value in (("RUNNER_READY", True), ("REVIEWED_PLAN_SHA256", self.pin)):
+            p = patch.object(r, name, value)
+            p.start()
+            self.addCleanup(p.stop)
+        self.cell = r.prepare_cell(self.plan, "smoke-0")
+        self.clock = Clock()
+        self.saved = []
+    def persist(self, payload):
+        self.saved.append(payload)
+        return {"plaintext_sha256": hashlib.sha256(payload).hexdigest(), "ciphertext_sha256": "c" * 64,
+                "remote_file_readback_verified": True}
+    def capture(self, transport, **kwargs):
+        return r.run_until_capture(transport, self.cell, self.persist, budget=r.StudyBudget(self.plan),
+                                   clock=self.clock, utcnow=lambda: STAMP + timedelta(seconds=40),
+                                   wait=self.clock.wait, **kwargs)
+    def normal(self, status="SUCCEEDED", export=None, settle=False):
+        replies = [r.Reply(201, response(status))]
+        if status == "SUCCEEDED":
+            replies.append(r.Reply(200, RECORDS if export is None else export))
+        replies += [r.Reply(200, metadata(k)) for k in ("dataset", "kv", "queue")]
+        return FakeTransport(replies, settle=settle)
+    def approval(self, state):
+        return {"plaintext_sha256": state.plaintext_sha256, "ciphertext_sha256": state.ciphertext_sha256,
+                "scope_approved": True}
+    def cleanup(self, transport, state, approval=None, verifier=lambda *args: True, **kwargs):
+        return r.cleanup_verified_capture(transport, state, self.approval(state) if approval is None else approval,
+                                         verify_local_approval=verifier, clock=self.clock,
+                                         utcnow=lambda: STAMP + timedelta(minutes=1), **kwargs)
+    def cleanup_transport(self, latest=None, metas=None, statuses=None):
+        replies = [r.Reply(200, response() if latest is None else latest)]
+        replies += [r.Reply(200, metadata(k)) for k in ("dataset", "kv", "queue")] if metas is None else metas
+        for status in statuses or [(204, 404)] * 3:
+            replies += [r.Reply(status[0], None), r.Reply(status[1], None)]
+        return FakeTransport(replies)
+
+
+class ContractTests(TestTools, unittest.TestCase):
+
+    def test_private_json_state_roundtrip_preserves_original_scope_and_counts(self):
+        self.assertTrue(callable(getattr(r, "private_state_bytes", None)), "bounded state serialization is missing")
+        state = self.capture(self.normal())
+        raw = r.private_state_bytes(state)
+        self.assertIn(b"PrivateOwner", raw)  # Root keeps this only in 0600 temporary state.
+        restored = r.restore_private_state(raw, self.plan)
+        self.assertEqual(restored.identity, state.identity)
+        self.assertEqual(restored.request_counts, state.request_counts)
+        self.assertEqual(restored.plaintext_sha256, state.plaintext_sha256)
+        result = self.cleanup(self.cleanup_transport(), restored)
+        self.assertEqual(result["cleanup_state"], "complete")
+
+    def test_private_state_restore_rejects_scope_receipt_plan_counts_and_non_json(self):
+        self.assertTrue(callable(getattr(r, "private_state_bytes", None)), "bounded state serialization is missing")
+        state = self.capture(self.normal()); raw = r.private_state_bytes(state)
+        for mutate in (lambda v: v["identity"].update(userId="ForeignOwner"),
+                       lambda v: v["evidence"].update(records=[]),
+                       lambda v: v.update(plan_sha256="0" * 64),
+                       lambda v: v["request_counts"].update(start=0),
+                       lambda v: v.update(diagnostic={"category": TOKEN})):
+            value = json.loads(raw); mutate(value)
+            with self.assertRaises(r.Fault):
+                r.restore_private_state(canonical(value), self.plan)
+        for invalid in (b"not JSON", b"x" * 262145, b'{"status":NaN}', b'{"status":1,"status":2}'):
+            with self.assertRaises(r.Fault):
+                r.restore_private_state(invalid, self.plan)
+
+    def test_failure_state_can_roundtrip_but_remains_impossible_to_clean(self):
+        self.assertTrue(callable(getattr(r, "private_state_bytes", None)), "bounded state serialization is missing")
+        state = self.capture(FakeTransport([r.Fault("connection_error", "request")]))
+        restored = r.restore_private_state(r.private_state_bytes(state), self.plan)
+        t = FakeTransport([])
+        self.assertEqual(self.cleanup(t, restored)["cleanup_state"], "blocked")
+        self.assertEqual(t.requests, [])
+
+    def test_three_normal_polls_plus_settling_and_two_phase_metadata_stay_at_nineteen(self):
+        replies = [r.Reply(201, response("READY")), r.Reply(200, response("RUNNING")),
+                   r.Reply(200, response("RUNNING")), r.Reply(200, response()), r.Reply(200, response()),
+                   r.Reply(200, RECORDS)] + [r.Reply(200, metadata(k)) for k in ("dataset", "kv", "queue")]
+        state = self.capture(FakeTransport(replies, settle=True))
+        self.assertEqual(self.cleanup(self.cleanup_transport(), state)["cleanup_state"], "complete")
+        self.assertEqual(state.request_counts["total"], 19)
+        self.assertEqual(state.request_counts["poll"] + state.request_counts["settle"], 4)
+
+    def test_public_projection_discards_hostile_diagnostic_fields(self):
+        state = self.capture(self.normal())
+        state.diagnostic = {"category": TOKEN, "stage": TOKEN, "http_status": TOKEN, "body": TOKEN}
+        state.request_counts["raw"] = TOKEN
+        public = json.dumps(r.public_result(state))
+        self.assertNotIn(TOKEN, public)
+        self.assertNotIn("raw", json.loads(public)["request_counts"])
+
+    def test_final_cleanup_result_has_no_raw_provider_references(self):
+        state = self.capture(self.normal()); result = self.cleanup(self.cleanup_transport(), state)
+        encoded = json.dumps(result)
+        for raw in (TOKEN, "PrivateOwner", "PrivateRun", "PrivateDataset", "PrivateKv", "PrivateQueue"):
+            self.assertNotIn(raw, encoded)
+
+    def test_partial_owned_records_survive_acceptance_failure_without_debug_fields(self):
+        rows = copy.deepcopy(RECORDS[:2]); rows[0]["price_minor"] = 1; rows[0]["#debug"] = TOKEN
+        state = self.capture(self.normal(export=rows))
+        self.assertEqual(state.evidence["extraction_state"], "invalid")
+        self.assertEqual(state.evidence["records"], [{k:v for k,v in row.items() if k != "#debug"} for row in rows])
+        self.assertNotIn(TOKEN, self.saved[-1].decode())
+
+    def test_rag_metadata_url_adapter_drops_other_metadata_and_preserves_partial_text(self):
+        p = plan_fixture(); out = p["cells"][0]["output"]
+        out.update(fields=["url", "text", "markdown"], expected_records=None, url_source="metadata.url",
+                   content_contracts=[{"url":u} for u in URLS])
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()):
+            cell = r.prepare_cell(p, "smoke-0")
+            rows = [{"metadata":{"url":u, "userId":"PrivateOwner", "headers":{"Authorization":TOKEN}},
+                     "text":"Owned", "markdown":"Owned"} for u in URLS]
+            self.assertEqual(r.validate_output(rows,cell), [{"url":u,"text":"Owned","markdown":"Owned"} for u in URLS])
+
+    def test_sentinel_extra_record_is_detected_not_silently_accepted(self):
+        state = self.capture(self.normal(export=RECORDS + [RECORDS[0]]))
+        self.assertEqual(state.evidence["extraction_state"], "invalid")
+        self.assertEqual(len(state.evidence["records"]), 4)
+
+    def test_metadata_item_count_is_captured_without_defaulting_missing_to_zero(self):
+        t=self.normal(); t.replies[2]=r.Reply(200,metadata("dataset",itemCount=3))
+        state=self.capture(t)
+        self.assertEqual(state.evidence["storage"]["dataset"]["itemCount"],3)
+        self.assertIsNone(state.evidence["storage"]["kv"].get("itemCount"))
+
+    def test_root_serializer_name_and_cleanup_fresh_scalar_receipts(self):
+        self.assertTrue(callable(getattr(r,"serialize_private_state",None)),"root private-state interface is missing")
+        state=self.capture(self.normal()); before=canonical(state.evidence)
+        fresh=response();fresh["data"]["usageTotalUsd"]=0.012
+        result=self.cleanup(self.cleanup_transport(latest=fresh),state)
+        self.assertEqual(result["refreshed_run"]["usage_total_usd"],"0.012")
+        self.assertEqual(result["refreshed_storage"]["queue"]["storageBytes"],128)
+        self.assertEqual(result["cleaned_at"],(STAMP+timedelta(minutes=1)).isoformat())
+        self.assertEqual(canonical(state.evidence),before)
+        self.assertEqual(r.restore_private_state(r.serialize_private_state(state),self.plan).cleanup_state,"complete")
+
+    def test_cleanup_active_revocation_preserves_approved_initial_evidence_immutable(self):
+        state=self.capture(self.normal());before=canonical(state.evidence)
+        result=self.cleanup(FakeTransport([r.Reply(200,response("RUNNING",options={}))]),state)
+        self.assertEqual(result["cleanup_state"],"blocked")
+        self.assertEqual(canonical(state.evidence),before)
+        self.assertTrue(state.latest_active)
+
+    def test_session_late_original_active_reply_revokes_before_deadline_check(self):
+        state=self.capture(self.normal());before=canonical(state.evidence)
+        t=FakeTransport([r.Reply(200,response("RUNNING",options={},userId=None))])
+        original=t.request
+        def late(operation,identity,timeout):
+            reply=original(operation,identity,timeout)
+            self.clock.wait(121)
+            return reply
+        t.request=late
+        result=self.cleanup(t,state)
+        self.assertEqual(result["diagnostic"]["category"],"latest_run_active")
+        self.assertTrue(state.latest_active)
+        self.assertFalse(state.capture_verified)
+        self.assertEqual(canonical(state.evidence),before)
+        self.assertEqual([q[0] for q in t.requests],["fresh_terminal"])
+
+    def test_session_late_settling_active_reply_never_uses_old_terminal_for_capture(self):
+        t=FakeTransport([r.Reply(201,response()),r.Reply(200,response("RUNNING",options={}))],settle=True)
+        original=t.request
+        def late(operation,identity,timeout):
+            reply=original(operation,identity,timeout)
+            if operation=="settle":self.clock.wait(471)
+            return reply
+        t.request=late
+        state=self.capture(t)
+        self.assertTrue(state.latest_active)
+        self.assertFalse(state.capture_verified)
+        self.assertIsNone(state.evidence["run"])
+        self.assertEqual(state.evidence["historical_terminal_capture"]["status"],"SUCCEEDED")
+        self.assertEqual([q[0] for q in t.requests],["start","settle"])
+
+    def test_dataset_item_count_mismatch_marks_extraction_invalid_and_keeps_records(self):
+        t=self.normal();t.replies[2]=r.Reply(200,metadata("dataset",itemCount=4))
+        state=self.capture(t)
+        self.assertEqual(state.evidence["extraction_state"],"invalid")
+        self.assertEqual(state.evidence["records"],RECORDS)
+        self.assertFalse(state.evidence["dataset_item_count_matches_capture"])
+
+    def test_file_and_canonical_plan_pins_are_separately_verified(self):
+        self.assertTrue(callable(getattr(r, "load_reviewed_plan", None)), "fixed-file plan verification is missing")
+        raw = json.dumps(self.plan, indent=2).encode()
+        with patch.object(r, "REVIEWED_PLAN_FILE_SHA256", hashlib.sha256(raw).hexdigest()):
+            self.assertEqual(r.load_reviewed_plan(raw), self.plan)
+            with self.assertRaises(r.Fault):
+                r.load_reviewed_plan(canonical(self.plan))
+
+    def test_real_schema_case_id_and_full_content_manifest_contract(self):
+        p = plan_fixture()
+        records = [{"case_id": v["fixture"], **{k: value for k, value in v.items() if k != "fixture"}} for v in RECORDS]
+        p["cells"][0]["output"].update(fields=["case_id", "sku", "name", "price_minor", "currency"], expected_records=records)
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()):
+            cell = r.prepare_cell(p, "smoke-0")
+            self.assertEqual(r.validate_output(records, cell), records)
+        p["cells"][0]["output"].update(fields=["url", "text", "markdown"], expected_records=None,
+                                     content_contracts=[{"url": u, "case_id": str(i), "expected_sentences": {"S1": "Owned"}}
+                                                        for i, u in enumerate(URLS)])
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()):
+            cell = r.prepare_cell(p, "smoke-0")
+            rows = [{"url": u, "text": "Owned content", "markdown": "Owned markdown"} for u in URLS]
+            self.assertEqual(r.validate_output(rows, cell), rows)
+
+    def test_capture_requires_encryption_callback_before_start(self):
+        t = FakeTransport([])
+        with self.assertRaises(r.Fault):
+            r.run_until_capture(t, self.cell, None, budget=r.StudyBudget(self.plan), clock=self.clock,
+                                utcnow=lambda: STAMP, wait=self.clock.wait)
+        self.assertEqual(t.requests, [])
+
+    def test_six_cell_ledger_uses_exact_aggregate_and_rejects_repeated_cell(self):
+        budget = r.StudyBudget(self.plan)
+        for c in self.plan["cells"]:
+            budget.claim(r.prepare_cell(self.plan, c["cell_id"]))
+        self.assertEqual(budget.reserved_usd, Decimal("0.84"))
+        with self.assertRaises(r.Fault):
+            budget.claim(self.cell)
+
+    def test_poll_validation_diagnostic_retains_successful_http_status(self):
+        t = FakeTransport([r.Reply(201, response("READY")), r.Reply(200, response(buildNumber="wrong"))])
+        state = self.capture(t)
+        self.assertEqual(state.diagnostic["category"], "build_mismatch")
+        self.assertEqual(state.diagnostic["http_status"], 200)
+
+    def test_numeric_cap_rejects_nonfinite_boolean_negative_missing_and_string(self):
+        for value in (Decimal("NaN"), float("inf"), True, -1, None, "0.12"):
+            data = response()["data"]; data["options"]["maxTotalChargeUsd"] = value
+            with self.subTest(value=value), self.assertRaises(r.Fault):
+                r.validate_run(data, self.cell)
+
+    def test_local_approval_time_is_included_in_cleanup_phase_deadline(self):
+        state = self.capture(self.normal())
+        t = FakeTransport([])
+        def slow_approval(*args):
+            self.clock.wait(30)
+            return True
+        result = self.cleanup(t, state, verifier=slow_approval)
+        self.assertEqual(result["cleanup_state"], "blocked")
+        self.assertEqual(t.requests, [])
+
+    def test_cleanup_expiry_checked_again_before_each_delete(self):
+        state = self.capture(self.normal())
+        t = self.cleanup_transport()
+        times = iter([STAMP + timedelta(minutes=1), STAMP + timedelta(minutes=31),
+                      STAMP + timedelta(minutes=31), STAMP + timedelta(minutes=31), STAMP + timedelta(minutes=31)])
+        result = r.cleanup_verified_capture(t, state, self.approval(state), verify_local_approval=lambda *a: True,
+                                            clock=self.clock, utcnow=lambda: next(times))
+        self.assertEqual(result["cleanup_state"], "residual")
+        self.assertFalse(any(q[0].startswith("delete") for q in t.requests))
+
+    def test_slow_export_never_spends_reserved_cleanup_time_on_metadata(self):
+        t = self.normal()
+        original = t.request
+        def request(operation, identity, timeout):
+            result = original(operation, identity, timeout)
+            if operation == "export":
+                self.clock.wait(390)
+            return result
+        t.request = request
+        state = self.capture(t)
+        self.assertFalse(state.capture_verified)
+        self.assertEqual([q[0] for q in t.requests], ["start", "export"])
+
+    def test_typed_transport_active_fault_moves_prior_numbers_to_historical_only(self):
+        t = FakeTransport([r.Reply(201, response()), r.Fault("latest_run_active", "run_validation", 200)], settle=True)
+        t.latest_active_status = "RUNNING"
+        state = self.capture(t)
+        self.assertTrue(state.latest_active)
+        self.assertIsNone(state.evidence["run"])
+        self.assertEqual(state.evidence["historical_terminal_capture"]["status"], "SUCCEEDED")
+        self.assertEqual(state.status, "RUNNING")
+
+    def test_content_foreign_duplicate_url_and_oversized_text_are_rejected(self):
+        p = plan_fixture(); p["cells"][0]["output"].update(fields=["url", "text", "markdown"], expected_records=None,
+            content_contracts=[{"url": u, "case_id": str(i)} for i,u in enumerate(URLS)])
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()):
+            cell = r.prepare_cell(p, "smoke-0")
+            base = [{"url": u, "text": "Owned", "markdown": "Owned"} for u in URLS]
+            for replacement in ({"url": "https://foreign.invalid", "text": "Owned", "markdown": "Owned"},
+                                base[1], {"url": URLS[0], "text": "x"*65537, "markdown": "Owned"}):
+                items = copy.deepcopy(base); items[0] = replacement
+                with self.assertRaises(r.Fault):
+                    r.validate_output(items, cell)
+
+    def test_closed_guard_blocks_before_token_or_transport(self):
+        with patch.object(r, "RUNNER_READY", False):
+            with self.assertRaises(r.Fault):
+                r.execute(self.plan, "smoke-0", opt_in=True, environ=ForbiddenEnvironment(),
+                          persist_encrypted=self.persist, transport_factory=lambda *args, **kw: self.fail("transport created"))
+
+    def test_missing_opt_in_blocks_before_token(self):
+        with self.assertRaises(r.Fault):
+            r.execute(self.plan, "smoke-0", opt_in=False, environ=ForbiddenEnvironment(), persist_encrypted=self.persist)
+
+    def test_modified_plan_rejected_before_token(self):
+        self.plan["cells"][0]["build"] = "unreviewed"
+        with self.assertRaises(r.Fault):
+            r.execute(self.plan, "smoke-0", opt_in=True, environ=ForbiddenEnvironment(), persist_encrypted=self.persist)
+
+    def test_missing_pin_bad_budget_and_low_deadline_block_start(self):
+        for mutation in (lambda p: p["cells"][0].pop("build"),
+                         lambda p: p.update(aggregate_reserved_usd="0.83"),
+                         lambda p: p["cells"][0]["options"].update(maxTotalChargeUsd="0.13")):
+            p = plan_fixture(); mutation(p)
+            with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()), self.assertRaises(r.Fault):
+                r.prepare_cell(p, "smoke-0")
+        with self.assertRaises(r.Fault):
+            r.execute(self.plan, "smoke-0", opt_in=True, environ=ForbiddenEnvironment(),
+                      persist_encrypted=self.persist, clock=self.clock, deadline=self.clock() + 359)
+
+    def test_budget_retains_full_reserve_after_ambiguous_start_and_cannot_repeat(self):
+        budget = r.StudyBudget(self.plan)
+        t = FakeTransport([r.Fault("connection_error", "request")])
+        state = r.run_until_capture(t, self.cell, self.persist, budget=budget, clock=self.clock,
+                                   utcnow=lambda: STAMP + timedelta(seconds=40), wait=self.clock.wait)
+        self.assertEqual(state.status, "UNKNOWN")
+        self.assertEqual(budget.reserved_usd, Decimal("0.14"))
+        self.assertEqual([q[0] for q in t.requests], ["start"])
+        with self.assertRaises(r.Fault):
+            r.run_until_capture(t, self.cell, self.persist, budget=budget, clock=self.clock,
+                                utcnow=lambda: STAMP, wait=self.clock.wait)
+
+    def test_capture_receipt_is_private_redacted_and_performs_no_delete(self):
+        t = self.normal()
+        state = self.capture(t)
+        evidence = json.loads(self.saved[0])
+        self.assertEqual(state.status, "SUCCEEDED")
+        self.assertEqual([q[0] for q in t.requests], ["start", "export", "metadata_dataset", "metadata_kv", "metadata_queue"])
+        self.assertEqual(evidence["records"], RECORDS)
+        self.assertTrue(evidence["owner_association_verified"])
+        self.assertFalse(evidence["invoice_finality"])
+        self.assertEqual(evidence["storage"]["kv"]["storageBytes"], 128)
+        for secret in (TOKEN, "PrivateRun", "PrivateOwner", "PrivateDataset", "urlSigningSecretKey", "private-account"):
+            self.assertNotIn(secret, self.saved[0].decode())
+            self.assertNotIn(secret, json.dumps(r.public_result(state)))
+            self.assertNotIn(secret, repr(state))
+
+    def test_nullable_pending_build_and_numeric_equivalence_are_accepted(self):
+        t = self.normal()
+        initial = response("READY", buildNumber=None)
+        initial["data"]["options"]["maxTotalChargeUsd"] = Decimal("0.12000")
+        t.replies.insert(0, r.Reply(201, initial)); t.replies[1] = r.Reply(200, response())
+        state = self.capture(t)
+        self.assertEqual(state.status, "SUCCEEDED")
+        self.assertEqual([q[0] for q in t.requests].count("start"), 1)
+        self.assertEqual([q[0] for q in t.requests].count("poll"), 1)
+
+    def test_initial_missing_identity_foreign_actor_bad_build_or_options_never_polls(self):
+        bads = [response(userId=None), response(actId="ForeignActor"), response(buildNumber=None),
+                response(buildNumber="9.9.9"), response(defaultDatasetId="../../evil")]
+        bad = response(); bad["data"]["options"]["memoryMbytes"] = True; bads.append(bad)
+        for initial in bads:
+            with self.subTest(initial=initial):
+                t = FakeTransport([r.Reply(201, initial)])
+                state = self.capture(t)
+                self.assertEqual(state.status, "UNKNOWN")
+                self.assertEqual([q[0] for q in t.requests], ["start"])
+                self.assertTrue(r.public_result(state)["owner_attention_required"])
+
+    def test_three_active_polls_leave_owner_attention_without_export_or_cleanup(self):
+        t = FakeTransport([r.Reply(201, response("READY"))] + [r.Reply(200, response("RUNNING"))] * 3)
+        state = self.capture(t)
+        self.assertTrue(state.latest_active)
+        self.assertEqual(len(t.requests), 4)
+        self.assertNotIn("export", [q[0] for q in t.requests])
+
+    def test_settling_uses_one_spare_poll_and_no_fourth_normal_poll(self):
+        t = self.normal()
+        t.enable_terminal_settling = True
+        t.replies.insert(1, r.Reply(200, response()))
+        state = self.capture(t)
+        self.assertEqual(state.status, "SUCCEEDED")
+        self.assertEqual([q[0] for q in t.requests].count("settle"), 1)
+        self.assertEqual(self.clock(), 110)
+
+    def test_latest_same_id_active_even_malformed_revokes_terminal_capture_permission(self):
+        for key, value in (("buildNumber", "9.9.9"), ("options", {}), ("userId", None), ("actId", "ForeignActor")):
+            with self.subTest(key=key):
+                t = FakeTransport([r.Reply(201, response()), r.Reply(200, response("RUNNING", **{key: value}))], settle=True)
+                state = self.capture(t)
+                self.assertTrue(state.latest_active)
+                self.assertEqual([q[0] for q in t.requests], ["start", "settle"])
+                self.assertEqual(state.evidence["historical_terminal_capture"]["status"], "SUCCEEDED")
+
+    def test_export_failure_still_captures_all_metadata_for_approved_cleanup(self):
+        t = self.normal(export=[{"arbitrary": TOKEN}])
+        state = self.capture(t)
+        self.assertEqual(state.evidence["extraction_state"], "invalid")
+        self.assertTrue(state.capture_verified)
+        self.assertEqual([q[0] for q in t.requests][-3:], ["metadata_dataset", "metadata_kv", "metadata_queue"])
+
+    def test_every_metadata_must_be_owned_unnamed_and_associated_before_capture_verified(self):
+        for changes in ({"userId": "ForeignOwner"}, {"name": "shared"}, {"name": ""},
+                        {"actRunId": "ForeignRun"}, {"actId": "ForeignActor"}, {"id": "ForeignStore"},
+                        {"createdAt": (STAMP - timedelta(seconds=6)).isoformat()}):
+            t = self.normal(); t.replies[2] = r.Reply(200, metadata("dataset", **changes))
+            state = self.capture(t)
+            self.assertFalse(state.capture_verified)
+            self.assertEqual([q[0] for q in t.requests][-3:], ["metadata_dataset", "metadata_kv", "metadata_queue"])
+
+    def test_persistence_exception_or_unverified_hash_never_authorizes_cleanup(self):
+        for callback in (lambda payload: (_ for _ in ()).throw(RuntimeError(TOKEN)),
+                         lambda payload: {"plaintext_sha256": "0" * 64, "ciphertext_sha256": "c" * 64,
+                                          "remote_file_readback_verified": True},
+                         lambda payload: {"plaintext_sha256": hashlib.sha256(payload).hexdigest(), "ciphertext_sha256": "c" * 64,
+                                          "remote_file_readback_verified": False}):
+            state = r.run_until_capture(self.normal(), self.cell, callback, budget=r.StudyBudget(self.plan),
+                                        clock=self.clock, utcnow=lambda: STAMP + timedelta(seconds=40), wait=self.clock.wait)
+            t = FakeTransport([])
+            result = self.cleanup(t, state)
+            self.assertEqual(t.requests, [])
+            self.assertEqual(result["cleanup_state"], "blocked")
+
+    def test_cleanup_requires_matching_approval_and_local_readback_callback_before_get(self):
+        state = self.capture(self.normal())
+        for approval, verifier in (({}, lambda *a: True), (self.approval(state), None),
+                                   (self.approval(state), lambda *a: False)):
+            t = FakeTransport([])
+            result = self.cleanup(t, state, approval=approval, verifier=verifier)
+            self.assertEqual(result["cleanup_state"], "blocked")
+            self.assertEqual(t.requests, [])
+
+    def test_cleanup_uses_fresh_terminal_then_all_three_metadata_then_exact_deletes(self):
+        state = self.capture(self.normal())
+        t = self.cleanup_transport()
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "complete")
+        self.assertEqual([q[0] for q in t.requests], ["fresh_terminal", "metadata_dataset", "metadata_kv", "metadata_queue",
+                          "delete_dataset", "absence_dataset", "delete_kv", "absence_kv", "delete_queue", "absence_queue"])
+        self.assertTrue(t.authorized)
+        self.assertEqual(state.request_counts["total"], 15)
+
+    def test_terminal_failed_run_can_be_cleaned_after_durable_failure_receipt(self):
+        state = self.capture(self.normal(status="FAILED"))
+        t = self.cleanup_transport(latest=response("FAILED"))
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "complete")
+        self.assertEqual(state.evidence["extraction_state"], "terminal_failure")
+
+    def test_cleanup_fresh_active_malformed_revokes_without_any_metadata_or_delete(self):
+        state = self.capture(self.normal())
+        for changes in ({"buildNumber": "wrong"}, {"options": {}}, {"userId": None}):
+            t = FakeTransport([r.Reply(200, response("RUNNING", **changes))])
+            result = self.cleanup(t, state)
+            self.assertEqual(result["cleanup_state"], "blocked")
+            self.assertTrue(result["owner_attention_required"])
+            self.assertEqual([q[0] for q in t.requests], ["fresh_terminal"])
+            # A revoked state cannot recover permission from its earlier receipt.
+            self.assertTrue(state.latest_active)
+            break
+
+    def test_cleanup_fresh_foreign_refs_or_build_options_status_prevent_all_deletion(self):
+        for changes in ({"id": "ForeignRun"}, {"userId": "ForeignOwner"}, {"actId": "ForeignActor"},
+                        {"defaultDatasetId": "ForeignStore"}, {"buildNumber": None},
+                        {"buildNumber": "9.9.9"}, {"options": {}}, {"status": "FAILED"}):
+            state = self.capture(self.normal())
+            t = FakeTransport([r.Reply(200, response(**changes))])
+            result = self.cleanup(t, state)
+            self.assertEqual(result["cleanup_state"], "blocked")
+            self.assertFalse(any(q[0].startswith("delete") for q in t.requests))
+
+    def test_phase2_all_metadata_checks_precede_any_delete_even_last_store_bad(self):
+        state = self.capture(self.normal())
+        metas = [r.Reply(200, metadata("dataset")), r.Reply(200, metadata("kv")),
+                 r.Reply(200, metadata("queue", name="existing-shared"))]
+        t = self.cleanup_transport(metas=metas)
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "blocked")
+        self.assertEqual([q[0] for q in t.requests], ["fresh_terminal", "metadata_dataset", "metadata_kv", "metadata_queue"])
+
+    def test_delete_failure_continues_independent_stores_and_reports_residual(self):
+        state = self.capture(self.normal())
+        t = self.cleanup_transport(statuses=[(500, 404), (204, 404), (204, 404)])
+        # A failed DELETE has no absence verification call.
+        t.replies.pop(5)
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "residual")
+        self.assertEqual([q[0] for q in t.requests].count("delete_queue"), 1)
+        self.assertTrue(result["owner_attention_required"])
+
+    def test_only_typed_http_404_proves_absence_not_json_body(self):
+        state = self.capture(self.normal())
+        t = self.cleanup_transport(statuses=[(204, 200), (204, 404), (204, 404)])
+        t.replies[5] = r.Reply(200, {"statusCode": 404})
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "residual")
+        self.assertEqual(result["stores"]["dataset"], "absence_unconfirmed")
+
+    def test_approval_age_and_short_cleanup_deadline_block_before_requests(self):
+        state = self.capture(self.normal())
+        t = FakeTransport([])
+        result = r.cleanup_verified_capture(t, state, self.approval(state), verify_local_approval=lambda *a: True,
+                                            clock=self.clock, utcnow=lambda: STAMP + timedelta(minutes=26))
+        self.assertEqual(result["cleanup_state"], "blocked"); self.assertEqual(t.requests, [])
+        result = self.cleanup(t, state, deadline=self.clock() + 99)
+        self.assertEqual(result["cleanup_state"], "blocked"); self.assertEqual(t.requests, [])
+
+    def test_tampered_raw_state_scope_cannot_use_approved_receipt(self):
+        state = self.capture(self.normal())
+        state.identity["userId"] = "ForeignOwner"
+        t = FakeTransport([])
+        result = self.cleanup(t, state)
+        self.assertEqual(result["cleanup_state"], "blocked")
+        self.assertEqual(t.requests, [])
+
+    def test_content_contract_keeps_only_owned_bounded_text_and_fixed_urls(self):
+        p = plan_fixture()
+        p["cells"][0]["output"].update(fields=["url", "text", "markdown"], expected_records=None,
+                                     content_contracts={u: {"expected_sentence": "Owned fixture sentence."} for u in URLS})
+        with patch.object(r, "REVIEWED_PLAN_SHA256", hashlib.sha256(canonical(p)).hexdigest()):
+            cell = r.prepare_cell(p, "smoke-0")
+            items = [{"url": u, "text": "Owned fixture sentence.", "markdown": "# Owned\nOwned fixture sentence.",
+                      "headers": {"Authorization": TOKEN}, "#debug": TOKEN} for u in URLS]
+            t = FakeTransport([r.Reply(201, response()), r.Reply(200, items)] + [r.Reply(200, metadata(k)) for k in ("dataset", "kv", "queue")])
+            state = r.run_until_capture(t, cell, self.persist, budget=r.StudyBudget(p), clock=self.clock,
+                                        utcnow=lambda: STAMP + timedelta(seconds=40), wait=self.clock.wait)
+            self.assertEqual(state.evidence["extraction_state"], "accepted")
+            self.assertNotIn(TOKEN, self.saved[-1].decode())
+
+
+class TransportTests(TestTools, unittest.TestCase):
+    def http(self, opener):
+        return r.HttpTransport(self.cell, TOKEN, opener=opener, clock=self.clock, deadline=self.clock() + 480)
+
+    def test_export_uses_extra_record_sentinel_and_fixed_fields(self):
+        seen=[]
+        def opener(req,timeout):
+            seen.append(req.full_url);raise URLError(TOKEN)
+        state=self.capture(self.normal());t=self.http(opener);t.bind_run(state.identity)
+        with self.assertRaises(r.Fault):
+            t.request("export",state.identity,10)
+        q=parse_qs(urlsplit(seen[0]).query)
+        self.assertEqual(q["limit"],["4"])
+        self.assertEqual(q["fields"],[",".join(FIELDS)])
+
+    def test_trickling_response_uses_read1_and_stops_at_route_deadline(self):
+        class Trickle:
+            status=201
+            def __init__(inner):
+                inner.body=io.BytesIO(canonical(response()));inner.buffered_reads=0;inner.chunk_reads=0;inner.closed=False
+            def read(inner,size):
+                inner.buffered_reads+=1
+                self.clock.wait(11)
+                return inner.body.read(size)
+            def read1(inner,size):
+                inner.chunk_reads+=1
+                self.clock.wait(11)
+                return inner.body.read(min(size,1))
+            def close(inner):inner.closed=True
+        body=Trickle();t=self.http(lambda *a,**kw:body)
+        with self.assertRaises(r.Fault) as error:
+            t.request("start",None,30)
+        self.assertEqual(error.exception.category,"deadline_exceeded")
+        self.assertEqual(body.buffered_reads,0)
+        self.assertEqual(body.chunk_reads,3)
+        self.assertTrue(body.closed)
+        self.assertEqual(t.counts["start"],1)
+
+    def test_route_deadline_includes_connection_time_and_json_decode(self):
+        class Body:
+            status=201
+            def __init__(inner):inner.body=io.BytesIO(canonical(response()));inner.closed=False
+            def read(inner,size):return inner.body.read(size)
+            def read1(inner,size):return inner.body.read(size)
+            def close(inner):inner.closed=True
+        body=Body();t=self.http(lambda *a,**kw:body)
+        original_loads=r.json.loads
+        def slow_decode(value,*args,**kwargs):
+            result=original_loads(value,*args,**kwargs)
+            self.clock.wait(31)
+            return result
+        with patch.object(r.json,"loads",side_effect=slow_decode):
+            with self.assertRaises(r.Fault) as error:t.request("start",None,30)
+        self.assertEqual(error.exception.category,"deadline_exceeded")
+        self.assertTrue(body.closed)
+
+    def test_http_late_decoded_original_active_revokes_before_time_and_scope_checks(self):
+        state=self.capture(self.normal())
+        class Body:
+            status=200
+            def __init__(inner):inner.body=io.BytesIO(canonical(response("RUNNING",options={},actId="ForeignActor")))
+            def read(inner,size):return inner.body.read(size)
+            def read1(inner,size):return inner.body.read(size)
+            def close(inner):pass
+        t=r.HttpTransport(self.cell,TOKEN,mode="cleanup",identity=state.identity,request_counts=state.request_counts,
+                          opener=lambda *a,**kw:Body(),clock=self.clock,deadline=self.clock()+120)
+        original_loads=r.json.loads
+        def slow_decode(value,*args,**kwargs):
+            result=original_loads(value,*args,**kwargs)
+            self.clock.wait(121)
+            return result
+        with patch.object(r.json,"loads",side_effect=slow_decode):
+            with self.assertRaises(r.Fault) as error:t.request("fresh_terminal",state.identity,10)
+        self.assertEqual(error.exception.category,"latest_run_active")
+        self.assertTrue(t.latest_active)
+        self.assertEqual(t.latest_active_status,"RUNNING")
+        with self.assertRaises(r.Fault):t.authorize_cleanup(state.identity)
+        with self.assertRaises(r.Fault):t.request("metadata_dataset",state.identity,10)
+        self.assertEqual(t.counts["total"],6)
+
+    def test_late_http_404_cannot_bypass_absence_route_deadline(self):
+        state=self.capture(self.normal())
+        def opener(req,timeout):
+            self.clock.wait(11)
+            raise HTTPError(req.full_url,404,TOKEN,{},io.BytesIO(TOKEN.encode()))
+        t=r.HttpTransport(self.cell,TOKEN,mode="cleanup",identity=state.identity,request_counts=state.request_counts,
+                          opener=opener,clock=self.clock,deadline=self.clock()+120)
+        t.authorize_cleanup(state.identity)
+        with self.assertRaises(r.Fault) as error:t.request("absence_dataset",state.identity,10)
+        self.assertEqual(error.exception.category,"deadline_exceeded")
+        self.assertEqual(error.exception.http_status,404)
+        self.assertEqual(t.counts["absence_dataset"],1)
+
+    def test_connection_setup_overrun_stops_before_any_body_read(self):
+        class Body:
+            status=201
+            def read1(inner,size):raise AssertionError("body read after route expired")
+            def close(inner):inner.closed=True
+        body=Body();body.closed=False
+        def opener(req,timeout):
+            self.clock.wait(31)
+            return body
+        t=self.http(opener)
+        with self.assertRaises(r.Fault) as error:t.request("start",None,30)
+        self.assertEqual(error.exception.category,"deadline_exceeded")
+        self.assertEqual(error.exception.http_status,201)
+        self.assertTrue(body.closed)
+
+    def test_http_routes_fixed_auth_header_only_and_no_automatic_retry(self):
+        seen = []
+        def opener(req, timeout):
+            seen.append((req.full_url, req.get_method(), req.headers, timeout))
+            raise URLError(TOKEN)
+        t = self.http(opener)
+        with self.assertRaises(r.Fault) as ctx:
+            t.request("start", None, 30)
+        self.assertEqual(ctx.exception.category, "connection_error")
+        self.assertEqual(len(seen), 1)
+        self.assertNotIn(TOKEN, seen[0][0])
+        self.assertEqual(urlsplit(seen[0][0]).hostname, "api.apify.com")
+        self.assertEqual(seen[0][2]["Authorization"], "Bearer " + TOKEN)
+        self.assertEqual(parse_qs(urlsplit(seen[0][0]).query)["restartOnError"], ["false"])
+        with self.assertRaises(r.Fault):
+            t.request("start", None, 30)
+        with self.assertRaises(r.Fault):
+            t.request("https://foreign.invalid", None, 30)
+        self.assertEqual(len(seen), 1)
+
+    def test_http_error_body_is_not_read_and_numeric_status_is_preserved(self):
+        class BadBody:
+            def read(self, *args):
+                raise AssertionError("HTTP error body must never be read")
+            def close(self):
+                pass
+        for status in (400, 401, 403, 302):
+            def opener(req, timeout, status=status):
+                raise HTTPError("https://api.apify.com/v2/acts/x/runs", status, TOKEN, {}, BadBody())
+            t = self.http(opener)
+            with self.assertRaises(r.Fault) as ctx:
+                t.request("start", None, 30)
+            self.assertEqual(ctx.exception.http_status, status)
+            self.assertNotIn(TOKEN, str(ctx.exception))
+
+    def test_http_body_limit_json_failures_and_private_error_sanitization(self):
+        class Body:
+            status = 201
+            def __init__(self, body):
+                self.body = io.BytesIO(body)
+            def read(self, n):
+                return self.body.read(n)
+            def read1(self, n):
+                return self.body.read(n)
+            def close(self):
+                pass
+        for body, category in ((b"x" * 131073, "response_too_large"), (TOKEN.encode(), "invalid_json"),
+                               (b'{"value":NaN}', "invalid_json"), (b'{"a":1,"a":2}', "invalid_json")):
+            t = self.http(lambda req, timeout, body=body: Body(body))
+            with self.assertRaises(r.Fault) as ctx:
+                t.request("start", None, 30)
+            self.assertEqual(ctx.exception.category, category)
+            self.assertEqual(ctx.exception.http_status, 201)
+            self.assertNotIn(TOKEN, str(ctx.exception))
+
+    def test_cleanup_transport_has_no_start_and_restores_total_call_budget(self):
+        state = self.capture(self.normal())
+        counts = {**r.OP_LIMITS, "total": sum(r.OP_LIMITS.values())}
+        t = r.HttpTransport(self.cell, TOKEN, mode="cleanup", identity=state.identity,
+                            request_counts=counts,
+                            opener=lambda *a, **kw: self.fail("HTTP after exhausted budget"),
+                            clock=self.clock, deadline=self.clock() + 120)
+        for operation in ("start", "fresh_terminal", "delete_dataset"):
+            with self.assertRaises(r.Fault):
+                t.request(operation, state.identity, 10)
+
+    def test_raw_http_active_original_id_revokes_even_with_wrong_options(self):
+        state = self.capture(self.normal())
+        payload = canonical(response("RUNNING", options={}))
+        class Body:
+            status = 200
+            def read(self, n):
+                nonlocal payload
+                chunk, payload = payload[:n], payload[n:]
+                return chunk
+            def read1(self,n):
+                return self.read(n)
+            def close(self):
+                pass
+        t = r.HttpTransport(self.cell, TOKEN, mode="cleanup", identity=state.identity,
+                            request_counts=state.request_counts, opener=lambda *a, **kw: Body(),
+                            clock=self.clock, deadline=self.clock() + 120)
+        with self.assertRaises(r.Fault) as ctx:
+            t.request("fresh_terminal", state.identity, 10)
+        self.assertEqual(ctx.exception.category, "latest_run_active")
+        with self.assertRaises(r.Fault):
+            t.authorize_cleanup(state.identity)
+        with self.assertRaises(r.Fault):
+            t.request("delete_dataset", state.identity, 10)
+
+
+class AvailabilityTests(unittest.TestCase):
+    def test_closed_runner_module_exists_for_review(self):
+        self.assertTrue(Path(__file__).with_name("runner.py").is_file(),
+                        "the separately guarded study runner has not been implemented")
+
+
+if __name__ == "__main__":
+    unittest.main()

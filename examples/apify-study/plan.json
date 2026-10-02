@@ -1,0 +1,785 @@
+{
+  "aggregate_reserved_usd": "0.84",
+  "cells": [
+    {
+      "actor": "apify/cheerio-scraper",
+      "actor_id": "YrQuEkowkNCLdk4j2",
+      "ancillary_reserve_usd": "0.02",
+      "build": "3.0.22",
+      "cell_id": "smoke-cheerio-scraper",
+      "input": {
+        "debugLog": false,
+        "excludes": [],
+        "globs": [],
+        "initialCookies": [],
+        "keepUrlFragments": false,
+        "linkSelector": "",
+        "maxConcurrency": 1,
+        "maxCrawlingDepth": 0,
+        "maxPagesPerCrawl": 3,
+        "maxRequestRetries": 0,
+        "maxResultsPerCrawl": 3,
+        "pageFunction": "async function pageFunction(context){ const element=context.$('.product').first();if(!element.length)throw Error('Missing owned product');const keys=['case_id','sku','name','price_minor','currency'];const out={};for(const key of keys){const value=element.attr('data-'+key.replaceAll('_','-'));out[key]=key==='price_minor'?Number(value):value;}return out;}",
+        "pageFunctionTimeoutSecs": 10,
+        "pageLoadTimeoutSecs": 20,
+        "preNavigationHooks": "[async function beforeOwnedRequest(context,gotOptions){context.request.noRetry=true;gotOptions.followRedirect=false;gotOptions.retry={limit:0};await new Promise(resolve=>setTimeout(resolve,200));}]",
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "pseudoUrls": [],
+        "respectRobotsTxtFile": false,
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+          }
+        ]
+      },
+      "input_schema_sha256": "24525d0d9a0cb99e5f97c4a1a590a418be4042f40174fb67c20e9611d9c57575",
+      "options": {
+        "build": "3.0.22",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 4096,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+        ],
+        "content_contracts": [],
+        "expected_records": [
+          {
+            "case_id": "s-000",
+            "currency": "USD",
+            "name": "Desk & lamp 0",
+            "price_minor": 3499,
+            "sku": "OWNED-000"
+          },
+          {
+            "case_id": "s-001",
+            "currency": "USD",
+            "name": "Chair \"Oak\" 1",
+            "price_minor": 3636,
+            "sku": "OWNED-001"
+          },
+          {
+            "case_id": "s-002",
+            "currency": "USD",
+            "name": "Caf\u00e9 table 2",
+            "price_minor": 3773,
+            "sku": "OWNED-002"
+          }
+        ],
+        "fields": [
+          "case_id",
+          "sku",
+          "name",
+          "price_minor",
+          "currency"
+        ],
+        "max_bytes": 65536,
+        "max_records": 3
+      },
+      "pricing_model_expected": "usage_only",
+      "target_load_scope": "Three owned raw-HTTP start URLs, no subresources or link discovery; 200ms pre-navigation throttle and concurrency1 bound navigation starts to5/s."
+    },
+    {
+      "actor": "apify/web-scraper",
+      "actor_id": "moJRLRc85AitArpNN",
+      "ancillary_reserve_usd": "0.02",
+      "build": "3.0.25",
+      "cell_id": "smoke-web-scraper",
+      "input": {
+        "breakpointLocation": "NONE",
+        "browserLog": false,
+        "closeCookieModals": false,
+        "debugLog": false,
+        "downloadCss": false,
+        "downloadMedia": false,
+        "excludes": [],
+        "globs": [],
+        "headless": true,
+        "initialCookies": [],
+        "injectJQuery": false,
+        "keepUrlFragments": false,
+        "linkSelector": "",
+        "maxConcurrency": 1,
+        "maxCrawlingDepth": 0,
+        "maxPagesPerCrawl": 3,
+        "maxRequestRetries": 0,
+        "maxResultsPerCrawl": 3,
+        "maxScrollHeightPixels": 0,
+        "pageFunction": "async function pageFunction(context){ const element=document.querySelector('.product'); if(!element)throw Error('Missing owned product'); const keys=['case_id','sku','name','price_minor','currency']; const out={}; for(const key of keys){ const value=element.getAttribute('data-'+key.replaceAll('_','-')); out[key]=key==='price_minor'?Number(value):value; } return out; }",
+        "pageFunctionTimeoutSecs": 10,
+        "pageLoadTimeoutSecs": 20,
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "pseudoUrls": [],
+        "respectRobotsTxtFile": false,
+        "runMode": "PRODUCTION",
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+          }
+        ],
+        "waitUntil": [
+          "domcontentloaded"
+        ]
+      },
+      "input_schema_sha256": "ad58c32f7942a5447eb74ba8d48764912e223e4d595758cca3ee75fd5d36cdd1",
+      "options": {
+        "build": "3.0.25",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 4096,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+        ],
+        "content_contracts": [],
+        "expected_records": [
+          {
+            "case_id": "s-000",
+            "currency": "USD",
+            "name": "Desk & lamp 0",
+            "price_minor": 3499,
+            "sku": "OWNED-000"
+          },
+          {
+            "case_id": "s-001",
+            "currency": "USD",
+            "name": "Chair \"Oak\" 1",
+            "price_minor": 3636,
+            "sku": "OWNED-001"
+          },
+          {
+            "case_id": "s-002",
+            "currency": "USD",
+            "name": "Caf\u00e9 table 2",
+            "price_minor": 3773,
+            "sku": "OWNED-002"
+          }
+        ],
+        "fields": [
+          "case_id",
+          "sku",
+          "name",
+          "price_minor",
+          "currency"
+        ],
+        "max_bytes": 65536,
+        "max_records": 3
+      },
+      "pricing_model_expected": "usage_only",
+      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+    },
+    {
+      "actor": "apify/playwright-scraper",
+      "actor_id": "MpRbnNmVAoj5RC1Ma",
+      "ancillary_reserve_usd": "0.02",
+      "build": "1.0.22",
+      "cell_id": "smoke-playwright-scraper",
+      "input": {
+        "browserLog": false,
+        "closeCookieModals": false,
+        "debugLog": false,
+        "downloadCss": false,
+        "downloadMedia": false,
+        "excludes": [],
+        "globs": [],
+        "headless": true,
+        "initialCookies": [],
+        "keepUrlFragments": false,
+        "launcher": "chromium",
+        "linkSelector": "",
+        "maxConcurrency": 1,
+        "maxCrawlingDepth": 0,
+        "maxPagesPerCrawl": 3,
+        "maxRequestRetries": 0,
+        "maxResultsPerCrawl": 3,
+        "maxScrollHeightPixels": 0,
+        "pageFunction": "async function pageFunction(context){ return context.page.evaluate(()=>{const element=document.querySelector('.product');if(!element)throw Error('Missing owned product'); const keys=['case_id','sku','name','price_minor','currency']; const out={}; for(const key of keys){ const value=element.getAttribute('data-'+key.replaceAll('_','-')); out[key]=key==='price_minor'?Number(value):value; } return out; }); }",
+        "pageFunctionTimeoutSecs": 10,
+        "pageLoadTimeoutSecs": 20,
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "pseudoUrls": [],
+        "respectRobotsTxtFile": false,
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+          }
+        ],
+        "waitUntil": "domcontentloaded"
+      },
+      "input_schema_sha256": "bbf0e104d850041400176aa1af380ef349b381bcf337cd119e399819a365dc02",
+      "options": {
+        "build": "1.0.22",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 4096,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+        ],
+        "content_contracts": [],
+        "expected_records": [
+          {
+            "case_id": "s-000",
+            "currency": "USD",
+            "name": "Desk & lamp 0",
+            "price_minor": 3499,
+            "sku": "OWNED-000"
+          },
+          {
+            "case_id": "s-001",
+            "currency": "USD",
+            "name": "Chair \"Oak\" 1",
+            "price_minor": 3636,
+            "sku": "OWNED-001"
+          },
+          {
+            "case_id": "s-002",
+            "currency": "USD",
+            "name": "Caf\u00e9 table 2",
+            "price_minor": 3773,
+            "sku": "OWNED-002"
+          }
+        ],
+        "fields": [
+          "case_id",
+          "sku",
+          "name",
+          "price_minor",
+          "currency"
+        ],
+        "max_bytes": 65536,
+        "max_records": 3
+      },
+      "pricing_model_expected": "usage_only",
+      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+    },
+    {
+      "actor": "apify/puppeteer-scraper",
+      "actor_id": "YJCnS9qogi9XxDgLB",
+      "ancillary_reserve_usd": "0.02",
+      "build": "3.0.18",
+      "cell_id": "smoke-puppeteer-scraper",
+      "input": {
+        "browserLog": false,
+        "closeCookieModals": false,
+        "debugLog": false,
+        "downloadCss": false,
+        "downloadMedia": false,
+        "excludes": [],
+        "globs": [],
+        "headless": true,
+        "initialCookies": [],
+        "keepUrlFragments": false,
+        "linkSelector": "",
+        "maxConcurrency": 1,
+        "maxCrawlingDepth": 0,
+        "maxPagesPerCrawl": 3,
+        "maxRequestRetries": 0,
+        "maxResultsPerCrawl": 3,
+        "maxScrollHeightPixels": 0,
+        "pageFunction": "async function pageFunction(context){ return context.page.evaluate(()=>{const element=document.querySelector('.product');if(!element)throw Error('Missing owned product'); const keys=['case_id','sku','name','price_minor','currency']; const out={}; for(const key of keys){ const value=element.getAttribute('data-'+key.replaceAll('_','-')); out[key]=key==='price_minor'?Number(value):value; } return out; }); }",
+        "pageFunctionTimeoutSecs": 10,
+        "pageLoadTimeoutSecs": 20,
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "pseudoUrls": [],
+        "respectRobotsTxtFile": false,
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+          }
+        ],
+        "waitUntil": [
+          "domcontentloaded"
+        ]
+      },
+      "input_schema_sha256": "35699ec1470ccbed0a6b5598caff58cb78bb9e33a9669b6b72810054eb2e09ea",
+      "options": {
+        "build": "3.0.18",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 4096,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+        ],
+        "content_contracts": [],
+        "expected_records": [
+          {
+            "case_id": "s-000",
+            "currency": "USD",
+            "name": "Desk & lamp 0",
+            "price_minor": 3499,
+            "sku": "OWNED-000"
+          },
+          {
+            "case_id": "s-001",
+            "currency": "USD",
+            "name": "Chair \"Oak\" 1",
+            "price_minor": 3636,
+            "sku": "OWNED-001"
+          },
+          {
+            "case_id": "s-002",
+            "currency": "USD",
+            "name": "Caf\u00e9 table 2",
+            "price_minor": 3773,
+            "sku": "OWNED-002"
+          }
+        ],
+        "fields": [
+          "case_id",
+          "sku",
+          "name",
+          "price_minor",
+          "currency"
+        ],
+        "max_bytes": 65536,
+        "max_records": 3
+      },
+      "pricing_model_expected": "usage_only",
+      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+    },
+    {
+      "actor": "apify/website-content-crawler",
+      "actor_id": "aYG0l9s7dbB7j3gbS",
+      "ancillary_reserve_usd": "0.02",
+      "build": "0.3.97",
+      "cell_id": "smoke-website-content-crawler",
+      "input": {
+        "blockMedia": true,
+        "crawlerType": "playwright:firefox",
+        "debugLog": false,
+        "debugMode": false,
+        "dynamicContentWaitSecs": 6,
+        "expandIframes": false,
+        "htmlTransformer": "readableTextIfPossible",
+        "initialConcurrency": 1,
+        "keepUrlFragments": false,
+        "maxConcurrency": 1,
+        "maxCrawlDepth": 0,
+        "maxCrawlPages": 3,
+        "maxRequestRetries": 0,
+        "maxResults": 3,
+        "maxScrollHeightPixels": 0,
+        "maxSessionRotations": 0,
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "removeCookieWarnings": false,
+        "requestTimeoutSecs": 30,
+        "respectRobotsTxtFile": false,
+        "saveFiles": false,
+        "saveHtml": false,
+        "saveHtmlAsFile": false,
+        "saveMarkdown": true,
+        "saveScreenshots": false,
+        "signHttpRequests": false,
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html"
+          }
+        ],
+        "summarize": false,
+        "useLlmsTxt": false,
+        "useSitemaps": false,
+        "waitForSelector": "article"
+      },
+      "input_schema_sha256": "b850c4d9a76333a0550ebadd7da093ab03e4798d5b9fb46ca7bfd466bf1f4653",
+      "options": {
+        "build": "0.3.97",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 8192,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html"
+        ],
+        "content_contracts": [
+          {
+            "boilerplate_ids": [
+              "B000",
+              "B001",
+              "B002",
+              "B003",
+              "B004",
+              "B005",
+              "B006",
+              "B007"
+            ],
+            "case_id": "c-000",
+            "code_marker": "CODE-c-000",
+            "expected_sentences": {
+              "S000000": "S000000 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 0.",
+              "S000001": "S000001 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 1.",
+              "S000002": "S000002 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 2.",
+              "S000003": "S000003 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 3.",
+              "S000004": "S000004 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 4.",
+              "S000005": "S000005 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 5.",
+              "S000006": "S000006 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 6.",
+              "S000007": "S000007 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 7.",
+              "S000008": "S000008 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 8.",
+              "S000009": "S000009 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 9.",
+              "S000010": "S000010 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 10.",
+              "S000011": "S000011 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 11.",
+              "S000012": "S000012 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 12.",
+              "S000013": "S000013 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 13.",
+              "S000014": "S000014 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 14.",
+              "S000015": "S000015 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 15.",
+              "S000016": "S000016 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 16.",
+              "S000017": "S000017 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 17.",
+              "S000018": "S000018 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 18.",
+              "S000019": "S000019 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 19."
+            },
+            "family": "content",
+            "mode": "static-article",
+            "path": "content/c-000.html",
+            "required_sentence_ids": [
+              "S000000",
+              "S000001",
+              "S000002",
+              "S000003",
+              "S000004",
+              "S000005",
+              "S000006",
+              "S000007",
+              "S000008",
+              "S000009",
+              "S000010",
+              "S000011",
+              "S000012",
+              "S000013",
+              "S000014",
+              "S000015",
+              "S000016",
+              "S000017",
+              "S000018",
+              "S000019"
+            ],
+            "table_marker": "TABLE-c-000",
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+          },
+          {
+            "boilerplate_ids": [
+              "B000",
+              "B001",
+              "B002",
+              "B003",
+              "B004",
+              "B005",
+              "B006",
+              "B007"
+            ],
+            "case_id": "c-001",
+            "code_marker": "CODE-c-001",
+            "expected_sentences": {
+              "S001000": "S001000 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 0.",
+              "S001001": "S001001 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 1.",
+              "S001002": "S001002 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 2.",
+              "S001003": "S001003 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 3.",
+              "S001004": "S001004 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 4.",
+              "S001005": "S001005 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 5.",
+              "S001006": "S001006 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 6.",
+              "S001007": "S001007 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 7.",
+              "S001008": "S001008 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 8.",
+              "S001009": "S001009 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 9.",
+              "S001010": "S001010 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 10.",
+              "S001011": "S001011 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 11.",
+              "S001012": "S001012 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 12.",
+              "S001013": "S001013 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 13.",
+              "S001014": "S001014 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 14.",
+              "S001015": "S001015 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 15.",
+              "S001016": "S001016 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 16.",
+              "S001017": "S001017 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 17.",
+              "S001018": "S001018 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 18.",
+              "S001019": "S001019 Owned case c-001 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 19."
+            },
+            "family": "content",
+            "mode": "javascript-content",
+            "path": "content/c-001.html",
+            "required_sentence_ids": [
+              "S001000",
+              "S001001",
+              "S001002",
+              "S001003",
+              "S001004",
+              "S001005",
+              "S001006",
+              "S001007",
+              "S001008",
+              "S001009",
+              "S001010",
+              "S001011",
+              "S001012",
+              "S001013",
+              "S001014",
+              "S001015",
+              "S001016",
+              "S001017",
+              "S001018",
+              "S001019"
+            ],
+            "table_marker": "TABLE-c-001",
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html"
+          },
+          {
+            "boilerplate_ids": [
+              "B000",
+              "B001",
+              "B002",
+              "B003",
+              "B004",
+              "B005",
+              "B006",
+              "B007"
+            ],
+            "case_id": "c-002",
+            "code_marker": "CODE-c-002",
+            "expected_sentences": {
+              "S002000": "S002000 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 0.",
+              "S002001": "S002001 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 1.",
+              "S002002": "S002002 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 2.",
+              "S002003": "S002003 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 3.",
+              "S002004": "S002004 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 4.",
+              "S002005": "S002005 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 5.",
+              "S002006": "S002006 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 6.",
+              "S002007": "S002007 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 7.",
+              "S002008": "S002008 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 8.",
+              "S002009": "S002009 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 9.",
+              "S002010": "S002010 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 10.",
+              "S002011": "S002011 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 11.",
+              "S002012": "S002012 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 12.",
+              "S002013": "S002013 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 13.",
+              "S002014": "S002014 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 14.",
+              "S002015": "S002015 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 15.",
+              "S002016": "S002016 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 16.",
+              "S002017": "S002017 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 17.",
+              "S002018": "S002018 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 18.",
+              "S002019": "S002019 Owned case c-002 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 19."
+            },
+            "family": "content",
+            "mode": "formatting-heavy",
+            "path": "content/c-002.html",
+            "required_sentence_ids": [
+              "S002000",
+              "S002001",
+              "S002002",
+              "S002003",
+              "S002004",
+              "S002005",
+              "S002006",
+              "S002007",
+              "S002008",
+              "S002009",
+              "S002010",
+              "S002011",
+              "S002012",
+              "S002013",
+              "S002014",
+              "S002015",
+              "S002016",
+              "S002017",
+              "S002018",
+              "S002019"
+            ],
+            "table_marker": "TABLE-c-002",
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html"
+          }
+        ],
+        "expected_records": null,
+        "fields": [
+          "url",
+          "text",
+          "markdown"
+        ],
+        "max_bytes": 65536,
+        "max_records": 3
+      },
+      "pricing_model_expected": "usage_only",
+      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+    },
+    {
+      "actor": "apify/rag-web-browser",
+      "actor_id": "3ox4R101TgZz67sLr",
+      "ancillary_reserve_usd": "0.02",
+      "build": "1.0.30",
+      "cell_id": "smoke-rag-web-browser",
+      "charged_event_fields": [
+        "search",
+        "fetch",
+        "apify-actor-start"
+      ],
+      "input": {
+        "debugMode": false,
+        "desiredConcurrency": 1,
+        "dynamicContentWaitSecs": 6,
+        "htmlTransformer": "readableText",
+        "maxRequestRetries": 0,
+        "maxResults": 1,
+        "outputFormats": [
+          "text",
+          "markdown"
+        ],
+        "proxyConfiguration": {
+          "useApifyProxy": false
+        },
+        "query": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html",
+        "removeCookieWarnings": false,
+        "requestTimeoutSecs": 30,
+        "scrapingTool": "browser-playwright",
+        "serpMaxRetries": 0
+      },
+      "input_schema_sha256": "cbbdabe67e73bd4af9e48ad9e0169e72f3b67f82310875d53fb6a5c640c0b45e",
+      "options": {
+        "build": "1.0.30",
+        "maxTotalChargeUsd": "0.12",
+        "memoryMbytes": 8192,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+        ],
+        "content_contracts": [
+          {
+            "boilerplate_ids": [
+              "B000",
+              "B001",
+              "B002",
+              "B003",
+              "B004",
+              "B005",
+              "B006",
+              "B007"
+            ],
+            "case_id": "c-000",
+            "code_marker": "CODE-c-000",
+            "expected_sentences": {
+              "S000000": "S000000 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 0.",
+              "S000001": "S000001 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 1.",
+              "S000002": "S000002 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 2.",
+              "S000003": "S000003 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 3.",
+              "S000004": "S000004 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 4.",
+              "S000005": "S000005 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 5.",
+              "S000006": "S000006 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 6.",
+              "S000007": "S000007 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 7.",
+              "S000008": "S000008 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 8.",
+              "S000009": "S000009 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 9.",
+              "S000010": "S000010 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 10.",
+              "S000011": "S000011 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 11.",
+              "S000012": "S000012 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 12.",
+              "S000013": "S000013 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 13.",
+              "S000014": "S000014 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 14.",
+              "S000015": "S000015 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 15.",
+              "S000016": "S000016 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 16.",
+              "S000017": "S000017 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 17.",
+              "S000018": "S000018 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 18.",
+              "S000019": "S000019 Owned case c-000 describes product extraction, useful text, exact acceptance and repeatable evidence sentence 19."
+            },
+            "family": "content",
+            "mode": "static-article",
+            "path": "content/c-000.html",
+            "required_sentence_ids": [
+              "S000000",
+              "S000001",
+              "S000002",
+              "S000003",
+              "S000004",
+              "S000005",
+              "S000006",
+              "S000007",
+              "S000008",
+              "S000009",
+              "S000010",
+              "S000011",
+              "S000012",
+              "S000013",
+              "S000014",
+              "S000015",
+              "S000016",
+              "S000017",
+              "S000018",
+              "S000019"
+            ],
+            "table_marker": "TABLE-c-000",
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+          }
+        ],
+        "expected_records": null,
+        "fields": [
+          "url",
+          "text",
+          "markdown"
+        ],
+        "max_bytes": 65536,
+        "max_records": 1,
+        "url_source": "metadata.url"
+      },
+      "pricing_model_expected": "events_plus_platform_usage",
+      "target_load_scope": "At most3ownedstartURLs, singleconcurrency, no links/proxy/media; native ancillary requests must be counted before activation."
+    }
+  ],
+  "cleanup_approved": true,
+  "evidence_type": "unexecuted_reviewed-input-candidate",
+  "fixture_manifest_sha256": "89d02cd0d4347c2a40ef60432428fe5ea9177fdd4416023a04437f234ad16333",
+  "schema_version": 1,
+  "stage": "SMOKE"
+}
