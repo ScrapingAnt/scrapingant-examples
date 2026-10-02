@@ -4,6 +4,8 @@
 
 Do not rerun or start another dispatch. Default CLI operation and all tests remain offline and use no real token.
 
+Future start/poll failures retain a sanitized `failure_diagnostic`: the operation, numeric HTTP status (or null if none was observed), fixed error category and validation stage, and a known run-status enum when available. This distinguishes an HTTP rejection from an HTTP 201 response whose JSON, build, options or resource references failed validation. A successful HTTP status alone does not establish a validated run or its cost. Raw messages, bodies, URLs, headers and identifiers remain excluded. This offline diagnostic change adds no retries or provider actions and keeps the guard closed. The earlier receipt's `UNKNOWN` status and null run receipts cannot recover the cause of the October 2 dispatch; these new fields must not be inferred retroactively.
+
 ## Historical activation record
 
 # Apify calibration — one authorized dispatch

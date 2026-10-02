@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 import tempfile
 from unittest.mock import patch
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlsplit
 
 import calibration as c
@@ -597,6 +597,115 @@ class HttpBoundaryTests(unittest.TestCase):
         with patch.object(c, "monotonic", side_effect=[0, 2]), self.assertRaises(c.WallDeadline):
             c.read_bounded(response, deadline=1)
         self.assertEqual(response.read_sizes, [65536])
+
+
+class DiagnosticTests(unittest.TestCase):
+    def setUp(self):
+        for name, value in (("REVIEWED_GUARD", copy.deepcopy(CLOSED_TEST_GUARD)),
+                            ("PUBLIC_ACTOR_ID", "OfflineActorIdentifier")):
+            changed = patch.object(c, name, value)
+            changed.start()
+            self.addCleanup(changed.stop)
+
+    def failure(self, replies):
+        opener, saved = SequenceOpener(replies), []
+        def persist(receipt, phase):
+            saved.append(copy.deepcopy(receipt))
+            return c.digest(receipt)
+        with patch.object(c, "require_readiness"), patch.object(c, "build_opener", return_value=opener):
+            with self.assertRaises(c.CalibrationFailure) as error:
+                c.orchestrate(c.build_plan(BUILD), TOKEN, c.HttpTransport(BUILD), persist=persist)
+        receipt = error.exception.receipt
+        self.assertEqual(receipt["request_counts"]["start"], 1)
+        for kind in ("export", "metadata", "delete", "absence"):
+            self.assertEqual(receipt["request_counts"][kind], 0)
+        self.assertEqual(len(opener.requests), 1 + receipt["request_counts"]["poll"])
+        self.assertEqual(saved[-1]["failure_diagnostic"], receipt["failure_diagnostic"])
+        serialized = json.dumps(receipt) + str(error.exception)
+        for private in (TOKEN, "OfflineRunIdentifier", "OfflineAccountIdentifier",
+                        "OfflineDatasetIdentifier", "OfflineKvIdentifier", "OfflineQueueIdentifier",
+                        "https://example.invalid", "Authorization", "private provider"):
+            self.assertNotIn(private, serialized)
+        return receipt
+
+    def test_http_rejections_retain_only_numeric_status_and_fixed_category(self):
+        for status in (401, 403, 400):
+            with self.subTest(status=status):
+                error = HTTPError("https://example.invalid/" + TOKEN, status, TOKEN,
+                                  {"Authorization": TOKEN}, io.BytesIO(TOKEN.encode()))
+                receipt = self.failure([error])
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "start", "http_status": status, "category": "http_error",
+                    "stage": "response_status", "run_status": None})
+                self.assertEqual(receipt["status"], "UNKNOWN")
+                self.assertIsNone(receipt["receipts"]["run"])
+
+    def test_successful_http_status_survives_bounded_read_and_json_failures(self):
+        for body, category, stage in ((b"x" * (c.RESPONSE_LIMIT + 1), "response_too_large", "response_read"),
+                                      (TOKEN.encode(), "invalid_json", "json_decode"),
+                                      (b"\xff" + TOKEN.encode(), "invalid_json", "json_decode")):
+            with self.subTest(category=category, body_length=len(body)):
+                receipt = self.failure([FakeResponse(body, 201)])
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "start", "http_status": 201, "category": category,
+                    "stage": stage, "run_status": None})
+
+    def test_build_options_and_identifier_validation_have_distinct_stages(self):
+        for field, value, category, stage in (
+                ("buildNumber", TOKEN, "build_mismatch", "build_validation"),
+                ("memoryMbytes", 2048, "options_mismatch", "options_validation"),
+                ("id", TOKEN + "/", "invalid_identifier", "identifier_validation"),
+                ("userId", None, "invalid_identifier", "identifier_validation"),
+                ("actId", "DifferentPublicActor", "scope_mismatch", "scope_validation")):
+            with self.subTest(field=field):
+                response = run_response()
+                target = response["data"]["options"] if field == "memoryMbytes" else response["data"]
+                target[field] = value
+                receipt = self.failure([FakeResponse(json.dumps(response).encode(), 201)])
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "start", "http_status": 201, "category": category,
+                    "stage": stage, "run_status": "SUCCEEDED"})
+
+    def test_invalid_response_and_run_status_do_not_copy_untrusted_values(self):
+        for response, category in (({"data": None}, "invalid_response"),
+                                   (dict(run_response(), data={"status": TOKEN}), "invalid_run_status")):
+            with self.subTest(category=category):
+                receipt = self.failure([FakeResponse(json.dumps(response).encode(), 201)])
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "start", "http_status": 201, "category": category,
+                    "stage": "run_validation", "run_status": None})
+
+    def test_unexpected_success_status_is_distinct_from_connection_failure(self):
+        for response, status, category, stage in (
+                (FakeResponse(TOKEN.encode(), 202), 202, "unexpected_http_status", "response_status"),
+                (URLError(TOKEN + " private provider message"), None, "connection_error", "request"),
+                (RuntimeError(TOKEN + " private provider message"), None, "transport_error", "request")):
+            with self.subTest(category=category):
+                receipt = self.failure([response])
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "start", "http_status": status, "category": category,
+                    "stage": stage, "run_status": None})
+
+    def test_poll_failure_keeps_current_status_without_reusing_start_http_status(self):
+        for reply, http_status, category, stage, run_status in (
+                (URLError(TOKEN), None, "connection_error", "request", None),
+                (HTTPError(c.API, 403, TOKEN, {}, io.BytesIO(TOKEN.encode())),
+                 403, "http_error", "response_status", None)):
+            with self.subTest(category=category):
+                receipt = self.failure([FakeResponse(json.dumps(run_response("RUNNING")).encode(), 201), reply])
+                self.assertEqual(receipt["status"], "RUNNING")
+                self.assertEqual(receipt["failure_diagnostic"], {
+                    "operation": "poll", "http_status": http_status, "category": category,
+                    "stage": stage, "run_status": run_status})
+
+    def test_successful_poll_http_status_survives_local_scope_validation(self):
+        changed = run_response()
+        changed["data"]["userId"] = "DifferentOwner"
+        receipt = self.failure([FakeResponse(json.dumps(run_response("RUNNING")).encode(), 201),
+                                FakeResponse(json.dumps(changed).encode(), 200)])
+        self.assertEqual(receipt["failure_diagnostic"], {
+            "operation": "poll", "http_status": 200, "category": "scope_mismatch",
+            "stage": "scope_validation", "run_status": "SUCCEEDED"})
 
 
 class EvidencePersistenceTests(unittest.TestCase):

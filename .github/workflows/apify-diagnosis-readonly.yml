@@ -1,0 +1,48 @@
+name: Apify consumed attempt read-only diagnosis
+
+on:
+  workflow_dispatch:
+    inputs:
+      execute_read_only:
+        description: One separately approved bounded read-only diagnosis of workflow37018036109
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apify-diagnosis-readonly
+  cancel-in-progress: false
+
+jobs:
+  diagnosis:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline diagnostic rejection tests
+        working-directory: examples/apify-calibration
+        run: python -m unittest test_diagnosis.py
+      - name: At most four read-only requests for the consumed attempt
+        if: inputs.execute_read_only
+        working-directory: examples/apify-calibration
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python diagnosis.py --execute-read-only
+      - name: Retain only fixed sanitized status and match booleans
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-readonly-diagnosis
+          path: examples/apify-calibration/diagnosis-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7

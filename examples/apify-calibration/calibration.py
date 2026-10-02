@@ -11,7 +11,7 @@ import sys
 import tempfile
 from time import monotonic
 from urllib.parse import parse_qsl, urlencode, urlsplit
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ACTOR = "apify/web-scraper"
@@ -27,6 +27,13 @@ STORE_FIELDS = {"dataset": ("defaultDatasetId", "datasets"),
                 "kv": ("defaultKeyValueStoreId", "key-value-stores"),
                 "queue": ("defaultRequestQueueId", "request-queues")}
 TERMINAL = ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED")
+RUN_STATUSES = ("READY", "RUNNING", "TIMING-OUT", "ABORTING") + TERMINAL
+DIAGNOSTIC_CATEGORIES = ("http_error", "connection_error", "unexpected_http_status", "response_too_large",
+                         "invalid_json", "invalid_response", "invalid_run_status", "build_mismatch",
+                         "options_mismatch", "invalid_identifier", "scope_mismatch", "deadline_exceeded",
+                         "policy_error", "transport_error")
+DIAGNOSTIC_STAGES = ("request", "response_status", "response_read", "json_decode", "run_validation",
+                     "build_validation", "options_validation", "identifier_validation", "scope_validation", "local_policy")
 MAX_CLEANUP_HOURS = Decimal("0.25")
 CREATION_TOLERANCE_SECONDS = 5
 MAX_WALL_SECONDS = 480
@@ -101,6 +108,39 @@ class MissingStorage:
 
 class WallDeadline(PolicyError):
     """A local wall budget was exhausted; no request was made."""
+
+
+def sanitized_diagnostic(data):
+    """Only fixed enums and a numeric HTTP status; never exception text or arbitrary fields."""
+    data = data if isinstance(data, dict) else {}
+    status = data.get("http_status")
+    category, stage, run_status = (data.get(key) for key in ("category", "stage", "run_status"))
+    return {"http_status": status if type(status) is int and 100 <= status <= 599 else None,
+            "category": category if type(category) is str and category in DIAGNOSTIC_CATEGORIES else "transport_error",
+            "stage": stage if type(stage) is str and stage in DIAGNOSTIC_STAGES else "request",
+            "run_status": run_status if type(run_status) is str and run_status in RUN_STATUSES else None}
+
+
+class DiagnosticError(PolicyError):
+    def __init__(self, category, stage, http_status=None, run_status=None):
+        super().__init__("Calibration boundary failed; only sanitized diagnostics are retained.")
+        self.diagnostic = sanitized_diagnostic({"category": category, "stage": stage,
+                                               "http_status": http_status, "run_status": run_status})
+
+
+def failure_diagnostic(error, operation, response_context=None):
+    if isinstance(error, DiagnosticError):
+        data = sanitized_diagnostic(error.diagnostic)
+        if data["stage"].endswith("_validation") and data["http_status"] is None:
+            context = sanitized_diagnostic(response_context)
+            data["http_status"] = context["http_status"]
+            if data["run_status"] is None: data["run_status"] = context["run_status"]
+    else:
+        category = "deadline_exceeded" if isinstance(error, WallDeadline) else (
+            "policy_error" if isinstance(error, PolicyError) else "transport_error")
+        data = sanitized_diagnostic({"category": category,
+                                     "stage": "local_policy" if isinstance(error, PolicyError) else "request"})
+    return {"operation": operation if type(operation) is str and operation in TIMEOUTS else None, **data}
 
 
 def build_plan(build=None):
@@ -226,7 +266,7 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
     except (KeyError, TypeError):
         raise PolicyError("The plan is invalid.") from None
     result = {"evidence_type": "transport_receipt_not_an_invoice", "status": "UNKNOWN",
-              "wall_budget_exhausted": False,
+              "wall_budget_exhausted": False, "failure_diagnostic": None,
               "extraction_outcome": "not_attempted", "pre_cleanup_capture": None,
               "pre_cleanup_capture_sha256": None, "pre_cleanup_evidence_verified": False,
               "returned_output_count": None, "accepted_output_count": 0, "records": [],
@@ -241,7 +281,11 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
     deadline = began + MAX_WALL_SECONDS
     if wall_deadline is not None: deadline = min(deadline, wall_deadline)
 
+    current_operation, response_context = "start", None
+
     def request(kind, method, url, payload=None):
+        nonlocal current_operation, response_context
+        current_operation, response_context = kind, None
         if kind in ("metadata", "delete", "absence"):
             remaining_cleanup = 9 - sum(result["request_counts"][key] for key in ("metadata", "delete", "absence"))
             needed = remaining_cleanup * 10 + 10
@@ -252,7 +296,9 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
             result["wall_budget_exhausted"] = True
             raise WallDeadline("Wall deadline reached; request skipped to preserve cleanup time.")
         result["request_counts"][kind] += 1
-        return safe_request(transport, method, url, payload, token)
+        reply = safe_request(transport, method, url, payload, token)
+        response_context = getattr(transport, "last_response_diagnostic", None)
+        return reply
 
     cleanup_requested = isinstance(REVIEWED_GUARD.get("retention_policy"), dict)
     if cleanup_requested:
@@ -274,10 +320,11 @@ def orchestrate(plan, token, transport, *, wall_deadline=None, persist=None, emi
                                              "?waitForFinish=60"), build)
             fields = ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values())
             if any(candidate.get(field) != initial.get(field) for field in fields):
-                raise PolicyError("Run polling returned inconsistent scope references.")
+                raise DiagnosticError("scope_mismatch", "scope_validation")
             run = candidate
             result["status"] = run["status"]
-    except Exception:
+    except Exception as error:
+        result["failure_diagnostic"] = failure_diagnostic(error, current_operation, response_context)
         result["cleanup"]["state"] = "unknown_run_or_poll_outcome"
         persist_final(result, persist)
         raise CalibrationFailure("Start/polling is ambiguous; owner attention required, no retry or deletion attempted.", result) from None
@@ -340,9 +387,9 @@ def verify_initial_references(initial):
     for field in ("id", "userId", "actId") + tuple(value[0] for value in STORE_FIELDS.values()):
         safe_identifier(initial.get(field))
     if PUBLIC_ACTOR_ID is not None and initial["actId"] != PUBLIC_ACTOR_ID:
-        raise PolicyError("Run Actor identity differs from the reviewed public identity.")
+        raise DiagnosticError("scope_mismatch", "scope_validation")
     if len({initial[value[0]] for value in STORE_FIELDS.values()}) != 3:
-        raise PolicyError("The initial default storage references are not distinct.")
+        raise DiagnosticError("scope_mismatch", "scope_validation")
     timestamp(initial.get("startedAt"))
 
 
@@ -515,33 +562,40 @@ def safe_request(transport, method, url, payload, token):
             error.close()
             return MissingStorage()
         error.close()
-        raise PolicyError("HTTP request failed; no automatic retry attempted.") from None
+        raise DiagnosticError("http_error", "response_status", error.code) from None
+    except DiagnosticError:
+        raise
+    except (URLError, OSError):
+        raise DiagnosticError("connection_error", "request") from None
+    except WallDeadline:
+        raise
     except Exception:
         # Even exceptions from HTTP libraries may contain URLs, tokens, headers or full bodies.
-        raise PolicyError("HTTP request failed or returned an invalid response; no automatic retry attempted.") from None
+        raise DiagnosticError("transport_error", "request") from None
 
 
 def safe_identifier(value):
     if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9]{1,64}", value):
-        raise PolicyError("Provider response contains an invalid resource reference.")
+        raise DiagnosticError("invalid_identifier", "identifier_validation")
     return value
 
 
 def validate_run(response, build):
     if not isinstance(response, dict) or not isinstance(response.get("data"), dict):
-        raise PolicyError("Provider run response is invalid.")
+        raise DiagnosticError("invalid_response", "run_validation")
     run = response["data"]
     status = run.get("status")
-    if status not in ("READY", "RUNNING", "TIMING-OUT", "ABORTING", "SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED"):
-        raise PolicyError("Provider run status is invalid.")
+    if type(status) is not str or status not in RUN_STATUSES:
+        raise DiagnosticError("invalid_run_status", "run_validation")
     options = run.get("options")
-    if (run.get("buildNumber") != build or not isinstance(options, dict) or
-            options.get("build") != build or
+    if run.get("buildNumber") != build or (isinstance(options, dict) and options.get("build") != build):
+        raise DiagnosticError("build_mismatch", "build_validation", run_status=status)
+    if (not isinstance(options, dict) or
             type(options.get("memoryMbytes")) is not int or options["memoryMbytes"] != 1024 or
             type(options.get("timeoutSecs")) is not int or options["timeoutSecs"] != 120 or
             isinstance(options.get("maxTotalChargeUsd"), bool) or
             str(options.get("maxTotalChargeUsd")) not in ("0.1", "0.10")):
-        raise PolicyError("Effective run options did not confirm the requested build and limits.")
+        raise DiagnosticError("options_mismatch", "options_validation", run_status=status)
     return run
 
 
@@ -594,7 +648,7 @@ def read_bounded(response, deadline):
         if not chunk: break
         chunks.append(chunk)
         total += len(chunk)
-    if total > RESPONSE_LIMIT: raise PolicyError("HTTP response exceeded its bounded read size.")
+    if total > RESPONSE_LIMIT: raise DiagnosticError("response_too_large", "response_read")
     return b"".join(chunks)
 
 
@@ -608,6 +662,7 @@ class HttpTransport:
         self.initial, self.last_run = None, None
         self.metadata, self.cleanup_urls = {}, set()
         self.start_attempted = False
+        self.last_response_diagnostic = None
         self.seen = {key: set() for key in TIMEOUTS}
 
     def bind_run(self, initial):
@@ -632,6 +687,7 @@ class HttpTransport:
         self.cleanup_urls = {API + "/" + route + "/" + initial[field] for field, route in STORE_FIELDS.values()}
 
     def request(self, method, url, payload, token):
+        self.last_response_diagnostic = None
         require_readiness(self.build)
         plan = build_plan(self.build)
         parsed = urlsplit(url)
@@ -674,17 +730,23 @@ class HttpTransport:
         request = Request(url, data=body, method=method,
                           headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"})
         route_deadline = min(self.deadline, monotonic() + TIMEOUTS[kind])
+        status, run_status, stage = None, None, "request"
         try:
             with build_opener(NoRedirect()).open(request, timeout=TIMEOUTS[kind]) as response:
                 status = response.getcode()
+                stage = "response_status"
                 if kind == "delete":
-                    if status != 204: raise PolicyError("Deletion did not return its documented empty success response.")
+                    if status != 204: raise DiagnosticError("unexpected_http_status", stage)
                     return None
-                if status != (201 if start else 200): raise PolicyError("HTTP success status is unexpected.")
+                if status != (201 if start else 200): raise DiagnosticError("unexpected_http_status", stage)
+                stage = "response_read"
                 data = read_bounded(response, route_deadline)
-            if len(data) > RESPONSE_LIMIT:
-                raise PolicyError("HTTP response exceeded the bounded local read size.")
+            stage = "json_decode"
             parsed_response = json.loads(data.decode("utf-8"), parse_float=Decimal)
+            if isinstance(parsed_response, dict) and isinstance(parsed_response.get("data"), dict):
+                run_status = sanitized_diagnostic({"run_status": parsed_response["data"].get("status")})["run_status"]
+            self.last_response_diagnostic = sanitized_diagnostic({"http_status": status, "run_status": run_status})
+            stage = "run_validation"
             if start:
                 self.initial = validate_run(parsed_response, self.build)
                 verify_initial_references(self.initial)
@@ -699,9 +761,18 @@ class HttpTransport:
                 error.close()
                 return MissingStorage()
             error.close()
-            raise PolicyError("HTTP transport stopped; response details are not printed.") from None
+            raise DiagnosticError("http_error", "response_status", error.code) from None
+        except DiagnosticError as error:
+            data = sanitized_diagnostic(error.diagnostic)
+            raise DiagnosticError(data["category"], data["stage"], status, run_status) from None
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            raise DiagnosticError("invalid_json", "json_decode", status) from None
+        except WallDeadline:
+            raise DiagnosticError("deadline_exceeded", stage, status, run_status) from None
+        except (URLError, OSError):
+            raise DiagnosticError("connection_error", stage, status, run_status) from None
         except Exception:
-            raise PolicyError("HTTP transport stopped; response bodies, headers and identifiers are not printed.") from None
+            raise DiagnosticError("transport_error", stage, status, run_status) from None
 
 
 def main(argv=None, *, environ=None, transport=None, persist=None, emit=None):
