@@ -12,7 +12,7 @@ from urllib.error import HTTPError,URLError
 import evidence_transport as crypto
 import monthly_usage_projection as projection
 
-BILLING_READY=True
+BILLING_READY=False
 URLS=('https://api.apify.com/v2/users/me/usage/monthly?date=2026-10-03','https://api.apify.com/v2/users/me/limits')
 ROOT=Path(__file__).resolve().parent
 REVIEWED_SOURCES={'monthly_usage_projection.py': '93a5f8381aa680bbba07fcb7ea539cf071ce2e659c52e4777e17cee878b6509b', 'evidence_transport.py': 'eada45743952f7433ade8ecec6358f1130b386964478a533584efb8957a1c6f6', 'recipient.txt': '7da784c7f41ff4e52cce510c67943403dab25843a997bd805d6c4b4c7415ddac'}
