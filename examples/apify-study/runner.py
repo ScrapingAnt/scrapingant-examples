@@ -24,11 +24,19 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 import billing_projection
 
 RUNNER_READY = False
+GRAPH_READY = False
+CONCURRENCY_READY = False
 REVIEWED_PLAN_SHA256 = "df4697d71f086921e715f80c4590b8b478c7d16b9dcd5f77deaedee965e0381d"
 REVIEWED_PLAN_FILE_SHA256 = "5480d5863ab1267b8f2437a7333cc2a12d00aa61accd97c6de47d3876701477b"
 # Root installs the separately reviewed fixed capability file and pins. No fallback.
 REVIEWED_CAPABILITY_PLAN_SHA256 = "253afef63e7774d2e36c0a862e8b8e5fc90f3e0b7b99eb81b1b8a2495379a874"
 REVIEWED_CAPABILITY_PLAN_FILE_SHA256 = "b1b409024d3391bc9a73a506e8722c5227861083907cb98e4441b7b3dc557bcc"
+# Private candidate only. Root must separately install both reviewed pins.
+REVIEWED_CONCURRENCY_PLAN_SHA256 = "8e1c14b7da509f6bc79eb9884092aabbfa0b5c7453b73b8658ebf53165dc47cd"
+REVIEWED_CONCURRENCY_PLAN_FILE_SHA256 = "450672927e507502d2b4842afaa635d3f58437baf94cca6db7258f362d8a08b2"
+REVIEWED_GRAPH_PLAN_SHA256 = "68aa479167cc983cb6902065d28eec48e876947f575b57f64e6a33f62a284c23"
+REVIEWED_GRAPH_PLAN_FILE_SHA256 = "b8d1de34c6fdef7f5cc209b9d7d750ed04f532800164d08e5d2770998a73de52"
+GRAPH_CELL_ID = "cap-graph-wcc-ignore-canonical"
 API = "https://api.apify.com/v2"
 OWNED_HOST = "scrapingant.github.io"
 OWNED_PATH_PREFIX = "/scrapingant-examples/fixtures/"
@@ -45,6 +53,8 @@ CAPABILITY_CELL_IDENTITIES = tuple(
                           ("playwright-static", 2), ("playwright-dynamic", 2), ("puppeteer-static", 3),
                           ("puppeteer-dynamic", 3), ("website-content-crawler", 4),
                           ("rag-web-browser-static", 5), ("rag-web-browser-dynamic", 5), ("rag-web-browser-formatting", 5)))
+CONCURRENCY_CELL_IDENTITIES = tuple("concurrency-pilot-playwright-c%d" % n for n in (1, 5, 10))
+CONCURRENCY_SETTINGS = (1, 5, 10)
 TERMINAL = ("SUCCEEDED", "FAILED", "TIMED-OUT", "ABORTED")
 ACTIVE = ("READY", "RUNNING", "TIMING-OUT", "ABORTING")
 STORES = {"dataset": ("defaultDatasetId", "datasets"),
@@ -56,6 +66,8 @@ OP_LIMITS = {"start": 1, "poll": 3, "settle": 1, "export": 1, "fresh_terminal": 
 MAX_CALLS = 20
 CAPTURE_WALL_SECONDS = 480
 MINIMUM_START_SECONDS = 360
+CONCURRENCY_CAPTURE_WALL_SECONDS = 540
+CONCURRENCY_MINIMUM_START_SECONDS = 500
 CLEANUP_RESERVE_SECONDS = 100
 CLEANUP_WALL_SECONDS = 120
 SETTLE_SECONDS = 10
@@ -81,6 +93,16 @@ STAT_FIELDS = ("inputBodyLen", "migrationCount", "rebootCount", "restartCount", 
 STORAGE_FIELDS = ("storageBytes", "readCount", "writeCount", "deleteCount", "listCount")
 OUTPUT_FIELDS = ("fixture", "case_id", "sku", "name", "price_minor", "currency", "url", "text", "markdown",
                  "duration_ms", "elapsed_ms", "fetch_ms", "parse_ms")
+CONCURRENCY_FIELDS = ("native_active_tasks_start", "native_active_tasks_end",
+                      "native_desired_tasks_start", "native_desired_tasks_end")
+CONCURRENCY_CONTROLLER_POLICY = {"absence_calls": 3, "capture_wall_seconds": 540,
+    "cleanup_phase_wall_seconds": 120, "cleanup_reserve_seconds": 100, "delete_calls": 3,
+    "export_calls": 1, "fresh_terminal_calls_before_cleanup": 1, "max_calls": 20,
+    "maximum_capture_request_wait_seconds": 395, "metadata_calls_before_capture": 3,
+    "metadata_calls_before_delete": 3, "minimum_start_seconds": 500,
+    "no_restart_abort_or_rerun": True, "poll_timeout_seconds": 65,
+    "poll_wait_for_finish_seconds": 60, "polls": 5, "queue_or_startup_completion_bounded": False,
+    "settling_calls": 0, "start_calls": 1, "worst_request_wait_plus_cleanup_reserve_seconds": 495}
 CATEGORIES = ("guard_closed", "opt_in_required", "unreviewed_plan", "invalid_plan", "invalid_cell",
               "budget_exhausted", "deadline_exceeded", "token_unavailable", "invalid_operation", "call_limit",
               "http_error", "connection_error", "transport_error", "unexpected_http_status", "response_too_large",
@@ -175,9 +197,26 @@ def owned_url(value):
             and u.path.startswith(OWNED_PATH_PREFIX) and not any(s in u.path for s in ("..", "%", "\\")))
 
 
+def plan_pin(stage):
+    return {"SMOKE": REVIEWED_PLAN_SHA256, "CAPABILITY": REVIEWED_CAPABILITY_PLAN_SHA256,
+            "CAPABILITY_GRAPH": REVIEWED_GRAPH_PLAN_SHA256,
+            "CONCURRENCY_PILOT": REVIEWED_CONCURRENCY_PLAN_SHA256}.get(stage)
+
+
+def capture_policy(stage):
+    return ((CONCURRENCY_CAPTURE_WALL_SECONDS, CONCURRENCY_MINIMUM_START_SECONDS)
+            if stage == "CONCURRENCY_PILOT" else (CAPTURE_WALL_SECONDS, MINIMUM_START_SECONDS))
+
+
+def operation_limits(stage):
+    return dict(OP_LIMITS, poll=5, settle=0) if stage == "CONCURRENCY_PILOT" else OP_LIMITS
+
+
 def require_guard(stage="SMOKE", plan_sha256=None):
-    pin = REVIEWED_PLAN_SHA256 if stage == "SMOKE" else REVIEWED_CAPABILITY_PLAN_SHA256 if stage == "CAPABILITY" else None
-    if RUNNER_READY is not True or not digest(pin):
+    pin = plan_pin(stage)
+    if (RUNNER_READY is not True or not digest(pin)
+            or stage == "CAPABILITY_GRAPH" and GRAPH_READY is not True
+            or stage == "CONCURRENCY_PILOT" and CONCURRENCY_READY is not True):
         raise Fault("guard_closed")
     if plan_sha256 is not None and plan_sha256 != pin:
         raise Fault("unreviewed_plan")
@@ -185,14 +224,18 @@ def require_guard(stage="SMOKE", plan_sha256=None):
 
 def validate_plan(plan):
     stage = plan.get("stage") if isinstance(plan, dict) else None
-    pin = REVIEWED_PLAN_SHA256 if stage == "SMOKE" else REVIEWED_CAPABILITY_PLAN_SHA256 if stage == "CAPABILITY" else None
+    pin = plan_pin(stage)
     if not isinstance(plan, dict) or not digest(pin) or sha(canonical(plan)) != pin:
         raise Fault("unreviewed_plan")
-    capability = stage == "CAPABILITY"
-    if plan.get("schema_version") != 1 or plan.get("aggregate_reserved_usd") != ("3.60" if capability else "0.84"):
+    graph = stage == "CAPABILITY_GRAPH"
+    capability = stage in ("CAPABILITY", "CAPABILITY_GRAPH")
+    concurrency = stage == "CONCURRENCY_PILOT"
+    if plan.get("schema_version") != 1 or plan.get("aggregate_reserved_usd") != ("0.10" if graph else "0.66" if concurrency else "3.60" if capability else "0.84"):
+        raise Fault("invalid_plan")
+    if concurrency and plan.get("controller_policy") != CONCURRENCY_CONTROLLER_POLICY:
         raise Fault("invalid_plan")
     cells = plan.get("cells")
-    if not isinstance(cells, list) or len(cells) != (36 if capability else 6):
+    if not isinstance(cells, list) or len(cells) != (1 if graph else 3 if concurrency else 36 if capability else 6):
         raise Fault("invalid_plan")
     names, actors = set(), set()
     for index, spec in enumerate(cells):
@@ -206,19 +249,30 @@ def validate_plan(plan):
         # An override can target only these six identities in the reviewed order.
         # Historical plans without overrides remain restorable; capture requires
         # the explicit limited intent separately, without a default fallback.
-        if capability:
+        if graph:
+            if (name != GRAPH_CELL_ID or spec.get("actor") != "apify/website-content-crawler"
+                    or actor != REVIEWED_ACTORS[4][1] or spec.get("build") != "0.3.97"
+                    or spec.get("force_permission_level") != "LIMITED_PERMISSIONS"
+                    or spec.get("input", {}).get("ignoreCanonicalUrl") is not True):
+                raise Fault("invalid_cell")
+        elif concurrency:
+            if (name != CONCURRENCY_CELL_IDENTITIES[index] or spec.get("actor") != "apify/playwright-scraper"
+                    or actor != REVIEWED_ACTORS[2][1] or spec.get("build") != "1.0.22"
+                    or spec.get("force_permission_level") != "LIMITED_PERMISSIONS"):
+                raise Fault("invalid_cell")
+        elif capability:
             reviewed_cell, reviewed_name, reviewed_id = CAPABILITY_CELL_IDENTITIES[index]
             if (name != reviewed_cell or spec.get("actor") != "apify/" + reviewed_name or actor != reviewed_id
                     or spec.get("force_permission_level") != "LIMITED_PERMISSIONS"):
                 raise Fault("invalid_cell")
         else:
             reviewed_name, reviewed_id = REVIEWED_ACTORS[index]
-        if not capability and "force_permission_level" in spec and (
+        if not (capability or concurrency) and "force_permission_level" in spec and (
                 spec["force_permission_level"] != "LIMITED_PERMISSIONS"
                 or name != "smoke-" + reviewed_name or spec.get("actor") != "apify/" + reviewed_name
                 or actor != reviewed_id):
             raise Fault("invalid_cell")
-        if not capability and actor in actors:
+        if not (capability or concurrency) and actor in actors:
             raise Fault("invalid_cell")
         actors.add(actor)
         build = spec.get("build")
@@ -228,20 +282,26 @@ def validate_plan(plan):
         if not isinstance(opts, dict) or set(opts) != {"build", "memoryMbytes", "timeoutSecs", "maxTotalChargeUsd", "restartOnError"}:
             raise Fault("invalid_cell")
         if (opts["build"] != build or type(opts["memoryMbytes"]) is not int or opts["memoryMbytes"] not in (4096, 8192)
-                or type(opts["timeoutSecs"]) is not int or opts["timeoutSecs"] != 120
-                or opts["maxTotalChargeUsd"] != ("0.08" if capability else "0.12") or opts["restartOnError"] is not False
+                or type(opts["timeoutSecs"]) is not int or opts["timeoutSecs"] != (300 if concurrency else 120)
+                or opts["maxTotalChargeUsd"] != ("0.20" if concurrency else "0.08" if capability else "0.12") or opts["restartOnError"] is not False
                 or spec.get("ancillary_reserve_usd") != "0.02"):
             raise Fault("invalid_cell")
         if not isinstance(spec.get("input"), dict) or len(canonical(spec["input"])) > 131072:
             raise Fault("invalid_cell")
+        if concurrency and (opts["memoryMbytes"] != 8192
+                or type(spec["input"].get("maxConcurrency")) is not int
+                or spec["input"]["maxConcurrency"] != CONCURRENCY_SETTINGS[index]
+                or spec["input"].get("maxPagesPerCrawl") != 150
+                or spec["input"].get("maxResultsPerCrawl") != 150):
+            raise Fault("invalid_cell")
         out = spec.get("output")
-        if not isinstance(out, dict) or type(out.get("max_records")) is not int or out["max_records"] not in ((1, 30) if capability else (1, 3)):
+        if not isinstance(out, dict) or type(out.get("max_records")) is not int or out["max_records"] not in ((150,) if concurrency else (1, 30) if capability else (1, 3)):
             raise Fault("invalid_cell")
         if type(out.get("max_bytes")) is not int or not 1 <= out["max_bytes"] <= (524288 if capability else 65536):
             raise Fault("invalid_cell")
         fields = out.get("fields")
         if (not isinstance(fields, list) or not fields or len(set(fields)) != len(fields)
-                or any(f not in OUTPUT_FIELDS for f in fields)):
+                or any(f not in OUTPUT_FIELDS + (CONCURRENCY_FIELDS if concurrency else ()) for f in fields)):
             raise Fault("invalid_cell")
         urls = out.get("allowed_urls")
         if not isinstance(urls, list) or len(urls) != out["max_records"] or len(set(urls)) != len(urls) or not all(owned_url(u) for u in urls):
@@ -273,13 +333,15 @@ def load_reviewed_plan(raw):
     file_sha = sha(raw)
     smoke = digest(REVIEWED_PLAN_FILE_SHA256) and file_sha == REVIEWED_PLAN_FILE_SHA256 and len(raw) <= 262144
     capability = digest(REVIEWED_CAPABILITY_PLAN_FILE_SHA256) and file_sha == REVIEWED_CAPABILITY_PLAN_FILE_SHA256 and len(raw) <= 1048576
-    if not (smoke or capability):
+    concurrency = digest(REVIEWED_CONCURRENCY_PLAN_FILE_SHA256) and file_sha == REVIEWED_CONCURRENCY_PLAN_FILE_SHA256 and len(raw) <= 1048576
+    graph = digest(REVIEWED_GRAPH_PLAN_FILE_SHA256) and file_sha == REVIEWED_GRAPH_PLAN_FILE_SHA256 and len(raw) <= 1048576
+    if not (smoke or capability or concurrency or graph):
         raise Fault("unreviewed_plan")
     try:
         plan = json.loads(raw)
     except (ValueError, UnicodeDecodeError, RecursionError):
         raise Fault("invalid_plan") from None
-    if not isinstance(plan, dict) or plan.get("stage") != ("CAPABILITY" if capability else "SMOKE"):
+    if not isinstance(plan, dict) or plan.get("stage") != ("CAPABILITY_GRAPH" if graph else "CONCURRENCY_PILOT" if concurrency else "CAPABILITY" if capability else "SMOKE"):
         raise Fault("unreviewed_plan")
     return validate_plan(plan)
 
@@ -336,27 +398,30 @@ class StudyBudget:
 class Reply:
     status: int
     body: object
+    absence_type: str = None
 
 
 def empty_counts():
     return {"total": 0, **{k: 0 for k in OP_LIMITS}}
 
 
-def validate_counts(counts):
+def validate_counts(counts, stage="SMOKE"):
+    limits = operation_limits(stage)
     if (not isinstance(counts, dict) or set(counts) != set(empty_counts())
-            or any(type(counts[k]) is not int or not 0 <= counts[k] <= OP_LIMITS[k] for k in OP_LIMITS)
+            or any(type(counts[k]) is not int or not 0 <= counts[k] <= limits[k] for k in OP_LIMITS)
             or type(counts["total"]) is not int or counts["total"] != sum(counts[k] for k in OP_LIMITS)
             or counts["total"] > MAX_CALLS):
         raise Fault("state_mismatch")
 
 
-def consume(counts, operation, mode):
-    validate_counts(counts)
+def consume(counts, operation, mode, stage="SMOKE"):
+    validate_counts(counts, stage)
+    limits = operation_limits(stage)
     if operation not in OP_LIMITS or (mode == "capture" and (operation.startswith(("delete_", "absence_")) or operation == "fresh_terminal")):
         raise Fault("invalid_operation")
     if mode == "cleanup" and operation not in {"fresh_terminal", *[p + "_" + k for p in ("metadata", "delete", "absence") for k in STORES]}:
         raise Fault("invalid_operation")
-    if counts["total"] >= MAX_CALLS or counts[operation] >= OP_LIMITS[operation]:
+    if counts["total"] >= MAX_CALLS or counts[operation] >= limits[operation]:
         raise Fault("call_limit")
     counts["total"] += 1
     counts[operation] += 1
@@ -426,7 +491,7 @@ def validate_run(data, cell, initial=None, required_status=None):
     opts = data.get("options")
     if (not isinstance(opts, dict) or opts.get("build") != spec["build"]
             or type(opts.get("memoryMbytes")) is not int or opts["memoryMbytes"] != spec["options"]["memoryMbytes"]
-            or type(opts.get("timeoutSecs")) is not int or opts["timeoutSecs"] != 120
+            or type(opts.get("timeoutSecs")) is not int or opts["timeoutSecs"] != spec["options"]["timeoutSecs"]
             or number(opts.get("maxTotalChargeUsd")) != Decimal(spec["options"]["maxTotalChargeUsd"])
             or ("restartOnError" in opts and opts["restartOnError"] is not False)):
         raise Fault("options_mismatch", "run_validation")
@@ -518,7 +583,11 @@ def validate_output(items, cell):
                 continue
         valid_row = True
         for k, value in v.items():
-            if k in ("duration_ms", "elapsed_ms", "fetch_ms", "parse_ms"):
+            if k in CONCURRENCY_FIELDS:
+                if (cell.stage != "CONCURRENCY_PILOT" or (value is not None and
+                        (type(value) is not int or not 1 <= value <= cell.spec["input"]["maxConcurrency"]))):
+                    valid_row = False
+            elif k in ("duration_ms", "elapsed_ms", "fetch_ms", "parse_ms"):
                 if number(value) is None:
                     valid_row = False
                 else:
@@ -539,8 +608,9 @@ def validate_output(items, cell):
         raise OutputFault(projected)
     expected = out.get("expected_records")
     if expected is not None:
-        # Optional timings never expand the controlled truth contract.
-        base = [{k: v for k, v in row.items() if k not in ("duration_ms", "elapsed_ms", "fetch_ms", "parse_ms")} for row in projected]
+        # Optional private telemetry never expands the controlled truth contract.
+        telemetry = ("duration_ms", "elapsed_ms", "fetch_ms", "parse_ms") + (CONCURRENCY_FIELDS if cell.stage == "CONCURRENCY_PILOT" else ())
+        base = [{k: v for k, v in row.items() if k not in telemetry} for row in projected]
         if sorted(map(canonical, base)) != sorted(map(canonical, expected)):
             raise OutputFault(projected)
     else:
@@ -565,7 +635,7 @@ class Session:
         timeout = TIMEOUTS.get(operation, 10)
         reserve = CLEANUP_RESERVE_SECONDS if self.mode == "capture" else 0
         check_time(self.clock, self.deadline, timeout + reserve)
-        consume(self.state.request_counts, operation, self.mode)
+        consume(self.state.request_counts, operation, self.mode, self.state.cell.stage)
         try:
             result = self.transport.request(operation, self.state.identity or None, timeout)
             if operation in ("poll", "settle", "fresh_terminal") and isinstance(result, Reply) and result.status == 200:
@@ -636,8 +706,9 @@ def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monot
     cell.spec
     if not callable(persist_encrypted):
         raise Fault("persistence_failed", "evidence")
-    deadline = min(deadline, clock() + CAPTURE_WALL_SECONDS) if deadline is not None else clock() + CAPTURE_WALL_SECONDS
-    check_time(clock, deadline, MINIMUM_START_SECONDS)
+    wall, minimum = capture_policy(cell.stage)
+    deadline = min(deadline, clock() + wall) if deadline is not None else clock() + wall
+    check_time(clock, deadline, minimum)
     if not isinstance(budget, StudyBudget):
         raise Fault("budget_exhausted")
     budget.claim(cell)  # A start attempt consumes the full per-cell reserve.
@@ -656,7 +727,7 @@ def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monot
             raise Fault(exc.category, exc.stage, reply.status) from None
         state.status = data["status"]
         transport.bind_run(state.identity)
-        while state.status in ACTIVE and state.request_counts["poll"] < 3:
+        while state.status in ACTIVE and state.request_counts["poll"] < operation_limits(cell.stage)["poll"]:
             reply = session.call("poll")
             data = response_data(reply, 200)
             try:
@@ -671,6 +742,7 @@ def run_until_capture(transport, cell, persist_encrypted, *, budget, clock=monot
             raise Fault("terminal_unconfirmed", "run_validation")
         state.evidence["run"] = run_receipt(data, cell)
         if (getattr(transport, "enable_terminal_settling", False) is True
+                and operation_limits(cell.stage)["settle"] > 0
                 and state.request_counts["poll"] < 4 and deadline - clock() >= SETTLE_SECONDS + 65 + 40 + CLEANUP_RESERVE_SECONDS):
             try:
                 wait(SETTLE_SECONDS)
@@ -747,6 +819,9 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
     result = {"cleanup_state": "blocked", "owner_attention_required": True, "stores": {}, "diagnostic": None,
               "refreshed_run": None, "refreshed_storage": {}, "cleaned_at": None, "cleanup_elapsed_seconds": None,
               "http_error_responses": []}
+    typed_absence_required = isinstance(state, PrivateState) and state.cell.stage in ("CAPABILITY_GRAPH", "CONCURRENCY_PILOT")
+    if typed_absence_required:
+        result["absence_types"] = {}
     def retain_fault(exc):
         result["diagnostic"] = exc.safe()
         # Dedicated PRIVATE phase-two evidence; the approved capture is immutable.
@@ -759,7 +834,7 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
                 or state.latest_active or state.cleanup_state != "not_attempted"):
             raise Fault("state_mismatch", "approval")
         state.cell.spec
-        validate_counts(state.request_counts)
+        validate_counts(state.request_counts, state.cell.stage)
         if (state.status not in TERMINAL or state.evidence.get("status") != state.status
                 or state.evidence.get("scope_association_sha256") != scope_commitment(state.identity)
                 or sha(canonical(state.evidence)) != state.plaintext_sha256):
@@ -809,6 +884,10 @@ def cleanup_verified_capture(transport, state, approved_sha, *, verify_local_app
                 reply = session.call("absence_" + kind)
                 if not isinstance(reply, Reply) or reply.status != 404 or reply.body is not None:
                     raise Fault("absence_unconfirmed", "cleanup", getattr(reply, "status", None))
+                if typed_absence_required:
+                    if reply.absence_type != "record-not-found":
+                        raise Fault("absence_unconfirmed", "cleanup", 404)
+                    result["absence_types"][kind] = reply.absence_type
                 result["stores"][kind] = "absent"
             except Fault as exc:
                 result["stores"][kind] = exc.category if exc.category in ("delete_unconfirmed", "absence_unconfirmed") else "unknown"
@@ -832,10 +911,12 @@ PRIVATE_STATE_KEYS = ("schema_version", "plan_sha256", "cell_id", "identity", "s
 
 
 def private_state_bytes(state):
-    """Full ephemeral runner state stays only in 0600 RUNNER_TEMP.
+    """RAW private identifiers: root writes these bytes ONLY to 0600 RUNNER_TEMP.
 
-    Never log, upload, commit, or encrypt these whole-state bytes. The separately
-    validated recovery_identity projection may enter the private age receipt.
+    Never log, upload, commit or encrypt the whole ephemeral state. The separate
+    authorized recovery_identity in evidence contains only normalized run scope
+    and may be passed to the private evidence encryption callback. Tokens and
+    unrelated provider/account fields are excluded from that projection.
     There is no filesystem write in this module and no pickle serialization.
     """
     if not isinstance(state, PrivateState):
@@ -843,7 +924,7 @@ def private_state_bytes(state):
     data = {"schema_version": 1, "plan_sha256": sha(state.cell.plan_bytes), "cell_id": state.cell.cell_id,
             **{k: copy.deepcopy(getattr(state, k)) for k in PRIVATE_STATE_KEYS if k not in ("schema_version", "plan_sha256", "cell_id")}}
     raw = canonical(data)
-    if len(raw) > (1048576 if state.cell.stage == "CAPABILITY" else 262144):
+    if len(raw) > (1048576 if state.cell.stage in ("CAPABILITY", "CAPABILITY_GRAPH", "CONCURRENCY_PILOT") else 262144):
         raise Fault("state_mismatch")
     restore_private_state(raw, json.loads(state.cell.plan_bytes))
     return raw
@@ -857,7 +938,7 @@ def serialize_private_state(state):
 def restore_private_state(raw, plan):
     """Verify the exact frozen scope/receipt/counts before creating cleanup transport."""
     try:
-        if not isinstance(raw, bytes) or len(raw) > (1048576 if plan.get("stage") == "CAPABILITY" else 262144):
+        if not isinstance(raw, bytes) or len(raw) > (1048576 if plan.get("stage") in ("CAPABILITY", "CAPABILITY_GRAPH", "CONCURRENCY_PILOT") else 262144):
             raise Fault("state_mismatch")
         def unique(pairs):
             d = {}
@@ -874,7 +955,7 @@ def restore_private_state(raw, plan):
         cell = prepare_cell(plan, data["cell_id"])
         if data["plan_sha256"] != sha(cell.plan_bytes):
             raise Fault("state_mismatch")
-        validate_counts(data["request_counts"])
+        validate_counts(data["request_counts"], cell.stage)
         if (data["status"] not in TERMINAL + ACTIVE + ("UNKNOWN",)
                 or data["cleanup_state"] not in ("not_attempted", "blocked", "residual", "complete")
                 or any(type(data[k]) is not bool for k in ("latest_active", "capture_verified", "encrypted_verified"))
@@ -902,8 +983,11 @@ def restore_private_state(raw, plan):
             api_copy["options"]["maxTotalChargeUsd"] = Decimal(cell.spec["options"]["maxTotalChargeUsd"])
             validate_run(api_copy, cell)
         ev = data["evidence"]
-        if "recovery_identity" in ev and ev["recovery_identity"] != ({"schema_version": 1, "identity": identity} if identity else None):
-            raise Fault("state_mismatch")
+        if "recovery_identity" in ev:
+            expected = {"schema_version": 1, "identity": identity} if identity else None
+            if (ev["recovery_identity"] != expected or ev["recovery_identity"] is not None
+                    and type(ev["recovery_identity"].get("schema_version")) is not int):
+                raise Fault("state_mismatch")
         if (ev.get("stage") != cell.stage or ev.get("scope_association_sha256") != (scope_commitment(identity) if identity else None)
                 or ev.get("cell_id") != cell.cell_id or ev.get("actor_id") != cell.spec["actor_id"]
                 or (data["cleanup_state"] == "not_attempted" and ev.get("request_counts") != data["request_counts"])):
@@ -931,8 +1015,9 @@ def execute(plan, cell_id, *, opt_in=False, environ=None, persist_encrypted=None
     if opt_in is not True:
         raise Fault("opt_in_required")
     cell = prepare_cell(plan, cell_id)
-    deadline = min(deadline, clock() + CAPTURE_WALL_SECONDS) if deadline is not None else clock() + CAPTURE_WALL_SECONDS
-    check_time(clock, deadline, MINIMUM_START_SECONDS)
+    wall, minimum = capture_policy(cell.stage)
+    deadline = min(deadline, clock() + wall) if deadline is not None else clock() + wall
+    check_time(clock, deadline, minimum)
     if not isinstance(budget, StudyBudget) or budget.plan_sha256 != sha(cell.plan_bytes) or cell_id in budget.claimed:
         raise Fault("budget_exhausted")
     if not callable(persist_encrypted):
@@ -1095,10 +1180,10 @@ class HttpTransport:
             raise Fault("token_unavailable")
         self._token = token
         self.clock = clock
-        cap = CAPTURE_WALL_SECONDS if mode == "capture" else CLEANUP_WALL_SECONDS
+        cap = capture_policy(cell.stage)[0] if mode == "capture" else CLEANUP_WALL_SECONDS
         self.deadline = min(deadline, clock() + cap) if deadline is not None else clock() + cap
         self.counts = copy.deepcopy(request_counts) if request_counts is not None else empty_counts()
-        validate_counts(self.counts)
+        validate_counts(self.counts, cell.stage)
         self.identity = {}
         self.latest_active = False
         self.latest_active_status = None
@@ -1163,6 +1248,39 @@ class HttpTransport:
                     "read_state": read_state}
         return Fault(category, stage if category == "deadline_exceeded" else "response_status", code,
                      machine_error_type=machine, response_format=response_format, error_response=evidence)
+    def typed_absence(self, response, route_deadline):
+        """Future cells require the documented JSON record-not-found error type."""
+        headers = getattr(response, "headers", None)
+        content_type = headers.get("Content-Type", "") if headers is not None else ""
+        if not isinstance(content_type, str) or content_type.split(";", 1)[0].strip().lower() != "application/json":
+            raise Fault("absence_unconfirmed", "cleanup", 404)
+        body = bytearray()
+        def unique(pairs):
+            value = {}
+            for key, item in pairs:
+                if key in value:raise ValueError()
+                value[key] = item
+            return value
+        def reject(value):raise ValueError()
+        try:
+            while True:
+                check_time(self.clock, route_deadline)
+                chunk = response.read1(min(8192, ERROR_RESPONSE_LIMIT + 1 - len(body)))
+                check_time(self.clock, route_deadline)
+                if not isinstance(chunk, bytes):raise ValueError()
+                body.extend(chunk)
+                if len(body) > ERROR_RESPONSE_LIMIT:raise ValueError()
+                if not chunk:break
+            value = json.loads(body.decode("utf-8"), object_pairs_hook=unique, parse_constant=reject)
+            error = value.get("error") if isinstance(value, dict) else None
+            if not isinstance(error, dict) or error.get("type") != "record-not-found":raise ValueError()
+            check_time(self.clock, route_deadline)
+            return Reply(404, None, "record-not-found")
+        except Fault:
+            raise
+        except Exception:
+            raise Fault("absence_unconfirmed", "cleanup", 404) from None
+
     def request(self, operation, identity, timeout):
         require_guard(self.cell.stage, sha(self.cell.plan_bytes))
         if self.latest_active:
@@ -1174,13 +1292,13 @@ class HttpTransport:
                 raise Fault("scope_mismatch", "scope_validation")
         if operation.startswith(("delete_", "absence_")) and not self.cleanup_authorized:
             raise Fault("approval_missing", "cleanup")
-        consume(self.counts, operation, self.mode)
+        consume(self.counts, operation, self.mode, self.cell.stage)
         check_time(self.clock, self.deadline, timeout)
         route_deadline = min(self.deadline, self.clock() + timeout)
         method, payload = "GET", None
         if operation == "start":
             opts = self.spec["options"]
-            query = {"build": self.spec["build"], "memory": opts["memoryMbytes"], "timeout": 120,
+            query = {"build": self.spec["build"], "memory": opts["memoryMbytes"], "timeout": opts["timeoutSecs"],
                      "maxTotalChargeUsd": self.spec["options"]["maxTotalChargeUsd"], "restartOnError": "false"}
             if "force_permission_level" in self.spec:
                 query["forcePermissionLevel"] = self.spec["force_permission_level"]
@@ -1227,12 +1345,14 @@ class HttpTransport:
                     raise Fault("delete_unconfirmed", "cleanup", status)
                 return Reply(204, None)
             if operation.startswith("absence_") and status == 404:
+                if self.cell.stage in ("CAPABILITY_GRAPH", "CONCURRENCY_PILOT"):
+                    return self.typed_absence(response, route_deadline)
                 return Reply(404, None)
             expected = 201 if operation == "start" else 200
             if status != expected:
                 raise Fault("unexpected_http_status", "response_status", status)
             body = bytearray()
-            limit = CAPABILITY_EXPORT_LIMIT if operation == "export" and self.cell.stage == "CAPABILITY" else RESPONSE_LIMIT
+            limit = CAPABILITY_EXPORT_LIMIT if operation == "export" and self.cell.stage in ("CAPABILITY", "CAPABILITY_GRAPH") else RESPONSE_LIMIT
             while True:
                 route_time("response_read")
                 chunk = response.read1(min(8192, limit + 1 - len(body)))
@@ -1274,6 +1394,8 @@ class HttpTransport:
             if operation.startswith("absence_") and code == 404:
                 try:
                     route_time("response_status")
+                    if self.cell.stage in ("CAPABILITY_GRAPH", "CONCURRENCY_PILOT"):
+                        return self.typed_absence(exc, route_deadline)
                     return Reply(404, None)
                 finally:
                     exc.close()

@@ -1,0 +1,204 @@
+{
+  "actual_ledger_mutations": 0,
+  "aggregate_reserved_usd": "0.10",
+  "capability_graph_slots_available_after_if_reserved": 3,
+  "capability_graph_slots_available_before": 4,
+  "cells": [
+    {
+      "actor": "apify/website-content-crawler",
+      "actor_id": "aYG0l9s7dbB7j3gbS",
+      "ancillary_reserve_usd": "0.02",
+      "build": "0.3.97",
+      "cell_id": "cap-graph-wcc-ignore-canonical",
+      "force_permission_level": "LIMITED_PERMISSIONS",
+      "input": {
+        "blockMedia": true,
+        "clickElementsCssSelector": "__owned_no_clicks",
+        "crawlerType": "playwright:firefox",
+        "debugLog": false,
+        "debugMode": false,
+        "dynamicContentWaitSecs": 8,
+        "expandIframes": false,
+        "htmlTransformer": "readableTextIfPossible",
+        "ignoreCanonicalUrl": true,
+        "initialConcurrency": 1,
+        "keepUrlFragments": false,
+        "maxConcurrency": 1,
+        "maxCrawlDepth": 0,
+        "maxCrawlPages": 30,
+        "maxRequestRetries": 0,
+        "maxResults": 30,
+        "maxScrollHeightPixels": 0,
+        "maxSessionRotations": 0,
+        "proxyConfiguration": {
+          "useApifyProxy": true
+        },
+        "removeCookieWarnings": false,
+        "requestTimeoutSecs": 30,
+        "respectRobotsTxtFile": false,
+        "saveFiles": false,
+        "saveHtml": false,
+        "saveHtmlAsFile": false,
+        "saveMarkdown": true,
+        "saveScreenshots": false,
+        "signHttpRequests": false,
+        "startUrls": [
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-003.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-004.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-005.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-006.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-007.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-008.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-009.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-010.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-011.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-012.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-013.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-014.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-015.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-016.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-017.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-018.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-019.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-020.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-021.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-022.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-023.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-024.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-025.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-026.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-027.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-028.html"
+          },
+          {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-029.html"
+          }
+        ],
+        "summarize": false,
+        "useLlmsTxt": false,
+        "useSitemaps": false,
+        "waitForSelector": "article"
+      },
+      "options": {
+        "build": "0.3.97",
+        "maxTotalChargeUsd": "0.08",
+        "memoryMbytes": 8192,
+        "restartOnError": false,
+        "timeoutSecs": 120
+      },
+      "output": {
+        "allowed_urls": [
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-003.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-004.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-005.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-006.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-007.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-008.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-009.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-010.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-011.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-012.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-013.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-014.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-015.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-016.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-017.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-018.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-019.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-020.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-021.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-022.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-023.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-024.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-025.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-026.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-027.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-028.html",
+          "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-029.html"
+        ],
+        "content_contracts": [],
+        "expected_records": null,
+        "fields": [
+          "url",
+          "text",
+          "markdown"
+        ],
+        "max_bytes": 524288,
+        "max_records": 30
+      },
+      "pricing_model_expected": "usage_only"
+    }
+  ],
+  "evidence_type": "single_flag_counterfactual_private_candidate_not_executed",
+  "execution_ready": false,
+  "observed_result": null,
+  "planned_start_count": 1,
+  "provider_calls": 0,
+  "schema_version": 1,
+  "source_cell_id": "cap-r1-website-content-crawler",
+  "source_plan_file_sha256": "b1b409024d3391bc9a73a506e8722c5227861083907cb98e4441b7b3dc557bcc",
+  "stage": "CAPABILITY_GRAPH"
+}

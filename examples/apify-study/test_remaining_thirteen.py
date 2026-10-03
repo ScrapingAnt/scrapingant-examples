@@ -17,11 +17,12 @@ EXPECTED = ('cap-r2-rag-web-browser-dynamic', 'cap-r2-rag-web-browser-formatting
 
 
 class RemainingThirteenTests(unittest.TestCase):
-    def test_manifest_and_execution_allowlist_are_exact_thirteen_and_secret_free(self):
+    def test_completed_thirteen_manifest_is_preserved_and_no_longer_admitted(self):
         with patch.object(driver.os, 'environ', fixture.ForbiddenEnvironment()), \
                 patch.object(driver, 'plan', side_effect=AssertionError('manifest read source')):
             self.assertEqual(tuple(driver.smoke_manifest('capability-unstarted-thirteen')), EXPECTED)
-        self.assertEqual(tuple(driver.EXECUTION_CELL_ALLOWLIST), EXPECTED)
+        self.assertEqual(tuple(driver.COMPLETED_THIRTEEN_CELLS), EXPECTED)
+        self.assertFalse(set(driver.EXECUTION_CELL_ALLOWLIST)&set(EXPECTED))
         self.assertEqual(len(set(EXPECTED)), 13)
         self.assertIn('capability-unstarted-thirteen', driver.MANIFEST_SCOPES)
         workflow = (driver.ROOT.parents[1]/'.github/workflows/apify-study-smoke.yml').read_text()
@@ -29,7 +30,7 @@ class RemainingThirteenTests(unittest.TestCase):
 
     def test_completed_and_deferred_cells_cannot_read_plan_or_environment_even_when_open(self):
         all_cells = list(driver.ALLOWED_CELLS) + list(driver.CAPABILITY_CELLS)
-        excluded = [cell for cell in all_cells if cell not in EXPECTED]
+        excluded = all_cells
         for phase in (driver.capture, driver.cleanup):
             for cell in excluded:
                 with self.subTest(phase=phase.__name__, cell=cell), \

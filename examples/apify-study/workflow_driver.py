@@ -23,12 +23,15 @@ ROOT=Path(__file__).resolve().parent
 ALLOWED_CELLS=('smoke-cheerio-scraper','smoke-web-scraper','smoke-playwright-scraper',
                'smoke-puppeteer-scraper','smoke-website-content-crawler','smoke-rag-web-browser')
 CAPABILITY_CELLS=tuple(value[0] for value in runner.CAPABILITY_CELL_IDENTITIES)
-EXECUTION_CELL_ALLOWLIST=('cap-r2-rag-web-browser-dynamic','cap-r2-rag-web-browser-formatting',
+COMPLETED_THIRTEEN_CELLS=('cap-r2-rag-web-browser-dynamic','cap-r2-rag-web-browser-formatting',
     'cap-r3-cheerio-static','cap-r3-cheerio-dynamic','cap-r3-web-static','cap-r3-web-dynamic',
     'cap-r3-playwright-static','cap-r3-playwright-dynamic','cap-r3-puppeteer-static',
     'cap-r3-puppeteer-dynamic','cap-r3-rag-web-browser-static','cap-r3-rag-web-browser-dynamic',
     'cap-r3-rag-web-browser-formatting')
-MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions','capability-remaining-without-wcc','capability-unstarted-thirteen')
+GRAPH_CELLS=(runner.GRAPH_CELL_ID,)
+PILOT_CELLS=runner.CONCURRENCY_CELL_IDENTITIES
+EXECUTION_CELL_ALLOWLIST=GRAPH_CELLS+PILOT_CELLS
+MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions','capability-remaining-without-wcc','capability-unstarted-thirteen','wcc-ignore-canonical','concurrency-pilot')
 APPROVAL_BASE='https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/main/examples/apify-study/approvals/'
 MAX_APPROVAL_BYTES=16384
 MAX_APPROVAL_READS=75
@@ -40,6 +43,8 @@ class NoRedirect(HTTPRedirectHandler):
 
 
 def check_cell(cell):
+    if cell in GRAPH_CELLS:return 'CAPABILITY_GRAPH'
+    if cell in PILOT_CELLS:return 'CONCURRENCY_PILOT'
     if cell not in ALLOWED_CELLS+CAPABILITY_CELLS:raise runner.Fault('invalid_cell')
     return 'CAPABILITY' if cell in CAPABILITY_CELLS else 'SMOKE'
 
@@ -51,7 +56,9 @@ def smoke_manifest(scope):
     if scope=='capability-first-repetition':return list(CAPABILITY_CELLS[:12])
     if scope=='capability-remaining-repetitions':return list(CAPABILITY_CELLS[12:])
     if scope=='capability-remaining-without-wcc':return [c for c in CAPABILITY_CELLS[12:]if not c.endswith('-website-content-crawler')]
-    if scope=='capability-unstarted-thirteen':return list(EXECUTION_CELL_ALLOWLIST)
+    if scope=='capability-unstarted-thirteen':return list(COMPLETED_THIRTEEN_CELLS)
+    if scope=='wcc-ignore-canonical':return list(GRAPH_CELLS)
+    if scope=='concurrency-pilot':return list(PILOT_CELLS)
     raise runner.Fault('invalid_cell')
 
 
@@ -111,7 +118,8 @@ def private_paths(environ):
 
 def plan(cell=None):
     stage=check_cell(cell) if cell is not None else 'SMOKE'
-    reviewed=runner.load_reviewed_plan((ROOT/('capability-plan.json' if stage=='CAPABILITY' else 'plan.json')).read_bytes())
+    files={'SMOKE':'plan.json','CAPABILITY':'capability-plan.json','CAPABILITY_GRAPH':'capability-graph-plan.json','CONCURRENCY_PILOT':'concurrency-plan.json'}
+    reviewed=runner.load_reviewed_plan((ROOT/files[stage]).read_bytes())
     if reviewed['stage']!=stage:raise runner.Fault('unreviewed_plan')
     return reviewed
 
@@ -124,7 +132,7 @@ def capture(cell,*,environ=None):
     stage=check_cell(cell)
     runner.require_guard(stage)
     if cell not in EXECUTION_CELL_ALLOWLIST:raise runner.Fault('invalid_cell')
-    reviewed=plan(cell) if stage=='CAPABILITY' else plan()
+    reviewed=plan(cell) if stage!='SMOKE' else plan()
     if runner.prepare_cell(reviewed,cell).spec.get('force_permission_level')!='LIMITED_PERMISSIONS':
         raise runner.Fault('invalid_cell')
     environ=os.environ if environ is None else environ
@@ -159,7 +167,7 @@ def cleanup(cell,*,environ=None):
     stage=check_cell(cell)
     runner.require_guard(stage)
     if cell not in EXECUTION_CELL_ALLOWLIST:raise runner.Fault('invalid_cell')
-    reviewed=plan(cell) if stage=='CAPABILITY' else plan()
+    reviewed=plan(cell) if stage!='SMOKE' else plan()
     environ=os.environ if environ is None else environ
     folder,binary=private_paths(environ)
     file=folder/'state.json'
@@ -203,7 +211,7 @@ def main():
     parser=argparse.ArgumentParser(description='Bounded reviewed smoke transport; default offline')
     parser.add_argument('phase',choices=('manifest','capture','cleanup'))
     parser.add_argument('--smoke-scope',choices=MANIFEST_SCOPES)
-    parser.add_argument('--cell',choices=ALLOWED_CELLS+CAPABILITY_CELLS,default=ALLOWED_CELLS[0])
+    parser.add_argument('--cell',choices=ALLOWED_CELLS+CAPABILITY_CELLS+GRAPH_CELLS+PILOT_CELLS,default=ALLOWED_CELLS[0])
     parser.add_argument('--execute',action='store_true')
     args=parser.parse_args()
     if args.phase=='manifest':
