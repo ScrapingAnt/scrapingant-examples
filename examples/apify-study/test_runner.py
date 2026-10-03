@@ -661,8 +661,10 @@ class ContractTests(TestTools, unittest.TestCase):
         self.assertTrue(evidence["owner_association_verified"])
         self.assertFalse(evidence["invoice_finality"])
         self.assertEqual(evidence["storage"]["kv"]["storageBytes"], 128)
-        for secret in (TOKEN, "PrivateRun", "PrivateOwner", "PrivateDataset", "urlSigningSecretKey", "private-account"):
+        self.assertEqual(evidence["recovery_identity"], {"schema_version": 1, "identity": state.identity})
+        for secret in (TOKEN, "urlSigningSecretKey", "private-account"):
             self.assertNotIn(secret, self.saved[0].decode())
+        for secret in (TOKEN, "PrivateRun", "PrivateOwner", "PrivateDataset", "PrivateKV", "PrivateQueue", "urlSigningSecretKey", "private-account"):
             self.assertNotIn(secret, json.dumps(r.public_result(state)))
             self.assertNotIn(secret, repr(state))
 

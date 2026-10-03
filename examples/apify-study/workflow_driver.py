@@ -23,7 +23,12 @@ ROOT=Path(__file__).resolve().parent
 ALLOWED_CELLS=('smoke-cheerio-scraper','smoke-web-scraper','smoke-playwright-scraper',
                'smoke-puppeteer-scraper','smoke-website-content-crawler','smoke-rag-web-browser')
 CAPABILITY_CELLS=tuple(value[0] for value in runner.CAPABILITY_CELL_IDENTITIES)
-MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions','capability-remaining-without-wcc')
+EXECUTION_CELL_ALLOWLIST=('cap-r2-rag-web-browser-dynamic','cap-r2-rag-web-browser-formatting',
+    'cap-r3-cheerio-static','cap-r3-cheerio-dynamic','cap-r3-web-static','cap-r3-web-dynamic',
+    'cap-r3-playwright-static','cap-r3-playwright-dynamic','cap-r3-puppeteer-static',
+    'cap-r3-puppeteer-dynamic','cap-r3-rag-web-browser-static','cap-r3-rag-web-browser-dynamic',
+    'cap-r3-rag-web-browser-formatting')
+MANIFEST_SCOPES=('cheerio','remaining-five','capability-first-repetition','capability-remaining-repetitions','capability-remaining-without-wcc','capability-unstarted-thirteen')
 APPROVAL_BASE='https://raw.githubusercontent.com/ScrapingAnt/scrapingant-examples/main/examples/apify-study/approvals/'
 MAX_APPROVAL_BYTES=16384
 MAX_APPROVAL_READS=75
@@ -46,6 +51,7 @@ def smoke_manifest(scope):
     if scope=='capability-first-repetition':return list(CAPABILITY_CELLS[:12])
     if scope=='capability-remaining-repetitions':return list(CAPABILITY_CELLS[12:])
     if scope=='capability-remaining-without-wcc':return [c for c in CAPABILITY_CELLS[12:]if not c.endswith('-website-content-crawler')]
+    if scope=='capability-unstarted-thirteen':return list(EXECUTION_CELL_ALLOWLIST)
     raise runner.Fault('invalid_cell')
 
 
@@ -117,6 +123,7 @@ def safe_write(path,value):
 def capture(cell,*,environ=None):
     stage=check_cell(cell)
     runner.require_guard(stage)
+    if cell not in EXECUTION_CELL_ALLOWLIST:raise runner.Fault('invalid_cell')
     reviewed=plan(cell) if stage=='CAPABILITY' else plan()
     if runner.prepare_cell(reviewed,cell).spec.get('force_permission_level')!='LIMITED_PERMISSIONS':
         raise runner.Fault('invalid_cell')
@@ -151,6 +158,7 @@ def cleanup_public(result):
 def cleanup(cell,*,environ=None):
     stage=check_cell(cell)
     runner.require_guard(stage)
+    if cell not in EXECUTION_CELL_ALLOWLIST:raise runner.Fault('invalid_cell')
     reviewed=plan(cell) if stage=='CAPABILITY' else plan()
     environ=os.environ if environ is None else environ
     folder,binary=private_paths(environ)

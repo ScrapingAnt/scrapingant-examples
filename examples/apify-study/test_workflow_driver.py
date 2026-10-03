@@ -256,6 +256,7 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(kwargs['identity']['id'],'PrivateRun')
                 return cleanup_calls
             with patch.object(r,'RUNNER_READY',True),patch.object(r,'REVIEWED_PLAN_SHA256',r.sha(r.canonical(reviewed))),\
+                 patch.object(driver,'EXECUTION_CELL_ALLOWLIST',('smoke-cheerio-scraper',)),\
                  patch.object(driver,'ROOT',root),patch.object(driver,'plan',return_value=reviewed),\
                  patch.object(driver,'private_paths',return_value=(private,binary)),\
                  patch.object(r,'execute',side_effect=execute):

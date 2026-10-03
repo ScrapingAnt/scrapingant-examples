@@ -16,6 +16,7 @@ on:
           - remaining-five
           - capability-first-repetition
           - capability-remaining-without-wcc
+          - capability-unstarted-thirteen
       execute_reviewed_smoke:
         description: Execute the selected reviewed LIMITED manifest; encrypted capture then verified cleanup
         type: boolean

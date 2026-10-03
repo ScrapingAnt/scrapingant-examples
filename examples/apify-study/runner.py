@@ -595,6 +595,21 @@ def record_fault(state, fault):
 
 
 def persist_capture(state, callback):
+    # Owner-authorized recovery scope is encrypted only. It is not the whole
+    # ephemeral state, a token, an account profile or an arbitrary provider body.
+    identity = None
+    if state.identity:
+        fields = set(IDENTITY_FIELDS) | {"startedAt", "finishedAt", "build", "options", "status"}
+        if set(state.identity) != fields:
+            raise Fault("state_mismatch")
+        normalized = {k: copy.deepcopy(state.identity[k]) for k in fields}
+        api_copy = copy.deepcopy(normalized)
+        api_copy["buildNumber"] = normalized["build"]
+        api_copy["options"]["maxTotalChargeUsd"] = Decimal(normalized["options"]["maxTotalChargeUsd"])
+        if validate_run(api_copy, state.cell) != normalized:
+            raise Fault("state_mismatch")
+        identity = {"schema_version": 1, "identity": normalized}
+    state.evidence["recovery_identity"] = identity
     state.evidence.update(status=state.status, latest_active=state.latest_active,
                           request_counts=copy.deepcopy(state.request_counts), diagnostic=state.diagnostic,
                           scope_association_sha256=scope_commitment(state.identity) if state.identity else None)
@@ -817,9 +832,10 @@ PRIVATE_STATE_KEYS = ("schema_version", "plan_sha256", "cell_id", "identity", "s
 
 
 def private_state_bytes(state):
-    """RAW private identifiers: root writes these bytes ONLY to 0600 RUNNER_TEMP.
+    """Full ephemeral runner state stays only in 0600 RUNNER_TEMP.
 
-    Never log, upload, commit or pass these bytes to the evidence encryption callback.
+    Never log, upload, commit, or encrypt these whole-state bytes. The separately
+    validated recovery_identity projection may enter the private age receipt.
     There is no filesystem write in this module and no pickle serialization.
     """
     if not isinstance(state, PrivateState):
@@ -886,6 +902,8 @@ def restore_private_state(raw, plan):
             api_copy["options"]["maxTotalChargeUsd"] = Decimal(cell.spec["options"]["maxTotalChargeUsd"])
             validate_run(api_copy, cell)
         ev = data["evidence"]
+        if "recovery_identity" in ev and ev["recovery_identity"] != ({"schema_version": 1, "identity": identity} if identity else None):
+            raise Fault("state_mismatch")
         if (ev.get("stage") != cell.stage or ev.get("scope_association_sha256") != (scope_commitment(identity) if identity else None)
                 or ev.get("cell_id") != cell.cell_id or ev.get("actor_id") != cell.spec["actor_id"]
                 or (data["cleanup_state"] == "not_attempted" and ev.get("request_counts") != data["request_counts"])):
