@@ -23,8 +23,8 @@ from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 import billing_projection
 
-RUNNER_READY = True
-SUSTAINED_READY = True
+RUNNER_READY = False
+SUSTAINED_READY = False
 REVIEWED_SUSTAINED_PLAN_SHA256 = 'ad6534e2ef9cd0be32d1e0fac9a3ddfdc6d5648d6eb45fdf262855f7541d7b4e'
 REVIEWED_SUSTAINED_PLAN_FILE_SHA256 = '48eb2ef48c114debda2796603f828c6921a4526266e00ca3737e1db986d1797a'
 GRAPH_READY = False
