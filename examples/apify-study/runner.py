@@ -23,9 +23,9 @@ from urllib.parse import unquote, urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 import billing_projection
 
-RUNNER_READY = True
+RUNNER_READY = False
 GRAPH_READY = False
-CONCURRENCY_READY = True
+CONCURRENCY_READY = False
 REVIEWED_PLAN_SHA256 = "df4697d71f086921e715f80c4590b8b478c7d16b9dcd5f77deaedee965e0381d"
 REVIEWED_PLAN_FILE_SHA256 = "5480d5863ab1267b8f2437a7333cc2a12d00aa61accd97c6de47d3876701477b"
 # Root installs the separately reviewed fixed capability file and pins. No fallback.
