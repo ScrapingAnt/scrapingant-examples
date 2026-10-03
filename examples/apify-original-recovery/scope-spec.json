@@ -1,0 +1,16 @@
+{
+  "actor_id": "MpRbnNmVAoj5RC1Ma",
+  "cell_id": "sustained-playwright-c5-7680",
+  "dependency_sha256": {
+    "billing_projection.py": "f54f05292bc68e9ee3f2bdd8de0b537a5c270069e996b393da620d5541329498",
+    "evidence_transport.py": "f5c3a9ffdb57add4a20121b0369da7223703a57b49cdbaf2a29015b808d2cbb3",
+    "recipient.txt": "7da784c7f41ff4e52cce510c67943403dab25843a997bd805d6c4b4c7415ddac",
+    "runner.py": "f1af87634b4f2030f7b2249c9597425218f062b77b57a5f480028a0a241c574a",
+    "sustained-plan.json": "48eb2ef48c114debda2796603f828c6921a4526266e00ca3737e1db986d1797a"
+  },
+  "original_scope_sha256": "deb06ac59966599b3ce3aae5fc554e49d255b2db95f4ba5fde4795d4973ea6e4",
+  "schema_version": 1,
+  "started_after": "2026-10-03T19:46:00.000Z",
+  "started_before": "2026-10-03T19:47:00.000Z",
+  "target_run_sha256": "12387460fb70db32ceae95729ea33d83512e3fc0ff65f1879f5fa0f59cf32eb5"
+}
