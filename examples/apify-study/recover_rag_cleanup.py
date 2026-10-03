@@ -22,7 +22,7 @@ import runner
 from workflow_driver import private_paths
 
 ROOT = Path(__file__).resolve().parent
-CLEANUP_READY = True
+CLEANUP_READY = False
 MAX_REQUESTS = 11
 REQUEST_TIMEOUT_SECONDS = 10
 TRANSPORT_WALL_SECONDS = 150
