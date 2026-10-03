@@ -1,0 +1,58 @@
+name: Apify original RAG read-only recovery (guard closed)
+on:
+  workflow_dispatch:
+    inputs:
+      execute_readonly_recovery:
+        description: Five bounded original-scope GETs; encrypted private evidence only
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-original-rag-readonly-recovery
+  cancel-in-progress: false
+jobs:
+  recovery:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install official age at the reviewed version and digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/age-v1.3.2"
+          curl --fail --silent --show-error --location --max-time 60 \
+            https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \
+            --output "$RUNNER_TEMP/age-v1.3.2/age.tar.gz"
+          printf '%s  %s\n' cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10 "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" | sha256sum --check --status
+          tar -xzf "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" -C "$RUNNER_TEMP/age-v1.3.2" age/age age/age-keygen age/LICENSE
+      - name: Offline recovery, scope, privacy and standard-age tests
+        working-directory: examples/apify-study
+        env:
+          STUDY_TEST_AGE_BIN: ${{ runner.temp }}/age-v1.3.2/age/age
+        run: python -m unittest test_recover_rag_readonly.py
+      - name: Original RAG scope read-only recovery with existing secret
+        if: inputs.execute_readonly_recovery
+        working-directory: examples/apify-study
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: python recover_rag_readonly.py --execute
+      - name: Encrypted recovery evidence and explicit public allowlist only
+        if: always() && inputs.execute_readonly_recovery
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-rag-encrypted-readonly-recovery
+          path: |
+            examples/apify-study/rag-recovery.age
+            examples/apify-study/rag-recovery-public.json
+          if-no-files-found: ignore
+          retention-days: 7
