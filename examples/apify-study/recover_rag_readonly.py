@@ -23,7 +23,7 @@ import runner
 from workflow_driver import private_paths
 
 ROOT = Path(__file__).resolve().parent
-RECOVERY_READY = False
+RECOVERY_READY = True
 CELL_ID = 'cap-r2-rag-web-browser-static'
 ACTOR_ID = '3ox4R101TgZz67sLr'  # Public Actor resource, not an account identifier.
 TARGET_RUN_SHA256 = 'b7dc3309eb7e0b23c1cf1206a844ce8fb9f8fd1591c424021bcf28ac5adce62d'
