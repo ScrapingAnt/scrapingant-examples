@@ -19,7 +19,7 @@ sys.path.insert(0,str(DEPS))
 import runner
 import evidence_transport as crypto
 
-RECOVERY_READY=True
+RECOVERY_READY=False
 SPEC_SHA256='735af7b63b63f2242caffd6cb0c5d100e4c2146fac87b292e77bfb31fb70a292'
 STAGES=('list','run','dataset','raw','clean','projection','log')
 LABELS={stage:stage+'.age' for stage in STAGES if stage!='list'}
