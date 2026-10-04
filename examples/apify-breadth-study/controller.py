@@ -16,7 +16,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, HTTPRedirectHandler, build_opener
 
-ACTIVE_CELL = 'breadth-r1-web'
+ACTIVE_CELL = None
 PLAN_SHA256 = '88b2016039efe99f3b131edea1382f60c9b77be1ddac67ea1f8f48458eee7ae4'
 ROOT = Path(__file__).resolve().parent
 API = 'https://api.apify.com/v2'
