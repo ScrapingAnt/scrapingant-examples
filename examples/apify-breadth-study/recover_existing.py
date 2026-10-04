@@ -15,7 +15,7 @@ import copy, hashlib, json, os, re, sys, time
 import controller
 
 ROOT = Path(__file__).resolve().parent
-RECOVERY_READY = False
+RECOVERY_READY = True
 SPEC_SHA256 = '4829bb2439460e3a9c36848ab5d9deeb57df99b4d0ad939214031d2c32de21b4'
 STAGES = ('run', 'raw', 'dataset', 'kv', 'queue', 'log', 'meter')
 MAX_GETS = 7
