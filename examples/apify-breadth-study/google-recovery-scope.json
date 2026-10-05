@@ -1,0 +1,26 @@
+{
+  "body_limit_bytes": 131072,
+  "cell_id": "breadth-r1-google-search",
+  "dependencies_sha256": {
+    "apify-breadth-study/breadth-plan.json": "c6de8f32e1e076795eecd7f7c1c61d8cfc85d0d0fb64bba7ead1f83c44bf2831",
+    "apify-breadth-study/controller.py": "f8d91af0ed7c3a003e0b85e462acd30718f775bc12b7a8c1ee52a92b5d8488df",
+    "apify-breadth-study/recover_existing.py": "a30c5993519088166d6daeeeb6895f1475a1c9d914fca9ad84e0ae926ed3fbaa",
+    "apify-breadth-study/storage_policy.py": "11577eb4d5f426d6eee3f1bde3eb7962649143b0fdd13ed48560eacfd48f2af7",
+    "apify-study/billing_projection.py": "f54f05292bc68e9ee3f2bdd8de0b537a5c270069e996b393da620d5541329498",
+    "apify-study/runner.py": "d7e11778845fb95a95d99a0671a9023cef9304735edf965b84487aafcaf61bfd",
+    "apify-sustained/evidence_transport.py": "f5c3a9ffdb57add4a20121b0369da7223703a57b49cdbaf2a29015b808d2cbb3",
+    "apify-sustained/recipient.txt": "7da784c7f41ff4e52cce510c67943403dab25843a997bd805d6c4b4c7415ddac"
+  },
+  "maximum_GETs": 6,
+  "native_failed_verification_sha256": "17dcdc379f19276c285741af490e080b2cdc13f293cfd1532b2b04400e2b3516",
+  "original_storage_policy_failure_preserved": true,
+  "provider_mutations": 0,
+  "retained_ancillary_reserve_usd": "0.01",
+  "retained_run_cap_usd": "0.50",
+  "route_timeout_seconds": 20,
+  "schema_version": 1,
+  "target_payload_sha256": "841c9065be84a4238ab757dcb9df68c3a3509c45fa172ca4c51dfe8a2dd9bf07",
+  "target_secret_name": "APIFY_GOOGLE_RECOVERY_TARGET",
+  "terminal_required_before_store_reads": true,
+  "transport_wall_seconds": 150
+}

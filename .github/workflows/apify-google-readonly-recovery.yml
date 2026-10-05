@@ -1,0 +1,83 @@
+name: Exact Google status and stores recovery (guard closed)
+on:
+  push:
+    paths:
+      - 'examples/apify-breadth-study/recover_google.py'
+      - 'examples/apify-breadth-study/google-recovery-scope.json'
+      - 'examples/apify-breadth-study/test_recover_google.py'
+      - '.github/workflows/apify-google-readonly-recovery.yml'
+  workflow_dispatch:
+    inputs:
+      execute_readonly_recovery:
+        description: Six fixed existing-run/store metadata GETs; no start, abort, items or deletion
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-google-readonly-recovery
+  cancel-in-progress: false
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Named synthetic scope, transport and privacy tests
+        working-directory: examples/apify-breadth-study
+        run: python -B -m unittest test_recover_google.py test_recover_existing.py
+  recovery:
+    needs: offline
+    if: github.event_name == 'workflow_dispatch' && inputs.execute_readonly_recovery && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install existing official age version at pinned digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/age-v1.3.2"
+          curl --fail --silent --show-error --location --max-time 60 \
+            https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \
+            --output "$RUNNER_TEMP/age-v1.3.2/age.tar.gz"
+          printf '%s  %s\n' cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10 "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" | sha256sum --check --status
+          tar -xzf "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" -C "$RUNNER_TEMP/age-v1.3.2" age/age age/LICENSE
+      - name: Committed Google run using existing provider credential
+        working-directory: examples/apify-breadth-study
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_GOOGLE_RECOVERY_TARGET: ${{ secrets.APIFY_GOOGLE_RECOVERY_TARGET }}
+        run: python -B recover_google.py --execute
+      - name: Only encrypted native bodies and fixed public diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-google-encrypted-readonly-recovery
+          path: |
+            examples/apify-breadth-study/google-recovery/run.age
+            examples/apify-breadth-study/google-recovery/dataset.age
+            examples/apify-breadth-study/google-recovery/kv.age
+            examples/apify-breadth-study/google-recovery/queue.age
+            examples/apify-breadth-study/google-recovery/extra.age
+            examples/apify-breadth-study/google-recovery/meter.age
+            examples/apify-breadth-study/google-recovery/manifest.age
+            examples/apify-breadth-study/google-recovery/recovery-public.json
+          if-no-files-found: ignore
+          retention-days: 7
