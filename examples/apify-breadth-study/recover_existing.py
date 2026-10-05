@@ -16,7 +16,7 @@ import controller
 
 ROOT = Path(__file__).resolve().parent
 RECOVERY_READY = False
-SPEC_SHA256 = '4829bb2439460e3a9c36848ab5d9deeb57df99b4d0ad939214031d2c32de21b4'
+SPEC_SHA256 = 'e831f24d2f7440d9ded3c2c18b2601ce4a2077f690d9b55c42aa1c27ff41b415'
 STAGES = ('run', 'raw', 'dataset', 'kv', 'queue', 'log', 'meter')
 MAX_GETS = 7
 SMALL_LIMIT, RAW_LIMIT, LOG_LIMIT = 131072, 4194304, 8388608
@@ -63,6 +63,22 @@ def strict(blob):
         raise RecoveryError('response_invalid') from None
 
 
+def dependency_digest(name, blob):
+    # A separate paid-cell workflow changes only the closed controller guard.
+    # Normalize that one reviewed assignment for offline dependency tests. Live
+    # recovery still rejects an active paid guard in load_reviewed below.
+    if name == 'apify-breadth-study/controller.py':
+        matches = list(re.finditer(rb'^ACTIVE_CELL = (None|\'[^\'\n]+\')$', blob, re.MULTILINE))
+        if len(matches) != 1:
+            raise ValueError('controller_guard_assignment')
+        value = matches[0].group(1)
+        if value != b'None':
+            permitted = {repr(c['cell_id']).encode() for c in controller.load_plan()['cells']}
+            if value not in permitted:
+                raise ValueError('controller_guard_scope')
+        blob = blob[:matches[0].start()] + b'ACTIVE_CELL = None' + blob[matches[0].end():]
+    return sha(blob)
+
 def load_reviewed():
     try:
         path = ROOT / 'recovery-scope.json'
@@ -86,7 +102,7 @@ def load_reviewed():
             raise ValueError()
         for name, digest in spec['dependencies_sha256'].items():
             p = ROOT.parent / name
-            if p.is_symlink() or not p.is_file() or sha(p.read_bytes()) != digest:
+            if p.is_symlink() or not p.is_file() or dependency_digest(name, p.read_bytes()) != digest:
                 raise ValueError()
         cell = next(c for c in controller.load_plan()['cells'] if c['cell_id'] == spec['cell_id'])
         if (cell['actor'] != 'apify/web-scraper' or cell['assigned_case_count'] != spec['assigned_case_count']

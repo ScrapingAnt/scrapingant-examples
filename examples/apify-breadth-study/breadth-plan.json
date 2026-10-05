@@ -53936,7 +53936,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),null,{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -76988,22 +76988,22 @@
       },
       "input_schema_sha256": "bbf0e104d850041400176aa1af380ef349b381bcf337cd119e399819a365dc02",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "a3aaf669f2df7ba23814f27eed156c1e6c5c0d1ff26c58ba767c480c74e16190",
+      "native_input_sha256": "2bc182e0f1aa6a59770a7ab8be7667fcf44f8c6d2a5a7e52e6bcbc8b5ac0ab4b",
       "options": {
         "build": "1.0.22",
         "maxTotalChargeUsd": "0.75",
@@ -107794,7 +107794,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -130848,22 +130848,22 @@
       },
       "input_schema_sha256": "35699ec1470ccbed0a6b5598caff58cb78bb9e33a9669b6b72810054eb2e09ea",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "693d769c9df5906dd2d4864b14a99ef8306e3d572f397ec820bb230099553280",
+      "native_input_sha256": "7f0b4ce35250f327a2d1dda9c3bfd747cf4ff327190b06c606cbc388131f67e0",
       "options": {
         "build": "3.0.18",
         "maxTotalChargeUsd": "0.75",
@@ -162059,7 +162059,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -185114,22 +185114,22 @@
       },
       "input_schema_sha256": "ad58c32f7942a5447eb74ba8d48764912e223e4d595758cca3ee75fd5d36cdd1",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "b38d8c371afc6893246783cdad57e998235083235eb36f0c104a2e268e636600",
+      "native_input_sha256": "647806851172ea5addda2731dbb009ff442914930d2ab9366702eac4e0a9cdb1",
       "options": {
         "build": "3.0.25",
         "maxTotalChargeUsd": "0.75",
@@ -215921,7 +215921,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),null,{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -238973,22 +238973,22 @@
       },
       "input_schema_sha256": "bbf0e104d850041400176aa1af380ef349b381bcf337cd119e399819a365dc02",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "a3aaf669f2df7ba23814f27eed156c1e6c5c0d1ff26c58ba767c480c74e16190",
+      "native_input_sha256": "2bc182e0f1aa6a59770a7ab8be7667fcf44f8c6d2a5a7e52e6bcbc8b5ac0ab4b",
       "options": {
         "build": "1.0.22",
         "maxTotalChargeUsd": "0.75",
@@ -269779,7 +269779,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -292833,22 +292833,22 @@
       },
       "input_schema_sha256": "35699ec1470ccbed0a6b5598caff58cb78bb9e33a9669b6b72810054eb2e09ea",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "693d769c9df5906dd2d4864b14a99ef8306e3d572f397ec820bb230099553280",
+      "native_input_sha256": "7f0b4ce35250f327a2d1dda9c3bfd747cf4ff327190b06c606cbc388131f67e0",
       "options": {
         "build": "3.0.18",
         "maxTotalChargeUsd": "0.75",
@@ -323985,7 +323985,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -347040,22 +347040,22 @@
       },
       "input_schema_sha256": "ad58c32f7942a5447eb74ba8d48764912e223e4d595758cca3ee75fd5d36cdd1",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "b38d8c371afc6893246783cdad57e998235083235eb36f0c104a2e268e636600",
+      "native_input_sha256": "647806851172ea5addda2731dbb009ff442914930d2ab9366702eac4e0a9cdb1",
       "options": {
         "build": "3.0.25",
         "maxTotalChargeUsd": "0.75",
@@ -377847,7 +377847,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),null,{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;let pilotOrigin;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule)throw Error('Owned manifest mismatch');if(!context.request.userData||typeof context.request.userData!=='object')throw Error('Owned request data missing');context.request.userData.case_id=rule.case_id;const pilotNow=performance.now();pilotOrigin??=pilotNow;\nconst pool=context.crawler?.autoscaledPool;const scalar=value=>Number.isInteger(value)&&value>=1&&value<=10?value:null;\nObject.assign(context.request.userData,{pilot_started_ms:pilotNow,pilot_origin_ms:pilotOrigin,\nnative_active_tasks_start:scalar(pool?.currentConcurrency),native_desired_tasks_start:scalar(pool?.desiredConcurrency)});let sent=0;const used=new Set();await context.page.route('**/*',async route=>{const request=route.request();if(request.method()!=='GET'||!rule.urls.includes(request.url())||sent>=rule.maximum||used.has(request.url()))return route.abort();try{await admit(()=>{if(sent>=rule.maximum||used.has(request.url()))return route.abort();used.add(request.url());sent++;return route.continue();});}catch{await route.abort().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -400899,22 +400899,22 @@
       },
       "input_schema_sha256": "bbf0e104d850041400176aa1af380ef349b381bcf337cd119e399819a365dc02",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "a3aaf669f2df7ba23814f27eed156c1e6c5c0d1ff26c58ba767c480c74e16190",
+      "native_input_sha256": "2bc182e0f1aa6a59770a7ab8be7667fcf44f8c6d2a5a7e52e6bcbc8b5ac0ab4b",
       "options": {
         "build": "1.0.22",
         "maxTotalChargeUsd": "0.75",
@@ -431705,7 +431705,7 @@
         "pageFunctionTimeoutSecs": 20,
         "pageLoadTimeoutSecs": 20,
         "postNavigationHooks": "[async function ownedReadiness({page,request}){if(!request.userData.case_id.startsWith('cs-'))return;const mode=await page.evaluate(()=>document.querySelector('#target')?.dataset.mode);if(mode==='expand'||mode==='load-more'){await page.evaluate(()=>{const button=document.querySelector('#reveal');if(!button)throw Error('Owned reveal missing');button.click();});}await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('.product'),{timeout:8000});}]",
-        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3600;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
+        "preNavigationHooks": "(()=>{const prefix=\"https://scrapingant.github.io/scrapingant-examples/fixtures/apify-sustained-v1/\",count=3840;const ruleFor=url=>{if(typeof url!=='string'||!url.startsWith(prefix))return null;const match=/^dynamic\\/(cs-\\d{6})\\.html$/.exec(url.slice(prefix.length));if(!match||Number(match[1].slice(3))>=count)return null;const caseID=match[1];if(url!==prefix+'dynamic/'+caseID+'.html')return null;return{case_id:caseID,urls:[url,prefix+'dynamic.js',prefix+'data/'+caseID+'.json'],maximum:3};};let tail=Promise.resolve(),last=-Infinity;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const admit=send=>{const next=tail.then(async()=>{let delay=last+200-performance.now();while(delay>0){await sleep(delay);delay=last+200-performance.now();}last=performance.now();return send();});tail=next.catch(()=>{});return next;};return[async function ownedAdmission(context){context.request.noRetry=true;const rule=ruleFor(context.request.url);if(!rule||context.page.listenerCount('request')!==1)throw Error('Owned interception conflict');let sent=0;const used=new Set();await context.page.setRequestInterception(true);context.page.on('request',async request=>{try{if(request.isInterceptResolutionHandled())throw Error('Owned interception conflict');if(request.method()!=='GET'||!rule.urls.includes(request.url())||request.redirectChain().length||sent>=rule.maximum||used.has(request.url()))return request.abort();await admit(()=>{if(request.isInterceptResolutionHandled()||context.page.listenerCount('request')!==2)throw Error('Owned interception conflict');if(sent>=rule.maximum||used.has(request.url()))return request.abort();used.add(request.url());sent++;return request.continue();});}catch{if(!request.isInterceptResolutionHandled())await request.abort().catch(()=>{});await context.page.close().catch(()=>{});}});}];})()",
         "proxyConfiguration": {
           "useApifyProxy": true
         },
@@ -454759,22 +454759,22 @@
       },
       "input_schema_sha256": "35699ec1470ccbed0a6b5598caff58cb78bb9e33a9669b6b72810054eb2e09ea",
       "layout_distribution": {
-        "0": 720,
-        "1": 720,
-        "2": 720,
-        "3": 720,
-        "4": 720
+        "0": 768,
+        "1": 768,
+        "2": 768,
+        "3": 768,
+        "4": 768
       },
-      "maximum_owned_resource_admissions": 10800,
+      "maximum_owned_resource_admissions": 11520,
       "mode_distribution": {
-        "delay-2000": 600,
-        "delay-500": 600,
-        "delay-5000": 600,
-        "expand": 600,
-        "load-more": 600,
-        "xhr": 600
+        "delay-2000": 640,
+        "delay-500": 640,
+        "delay-5000": 640,
+        "expand": 640,
+        "load-more": 640,
+        "xhr": 640
       },
-      "native_input_sha256": "693d769c9df5906dd2d4864b14a99ef8306e3d572f397ec820bb230099553280",
+      "native_input_sha256": "7f0b4ce35250f327a2d1dda9c3bfd747cf4ff327190b06c606cbc388131f67e0",
       "options": {
         "build": "3.0.18",
         "maxTotalChargeUsd": "0.75",
@@ -485891,6 +485891,27 @@
   "hard_total_usd": "19",
   "internal_buffer_is_not_a_hard_cap": true,
   "new_fixtures": 0,
+  "resumption_revision": {
+    "assigned_cases_and_acceptance_unchanged": true,
+    "corrected_browser_cells": [
+      "breadth-r1-playwright",
+      "breadth-r1-puppeteer",
+      "breadth-r2-web",
+      "breadth-r2-playwright",
+      "breadth-r2-puppeteer",
+      "breadth-r3-web",
+      "breadth-r3-playwright",
+      "breadth-r3-puppeteer"
+    ],
+    "correction": "Admission range matches the existing 3840 assigned pages; three owned resources per page",
+    "first_cell_rerun_authorized": false,
+    "historical_cell_preserved": "breadth-r1-web",
+    "original_plan_sha256": "88b2016039efe99f3b131edea1382f60c9b77be1ddac67ea1f8f48458eee7ae4",
+    "per_run_charge_caps_unchanged": true,
+    "provider_calls_unchanged": true,
+    "readiness_timeout_ms_unchanged": 8000,
+    "version": "admission-bound-v2"
+  },
   "schema_version": 1,
   "source_date": "2026-10-04"
 }

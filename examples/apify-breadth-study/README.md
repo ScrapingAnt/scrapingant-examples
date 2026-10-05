@@ -17,3 +17,27 @@ Raw errors, exact raw UTF-8 response bytes, logs, default-store metadata and one
 Prospective active reservation totals USD17.84/69 attempts including unchanged prior USD8.69/50; Article's USD0.15/3 slots remain unused within the USD17.99/72 planning envelope. These are bounds, not measured spend or newly committed holds. USD19 is the hard ceiling; USD18 is only an internal buffer. No automatic reassignment, uncertainty release or spending toward a target is included. Platform/Actor event inclusion, unmeasured ancillary quantities, prepaid/overage application and final invoicing remain separate evidence questions.
 
 Published rules checked October 4, 2026: [permissions](https://docs.apify.com/actors/running/permissions), [run caps and permission override](https://docs.apify.com/api/v2/actors-runs-post), [Google Search pricing](https://apify.com/apify/google-search-scraper/pricing), [AI Web](https://apify.com/apify/ai-web-scraper), [Trends pricing](https://apify.com/apify/google-trends-scraper/pricing), [RAG pricing](https://apify.com/apify/rag-web-browser/pricing). Search's minimum requested .50 cap is not minimum spending. Trends bills platform usage in addition to result events. Unknown effective tier/inclusion stays unknown. Native usage-only `FREE` means no Actor event fee, not free platform resources. Preliminary run meters are not invoices; do not infer spend from caps or add snapshots, subscriptions or prepaid allowance to consumption. No cheapest-provider, ranking-accuracy, absolute-search-volume or completed rental-migration claim follows from this method.
+
+
+## Prospective resumption correction
+
+Revision `admission-bound-v2` corrects the owned-resource admission range for the
+eight unattempted browser cells from 3,600 to the existing 3,840 assigned pages.
+The original first Web cell’s input remains unchanged and must never be rerun.
+Assigned truth, accepted fields, eight-second readiness timeout, concurrency,
+proxy choice, zero retries, build pins, run timeouts and requested per-run charge
+caps are unchanged. The finite resource allowance is three per assigned page:
+HTML, the shared script and that page’s JSON. Original and corrected revisions
+must be identified separately when interpreting repetitions.
+
+Before the existing single dataset metadata GET, the producer waits six seconds
+within its existing deadline. [Official dataset documentation](https://docs.apify.com/api/v2/dataset-get),
+checked October 4, 2026, allows up to five seconds of counter propagation. This
+adds no provider request or retry and keeps the exact raw/count comparison.
+
+The native requested charge cap and strict informational-meter diagnostic remain
+unchanged. A terminal meter above the requested cap remains recorded as such.
+Only a separately reviewed private recovery/accounting bridge can fund a known
+meter excess from unused total-budget buffer while retaining the full ancillary
+hold. Capture diagnostics, partial outputs and the consumed attempt are never
+rewritten as successful observations. Publication does not open any run guard.

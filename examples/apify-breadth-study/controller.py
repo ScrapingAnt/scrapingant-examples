@@ -10,14 +10,14 @@ from datetime import datetime, timezone
 from decimal import Decimal
 import hashlib, json, os, re, sys
 from pathlib import Path
-from time import monotonic
+from time import monotonic, sleep
 from types import SimpleNamespace
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, HTTPRedirectHandler, build_opener
 
 ACTIVE_CELL = None
-PLAN_SHA256 = '88b2016039efe99f3b131edea1382f60c9b77be1ddac67ea1f8f48458eee7ae4'
+PLAN_SHA256 = 'c6de8f32e1e076795eecd7f7c1c61d8cfc85d0d0fb64bba7ead1f83c44bf2831'
 ROOT = Path(__file__).resolve().parent
 API = 'https://api.apify.com/v2'
 # Changing this reviewed allowlist requires a fresh scope decision. Guard
@@ -43,7 +43,7 @@ CATEGORIES = ('guard_closed', 'opt_in_required', 'invalid_cell', 'source_mismatc
     'token_unavailable', 'route_rejected', 'deadline_exceeded', 'http_error',
     'redirect_refused', 'connection_error', 'unexpected_status', 'response_too_large',
     'invalid_json', 'scope_mismatch', 'terminal_unknown', 'persistence_failed',
-    'meter_unavailable', 'budget_exceeded', 'storage_policy')
+    'meter_unavailable', 'budget_exceeded', 'storage_policy', 'settling_failed')
 MAX_TOTAL_CAPTURE_BYTES = 48 * 1048576
 
 class Stopped(Exception):
@@ -236,6 +236,28 @@ class Transport:
         finally:
             if response is not None: response.close()
 
+# Official dataset item counters can lag writes by up to five seconds.
+# One bounded six-second settle precedes the already allowed single metadata GET;
+# it adds no request, retry or relaxed count comparison.
+METADATA_SETTLE_SECONDS = 6
+
+def settle_metadata(transport, *, sleeper=sleep):
+    guard(transport.cell['cell_id'])
+    if transport.failed or transport.counts.get('export') != 1 or transport.counts.get('dataset', 0):
+        raise Stopped('settling_failed')
+    began = transport.clock()
+    if transport.deadline - began < METADATA_SETTLE_SECONDS + 15:
+        raise Stopped('deadline_exceeded')
+    try: sleeper(METADATA_SETTLE_SECONDS)
+    except Exception: raise Stopped('settling_failed') from None
+    ended = transport.clock()
+    if ended < began + METADATA_SETTLE_SECONDS:
+        raise Stopped('settling_failed')
+    if transport.deadline - ended < 15:
+        raise Stopped('deadline_exceeded')
+    guard(transport.cell['cell_id'])
+    return METADATA_SETTLE_SECONDS
+
 def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
     guard(cell_id)
     if opt_in is not True: raise Stopped('opt_in_required')
@@ -259,6 +281,7 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
     transport = Transport(cell, env.get('APIFY_TOKEN'), clock=clock)
     files, identity, diagnostic, meter = {}, None, None, None
     started = datetime.now(timezone.utc)
+    settled_seconds = None
     def read(operation, label):
         raw = transport.request(operation)
         wrapped = canonical({'schema_version': 1, 'operation': operation, 'raw_sha256': sha(raw),
@@ -291,6 +314,7 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
         raw = read('export', 'raw')
         rows = strict(raw)
         if not isinstance(rows, list) or len(rows) > cell['assigned_case_count']: raise Stopped('scope_mismatch')
+        settled_seconds = settle_metadata(transport)
         for kind in ('dataset', 'kv', 'queue'):
             meta = strict(read(kind, kind)).get('data')
             runner.validate_metadata(meta, kind, identity)
@@ -315,7 +339,7 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
         'native_input_sha256': cell['native_input_sha256'], 'identity': identity, 'files': files,
         'requests': transport.counts, 'start_attempts': transport.counts.get('start', 0), 'DELETEs': 0,
         'started_at_utc': started.isoformat(), 'captured_at_utc': datetime.now(timezone.utc).isoformat(),
-        'latest_run_meter': meter, 'diagnostic': diagnostic, 'complete': diagnostic is None,
+        'latest_run_meter': meter, 'metadata_settle_seconds': settled_seconds, 'diagnostic': diagnostic, 'complete': diagnostic is None,
         'invoice_finality': False, 'cleanup_authorized': False,
         'retained_run_cap_usd': cell['options']['maxTotalChargeUsd'],
         'retained_ancillary_reserve_usd': cell['ancillary_reserve_usd']}

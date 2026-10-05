@@ -51,6 +51,10 @@ def fixtures():
 
 class RecoveryTests(unittest.TestCase):
     def setUp(self):
+        # Recovery fixtures are isolated from another workflow's paid-cell guard.
+        isolated_guard = patch.object(r.controller, 'ACTIVE_CELL', None)
+        isolated_guard.start()
+        self.addCleanup(isolated_guard.stop)
         self.spec, self.cell, self.validators, self.crypto, self.recipient, self.target, self.bodies = fixtures()
 
     def collect(self, bodies=None, failure_at=None, headers=None):

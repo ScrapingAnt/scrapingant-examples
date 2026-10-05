@@ -2,8 +2,8 @@
   "assigned_case_count": 3840,
   "cell_id": "breadth-r1-web",
   "dependencies_sha256": {
-    "apify-breadth-study/breadth-plan.json": "88b2016039efe99f3b131edea1382f60c9b77be1ddac67ea1f8f48458eee7ae4",
-    "apify-breadth-study/controller.py": "2496ceb2c1b08a1862cba585446656b26418c0483ccea6981ad264d14998a68a",
+    "apify-breadth-study/breadth-plan.json": "c6de8f32e1e076795eecd7f7c1c61d8cfc85d0d0fb64bba7ead1f83c44bf2831",
+    "apify-breadth-study/controller.py": "f8d91af0ed7c3a003e0b85e462acd30718f775bc12b7a8c1ee52a92b5d8488df",
     "apify-breadth-study/storage_policy.py": "11577eb4d5f426d6eee3f1bde3eb7962649143b0fdd13ed48560eacfd48f2af7",
     "apify-study/billing_projection.py": "f54f05292bc68e9ee3f2bdd8de0b537a5c270069e996b393da620d5541329498",
     "apify-study/runner.py": "d7e11778845fb95a95d99a0671a9023cef9304735edf965b84487aafcaf61bfd",
