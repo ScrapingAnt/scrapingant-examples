@@ -16,7 +16,7 @@ import controller
 import recover_existing as base
 
 ROOT = Path(__file__).resolve().parent
-RECOVERY_READY = False
+RECOVERY_READY = True
 SPEC_SHA256 = 'da54dfc87f2f5b950275be137dbc11c279535e663172291a056b694477a6afae'
 STAGES = ('run', 'dataset', 'kv', 'queue', 'extra', 'meter')
 TARGET_FIELDS = base.TARGET_FIELDS + ('extraDatasetAlias', 'extraDatasetId')
