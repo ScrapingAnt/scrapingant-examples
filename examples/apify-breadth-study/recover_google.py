@@ -57,7 +57,7 @@ def load_reviewed():
             raise ValueError()
         for name, digest in spec['dependencies_sha256'].items():
             p = ROOT.parent / name
-            if p.is_symlink() or not p.is_file() or base.sha(p.read_bytes()) != digest:
+            if p.is_symlink() or not p.is_file() or base.dependency_digest(name, p.read_bytes()) != digest:
                 raise ValueError()
         cell = next(c for c in controller.load_plan()['cells'] if c['cell_id'] == spec['cell_id'])
         if (cell['actor'] != 'apify/google-search-scraper' or cell['build'] != '0.0.455'

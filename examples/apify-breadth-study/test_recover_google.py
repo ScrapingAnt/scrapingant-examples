@@ -29,6 +29,9 @@ class GoogleRecoveryTests(unittest.TestCase):
         isolated_guard = patch.object(r, 'RECOVERY_READY', False)
         isolated_guard.start()
         self.addCleanup(isolated_guard.stop)
+        isolated_paid_guard = patch.object(r.controller, 'ACTIVE_CELL', None)
+        isolated_paid_guard.start()
+        self.addCleanup(isolated_paid_guard.stop)
         self.spec, self.cell, self.validators, self.crypto, self.recipient = r.load_reviewed()
         self.target = {'id': 'R' * 17, 'userId': 'U' * 17, 'actId': self.cell['actor_id'],
             'defaultDatasetId': 'D' * 17, 'defaultKeyValueStoreId': 'K' * 17,
@@ -95,6 +98,48 @@ class GoogleRecoveryTests(unittest.TestCase):
         with patch.object(r, 'SPEC_SHA256', 'f' * 64), self.assertRaises(r.base.RecoveryError): r.load_reviewed()
         with patch.object(r.controller, 'ACTIVE_CELL', 'breadth-r1-google-search'), self.assertRaises(r.base.RecoveryError): r.load_reviewed()
         with patch.object(r.base, 'RECOVERY_READY', True), self.assertRaises(r.base.RecoveryError): r.load_reviewed()
+
+    def test_offline_dependency_pin_normalizes_only_reviewed_paid_assignment(self):
+        name = 'apify-breadth-study/controller.py'
+        blob = (r.ROOT.parent / name).read_bytes()
+        normalized = r.base.re.sub(rb'^ACTIVE_CELL = (None|\'[^\'\n]+\')$',
+                                  b'ACTIVE_CELL = None', blob, flags=r.base.re.MULTILINE)
+        expected = self.spec['dependencies_sha256'][name]
+        for cell in r.controller.load_plan()['cells']:
+            active = normalized.replace(b'ACTIVE_CELL = None',
+                                        ('ACTIVE_CELL = ' + repr(cell['cell_id'])).encode())
+            self.assertEqual(r.base.dependency_digest(name, active), expected)
+        for replacement in (b"ACTIVE_CELL = 'NAMED_SYNTHETIC_UNREVIEWED_CELL'",
+                            b'ACTIVE_CELL = True', b'ACTIVE_CELL=None',
+                            b'ACTIVE_CELL = None\nACTIVE_CELL = None'):
+            with self.assertRaises(ValueError):
+                r.base.dependency_digest(name, normalized.replace(b'ACTIVE_CELL = None', replacement))
+        self.assertNotEqual(r.base.dependency_digest(name, normalized + b'\n# synthetic edit\n'), expected)
+
+    def test_google_load_reviewed_uses_narrow_dependency_pin(self):
+        name = 'apify-breadth-study/controller.py'
+        original = Path.read_bytes
+        blob = original(r.ROOT.parent / name)
+        normalized = r.base.re.sub(rb'^ACTIVE_CELL = (None|\'[^\'\n]+\')$',
+                                  b'ACTIVE_CELL = None', blob, flags=r.base.re.MULTILINE)
+        active = normalized.replace(b'ACTIVE_CELL = None', b"ACTIVE_CELL = 'breadth-r1-ai-web'")
+        def synthetic_read(path):
+            return active if path == r.ROOT.parent / name else original(path)
+        with patch.object(Path, 'read_bytes', synthetic_read):
+            r.load_reviewed()
+        def altered_read(path):
+            return active + b'\n# synthetic source alteration\n' if path == r.ROOT.parent / name else original(path)
+        with patch.object(Path, 'read_bytes', altered_read), self.assertRaises(r.base.RecoveryError):
+            r.load_reviewed()
+
+    def test_live_google_recovery_rejects_active_paid_guard_before_env_or_transport(self):
+        with patch.object(r, 'RECOVERY_READY', True), \
+             patch.object(r.controller, 'ACTIVE_CELL', 'breadth-r1-ai-web'), \
+             patch.object(r, 'Transport', side_effect=AssertionError('unexpected transport')) as transport:
+            with self.assertRaises(r.base.RecoveryError) as caught:
+                r.execute(opt_in=True, environ=NoEnv())
+            self.assertEqual(caught.exception.category, 'source_invalid')
+            transport.assert_not_called()
 
     def test_target_exact_hash_fields_ids_and_alias(self):
         blob = r.base.canonical(self.target).decode()
