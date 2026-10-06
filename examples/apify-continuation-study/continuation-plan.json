@@ -4592,7 +4592,15 @@
       },
       "pricing_model_expected": "usage_only",
       "prospective_contract_version": "original-wcc-text-contract-v1",
-      "prospective_first_output_gate": false
+      "prospective_first_output_gate": false,
+      "storage_contract": {
+        "alias": "errors",
+        "initial_and_final_required": true,
+        "maximum_items": 30,
+        "maximum_storage_bytes": 1048576,
+        "metadata_only": true,
+        "version": "wcc-r3-owned-bounded-errors-v1"
+      }
     },
     {
       "actor": "vdrmota/contact-info-scraper",

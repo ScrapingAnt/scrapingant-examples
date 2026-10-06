@@ -1,0 +1,80 @@
+name: Contact start diagnostic (guard closed)
+on:
+  push:
+    paths:
+      - 'examples/apify-contact-readonly-recovery/**'
+      - '.github/workflows/apify-contact-readonly-recovery.yml'
+  workflow_dispatch:
+    inputs:
+      execute_readonly_recovery:
+        description: At most five fixed GETs; no starts, retries, aborts or deletion
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: apify-contact-readonly-recovery
+  cancel-in-progress: false
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Named synthetic bounded recovery tests
+        working-directory: examples/apify-contact-readonly-recovery
+        run: python -B -m unittest test_recover_contact.py
+  recovery:
+    needs: offline
+    if: github.event_name == 'workflow_dispatch' && inputs.execute_readonly_recovery && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install existing official age version at pinned digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/age-v1.3.2"
+          curl --fail --silent --show-error --location --max-time 60 \
+            https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \
+            --output "$RUNNER_TEMP/age-v1.3.2/age.tar.gz"
+          printf '%s  %s\n' cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10 "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" | sha256sum --check --status
+          tar -xzf "$RUNNER_TEMP/age-v1.3.2/age.tar.gz" -C "$RUNNER_TEMP/age-v1.3.2" age/age age/LICENSE
+      - name: Fixed Contact read-only diagnostic using existing credential
+        working-directory: examples/apify-contact-readonly-recovery
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_CONTACT_READONLY_OPT_IN: 'yes'
+        run: python -B recover_contact.py --execute
+      - name: Only encrypted native bodies and fixed public diagnostic states
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-contact-encrypted-readonly-recovery
+          path: |
+            examples/apify-contact-readonly-recovery/capture/list.age
+            examples/apify-contact-readonly-recovery/capture/run.age
+            examples/apify-contact-readonly-recovery/capture/kv.age
+            examples/apify-contact-readonly-recovery/capture/input.age
+            examples/apify-contact-readonly-recovery/capture/meter.age
+            examples/apify-contact-readonly-recovery/capture/manifest.age
+            examples/apify-contact-readonly-recovery/capture/recovery-public.json
+          if-no-files-found: ignore
+          retention-days: 7

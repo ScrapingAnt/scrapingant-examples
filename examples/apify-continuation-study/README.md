@@ -97,3 +97,31 @@ Run the secret-free public checks with
 `python -B -m unittest discover -p 'test_*.py'` from this directory.
 Authenticated private readback tests use only named synthetic injected responses
 and the existing opaque age identity; they are not public CI or provider tests.
+# Prospective WCC R3 errors dataset correction
+
+Only `cap-r3-website-content-crawler`, pinned Website Content Crawler 0.3.97,
+has the `wcc-r3-owned-bounded-errors-v1` storage profile. Its exact registered
+dataset aliases must be `default` and `errors`; all four run stores must have
+distinct IDs, and the `errors` ID must remain stable through every run snapshot.
+R2 remains governed by its original default-only contract. This prospective
+correction cannot replay R2 or reclassify its previously recorded outcome.
+
+Exactly two errors-metadata GETs are allowed: after the initial run association
+and after the default dataset export/settling. Each is bounded to131,072 response
+bytes and15 seconds, once per phase, inside the unchanged 600-second capture wall.
+Both must prove explicit `name:null`, exact owner/Actor/run association and
+creation between run start and the earlier of observation or terminal finish.
+The observation timestamp is retained inside each authenticated envelope.
+Both must provide native integer `itemCount` in 0–30 and `stats.storageBytes`
+in 0–1,048,576. These are imposed safety limits for review, not predictions of
+how many errors a future run will produce. Nonempty datasets inside these limits
+are allowed; missing/invalid/excess measurements stop capture. No errors items,
+extra storage listing or deletion route is added. Errors never count as accepted
+text outputs. Unknown SDK access remains unproved.
+
+Native INPUT, build/options, 30 assigned texts, original text-first acceptance,
+markdown diagnostics, USD 0.08 run cap andUSD 0.02 retained ancillary planning hold
+remain unchanged. The byte limit does not cap future retention or all SDK
+operation charges. Private reconciliation must include the measured errors bytes
+once and preserve all prior holds. Publication approval, source/CI checks,
+fresh account headroom and an exclusive R3 intent still precede any actual start.

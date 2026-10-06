@@ -18,7 +18,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, HTTPRedirectHandler, build_opener
 
 ACTIVE_CELL = None
-PLAN_SHA256 = '4a683cf7e42fb5e0a21d4253568b4273e13eafd79ca178e53705527b7c9f2579'
+PLAN_SHA256 = '432d3b5a6162345f5daae83b6f0a6856344086480b523e9dbcfc3b1d499497ed'
 ROOT = Path(__file__).resolve().parent
 API = 'https://api.apify.com/v2'
 # Changing this reviewed allowlist requires a fresh scope decision. Guard
@@ -57,7 +57,9 @@ def validate_cell_actor(cell):
             or cell.get('actor') not in ALLOWED_ACTORS
             or cell.get('actor_id') != ALLOWED_ACTORS[cell['actor']]):
         raise Stopped('invalid_cell')
-    try: input_contracts.validate(cell)
+    try:
+        input_contracts.validate(cell)
+        storage_policy.extra_contract(cell)
     except (ValueError,KeyError,TypeError): raise Stopped('invalid_cell') from None
 
 def strict(blob):
@@ -191,7 +193,7 @@ class Transport:
                            'limit': self.cell['assigned_case_count'] + 1})
             return 'GET', f"{API}/datasets/{identity['defaultDatasetId']}/items?{q}", 200, 30, self.cell['output']['max_bytes'], 1
         if operation in ('extra_initial', 'extra_final'):
-            if self.cell['actor'] != storage_policy.GOOGLE or self.extra_dataset_id is None:
+            if storage_policy.extra_contract(self.cell) is None or self.extra_dataset_id is None:
                 raise Stopped('route_rejected')
             if operation == 'extra_final' and not self.counts.get('export'):
                 raise Stopped('route_rejected')
@@ -294,15 +296,17 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
     settled_seconds = None
     def read(operation, label):
         raw = transport.request(operation)
+        observation = ({'observed_at_utc':datetime.now(timezone.utc).isoformat()}
+            if cell['cell_id']==storage_policy.WCC_R3 and operation in ('extra_initial','extra_final') else {})
         wrapped = canonical({'schema_version': 1, 'operation': operation, 'raw_sha256': sha(raw),
-                             'raw_bytes': len(raw), 'response_body_utf8': raw.decode('utf-8')})
+                             'raw_bytes': len(raw), 'response_body_utf8': raw.decode('utf-8'), **observation})
         # Keep the whole encrypted upload within the separately reviewed archive
         # envelope. No Actor retry/start follows a capture-envelope failure.
         used = sum((output / name).stat().st_size for name in files)
         if used + len(wrapped) + 65536 > MAX_TOTAL_CAPTURE_BYTES:
             raise Stopped('persistence_failed')
         receipt = crypto.encrypt_capture(wrapped, output / (label + '.age'), binary, recipient)
-        files[label + '.age'] = {**receipt, 'operation': operation, 'raw_sha256': sha(raw), 'raw_bytes': len(raw)}
+        files[label + '.age'] = {**receipt, 'operation': operation, 'raw_sha256': sha(raw), 'raw_bytes': len(raw), **observation}
         return raw
     try:
         raw = read('start', 'start')
@@ -314,7 +318,8 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
         transport.bind_extra(value['data'])
         if transport.extra_dataset_id is not None:
             meta = strict(read('extra_initial', 'extra-initial')).get('data')
-            storage_policy.validate_extra(cell,value['data'],meta,datetime.now(timezone.utc).isoformat(),transport.extra_dataset_id)
+            storage_policy.validate_extra(cell,value['data'],meta,
+                files['extra-initial.age'].get('observed_at_utc',datetime.now(timezone.utc).isoformat()),transport.extra_dataset_id)
         value = value['data']
         for n in range(7):
             if value['status'] in runner.TERMINAL: break
@@ -334,7 +339,8 @@ def execute(cell_id, *, opt_in=False, environ=None, clock=monotonic):
             if kind == 'dataset' and meta.get('itemCount') != len(rows): raise Stopped('scope_mismatch')
         if transport.extra_dataset_id is not None:
             meta = strict(read('extra_final', 'extra-final')).get('data')
-            storage_policy.validate_extra(cell,value,meta,datetime.now(timezone.utc).isoformat(),transport.extra_dataset_id)
+            storage_policy.validate_extra(cell,value,meta,
+                files['extra-final.age'].get('observed_at_utc',datetime.now(timezone.utc).isoformat()),transport.extra_dataset_id)
         log = read('log', 'log').decode('utf-8')
         storage_policy.require_log_scope(cell, log)
         value = strict(read('meter', 'meter')).get('data')

@@ -1,0 +1,72 @@
+{
+  "actor": "vdrmota/contact-info-scraper",
+  "actor_id": "9Sk4JJhEma9vBKqrg",
+  "body_limit_bytes": 131072,
+  "build": "0.2.238",
+  "cell_id": "continuation-contact-pilot",
+  "dependency_sha256": {
+    "examples/apify-study/billing_projection.py": "f54f05292bc68e9ee3f2bdd8de0b537a5c270069e996b393da620d5541329498",
+    "examples/apify-study/runner.py": "d7e11778845fb95a95d99a0671a9023cef9304735edf965b84487aafcaf61bfd",
+    "examples/apify-sustained/evidence_transport.py": "f5c3a9ffdb57add4a20121b0369da7223703a57b49cdbaf2a29015b808d2cbb3",
+    "examples/apify-sustained/recipient.txt": "7da784c7f41ff4e52cce510c67943403dab25843a997bd805d6c4b4c7415ddac"
+  },
+  "list_limit": 5,
+  "maximum_GETs": 5,
+  "native_input": {
+    "considerChildFrames": false,
+    "leadsEnrichmentDepartments": [],
+    "maxDepth": 0,
+    "maxRequests": 6,
+    "maxRequestsPerStartUrl": 1,
+    "maximumLeadsEnrichmentRecords": 0,
+    "mergeContacts": false,
+    "proxyConfig": {
+      "useApifyProxy": false
+    },
+    "sameDomain": true,
+    "scrapeSocialMediaProfiles": {
+      "facebooks": false,
+      "instagrams": false,
+      "tiktoks": false,
+      "twitters": false,
+      "youtubes": false
+    },
+    "startUrls": [
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-000.html"
+      },
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-001.html"
+      },
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-002.html"
+      },
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-003.html"
+      },
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-004.html"
+      },
+      {
+        "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-005.html"
+      }
+    ],
+    "useBrowser": false,
+    "verifyLeadsEnrichmentEmails": false,
+    "waitUntil": "domcontentloaded"
+  },
+  "native_input_sha256": "a1a3b32ef5fcb52d05f47903440885dfac6a5f0de737ddff70674a150579fca7",
+  "options": {
+    "build": "0.2.238",
+    "maxTotalChargeUsd": "0.50",
+    "memoryMbytes": 512,
+    "restartOnError": false,
+    "timeoutSecs": 120
+  },
+  "owner_id_sha256": "46c61fe824b17f8d39a5316d4876bc91ff1da1d00a80ff767aefbb0fa9024bfe",
+  "route_seconds": 15,
+  "schema_version": 1,
+  "started_after": "2026-10-06T13:30:00Z",
+  "started_before": "2026-10-06T13:30:59.999999Z",
+  "wall_seconds": 90
+}
