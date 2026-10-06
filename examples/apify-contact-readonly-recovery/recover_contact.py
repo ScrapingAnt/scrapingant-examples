@@ -14,7 +14,7 @@ from urllib.request import Request, HTTPRedirectHandler, build_opener
 import copy, hashlib, importlib.util, json, os, re, sys, time
 
 ROOT = Path(__file__).resolve().parent
-RECOVERY_READY = True
+RECOVERY_READY = False
 SPEC_SHA256 = '70ee216c9d6fb133fe24793904cdcd597e74e1bd48449dea94c443d845a7a0b8'
 STAGES = ('list', 'run', 'kv', 'input', 'meter')
 TERMINAL = ('SUCCEEDED', 'FAILED', 'TIMED-OUT', 'ABORTED')
