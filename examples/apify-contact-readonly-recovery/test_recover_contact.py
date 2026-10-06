@@ -61,7 +61,7 @@ def capture(values=None):
 
 class RecoveryTests(unittest.TestCase):
     def test_closed_guard_blocks_before_opener(self):
-        with self.assertRaises(r.Stop) as raised:
+        with patch.object(r,'RECOVERY_READY',False), self.assertRaises(r.Stop) as raised:
             r.Transport('named_synthetic_token_123',SPEC,opener=lambda *a: self.fail())
         self.assertEqual(raised.exception.category,'guard_closed')
 
