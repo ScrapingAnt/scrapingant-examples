@@ -1,0 +1,344 @@
+{
+  "all_assets": 48,
+  "assets": {
+    "fixtures/apify-continuation-v1/commerce/product-000.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "7c091cea8ce4b224709e8cc978a79b0c51d7294b68d62afd538d887bc7d43dcd",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-000.html"
+    },
+    "fixtures/apify-continuation-v1/commerce/product-001.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "e172e4e50d15ec5ab218020737f30097098a9760690ce1d684c9ea00717fe65d",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-001.html"
+    },
+    "fixtures/apify-continuation-v1/commerce/product-002.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "e9fb2a26e7d47909820e8618f28c2d5c32438fdac8e415e8d6e56be86f40c508",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-002.html"
+    },
+    "fixtures/apify-continuation-v1/commerce/product-003.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "400e7eded754ca89a45de101a622201b7f9385079d5a05043baea0a312dec0d7",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-003.html"
+    },
+    "fixtures/apify-continuation-v1/commerce/product-004.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "87b76fb155c9cdebca5e3d4f781a01985f8ba8739ccc393618678eabd48dd363",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-004.html"
+    },
+    "fixtures/apify-continuation-v1/commerce/product-005.html": {
+      "bytes": 588,
+      "required_for_paid_cell": false,
+      "sha256": "b0e7e94a049b63aa44b358a5d6f3d6fc1fe8b72f7a3ff213648134750d29a40a",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-005.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-000.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "f9d479124c07ab5b26e76e57dd7044a4efbb213eda692d43e05ffacd4680cfb4",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-000.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-001.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "80d4565b59bb2f49ae5663fc8b28194b8c8e2ca8ea82e5b779cbd257cd16ca7d",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-001.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-002.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "b2dfe4a97781e1c749ad88f446f232c46ff2d719cf1eabdc111b406003f4fedf",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-002.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-003.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "4e8064fb9dc4de973b03b518d562b9549b35f74ed75d579608c1db4b01af6c03",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-003.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-004.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "3922bb19e38b2508eae55a6accb980a5f01cae7b8c94724c939084e359aebbd4",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-004.html"
+    },
+    "fixtures/apify-continuation-v1/contacts/contact-005.html": {
+      "bytes": 319,
+      "required_for_paid_cell": true,
+      "sha256": "ebde6deaec7cb9f3495f3bf66313d1b69058609216fb7ec69adb8423651d300f",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-005.html"
+    },
+    "fixtures/apify-study-v1/content/c-000.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "007b3d0ec6caa5387e3ed0bf884c8975929e88943795957ae953cb4debc2ee6f",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-000.html"
+    },
+    "fixtures/apify-study-v1/content/c-001.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "02a3449efd3699d63ef93fc543b77f6658e0200c2c4ad17b8c8c36e589b5311f",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-001.html"
+    },
+    "fixtures/apify-study-v1/content/c-002.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "fe6adeefe93d030c5518abec16f7650766c5e9c6fff4eb6cf90c7346d42f9397",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-002.html"
+    },
+    "fixtures/apify-study-v1/content/c-003.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "9c57dcab7636a04b5a98b24965acfc50f45ad1ab13179ed3ffc2fed0c976d418",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-003.html"
+    },
+    "fixtures/apify-study-v1/content/c-004.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "ffaf2ac9ba7c0e9d24f9af19bb5021ec92d42ad04b5771dc6fe5647c4f11cba5",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-004.html"
+    },
+    "fixtures/apify-study-v1/content/c-005.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "acf7a749f664a88c28de737b33ef49a73d9fea339eb51c618ed054fc65824502",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-005.html"
+    },
+    "fixtures/apify-study-v1/content/c-006.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "5f476e9dcfe891d5b385870e2b15366e311db377baba3937f679d410b3e92068",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-006.html"
+    },
+    "fixtures/apify-study-v1/content/c-007.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "fdc54b5fb9c9c65fa0c8c006fb86e6860cf74a9f0d9df8dba42ff68b15dcf619",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-007.html"
+    },
+    "fixtures/apify-study-v1/content/c-008.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "dd14ed398929b51daf6cdceaf7e55fe34d5d579cb80e576ea3e6c10a7cb3ae60",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-008.html"
+    },
+    "fixtures/apify-study-v1/content/c-009.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "253aa56aa32fa697d2d2c92424f528dbbe4768a0f692eecb6eac05be22804615",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-009.html"
+    },
+    "fixtures/apify-study-v1/content/c-010.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "d36bf82731005aa46f5678eb113eb29d1714d05549be7b129841e89d97eec08b",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-010.html"
+    },
+    "fixtures/apify-study-v1/content/c-011.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "7e4fafd5c499237164ef8532a89cfd9e0e66085d1a2f3e73bca93457c073c64c",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-011.html"
+    },
+    "fixtures/apify-study-v1/content/c-012.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "a3798ed76eb6d2bea675c8c12ed3131736ff045dfaf5f77ad9a90eb705c28ebe",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-012.html"
+    },
+    "fixtures/apify-study-v1/content/c-013.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "ea8b31c0599a831d692f5bf289bb94f5e331794f838c2adc93e7b0a5b37df4ba",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-013.html"
+    },
+    "fixtures/apify-study-v1/content/c-014.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "d131fff5f62fae7d42badede348c5a533e96ccf826c47b22331ff130d577791d",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-014.html"
+    },
+    "fixtures/apify-study-v1/content/c-015.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "0fb11906a314dfd6bd798d6252ef85e894c6fefe8ea8298eebffd003ba777efb",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-015.html"
+    },
+    "fixtures/apify-study-v1/content/c-016.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "17c06362a1c8b1c77b2738c66f299eaacd2388c371ce084ffa4bed69cac99e87",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-016.html"
+    },
+    "fixtures/apify-study-v1/content/c-017.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "579b5939053dc7675763ff665692def6aebea4a7e183212d8696cf906ace56ce",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-017.html"
+    },
+    "fixtures/apify-study-v1/content/c-018.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "b583e8a87bb4e80112608a7b48afa21fb5d402e891985a2154ddf20b4f967a62",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-018.html"
+    },
+    "fixtures/apify-study-v1/content/c-019.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "67977e9f7d50e9a6ee164ddf4daf8caf993c884201b7a2c9185779756dfc2597",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-019.html"
+    },
+    "fixtures/apify-study-v1/content/c-020.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "90423d3d780731987a6f7fd5f19ddf097f8d8ff0a98b21fa8415e872120cf71c",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-020.html"
+    },
+    "fixtures/apify-study-v1/content/c-021.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "f0f548777e6e36230da1a2461a306c776bd40bd45220be9b6b6df3b2710c2da7",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-021.html"
+    },
+    "fixtures/apify-study-v1/content/c-022.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "192a2b96510a701424c5a3e402118c1b9c0f0a7e08d575fe961b54d37c6315e3",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-022.html"
+    },
+    "fixtures/apify-study-v1/content/c-023.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "ce1ec379c34b0c55d095e6a2350f1bdbea5214b23491f0af9935dd7f7ddfdf95",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-023.html"
+    },
+    "fixtures/apify-study-v1/content/c-024.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "ea6d1a5202c0dac6ffeb8ec6ca83d56397bc37e15ea51348181128ed0e1320f5",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-024.html"
+    },
+    "fixtures/apify-study-v1/content/c-025.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "33461287a7095b00202ecae3446acc7de79146b71ac9768f1bc494df9e84e796",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-025.html"
+    },
+    "fixtures/apify-study-v1/content/c-026.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "5d75cc497872eede9e99be20711df121d9f89ddd7c0bd993f76720bb84d4b56d",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-026.html"
+    },
+    "fixtures/apify-study-v1/content/c-027.html": {
+      "bytes": 3524,
+      "required_for_paid_cell": true,
+      "sha256": "84e724d91495ca4906f587076dceab81397a975b79d450e5ed83cb20d505f6de",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-027.html"
+    },
+    "fixtures/apify-study-v1/content/c-028.html": {
+      "bytes": 814,
+      "required_for_paid_cell": true,
+      "sha256": "53bbd96442b2afbb4ed07092ec82581a65aa1ae866da3cba98c29ea9bf2e431d",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-028.html"
+    },
+    "fixtures/apify-study-v1/content/c-029.html": {
+      "bytes": 5924,
+      "required_for_paid_cell": true,
+      "sha256": "6985dc0f55b3a71908fd68c563161943cad25b3b95475de8a317538323bc07f3",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/content/c-029.html"
+    },
+    "fixtures/apify-study-v1/static/s-000.html": {
+      "bytes": 337,
+      "required_for_paid_cell": true,
+      "sha256": "28045ca460e4e471f4ca39fd986418684b6b77474e23714b903c1a1b46b1bd74",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-000.html"
+    },
+    "fixtures/apify-study-v1/static/s-001.html": {
+      "bytes": 349,
+      "required_for_paid_cell": true,
+      "sha256": "6eca3f7b1b326039b26ef90720688f7fadc84d5445e93bff278d2c7c19dd442c",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-001.html"
+    },
+    "fixtures/apify-study-v1/static/s-002.html": {
+      "bytes": 321,
+      "required_for_paid_cell": true,
+      "sha256": "a74766fa7c5214c0695b8d2e30c6e01cfbcfc6f453031a52dbfb85f6591fd620",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-002.html"
+    },
+    "fixtures/apify-study-v1/static/s-003.html": {
+      "bytes": 337,
+      "required_for_paid_cell": true,
+      "sha256": "18ac4a34f62fe26201f08a41cefd2d86f4a169c43a69b80d08bb2b9a41a62d2b",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-003.html"
+    },
+    "fixtures/apify-study-v1/static/s-004.html": {
+      "bytes": 349,
+      "required_for_paid_cell": true,
+      "sha256": "e40474da91c57217afaf34ab2922382185b038ea376c74bf779c95eb8a7eefc9",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-004.html"
+    },
+    "fixtures/apify-study-v1/static/s-005.html": {
+      "bytes": 321,
+      "required_for_paid_cell": true,
+      "sha256": "096b622e3a17a7c88b7203cb34ecf94d09d31d92997351a1e8570de8d32528e1",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-study-v1/static/s-005.html"
+    }
+  },
+  "required_assets": 42,
+  "schema_version": 1,
+  "synthetic": true
+}

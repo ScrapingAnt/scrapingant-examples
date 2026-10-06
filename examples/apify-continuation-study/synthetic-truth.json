@@ -1,0 +1,145 @@
+{
+  "commerce": [
+    {
+      "case_id": "commerce-000",
+      "currency": "USD",
+      "fixture_sha256": "7c091cea8ce4b224709e8cc978a79b0c51d7294b68d62afd538d887bc7d43dcd",
+      "name": "Synthetic product 000",
+      "price_minor": 1234,
+      "sku": "SYNTH-000",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-000.html"
+    },
+    {
+      "case_id": "commerce-001",
+      "currency": "USD",
+      "fixture_sha256": "e172e4e50d15ec5ab218020737f30097098a9760690ce1d684c9ea00717fe65d",
+      "name": "Synthetic product 001",
+      "price_minor": 1235,
+      "sku": "SYNTH-001",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-001.html"
+    },
+    {
+      "case_id": "commerce-002",
+      "currency": "USD",
+      "fixture_sha256": "e9fb2a26e7d47909820e8618f28c2d5c32438fdac8e415e8d6e56be86f40c508",
+      "name": "Synthetic product 002",
+      "price_minor": 1236,
+      "sku": "SYNTH-002",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-002.html"
+    },
+    {
+      "case_id": "commerce-003",
+      "currency": "USD",
+      "fixture_sha256": "400e7eded754ca89a45de101a622201b7f9385079d5a05043baea0a312dec0d7",
+      "name": "Synthetic product 003",
+      "price_minor": 1237,
+      "sku": "SYNTH-003",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-003.html"
+    },
+    {
+      "case_id": "commerce-004",
+      "currency": "USD",
+      "fixture_sha256": "87b76fb155c9cdebca5e3d4f781a01985f8ba8739ccc393618678eabd48dd363",
+      "name": "Synthetic product 004",
+      "price_minor": 1238,
+      "sku": "SYNTH-004",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-004.html"
+    },
+    {
+      "case_id": "commerce-005",
+      "currency": "USD",
+      "fixture_sha256": "b0e7e94a049b63aa44b358a5d6f3d6fc1fe8b72f7a3ff213648134750d29a40a",
+      "name": "Synthetic product 005",
+      "price_minor": 1239,
+      "sku": "SYNTH-005",
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-005.html"
+    }
+  ],
+  "contact": [
+    {
+      "case_id": "contact-000",
+      "emails": [
+        "contact000@example.com"
+      ],
+      "fixture_sha256": "f9d479124c07ab5b26e76e57dd7044a4efbb213eda692d43e05ffacd4680cfb4",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-000.html",
+      "phones": [
+        "12025550100"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-000.html"
+    },
+    {
+      "case_id": "contact-001",
+      "emails": [
+        "contact001@example.com"
+      ],
+      "fixture_sha256": "80d4565b59bb2f49ae5663fc8b28194b8c8e2ca8ea82e5b779cbd257cd16ca7d",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-001.html",
+      "phones": [
+        "12025550101"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-001.html"
+    },
+    {
+      "case_id": "contact-002",
+      "emails": [
+        "contact002@example.com"
+      ],
+      "fixture_sha256": "b2dfe4a97781e1c749ad88f446f232c46ff2d719cf1eabdc111b406003f4fedf",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-002.html",
+      "phones": [
+        "12025550102"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-002.html"
+    },
+    {
+      "case_id": "contact-003",
+      "emails": [
+        "contact003@example.com"
+      ],
+      "fixture_sha256": "4e8064fb9dc4de973b03b518d562b9549b35f74ed75d579608c1db4b01af6c03",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-003.html",
+      "phones": [
+        "12025550103"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-003.html"
+    },
+    {
+      "case_id": "contact-004",
+      "emails": [
+        "contact004@example.com"
+      ],
+      "fixture_sha256": "3922bb19e38b2508eae55a6accb980a5f01cae7b8c94724c939084e359aebbd4",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-004.html",
+      "phones": [
+        "12025550104"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-004.html"
+    },
+    {
+      "case_id": "contact-005",
+      "emails": [
+        "contact005@example.com"
+      ],
+      "fixture_sha256": "ebde6deaec7cb9f3495f3bf66313d1b69058609216fb7ec69adb8423651d300f",
+      "originalStartUrl": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-005.html",
+      "phones": [
+        "12025550105"
+      ],
+      "synthetic": true,
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/contacts/contact-005.html"
+    }
+  ],
+  "synthetic": true
+}

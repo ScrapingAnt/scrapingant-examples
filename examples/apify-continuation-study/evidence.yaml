@@ -1,0 +1,32 @@
+id: apify-prospective-continuation-v1
+status: private_candidate_guard_closed
+tested_at: 2026-10-06
+environment:
+  python: [3.10.2, 3.12.10]
+  dependencies: Python standard library; hash-pinned existing pure validators
+  encryption: age 1.3.2, existing recipient; private offline probes only
+requires_api_key: true
+existing_actions_secret_only: APIFY_TOKEN
+examples_repo_commit: null
+base_examples_repo_commit: 9f9ff0407dba6531cc56f78eb4f7ba45635bd637
+measurements:
+  offline_test_provider_calls: 0
+  paid_provider_calls: 0
+  anonymous_public_metadata_GETs_for_source_review: 6
+  actual_Actor_starts: 0
+  public_offline_tests_per_python: 50
+  private_offline_tests_per_python: 25
+  proposed_new_fixture_files: 12
+  total_manifest_fixtures: 48
+  paid_cell_required_fixtures: 42
+  original_819_assignment_preserved: true
+limitations:
+  - Named synthetic responses and fixtures; no real customer bill or runtime benchmark.
+  - New AI/Google contracts remain prospective; original failures are preserved.
+  - Native closed CI, served-byte proof and first-output gates remain future evidence.
+  - E-commerce and Smart Article are excluded from dispatch.
+  - No new publication, paid dispatch, cleanup or financial account call in this stage.
+claims:
+  - Tests establish offline normalization, scope rejection and admitted-output denominators.
+  - Official pricing and native minimum-cap facts are dated 2026-10-06.
+  - Model caps and ancillary reserves establish planning holds, not realized or final costs.
