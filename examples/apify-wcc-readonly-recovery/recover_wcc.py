@@ -15,7 +15,7 @@ ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT.parent/'apify-breadth-study'))
 import recover_existing as base
 
-RECOVERY_READY = True
+RECOVERY_READY = False
 SPEC_SHA256='dbb70daad8322778699f64ccbba1f3143b00a4578677a26b6e1b63d62a642c2e'
 STAGES=('run','dataset','kv','queue','extra','meter')
 TARGET_FIELDS=base.TARGET_FIELDS+('options','extraDatasetAlias','extraDatasetId')
