@@ -17,7 +17,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, HTTPRedirectHandler, build_opener
 
-ACTIVE_CELL = 'continuation-contact-pilot'
+ACTIVE_CELL = None
 PLAN_SHA256 = '4a683cf7e42fb5e0a21d4253568b4273e13eafd79ca178e53705527b7c9f2579'
 ROOT = Path(__file__).resolve().parent
 API = 'https://api.apify.com/v2'
