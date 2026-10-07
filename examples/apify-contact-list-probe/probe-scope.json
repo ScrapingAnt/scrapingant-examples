@@ -1,0 +1,32 @@
+{
+  "Actor_starts": 0,
+  "DELETEs": 0,
+  "HTTP400_error_body_limit_bytes": 16384,
+  "HTTP400_error_fields_required": [
+    "type",
+    "message"
+  ],
+  "aborts": 0,
+  "capture_wall_seconds": 90,
+  "dependency_sha256": {
+    "examples/apify-contact-readonly-recovery/recover_contact.py": "d384fc7cffc596e5074a65aa39a58635710f3f64d802d9e3a35f2358d18bbe2b",
+    "examples/apify-contact-readonly-recovery/scope.json": "70ee216c9d6fb133fe24793904cdcd597e74e1bd48449dea94c443d845a7a0b8",
+    "examples/apify-study/billing_projection.py": "f54f05292bc68e9ee3f2bdd8de0b537a5c270069e996b393da620d5541329498",
+    "examples/apify-study/runner.py": "d7e11778845fb95a95d99a0671a9023cef9304735edf965b84487aafcaf61bfd",
+    "examples/apify-sustained/evidence_transport.py": "f5c3a9ffdb57add4a20121b0369da7223703a57b49cdbaf2a29015b808d2cbb3",
+    "examples/apify-sustained/recipient.txt": "7da784c7f41ff4e52cce510c67943403dab25843a997bd805d6c4b4c7415ddac"
+  },
+  "diagnostic_id": "contact-list-error-capture-v1",
+  "historical_diagnostic_GETs": 1,
+  "item_exports": 0,
+  "maximum_aggregate_GETs": 5,
+  "maximum_aggregate_after_this_dispatch": 2,
+  "maximum_new_GETs": 1,
+  "new_credentials": false,
+  "no_resumption": true,
+  "original_query_unchanged": true,
+  "original_scope_sha256": "70ee216c9d6fb133fe24793904cdcd597e74e1bd48449dea94c443d845a7a0b8",
+  "request_seconds": 15,
+  "schema_version": 1,
+  "success_body_limit_bytes": 131072
+}

@@ -1,0 +1,114 @@
+{
+  "name": "Contact one-GET error capture (guard closed)",
+  "on": {
+    "push": {
+      "paths": [
+        "examples/apify-contact-list-probe/**",
+        ".github/workflows/apify-contact-list-probe.yml"
+      ]
+    },
+    "workflow_dispatch": {
+      "inputs": {
+        "execute_probe": {
+          "description": "One fixed list GET; encrypted error body; no starts or resumption",
+          "type": "boolean",
+          "required": true,
+          "default": false
+        },
+        "expected_source_sha": {
+          "description": "Exact reviewed activated source SHA",
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "apify-contact-readonly-recovery",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "offline": {
+      "runs-on": "ubuntu-latest",
+      "timeout-minutes": 10,
+      "strategy": {
+        "matrix": {
+          "python": [
+            "3.10",
+            "3.12"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@v4",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "with": {
+            "python-version": "${{ matrix.python }}"
+          }
+        },
+        {
+          "name": "Named synthetic probe and adapter tests",
+          "working-directory": "examples/apify-contact-list-probe",
+          "run": "python -B -m unittest test_list_probe.py"
+        }
+      ]
+    },
+    "probe": {
+      "needs": "offline",
+      "if": "github.event_name == 'workflow_dispatch' && inputs.execute_probe && github.ref == 'refs/heads/main' && github.run_attempt == 1 && inputs.expected_source_sha == github.sha",
+      "runs-on": "ubuntu-latest",
+      "timeout-minutes": 5,
+      "steps": [
+        {
+          "uses": "actions/checkout@v4",
+          "with": {
+            "ref": "${{ github.sha }}",
+            "persist-credentials": false
+          }
+        },
+        {
+          "uses": "actions/setup-python@v5",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "name": "Install existing official age version at pinned digest",
+          "shell": "bash",
+          "run": "set -euo pipefail\nmkdir -p \"$RUNNER_TEMP/age-v1.3.2\"\ncurl --fail --silent --show-error --location --max-time 60 \\\n  https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \\\n  --output \"$RUNNER_TEMP/age-v1.3.2/age.tar.gz\"\nprintf '%s  %s\\n' cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10 \"$RUNNER_TEMP/age-v1.3.2/age.tar.gz\" | sha256sum --check --status\ntar -xzf \"$RUNNER_TEMP/age-v1.3.2/age.tar.gz\" -C \"$RUNNER_TEMP/age-v1.3.2\" age/age age/LICENSE\n"
+        },
+        {
+          "name": "Exactly one Contact list GET and stop",
+          "working-directory": "examples/apify-contact-list-probe",
+          "env": {
+            "APIFY_TOKEN": "${{ secrets.APIFY_TOKEN }}",
+            "APIFY_CONTACT_LIST_PROBE_OPT_IN": "yes",
+            "APIFY_CONTACT_LIST_EXPECTED_SOURCE_SHA": "${{ inputs.expected_source_sha }}"
+          },
+          "run": "python -B list_probe.py --execute"
+        },
+        {
+          "name": "Encrypted responses and fixed projection only",
+          "if": "always()",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "apify-contact-encrypted-list-probe",
+            "path": "examples/apify-contact-list-probe/capture/list.age\nexamples/apify-contact-list-probe/capture/list-error.age\nexamples/apify-contact-list-probe/capture/manifest.age\nexamples/apify-contact-list-probe/capture/probe-public.json",
+            "if-no-files-found": "ignore",
+            "retention-days": 7
+          }
+        }
+      ]
+    }
+  }
+}
