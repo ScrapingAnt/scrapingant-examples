@@ -1,0 +1,36 @@
+example_id: download-image-c-sharp
+tested_at: "2026-10-08"
+examples_repo_commit: 083d26bc22d60f8d3e5f726e76e79095c007d747
+environment:
+  os: macOS arm64
+  dotnet_sdk: "10.0.401"
+  dotnet_runtime: "10.0.12"
+  python: "3.10.2"
+requires_api_key: false
+dependencies:
+  third_party_dotnet_packages: none
+claims:
+  - id: IMG-01
+    statement: The dated run passes 15 local cases and preserves exact PNG/JPEG fixture bytes on success.
+    source: expected_output/cases.json, test_download.py
+  - id: IMG-02
+    statement: Rejected responses do not publish a destination or leave temporary files; an existing destination remains unchanged.
+    source: expected_output/cases.json, test_download.py, ImageDownloader.cs
+  - id: IMG-03
+    statement: Body reads have a passed cancellation token and received bytes are limited even without Content-Length.
+    source: ImageDownloader.cs, expected_output/cases.json
+sources:
+  - id: HTTP-LIFE
+    url: "https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient-guidelines"
+    accessed_at: "2026-10-08"
+    supports: "HttpClient lifetime and pooling"
+  - id: HTTP-STREAM
+    url: "https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpcompletionoption?view=net-10.0"
+    accessed_at: "2026-10-08"
+    supports: "ResponseHeadersRead and body timeout scope"
+  - id: HTTP-OLD
+    url: "https://learn.microsoft.com/en-us/dotnet/core/compatibility/networking/6.0/webrequest-deprecated"
+    accessed_at: "2026-10-08"
+    supports: "WebClient/WebRequest obsolete for new .NET work"
+limitations:
+  - "Owned loopback tests only; signatures are not full image decoding, sanitization, malware validation or SSRF protection. No retries, public-server/TLS/provider measurements or crash-durability guarantee."

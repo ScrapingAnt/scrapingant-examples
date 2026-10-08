@@ -1,0 +1,5 @@
+{
+  "fixtures/pixel.jpg": "dba797a324f2d4a6cb2838da87e5a590b365803217341b1798f1f1d70cc7d91a",
+  "fixtures/pixel.png": "3a551478629e0c406e9e447cc1de9626e03e6900159c5cd6c4990a914c294004",
+  "expected_output/cases.json": "b2dbc9c1f51b993fee3820f2c310ed3de25e2833365ffb4bb8d9c60200f5b5b9"
+}

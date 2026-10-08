@@ -1,0 +1,33 @@
+example_id: parse-html-dot-net
+tested_at: "2026-10-08"
+examples_repo_commit: 5bc70eb654e3e412ae3918c813a3d274374588ab
+environment:
+  os: macOS arm64
+  dotnet_sdk: "10.0.401"
+  dotnet_runtime: "10.0.12"
+  python: "3.10.2"
+requires_api_key: false
+dependencies:
+  AngleSharp: "1.8.4"
+  HtmlAgilityPack: "1.13.0"
+claims:
+  - id: PARSE-01
+    statement: Both implementations emit the same three literal records on the owned fixture.
+    source: expected_output/css.json, expected_output/xpath.json, ParserTests.cs
+  - id: PARSE-02
+    statement: The dated test run passes fifteen assertions, including empty/incomplete/scheme/entity/script controls.
+    source: expected_output/tests.txt, ParserTests.cs
+  - id: PARSE-03
+    statement: HAP content is entity-decoded once; AngleSharp DOM values are not decoded again.
+    source: Extractors.cs, fixtures/catalog.html, expected_output/css.json
+sources:
+  - id: AS
+    url: "https://github.com/AngleSharp/AngleSharp"
+    accessed_at: "2026-10-08"
+    supports: "CSS querySelectorAll / parser APIs"
+  - id: HAP
+    url: "https://github.com/zzzprojects/html-agility-pack"
+    accessed_at: "2026-10-08"
+    supports: "HTML DOM and XPath support"
+limitations:
+  - "No benchmark, external target, network loading, JS execution, provider call, base-element support or universal parser-equivalence claim."

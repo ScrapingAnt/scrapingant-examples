@@ -1,0 +1,6 @@
+{
+  "fixtures/catalog.html": "d476cce6fb879f1497c92779fad59d881bbab5b0532f772ea65728eddccc2039",
+  "expected_output/css.json": "1f5053aa3a0524e19c97bbdce1f1567cf77d5cd69c39ebee54ac9d0fdeb40129",
+  "expected_output/tests.txt": "d0e5d60e4d98acfa826eb7bf0e9522b22948da2f81f6b1ce494f7f56325ec563",
+  "expected_output/xpath.json": "1f5053aa3a0524e19c97bbdce1f1567cf77d5cd69c39ebee54ac9d0fdeb40129"
+}
