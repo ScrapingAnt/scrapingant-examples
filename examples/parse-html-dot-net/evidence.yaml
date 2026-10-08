@@ -1,6 +1,6 @@
 example_id: parse-html-dot-net
 tested_at: "2026-10-08"
-examples_repo_commit: pending_publication
+examples_repo_commit: 5bc70eb654e3e412ae3918c813a3d274374588ab
 environment:
   os: macOS arm64
   dotnet_sdk: "10.0.401"
