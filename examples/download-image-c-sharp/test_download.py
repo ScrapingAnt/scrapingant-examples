@@ -56,7 +56,8 @@ def main():
                     f"http://127.0.0.1:{server.server_port}{route}", str(destination), *options]
                 if name != "http_without_opt_in": command.append("--allow-loopback")
                 result = subprocess.run(command, capture_output=True, text=True, timeout=10)
-                assert (result.returncode == 0) == success, (name, result.stdout, result.stderr)
+                assert result.returncode == (0 if success else 1), (name, result.stdout, result.stderr)
+                assert "Unhandled exception" not in result.stderr, (name, result.stderr)
                 if success:
                     assert destination.read_bytes() == (JPEG if name == "jpeg" else PNG), name + " byte oracle"
                 elif name == "existing_file": assert destination.read_bytes() == b"keep me"

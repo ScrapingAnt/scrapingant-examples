@@ -22,7 +22,7 @@ try
     var bytes = await ImageDownloader.SaveAsync(client, url, args[1], maxBytes, timeout.Token);
     Console.WriteLine($"saved {bytes} bytes");
 }
-catch (Exception error) when (error is HttpRequestException or IOException or
+catch (Exception error) when (error is HttpRequestException or IOException or InvalidDataException or
     OperationCanceledException or ArgumentException or FormatException or OverflowException)
 {
     Console.Error.WriteLine(error.GetType().Name + ": " + error.Message);

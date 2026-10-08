@@ -31,57 +31,57 @@
     {
       "case": "html",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "forged_png_mime",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "missing_mime",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "mismatched_signature",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "empty",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "declared_oversize",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
       "case": "unknown_length_oversize",
       "passed": true,
-      "exit_code": 134,
+      "exit_code": 1,
       "stdout": "",
-      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "error_type": "InvalidDataException",
       "saved_sha256": null
     },
     {
