@@ -1,0 +1,128 @@
+{
+  "fixture_bytes": 68,
+  "fixture_sha256": "3a551478629e0c406e9e447cc1de9626e03e6900159c5cd6c4990a914c294004",
+  "jpeg_fixture_bytes": 4670,
+  "jpeg_fixture_sha256": "dba797a324f2d4a6cb2838da87e5a590b365803217341b1798f1f1d70cc7d91a",
+  "cases": [
+    {
+      "case": "ok",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "saved 68 bytes",
+      "error_type": "",
+      "saved_sha256": "3a551478629e0c406e9e447cc1de9626e03e6900159c5cd6c4990a914c294004"
+    },
+    {
+      "case": "jpeg",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "saved 4670 bytes",
+      "error_type": "",
+      "saved_sha256": "dba797a324f2d4a6cb2838da87e5a590b365803217341b1798f1f1d70cc7d91a"
+    },
+    {
+      "case": "http404",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "HttpRequestException",
+      "saved_sha256": null
+    },
+    {
+      "case": "html",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "forged_png_mime",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "missing_mime",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "mismatched_signature",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "empty",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "declared_oversize",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "unknown_length_oversize",
+      "passed": true,
+      "exit_code": 134,
+      "stdout": "",
+      "error_type": "Unhandled exception. System.IO.InvalidDataException",
+      "saved_sha256": null
+    },
+    {
+      "case": "truncated",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "HttpIOException",
+      "saved_sha256": null
+    },
+    {
+      "case": "body_timeout",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "TaskCanceledException",
+      "saved_sha256": null
+    },
+    {
+      "case": "redirect",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "HttpRequestException",
+      "saved_sha256": null
+    },
+    {
+      "case": "existing_file",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "IOException",
+      "saved_sha256": null
+    },
+    {
+      "case": "http_without_opt_in",
+      "passed": true,
+      "exit_code": 1,
+      "stdout": "",
+      "error_type": "ArgumentException",
+      "saved_sha256": null
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+name: .NET article evidence
+on:
+  pull_request:
+    paths:
+      - 'examples/parse-html-dot-net/**'
+      - 'examples/download-image-c-sharp/**'
+      - '.github/workflows/dotnet-content-evidence.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'examples/parse-html-dot-net/**'
+      - 'examples/download-image-c-sharp/**'
+      - '.github/workflows/dotnet-content-evidence.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 8 * *'
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.401'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: bash examples/parse-html-dot-net/run.sh
+      - run: bash examples/download-image-c-sharp/run.sh

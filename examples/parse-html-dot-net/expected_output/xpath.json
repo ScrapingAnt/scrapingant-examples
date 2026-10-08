@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "tea",
+    "Title": "Tea \u0026 biscuits",
+    "Url": "https://shop.example.test/items/tea?pack=1\u0026size=2"
+  },
+  {
+    "Id": "cafe",
+    "Title": "Caf\u00E9 \u0022Noir\u0022",
+    "Url": "https://shop.example.test/items/cafe"
+  },
+  {
+    "Id": "literal",
+    "Title": "Literal \u0026lt;tag\u0026gt;",
+    "Url": "https://cdn.example.test/items/literal"
+  }
+]
