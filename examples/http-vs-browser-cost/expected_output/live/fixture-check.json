@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-09T14:03:06.278524+00:00",
+  "checks": [
+    {
+      "target": "static",
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "status": 200,
+      "source_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "public_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "byte_equal": true
+    },
+    {
+      "target": "delayed",
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+      "status": 200,
+      "source_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "public_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "byte_equal": true
+    }
+  ],
+  "ownership": "ScrapingAnt/scrapingant-examples tracked fixtures and fixtures/README.md; existing GitHub Pages publication"
+}

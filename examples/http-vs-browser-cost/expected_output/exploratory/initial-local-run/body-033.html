@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Ant Supply: tables fixture</title></head>
+<body>
+<h1>Ant Supply catalogue (fixture for pandas.read_html)</h1>
+<p>Eleven tables, each built to trigger one read_html behaviour.</p>
+
+<h2>1. simple</h2>
+<table id="simple">
+  <tr><th>Name</th><th>Age</th><th>City</th></tr>
+  <tr><td>Ada</td><td>36</td><td>London</td></tr>
+  <tr><td>Grace</td><td>45</td><td>Arlington</td></tr>
+  <tr><td>Linus</td><td>28</td><td>Helsinki</td></tr>
+</table>
+
+<h2>2. prices (thead, thousands separators, currency, percent)</h2>
+<table id="prices" class="data">
+  <thead><tr><th>Product</th><th>Price</th><th>Units sold</th><th>Share</th></tr></thead>
+  <tbody>
+    <tr><td>Ant Farm Deluxe</td><td>$1,234.50</td><td>12,345</td><td>45.5%</td></tr>
+    <tr><td>Ant Farm Mini</td><td>$99.00</td><td>1,020</td><td>3.8%</td></tr>
+    <tr><td>Magnifier</td><td>$12.25</td><td>987,654</td><td>50.7%</td></tr>
+  </tbody>
+</table>
+
+<h2>3. two-row header (colspan in thead)</h2>
+<table id="two-row-header">
+  <thead>
+    <tr><th rowspan="2">Region</th><th colspan="2">2025</th><th colspan="2">2026</th></tr>
+    <tr><th>Q1</th><th>Q2</th><th>Q1</th><th>Q2</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>North</td><td>10</td><td>12</td><td>14</td><td>16</td></tr>
+    <tr><td>South</td><td>7</td><td>8</td><td>9</td><td>11</td></tr>
+  </tbody>
+</table>
+
+<h2>4. spans in the body</h2>
+<table id="spans">
+  <thead><tr><th>Group</th><th>Item</th><th>Qty</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="2">Tools</td><td>Tweezers</td><td>4</td></tr>
+    <tr><td>Brush</td><td>2</td></tr>
+    <tr><td>Food</td><td colspan="2">sold out</td></tr>
+  </tbody>
+</table>
+
+<h2>5. codes with leading zeros</h2>
+<table id="codes">
+  <thead><tr><th>Code</th><th>Postcode</th><th>Label</th></tr></thead>
+  <tbody>
+    <tr><td>007</td><td>01234</td><td>agent</td></tr>
+    <tr><td>042</td><td>00501</td><td>answer</td></tr>
+  </tbody>
+</table>
+
+<h2>6. dates</h2>
+<table id="dates">
+  <thead><tr><th>Shipped</th><th>Delivered</th><th>Parcels</th></tr></thead>
+  <tbody>
+    <tr><td>2026-09-01</td><td>2026-09-03</td><td>3</td></tr>
+    <tr><td>2026-09-10</td><td>2026-09-15</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<h2>7. links</h2>
+<table id="links">
+  <thead><tr><th><a href="/docs/product">Product</a></th><th>Docs</th></tr></thead>
+  <tbody>
+    <tr><td>Ant Farm Deluxe</td><td><a href="https://example.com/deluxe">manual</a></td></tr>
+    <tr><td>Magnifier</td><td>none</td></tr>
+  </tbody>
+</table>
+
+<h2>8. hidden row</h2>
+<table id="hidden">
+  <thead><tr><th>Sku</th><th>Stock</th></tr></thead>
+  <tbody>
+    <tr><td>AF-1</td><td>5</td></tr>
+    <tr style="display: none"><td>AF-2</td><td>0</td></tr>
+    <tr><td>AF-3</td><td>12</td></tr>
+  </tbody>
+</table>
+
+<h2>9. nested</h2>
+<table id="outer">
+  <thead><tr><th>Warehouse</th><th>Bins</th></tr></thead>
+  <tbody>
+    <tr><td>Berlin</td><td>
+      <table id="inner">
+        <tr><th>Bin</th><th>Count</th></tr>
+        <tr><td>B1</td><td>40</td></tr>
+        <tr><td>B2</td><td>15</td></tr>
+      </table>
+    </td></tr>
+    <tr><td>Lyon</td><td>none</td></tr>
+  </tbody>
+</table>
+
+<h2>10. no thead, td header row</h2>
+<table id="no-thead">
+  <tr><td>Metric</td><td>Value</td></tr>
+  <tr><td>Uptime</td><td>99.9</td></tr>
+  <tr><td>Errors</td><td>3</td></tr>
+</table>
+
+<h2>11. european numbers</h2>
+<table id="european">
+  <thead><tr><th>Country</th><th>Revenue</th><th>Growth</th></tr></thead>
+  <tbody>
+    <tr><td>Germany</td><td>1.234.567,89</td><td>3,5</td></tr>
+    <tr><td>France</td><td>987.654,32</td><td>-1,2</td></tr>
+    <tr><td>Spain</td><td>n/a</td><td>0,0</td></tr>
+  </tbody>
+</table>
+</body>
+</html>

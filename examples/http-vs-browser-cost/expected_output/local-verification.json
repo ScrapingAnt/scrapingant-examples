@@ -1,0 +1,102 @@
+{
+  "complete": true,
+  "runtime_hashes_present": false,
+  "billing_status": "no_api_calls",
+  "actual_credits_receipted": 0,
+  "summary": [
+    {
+      "target": "static",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 5.9844585484825075,
+      "median_valid_ms": 5.9844585484825075,
+      "observed_range_ms": [
+        3.6554998951032758,
+        37.66937495674938
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "static",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 112.53483302425593,
+      "median_valid_ms": 112.53483302425593,
+      "observed_range_ms": [
+        76.97145803831518,
+        226.90170805435628
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "delayed",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 0,
+      "valid_record_observations": 0,
+      "unique_expected_records": 0,
+      "median_all_ms": 1.843479520175606,
+      "median_valid_ms": null,
+      "observed_range_ms": [
+        1.168375019915402,
+        4.37949993647635
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0,
+        0.2775327998628892
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {
+        "invalid_contract": 10
+      }
+    },
+    {
+      "target": "delayed",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 10,
+      "unique_expected_records": 1,
+      "median_all_ms": 1891.560208518058,
+      "median_valid_ms": 1891.560208518058,
+      "observed_range_ms": [
+        1850.135332904756,
+        2043.137542088516
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    }
+  ]
+}

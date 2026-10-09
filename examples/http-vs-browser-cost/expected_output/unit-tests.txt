@@ -1,0 +1,37 @@
+test_budget_reserves_before_call (test_contract.ContractTests.test_budget_reserves_before_call) ... ok
+test_charged_invalid_response_stays_in_numerator (test_contract.ContractTests.test_charged_invalid_response_stays_in_numerator) ... ok
+test_delayed_content_requires_ready_marker_and_exact_text (test_contract.ContractTests.test_delayed_content_requires_ready_marker_and_exact_text) ... ok
+test_duplicate_tables_fail (test_contract.ContractTests.test_duplicate_tables_fail) ... ok
+test_exact_static_records (test_contract.ContractTests.test_exact_static_records) ... ok
+test_missing_and_extra_rows_fail (test_contract.ContractTests.test_missing_and_extra_rows_fail) ... ok
+test_missing_receipt_means_unknown_cost (test_contract.ContractTests.test_missing_receipt_means_unknown_cost) ... ok
+test_rendered_has_selector_and_source_false_raw_does_not (test_contract.ContractTests.test_rendered_has_selector_and_source_false_raw_does_not) ... ok
+test_schedule_retains_each_target_arm_round (test_contract.ContractTests.test_schedule_retains_each_target_arm_round) ... ok
+test_status_failure_not_valid_even_with_right_html (test_contract.ContractTests.test_status_failure_not_valid_even_with_right_html) ... ok
+test_wrong_price_fails_whole_contract (test_contract.ContractTests.test_wrong_price_fails_whole_contract) ... ok
+test_zero_valid_is_undefined_not_free (test_contract.ContractTests.test_zero_valid_is_undefined_not_free) ... ok
+test_cleanup_failure_keeps_successful_capture (test_runner.RunnerTests.test_cleanup_failure_keeps_successful_capture) ... ok
+test_hard_stop_after_body_write_preserves_replayable_intent (test_runner.RunnerTests.test_hard_stop_after_body_write_preserves_replayable_intent) ... ok
+test_interrupt_preserves_unknown_api_attempt (test_runner.RunnerTests.test_interrupt_preserves_unknown_api_attempt) ... ok
+test_live_requires_explicit_exact_credit_cap (test_runner.RunnerTests.test_live_requires_explicit_exact_credit_cap) ... ok
+test_local_never_accepts_a_paid_budget (test_runner.RunnerTests.test_local_never_accepts_a_paid_budget) ... ok
+test_receipt_requires_expected_mode_cost_or_zero_for_api_error (test_runner.RunnerTests.test_receipt_requires_expected_mode_cost_or_zero_for_api_error) ... ok
+test_repeats_bounded (test_runner.RunnerTests.test_repeats_bounded) ... ok
+test_replay_rejects_changed_body (test_runner.RunnerTests.test_replay_rejects_changed_body) ... ok
+test_replay_rejects_forged_short_plan (test_runner.RunnerTests.test_replay_rejects_forged_short_plan) ... ok
+test_replay_rejects_omitted_attempt (test_runner.RunnerTests.test_replay_rejects_omitted_attempt) ... ok
+test_requests_has_ten_second_acquisition_deadline (test_runner.RunnerTests.test_requests_has_ten_second_acquisition_deadline) ... ok
+test_canonical_live_report_passes (test_verify_capture.VerificationTests.test_canonical_live_report_passes) ... ok
+test_changed_fixture_url_is_rejected (test_verify_capture.VerificationTests.test_changed_fixture_url_is_rejected) ... ok
+test_incomplete_unknown_billing_remains_explicit (test_verify_capture.VerificationTests.test_incomplete_unknown_billing_remains_explicit) ... ok
+test_legacy_local_report_is_explicitly_unbound (test_verify_capture.VerificationTests.test_legacy_local_report_is_explicitly_unbound) ... ok
+test_missing_fixture_map_is_rejected (test_verify_capture.VerificationTests.test_missing_fixture_map_is_rejected) ... ok
+test_missing_runtime_map_is_rejected (test_verify_capture.VerificationTests.test_missing_runtime_map_is_rejected) ... ok
+test_partial_runtime_map_is_rejected (test_verify_capture.VerificationTests.test_partial_runtime_map_is_rejected) ... ok
+test_receipts_above_ceiling_are_rejected (test_verify_capture.VerificationTests.test_receipts_above_ceiling_are_rejected) ... ok
+test_successful_zero_credit_receipt_is_rejected (test_verify_capture.VerificationTests.test_successful_zero_credit_receipt_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.342s
+
+OK

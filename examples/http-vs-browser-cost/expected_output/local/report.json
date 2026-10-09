@@ -1,0 +1,1491 @@
+{
+  "tested_at": "2026-10-09T13:51:36.919046+00:00",
+  "mode": "local",
+  "seed": 607,
+  "repeats": 10,
+  "plan": [
+    [
+      0,
+      "delayed",
+      "playwright"
+    ],
+    [
+      0,
+      "delayed",
+      "requests"
+    ],
+    [
+      0,
+      "static",
+      "playwright"
+    ],
+    [
+      0,
+      "static",
+      "requests"
+    ],
+    [
+      1,
+      "static",
+      "playwright"
+    ],
+    [
+      1,
+      "static",
+      "requests"
+    ],
+    [
+      1,
+      "delayed",
+      "playwright"
+    ],
+    [
+      1,
+      "delayed",
+      "requests"
+    ],
+    [
+      2,
+      "delayed",
+      "playwright"
+    ],
+    [
+      2,
+      "delayed",
+      "requests"
+    ],
+    [
+      2,
+      "static",
+      "playwright"
+    ],
+    [
+      2,
+      "static",
+      "requests"
+    ],
+    [
+      3,
+      "delayed",
+      "requests"
+    ],
+    [
+      3,
+      "delayed",
+      "playwright"
+    ],
+    [
+      3,
+      "static",
+      "playwright"
+    ],
+    [
+      3,
+      "static",
+      "requests"
+    ],
+    [
+      4,
+      "static",
+      "requests"
+    ],
+    [
+      4,
+      "static",
+      "playwright"
+    ],
+    [
+      4,
+      "delayed",
+      "requests"
+    ],
+    [
+      4,
+      "delayed",
+      "playwright"
+    ],
+    [
+      5,
+      "delayed",
+      "playwright"
+    ],
+    [
+      5,
+      "delayed",
+      "requests"
+    ],
+    [
+      5,
+      "static",
+      "requests"
+    ],
+    [
+      5,
+      "static",
+      "playwright"
+    ],
+    [
+      6,
+      "delayed",
+      "playwright"
+    ],
+    [
+      6,
+      "delayed",
+      "requests"
+    ],
+    [
+      6,
+      "static",
+      "requests"
+    ],
+    [
+      6,
+      "static",
+      "playwright"
+    ],
+    [
+      7,
+      "delayed",
+      "playwright"
+    ],
+    [
+      7,
+      "delayed",
+      "requests"
+    ],
+    [
+      7,
+      "static",
+      "requests"
+    ],
+    [
+      7,
+      "static",
+      "playwright"
+    ],
+    [
+      8,
+      "static",
+      "playwright"
+    ],
+    [
+      8,
+      "static",
+      "requests"
+    ],
+    [
+      8,
+      "delayed",
+      "playwright"
+    ],
+    [
+      8,
+      "delayed",
+      "requests"
+    ],
+    [
+      9,
+      "delayed",
+      "playwright"
+    ],
+    [
+      9,
+      "delayed",
+      "requests"
+    ],
+    [
+      9,
+      "static",
+      "requests"
+    ],
+    [
+      9,
+      "static",
+      "playwright"
+    ]
+  ],
+  "rows": [
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-000.html",
+      "elapsed_ms": 2043.137542088516,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 0
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-001.html",
+      "elapsed_ms": 2.9532089829444885,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 0
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-002.html",
+      "elapsed_ms": 130.06724999286234,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 0
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-003.html",
+      "elapsed_ms": 7.2855420876294374,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 0
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-004.html",
+      "elapsed_ms": 119.02449990157038,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 1
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-005.html",
+      "elapsed_ms": 4.51779190916568,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 1
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-006.html",
+      "elapsed_ms": 1850.135332904756,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 1
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-007.html",
+      "elapsed_ms": 1.4224170008674264,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 1
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-008.html",
+      "elapsed_ms": 1868.669749936089,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 2
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-009.html",
+      "elapsed_ms": 1.2667500413954258,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 2
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-010.html",
+      "elapsed_ms": 78.69458291679621,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 2
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-011.html",
+      "elapsed_ms": 4.509708960540593,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 2
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-012.html",
+      "elapsed_ms": 1.2888330966234207,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 3
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-013.html",
+      "elapsed_ms": 1863.5342920897529,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 3
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-014.html",
+      "elapsed_ms": 97.59366605430841,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 3
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-015.html",
+      "elapsed_ms": 4.661583108827472,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 3
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-016.html",
+      "elapsed_ms": 3.6554998951032758,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 4
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-017.html",
+      "elapsed_ms": 76.97145803831518,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 4
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-018.html",
+      "elapsed_ms": 1.8036669353023171,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 4
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-019.html",
+      "elapsed_ms": 1863.7173330644146,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 4
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-020.html",
+      "elapsed_ms": 1961.1183749511838,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 5
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-021.html",
+      "elapsed_ms": 4.37949993647635,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 5
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-022.html",
+      "elapsed_ms": 16.87475002836436,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 5
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-023.html",
+      "elapsed_ms": 167.46891709044576,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 5
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-024.html",
+      "elapsed_ms": 1902.0558750489727,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 6
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-025.html",
+      "elapsed_ms": 2.5839580921456218,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 6
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-026.html",
+      "elapsed_ms": 13.06816702708602,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 6
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-027.html",
+      "elapsed_ms": 109.37012499198318,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 6
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-028.html",
+      "elapsed_ms": 1881.0645419871435,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 7
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-029.html",
+      "elapsed_ms": 1.8832921050488949,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 7
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-030.html",
+      "elapsed_ms": 8.862082962878048,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 7
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-031.html",
+      "elapsed_ms": 115.69954105652869,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 7
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-032.html",
+      "elapsed_ms": 226.90170805435628,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 8
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-033.html",
+      "elapsed_ms": 37.66937495674938,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 8
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-034.html",
+      "elapsed_ms": 1906.9696250371635,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 8
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-035.html",
+      "elapsed_ms": 1.168375019915402,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 8
+    },
+    {
+      "arm": "playwright",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 1,
+      "records": [
+        [
+          "I ❤️ ScrapingAnt (after 1500 ms)"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-036.html",
+      "elapsed_ms": 2020.4477909719571,
+      "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+      "round": 9
+    },
+    {
+      "arm": "requests",
+      "target": "delayed",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": false,
+      "valid_records": 0,
+      "records": [
+        [
+          "Web Scraping is hard"
+        ]
+      ],
+      "ready": false,
+      "outcome": "invalid_contract",
+      "retries": 0,
+      "body_file": "body-037.html",
+      "elapsed_ms": 2.2300840355455875,
+      "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+      "round": 9
+    },
+    {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-038.html",
+      "elapsed_ms": 4.6833750093355775,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 9
+    },
+    {
+      "arm": "playwright",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-039.html",
+      "elapsed_ms": 80.20354097243398,
+      "body_sha256": "01c82954456bcd53ff97a7097d44568f95835c5f802dcafe71fade37d73876c9",
+      "round": 9
+    }
+  ],
+  "complete": true,
+  "approved_credit_ceiling": 0,
+  "api_calls": 0,
+  "actual_credits_receipted": 0,
+  "environment": {
+    "python": "3.12.10",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "architecture": "arm64",
+    "timezone": [
+      "EET",
+      "EEST"
+    ],
+    "client_region": "not supplied",
+    "dependencies": {
+      "requests": "2.34.2",
+      "playwright": "1.62.0",
+      "beautifulsoup4": "4.15.0"
+    },
+    "chromium": "151.0.7922.34"
+  },
+  "fixtures": {
+    "static": {
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a"
+    },
+    "delayed": {
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+      "sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93"
+    }
+  },
+  "timing": {
+    "acquisition_readiness_seconds": 10,
+    "caller_wall_seconds": 15,
+    "latency": "acquisition through validation; excludes browser launch/context cleanup",
+    "requests": "connect=5/read=10 plus caller wall deadline",
+    "browser_reuse": "one browser; fresh context per attempt",
+    "api_worker_version": "unobserved",
+    "api_worker_reuse": "unobserved"
+  },
+  "unrun_arms": [
+    "api_raw",
+    "api_rendered"
+  ],
+  "browser_launch_ms": 367.0867501059547,
+  "summary": [
+    {
+      "target": "static",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 5.9844585484825075,
+      "median_valid_ms": 5.9844585484825075,
+      "observed_range_ms": [
+        3.6554998951032758,
+        37.66937495674938
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "static",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 112.53483302425593,
+      "median_valid_ms": 112.53483302425593,
+      "observed_range_ms": [
+        76.97145803831518,
+        226.90170805435628
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "delayed",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 0,
+      "valid_record_observations": 0,
+      "unique_expected_records": 0,
+      "median_all_ms": 1.843479520175606,
+      "median_valid_ms": null,
+      "observed_range_ms": [
+        1.168375019915402,
+        4.37949993647635
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0,
+        0.2775327998628892
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {
+        "invalid_contract": 10
+      }
+    },
+    {
+      "target": "delayed",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 10,
+      "unique_expected_records": 1,
+      "median_all_ms": 1891.560208518058,
+      "median_valid_ms": 1891.560208518058,
+      "observed_range_ms": [
+        1850.135332904756,
+        2043.137542088516
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    }
+  ],
+  "run_context": "Final source capture overlapped a local blog build. Other host activity was not controlled; local latency is illustrative, not a production comparison."
+}

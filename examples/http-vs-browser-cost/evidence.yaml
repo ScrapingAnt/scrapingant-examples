@@ -1,0 +1,127 @@
+article_id: requests-playwright-scrapingant-benchmark
+evidence_asset_id: http-vs-browser-cost
+tested_at: 2026-10-09
+status: completed_controlled_four_arm_evidence
+requires_api_key: false
+live_requires_api_key: true
+live_authorization: owner_approved_40_calls_220_credits_2026_10_09
+default_paid_calls: 0
+recorded_api_calls: 40
+source_base: bd151557ab995bd1ce4178dd4c848700de982bac
+run_command: ./run.sh
+actual_run: python runner.py --out run_output/local-final
+environment:
+  python: 3.12.10
+  requests: 2.34.2
+  beautifulsoup4: 4.15.0
+  playwright: 1.62.0
+  chromium: 151.0.7922.34
+  os: macOS 26.6.2 arm64
+  client_region: not_supplied
+outputs:
+- expected_output/local/report.json
+- expected_output/local/body-000.html through body-039.html
+- expected_output/summary.json
+- expected_output/fixture-check.json
+- expected_output/unit-tests.txt
+- expected_output/live/report.json
+- expected_output/live/body-000.html through body-079.html
+- expected_output/live/fixture-check.json
+- expected_output/live/capture-provenance.json
+- expected_output/live-summary.json
+- expected_output/live-verification.json
+- expected_output/local-verification.json
+limitations:
+- 'Existing owned fixtures only: measured results do not establish production reliability
+  or total cash cost.'
+- Controlled owned fixtures only; no real-world reliability, anti-bot, proxy quality
+  or uptime result.
+- Catalog records and delayed sentinel are different units and must not be pooled.
+- Repeated observations are not new unique records or independent sites.
+- Loopback timing is distinct from public-origin/API network paths; one reused browser,
+  fresh contexts.
+- CPU/memory, setup/maintenance labor, host/proxy cash and subscription allocation
+  unmeasured.
+- Final loopback capture overlapped a local blog build; public-origin acquisition
+  had no concurrent build/render audit. Other host activity uncontrolled.
+- No p95/p99 or statistical superiority conclusion; fixture intervals are descriptive.
+- Named author review and completed four-arm independent review remain publication
+  gates.
+claims:
+- id: L1
+  text: Both local arms validated all three static records on each of ten attempts.
+  source: expected_output/local/report.json; expected_output/summary.json
+- id: L2
+  text: Requests validated zero delayed sentinel attempts; Playwright validated ten.
+  source: expected_output/local/report.json; expected_output/summary.json
+- id: L3
+  text: Both existing public fixture bytes matched tracked source after HTTP 200 reads.
+  source: expected_output/fixture-check.json
+- id: L4
+  text: The runner reserves documented credit cost and stops on missing/unexpected
+    receipts; expected arm cost or zero with an API error status is allowed.
+  source: runner.py; test_contract.py; test_runner.py
+- id: L5
+  text: Actual charged invalid output remains in the numerator; missing receipts and
+    zero valid results do not become zero cost.
+  source: contract.py; test_contract.py
+- id: M1
+  text: All four arms accepted all ten static attempts, thirty catalog observations
+    repeating three unique records.
+  source: expected_output/live/report.json; expected_output/live-summary.json
+- id: M2
+  text: Raw arms accepted zero delayed sentinels; direct Playwright and rendered ScrapingAnt
+    each accepted ten.
+  source: expected_output/live/report.json; all eighty raw body files
+- id: M3
+  text: Static raw API cost 10/30 = 0.3333 credits per accepted record observation;
+    rendered 100/30 = 3.3333.
+  source: expected_output/live-summary.json
+- id: M4
+  text: Delayed raw API spent ten credits with zero accepted sentinels, so its ratio
+    is undefined; rendered spent 100 for ten sentinels.
+  source: expected_output/live-summary.json
+- id: M5
+  text: Public-origin run completed with forty API calls and 220 receipts; all API
+    outer/target statuses 200, no timeout/retry.
+  source: expected_output/live/report.json
+- id: V1
+  text: Strict offline wrapper requires complete live source/fixture maps, expected
+    completed receipts and total at or below ceiling, then performs the recorded mechanical
+    replay.
+  source: verify_capture.py; test_verify_capture.py; expected_output/live-verification.json
+tested_source_commit: 05cbdf3080507b8f3f2d41ad65bb3ddd42b5d587
+publication_status: public_draft_review_source_only
+actual_credits_receipted: 220
+approved_credit_ceiling: 220
+live_actual_run: python runner.py --live --repeats 10 --approved-credits 220 --out
+  run_output/live-approved-20261009
+local_tested_source_commit: 58fe3cef55ffb06368f277a1e9d9f9a440e7174f
+local_measurements:
+  source: expected_output/local/report.json
+  attempts: 40
+  targets: 2
+  repeats_per_target_arm: 10
+  static_requests_valid_attempts: 10
+  static_playwright_valid_attempts: 10
+  static_valid_observations_per_arm: 30
+  static_unique_records: 3
+  delayed_requests_valid_attempts: 0
+  delayed_playwright_valid_attempts: 10
+  delayed_valid_sentinel_observations_playwright: 10
+  initial_browser_launch_ms: 367.0867501059547
+measurements:
+  source: expected_output/live/report.json
+  attempts: 80
+  targets: 2
+  repeats_per_target_arm: 10
+  api_calls: 40
+  actual_credits_receipted: 220
+  initial_browser_launch_ms: 228.74499997124076
+  summary: expected_output/live-summary.json
+  runtime_source_sha256:
+    runner.py: c38a23b947edf2473b69276b8ec06ecce99abeecf1114a63b446b291ced749e7
+    contract.py: ab9bfb69f7749b42d1bf5dad1e1a48cc2add2ca611e092f28ea3631ff6de49f8
+    requirements.txt: 9377ddc225c89e07805fee441cfccf2add4ac1deb63a48ca86b294170bad964b
+offline_verification: python verify_capture.py expected_output/live/report.json
+regression_tests_passed: 32

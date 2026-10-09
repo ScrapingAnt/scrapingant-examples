@@ -1,0 +1,43 @@
+name: HTTP versus browser offline evidence
+on:
+  pull_request:
+    paths:
+      - 'examples/http-vs-browser-cost/**'
+      - '.github/workflows/http-vs-browser-cost-offline.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'examples/http-vs-browser-cost/**'
+      - '.github/workflows/http-vs-browser-cost-offline.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: examples/http-vs-browser-cost
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Offline regression tests
+        run: python -B -m unittest discover -v -p 'test_*.py'
+      - name: Verify recorded public-origin and local captures
+        run: |
+          python -B verify_capture.py expected_output/live/report.json
+          python -B verify_capture.py expected_output/local/report.json
+      - name: Verify packet hashes
+        run: |
+          python -B - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.')
+          manifest = json.loads((root/'manifest.json').read_text())
+          for name, expected in manifest['sha256'].items():
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest() == expected, name
+          print('All recorded packet hashes match')
+          PY

@@ -1,0 +1,196 @@
+{
+  "complete": true,
+  "runtime_hashes_present": true,
+  "billing_status": "complete_receipts",
+  "actual_credits_receipted": 220,
+  "summary": [
+    {
+      "target": "static",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 55.77029153937474,
+      "median_valid_ms": 55.77029153937474,
+      "observed_range_ms": [
+        52.950666984543204,
+        61.32166599854827
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "static",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 237.2558545321226,
+      "median_valid_ms": 237.2558545321226,
+      "observed_range_ms": [
+        219.48600001633167,
+        277.15650002937764
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "static",
+      "arm": "api_raw",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 692.2762499889359,
+      "median_valid_ms": 692.2762499889359,
+      "observed_range_ms": [
+        648.5616250429302,
+        785.2739579975605
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": 10,
+      "credits_per_valid_record": 0.3333333333333333,
+      "cost_status": "receipted",
+      "failures": {}
+    },
+    {
+      "target": "static",
+      "arm": "api_rendered",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 30,
+      "unique_expected_records": 3,
+      "median_all_ms": 1331.1444999999367,
+      "median_valid_ms": 1331.1444999999367,
+      "observed_range_ms": [
+        1193.032749928534,
+        1414.9465420050547
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": 100,
+      "credits_per_valid_record": 3.3333333333333335,
+      "cost_status": "receipted",
+      "failures": {}
+    },
+    {
+      "target": "delayed",
+      "arm": "requests",
+      "attempts": 10,
+      "valid_attempts": 0,
+      "valid_record_observations": 0,
+      "unique_expected_records": 0,
+      "median_all_ms": 51.90410400973633,
+      "median_valid_ms": null,
+      "observed_range_ms": [
+        44.31420809123665,
+        148.6242499668151
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0,
+        0.2775327998628892
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {
+        "invalid_contract": 10
+      }
+    },
+    {
+      "target": "delayed",
+      "arm": "playwright",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 10,
+      "unique_expected_records": 1,
+      "median_all_ms": 2028.7872289191,
+      "median_valid_ms": 2028.7872289191,
+      "observed_range_ms": [
+        2021.129957982339,
+        2173.068583011627
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": null,
+      "credits_per_valid_record": null,
+      "cost_status": "local_usd_unmeasured",
+      "failures": {}
+    },
+    {
+      "target": "delayed",
+      "arm": "api_raw",
+      "attempts": 10,
+      "valid_attempts": 0,
+      "valid_record_observations": 0,
+      "unique_expected_records": 0,
+      "median_all_ms": 695.0655204709619,
+      "median_valid_ms": null,
+      "observed_range_ms": [
+        643.2844579685479,
+        1566.7701659258455
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0,
+        0.2775327998628892
+      ],
+      "credits_total": 10,
+      "credits_per_valid_record": null,
+      "cost_status": "receipted",
+      "failures": {
+        "invalid_contract": 10
+      }
+    },
+    {
+      "target": "delayed",
+      "arm": "api_rendered",
+      "attempts": 10,
+      "valid_attempts": 10,
+      "valid_record_observations": 10,
+      "unique_expected_records": 1,
+      "median_all_ms": 3106.8575414828956,
+      "median_valid_ms": 3106.8575414828956,
+      "observed_range_ms": [
+        3013.6679579736665,
+        6754.536833963357
+      ],
+      "known_elapsed_attempts": 10,
+      "wilson95_fixture_attempts": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "credits_total": 100,
+      "credits_per_valid_record": 10.0,
+      "cost_status": "receipted",
+      "failures": {}
+    }
+  ]
+}
