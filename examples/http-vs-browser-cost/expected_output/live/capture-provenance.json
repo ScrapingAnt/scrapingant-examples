@@ -1,0 +1,8 @@
+{
+  "tested_runtime_commit": "05cbdf3080507b8f3f2d41ad65bb3ddd42b5d587",
+  "command": "python runner.py --live --repeats 10 --approved-credits 220 --out run_output/live-approved-20261009",
+  "authorization": "Owner-approved hard caps: 40 ScrapingAnt API attempts, 220 credits; no warmups, retries, purchases or additional services.",
+  "source_publication": "Held for owner approval; local draft only.",
+  "run_context": "Serial acquisition. No concurrent blog build or browser rendering audit during this run; unrelated host activity was not controlled.",
+  "complete": true
+}
