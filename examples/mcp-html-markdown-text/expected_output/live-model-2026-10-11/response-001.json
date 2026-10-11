@@ -1,9 +1,8 @@
 {
   "error": {
-    "message": "[REDACTED: provider message includes a masked credential identifier]",
-    "type": "invalid_request_error",
-    "code": "invalid_api_key",
-    "param": null
+    "message": "[REDACTED: operational provider details retained privately]",
+    "operational_details_omitted": true,
+    "public_classification": "pre_inference_failure"
   },
   "status": 401
 }

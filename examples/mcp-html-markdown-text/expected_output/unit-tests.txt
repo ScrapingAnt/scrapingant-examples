@@ -21,21 +21,27 @@ test_tool_error_string_with_false_iserror_is_failure (test_live.GuardTests.test_
 test_transport_traceback_does_not_expose_exception_secret (test_live.GuardTests.test_transport_traceback_does_not_expose_exception_secret) ... ok
 test_wrong_rpc_id_stops_before_another_attempt (test_live.GuardTests.test_wrong_rpc_id_stops_before_another_attempt) ... ok
 test_45_same_capture_jobs_are_balanced (test_model.ModelGuardTests.test_45_same_capture_jobs_are_balanced) ... ok
+test_authorized_continuation_preserves_failed_attempt_and_cap (test_model.ModelGuardTests.test_authorized_continuation_preserves_failed_attempt_and_cap) ... ok
 test_cached_price_and_unknown_details_are_conservative (test_model.ModelGuardTests.test_cached_price_and_unknown_details_are_conservative) ... ok
+test_continuation_cannot_reset_reservation_or_expand_limits (test_model.ModelGuardTests.test_continuation_cannot_reset_reservation_or_expand_limits) ... ok
 test_correct_records_are_scored_without_prompt_oracle_leak (test_model.ModelGuardTests.test_correct_records_are_scored_without_prompt_oracle_leak) ... ok
 test_dollar_reservation_blocks_before_transport (test_model.ModelGuardTests.test_dollar_reservation_blocks_before_transport) ... ok
 test_existing_run_cannot_restart (test_model.ModelGuardTests.test_existing_run_cannot_restart) ... ok
 test_full_request_input_cap_blocks_dispatch (test_model.ModelGuardTests.test_full_request_input_cap_blocks_dispatch) ... ok
 test_http200_provider_error_can_never_be_accepted (test_model.ModelGuardTests.test_http200_provider_error_can_never_be_accepted) ... ok
 test_missing_or_invalid_usage_stops_never_zero_cost (test_model.ModelGuardTests.test_missing_or_invalid_usage_stops_never_zero_cost) ... ok
+test_repeated_auth_failure_stops_without_retry_and_retains_two_reservations (test_model.ModelGuardTests.test_repeated_auth_failure_stops_without_retry_and_retains_two_reservations) ... ok
 test_run_freezes_task_text_even_if_source_file_changes (test_model.ModelGuardTests.test_run_freezes_task_text_even_if_source_file_changes) ... ok
 test_secret_echo_stops_and_never_persists (test_model.ModelGuardTests.test_secret_echo_stops_and_never_persists) ... ok
 test_sixtieth_attempt_is_last_and_never_retried (test_model.ModelGuardTests.test_sixtieth_attempt_is_last_and_never_retried) ... ok
 test_timeout_reserved_unknown_cost_stops_and_redacts (test_model.ModelGuardTests.test_timeout_reserved_unknown_cost_stops_and_redacts) ... ok
 test_truncation_refusal_and_wrong_records_remain_charged (test_model.ModelGuardTests.test_truncation_refusal_and_wrong_records_remain_charged) ... ok
 test_wrong_model_and_paid_tier_stop (test_model.ModelGuardTests.test_wrong_model_and_paid_tier_stop) ... ok
+test_missing_completion_retains_attempt_cost_and_balances_repeats (test_summary.AnalysisTests.test_missing_completion_retains_attempt_cost_and_balances_repeats) ... ok
+test_nominal_wilson_bounds_do_not_report_certain_one_or_zero (test_summary.AnalysisTests.test_nominal_wilson_bounds_do_not_report_certain_one_or_zero) ... ok
+test_zero_correct_denominator_is_undefined_even_with_known_cost (test_summary.AnalysisTests.test_zero_correct_denominator_is_undefined_even_with_known_cost) ... ok
 
 ----------------------------------------------------------------------
-Ran 36 tests in 0.508s
+Ran 42 tests in 0.537s
 
 OK

@@ -111,6 +111,44 @@ class ModelGuardTests(unittest.TestCase):
         self.make(lambda p:Response(reply()))
         with self.assertRaises(FileExistsError):self.make(lambda p:Response(reply()))
 
+    def auth_failure(self):
+        response=Response({'error':{'type':'invalid_request_error','code':'invalid_api_key'}})
+        response.status_code=401
+        run=self.make(lambda p:response)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        return json.loads((self.out/'ledger.json').read_text())
+
+    def test_authorized_continuation_preserves_failed_attempt_and_cap(self):
+        original=self.auth_failure()
+        calls=[]
+        run=ModelRun.continue_after_auth_failure(self.out,lambda p:(calls.append(p),Response(reply()))[1],'replacement-test-binding')
+        self.assertEqual(run.ledger['calls'],original['calls'])
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0036)
+        for _ in range(59):run.observe(self.job)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        self.assertEqual(len(calls),59)
+        self.assertEqual(run.ledger['calls'][0],original['calls'][0])
+        self.assertEqual(run.ledger['calls'][-1]['attempt'],60)
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0036+59*0.00036)
+        self.assertIsNone(run.ledger['calls'][0]['actual_cost_usd'])
+
+    def test_continuation_cannot_reset_reservation_or_expand_limits(self):
+        original=self.auth_failure()
+        for changes in ({'accounted_usd':0.0},{'accounted_usd':float('nan')},{'maximum_attempts':61},{'usd_ceiling':1.0},{'stop_reason':'transport_outcome_unknown'}):
+            (self.out/'ledger.json').write_text(json.dumps({**original,**changes}))
+            with self.assertRaises(StopRun):ModelRun.continue_after_auth_failure(self.out,lambda p:self.fail('dispatch'),'replacement-test-binding')
+
+    def test_repeated_auth_failure_stops_without_retry_and_retains_two_reservations(self):
+        self.auth_failure()
+        response=Response({'error':{'type':'invalid_request_error','code':'invalid_api_key'}});response.status_code=401
+        calls=[]
+        run=ModelRun.continue_after_auth_failure(self.out,lambda p:(calls.append(p),response)[1],'replacement-test-binding')
+        with self.assertRaises(StopRun):run.observe(self.job)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        self.assertEqual(len(calls),1)
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0072)
+        with self.assertRaises(StopRun):ModelRun.continue_after_auth_failure(self.out,lambda p:self.fail('second rebind'),'third-test-binding')
+
     def test_cached_price_and_unknown_details_are_conservative(self):
         self.assertAlmostEqual(calculate_cost({"prompt_tokens":1000,"completion_tokens":100,"total_tokens":1100,"prompt_tokens_details":{"cached_tokens":800}}),0.00032)
         self.assertAlmostEqual(calculate_cost({"prompt_tokens":1000,"completion_tokens":100,"total_tokens":1100}),0.00056)

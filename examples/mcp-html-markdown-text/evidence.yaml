@@ -1,11 +1,11 @@
 article_id: html-markdown-plain-text-llm-extraction
 evidence_asset_id: mcp-html-markdown-text
 tested_at: '2026-10-11'
-status: completed_offline_and_hosted_mcp__model_authentication_blocked
+status: completed_offline_and_hosted_mcp__model_phase_incomplete
 requires_api_key: false
 default_paid_calls: 0
 new_retrieval_calls: 15
-model_calls: 1
+model_calls: 2
 public_discovery_http_requests: 3
 source_base: 9e5fba96d34a7bb7106a5a0e478a668078c6a312
 run_command: ./run.sh
@@ -39,7 +39,7 @@ measurements:
   actual_tool_credit_receipts: null
   model_completions: 0
   model_actual_cost_usd: null
-  model_retained_reservation_usd: 0.0036
+  model_retained_reservation_usd: 0.0072
 proposed_budget:
   status: approved_2026_10_11
   scrapingant_credit_ceiling: 15
@@ -50,10 +50,10 @@ proposed_budget:
   missing_environment_keys: []
   purchase_authorized: false
   scrapingant_attempts_remaining: 0
-  model_attempts_remaining: 59
-  model_usd_unreserved_remaining: 0.2464
-  exact_access_blocker: Approved extractor OpenAI binding returnedHTTP 401 invalid_api_key;
-    no alternate account or retry
+  model_attempts_remaining: 58
+  model_usd_unreserved_remaining: 0.2428
+  exact_access_blocker: Model phase stopped before inference; accuracy and actual
+    charges unmeasured. Operational provider details retained privately.
 outputs:
 - expected_output/report.json
 - expected_output/summary.csv
@@ -85,8 +85,9 @@ limitations:
   not exposed.
 - Scoped account deltas are contemporaneous, not exclusive request receipts; concurrent
   traffic cannot be ruled out.
-- Model access failed onattempt 1; accuracy, actual model charge and cost per model-correct
-  output are unmeasured.
+- Two pre-inference model failures; no accuracy, reported usage, actual total charges,
+  uncertainty interval or cost per correct output exists. Reservations are allowance
+  accounting, not billing.
 claims:
 - id: M1
   text: The table retains12/12 non-null slots in all reference formats.
@@ -111,9 +112,11 @@ claims:
     rows and numeric coercion; zero-correct ratio undefined.
   source: contract.py; test_contract.py; expected_output/unit-tests.txt
 - id: L1
-  text: 15 hosted requests completed with all 12 required literals and observed account delta 15.
+  text: 15 hosted requests completed with all 12 required literals and observed account
+    delta 15.
   source: expected_output/execution-report.json; live-mcp ledger/captures
 - id: B1
-  text: Fresh budget approved; first model request returned 401 invalid_api_key, stopped,
-    cost unknown and reservation 0.0036 retained.
-  source: expected_output/live-model-2026-10-11/ledger.json; sanitized response
+  text: Two pre-inference failures retained; unknown charges and total reservation
+    0.0072. No model accuracy or zero-charge claim.
+  source: expected_output/live-model-2026-10-11/ledger.json; sanitized response-001.json
+    and response-002.json

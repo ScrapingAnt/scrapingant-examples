@@ -2,6 +2,7 @@
 """Explicit approved model phase: fixed snapshot, 60 attempts / USD0.25, no retries."""
 import argparse
 import json
+import math
 import os
 from pathlib import Path
 import random
@@ -71,6 +72,46 @@ class ModelRun:
                      "runtime_sha256":{name:digest((ROOT/name).read_bytes()) for name in ('model_run.py','contract.py','requirements.txt')}}
         self.save()
 
+    @classmethod
+    def continue_after_auth_failure(cls,out,transport,secret):
+        """Explicit owner-authorized rebind; retain attempt 1 and skip its job."""
+        out=Path(out);original=(out/'ledger.json').read_bytes()
+        try:
+            ledger=json.loads(original);calls=ledger['calls']
+            if (ledger.get('complete') or ledger.get('continuation') or len(calls)!=1
+                or ledger['maximum_attempts']!=MAX_CALLS or ledger['usd_ceiling']!=CEILING_USD
+                or ledger['max_input_tokens']!=MAX_INPUT or ledger['max_output_tokens']!=MAX_OUTPUT
+                or ledger['model']!=MODEL or ledger['reserve_usd_per_attempt']!=RESERVE_USD
+                or not math.isfinite(ledger['accounted_usd'])
+                or abs(ledger['accounted_usd']-RESERVE_USD)>1e-12
+                or ledger['actual_reported_usage_cost_usd']!=0
+                or ledger['stop_reason']!='provider_http_error_unknown_usage'
+                or ledger['task_sha256']!=digest((ROOT/'task.txt').read_bytes())
+                or ledger['schema']!=SCHEMA or ledger['system_prompt']!=SYSTEM):
+                raise ValueError()
+            row=calls[0]
+            if (row['attempt']!=1 or row['http_status']!=401 or row['outcome']!='http_error'
+                or row['actual_cost_usd'] is not None or row['reserved_usd']!=RESERVE_USD
+                or row['response_file']!='response-001.json' or row['score']['accepted_page']):
+                raise ValueError()
+            response=(out/row['response_file']).read_bytes()
+            if digest(response)!=row['response_sha256'] or json.loads(response)['error']['code']!='invalid_api_key':raise ValueError()
+            if any(ledger['runtime_sha256'][name]!=digest((ROOT/name).read_bytes()) for name in ('contract.py','requirements.txt')):raise ValueError()
+        except (ValueError,KeyError,TypeError,AttributeError):
+            raise StopRun('continuation_scope_or_accounting_invalid') from None
+        # Preserve the exact stopped checkpoint before any newly authorized write.
+        checkpoint=out/'checkpoint-001-ledger.json'
+        with checkpoint.open('xb') as stream:stream.write(original)
+        run=cls.__new__(cls);run.out=out;run.transport=transport;run.secret=secret;run.stopped=False
+        run.task_text=(ROOT/'task.txt').read_text();run.ledger=ledger
+        ledger['continuation']={'authorized_at_utc':now(),'prior_ledger_sha256':digest(original),
+            'checkpoint_file':checkpoint.name,'prior_calls_sha256':digest(json.dumps(calls,sort_keys=True).encode()),
+            'retained_attempts':1,'retained_unknown_charge_reservation_usd':RESERVE_USD,
+            'remaining_attempts_at_rebind':59,'remaining_unreserved_usd_at_rebind':CEILING_USD-RESERVE_USD,
+            'failed_job_retried':False,'prior_stop_reason':ledger.pop('stop_reason'),
+            'runtime_sha256':{name:digest((ROOT/name).read_bytes()) for name in ('model_run.py','contract.py','requirements.txt')}}
+        run.save();return run
+
     def save(self): atomic_json(self.out/"ledger.json",self.ledger)
     def stop(self,reason):
         self.stopped=True;self.ledger['stop_reason']=reason;self.save();raise StopRun(reason) from None
@@ -132,7 +173,7 @@ class ModelRun:
             row['outcome']='malformed_provider_response';self.stop('malformed_provider_response')
         self.save();return row
 
-def execute(out,key,live_dir):
+def execute(out,key,live_dir,continue_after_auth_failure=False):
     import requests
     jobs=model_plan()
     live=json.loads((live_dir/'ledger.json').read_text())
@@ -145,14 +186,21 @@ def execute(out,key,live_dir):
     if len(jobs)!=60:raise StopRun('plan_size_invalid')
     # Preflight the entire plan before the first paid model dispatch.
     if any(preflight_tokens(build_request(job))>MAX_INPUT for job in jobs):raise StopRun('plan_input_cap')
+    if continue_after_auth_failure:
+        prior=json.loads((out/'ledger.json').read_text())
+        if prior.get('plan')!=[{k:v for k,v in job.items() if k!='content'} for job in jobs]:raise StopRun('continuation_plan_drift')
+        if prior['calls'][0]['request']!=build_request(jobs[0]):raise StopRun('continuation_failed_request_drift')
+        if prior.get('source_mcp_ledger_sha256')!=digest((live_dir/'ledger.json').read_bytes()):raise StopRun('continuation_mcp_ledger_drift')
     session=requests.Session();session.trust_env=False
     def transport(request):return session.post(ENDPOINT,headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},json=request,timeout=(10,60),allow_redirects=False)
-    run=ModelRun(out,transport,key)
-    run.ledger['runtime']={'requests':requests.__version__,'tiktoken':tiktoken.__version__,'python':__import__('platform').python_version()}
+    run=ModelRun.continue_after_auth_failure(out,transport,key) if continue_after_auth_failure else ModelRun(out,transport,key)
+    runtime={'requests':requests.__version__,'tiktoken':tiktoken.__version__,'python':__import__('platform').python_version()}
+    if continue_after_auth_failure:run.ledger['continuation']['runtime']=runtime
+    else:run.ledger['runtime']=runtime
     run.ledger['source_mcp_ledger_sha256']=digest((live_dir/'ledger.json').read_bytes())
     run.ledger['plan']=[{k:v for k,v in job.items() if k!='content'} for job in jobs];run.save()
     try:
-        for job in jobs:
+        for job in jobs[len(run.ledger['calls']):]:
             row=run.observe(job)
             print(json.dumps({k:row.get(k) for k in ('attempt','phase','case','arm','repeat','outcome','actual_cost_usd')}),flush=True)
         run.ledger.update(complete=True,completed_at_utc=now());run.save()
@@ -163,7 +211,8 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--execute-approved-60-call-run',action='store_true',required=True)
     ap.add_argument('--out',type=Path,required=True);ap.add_argument('--live-dir',type=Path,required=True)
+    ap.add_argument('--continue-after-approved-auth-rebind',action='store_true',help='Only after explicit owner authorization; preserve the original failed attempt and allowance.')
     args=ap.parse_args();key=os.environ.get('OPENAI_API_KEY')
     if not key:raise SystemExit('OPENAI_API_KEY required; do not paste credentials into commands')
-    try:execute(args.out,key,args.live_dir)
+    try:execute(args.out,key,args.live_dir,args.continue_after_approved_auth_rebind)
     except StopRun as exc:raise SystemExit(str(exc)) from None
