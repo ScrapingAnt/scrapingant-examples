@@ -1,0 +1,274 @@
+{
+  "article_id": "scraping-for-labor-market-intelligence-jobs-skills-and-wage",
+  "canonical_url": "https://scrapingant.com/blog/scraping-for-labor-market-intelligence-jobs-skills-and-wage",
+  "owner": "Oleg Kulyk",
+  "review_state": "AI-assisted draft; named-author and independent review pending",
+  "examples_repo_commit": null,
+  "commit_note": "Article pins immutable code/evidence commit after local packet commit; no live publication is implied.",
+  "tested_at": "2026-10-11",
+  "observed_utc": "2026-10-11T21:14:49Z",
+  "requires_api_key": false,
+  "environment": {
+    "os": "Darwin 25.6.0",
+    "architecture": "arm64",
+    "python": "3.12.11",
+    "browser": "not used",
+    "node": "not used"
+  },
+  "dependencies": {
+    "CPython": "3.12.11",
+    "third_party_packages": []
+  },
+  "run_command": "PYTHON_BIN=python3.12 ./run.sh",
+  "check_command": "PYTHON_BIN=python3.12 ./run.sh --check",
+  "execution_scope": {
+    "default_network": "owned 127.0.0.1 HTTP only",
+    "live_provider_calls": 0,
+    "paid_calls": 0,
+    "live_ATS_calls_by_runner": 0,
+    "greenhouse_capture_replayed": true,
+    "managed_request_mocked_only": true
+  },
+  "fixtures": [
+    "fixtures/denied.html",
+    "fixtures/empty.html",
+    "fixtures/expected-records.json",
+    "fixtures/greenhouse-expected-ids.json",
+    "fixtures/greenhouse-jobs-projection.json",
+    "fixtures/page-1.html",
+    "fixtures/page-2.html",
+    "fixtures/refresh-1.html",
+    "fixtures/refresh-2.html"
+  ],
+  "outputs": [
+    "expected_output/baseline.json",
+    "expected_output/complete-refresh.json",
+    "expected_output/failure-matrix.json",
+    "expected_output/failure-matrix.txt",
+    "expected_output/greenhouse-replay.json",
+    "expected_output/partial-collection.json",
+    "expected_output/partial-refresh.json",
+    "expected_output/record-example.json",
+    "expected_output/summary.txt",
+    "expected_output/tests.txt"
+  ],
+  "measurements": [
+    {
+      "name": "passing_tests",
+      "value": 50,
+      "unit": "test methods",
+      "denominator": "50 executed test methods; subtests are not counted as extra tests",
+      "source": "expected_output/tests.txt"
+    },
+    {
+      "name": "baseline_accepted_cards",
+      "value": 4,
+      "unit": "cards",
+      "denominator": "4 cards across 2 validated owned fixture pages",
+      "source": "expected_output/baseline.json"
+    },
+    {
+      "name": "baseline_unique_records",
+      "value": 3,
+      "unit": "jobs",
+      "denominator": "4 accepted cards, with 1 identical duplicate",
+      "source": "expected_output/baseline.json"
+    },
+    {
+      "name": "controlled_failure_cases",
+      "value": 10,
+      "unit": "cases",
+      "denominator": "10 deliberately selected fixture cases, including successful baseline and valid empty controls; not success-rate sampling",
+      "source": "expected_output/failure-matrix.json"
+    },
+    {
+      "name": "partial_refresh_removals",
+      "value": 0,
+      "unit": "removed IDs",
+      "denominator": "3 previously validated records, 1 acquired record before page-2 HTTP503; 2 prior absent records retained",
+      "source": "expected_output/partial-refresh.json"
+    },
+    {
+      "name": "greenhouse_candidates",
+      "value": 19,
+      "unit": "post IDs",
+      "denominator": "19 retained posts from one observed public board response with meta.total19; zero qualify for this HTML refresh schema because distinct applicationURL was not verified",
+      "source": "expected_output/greenhouse-replay.json"
+    }
+  ],
+  "external_sources": [
+    {
+      "url": "https://docs.greenhouse.io/job-board.html",
+      "checked_at": "2026-10-11",
+      "claim": "Published-job GET endpoints public/unauthenticated; GET /v1/boards/{board_token}/jobs list. No fabricated pagination interface."
+    },
+    {
+      "url": "https://docs.scrapingant.com/request-response-format",
+      "checked_at": "2026-10-11",
+      "claim": "General endpoint HTML; explicit browser/proxy/country/timeout30/return_page_sourcefalse parameters; public OpenAPI query auth is not evidence for header auth."
+    },
+    {
+      "url": "https://docs.scrapingant.com/credits-cost",
+      "checked_at": "2026-10-11",
+      "claim": "Ordinary non-Google datacenter request documented 1 credit raw /10 rendered; no measured credit receipts in this packet."
+    },
+    {
+      "url": "https://scrapingant.com/#pricing",
+      "checked_at": "2026-10-11",
+      "claim": "Free 10000 monthly API credits/no card; Enthusiast100000 monthly credits/$19. Dated documented capacity, not successful output."
+    },
+    {
+      "url": "https://docs.scrapingant.com/custom-headers",
+      "checked_at": "2026-10-11",
+      "claim": "Target response headers use Ant-original-header- prefix; outer content-type is not guaranteed target media type."
+    }
+  ],
+  "genuine_public_capture": {
+    "url": "https://boards-api.greenhouse.io/v1/boards/greenhouse/jobs",
+    "observed_utc": "2026-10-11T21:03:15.995679+00:00",
+    "status": 200,
+    "meta_total": 19,
+    "jobs_count": 19,
+    "retained_fields": [
+      "id",
+      "title",
+      "location",
+      "absolute_url",
+      "updated_at"
+    ],
+    "projection_file": "fixtures/greenhouse-jobs-projection.json",
+    "projection_file_sha256": "7f8d71f9490c5c5d29aa220458f23af2ff6125eee825515665c6545bd3f0d76c",
+    "original_full_response_sha256": "b7c458403eb0e58052562733f283431ac29fb3d333695dd07e58d4238468d69c",
+    "hash_scope": "Full response hash was recorded before projection. Full response is not distributed; its hash cannot be reproduced from the saved projection. Projection-file hash identifies different bytes."
+  },
+  "limitations": [
+    "Owned fictional HTML demonstrates one fixed adapter, not live ATS HTML acquisition, rendering or general support.",
+    "Greenhouse capture is genuine observed JSON availability on one board at one time. Default runner only replays it; no paid HTML retrieval is measured.",
+    "Greenhouse employer label is supplied by caller; applicationURL is unverified/null and candidates cannot enter the validated fixture refresh sink.",
+    "updated_at is retained as source_updated_at; sourcePostedDate stays null. Neither observation time nor update time is relabeled a posting date.",
+    "Completeness is conditional on this validated source envelope and declared page sequence; source-specific validation is required for a different source.",
+    "removed_ids denotes source-list absence only; incomplete acquisitions suppress all removals and retain prior records with prior timestamps.",
+    "No applications, profiles, wage/skills inference, universal Indeed/LinkedIn support, ready-made jobs database, live success rate or production reliability result.",
+    "Managed request shape and response checks use mocks only; header contract checked in current source without a new authenticated call. Public OpenAPI describes query authentication only.",
+    "No per-request cost or successful-job yield measured; current pricing and credit costs are documented dated facts.",
+    "Named-author and independent methodology review are pending; article remains unlisted; no restoration or deployment approved.",
+    "Managed HTML acceptance does not require an outer Content-Type. Unknown original target media type is deferred to the required schema. Managed redirect guard covers API endpoint redirects only; no remote-target redirect proof."
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "CPython3.12.11, standard library only, 50 tests pass.",
+      "type": "measured",
+      "source": [
+        ".python-version",
+        "requirements.txt",
+        "expected_output/tests.txt"
+      ]
+    },
+    {
+      "id": "C2",
+      "text": "First-page-only yields2 jobs; bounded2 pages/4cards/1duplicate yield3 records matching literal oracle.",
+      "type": "measured",
+      "source": [
+        "fixtures/expected-records.json",
+        "expected_output/summary.txt",
+        "expected_output/baseline.json"
+      ]
+    },
+    {
+      "id": "C3",
+      "text": "Ten selected loopback controls cover invalid/empty/error/page-boundary states.",
+      "type": "measured",
+      "source": "expected_output/failure-matrix.json"
+    },
+    {
+      "id": "C4",
+      "text": "Complete refresh addsNS004/changesNS001 title and location/marksNS002 absent; partial HTTP503 refresh removes0 and retainsNS002/3.",
+      "type": "measured",
+      "source": [
+        "expected_output/complete-refresh.json",
+        "expected_output/partial-refresh.json"
+      ]
+    },
+    {
+      "id": "C5",
+      "text": "IDs, fields, timestamps, source/application URLs and optional dates are explicitly validated; conflicts excludeID and make acquisition partial.",
+      "type": "documented",
+      "source": [
+        "collector.py",
+        "schema.py",
+        "test_collector.py"
+      ]
+    },
+    {
+      "id": "C6",
+      "text": "Public Greenhouse GET observed HTTP200/jobs19/meta.total19 at recorded time; replay19 candidates with missing applicationURL.",
+      "type": "measured",
+      "source": [
+        "fixtures/greenhouse-jobs-projection.json",
+        "expected_output/greenhouse-replay.json",
+        "greenhouse_replay.py"
+      ]
+    },
+    {
+      "id": "C7",
+      "text": "Greenhouse documentation describes public unauthenticated GET published jobs and the board jobs endpoint.",
+      "type": "documented",
+      "source": "https://docs.greenhouse.io/job-board.html"
+    },
+    {
+      "id": "C8",
+      "text": "General endpoint returns HTML; explicit browser modes and parameters shown.",
+      "type": "product",
+      "source": "https://docs.scrapingant.com/request-response-format"
+    },
+    {
+      "id": "C9",
+      "text": "Code uses environment key in header; keepskey outside URLs and sanitizeserrors; contract checked in current source, not public OpenAPI or livecall.",
+      "type": "documented",
+      "source": [
+        "scrapingant_transport.py",
+        "test_collector.py"
+      ]
+    },
+    {
+      "id": "C10",
+      "text": "Datacenter nonGoogle retrieval documented1raw/10rendered credits; no measured actual cost.",
+      "type": "product",
+      "source": "https://docs.scrapingant.com/credits-cost"
+    },
+    {
+      "id": "C11",
+      "text": "October11 plansFree10000credits/month/no card; Enthusiast100000credits/$19month.",
+      "type": "product",
+      "source": "https://scrapingant.com/#pricing"
+    },
+    {
+      "id": "C12",
+      "text": "Default runner no live ATS/provider/paidcalls; optional managed is explicit unexecuted opt-in.",
+      "type": "documented",
+      "source": [
+        "run.sh",
+        "demo.py",
+        "collector.py",
+        "expected_output/summary.txt"
+      ]
+    },
+    {
+      "id": "C13",
+      "text": "Original full response hash and saved projection hash identify different bytes; full body not distributed.",
+      "type": "documented",
+      "source": "fixtures/greenhouse-jobs-projection.json"
+    },
+    {
+      "id": "C14",
+      "text": "Managed response uses prefixed original-target media type when present; missing type defers to required source schema; source-shaped no-outer-type mock and explicitnonHTML/malformed controls pass. DirectHTTP rejects target redirects; managed guard only controls APIendpoint redirects.",
+      "type": "documented",
+      "source": [
+        "https://docs.scrapingant.com/custom-headers",
+        "scrapingant_transport.py",
+        "test_collector.py"
+      ]
+    }
+  ]
+}

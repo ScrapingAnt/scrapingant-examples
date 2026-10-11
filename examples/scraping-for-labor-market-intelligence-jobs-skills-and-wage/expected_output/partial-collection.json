@@ -1,0 +1,36 @@
+{
+  "complete": false,
+  "counters": {
+    "accepted_pages": 1,
+    "cards_seen": 1,
+    "conflicting_ids": 0,
+    "duplicate_cards": 0,
+    "failures": 1,
+    "fetched_pages": 1,
+    "rejected_cards": 0,
+    "requested_pages": 2,
+    "unique_records": 1,
+    "valid_cards": 1
+  },
+  "employer": "Northstar Demonstration Labs",
+  "failures": [
+    {
+      "code": "http_503",
+      "page": 2
+    }
+  ],
+  "observedUTC": "2026-10-11T21:14:49Z",
+  "records": [
+    {
+      "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-001",
+      "employer": "Northstar Demonstration Labs",
+      "jobID": "NS-001",
+      "location": "Remote - UK",
+      "observedUTC": "2026-10-11T21:14:49Z",
+      "sourcePostedDate": "2026-10-01",
+      "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-001",
+      "title": "Senior Platform Engineer"
+    }
+  ],
+  "source": "http://127.0.0.1:55325/careers/roles?page=1"
+}

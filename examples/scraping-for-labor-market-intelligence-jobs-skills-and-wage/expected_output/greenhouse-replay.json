@@ -1,0 +1,220 @@
+{
+  "candidate_count": 19,
+  "candidate_records": [
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "6180015",
+      "location": "Anywhere in the United States",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/6180015?gh_jid=6180015",
+      "source_updated_at": "2026-10-09T20:22:16-04:00",
+      "title": "Mid-Market Sales Development Representative"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8126988",
+      "location": "Eastern Timezone",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+      "source_updated_at": "2026-10-09T18:28:27-04:00",
+      "title": "Commercial Counsel"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8148418",
+      "location": "Argentina",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8148418?gh_jid=8148418",
+      "source_updated_at": "2026-09-18T11:47:46-04:00",
+      "title": "Software Engineer (Contract, Argentina)"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8168227",
+      "location": "Anywhere in Ireland",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8168227?gh_jid=8168227",
+      "source_updated_at": "2026-09-02T05:03:37-04:00",
+      "title": "Growth Account Executive"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8168281",
+      "location": "Anywhere in Ireland",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8168281?gh_jid=8168281",
+      "source_updated_at": "2026-09-11T09:55:40-04:00",
+      "title": "Senior Account Executive, Mid-Market"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8172357",
+      "location": "Anywhere in the United States",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8172357?gh_jid=8172357",
+      "source_updated_at": "2026-10-01T00:20:47-04:00",
+      "title": "Program Manager, Product & GTM Enablement"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8204473",
+      "location": "Ontario",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8204473?gh_jid=8204473",
+      "source_updated_at": "2026-10-05T18:35:42-04:00",
+      "title": "Senior Software Engineer"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8204474",
+      "location": "British Columbia",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8204474?gh_jid=8204474",
+      "source_updated_at": "2026-10-05T18:35:41-04:00",
+      "title": "Senior Software Engineer"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8208105",
+      "location": "Northern Ireland, United Kingdom",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8208105?gh_jid=8208105",
+      "source_updated_at": "2026-09-22T11:20:55-04:00",
+      "title": "Manager, Corporate IT"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8211770",
+      "location": "Anywhere in Ireland",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8211770?gh_jid=8211770",
+      "source_updated_at": "2026-09-25T09:41:52-04:00",
+      "title": "Senior Program Manager, GTM & Field Enablement"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8211828",
+      "location": "Ontario",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8211828?gh_jid=8211828",
+      "source_updated_at": "2026-10-05T18:35:40-04:00",
+      "title": "Senior Software Engineer"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8214721",
+      "location": "Ontario",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8214721?gh_jid=8214721",
+      "source_updated_at": "2026-10-05T18:35:39-04:00",
+      "title": "Software Engineer"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8220443",
+      "location": "Eastern or Central Timezone",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8220443?gh_jid=8220443",
+      "source_updated_at": "2026-10-07T10:04:29-04:00",
+      "title": "Senior Implementation Consultant"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8222047",
+      "location": "Anywhere in Ireland",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8222047?gh_jid=8222047",
+      "source_updated_at": "2026-09-30T15:51:33-04:00",
+      "title": "Strategic Consultant"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8227655",
+      "location": "London, United Kingdom",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8227655?gh_jid=8227655",
+      "source_updated_at": "2026-09-24T10:19:10-04:00",
+      "title": "Strategic Consultant I"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8233584",
+      "location": "Anywhere in the United States",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8233584?gh_jid=8233584",
+      "source_updated_at": "2026-10-05T18:36:42-04:00",
+      "title": "Product Marketing Manager, Strategic Partnerships"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8233862",
+      "location": "Anywhere in the United States",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8233862?gh_jid=8233862",
+      "source_updated_at": "2026-10-05T18:36:26-04:00",
+      "title": "VP, Product Marketing"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8234044",
+      "location": "Anywhere in the United States",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8234044?gh_jid=8234044",
+      "source_updated_at": "2026-10-09T20:21:48-04:00",
+      "title": "Enterprise Sales Development Representative"
+    },
+    {
+      "applicationURL": null,
+      "employer": "Greenhouse",
+      "jobID": "8245894",
+      "location": "Eastern or Central Timezone",
+      "observedUTC": "2026-10-11T21:03:15Z",
+      "sourcePostedDate": null,
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8245894?gh_jid=8245894",
+      "source_updated_at": "2026-10-09T16:48:29-04:00",
+      "title": "Project Manager"
+    }
+  ],
+  "missing_required_fields": [
+    "applicationURL"
+  ],
+  "observedUTC": "2026-10-11T21:03:15Z",
+  "source": "https://boards-api.greenhouse.io/v1/boards/greenhouse/jobs",
+  "validated_for_refresh": false
+}
