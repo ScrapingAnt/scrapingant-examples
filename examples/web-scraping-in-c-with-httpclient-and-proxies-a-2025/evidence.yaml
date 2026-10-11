@@ -1,0 +1,117 @@
+article_id: web-scraping-in-c-with-httpclient-and-proxies-a-2025
+canonical_url: https://scrapingant.com/blog/web-scraping-in-c-with-httpclient-and-proxies-a-2025
+owner: Oleg Kulyk
+source_ref: "The article pins the immutable commit containing this packet."
+tested_at: 2026-10-11
+requires_api_key: false
+scope: offline-synthetic
+environment:
+  os: macOS 26.6.2 arm64
+  dotnet_sdk: 10.0.401
+  dotnet_runtime: 10.0.12
+  python: 3.10.2
+  browser: none
+dependencies:
+  HtmlAgilityPack: 1.13.0
+  nuget_lockfile: packages.lock.json
+runtime_provenance:
+  url: https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+  metadata: https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json
+  sha512: 69f64eb00dc045398755c440b152225d544301a345a146a16e86a56a0c52b7c94b2c331520e976dbb821f18d31930aafbd25bb85961e3517e0665414ce0cbcff
+  checksum_verified_before_extraction: true
+run_command: ./run.sh
+capture_command: ./run.sh --capture
+fixtures:
+  - fixtures/raw.html
+  - fixtures/shell.html
+  - fixtures/rendered.html
+  - fixtures/oracle.json
+outputs:
+  - expected_output/offline.txt
+  - expected_output/results.json
+  - expected_output/oracle.txt
+  - expected_output/oracle-controls.txt
+measurements:
+  - name: CSharp_offline_cases_passed
+    value: 48
+    denominator: 48 named fake-handler and boundary cases
+    source: expected_output/offline.txt
+  - name: independent_oracle_mutation_controls_passed
+    value: 5
+    denominator: 5 deliberately corrupted output variants
+    source: expected_output/oracle-controls.txt
+  - name: simulated_records_matching_literal_oracle
+    value: 2
+    denominator: 2 simulated raw/rendered records, each with 4 required fields
+    source: expected_output/results.json
+  - name: live_API_calls
+    value: 0
+    denominator: this packet's recorded run
+    source: expected_output/offline.txt
+limitations:
+  - No live ScrapingAnt request, target retrieval, account or usage endpoint call.
+  - Rendered HTML and credit receipts are authored simulation, not browser output or service charges.
+  - No observed latency, throughput, reliability, CAPTCHA solving or paid capacity result.
+  - Delays are injected; schedule is tested without sleeping.
+  - HTML parser may tolerate malformed markup; required schema validation is not universal HTML validation.
+  - Optional live commands are illustrative and unexecuted; CLI performs one attempt each.
+  - Named-author review is pending; full blog build and exact-head CI are separate pending gates.
+  - Retrieval defaults differ across documentation and source; explicit settings avoid reliance on defaults.
+claims:
+  - id: C1
+    text: The tested client constructs an encoded general-endpoint GET with key header and six explicit query parameters.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C2
+    text: Two simulated raw/rendered HTML bodies produce the literal SKU, title, price and currency.
+    type: measured
+    source: expected_output/results.json
+  - id: C3
+    text: The empty application shell and missing or invalid required fields fail acceptance.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C4
+    text: API 200 with unsuccessful or missing target status fails acceptance.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C5
+    text: Missing, malformed or duplicate credit receipts fail acceptance rather than inventing a cost.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C6
+    text: The client stops outer 400/403/404/405/409/422/423/429 with one attempt and sanitizes errors.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C7
+    text: Transport and outer 500/502/503/504 retries are bounded to three attempts, with scheduled 1s/2s waits.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C8
+    text: Cancellation before or during send, body read and backoff stops without automatic replacement.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C9
+    text: The executable live command uses a one-attempt budget; live calls were not executed.
+    type: measured
+    source: Program.cs
+  - id: C10
+    text: The general endpoint returns HTML; structured AI extraction is a separate endpoint.
+    type: product
+    source: https://docs.scrapingant.com/request-response-format
+    accessed_at: 2026-10-11
+  - id: C11
+    text: Raw datacenter retrieval of a non-Google target is documented at 1 credit and JS-rendered datacenter retrieval at 10 credits.
+    type: product
+    source: https://docs.scrapingant.com/credits-cost
+    accessed_at: 2026-10-11
+  - id: C12
+    text: Outer API status and Ant-page-status-code belong to different layers; 403 access and 409 concurrency need corrective action.
+    type: product
+    source: https://docs.scrapingant.com/errors
+    accessed_at: 2026-10-11
+  - id: C13
+    text: The current Free allowance is 10000 API credits per month with no credit card; Enthusiast is 100000 credits per month at 19 USD per month.
+    type: product
+    source: https://scrapingant.com/#pricing
+    accessed_at: 2026-10-11
+    limitation: Documentation observation, not measured capacity or live billing.
