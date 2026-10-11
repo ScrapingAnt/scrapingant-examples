@@ -29,6 +29,16 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(cell['all_attempts_token_rate_cost_usd'],0.001)
         self.assertIsNone(cell['all_attempts_cost_per_accepted_page_usd'])
 
+    def test_charged_refusal_counts_as_inference_without_completion_text(self):
+        row=observation('html',0,False,0.001,None)
+        row.update(usage={'prompt_tokens':100,'completion_tokens':20},outcome='refusal')
+        cell=aggregate_model([row])['cells'][0]
+        self.assertEqual(cell['inference_responses'],1)
+        self.assertEqual(cell['completion_strings'],0)
+        self.assertEqual(cell['exact_page_accuracy'],0)
+        self.assertEqual(cell['unique_completion_strings'],0)
+        self.assertIsNone(cell['known_token_rate_cost_per_accepted_page_usd'])
+
     def test_nominal_wilson_bounds_do_not_report_certain_one_or_zero(self):
         self.assertAlmostEqual(wilson_interval(5,5)[0],0.5655175352)
         self.assertAlmostEqual(wilson_interval(0,5)[1],0.4344824648)

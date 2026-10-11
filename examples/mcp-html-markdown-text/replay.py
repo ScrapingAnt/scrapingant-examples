@@ -140,7 +140,7 @@ def run(out):
         lines.append(f"{row['case']:10} {row['arm']:8} {row['utf8_bytes']:5} bytes {row['unicode_codepoints']:5} codepoints "
                      f"{row['o200k_base']:4} o200k {row['cl100k_base']:4} cl100k "
                      f"{row['present_slots']}/{row['expected_non_null_slots']} required non-null slots present")
-    lines.append("Paid API/model calls: 0. LLM exact-record accuracy and live MCP costs: unmeasured.")
+    lines.append("This offline replay makes 0 paid calls and measures preservation/tokenization only. Hosted/model observations are separate in execution-report.json.")
     (out / "summary.txt").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     return report

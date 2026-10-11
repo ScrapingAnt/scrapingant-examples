@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EXsWWBDGxf7Wu3jA3eL6o3ZECafFK",
+  "object": "chat.completion",
+  "created": 1791743120,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "[\n  {\n    \"name\": \"Ant Farm Deluxe\",\n    \"displayed_price\": \"$1,234.50\",\n    \"units_sold\": \"12,345\",\n    \"share\": \"45.5%\",\n    \"sku\": null,\n    \"buy_url\": null\n  },\n  {\n    \"name\": \"Ant Farm Mini\",\n    \"displayed_price\": \"$99.00\",\n    \"units_sold\": \"1,020\",\n    \"share\": \"3.8%\",\n    \"sku\": null,\n    \"buy_url\": null\n  },\n  {\n    \"name\": \"Magnifier\",\n    \"displayed_price\": \"$12.25\",\n    \"units_sold\": \"987,654\",\n    \"share\": \"50.7%\",\n    \"sku\": null,\n    \"buy_url\": null\n  }\n]",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1897,
+    "completion_tokens": 174,
+    "total_tokens": 2071,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_75022ca69a"
+}

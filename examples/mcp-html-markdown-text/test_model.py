@@ -149,6 +149,34 @@ class ModelGuardTests(unittest.TestCase):
         self.assertAlmostEqual(run.ledger['accounted_usd'],0.0072)
         with self.assertRaises(StopRun):ModelRun.continue_after_auth_failure(self.out,lambda p:self.fail('second rebind'),'third-test-binding')
 
+    def quota_failure_after_first_rebind(self):
+        self.auth_failure()
+        response=Response({'error':{'type':'insufficient_quota','code':'credit_balance_exhausted'}});response.status_code=429
+        run=ModelRun.continue_after_auth_failure(self.out,lambda p:response,'second-test-binding')
+        with self.assertRaises(StopRun):run.observe(self.job)
+        return json.loads((self.out/'ledger.json').read_text())
+
+    def test_explicit_two_attempt_rebind_retains_prefix_and_allows_only_58_jobs(self):
+        original=self.quota_failure_after_first_rebind();calls=[]
+        run=ModelRun.continue_after_auth_failure(self.out,lambda p:(calls.append(p),Response(reply()))[1],'third-test-binding',retained_attempts=2)
+        self.assertEqual(run.ledger['calls'],original['calls'])
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0072)
+        for _ in range(58):run.observe(self.job)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        self.assertEqual(len(calls),58);self.assertEqual(run.ledger['calls'][-1]['attempt'],60)
+        self.assertEqual(run.ledger['calls'][:2],original['calls'])
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0072+58*0.00036)
+        self.assertEqual(run.ledger['continuation_history'],[original['continuation']])
+
+    def test_third_quota_failure_stops_and_cannot_rebind_again(self):
+        self.quota_failure_after_first_rebind()
+        response=Response({'error':{'type':'insufficient_quota','code':'credit_balance_exhausted'}});response.status_code=429
+        run=ModelRun.continue_after_auth_failure(self.out,lambda p:response,'third-test-binding',retained_attempts=2)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        with self.assertRaises(StopRun):run.observe(self.job)
+        self.assertAlmostEqual(run.ledger['accounted_usd'],0.0108)
+        with self.assertRaises(StopRun):ModelRun.continue_after_auth_failure(self.out,lambda p:self.fail('retry'),'fourth-test-binding',retained_attempts=2)
+
     def test_cached_price_and_unknown_details_are_conservative(self):
         self.assertAlmostEqual(calculate_cost({"prompt_tokens":1000,"completion_tokens":100,"total_tokens":1100,"prompt_tokens_details":{"cached_tokens":800}}),0.00032)
         self.assertAlmostEqual(calculate_cost({"prompt_tokens":1000,"completion_tokens":100,"total_tokens":1100}),0.00056)

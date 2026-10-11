@@ -1,6 +1,6 @@
 # HTML, Markdown or plain text for one extraction contract
 
-This packet backs the draft article “HTML vs Markdown vs Plain Text for LLM Extraction.” It demonstrates field information loss and content token counts on frozen inputs. It also retains 15 authenticated hosted MCP retrievals and their scoped account-counter observations. **No LLM accuracy result exists:** two requests failed before inference, with an explicitly authorized continuation between the failures. Both attempts remain in the evidence with no completion or usage. See [PROTOCOL.md](PROTOCOL.md) for completed work and the remaining model gate.
+This packet backs the draft article “HTML vs Markdown vs Plain Text for LLM Extraction.” It separates same-capture field loss/tokenization, 15 hosted MCP acquisitions, and 58 fixed-model extraction responses. Two additional requests failed before inference and remain in the evidence with unknown charges. The completed run contains every planned attempt; no failed job was retried. See [PROTOCOL.md](PROTOCOL.md) for settings, provenance, budget accounting and limitations.
 
 ## Run the saved evidence
 
@@ -36,7 +36,7 @@ The nine rows report **literal presence among non-null expected slots**. Equal v
 
 The fixed task selects the four-column catalog table or the offers under `Desk lamps` / `Travel bottles`; other demonstration tables and documentation links are outside that product region. Inputs and conversions remain complete. The current URL-presence fallback checks only pathname: all selected purchase URLs lack query/fragment components. Extend and test the checker before using those components in a new case.
 
-The same fixed schema is used for all cases: name, displayed price, units sold, share, SKU, buy URL. Seven unique fixture records are reused; five local transformations are not five new sites or records. No accuracy/credit/cash-cost winner is claimed.
+The same fixed schema is used for all cases: name, displayed price, units sold, share, SKU, buy URL. Seven unique fixture records are reused; five local transformations are not five new sites or records. No universal accuracy, credit or cash-cost winner is claimed. Fixed-model outcomes are reported separately below.
 
 ## Optional public schema discovery
 
@@ -48,10 +48,29 @@ This makes three read-only unauthenticated requests to the existing hosted MCP e
 
 ## Paid phase and publication
 
-The bounded run allows at most 15 MCP attempts/15 credits and 60 fixed-model attempts / US$0.25. All 15 MCP attempts completed; account counters increased 15 in total, without per-call receipt/exclusive attribution. Model attempts 1 and 2 failed before inference. Their US$0.0072 total reservation remains conservative allowance accounting, **not observed billing**; actual charges are unknown. 58 attempts and US$0.2428 unreserved remain. No new credentials/accounts/purchases were created and no MCP call was repeated.
+The approved run allowed at most 15 MCP attempts/15 credits and 60 fixed-model attempts / US$0.25. All 15 MCP attempts completed; account counters increased 15 in total, without per-call receipt/exclusive attribution. Model attempts 1 and 2 failed before inference. Their US$0.0072 reservation remains conservative allowance accounting, **not observed billing**. Separately authorized continuations preserved both checkpoints and failed rows, skipped both consumed jobs, and completed attempts 3–60 using the saved MCP outputs. No new credentials/accounts/purchases were created and no MCP call was repeated. The call cap is exhausted.
 
-`mcp_live.py` and `model_run.py` require explicit execution flags and keys supplied securely in the environment. They are not called by `run.sh`. Do not rerun them against a paid account without bounded approval. Normal runs require a fresh directory. The explicit owner-authorized `--continue-after-approved-auth-rebind` mode preserves the first failed checkpoint and allowance, skips that failed job, and permits only the remaining jobs. It is guarded against a second continuation. No automatic retries, account/model fallback or fresh-budget reset occurs. The present second stop requires a separately reviewed continuation; do not invoke a fresh 60-call run.
+`mcp_live.py` and `model_run.py` are explicit opt-in runners, not called by `run.sh`. Do not rerun them against a paid account without bounded approval. Normal runs require a fresh directory. The exceptional `--continue-after-approved-auth-rebind` mode preserves a validated failed prefix; `--retained-attempts-at-approved-rebind 2` additionally carries the preceding checkpoint/history and both reservations. This recorded run had separate owner authorization and independent pre-dispatch review for each rebind. These flags do not grant approval. Another continuation, automatic retry, fallback or fresh-budget reset is rejected.
 
-`expected_output/live-mcp-2026-10-11/` retains all 15 requests/responses/outputs and authenticated discovery. `expected_output/live-model-2026-10-11/` retains both failed requests and sanitized responses. Operational provider messages and account absolute counters/internal period identity are omitted from public copies; HTTP statuses, pre-inference failure markers and minimization hashes remain. Exact stopped checkpoint and responses are kept privately. `execution-report.json` separates content preservation/tokenization, hosted acquisition and absent model outcomes. Run `python summarize_runs.py` offline to validate captures and recompute it. The analysis distinguishes inference responses from pre-inference errors, preserves unknown costs and balances matching repeats when available; with zero inference responses it reports no accuracy or intervals. No billing receipt or zero charge is inferred.
+`expected_output/live-mcp-2026-10-11/` retains all 15 requests/responses/outputs and authenticated discovery. `expected_output/live-model-2026-10-11/` retains all 60 requests/responses and exact 58 completion strings. Operational error messages and account absolute counters/internal period identity are omitted from public copies; HTTP statuses, failure classifications and private-original/minimization hashes remain. Exact stopped checkpoints and responses are kept privately. No raw secret or credential-bearing header is included.
+
+Run `python summarize_runs.py` offline to check retained response hashes, recompute usage costs/strict scores and regenerate `execution-report.json`. Inference responses include refusals/truncation/invalid records; pre-inference failures remain separate attempts with unknown costs. `completion_strings` counts content-bearing responses separately. All available observations and matched-repeat comparisons are both reported.
+
+## Fixed-model results
+
+Model: `gpt-4.1-mini-2025-04-14`, temperature 0, top_p 1, n 1, max_completion_tokens 1000, service_tier default, store false, no tools/history/retrieval/retries. The same full task/schema/source URL is used across arms; the oracle is withheld. The complete 60-job plan is in the ledger. Missing inference responses are offline links/Markdown repeat 0 and offline catalog/text repeat 0; matching repeat labels therefore leave four comparable rounds for those cases.
+
+| Matched input | Repeats per arm | HTML accepted | Markdown accepted | Text accepted |
+|---|---:|---:|---:|---:|
+| Same-capture catalog | 4 | 4 | 0 | 4 |
+| Same-capture links | 4 | 4 | 4 | 0 |
+| Same-capture attributes | 5 | 5 | 0 | 0 |
+| Saved hosted catalog | 5 | 5 | 0 | 0 |
+
+All 58 inference responses completed with stop: 28 accepted pages and 30 incorrect pages. Twenty-five incorrect responses were `[]`; five attribute/Markdown responses omitted both required SKUs. We do not pool unlike cases into a format ranking. Nominal 95% Wilson repeat intervals assume independent Bernoulli responses, which repeated identical inputs may violate; they do not establish coverage across websites or production reliability.
+
+Reported usage: 48,709 input tokens (14,976 cached), 4,860 output tokens. Published standard token rates yield known usage cost US$0.0227668. Including both unknown-charge reservations gives US$0.0299668 allowance accounting under the US$0.25 ceiling. Actual all-attempt billing is unknown. Cells with zero accepted pages have undefined cost per accepted output; cells containing unknown-charge attempts keep all-attempt cost ratios null. Other cells report per-accepted-page token-rate cost. Caching/order and success-dependent output lengths mean these costs do not isolate a format-size effect. The report retains every cell, usage record, system fingerprint and score.
+
+Hosted text differs from local browser selection and failed this fixed task despite preserving all required literals. This is observed model behavior, not a causal explanation of which text difference mattered. The saved-output model phase does not test interactive agent planning, acquisition retries or a production workflow. No paying-customer impact is measured.
 
 The blog remains `draft: true`. Oleg Kulyk must review conclusions, method and byline before any publication; AI execution and independent AI evidence review do not imply human review. No source merge, deployment or Terraform is authorized here.

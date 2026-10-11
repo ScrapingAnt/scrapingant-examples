@@ -33,6 +33,7 @@ def aggregate_model(rows):
         unknown=sum(r['actual_cost_usd'] is None for r in group)
         total=None if unknown else known
         cells.append({'phase':phase,'case':case,'arm':arm,'attempts':len(group),'completions':len(completed),
+            'inference_responses':len(completed),'completion_strings':sum(r.get('completion') is not None for r in completed),
             'accepted_pages':accepted,'exact_page_accuracy':accepted/len(completed) if completed else None,
             'nominal_wilson_95_repeat_interval':wilson_interval(accepted,len(completed)),
             'correct_slots':sum(r['score']['correct_slots'] for r in completed),
@@ -41,7 +42,8 @@ def aggregate_model(rows):
             'unknown_charge_attempts':unknown,'known_token_rate_cost_usd':known,'all_attempts_token_rate_cost_usd':total,
             'conservative_accounted_usd':known+sum(r['reserved_usd'] for r in group if r['actual_cost_usd'] is None),
             'all_attempts_cost_per_accepted_page_usd':total/accepted if total is not None and accepted else None,
-            'unique_completion_strings':len({r.get('completion') for r in completed}),
+            'known_token_rate_cost_per_accepted_page_usd':known/accepted if accepted else None,
+            'unique_completion_strings':len({r['completion'] for r in completed if r.get('completion') is not None}),
             'system_fingerprints':sorted({r['system_fingerprint'] for r in completed if r.get('system_fingerprint')})})
     for phase,case in sorted({(r['phase'],r['case']) for r in rows}):
         groups={arm:[r for r in rows if (r['phase'],r['case'],r['arm'])==(phase,case,arm) and inference(r)] for arm in ('html','markdown','text')}
@@ -66,6 +68,7 @@ def summarize():
             'credit_receipts':None,'credit_attribution':'Scoped read-only contemporaneous account delta, no exclusive per-request receipts; concurrent traffic cannot be ruled out.',
             'model_attempts':len(model['calls']),'model_complete':model.get('complete',False),
             'model_completions':sum(row.get('completion') is not None for row in model['calls']),
+            'model_inference_responses':sum(inference(row) for row in model['calls']),
             'model_stop_reason':model.get('stop_reason'),'model_actual_known_cost_usd':model['actual_reported_usage_cost_usd'],
             'model_total_actual_cost_usd':None if any(row['actual_cost_usd'] is None for row in model['calls']) else model['actual_reported_usage_cost_usd'],
             'model_accounted_upper_bound_usd':model['accounted_usd'],

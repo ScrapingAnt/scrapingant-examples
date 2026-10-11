@@ -73,6 +73,7 @@
   "checked_at": "2026-10-11",
   "ownership": "Existing ScrapingAnt-owned capture; authored synthetic local-only inputs; no user/customer content",
   "new_paid_calls": 15,
-  "model_attempts": 2,
-  "hosted_capture_notes": "15 hosted MCP outputs retained unchanged; two model requests failed before inference, with operational provider details omitted publicly. No model accuracy, charge or cost-per-correct claim."
+  "model_attempts": 60,
+  "hosted_capture_notes": "15 hosted MCP outputs retained unchanged; all 60 model attempts retained with58 inference responses and2 pre-inference failures. Operational provider details omitted publicly. Fixed-model per-case/arm outcomes and usage costs are reported separately from preservation/acquisition; all-attempt actual billing is unknown.",
+  "model_inference_responses": 58
 }

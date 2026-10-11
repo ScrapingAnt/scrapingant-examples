@@ -1,11 +1,11 @@
 article_id: html-markdown-plain-text-llm-extraction
 evidence_asset_id: mcp-html-markdown-text
 tested_at: '2026-10-11'
-status: completed_offline_and_hosted_mcp__model_phase_incomplete
+status: completed_offline_hosted_mcp_and_fixed_model__author_review_pending
 requires_api_key: false
 default_paid_calls: 0
 new_retrieval_calls: 15
-model_calls: 2
+model_calls: 60
 public_discovery_http_requests: 3
 source_base: 9e5fba96d34a7bb7106a5a0e478a668078c6a312
 run_command: ./run.sh
@@ -30,16 +30,20 @@ measurements:
     attributes: 8
   scope: lexical value survival; not row association or LLM accuracy
   token_scope: exact representation content; prompts/schema/tool envelopes excluded
-  llm_exact_record_accuracy: null
+  llm_exact_record_accuracy: Per-case/arm and matched repeats in execution-report.json;
+    no pooled ranking
   live_mcp_cost_per_correct_output: null
   actual_paid_credits: null
   hosted_report: expected_output/execution-report.json
   hosted_attempts: 15
   observed_account_credit_delta: 15
   actual_tool_credit_receipts: null
-  model_completions: 0
+  model_completions: 58
   model_actual_cost_usd: null
   model_retained_reservation_usd: 0.0072
+  model_inference_responses: 58
+  model_known_token_rate_cost_usd: 0.0227668
+  model_conservative_accounted_usd: 0.0299668
 proposed_budget:
   status: approved_2026_10_11
   scrapingant_credit_ceiling: 15
@@ -50,10 +54,9 @@ proposed_budget:
   missing_environment_keys: []
   purchase_authorized: false
   scrapingant_attempts_remaining: 0
-  model_attempts_remaining: 58
-  model_usd_unreserved_remaining: 0.2428
-  exact_access_blocker: Model phase stopped before inference; accuracy and actual
-    charges unmeasured. Operational provider details retained privately.
+  model_attempts_remaining: 0
+  model_usd_unreserved_remaining: 0.2200332
+  exact_access_blocker: null
 outputs:
 - expected_output/report.json
 - expected_output/summary.csv
@@ -85,9 +88,10 @@ limitations:
   not exposed.
 - Scoped account deltas are contemporaneous, not exclusive request receipts; concurrent
   traffic cannot be ruled out.
-- Two pre-inference model failures; no accuracy, reported usage, actual total charges,
-  uncertainty interval or cost per correct output exists. Reservations are allowance
-  accounting, not billing.
+- Two pre-inference model failures have unknown charges.58 responses retain all incorrect
+  outcomes; all-attempt actual totals are null. Nominal same-input repeat intervals
+  do not establish website-population reliability. Reservations are allowance accounting,
+  not billing.
 claims:
 - id: M1
   text: The table retains12/12 non-null slots in all reference formats.
@@ -116,7 +120,12 @@ claims:
     delta 15.
   source: expected_output/execution-report.json; live-mcp ledger/captures
 - id: B1
-  text: Two pre-inference failures retained; unknown charges and total reservation
-    0.0072. No model accuracy or zero-charge claim.
+  text: Two pre-inference failures retained with unknown charges and0.0072reservation;58 inferences
+    scored separately. No zero-charge claim.
   source: expected_output/live-model-2026-10-11/ledger.json; sanitized response-001.json
     and response-002.json
+- id: E1
+  text: All60 planned attempts retained,58 inferences with28 accepted/30 incorrect pages;
+    matched case/arm rates and per-correct usage costs reported with unknown-charge
+    ratios null.
+  source: expected_output/execution-report.json; live-model ledger/all 60responses

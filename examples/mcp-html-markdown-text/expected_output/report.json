@@ -772,7 +772,7 @@
   "ground_truth_sha256": "d6d10cef65eab63c2ac66797784823bc54a07b1753d720f5b94144fb6b3c2d50",
   "task_sha256": "15156241cec5f65de3f7bd49d53eff100478a29fac356e47e5d4a6d87288ed4c",
   "runtime_sha256": {
-    "replay.py": "1e844775c1e81bd9d2c6853ce880f404bc9e189738aada3d24435ec3a5a8c62b",
+    "replay.py": "372e4f8593ef25b901f73c383b143ddd327cc08511fb6588d64dbe83c009ece2",
     "contract.py": "f18d604ca2ce5e07cbd4b1adb2a7754ae1927044135337fabaed41603fcb852b",
     "requirements.txt": "1b6955a84bc944b4f8d678a47c24fdc83b8e7f4fdac4b467c7d6909cde2d3577"
   }

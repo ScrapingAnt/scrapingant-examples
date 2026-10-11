@@ -27,6 +27,7 @@ test_continuation_cannot_reset_reservation_or_expand_limits (test_model.ModelGua
 test_correct_records_are_scored_without_prompt_oracle_leak (test_model.ModelGuardTests.test_correct_records_are_scored_without_prompt_oracle_leak) ... ok
 test_dollar_reservation_blocks_before_transport (test_model.ModelGuardTests.test_dollar_reservation_blocks_before_transport) ... ok
 test_existing_run_cannot_restart (test_model.ModelGuardTests.test_existing_run_cannot_restart) ... ok
+test_explicit_two_attempt_rebind_retains_prefix_and_allows_only_58_jobs (test_model.ModelGuardTests.test_explicit_two_attempt_rebind_retains_prefix_and_allows_only_58_jobs) ... ok
 test_full_request_input_cap_blocks_dispatch (test_model.ModelGuardTests.test_full_request_input_cap_blocks_dispatch) ... ok
 test_http200_provider_error_can_never_be_accepted (test_model.ModelGuardTests.test_http200_provider_error_can_never_be_accepted) ... ok
 test_missing_or_invalid_usage_stops_never_zero_cost (test_model.ModelGuardTests.test_missing_or_invalid_usage_stops_never_zero_cost) ... ok
@@ -34,14 +35,16 @@ test_repeated_auth_failure_stops_without_retry_and_retains_two_reservations (tes
 test_run_freezes_task_text_even_if_source_file_changes (test_model.ModelGuardTests.test_run_freezes_task_text_even_if_source_file_changes) ... ok
 test_secret_echo_stops_and_never_persists (test_model.ModelGuardTests.test_secret_echo_stops_and_never_persists) ... ok
 test_sixtieth_attempt_is_last_and_never_retried (test_model.ModelGuardTests.test_sixtieth_attempt_is_last_and_never_retried) ... ok
+test_third_quota_failure_stops_and_cannot_rebind_again (test_model.ModelGuardTests.test_third_quota_failure_stops_and_cannot_rebind_again) ... ok
 test_timeout_reserved_unknown_cost_stops_and_redacts (test_model.ModelGuardTests.test_timeout_reserved_unknown_cost_stops_and_redacts) ... ok
 test_truncation_refusal_and_wrong_records_remain_charged (test_model.ModelGuardTests.test_truncation_refusal_and_wrong_records_remain_charged) ... ok
 test_wrong_model_and_paid_tier_stop (test_model.ModelGuardTests.test_wrong_model_and_paid_tier_stop) ... ok
+test_charged_refusal_counts_as_inference_without_completion_text (test_summary.AnalysisTests.test_charged_refusal_counts_as_inference_without_completion_text) ... ok
 test_missing_completion_retains_attempt_cost_and_balances_repeats (test_summary.AnalysisTests.test_missing_completion_retains_attempt_cost_and_balances_repeats) ... ok
 test_nominal_wilson_bounds_do_not_report_certain_one_or_zero (test_summary.AnalysisTests.test_nominal_wilson_bounds_do_not_report_certain_one_or_zero) ... ok
 test_zero_correct_denominator_is_undefined_even_with_known_cost (test_summary.AnalysisTests.test_zero_correct_denominator_is_undefined_even_with_known_cost) ... ok
 
 ----------------------------------------------------------------------
-Ran 42 tests in 0.537s
+Ran 45 tests in 4.966s
 
 OK
