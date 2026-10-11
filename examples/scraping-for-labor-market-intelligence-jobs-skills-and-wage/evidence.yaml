@@ -2,9 +2,9 @@
   "article_id": "scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "canonical_url": "https://scrapingant.com/blog/scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "owner": "Oleg Kulyk",
-  "review_state": "AI-assisted draft; named-author and independent review pending",
+  "review_state": "AI-assisted draft; named-author review and independent review of this capture update pending",
   "examples_repo_commit": "6d500a8e78db711b9fcf2181a17a256421588cab",
-  "commit_note": "Identifies the verified code/output snapshot. This manifest is pinned in a following provenance-only commit; article links the final immutable packet tree. No public publication or live provider result is implied.",
+  "commit_note": "Identifies the verified offline code/output snapshot. Later commits add provenance and the separately recorded owned raw transport capture; core code is unchanged. Article links the final immutable packet tree.",
   "tested_at": "2026-10-11",
   "observed_utc": "2026-10-11T21:14:49Z",
   "requires_api_key": false,
@@ -23,11 +23,15 @@
   "check_command": "PYTHON_BIN=python3.12 ./run.sh --check",
   "execution_scope": {
     "default_network": "owned 127.0.0.1 HTTP only",
-    "live_provider_calls": 0,
-    "paid_calls": 0,
+    "default_runner_live_provider_calls": 0,
+    "default_runner_paid_calls": 0,
     "live_ATS_calls_by_runner": 0,
     "greenhouse_capture_replayed": true,
-    "managed_request_mocked_only": true
+    "default_managed_requests_mocked_only": true,
+    "recorded_live_owned_transport_calls": 1,
+    "recorded_transport_API_credits": 1,
+    "recorded_live_job_adapter_calls": 0,
+    "recorded_managed_CLI_executed": false
   },
   "fixtures": [
     "fixtures/denied.html",
@@ -46,6 +50,8 @@
     "expected_output/failure-matrix.json",
     "expected_output/failure-matrix.txt",
     "expected_output/greenhouse-replay.json",
+    "expected_output/live-managed-2026-10-11/receipt.json",
+    "expected_output/live-managed-2026-10-11/response.html",
     "expected_output/partial-collection.json",
     "expected_output/partial-refresh.json",
     "expected_output/record-example.json",
@@ -94,6 +100,13 @@
       "unit": "post IDs",
       "denominator": "19 retained posts from one observed public board response with meta.total19; zero qualify for this HTML refresh schema because distinct applicationURL was not verified",
       "source": "expected_output/greenhouse-replay.json"
+    },
+    {
+      "name": "live_owned_raw_transport",
+      "value": 1,
+      "unit": "successful recorded API call",
+      "denominator": "one request to the existing owned fixture; API 200/target 200, Ant-credits-cost 1, body 752 bytes; not jobs or ATS coverage",
+      "source": "expected_output/live-managed-2026-10-11/receipt.json"
     }
   ],
   "external_sources": [
@@ -110,7 +123,7 @@
     {
       "url": "https://docs.scrapingant.com/credits-cost",
       "checked_at": "2026-10-11",
-      "claim": "Ordinary non-Google datacenter request documented 1 credit raw /10 rendered; no measured credit receipts in this packet."
+      "claim": "Ordinary non-Google datacenter request documented 1 credit raw /10 rendered. Separate recorded owned raw fixture receipt is 1 credit; no measured cost per valid job."
     },
     {
       "url": "https://scrapingant.com/#pricing",
@@ -143,15 +156,15 @@
   },
   "limitations": [
     "Owned fictional HTML demonstrates one fixed adapter, not live ATS HTML acquisition, rendering or general support.",
-    "Greenhouse capture is genuine observed JSON availability on one board at one time. Default runner only replays it; no paid HTML retrieval is measured.",
+    "Greenhouse capture is genuine observed JSON availability on one board at one time. Default runner only replays it; separate owned raw transport result does not validate an employer HTML source.",
     "Greenhouse employer label is supplied by caller; applicationURL is unverified/null and candidates cannot enter the validated fixture refresh sink.",
     "updated_at is retained as source_updated_at; sourcePostedDate stays null. Neither observation time nor update time is relabeled a posting date.",
     "Completeness is conditional on this validated source envelope and declared page sequence; source-specific validation is required for a different source.",
     "removed_ids denotes source-list absence only; incomplete acquisitions suppress all removals and retain prior records with prior timestamps.",
     "No applications, profiles, wage/skills inference, universal Indeed/LinkedIn support, ready-made jobs database, live success rate or production reliability result.",
-    "Managed request shape and response checks use mocks only; header contract checked in current source without a new authenticated call. Public OpenAPI describes query authentication only.",
-    "No per-request cost or successful-job yield measured; current pricing and credit costs are documented dated facts.",
-    "Named-author and independent methodology review are pending; article remains unlisted; no restoration or deployment approved.",
+    "Default managed request controls use mocks; a separate authenticated owned raw fixture call exercised unchanged managed_html. Public OpenAPI describes query authentication only; no job source or managed CLI was exercised.",
+    "One owned raw fixture credit receipt is 1 API credit; no successful-job yield or cost per valid job measured. Current pricing and remaining credit costs are documented dated facts.",
+    "Named-author review and independent review of this capture update are pending; article remains unlisted; no restoration or deployment approved.",
     "Managed HTML acceptance does not require an outer Content-Type. Unknown original target media type is deferred to the required schema. Managed redirect guard covers API endpoint redirects only; no remote-target redirect proof."
   ],
   "claims": [
@@ -224,16 +237,17 @@
     },
     {
       "id": "C9",
-      "text": "Code uses environment key in header; keepskey outside URLs and sanitizeserrors; contract checked in current source, not public OpenAPI or livecall.",
+      "text": "Code uses environment key in header, outside URLs and sanitized errors. Header contract checked in current source and exercised once by separate owned raw managed_html call, not a job adapter or managed CLI.",
       "type": "documented",
       "source": [
         "scrapingant_transport.py",
-        "test_collector.py"
+        "test_collector.py",
+        "expected_output/live-managed-2026-10-11/receipt.json"
       ]
     },
     {
       "id": "C10",
-      "text": "Datacenter nonGoogle retrieval documented1raw/10rendered credits; no measured actual cost.",
+      "text": "Datacenter non-Google retrieval documented at 1 raw/10 rendered credits; one separate owned raw fixture receipt measured 1 credit, with no cost per valid job.",
       "type": "product",
       "source": "https://docs.scrapingant.com/credits-cost"
     },
@@ -245,7 +259,7 @@
     },
     {
       "id": "C12",
-      "text": "Default runner no live ATS/provider/paidcalls; optional managed is explicit unexecuted opt-in.",
+      "text": "Default runner has no live ATS/provider/paid calls; managed job-source command remains unexecuted. One separate owned raw transport call is recorded.",
       "type": "documented",
       "source": [
         "run.sh",
@@ -269,6 +283,37 @@
         "scrapingant_transport.py",
         "test_collector.py"
       ]
+    },
+    {
+      "id": "C15",
+      "text": "From 2026-10-11T21:38:39.695211 to 21:38:40.432850 UTC, one raw owned-fixture call through unchanged managed_html returned API 200/target 200, a 1-credit receipt and 752 bytes with recorded SHA/initial marker. This does not validate ATS HTML/job adapter/pagination/managed CLI or JavaScript rendering.",
+      "type": "measured",
+      "source": [
+        "expected_output/live-managed-2026-10-11/receipt.json",
+        "expected_output/live-managed-2026-10-11/response.html"
+      ]
     }
-  ]
+  ],
+  "requires_api_key_scope": "Default offline runner only; the separate recorded transport call used authentication that is not retained.",
+  "environment_scope": "Default offline test run; live capture parameters and observation times are separately recorded.",
+  "recorded_live_owned_transport": {
+    "receipt": "expected_output/live-managed-2026-10-11/receipt.json",
+    "body": "expected_output/live-managed-2026-10-11/response.html",
+    "started_at_utc": "2026-10-11T21:38:39.695211+00:00",
+    "completed_at_utc": "2026-10-11T21:38:40.432850+00:00",
+    "API_status": 200,
+    "target_status": 200,
+    "actual_API_credits": 1,
+    "body_bytes": 752,
+    "body_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+    "parameters": {
+      "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+      "browser": "false",
+      "proxy_type": "datacenter",
+      "proxy_country": "us",
+      "timeout": "30",
+      "return_page_source": "false"
+    },
+    "scope": "Unchanged managed_html accepted one owned raw fixture and its initial source marker. No employer/ATS HTML, job adapter, managed CLI, pagination or rendering proof."
+  }
 }
