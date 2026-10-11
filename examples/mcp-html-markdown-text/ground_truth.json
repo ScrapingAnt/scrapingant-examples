@@ -1,0 +1,15 @@
+{
+  "catalog": [
+    {"name":"Ant Farm Deluxe","displayed_price":"$1,234.50","units_sold":"12,345","share":"45.5%","sku":null,"buy_url":null},
+    {"name":"Ant Farm Mini","displayed_price":"$99.00","units_sold":"1,020","share":"3.8%","sku":null,"buy_url":null},
+    {"name":"Magnifier","displayed_price":"$12.25","units_sold":"987,654","share":"50.7%","sku":null,"buy_url":null}
+  ],
+  "links": [
+    {"name":"Twin Lamp","displayed_price":"$19.00","units_sold":null,"share":null,"sku":"LAMP-A","buy_url":"https://catalog.example/buy/lamp-a"},
+    {"name":"Twin Lamp","displayed_price":"$24.00","units_sold":null,"share":null,"sku":"LAMP-B","buy_url":"https://catalog.example/buy/lamp-b"}
+  ],
+  "attributes": [
+    {"name":"Red Bottle","displayed_price":"$12.00","units_sold":null,"share":null,"sku":"BOTTLE-RED","buy_url":"https://catalog.example/buy/red-bottle"},
+    {"name":"Blue Bottle","displayed_price":"$14.00","units_sold":null,"share":null,"sku":"BOTTLE-BLUE","buy_url":"https://catalog.example/buy/blue-bottle"}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "error": {
+    "message": "[REDACTED: operational provider details retained privately]",
+    "operational_details_omitted": true,
+    "public_classification": "pre_inference_failure"
+  }
+}

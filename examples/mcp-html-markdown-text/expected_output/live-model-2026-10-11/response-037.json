@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EXsWEYBcrfuiYsXcGXqkKqPsAXkJM",
+  "object": "chat.completion",
+  "created": 1791743102,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "[\n  {\n    \"name\": \"Red Bottle\",\n    \"displayed_price\": \"$12.00\",\n    \"units_sold\": null,\n    \"share\": null,\n    \"sku\": null,\n    \"buy_url\": \"https://catalog.example/buy/red-bottle\"\n  },\n  {\n    \"name\": \"Blue Bottle\",\n    \"displayed_price\": \"$14.00\",\n    \"units_sold\": null,\n    \"share\": null,\n    \"sku\": null,\n    \"buy_url\": \"https://catalog.example/buy/blue-bottle\"\n  }\n]",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 408,
+    "completion_tokens": 121,
+    "total_tokens": 529,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_75022ca69a"
+}
