@@ -1,0 +1,9 @@
+{
+  "error": {
+    "message": "[REDACTED: provider message includes a masked credential identifier]",
+    "type": "invalid_request_error",
+    "code": "invalid_api_key",
+    "param": null
+  },
+  "status": 401
+}

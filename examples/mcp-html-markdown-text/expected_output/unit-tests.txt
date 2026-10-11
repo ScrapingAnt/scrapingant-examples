@@ -4,8 +4,38 @@ test_literal_oracle_accepts_all_cases (test_contract.ContractTests.test_literal_
 test_shape_type_and_extra_fields_fail (test_contract.ContractTests.test_shape_type_and_extra_fields_fail) ... ok
 test_wrong_and_invented_values_fail (test_contract.ContractTests.test_wrong_and_invented_values_fail) ... ok
 test_zero_correct_is_undefined_and_failures_stay_charged (test_contract.ContractTests.test_zero_correct_is_undefined_and_failures_stay_charged) ... ok
+test_cap_prevents_sixteenth_transport_and_persists_fifteen (test_live.GuardTests.test_cap_prevents_sixteenth_transport_and_persists_fifteen) ... ok
+test_counter_debit_above_bound_stops_remaining_calls (test_live.GuardTests.test_counter_debit_above_bound_stops_remaining_calls) ... ok
+test_discovery_wrong_identity_prevents_any_paid_attempt (test_live.GuardTests.test_discovery_wrong_identity_prevents_any_paid_attempt) ... ok
+test_drift_is_recorded_not_disguised_as_identical_source (test_live.GuardTests.test_drift_is_recorded_not_disguised_as_identical_source) ... ok
+test_existing_run_is_never_overwritten_or_resumed (test_live.GuardTests.test_existing_run_is_never_overwritten_or_resumed) ... ok
+test_malformed_result_and_blocks_are_retained_and_stop (test_live.GuardTests.test_malformed_result_and_blocks_are_retained_and_stop) ... ok
+test_period_change_and_unknown_snapshot_never_mean_zero (test_live.GuardTests.test_period_change_and_unknown_snapshot_never_mean_zero) ... ok
+test_plan_is_balanced_and_interleaved (test_live.GuardTests.test_plan_is_balanced_and_interleaved) ... ok
+test_rpc_error_is_retained_without_success (test_live.GuardTests.test_rpc_error_is_retained_without_success) ... ok
+test_secret_echo_redacted_and_stops (test_live.GuardTests.test_secret_echo_redacted_and_stops) ... ok
+test_snapshot_rejects_write_role_standby_ambiguous_account (test_live.GuardTests.test_snapshot_rejects_write_role_standby_ambiguous_account) ... ok
+test_sse_multiline_json_is_decoded (test_live.GuardTests.test_sse_multiline_json_is_decoded) ... ok
+test_timeout_is_reserved_and_not_retried (test_live.GuardTests.test_timeout_is_reserved_and_not_retried) ... ok
+test_tool_error_string_with_false_iserror_is_failure (test_live.GuardTests.test_tool_error_string_with_false_iserror_is_failure) ... ok
+test_transport_traceback_does_not_expose_exception_secret (test_live.GuardTests.test_transport_traceback_does_not_expose_exception_secret) ... ok
+test_wrong_rpc_id_stops_before_another_attempt (test_live.GuardTests.test_wrong_rpc_id_stops_before_another_attempt) ... ok
+test_45_same_capture_jobs_are_balanced (test_model.ModelGuardTests.test_45_same_capture_jobs_are_balanced) ... ok
+test_cached_price_and_unknown_details_are_conservative (test_model.ModelGuardTests.test_cached_price_and_unknown_details_are_conservative) ... ok
+test_correct_records_are_scored_without_prompt_oracle_leak (test_model.ModelGuardTests.test_correct_records_are_scored_without_prompt_oracle_leak) ... ok
+test_dollar_reservation_blocks_before_transport (test_model.ModelGuardTests.test_dollar_reservation_blocks_before_transport) ... ok
+test_existing_run_cannot_restart (test_model.ModelGuardTests.test_existing_run_cannot_restart) ... ok
+test_full_request_input_cap_blocks_dispatch (test_model.ModelGuardTests.test_full_request_input_cap_blocks_dispatch) ... ok
+test_http200_provider_error_can_never_be_accepted (test_model.ModelGuardTests.test_http200_provider_error_can_never_be_accepted) ... ok
+test_missing_or_invalid_usage_stops_never_zero_cost (test_model.ModelGuardTests.test_missing_or_invalid_usage_stops_never_zero_cost) ... ok
+test_run_freezes_task_text_even_if_source_file_changes (test_model.ModelGuardTests.test_run_freezes_task_text_even_if_source_file_changes) ... ok
+test_secret_echo_stops_and_never_persists (test_model.ModelGuardTests.test_secret_echo_stops_and_never_persists) ... ok
+test_sixtieth_attempt_is_last_and_never_retried (test_model.ModelGuardTests.test_sixtieth_attempt_is_last_and_never_retried) ... ok
+test_timeout_reserved_unknown_cost_stops_and_redacts (test_model.ModelGuardTests.test_timeout_reserved_unknown_cost_stops_and_redacts) ... ok
+test_truncation_refusal_and_wrong_records_remain_charged (test_model.ModelGuardTests.test_truncation_refusal_and_wrong_records_remain_charged) ... ok
+test_wrong_model_and_paid_tier_stop (test_model.ModelGuardTests.test_wrong_model_and_paid_tier_stop) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.000s
+Ran 36 tests in 0.508s
 
 OK

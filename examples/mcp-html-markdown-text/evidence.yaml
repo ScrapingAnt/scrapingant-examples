@@ -1,11 +1,11 @@
 article_id: html-markdown-plain-text-llm-extraction
 evidence_asset_id: mcp-html-markdown-text
 tested_at: '2026-10-11'
-status: completed_offline_reference_preservation__live_and_model_blocked
+status: completed_offline_and_hosted_mcp__model_authentication_blocked
 requires_api_key: false
 default_paid_calls: 0
-new_retrieval_calls: 0
-model_calls: 0
+new_retrieval_calls: 15
+model_calls: 1
 public_discovery_http_requests: 3
 source_base: 9e5fba96d34a7bb7106a5a0e478a668078c6a312
 run_command: ./run.sh
@@ -33,17 +33,27 @@ measurements:
   llm_exact_record_accuracy: null
   live_mcp_cost_per_correct_output: null
   actual_paid_credits: null
+  hosted_report: expected_output/execution-report.json
+  hosted_attempts: 15
+  observed_account_credit_delta: 15
+  actual_tool_credit_receipts: null
+  model_completions: 0
+  model_actual_cost_usd: null
+  model_retained_reservation_usd: 0.0036
 proposed_budget:
-  status: not_approved
+  status: approved_2026_10_11
   scrapingant_credit_ceiling: 15
   retrieval_call_ceiling: 15
   model_usd_ceiling: 0.25
   model_call_ceiling: 60
   model: gpt-4.1-mini-2025-04-14
-  missing_environment_keys:
-  - SCRAPINGANT_API_KEY
-  - OPENAI_API_KEY
+  missing_environment_keys: []
   purchase_authorized: false
+  scrapingant_attempts_remaining: 0
+  model_attempts_remaining: 59
+  model_usd_unreserved_remaining: 0.2464
+  exact_access_blocker: Approved extractor OpenAI binding returnedHTTP 401 invalid_api_key;
+    no alternate account or retry
 outputs:
 - expected_output/report.json
 - expected_output/summary.csv
@@ -52,6 +62,9 @@ outputs:
 - expected_output/scorer-demo.txt
 - expected_output/unit-tests.txt
 - all nine reference outputs and two counterfactual source/output groups
+- expected_output/live-mcp-2026-10-11/
+- expected_output/live-model-2026-10-11/
+- expected_output/execution-report.json
 limitations:
 - Local browser selection is a source-informed reference, not hosted MCP text output
   or raw-mode verification.
@@ -65,10 +78,15 @@ limitations:
 - ASCII-only selected inputs; no Unicode payload generalization.
 - Content-only token counts exclude prompt, schema, tools and billing overhead.
 - Public schemas do not verify retrieval behavior or production reliability.
-- Live/model evidence blocked; no zero-cost or accuracy winner inferred.
-- Inspected MCP content omits credit receipts; exact observed credit cost requires
-  separately authorized evidence.
 - Named author review, source merge and deployment remain unapproved.
+- 'Hosted raw-mode text differs from local browser selection: title/hidden stock row/newline
+  cell layout are retained.'
+- 15 live acquisition calls target one static URL; Markdown/text source identity is
+  not exposed.
+- Scoped account deltas are contemporaneous, not exclusive request receipts; concurrent
+  traffic cannot be ruled out.
+- Model access failed onattempt 1; accuracy, actual model charge and cost per model-correct
+  output are unmeasured.
 claims:
 - id: M1
   text: The table retains12/12 non-null slots in all reference formats.
@@ -92,7 +110,10 @@ claims:
   text: Exact-page scorer rejects wrong values, extra/missing/duplicate/reordered
     rows and numeric coercion; zero-correct ratio undefined.
   source: contract.py; test_contract.py; expected_output/unit-tests.txt
+- id: L1
+  text: 15 hosted requests completed with all 12 required literals and observed account delta 15.
+  source: expected_output/execution-report.json; live-mcp ledger/captures
 - id: B1
-  text: New paid retrieval and model calls are zero; proposed15credits/$0.25 is not
-    approved.
-  source: PROTOCOL.md; replay.py; discover.py
+  text: Fresh budget approved; first model request returned 401 invalid_api_key, stopped,
+    cost unknown and reservation 0.0036 retained.
+  source: expected_output/live-model-2026-10-11/ledger.json; sanitized response

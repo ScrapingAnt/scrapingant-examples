@@ -1,6 +1,6 @@
 # HTML, Markdown or plain text for one extraction contract
 
-This packet backs the draft article “HTML vs Markdown vs Plain Text for LLM Extraction.” It demonstrates field information loss and content token counts on frozen inputs. **It does not contain measured LLM accuracy or authenticated live MCP retrieval results.** No new paid calls were made. See [PROTOCOL.md](PROTOCOL.md) for the proposed bounded model/live phase and missing approval/access.
+This packet backs the draft article “HTML vs Markdown vs Plain Text for LLM Extraction.” It demonstrates field information loss and content token counts on frozen inputs. It also retains15 authenticated hosted MCP retrievals and their scoped account-counter observations. **No LLM accuracy result exists:** the first approved model attempt returned 401 invalid_api_key and stopped without retry/completion/usage. See [PROTOCOL.md](PROTOCOL.md) for completed work, the retained failure and remaining access gate.
 
 ## Run the saved evidence
 
@@ -48,6 +48,10 @@ This makes three read-only unauthenticated requests to the existing hosted MCP e
 
 ## Paid phase and publication
 
-Pending separate explicit approval: at most 15 static-fixture MCP retrieval calls / documented 15-credit ceiling and at most 60 GPT-4.1 mini calls / US$0.25 ceiling. Both secure keys are absent in this environment. No live paid runner is supplied or silently invoked. Exact observed MCP credit receipts are unavailable from the inspected content-only tool result; do not turn a documentation estimate into a measured bill.
+Fresh approval: at most15MCPattempts/15 credits and60 fixed-model attempts / US$0.25. All 15 MCP attempts completed; account counters increased 15 in total, without per-call receipt/exclusive attribution. Model attempt 1failed authentication; its US$0.0036 reservation is retained, actual cost unknown,59 attempts remain. Existing credential routes were approved; no new credentials/accounts/purchases were created.
+
+`mcp_live.py` and `model_run.py` require explicit execution flags and keys supplied securely in the environment. They are not called by `run.sh`. Do not rerun them against a paid account without a fresh bounded approval. Each run requires a fresh directory; no retries or stopped-run resumption. An account selection override must not silently choose another provider. The supplied model runner expects a complete 15-call live directory; it does not automatically continue this failed execution.
+
+`expected_output/live-mcp-2026-10-11/` retains all 15 requests/responses/outputs and authenticated discovery. `expected_output/live-model-2026-10-11/` retains the failed request and sanitized 401 response. `execution-report.json` separates content preservation/tokenization, hosted acquisition and absent model outcomes. Run `python summarize_runs.py` offline to validate capture hashes and recompute that report. Account absolute counters/internal period identity and the provider's masked credential identifier are omitted from public copies; no model billing receipt/zero charge is inferred.
 
 The blog remains `draft: true`. Oleg Kulyk must review conclusions, method and byline before any publication; AI execution and independent AI evidence review do not imply human review. No source merge, deployment or Terraform is authorized here.

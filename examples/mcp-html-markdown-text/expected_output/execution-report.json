@@ -1,0 +1,100 @@
+{
+  "measurement": "hosted_static_mcp_acquisition_and_incomplete_fixed_model_phase",
+  "source_url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+  "server_info": {
+    "name": "ScrapingAnt MCP Server",
+    "version": "1.30.0"
+  },
+  "protocol": "2025-11-25",
+  "mcp_attempts": 15,
+  "mcp_complete": true,
+  "mcp_credits_documented_bound": 15,
+  "observed_account_delta_total": 15,
+  "credit_receipts": null,
+  "credit_attribution": "Scoped read-only contemporaneous account delta, no exclusive per-request receipts; concurrent traffic cannot be ruled out.",
+  "model_attempts": 1,
+  "model_complete": false,
+  "model_completions": 0,
+  "model_stop_reason": "provider_http_error_unknown_usage",
+  "model_actual_known_cost_usd": 0.0,
+  "model_total_actual_cost_usd": null,
+  "model_accounted_upper_bound_usd": 0.0036,
+  "model_accuracy": null,
+  "model_cost_per_correct_output": null,
+  "mcp_cost_per_model_correct_output": null,
+  "source_ledger_sha256": {
+    "mcp": "5f4e40157a96c9c11d14dc77d56d04173b6a5ab65b8bed050f37b93120a7dcad",
+    "model": "612241132724f2c046d77566e513ab015eea9aacdc2ad7ce889ab0fc65c225c2"
+  },
+  "mcp_rows": [
+    {
+      "arm": "html",
+      "attempts": 5,
+      "required_values_present": 5,
+      "required_non_null_slots_per_output": 12,
+      "unique_output_hashes": 1,
+      "utf8_bytes": 3688,
+      "o200k_base": 1522,
+      "cl100k_base": 1520,
+      "matches_offline_reference": true,
+      "observed_account_delta": 5,
+      "outcomes": {
+        "required_values_present": 5
+      },
+      "source_identity_note": "Five HTML outputs match frozen source; source bytes for separately acquired Markdown/text calls are not exposed."
+    },
+    {
+      "arm": "markdown",
+      "attempts": 5,
+      "required_values_present": 5,
+      "required_non_null_slots_per_output": 12,
+      "unique_output_hashes": 1,
+      "utf8_bytes": 1504,
+      "o200k_base": 573,
+      "cl100k_base": 576,
+      "matches_offline_reference": true,
+      "observed_account_delta": 5,
+      "outcomes": {
+        "required_values_present": 5
+      },
+      "source_identity_note": "Five HTML outputs match frozen source; source bytes for separately acquired Markdown/text calls are not exposed."
+    },
+    {
+      "arm": "text",
+      "attempts": 5,
+      "required_values_present": 5,
+      "required_non_null_slots_per_output": 12,
+      "unique_output_hashes": 1,
+      "utf8_bytes": 1083,
+      "o200k_base": 436,
+      "cl100k_base": 440,
+      "matches_offline_reference": false,
+      "observed_account_delta": 5,
+      "outcomes": {
+        "required_values_present": 5
+      },
+      "source_identity_note": "Five HTML outputs match frozen source; source bytes for separately acquired Markdown/text calls are not exposed."
+    }
+  ],
+  "model_rows": [
+    {
+      "attempt": 1,
+      "phase": "offline",
+      "case": "links",
+      "arm": "markdown",
+      "repeat": 0,
+      "http_status": 401,
+      "outcome": "http_error",
+      "actual_cost_usd": null,
+      "reserved_usd": 0.0036,
+      "score": {
+        "accepted_page": false,
+        "correct_slots": 0,
+        "expected_slots": 12,
+        "shape_valid": false
+      },
+      "provider_error_code": "invalid_api_key"
+    }
+  ],
+  "all_failures_retained": true
+}

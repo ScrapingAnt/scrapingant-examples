@@ -1,0 +1,1117 @@
+{
+  "started_at_utc": "2026-10-11T13:28:11.740480+00:00",
+  "client": {
+    "name": "issue8-bounded-mcp",
+    "version": "1.0"
+  },
+  "source_url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+  "maximum_attempts": 15,
+  "credit_ceiling": 15,
+  "documented_credit_bound_per_attempt": 1,
+  "reserved_credit_upper_bound": 15,
+  "retry_policy": "none; unknown attempts remain reserved",
+  "calls": [
+    {
+      "attempt": 1,
+      "arm": "text",
+      "repeat": 0,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 10,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_text",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "76cf14d20f247c407dde5f9455e2b30d614769fdc17d1b6cd3279fd91aa3d27f",
+      "started_at_utc": "2026-10-11T13:28:12.513777+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:13.250105+00:00",
+      "elapsed_ms": 735.9266249695793,
+      "http_status": 200,
+      "response_file": "response-001.txt",
+      "response_sha256": "b95f5b3f5f64c8dad39b8d9b683d2739409f56a165fa01c10a879d0d64ac2b2e",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:11 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-001.txt",
+      "content_sha256": "9375518ee1aa9449e12bd2c0ddab40a12fdc962f329e13cd0dd5b9300ba34877",
+      "content_bytes": 1083,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:13.637502"
+      }
+    },
+    {
+      "attempt": 2,
+      "arm": "markdown",
+      "repeat": 0,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 11,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_markdown",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "353f75236f402eefd1c321955ea9242595e11433babd0c3ef6e9028337c7a38b",
+      "started_at_utc": "2026-10-11T13:28:13.701784+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:14.440611+00:00",
+      "elapsed_ms": 738.3580410387367,
+      "http_status": 200,
+      "response_file": "response-002.txt",
+      "response_sha256": "85e35e5b9447bb06383e4167c5d746b165c91fcc0251aff1948dd8b8e7f1bf19",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:12 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-002.md",
+      "content_sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "content_bytes": 1504,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:14.807168"
+      }
+    },
+    {
+      "attempt": 3,
+      "arm": "html",
+      "repeat": 0,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 12,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_html",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "5f9952dd6d091b217e458062a68cd9a2967d9a6ee700e83e86c0f4b23315a76f",
+      "started_at_utc": "2026-10-11T13:28:14.879828+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:15.619279+00:00",
+      "elapsed_ms": 738.9134999830276,
+      "http_status": 200,
+      "response_file": "response-003.txt",
+      "response_sha256": "c5488a875fa1bfecfab34cffdb92c37933ba0a2aac4a6644e8106e5acc61707a",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:14 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-003.html",
+      "content_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "content_bytes": 3688,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "matches_frozen_html": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:15.993473"
+      }
+    },
+    {
+      "attempt": 4,
+      "arm": "text",
+      "repeat": 1,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 13,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_text",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "5ede1feeed6b4af71240ba3c53b7b6b3668794e39ef61a96c7ba8faf76ce7bc9",
+      "started_at_utc": "2026-10-11T13:28:16.071921+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:16.735604+00:00",
+      "elapsed_ms": 663.2091659121215,
+      "http_status": 200,
+      "response_file": "response-004.txt",
+      "response_sha256": "83517d1384e4d7445c5cce23d2518dc8f7f2e5af2367a5c6666d4e66a489a207",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:15 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-004.txt",
+      "content_sha256": "9375518ee1aa9449e12bd2c0ddab40a12fdc962f329e13cd0dd5b9300ba34877",
+      "content_bytes": 1083,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:17.12178"
+      }
+    },
+    {
+      "attempt": 5,
+      "arm": "html",
+      "repeat": 1,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 14,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_html",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "85021f8eeaf0bd1fc26c177be367d3b50211b1b1902f593d87776019c4910290",
+      "started_at_utc": "2026-10-11T13:28:17.185132+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:17.835255+00:00",
+      "elapsed_ms": 649.5619169436395,
+      "http_status": 200,
+      "response_file": "response-005.txt",
+      "response_sha256": "a48203655525ccc6e84f64f536129bc8892a81eb2de13d54da51ef8d388e055a",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:16 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-005.html",
+      "content_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "content_bytes": 3688,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "matches_frozen_html": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:18.21472"
+      }
+    },
+    {
+      "attempt": 6,
+      "arm": "markdown",
+      "repeat": 1,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 15,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_markdown",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "8b92f14604d1a225a55636a1e6d8bebd16cfaf3e71888b4bc48d17feca6e79a8",
+      "started_at_utc": "2026-10-11T13:28:18.293520+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:19.090569+00:00",
+      "elapsed_ms": 796.3893749983981,
+      "http_status": 200,
+      "response_file": "response-006.txt",
+      "response_sha256": "228b8a9ad02e9bb90664144e62f1a84a34fdebc2dc1f2a92721b96612be6f0a7",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:17 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-006.md",
+      "content_sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "content_bytes": 1504,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:19.454557"
+      }
+    },
+    {
+      "attempt": 7,
+      "arm": "markdown",
+      "repeat": 2,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 16,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_markdown",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "aad6ed89558db3c5682de399459ca07b4ed2534d6667a402b2b3a709daa28454",
+      "started_at_utc": "2026-10-11T13:28:19.519581+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:20.172934+00:00",
+      "elapsed_ms": 652.7572920313105,
+      "http_status": 200,
+      "response_file": "response-007.txt",
+      "response_sha256": "0853a0ddd2aa62a5387970bfdc9d458d7cd0a5a3fea911265ef49fb4a79cf8a3",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:19 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-007.md",
+      "content_sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "content_bytes": 1504,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:20.566356"
+      }
+    },
+    {
+      "attempt": 8,
+      "arm": "text",
+      "repeat": 2,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 17,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_text",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "ad5acaf9f33d0233077addb90bc0f19c7eb4ab44e42021c8ef2346e1d324a4e8",
+      "started_at_utc": "2026-10-11T13:28:20.656197+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:21.300049+00:00",
+      "elapsed_ms": 643.1968751130626,
+      "http_status": 200,
+      "response_file": "response-008.txt",
+      "response_sha256": "bfb28c65e94f5cd90375d85e73c4d28ea0a86c835c37ad0bc2a8d2055d6fbbce",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:20 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-008.txt",
+      "content_sha256": "9375518ee1aa9449e12bd2c0ddab40a12fdc962f329e13cd0dd5b9300ba34877",
+      "content_bytes": 1083,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:21.679915"
+      }
+    },
+    {
+      "attempt": 9,
+      "arm": "html",
+      "repeat": 2,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 18,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_html",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "2b8b1285a6d4ca2034a78fee0e7fd604218633dd460a5d131235e19c68d05975",
+      "started_at_utc": "2026-10-11T13:28:21.758766+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:22.420665+00:00",
+      "elapsed_ms": 661.1802499974146,
+      "http_status": 200,
+      "response_file": "response-009.txt",
+      "response_sha256": "e3e9dd75dc96fed6aa8c8923c1bc58dc9fca1c25be1da20b4d4160b55837470a",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:20 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-009.html",
+      "content_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "content_bytes": 3688,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "matches_frozen_html": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:22.793924"
+      }
+    },
+    {
+      "attempt": 10,
+      "arm": "markdown",
+      "repeat": 3,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 19,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_markdown",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "321f79d010ff2831c99b77ac3c6f799e0c71c27888f1692773580c0e86a3ec91",
+      "started_at_utc": "2026-10-11T13:28:22.867187+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:23.458339+00:00",
+      "elapsed_ms": 590.3753329766914,
+      "http_status": 200,
+      "response_file": "response-010.txt",
+      "response_sha256": "5477aed0607ee77c2926ca89cd6ed9f40683c09aa4d79abbbbef8e00f06075b9",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:22 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-010.md",
+      "content_sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "content_bytes": 1504,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:23.83315"
+      }
+    },
+    {
+      "attempt": 11,
+      "arm": "text",
+      "repeat": 3,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 20,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_text",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "56a8779b3d7ef35de1b0be9cefa50f43cccd86d4cabbcb4b2eb36291b80f3c15",
+      "started_at_utc": "2026-10-11T13:28:23.913026+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:24.554733+00:00",
+      "elapsed_ms": 640.94270800706,
+      "http_status": 200,
+      "response_file": "response-011.txt",
+      "response_sha256": "6431b245fcfc907da31dba9352c5a6dc42906e55b947bd84f04578e48d781eeb",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:23 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-011.txt",
+      "content_sha256": "9375518ee1aa9449e12bd2c0ddab40a12fdc962f329e13cd0dd5b9300ba34877",
+      "content_bytes": 1083,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:24.920472"
+      }
+    },
+    {
+      "attempt": 12,
+      "arm": "html",
+      "repeat": 3,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 21,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_html",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "2278d3a87eb50057edf72925f4f6ca9d85a515ba143fa3b8d9c76cab7ff1e252",
+      "started_at_utc": "2026-10-11T13:28:24.990485+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:25.624124+00:00",
+      "elapsed_ms": 632.5854159658775,
+      "http_status": 200,
+      "response_file": "response-012.txt",
+      "response_sha256": "afab0edf3f189b44034508c76220c36862940a1d13cdaf64a3306d008d8b9d8d",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:24 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-012.html",
+      "content_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "content_bytes": 3688,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "matches_frozen_html": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:25.98563"
+      }
+    },
+    {
+      "attempt": 13,
+      "arm": "markdown",
+      "repeat": 4,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 22,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_markdown",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "ebee72d0f94b2f261cb80654dbef8a78f5238bac1fbcc3aad79fb7221acb0107",
+      "started_at_utc": "2026-10-11T13:28:26.043692+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:26.791632+00:00",
+      "elapsed_ms": 746.8317919410765,
+      "http_status": 200,
+      "response_file": "response-013.txt",
+      "response_sha256": "85b58b2961a08a380699b7434b3c16c85cada4d5ce8cd39e3e5f0f36023357c9",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:25 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-013.md",
+      "content_sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "content_bytes": 1504,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:27.202178"
+      }
+    },
+    {
+      "attempt": 14,
+      "arm": "text",
+      "repeat": 4,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 23,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_text",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "c4ff8880bc5beeba1a92814add8cae4771fa70820aff264ddabb7c1d2736ffef",
+      "started_at_utc": "2026-10-11T13:28:27.271405+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:27.917865+00:00",
+      "elapsed_ms": 645.5279589863494,
+      "http_status": 200,
+      "response_file": "response-014.txt",
+      "response_sha256": "497da1353688a9bbe8b12ca643b84be2170688e5f4a08e97b8b2ebd80c045e57",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:26 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-014.txt",
+      "content_sha256": "9375518ee1aa9449e12bd2c0ddab40a12fdc962f329e13cd0dd5b9300ba34877",
+      "content_bytes": 1083,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:28.310304"
+      }
+    },
+    {
+      "attempt": 15,
+      "arm": "html",
+      "repeat": 4,
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 24,
+        "method": "tools/call",
+        "params": {
+          "name": "get_web_page_html",
+          "arguments": {
+            "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+            "browser": false,
+            "proxy_type": "datacenter",
+            "proxy_country": "US"
+          }
+        }
+      },
+      "request_sha256": "211e8e0d3b598cd5fb9c2bcc64f5f1e93e728b6b184ccd0864dcd39a68b2384d",
+      "started_at_utc": "2026-10-11T13:28:28.365332+00:00",
+      "reserved_credits": 1,
+      "outcome": "required_values_present",
+      "observed_account_delta": 1,
+      "ended_at_utc": "2026-10-11T13:28:29.048406+00:00",
+      "elapsed_ms": 682.1596249938011,
+      "http_status": 200,
+      "response_file": "response-015.txt",
+      "response_sha256": "3782f4c5225fbf39d3cc3f75fe2429f728d80805c0434bdc1ac16cd7dd036f4c",
+      "response_headers": {
+        "Cache-Control": "no-cache, no-transform",
+        "Content-Encoding": "gzip",
+        "Content-Type": "text/event-stream",
+        "Date": "Sun, 11 Oct 2026 13:28:27 GMT",
+        "Server": "uvicorn",
+        "Vary": "Accept-Encoding",
+        "X-Accel-Buffering": "no",
+        "Transfer-Encoding": "chunked"
+      },
+      "credential_echo": false,
+      "content_file": "content-015.html",
+      "content_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "content_bytes": 3688,
+      "tool_is_error": false,
+      "text_blocks": 1,
+      "required_values_survive": true,
+      "matches_frozen_html": true,
+      "usage_after": {
+        "read_only_verified": true,
+        "physical_standby": false,
+        "matching_tokens": 1,
+        "active_periods": 1,
+        "account_ready": true,
+        "observed_at_utc": "2026-10-11T13:28:29.443797"
+      }
+    }
+  ],
+  "model_calls": 0,
+  "plan": [
+    [
+      "text",
+      0
+    ],
+    [
+      "markdown",
+      0
+    ],
+    [
+      "html",
+      0
+    ],
+    [
+      "text",
+      1
+    ],
+    [
+      "html",
+      1
+    ],
+    [
+      "markdown",
+      1
+    ],
+    [
+      "markdown",
+      2
+    ],
+    [
+      "text",
+      2
+    ],
+    [
+      "html",
+      2
+    ],
+    [
+      "markdown",
+      3
+    ],
+    [
+      "text",
+      3
+    ],
+    [
+      "html",
+      3
+    ],
+    [
+      "markdown",
+      4
+    ],
+    [
+      "text",
+      4
+    ],
+    [
+      "html",
+      4
+    ]
+  ],
+  "plan_seed": 8,
+  "exact_llm_accuracy": null,
+  "actual_tool_credit_receipts": null,
+  "cost_per_model_correct_output": null,
+  "account_delta_caveat": "Contemporaneous account deltas are not exclusive request receipts; concurrent usage cannot be ruled out.",
+  "initial_usage": {
+    "read_only_verified": true,
+    "physical_standby": false,
+    "matching_tokens": 1,
+    "active_periods": 1,
+    "account_ready": true,
+    "observed_at_utc": "2026-10-11T13:28:12.113463"
+  },
+  "runtime": {
+    "requests": "2.34.2",
+    "python": "3.12.11"
+  },
+  "negotiated_protocol": "2025-11-25",
+  "server_info": {
+    "name": "ScrapingAnt MCP Server",
+    "version": "1.30.0"
+  },
+  "tools": [
+    {
+      "name": "get_web_page_html",
+      "description": "Fetch (scrape) a URL using ScrapingAnt and return the web page content as HTML.\n\nArgs:\n    url: The URL of the page to extract (scrape).\n    browser: Whether to use browser rendering. Default: True.\n    proxy_type: Type of proxy to use. Default: 'datacenter'.\n        Use 'residential' if you encounter anti-bot detection, which improves anti-bot avoidance.\n    proxy_country: Optional ISO-3166 country code. Default: random worldwide proxy.\n        Use when facing geo-restrictions. Available country codes: ae, br, bz, ca, cn, cz, de, es, fr, gb, hk, id, il, in, it, jp, kr, mx, my, nh, nl, ph, pk, pl, ro, ru, sa, sc, se, sg, th, tr, tw, uk, us, vn.",
+      "inputSchema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "browser": {
+            "default": true,
+            "title": "Browser",
+            "type": "boolean"
+          },
+          "proxy_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Type"
+          },
+          "proxy_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Country"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "description": "Generic wrapper for non-object return types.",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "_WrappedResult",
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "get_web_page_markdown",
+      "description": "Fetch (scrape) a URL using ScrapingAnt and return the web page content as Markdown.\n\nArgs:\n    url: The URL of the page to extract (scrape).\n    browser: Whether to use browser rendering. Default: True.\n    proxy_type: Type of proxy to use. Default: 'datacenter'.\n        Use 'residential' if you encounter anti-bot detection, which improves anti-bot avoidance.\n    proxy_country: Optional ISO-3166 country code. Default: random worldwide proxy.\n        Use when facing geo-restrictions. Available country codes: ae, br, bz, ca, cn, cz, de, es, fr, gb, hk, id, il, in, it, jp, kr, mx, my, nh, nl, ph, pk, pl, ro, ru, sa, sc, se, sg, th, tr, tw, uk, us, vn.",
+      "inputSchema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "browser": {
+            "default": true,
+            "title": "Browser",
+            "type": "boolean"
+          },
+          "proxy_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Type"
+          },
+          "proxy_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Country"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "description": "Generic wrapper for non-object return types.",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "_WrappedResult",
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "get_web_page_text",
+      "description": "Fetch (scrape) a URL using ScrapingAnt and return the web page content as plain text.\n\nArgs:\n    url: The URL of the page to extract (scrape).\n    browser: Whether to use browser rendering. Default: True.\n    proxy_type: Type of proxy to use. Default: 'datacenter'.\n        Use 'residential' if you encounter anti-bot detection, which improves anti-bot avoidance.\n    proxy_country: Optional ISO-3166 country code. Default: random worldwide proxy.\n        Use when facing geo-restrictions. Available country codes: ae, br, bz, ca, cn, cz, de, es, fr, gb, hk, id, il, in, it, jp, kr, mx, my, nh, nl, ph, pk, pl, ro, ru, sa, sc, se, sg, th, tr, tw, uk, us, vn.",
+      "inputSchema": {
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "browser": {
+            "default": true,
+            "title": "Browser",
+            "type": "boolean"
+          },
+          "proxy_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Type"
+          },
+          "proxy_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Proxy Country"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "description": "Generic wrapper for non-object return types.",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "_WrappedResult",
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    }
+  ],
+  "completed_at_utc": "2026-10-11T13:28:29.515584+00:00",
+  "complete": true,
+  "private_ledger_sha256": "21ccc0c162f871f8cc5e8c4705b4ab005a90dafd91b85def06c6aebc46e885d3",
+  "privacy_minimization": "Absolute account balances and internal period reference omitted; safe scope guards, timestamps and every observed delta retained. Full tool requests/responses and outputs unchanged.",
+  "observed_account_delta_total": 15
+}
