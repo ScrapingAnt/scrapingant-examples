@@ -9,7 +9,7 @@ environment:
   os: macOS 26.6.2 arm64
   dotnet_sdk: 10.0.401
   dotnet_runtime: 10.0.12
-  python: 3.10.2
+  python: 3.12.11
   browser: none
 dependencies:
   HtmlAgilityPack: 1.13.0
@@ -33,8 +33,8 @@ outputs:
   - expected_output/oracle-controls.txt
 measurements:
   - name: CSharp_offline_cases_passed
-    value: 48
-    denominator: 48 named fake-handler and boundary cases
+    value: 58
+    denominator: 58 named fake-handler and boundary cases
     source: expected_output/offline.txt
   - name: independent_oracle_mutation_controls_passed
     value: 5
@@ -51,6 +51,7 @@ measurements:
 limitations:
   - No live ScrapingAnt request, target retrieval, account or usage endpoint call.
   - Rendered HTML and credit receipts are authored simulation, not browser output or service charges.
+  - UTF-8 fixture responses only; other target encodings require an adapter.
   - No observed latency, throughput, reliability, CAPTCHA solving or paid capacity result.
   - Delays are injected; schedule is tested without sleeping.
   - HTML parser may tolerate malformed markup; required schema validation is not universal HTML validation.
@@ -72,6 +73,10 @@ claims:
     source: expected_output/offline.txt
   - id: C4
     text: API 200 with unsuccessful or missing target status fails acceptance.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C14
+    text: Source-shaped HTML success with absent outer type is accepted using the original target content-type; explicit non-HTML or invalid types and non-HTML bodies fail.
     type: measured
     source: expected_output/offline.txt
   - id: C5

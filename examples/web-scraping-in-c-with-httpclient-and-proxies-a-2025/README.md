@@ -8,7 +8,8 @@ even if `SCRAPINGANT_API_KEY` is set. The key used by the handler is an obvious 
 ## Install and reproduce
 
 Install [.NET SDK 10.0.401 from Microsoft](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
-for your platform, and Python 3.10 or newer. `global.json` requires that exact SDK;
+for your platform, Python 3.12.11 and Bash. These commands use Bash on macOS or Linux;
+the recorded local run is macOS and Linux CI remains a separate check. `global.json` requires that exact SDK;
 the project targets `net10.0` and locks HtmlAgilityPack 1.13.0 in `packages.lock.json`.
 NuGet restoration is dependency setup, not a scraping API call.
 
@@ -18,10 +19,10 @@ dotnet --version
 ```
 
 The recorded SDK output is `10.0.401`. The recorded environment was macOS 26.6.2 arm64,
-.NET runtime 10.0.12, and Python 3.10.2. The scoped PR workflow installs SDK 10.0.401
-and Python 3.12 on Linux; that workflow is separate verification when CI executes.
+.NET runtime 10.0.12, and Python 3.12.11. The scoped PR workflow installs SDK 10.0.401
+and Python 3.12.11 on Linux; that workflow is separate verification when CI executes.
 
-`run.sh` restores locked dependencies, builds with warnings treated as errors, runs 48 C#
+`run.sh` restores locked dependencies, builds with warnings treated as errors, runs 58 C#
 cases, validates two simulated records against independent literals, runs five mutation
 controls, then compares the deterministic outputs with `expected_output/`.
 `./run.sh --capture` deliberately replaces recorded outputs after the checks pass.
@@ -50,12 +51,17 @@ fails acceptance. HtmlAgilityPack tolerates some malformed HTML; this validator 
 not certify every document as valid HTML. Adapt the selectors and field rules for
 your own permitted page before a live run.
 
+The client prefers the forwarded `Ant-original-header-content-type`, with outer
+Content-Type as fallback. Declared non-HTML or malformed media types are rejected;
+when both are absent, the returned body must still pass the HTML document and field
+schema checks. The source-shaped offline control has no outer Content-Type.
+
 The request always sets `browser` explicitly, `timeout=30`, `proxy_type=datacenter`,
 `proxy_country=us`, and `return_page_source=false`. Authentication uses the
 `x-api-key` header, with no key in the URL. Error diagnostics classify `detail` locally
 and print only fixed messages; raw error bodies, transport messages and keys are not printed.
 
-The integration retries only safe GET transport failures and outer 500/502/503/504
+The integration retries only safe GET HTTP or body-stream transport failures and outer 500/502/503/504
 responses, with at most three attempts and scheduled 1s/2s delays. Tests inject a
 non-sleeping delay and verify its schedule; no elapsed latency is measured.
 400/403/404/405/409/422/423/429 stop without automatic retries. Cancellation before
@@ -68,13 +74,13 @@ overall caller cancellation and target-site HTTP status are distinct controls.
 ```text
 SIMULATED raw: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=1
 SIMULATED rendered: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=10
-PASS 48/48 offline cases; live API calls=0
+PASS 58/58 offline cases; live API calls=0
 PASS independent literal oracle: 2 simulated records, 4 fields each
 PASS 5/5 independent oracle mutation controls
 ```
 
 The receipt values 1 and 10 are **mock header values**, matching documented retrieval
-choices. They are not measured service charges. Passing 48 cases is an offline case
+choices. They are not measured service charges. Passing 58 cases is an offline case
 denominator, not a production or target success rate.
 
 ## Optional live invocation — illustrative, not executed
@@ -103,6 +109,7 @@ The general endpoint returns HTML; `/v2/extract` is a separate structured-extrac
 product. Raw datacenter retrieval of a non-Google page is documented at 1 credit;
 JavaScript-rendered datacenter retrieval at 10 credits. This packet does not measure
 rendering efficacy, production throughput, billing, target reachability or anti-bot behavior.
+UTF-8 fixture responses are the tested encoding; adapt body decoding for other target encodings.
 It offers no CAPTCHA-solving claim.
 
 Current plans are at [pricing](https://scrapingant.com/#pricing); a key is available via

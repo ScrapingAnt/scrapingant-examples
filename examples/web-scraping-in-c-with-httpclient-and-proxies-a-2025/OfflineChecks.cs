@@ -56,7 +56,21 @@ public static class OfflineChecks
         await RejectedResponse("missing target status rejected", Html(Raw, targetStatus: null));
         await RejectedResponse("target 403 under API 200 rejected", Html(Raw, targetStatus: "403"));
         await RejectedResponse("JSON content type rejected", Html(Raw, mediaType: "application/json"));
-        await RejectedResponse("missing content type rejected", Html(Raw, mediaType: null));
+        var absentType = new FakeHandler((_, _) => Task.FromResult(Html(Raw, mediaType: null)));
+        Equal((await Client(absentType).FetchAsync(Target, false, CancellationToken.None)).Product, Oracle);
+        Pass("absent content type accepted only with checked HTML schema");
+        var sourceShape = Html(Raw, mediaType: null);
+        sourceShape.Headers.Add("Ant-original-header-content-type", "Text/HTML; charset=utf-8");
+        var sourceHandler = new FakeHandler((_, _) => Task.FromResult(sourceShape));
+        Equal((await Client(sourceHandler).FetchAsync(Target, false, CancellationToken.None)).Product, Oracle);
+        Pass("source-shaped success: no outer type, original target HTML type");
+        var nonHtmlTarget = Html(Raw);
+        nonHtmlTarget.Headers.Add("Ant-original-header-content-type", "application/json");
+        await RejectedResponse("original non-HTML type overrides outer HTML type", nonHtmlTarget);
+        var invalidType = Html(Raw);
+        invalidType.Headers.Add("Ant-original-header-content-type", "not a media type");
+        await RejectedResponse("malformed original target type rejected", invalidType);
+        await RejectedResponse("no content type cannot admit non-HTML body", Html("{}", mediaType: null));
         await RejectedResponse("malformed credit receipt rejected", Html(Raw, credits: "unknown"));
         await RejectedResponse("negative credit receipt rejected", Html(Raw, credits: "-1"));
         var duplicateReceipt = Html(Raw); duplicateReceipt.Headers.Add("Ant-credits-cost", "10");
@@ -82,6 +96,17 @@ public static class OfflineChecks
             var failure = await Throws<ApiFailure>(() => Client(handler).FetchAsync(Target, false, CancellationToken.None));
             Equal(failure.Category, pair.Item2); Equal(handler.Calls, 1); Pass($"403 detail category: {pair.Item2.Split(';')[0]}");
         }
+        foreach (var pair in new[] {
+            ("array", "[]"), ("null", "null"), ("string", JsonSerializer.Serialize("private " + FakeKey)),
+            ("invalid JSON", "{broken " + FakeKey), ("non-string detail", "{\"detail\":[1]}") })
+        {
+            var handler = new FakeHandler((_, _) => Task.FromResult(new HttpResponseMessage(HttpStatusCode.Forbidden)
+                { Content = new StringContent(pair.Item2, Encoding.UTF8, "application/json") }));
+            var failure = await Throws<ApiFailure>(() => Client(handler).FetchAsync(Target, false, CancellationToken.None));
+            Equal(failure.Status, 403); Equal(failure.Category, "access; inspect detail privately");
+            Equal(handler.Calls, 1); Require(!failure.ToString().Contains(FakeKey, StringComparison.Ordinal));
+            Pass($"{pair.Item1} error body becomes sanitized API failure");
+        }
         var retryDelays = new List<TimeSpan>();
         FakeHandler? recover = null;
         recover = new FakeHandler((_, _) => Task.FromResult(recoverResponse()));
@@ -102,6 +127,15 @@ public static class OfflineChecks
         var transportError = await Throws<TransportFailure>(() => Client(transport, transportPauses).FetchAsync(Target, false, CancellationToken.None));
         Equal(transport.Calls, 3); Equal(transportPauses.Count, 2);
         Require(!transportError.ToString().Contains(FakeKey, StringComparison.Ordinal)); Pass("transport exhaustion capped and sanitized");
+        var readPauses = new List<TimeSpan>();
+        var interruptedBody = new FakeHandler((_, _) => {
+            var response = Html(Raw); response.Content.Dispose();
+            response.Content = new StreamContent(new InterruptedStream()); return Task.FromResult(response);
+        });
+        var readError = await Throws<TransportFailure>(() => Client(interruptedBody, readPauses).FetchAsync(Target, false, CancellationToken.None));
+        Equal(interruptedBody.Calls, 3); Equal(readPauses.Count, 2);
+        Require(!readError.ToString().Contains(FakeKey, StringComparison.Ordinal));
+        Pass("body transport IOException capped and sanitized");
         FakeHandler? transportRecovery = null;
         transportRecovery = new FakeHandler((_, _) => transportRecovery!.Calls == 1
             ? throw new HttpRequestException("synthetic") : Task.FromResult(Html(Raw)));
@@ -211,5 +245,10 @@ public static class OfflineChecks
     {
         public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
         { source.Cancel(); return ValueTask.FromCanceled<int>(cancellationToken); }
+    }
+    private sealed class InterruptedStream : MemoryStream
+    {
+        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+            => ValueTask.FromException<int>(new IOException("private body transport " + FakeKey));
     }
 }

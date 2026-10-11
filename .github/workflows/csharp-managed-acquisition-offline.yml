@@ -19,6 +19,6 @@ jobs:
           dotnet-version: '10.0.401'
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.12.11'
       - name: Offline handler matrix and literal output oracle
         run: examples/web-scraping-in-c-with-httpclient-and-proxies-a-2025/run.sh

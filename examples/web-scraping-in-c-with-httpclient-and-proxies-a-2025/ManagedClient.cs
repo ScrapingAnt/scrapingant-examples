@@ -77,9 +77,16 @@ public sealed class ManagedClient(
                 if (targetStatuses.Length != 1 || !int.TryParse(targetStatuses[0], out var targetStatus) ||
                     targetStatus is < 200 or > 299)
                     throw new ContentFailure("Target status is missing, invalid or unsuccessful");
-                var mediaType = response.Content.Headers.ContentType?.MediaType;
-                if (mediaType is not ("text/html" or "application/xhtml+xml"))
-                    throw new ContentFailure("Expected HTML content type");
+                var originalTypes = response.Headers.TryGetValues("Ant-original-header-content-type", out var typeValues)
+                    ? typeValues.ToArray() : [];
+                if (originalTypes.Length > 1) throw new ContentFailure("Ambiguous target content type");
+                var contentType = originalTypes.SingleOrDefault() ?? response.Content.Headers.ContentType?.ToString();
+                if (contentType is not null &&
+                    (!System.Net.Http.Headers.MediaTypeHeaderValue.TryParse(contentType, out var declared) ||
+                     !(string.Equals(declared.MediaType, "text/html", StringComparison.OrdinalIgnoreCase) ||
+                       string.Equals(declared.MediaType, "application/xhtml+xml", StringComparison.OrdinalIgnoreCase))))
+                    throw new ContentFailure("Declared content type is not HTML");
+                // General responses can omit the outer type. The final HTML/schema guard still applies.
                 var product = ParseProduct(html);
                 var values = response.Headers.TryGetValues("Ant-credits-cost", out var receipts)
                     ? receipts.ToArray() : [];
@@ -88,7 +95,7 @@ public sealed class ManagedClient(
                     throw new ContentFailure("Credit receipt is missing or invalid; cost is unknown");
                 return new Acquisition(product, credits, attempt);
             }
-            catch (HttpRequestException)
+            catch (Exception error) when (error is HttpRequestException or IOException)
             {
                 if (attempt == maxAttempts) throw new TransportFailure();
                 await pause(TimeSpan.FromSeconds(attempt), cancellationToken);
@@ -106,7 +113,8 @@ public sealed class ManagedClient(
         try
         {
             using var doc = JsonDocument.Parse(body);
-            if (doc.RootElement.TryGetProperty("detail", out var value) && value.ValueKind == JsonValueKind.String)
+            if (doc.RootElement.ValueKind == JsonValueKind.Object &&
+                doc.RootElement.TryGetProperty("detail", out var value) && value.ValueKind == JsonValueKind.String)
                 detail = value.GetString() ?? "";
         }
         catch (JsonException) { }
