@@ -1,0 +1,19 @@
+{
+  "amazon_adapter_validated": false,
+  "amazon_capture": false,
+  "api_status": 200,
+  "capture_file_hashes": {
+    "captures/2026-10-11-owned-raw/metadata.json": "f86de9ce48fe34ae9dc6f9a77668a7488bfb35a3af561cadb979532129d527fa",
+    "captures/2026-10-11-owned-raw/receipt.json": "e1e735011af0ea45254dfa5e5a9878bf2422c54afd74a63a6bf1f83566710048",
+    "captures/2026-10-11-owned-raw/response.html": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93"
+  },
+  "complete_snapshot_accepted": false,
+  "pinned_fixture_bytes_match": true,
+  "raw_owned_marker_verified": true,
+  "recorded_credits": 1,
+  "replay_network_calls": 0,
+  "saved_response_bytes": 752,
+  "saved_response_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+  "status": "passed",
+  "target_status": "200"
+}

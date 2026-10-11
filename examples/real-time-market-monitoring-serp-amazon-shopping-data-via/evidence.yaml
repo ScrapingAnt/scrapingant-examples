@@ -32,6 +32,25 @@ outputs:
   - expected_output/tests.json
   - expected_output/verification.json
   - expected_output/environment.json
+  - expected_output/owned-transport-verification.json
+saved_transport:
+  directory: captures/2026-10-11-owned-raw
+  scope: One raw general-endpoint acquisition of an existing owned fixture, not Amazon data
+  function: acquire.fetch_html
+  acquire_cli_executed: false
+  dispatched_at_utc: 2026-10-11T21:38:50.623018Z
+  completed_at_utc: 2026-10-11T21:38:51.364459Z
+  api_status: 200
+  target_status: 200
+  response_bytes: 752
+  response_sha256: d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93
+  recorded_credits: 1
+  transport_source_revision: fbd403aacab5e6ab740f51af783283ecccf63191
+  fixture_source_revision: 223a9cf639d2cc124505080ee39a37223f4689d9
+  source_pin_limit: Saved response matches pinned fixture bytes; served deployment revision not independently established
+  amazon_capture: false
+  amazon_adapter_validated: false
+  complete_snapshot_accepted: false
 measurements:
   - name: offline_unittest_methods_passed
     value: 49
@@ -61,13 +80,21 @@ measurements:
     value: 0
     denominator: default offline packet run; acquisition transports mocked
     source: run.sh
+  - name: saved_owned_raw_transport_calls
+    value: 1
+    denominator: 1 separate approved genuine request to the existing owned dynamic-delayed fixture; default replay remains offline
+    source: captures/2026-10-11-owned-raw/receipt.json
+  - name: saved_owned_raw_transport_credits
+    value: 1
+    denominator: 1 separate owned raw/datacenter request with a recorded Ant-credits-cost header; not an Amazon or rendered-mode benchmark
+    source: captures/2026-10-11-owned-raw/receipt.json
 sources:
   - url: https://docs.scrapingant.com/request-response-format
     accessed_at: 2026-10-11
     scope: General endpoint HTML and explicit parameters; no target reliability benchmark
   - url: https://docs.scrapingant.com/credits-cost
     accessed_at: 2026-10-11
-    scope: Datacenter raw1/rendered10 credit documentation, not new measured receipts
+    scope: Datacenter raw1/rendered10 credit schedule; the one owned raw receipt is recorded separately
   - url: https://docs.scrapingant.com/errors
     accessed_at: 2026-10-11
     scope: Header authentication and status-specific failure handling
@@ -83,11 +110,11 @@ limitations:
   - "Duplicate HTML attributes anywhere in the capture reject comparison, including conflicting completeness and ASIN values."
   - "Same query/marketplace/currency/source/window and increasing UTC times are required. Observed differences may reflect layout/personalization, not market truth."
   - "Absence from a complete bounded window is not delisting, stock status or universal visibility."
-  - "Live acquisition is optional and unexecuted; local request/credit reserves do not enforce server billing. Real response receipts require inspection."
+  - "One raw acquire.fetch_html request was executed against an owned fixture; its CLI and real Amazon acquisition remain unexecuted. Local request/credit reserves do not enforce server billing."
   - "CLI reserves a new output directory and opens both output files before retrieval; its parent must exist. Later filesystem failures remain possible."
   - "Target content type prefers Ant-original-header-content-type; the outer Content-Type can be absent. Missing both types is unknown and rejected. Header controls are source-shaped mocks, not live captures."
   - "Documentation/landing copy disagree on defaults and timeout descriptions; explicit parameters avoid assuming deployment configuration."
-  - "No browser, paid provider, model, seller/Buy Box/review/stock test, benchmark, scheduling service, tracking, paid outcome or forecast."
+  - "The saved live result establishes raw HTML transport and the owned marker only. No Amazon capture, browser, model, seller/Buy Box/review/stock test, benchmark, scheduling service, tracking, paid outcome or forecast."
   - "Named-author and independent article review are pending. Fixtures alone do not satisfy restoration/publication gates."
 claims:
   - id: C1
@@ -115,10 +142,14 @@ claims:
     type: product
     source: https://docs.scrapingant.com/request-response-format; https://docs.scrapingant.com/ai-data-extraction/ai-extractor
   - id: C7
-    text: "The optional capture sets browser explicitly, datacenter/us/timeout30/page-sourcefalse, uses an environment key header and validates status/content/credit receipts. Its live path has not been executed."
+    text: "The optional capture sets browser explicitly, datacenter/us/timeout30/page-sourcefalse, uses an environment key header and validates status/content/credit receipts. Its raw function was exercised once against an owned fixture; CLI and Amazon acquisition were not executed."
     type: documented
     source: acquire.py; expected_output/tests.json
   - id: C8
     text: "Free10000/month/no credit card and Enthusiast100000/month/USD19 are the observed October11 plan terms; use current plans for a future workload."
     type: product
     source: https://scrapingant.com/#pricing
+  - id: C9
+    text: "On October11 one owned raw transport returned API200/target200,752bytes and a1credit receipt; the raw fixture marker and saved response hash were verified. No Amazon adapter or complete listing snapshot was accepted."
+    type: measured
+    source: captures/2026-10-11-owned-raw/receipt.json; captures/2026-10-11-owned-raw/response.html; expected_output/owned-transport-verification.json

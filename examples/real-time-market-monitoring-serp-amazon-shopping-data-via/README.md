@@ -35,7 +35,7 @@ python3 verify_captures.py
 
 The literal `fixtures/oracle.json` was authored separately from the parser and diff output. `verify_captures.py` checks all three record captures and two diffs, then rejects five deliberate record/provenance mutations. `naive.py` is a labeled, deliberately wrong completeness-blind set-difference demonstration.
 
-## Optional acquisition: not executed in this packet
+## Optional acquisition and the bounded owned transport check
 
 Use an official/approved dataset or a permitted direct request when it supplies the needed fields. If managed retrieval is appropriate, validate your permission, source layout and actual fields before scheduling work. Set `SCRAPINGANT_API_KEY` in your environment; never put it in code, query strings, logs or support messages. Supply your permitted target URL locally:
 
@@ -43,7 +43,28 @@ Use an official/approved dataset or a permitted direct request when it supplies 
 python3 acquire.py --url "$PERMITTED_QUERY_URL" --browser true --permitted --max-attempts 1 --max-credits 10 --out local-capture
 ```
 
-This command is an unexecuted live integration option. `acquire.py` retrieves HTML from `/v2/general`, not structured product JSON, and saves one capture plus local provenance. The key is sent only in the `x-api-key` header. Raw mode requires explicit `--browser false`. Both modes explicitly set datacenter proxy, US proxy country, API timeout 30 seconds and `return_page_source=false`; client transport timeout is 35 seconds. It rejects missing/invalid credit receipts, target status other than 200, non-HTML content, bodies over 2,000,000 bytes and invalid UTF-8. Target content type comes from `Ant-original-header-content-type` when present; it uses the outer `Content-Type` only as a fallback. The general response may lack that outer header. Missing both types is unknown and rejected; an explicitly non-HTML target type cannot be overridden by an outer HTML type. An HTTP 200 HTML capture still has `accepted_snapshot=false`: successful transport is not extraction or coverage validation.
+This CLI command is an unexecuted live integration option. `acquire.py` retrieves HTML from `/v2/general`, not structured product JSON, and saves one capture plus local provenance. The key is sent only in the `x-api-key` header. Raw mode requires explicit `--browser false`. Both modes explicitly set datacenter proxy, US proxy country, API timeout 30 seconds and `return_page_source=false`; client transport timeout is 35 seconds. It rejects missing/invalid credit receipts, target status other than 200, non-HTML content, bodies over 2,000,000 bytes and invalid UTF-8. Target content type comes from `Ant-original-header-content-type` when present; it uses the outer `Content-Type` only as a fallback. The general response may lack that outer header. Missing both types is unknown and rejected; an explicitly non-HTML target type cannot be overridden by an outer HTML type. An HTTP 200 HTML capture still has `accepted_snapshot=false`: successful transport is not extraction or coverage validation.
+
+One separate genuine transport check used the unchanged `acquire.fetch_html` function against the existing owned `dynamic-delayed.html` fixture on October 11, 2026, from 21:38:50.623018 to 21:38:51.364459 UTC. Raw mode (`browser=false`), datacenter/US, timeout30 and page-sourcefalse returned API200/target200, 752 bytes and an `Ant-credits-cost` receipt of 1. The raw `<div id="test">Web Scraping is hard</div>` marker was present. Saved response SHA256: `d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93`.
+
+The saved body and receipt are in `captures/2026-10-11-owned-raw/`; its metadata pins the tested acquisition source and the byte-matching owned fixture source. The capture is HTML transport evidence for that owned page only. It contains no Amazon records, does not validate an Amazon adapter or complete listing snapshot, and does not execute the acquisition CLI. `expected_output/owned-transport-verification.json` records offline hash/receipt/marker verification. Replay without a key or network:
+
+```bash
+python3 - <<'PY'
+import hashlib, json
+from pathlib import Path
+p = Path("captures/2026-10-11-owned-raw")
+body = (p / "response.html").read_bytes()
+receipt = json.loads((p / "receipt.json").read_text())
+assert len(body) == 752
+assert hashlib.sha256(body).hexdigest() == "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93"
+assert receipt["http_status"] == 200 and receipt["target_status"] == "200"
+assert receipt["credit_receipt"] == "1" and receipt["actual_credits"] == 1
+assert b'<div id="test">Web Scraping is hard</div>' in body
+assert b'<div id="loaded">' not in body
+print("Saved owned raw transport verified; no Amazon snapshot accepted.")
+PY
+```
 
 `--out` must name a new directory whose parent already exists. The CLI reserves that directory and opens both destination files before retrieval, so an existing destination, missing parent or local preflight error causes no provider call. It never overwrites an earlier capture. A later filesystem failure can still prevent saving a response; inspect the local destination before deciding whether to retrieve again.
 
@@ -66,6 +87,6 @@ Public documentation and rendering landing copy disagree on some defaults/timeou
 
 ## Files and limitations
 
-`snapshot.py` is the parser/diff; `acquire.py` is an optional unexecuted live adapter; `budget.py` is planning arithmetic; `fixtures/` holds local owned inputs and literal expectations. `expected_output/` contains actual offline captures, test results, tamper controls, environment and SHA-256 byte hashes. `requirements.txt` records no third-party dependencies.
+`snapshot.py` is the parser/diff; `acquire.py` is the acquisition adapter whose raw function was exercised once against an owned page, while its CLI and Amazon integration remain unexecuted; `budget.py` is planning arithmetic; `fixtures/` holds local owned inputs and literal expectations. `captures/` contains the separate dated genuine owned transport. `expected_output/` contains actual offline captures, test results, tamper controls, environment and SHA-256 byte hashes. `requirements.txt` records no third-party dependencies.
 
-49 offline unittest methods passed on October 11, 2026; subcases cover more input variations without pretending to be a target sample. This includes duplicate-attribute rejection, output-destination preflight and source-shaped response-header controls. Three synthetic captures and two synthetic diffs are the evidence denominator. No Amazon target pages, paid provider calls, browser sessions, success-rate benchmark, scheduling service, stock/Buy Box/review extraction or price recommendation was tested. Named-author review is pending. This packet alone does not establish that the article should be indexed or that a production tracker is ready.
+49 offline unittest methods passed on October 11, 2026; subcases cover more input variations without pretending to be a target sample. This includes duplicate-attribute rejection, output-destination preflight and source-shaped response-header controls. Three synthetic captures and two synthetic diffs are the comparison denominator. The separate live denominator is one raw request to an owned page, costing one recorded credit. No Amazon target pages, browser sessions, success-rate benchmark, scheduling service, stock/Buy Box/review extraction or price recommendation was tested. Named-author review is pending. This packet alone does not establish that the article should be indexed or that a production tracker is ready.

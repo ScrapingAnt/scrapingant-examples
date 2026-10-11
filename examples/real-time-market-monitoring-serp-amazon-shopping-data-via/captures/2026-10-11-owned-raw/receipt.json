@@ -1,0 +1,30 @@
+{
+  "task": "amazon",
+  "target_url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+  "endpoint": "https://api.scrapingant.com/v2/general",
+  "parameters": {
+    "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+    "browser": "false",
+    "proxy_type": "datacenter",
+    "proxy_country": "us",
+    "timeout": "30",
+    "return_page_source": "false"
+  },
+  "approved_attempt_cap": 1,
+  "documented_expected_credits": 1,
+  "actual_credits": 1,
+  "outcome": "owned_raw_transport_pass",
+  "live_job_or_amazon_adapter_validated": false,
+  "dispatched_at_utc": "2026-10-11T21:38:50.623018+00:00",
+  "http_status": 200,
+  "target_status": "200",
+  "credit_receipt": "1",
+  "target_content_type": "text/html; charset=utf-8",
+  "outer_content_type": "text/html; charset=utf-8",
+  "elapsed_headers_ms": 739.528,
+  "response_bytes": 752,
+  "response_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+  "elapsed_ms": 741.676,
+  "completed_at_utc": "2026-10-11T21:38:51.364459+00:00",
+  "raw_fixture_marker_validated": true
+}

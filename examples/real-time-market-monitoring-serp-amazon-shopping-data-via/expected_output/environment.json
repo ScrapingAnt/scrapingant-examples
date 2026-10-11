@@ -15,6 +15,7 @@
     "expected_output/changed-diff.json": "37e2f17f896c19df6939cc6c933fe23de8df4b61ec14419f83625ef02e77ea69",
     "expected_output/changed.json": "48bb136e062fdfd4cb22b140f52b99d11bf0be4149b36569d0f7339402f65708",
     "expected_output/naive.json": "251c74f832a2a931996357a69f9269102034010bd1c139b162675efff0ecda3a",
+    "expected_output/owned-transport-verification.json": "33cb3fee6d38db409eec24334f0c1db9e121490474323737e5700c92b9ec7aef",
     "expected_output/tests.json": "d9c0141e89669ea7f3a6710f6e3354fd444f6e6dfc55f5dc625f9a8771b9e22d",
     "expected_output/truncated-diff.json": "47b514584ec22ec7fd180b1469ea4edded4d54396e61fcfc10f4b8e64688e5e0",
     "expected_output/truncated.json": "e6cd8724a64e3b71a3fef5e655716e0089917375a3612838508bdf425b0910ca",

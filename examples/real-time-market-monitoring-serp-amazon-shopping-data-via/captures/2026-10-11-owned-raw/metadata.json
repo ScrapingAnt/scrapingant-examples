@@ -1,0 +1,17 @@
+{
+  "acquire_cli_executed": false,
+  "amazon_adapter_validated": false,
+  "amazon_capture": false,
+  "complete_snapshot_accepted": false,
+  "evidence_scope": "One genuine raw HTML transport to an existing owned fixture; not Amazon data",
+  "fixture_pin_limit": "Saved body byte-identical to pinned source; deployment revision not independently established",
+  "fixture_source_revision": "223a9cf639d2cc124505080ee39a37223f4689d9",
+  "fixture_source_url": "https://github.com/ScrapingAnt/scrapingant-examples/blob/223a9cf639d2cc124505080ee39a37223f4689d9/fixtures/dynamic-delayed.html",
+  "raw_marker": "<div id=\"test\">Web Scraping is hard</div>",
+  "receipt_sha256": "e1e735011af0ea45254dfa5e5a9878bf2422c54afd74a63a6bf1f83566710048",
+  "response_bytes": 752,
+  "response_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+  "transport_function": "acquire.fetch_html",
+  "transport_source_revision": "fbd403aacab5e6ab740f51af783283ecccf63191",
+  "transport_source_url": "https://github.com/ScrapingAnt/scrapingant-examples/blob/fbd403aacab5e6ab740f51af783283ecccf63191/examples/real-time-market-monitoring-serp-amazon-shopping-data-via/acquire.py"
+}
