@@ -1,0 +1,39 @@
+{
+  "ambiguous_placements": [],
+  "changes": [
+    {
+      "after": 2,
+      "asin": "B000000001",
+      "before": 1,
+      "kind": "observed_position_change",
+      "sponsored_status": "sponsored"
+    },
+    {
+      "after": 1,
+      "asin": "B000000002",
+      "before": 2,
+      "kind": "observed_position_change",
+      "sponsored_status": "organic"
+    },
+    {
+      "after": "27.00",
+      "asin": "B000000002",
+      "before": "29.00",
+      "currency": "USD",
+      "kind": "observed_price_change",
+      "sponsored_status": "organic"
+    },
+    {
+      "asin": "B000000005",
+      "kind": "not_observed_in_window",
+      "sponsored_status": "organic"
+    },
+    {
+      "asin": "B000000006",
+      "kind": "newly_observed_in_window",
+      "sponsored_status": "organic"
+    }
+  ],
+  "reasons": [],
+  "status": "compared"
+}

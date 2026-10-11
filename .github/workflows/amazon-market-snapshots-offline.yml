@@ -1,0 +1,19 @@
+name: Amazon market snapshots offline
+on:
+  pull_request:
+    paths:
+      - 'examples/real-time-market-monitoring-serp-amazon-shopping-data-via/**'
+      - '.github/workflows/amazon-market-snapshots-offline.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.11'
+      - name: Run offline tests and literal capture verification
+        working-directory: examples/real-time-market-monitoring-serp-amazon-shopping-data-via
+        run: ./run.sh

@@ -1,0 +1,87 @@
+{
+  "complete": true,
+  "context": {
+    "currency": "USD",
+    "marketplace": "amazon.com",
+    "observed_utc": "2026-10-11T10:00:00Z",
+    "query": "desk lamp",
+    "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1"
+  },
+  "expected_count": 6,
+  "issues": [],
+  "page": 1,
+  "records": [
+    {
+      "asin": "B000000001",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 1,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": "19.99",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "sponsored",
+      "title": "Orion desk lamp"
+    },
+    {
+      "asin": "B000000002",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 2,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": "29.00",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "organic",
+      "title": "Nova task lamp"
+    },
+    {
+      "asin": "B000000001",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 3,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": "19.99",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "organic",
+      "title": "Orion desk lamp"
+    },
+    {
+      "asin": "B000000003",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 4,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": "14.50",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "unknown",
+      "title": "Sol reading light"
+    },
+    {
+      "asin": "B000000004",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 5,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": null,
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "organic",
+      "title": null
+    },
+    {
+      "asin": "B000000005",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 6,
+      "observed_utc": "2026-10-11T10:00:00Z",
+      "price": "9.99",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "organic",
+      "title": "Lumen clip light"
+    }
+  ]
+}

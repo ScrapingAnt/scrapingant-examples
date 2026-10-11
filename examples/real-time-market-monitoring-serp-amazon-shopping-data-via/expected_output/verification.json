@@ -1,0 +1,7 @@
+{
+  "diff_captures_checked": 2,
+  "naive_negative_example_checked": 1,
+  "record_captures_checked": 3,
+  "status": "passed",
+  "tamper_negative_controls_rejected": 5
+}

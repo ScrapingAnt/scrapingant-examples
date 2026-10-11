@@ -1,0 +1,64 @@
+{
+  "provenance": {
+    "query": "desk lamp",
+    "marketplace": "amazon.com",
+    "currency": "USD",
+    "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1"
+  },
+  "baseline": {
+    "observed_utc": "2026-10-11T10:00:00Z",
+    "complete": true,
+    "issues": [],
+    "record_columns": ["asin", "observed_position", "sponsored_status", "title", "price"],
+    "records": [
+      ["B000000001", 1, "sponsored", "Orion desk lamp", "19.99"],
+      ["B000000002", 2, "organic", "Nova task lamp", "29.00"],
+      ["B000000001", 3, "organic", "Orion desk lamp", "19.99"],
+      ["B000000003", 4, "unknown", "Sol reading light", "14.50"],
+      ["B000000004", 5, "organic", null, null],
+      ["B000000005", 6, "organic", "Lumen clip light", "9.99"]
+    ]
+  },
+  "changed": {
+    "observed_utc": "2026-10-11T11:00:00Z",
+    "complete": true,
+    "issues": [],
+    "record_columns": ["asin", "observed_position", "sponsored_status", "title", "price"],
+    "records": [
+      ["B000000002", 1, "organic", "Nova task lamp", "27.00"],
+      ["B000000001", 2, "sponsored", "Orion desk lamp", "19.99"],
+      ["B000000001", 3, "organic", "Orion desk lamp", "19.99"],
+      ["B000000003", 4, "unknown", "Sol reading light", "14.50"],
+      ["B000000004", 5, "organic", null, null],
+      ["B000000006", 6, "organic", "Vega portable light", "11.00"]
+    ]
+  },
+  "truncated": {
+    "observed_utc": "2026-10-11T12:00:00Z",
+    "complete": false,
+    "issues": ["count_mismatch", "declared_incomplete", "malformed_or_truncated_html", "missing_or_duplicate_end_signal"],
+    "record_columns": ["asin", "observed_position", "sponsored_status", "title", "price"],
+    "records": [
+      ["B000000002", 1, "organic", "Nova task lamp", "27.00"],
+      ["B000000001", 2, "sponsored", "Orion desk lamp", "19.99"]
+    ]
+  },
+  "changed_diff": {
+    "status": "compared",
+    "reasons": [],
+    "ambiguous_placements": [],
+    "changes": [
+      {"asin": "B000000001", "sponsored_status": "sponsored", "kind": "observed_position_change", "before": 1, "after": 2},
+      {"asin": "B000000002", "sponsored_status": "organic", "kind": "observed_position_change", "before": 2, "after": 1},
+      {"asin": "B000000002", "sponsored_status": "organic", "kind": "observed_price_change", "before": "29.00", "after": "27.00", "currency": "USD"},
+      {"asin": "B000000005", "sponsored_status": "organic", "kind": "not_observed_in_window"},
+      {"asin": "B000000006", "sponsored_status": "organic", "kind": "newly_observed_in_window"}
+    ]
+  },
+  "truncated_diff": {
+    "status": "suppressed",
+    "reasons": ["current_incomplete"],
+    "changes": [],
+    "ambiguous_placements": []
+  }
+}

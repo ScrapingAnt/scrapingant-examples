@@ -1,0 +1,44 @@
+{
+  "complete": false,
+  "context": {
+    "currency": "USD",
+    "marketplace": "amazon.com",
+    "observed_utc": "2026-10-11T12:00:00Z",
+    "query": "desk lamp",
+    "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1"
+  },
+  "expected_count": 6,
+  "issues": [
+    "count_mismatch",
+    "declared_incomplete",
+    "malformed_or_truncated_html",
+    "missing_or_duplicate_end_signal"
+  ],
+  "page": 1,
+  "records": [
+    {
+      "asin": "B000000002",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 1,
+      "observed_utc": "2026-10-11T12:00:00Z",
+      "price": "27.00",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "organic",
+      "title": "Nova task lamp"
+    },
+    {
+      "asin": "B000000001",
+      "currency": "USD",
+      "marketplace": "amazon.com",
+      "observed_position": 2,
+      "observed_utc": "2026-10-11T12:00:00Z",
+      "price": "19.99",
+      "query": "desk lamp",
+      "source_url": "https://fixtures.invalid/amazon-us/search?k=desk%20lamp&page=1",
+      "sponsored_status": "sponsored",
+      "title": "Orion desk lamp"
+    }
+  ]
+}

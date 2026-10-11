@@ -1,0 +1,121 @@
+article_id: real-time-market-monitoring-serp-amazon-shopping-data-via
+canonical_url: https://scrapingant.com/blog/real-time-market-monitoring-serp-amazon-shopping-data-via
+owner: Oleg Kulyk
+named_author_review: pending
+tested_at: 2026-10-11
+requires_api_key: false
+optional_acquisition_requires_api_key: true
+source_base_commit: b43823853fa4662b8493952922acbff065866a37
+revision_note: "The article pins the immutable evidence revision. A manifest cannot embed its own final Git hash."
+environment:
+  os: Darwin 25.6.0
+  python: CPython 3.12.11
+  browser: not used
+  node: not used
+dependencies: []
+run_command: ./run.sh
+offline_only_default: true
+fixtures:
+  - fixtures/baseline.html
+  - fixtures/changed.html
+  - fixtures/truncated.html
+  - fixtures/oracle.json
+fixture_provenance: "Owned synthetic Amazon-shaped HTML; local-only fixtures. ASINs, prices, products, times and source URLs are invented illustrative data, not observations of Amazon."
+outputs:
+  - expected_output/baseline.json
+  - expected_output/changed.json
+  - expected_output/truncated.json
+  - expected_output/changed-diff.json
+  - expected_output/truncated-diff.json
+  - expected_output/naive.json
+  - expected_output/budget.json
+  - expected_output/tests.json
+  - expected_output/verification.json
+  - expected_output/environment.json
+measurements:
+  - name: offline_unittest_methods_passed
+    value: 37
+    denominator: 37 executed unittest methods; subcases are not additional target observations
+    source: expected_output/tests.json
+  - name: record_captures_verified
+    value: 3
+    denominator: 3 owned fixture captures, two complete six-card windows and one incomplete two-card window
+    source: expected_output/verification.json
+  - name: literal_diffs_verified
+    value: 2
+    denominator: 2 comparisons against independent literal diff expectations
+    source: expected_output/verification.json
+  - name: capture_tamper_controls_rejected
+    value: 5
+    denominator: 5 deliberate record/provenance mutations
+    source: expected_output/verification.json
+  - name: fixture_changes_reported
+    value: 5
+    denominator: complete baseline/changed pair; two position observations, one price observation, one absent and one new placement in the window
+    source: expected_output/changed-diff.json
+  - name: incomplete_pair_changes_reported
+    value: 0
+    denominator: baseline/truncated pair; comparison suppressed
+    source: expected_output/truncated-diff.json
+  - name: provider_calls
+    value: 0
+    denominator: default offline packet run; acquisition transports mocked
+    source: run.sh
+sources:
+  - url: https://docs.scrapingant.com/request-response-format
+    accessed_at: 2026-10-11
+    scope: General endpoint HTML and explicit parameters; no target reliability benchmark
+  - url: https://docs.scrapingant.com/credits-cost
+    accessed_at: 2026-10-11
+    scope: Datacenter raw1/rendered10 credit documentation, not new measured receipts
+  - url: https://docs.scrapingant.com/errors
+    accessed_at: 2026-10-11
+    scope: Header authentication and status-specific failure handling
+  - url: https://scrapingant.com/#pricing
+    accessed_at: 2026-10-11
+    scope: Free10000/month/no credit card; Enthusiast100000/month at USD19/month; current page terms, not a fixed future offer
+limitations:
+  - "No real Amazon query page, source adapter, source permissions, live field coverage or reliable complete-window signal was validated."
+  - "The owned organic annotation is explicit. Missing or ambiguous labels are unknown, not organic. Observed position includes ads and is not organic rank."
+  - "ASIN occurrences are preserved; duplicate occurrences within one sponsored class are ambiguous and not arbitrarily paired."
+  - "Fixture end markers and expected counts are a demonstration contract, not universal Amazon selectors or a guarantee that six results means a complete page."
+  - "Missing/invalid ASIN, partial HTML, count/page/terminal mismatch and block/error envelope suppress changes. Missing price/title are nullable; only known same-currency prices compare."
+  - "Same query/marketplace/currency/source/window and increasing UTC times are required. Observed differences may reflect layout/personalization, not market truth."
+  - "Absence from a complete bounded window is not delisting, stock status or universal visibility."
+  - "Live acquisition is optional and unexecuted; local request/credit reserves do not enforce server billing. Real response receipts require inspection."
+  - "Documentation/landing copy disagree on defaults and timeout descriptions; explicit parameters avoid assuming deployment configuration."
+  - "No browser, paid provider, model, seller/Buy Box/review/stock test, benchmark, scheduling service, tracking, paid outcome or forecast."
+  - "Named-author and independent article review are pending. Fixtures alone do not satisfy restoration/publication gates."
+claims:
+  - id: C1
+    text: "Offline reproduction uses three owned fixture snapshots with 6, 6 and 2 captured placements."
+    type: measured
+    source: expected_output/baseline.json; expected_output/changed.json; expected_output/truncated.json
+  - id: C2
+    text: "The naive set difference reports three missing ASINs in the incomplete capture; the conservative comparison reports no changes."
+    type: measured
+    source: expected_output/naive.json; expected_output/truncated-diff.json
+  - id: C3
+    text: "The complete synthetic pair reports two observed position changes, one USD price change, and two window-membership observations."
+    type: measured
+    source: expected_output/changed-diff.json
+  - id: C4
+    text: "37 offline unittest methods passed; three literal record captures, two literal diffs and five tamper controls pass."
+    type: measured
+    source: expected_output/tests.json; expected_output/verification.json
+  - id: C5
+    text: "An illustrative five-query, hourly, 30-day, one-marketplace/one-page workload has 3600 initial calls and a 7200 two-attempt cap; documentation gives raw7200/rendered72000 datacenter credits at cap."
+    type: measured
+    source: expected_output/budget.json; https://docs.scrapingant.com/credits-cost
+  - id: C6
+    text: "General retrieval returns HTML; structured AI extraction is a separate endpoint."
+    type: product
+    source: https://docs.scrapingant.com/request-response-format; https://docs.scrapingant.com/ai-data-extraction/ai-extractor
+  - id: C7
+    text: "The optional capture sets browser explicitly, datacenter/us/timeout30/page-sourcefalse, uses an environment key header and validates status/content/credit receipts. Its live path has not been executed."
+    type: documented
+    source: acquire.py; expected_output/tests.json
+  - id: C8
+    text: "Free10000/month/no credit card and Enthusiast100000/month/USD19 are the observed October11 plan terms; use current plans for a future workload."
+    type: product
+    source: https://scrapingant.com/#pricing

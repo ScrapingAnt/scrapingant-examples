@@ -1,0 +1,10 @@
+{
+  "current_complete": false,
+  "demonstration": "Wrong: ignores snapshot completeness",
+  "missing_asins": [
+    "B000000003",
+    "B000000004",
+    "B000000005"
+  ],
+  "missing_count": 3
+}

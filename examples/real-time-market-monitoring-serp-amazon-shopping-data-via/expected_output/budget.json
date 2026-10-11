@@ -1,0 +1,13 @@
+{
+  "attempted_calls_cap": 7200,
+  "attempts_per_page_cap": 2,
+  "days": 30,
+  "initial_calls": 3600,
+  "marketplaces": 1,
+  "pages": 1,
+  "queries": 5,
+  "raw_datacenter_credits_at_cap": 7200,
+  "rendered_datacenter_credits_at_cap": 72000,
+  "runs_per_day": 24,
+  "snapshots": 3600
+}
