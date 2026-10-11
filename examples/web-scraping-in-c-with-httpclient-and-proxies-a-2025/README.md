@@ -4,6 +4,9 @@ This packet supports the article at `/blog/web-scraping-in-c-with-httpclient-and
 It tests a `HttpClient` integration with `/v2/general` entirely through an injected
 `HttpMessageHandler`. It never contacts ScrapingAnt or a target during the default run,
 even if `SCRAPINGANT_API_KEY` is set. The key used by the handler is an obvious fake value.
+Two separately recorded [owned-fixture live captures](live-captures/README.md) confirm
+raw/rendered retrieval and actual credit receipts. They reused only `BuildUri` and
+do not validate the product parser, `ManagedClient.FetchAsync` or optional live CLI.
 
 ## Install and reproduce
 
@@ -42,6 +45,8 @@ For a workspace-only SDK, set `DOTNET` to its executable; `DOTNET_CLI_HOME` and
 - `fixtures/oracle.json`: literal SKU, title, decimal price and currency.
 - `verify_output.py`: a second literal output oracle plus wrong-title, wrong-price,
   missing-record, false-live-scope and invented-credit mutation controls.
+- `live-captures/`: accepted owned-fixture HTML and sanitized receipts, recorded
+  separately on October 11, 2026, with a key-free offline replay verifier.
 
 The parser's schema is deliberately narrow: exactly one `article[data-sku]`, a nonempty
 `h1`, a decimal `.price`, and a three-letter uppercase `data-currency`.
@@ -63,13 +68,13 @@ and print only fixed messages; raw error bodies, transport messages and keys are
 
 The integration retries only safe GET HTTP or body-stream transport failures and outer 500/502/503/504
 responses, with at most three attempts and scheduled 1s/2s delays. Tests inject a
-non-sleeping delay and verify its schedule; no elapsed latency is measured.
+non-sleeping delay and verify its schedule; these offline controls measure no elapsed latency.
 400/403/404/405/409/422/423/429 stop without automatic retries. Cancellation before
 send, during send, body read or backoff stops the operation. The CLI's 95-second
 deadline and disabled redirects apply to its one deliberate live attempt. API timeout,
 overall caller cancellation and target-site HTTP status are distinct controls.
 
-## Captured result (offline only)
+## Captured client/parser result (offline)
 
 ```text
 SIMULATED raw: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=1
@@ -95,9 +100,10 @@ dotnet run --no-restore --no-build --configuration Release -- --live "$PERMITTED
 ```
 
 Each command sends one GET with no automatic paid retries. **Neither command was run
-for this packet.** A separate future two-call owned-fixture raw/rendered probe is only
-proposed; it needs authorization and a schema matching that fixture. No fixture is
-published by this change. No account or usage endpoint is called.
+for this packet.** The separate authorized owned-fixture marker probe used its own
+send and validation path. Its two saved responses are in `live-captures/`; replay them
+with `python3 live-captures/verify_captures.py`, which makes no requests and reads no
+credentials. No fixture is published by this change. No account or usage endpoint is called.
 
 ## Documented choices and limits
 
@@ -107,8 +113,9 @@ Primary references checked October 11, 2026:
 [outer/target errors and safe troubleshooting](https://docs.scrapingant.com/errors).
 The general endpoint returns HTML; `/v2/extract` is a separate structured-extraction
 product. Raw datacenter retrieval of a non-Google page is documented at 1 credit;
-JavaScript-rendered datacenter retrieval at 10 credits. This packet does not measure
-rendering efficacy, production throughput, billing, target reachability or anti-bot behavior.
+JavaScript-rendered datacenter retrieval at 10 credits. The two owned-fixture receipts
+recorded those exact charges. They confirm raw/rendered DOM behavior on that page;
+they do not measure production throughput, reliability, plan capacity or anti-bot behavior.
 UTF-8 fixture responses are the tested encoding; adapt body decoding for other target encodings.
 It offers no CAPTCHA-solving claim.
 
@@ -121,4 +128,5 @@ The macOS SDK archive used for the recorded run came from Microsoft's official U
 Its published SHA-512 was verified before extraction:
 `69f64eb00dc045398755c440b152225d544301a345a146a16e86a56a0c52b7c94b2c331520e976dbb821f18d31930aafbd25bb85961e3517e0665414ce0cbcff`.
 
-Drafted with AI assistance and verified offline. Named-author review is pending.
+Drafted with AI assistance, verified with offline client/parser controls and separate
+owned-fixture retrieval captures. Named-author review is pending.

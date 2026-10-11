@@ -4,13 +4,39 @@ owner: Oleg Kulyk
 source_ref: "The article pins the immutable commit containing this packet."
 tested_at: 2026-10-11
 requires_api_key: false
-scope: offline-synthetic
+scope: offline-client-contract-and-owned-live-markers
+default_run_scope: offline-synthetic
+live_capture:
+  recorded_at: 2026-10-11
+  required_api_key_when_recorded: true
+  replay_requires_api_key: false
+  source_commit: 2b764ba84182ca47f0abcd3d5fa1a0e8315ab947
+  reused_method: ManagedClient.BuildUri only
+  managed_client_fetch_async_executed: false
+  public_product_parser_executed_live: false
+  public_live_cli_executed: false
+  target: https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+  timeout: 30
+  proxy_type: datacenter
+  proxy_country: us
+  return_page_source: false
+  raw_browser: false
+  rendered_browser: true
+  rendered_wait_for_selector: "#loaded"
+  requests_per_mode: 1
+  retries: 0
+  auto_redirect: false
+  caller_deadline_seconds: 95
+  body_limit_bytes: 1048576
+  remote_browser_version: not recorded
+  replay_command: python3 live-captures/verify_captures.py
+  provenance: live-captures/README.md
 environment:
   os: macOS 26.6.2 arm64
   dotnet_sdk: 10.0.401
   dotnet_runtime: 10.0.12
   python: 3.12.11
-  browser: none
+  browser: offline run uses none; live remote browser version not recorded
 dependencies:
   HtmlAgilityPack: 1.13.0
   nuget_lockfile: packages.lock.json
@@ -31,6 +57,10 @@ outputs:
   - expected_output/results.json
   - expected_output/oracle.txt
   - expected_output/oracle-controls.txt
+  - live-captures/raw/receipt.json
+  - live-captures/raw/response.html
+  - live-captures/rendered/receipt.json
+  - live-captures/rendered/response.html
 measurements:
   - name: CSharp_offline_cases_passed
     value: 58
@@ -44,15 +74,36 @@ measurements:
     value: 2
     denominator: 2 simulated raw/rendered records, each with 4 required fields
     source: expected_output/results.json
-  - name: live_API_calls
+  - name: default_run_live_API_calls
     value: 0
-    denominator: this packet's recorded run
+    denominator: the offline client/parser run only
     source: expected_output/offline.txt
+  - name: recorded_owned_fixture_live_API_calls
+    value: 2
+    denominator: one authorized raw request and one authorized rendered request
+    source: live-captures/README.md
+  - name: owned_raw_credit_receipt
+    value: 1
+    denominator: one owned-fixture raw request
+    source: live-captures/raw/receipt.json
+  - name: owned_rendered_credit_receipt
+    value: 10
+    denominator: one owned-fixture rendered request
+    source: live-captures/rendered/receipt.json
+  - name: owned_raw_elapsed_ms
+    value: 985
+    denominator: one owned-fixture raw request; not a latency benchmark
+    source: live-captures/raw/receipt.json
+  - name: owned_rendered_elapsed_ms
+    value: 3193
+    denominator: one owned-fixture rendered request; not a latency benchmark
+    source: live-captures/rendered/receipt.json
 limitations:
-  - No live ScrapingAnt request, target retrieval, account or usage endpoint call.
-  - Rendered HTML and credit receipts are authored simulation, not browser output or service charges.
+  - No account or usage endpoint call; default client/parser run makes no API requests.
+  - Catalog rendered HTML and credit receipts remain authored simulations; live-captures contains separate genuine owned-page responses and receipts.
+  - The owned marker probe reused only BuildUri, not ManagedClient.FetchAsync, the SKU parser or public live CLI.
   - UTF-8 fixture responses only; other target encodings require an adapter.
-  - No observed latency, throughput, reliability, CAPTCHA solving or paid capacity result.
+  - Two owned-page elapsed times are single observations, not production latency, throughput, reliability, CAPTCHA solving or paid capacity results.
   - Delays are injected; schedule is tested without sleeping.
   - HTML parser may tolerate malformed markup; required schema validation is not universal HTML validation.
   - Optional live commands are illustrative and unexecuted; CLI performs one attempt each.
@@ -120,3 +171,12 @@ claims:
     source: https://scrapingant.com/#pricing
     accessed_at: 2026-10-11
     limitation: Documentation observation, not measured capacity or live billing.
+  - id: C15
+    text: One raw and one rendered owned-fixture request returned the exact expected DOM markers with actual credit receipts of 1 and 10.
+    type: measured
+    source: live-captures/README.md
+    limitation: Separate marker probe reused BuildUri only; no live product-parser or complete acquisition validation.
+  - id: C16
+    text: Saved raw and rendered response bodies match their literal SHA-256s, receipts and DOM markers in a key-free offline replay.
+    type: measured
+    source: live-captures/verify_captures.py
