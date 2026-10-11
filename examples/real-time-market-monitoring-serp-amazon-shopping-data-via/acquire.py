@@ -41,7 +41,10 @@ def fetch_html(target, browser, max_attempts=1, max_credits=10, *, opener=urlope
                 if len(body) > MAX_BYTES:
                     raise AcquisitionError("Response exceeds the local capture byte limit.")
                 target_status = response.headers.get("Ant-page-status-code")
-                content_type = response.headers.get("Content-Type", "").split(";", 1)[0].lower()
+                # General responses expose target headers with this namespace;
+                # an outer Content-Type is not guaranteed by the service.
+                original_type = response.headers.get("Ant-original-header-content-type")
+                content_type = (original_type if original_type is not None else response.headers.get("Content-Type", "")).split(";", 1)[0].strip().lower()
                 if response.status != 200 or target_status != "200" or content_type not in ("text/html", "application/xhtml+xml"):
                     raise AcquisitionError("HTML capture rejected by status or content type; no snapshot accepted.")
                 receipt = response.headers.get("Ant-credits-cost")
@@ -84,10 +87,13 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     try:
-        html, metadata = fetch_html(args.url, args.browser == "true", args.max_attempts, args.max_credits)
-        args.out.mkdir(parents=True, exist_ok=False)
-        (args.out / "capture.html").write_text(html)
-        (args.out / "provenance.json").write_text(json.dumps(metadata, indent=2) + "\n")
+        # Reserve a new directory and both output files before any provider call.
+        # Its parent must already exist; never overwrite an earlier capture.
+        args.out.mkdir(exist_ok=False)
+        with (args.out / "capture.html").open("x", encoding="utf-8") as html_file, (args.out / "provenance.json").open("x", encoding="utf-8") as provenance_file:
+            html, metadata = fetch_html(args.url, args.browser == "true", args.max_attempts, args.max_credits)
+            html_file.write(html)
+            provenance_file.write(json.dumps(metadata, indent=2) + "\n")
         print("Saved one local HTML capture and provenance; validate the source adapter before comparison.")
     except (AcquisitionError, OSError) as exc:
         # Never print arbitrary OS paths, upstream response bodies or URLs.

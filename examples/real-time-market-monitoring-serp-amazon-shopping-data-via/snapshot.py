@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 class Node:
     def __init__(self, tag, attrs=()):
         self.tag, self.attrs, self.children = tag, dict(attrs), []
+        self.duplicate_attributes = len(attrs) != len(self.attrs)
 
     def all(self):
         yield self
@@ -76,6 +77,8 @@ def parse_snapshot(html):
     context = {key: root.attrs.get("data-" + key.replace("_", "-")) for key in
                ("query", "marketplace", "currency", "source_url", "observed_utc")}
     issues = []
+    if any(node.duplicate_attributes for node in nodes):
+        issues.append("duplicate_attributes")
     if any(not context[k] for k in context):
         issues.append("missing_provenance")
     try:

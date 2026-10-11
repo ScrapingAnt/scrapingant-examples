@@ -7,7 +7,7 @@
   "provider_calls": 0,
   "python": "3.12.11",
   "sha256": {
-    "acquire.py": "ae4572913260f6c5696111818a44cd08346baaad3056dd00056764cf3c1056af",
+    "acquire.py": "acd517c1bcca2e640aedafcc615013ef91ff3a0b161cd6f70e247b12d240fc64",
     "budget.py": "2afce2215a87c6eb2a0594f9bd4538d2eb8698e059eb503a752d586f0e5c4896",
     "environment.py": "03ce1e084e8111f3bb8d36bf75ba3637cc030339cfd9695c87066a5d955b8829",
     "expected_output/baseline.json": "cb983a3e43d9b061dc80bdd488662c9969e0cd1f9d7f4ffae435eaea493ab481",
@@ -15,7 +15,7 @@
     "expected_output/changed-diff.json": "37e2f17f896c19df6939cc6c933fe23de8df4b61ec14419f83625ef02e77ea69",
     "expected_output/changed.json": "48bb136e062fdfd4cb22b140f52b99d11bf0be4149b36569d0f7339402f65708",
     "expected_output/naive.json": "251c74f832a2a931996357a69f9269102034010bd1c139b162675efff0ecda3a",
-    "expected_output/tests.json": "cb00f644cfa27b42f7fd03de783b5daf3fb2e0f23dfe0abf10258169fd8aeec3",
+    "expected_output/tests.json": "d9c0141e89669ea7f3a6710f6e3354fd444f6e6dfc55f5dc625f9a8771b9e22d",
     "expected_output/truncated-diff.json": "47b514584ec22ec7fd180b1469ea4edded4d54396e61fcfc10f4b8e64688e5e0",
     "expected_output/truncated.json": "e6cd8724a64e3b71a3fef5e655716e0089917375a3612838508bdf425b0910ca",
     "expected_output/verification.json": "802669da1f1fdd6439520a6940f73124be08da84bb107764ad9ff99ab9dc7082",
@@ -27,8 +27,8 @@
     "requirements.txt": "dfd345ffed9d0987909af19991e3cbd411f7b2731704c755a5e47001f163a52d",
     "run.sh": "906fe1b9a13afc018f397da956680e2163eabb35de61af0f307034d8b605516d",
     "run_tests.py": "cd3c30398c08283909580e3e04654ec886f69983893a6f4d4c56ae3ff87d8dbb",
-    "snapshot.py": "d8c2072659e57f6cd7a9b1ce291fd3943a2c19a3d81a6896cb5584a37dc8fa50",
-    "test_snapshot.py": "176793472b1d33a920983b60544af4aca1fdcdfbc09caf16b36af7b62842e360",
+    "snapshot.py": "05757c8436d035c5feb86c03058cd75140eceff01da4112644be006b55624c0b",
+    "test_snapshot.py": "a9b312d255f66ae3582c8d62833fdf4e4d967b7de13e3fd2b6506c489ad242be",
     "verify_captures.py": "0c3d7dd382700970a9330100744b9e25349a30393a3239518d4a54399aacae6d"
   },
   "tested_at": "2026-10-11",

@@ -3,13 +3,16 @@ import copy
 import io
 import json
 import os
+import tempfile
 import unittest
+from email.message import Message
 from pathlib import Path
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlsplit
 
 from acquire import AcquisitionError, fetch_html
+from acquire import main as acquire_main
 from budget import workload
 from snapshot import compare, parse_snapshot
 
@@ -164,13 +167,36 @@ class SnapshotTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_snapshot("<html><body>Robot check</body></html>")
 
+    def test_conflicting_completion_attributes_never_override_incomplete(self):
+        changed = parse_snapshot(fixture("changed").replace('data-complete="true"', 'data-complete="false" data-complete="true"'))
+        self.assertFalse(changed["complete"])
+        self.assertIn("duplicate_attributes", changed["issues"])
+        self.assertEqual(compare(self.baseline, changed)["changes"], [])
+
+    def test_conflicting_asin_attributes_never_create_a_join(self):
+        changed = parse_snapshot(fixture("changed").replace('data-asin="B000000002"', 'data-asin="B000000099" data-asin="B000000002"'))
+        self.assertFalse(changed["complete"])
+        self.assertIn("duplicate_attributes", changed["issues"])
+        self.assertEqual(compare(self.baseline, changed)["changes"], [])
+
+    def test_duplicate_noncritical_and_self_closing_attributes_rejected(self):
+        for html in (fixture("changed").replace('<h2>', '<h2 class="title" class="title">', 1), fixture("changed").replace('</main>', '<img alt="a" alt="b" /></main>'), fixture("changed").replace('<body>', '<body id="a" ID="b">')):
+            with self.subTest(html=html[:50]):
+                changed = parse_snapshot(html)
+                self.assertFalse(changed["complete"])
+                self.assertIn("duplicate_attributes", changed["issues"])
+                self.assertEqual(compare(self.baseline, changed)["changes"], [])
+
 
 class Response(io.BytesIO):
     status = 200
 
     def __init__(self, body=b"<html>owned response</html>", **headers):
         super().__init__(body)
-        self.headers = {"Ant-page-status-code": "200", "Content-Type": "text/html; charset=utf-8", "Ant-credits-cost": "1", **headers}
+        self.headers = Message()
+        for name, value in {"Ant-page-status-code": "200", "Content-Type": "text/html; charset=utf-8", "Ant-credits-cost": "1", **headers}.items():
+            if value is not None:
+                self.headers[name] = value
 
 
 class AcquisitionTests(unittest.TestCase):
@@ -264,6 +290,90 @@ class AcquisitionTests(unittest.TestCase):
         for body in (b"x" * 2_000_001, b"\xff"):
             with self.assertRaises(AcquisitionError):
                 fetch_html("https://fixtures.invalid/", False, opener=lambda *a, **k: Response(body))
+
+    def test_source_shaped_html_original_header_without_outer_type_accepted(self):
+        response = Response(**{"Content-Type": None, "Ant-original-header-content-type": "text/html; charset=utf-8"})
+        html, meta = fetch_html("https://fixtures.invalid/", False, opener=lambda *a, **k: response)
+        self.assertIn("owned response", html)
+        self.assertFalse(meta["accepted_snapshot"])
+
+    def test_original_non_html_type_overrides_outer_html_and_is_rejected(self):
+        with self.assertRaises(AcquisitionError):
+            fetch_html("https://fixtures.invalid/", False, opener=lambda *a, **k: Response(**{"Ant-original-header-content-type": "application/json"}))
+
+    def test_no_original_or_outer_content_type_is_unknown_and_rejected(self):
+        with self.assertRaises(AcquisitionError):
+            fetch_html("https://fixtures.invalid/", False, opener=lambda *a, **k: Response(**{"Content-Type": None}))
+
+
+class AcquisitionDestinationTests(unittest.TestCase):
+    def run_cli(self, destination):
+        args = ["acquire.py", "--url", "https://fixtures.invalid/", "--browser", "false", "--permitted", "--out", str(destination)]
+        with patch("sys.argv", args), patch("sys.stdout", new_callable=io.StringIO) as output:
+            status = acquire_main()
+        return status, output.getvalue()
+
+    def test_valid_destination_is_reserved_before_fetch_and_saved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "new-capture"
+            def offline_fetch(*args):
+                self.assertTrue((destination / "capture.html").is_file())
+                self.assertTrue((destination / "provenance.json").is_file())
+                return "<html>owned capture</html>", {"accepted_snapshot": False}
+            with patch("acquire.fetch_html", side_effect=offline_fetch) as fetch:
+                status, _ = self.run_cli(destination)
+                self.assertEqual(status, 0)
+                fetch.assert_called_once()
+            self.assertEqual((destination / "capture.html").read_text(), "<html>owned capture</html>")
+            self.assertEqual(json.loads((destination / "provenance.json").read_text()), {"accepted_snapshot": False})
+
+    def test_existing_destination_prevents_any_fetch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "existing"
+            destination.mkdir()
+            (destination / "keep.txt").write_text("retain existing capture")
+            with patch("acquire.fetch_html", return_value=("owned capture", {})) as fetch:
+                status, message = self.run_cli(destination)
+                self.assertEqual(status, 1)
+                fetch.assert_not_called()
+            self.assertEqual((destination / "keep.txt").read_text(), "retain existing capture")
+            self.assertNotIn(str(destination), message)
+
+    def test_missing_parent_prevents_any_fetch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "missing-parent" / "capture"
+            with patch("acquire.fetch_html", return_value=("owned capture", {})) as fetch:
+                status, _ = self.run_cli(destination)
+                self.assertEqual(status, 1)
+                fetch.assert_not_called()
+            self.assertFalse(destination.parent.exists())
+
+    def test_file_destination_prevents_any_fetch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "existing-file"
+            destination.write_text("retain file")
+            with patch("acquire.fetch_html", return_value=("owned capture", {})) as fetch:
+                status, _ = self.run_cli(destination)
+                self.assertEqual(status, 1)
+                fetch.assert_not_called()
+            self.assertEqual(destination.read_text(), "retain file")
+
+    def test_open_error_prevents_any_fetch_and_redacts_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "new-capture"
+            with patch.object(Path, "open", side_effect=PermissionError("private path")), patch("acquire.fetch_html", return_value=("owned capture", {})) as fetch:
+                status, message = self.run_cli(destination)
+                self.assertEqual(status, 1)
+                fetch.assert_not_called()
+            self.assertNotIn("private path", message)
+
+    def test_mkdir_error_prevents_any_fetch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "new-capture"
+            with patch.object(Path, "mkdir", side_effect=PermissionError("private path")), patch("acquire.fetch_html", return_value=("owned capture", {})) as fetch:
+                status, _ = self.run_cli(destination)
+                self.assertEqual(status, 1)
+                fetch.assert_not_called()
 
 
 class BudgetTests(unittest.TestCase):

@@ -34,8 +34,8 @@ outputs:
   - expected_output/environment.json
 measurements:
   - name: offline_unittest_methods_passed
-    value: 37
-    denominator: 37 executed unittest methods; subcases are not additional target observations
+    value: 49
+    denominator: 49 executed unittest methods; subcases are not additional target observations
     source: expected_output/tests.json
   - name: record_captures_verified
     value: 3
@@ -80,9 +80,12 @@ limitations:
   - "ASIN occurrences are preserved; duplicate occurrences within one sponsored class are ambiguous and not arbitrarily paired."
   - "Fixture end markers and expected counts are a demonstration contract, not universal Amazon selectors or a guarantee that six results means a complete page."
   - "Missing/invalid ASIN, partial HTML, count/page/terminal mismatch and block/error envelope suppress changes. Missing price/title are nullable; only known same-currency prices compare."
+  - "Duplicate HTML attributes anywhere in the capture reject comparison, including conflicting completeness and ASIN values."
   - "Same query/marketplace/currency/source/window and increasing UTC times are required. Observed differences may reflect layout/personalization, not market truth."
   - "Absence from a complete bounded window is not delisting, stock status or universal visibility."
   - "Live acquisition is optional and unexecuted; local request/credit reserves do not enforce server billing. Real response receipts require inspection."
+  - "CLI reserves a new output directory and opens both output files before retrieval; its parent must exist. Later filesystem failures remain possible."
+  - "Target content type prefers Ant-original-header-content-type; the outer Content-Type can be absent. Missing both types is unknown and rejected. Header controls are source-shaped mocks, not live captures."
   - "Documentation/landing copy disagree on defaults and timeout descriptions; explicit parameters avoid assuming deployment configuration."
   - "No browser, paid provider, model, seller/Buy Box/review/stock test, benchmark, scheduling service, tracking, paid outcome or forecast."
   - "Named-author and independent article review are pending. Fixtures alone do not satisfy restoration/publication gates."
@@ -100,7 +103,7 @@ claims:
     type: measured
     source: expected_output/changed-diff.json
   - id: C4
-    text: "37 offline unittest methods passed; three literal record captures, two literal diffs and five tamper controls pass."
+    text: "49 offline unittest methods passed; three literal record captures, two literal diffs and five tamper controls pass."
     type: measured
     source: expected_output/tests.json; expected_output/verification.json
   - id: C5
