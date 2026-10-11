@@ -1,0 +1,98 @@
+article_id: html-markdown-plain-text-llm-extraction
+evidence_asset_id: mcp-html-markdown-text
+tested_at: '2026-10-11'
+status: completed_offline_reference_preservation__live_and_model_blocked
+requires_api_key: false
+default_paid_calls: 0
+new_retrieval_calls: 0
+model_calls: 0
+public_discovery_http_requests: 3
+source_base: 9e5fba96d34a7bb7106a5a0e478a668078c6a312
+run_command: ./run.sh
+environment:
+  python: 3.12.11
+  os: macOS-26.6.2-arm64-arm-64bit
+  beautifulsoup4: 4.12.2
+  soupsieve: '2.5'
+  html2text: 2020.1.16
+  tiktoken: 0.11.0
+  playwright: 1.62.0
+  chromium: 151.0.7922.34
+measurements:
+  source: expected_output/report.json
+  cases: 3
+  unique_fixture_products: 7
+  arms: 3
+  local_transform_repeats_per_case_arm: 5
+  non_null_slot_denominators:
+    catalog: 12
+    links: 8
+    attributes: 8
+  scope: lexical value survival; not row association or LLM accuracy
+  token_scope: exact representation content; prompts/schema/tool envelopes excluded
+  llm_exact_record_accuracy: null
+  live_mcp_cost_per_correct_output: null
+  actual_paid_credits: null
+proposed_budget:
+  status: not_approved
+  scrapingant_credit_ceiling: 15
+  retrieval_call_ceiling: 15
+  model_usd_ceiling: 0.25
+  model_call_ceiling: 60
+  model: gpt-4.1-mini-2025-04-14
+  missing_environment_keys:
+  - SCRAPINGANT_API_KEY
+  - OPENAI_API_KEY
+  purchase_authorized: false
+outputs:
+- expected_output/report.json
+- expected_output/summary.csv
+- expected_output/summary.txt
+- expected_output/public-discovery.json
+- expected_output/scorer-demo.txt
+- expected_output/unit-tests.txt
+- all nine reference outputs and two counterfactual source/output groups
+limitations:
+- Local browser selection is a source-informed reference, not hosted MCP text output
+  or raw-mode verification.
+- Selected fixtures; five deterministic repeats are not model trials or independent
+  sites.
+- Lexical presence is not correct row association; duplicate values count as separate
+  field slots.
+- Same AI session authored local fixtures and oracle; fresh independent review required.
+- URL-presence fallback checks pathname only; selected purchase URLs have no query
+  or fragment. Extend and test before expanding that scope.
+- ASCII-only selected inputs; no Unicode payload generalization.
+- Content-only token counts exclude prompt, schema, tools and billing overhead.
+- Public schemas do not verify retrieval behavior or production reliability.
+- Live/model evidence blocked; no zero-cost or accuracy winner inferred.
+- Inspected MCP content omits credit receipts; exact observed credit cost requires
+  separately authorized evidence.
+- Named author review, source merge and deployment remain unapproved.
+claims:
+- id: M1
+  text: The table retains12/12 non-null slots in all reference formats.
+  source: expected_output/report.json rows catalog
+- id: M2
+  text: Text loses two purchase destinations in the links case; Markdown retains8/8
+    slots.
+  source: expected_output/report.json rows links; counterfactuals links
+- id: M3
+  text: Markdown/text lose both attribute-only SKUs; changing them leaves those outputs
+    identical.
+  source: expected_output/report.json rows attributes; counterfactuals attributes
+- id: M4
+  text: Exact content bytes/codepoints/o200k/cl100k counts and five transformation
+    hashes are recorded for all nine rows.
+  source: expected_output/report.json; expected_output/summary.csv
+- id: D1
+  text: Public MCP discovery advertises three tools with url/browser/proxy_type/proxy_country.
+  source: expected_output/public-discovery.json
+- id: V1
+  text: Exact-page scorer rejects wrong values, extra/missing/duplicate/reordered
+    rows and numeric coercion; zero-correct ratio undefined.
+  source: contract.py; test_contract.py; expected_output/unit-tests.txt
+- id: B1
+  text: New paid retrieval and model calls are zero; proposed15credits/$0.25 is not
+    approved.
+  source: PROTOCOL.md; replay.py; discover.py

@@ -1,0 +1,11 @@
+OFFLINE REFERENCE: lexical survival and content tokenization, NOT model accuracy or live MCP.
+catalog    html      3688 bytes  3688 codepoints 1522 o200k 1520 cl100k 12/12 required non-null slots present
+catalog    markdown  1504 bytes  1504 codepoints  573 o200k  576 cl100k 12/12 required non-null slots present
+catalog    text      1051 bytes  1051 codepoints  415 o200k  416 cl100k 12/12 required non-null slots present
+links      html       491 bytes   491 codepoints  173 o200k  170 cl100k 8/8 required non-null slots present
+links      markdown   218 bytes   218 codepoints   72 o200k   72 cl100k 8/8 required non-null slots present
+links      text       174 bytes   174 codepoints   55 o200k   57 cl100k 6/8 required non-null slots present
+attributes html       399 bytes   399 codepoints  143 o200k  139 cl100k 8/8 required non-null slots present
+attributes markdown   128 bytes   128 codepoints   45 o200k   44 cl100k 6/8 required non-null slots present
+attributes text        75 bytes    75 codepoints   26 o200k   26 cl100k 4/8 required non-null slots present
+Paid API/model calls: 0. LLM exact-record accuracy and live MCP costs: unmeasured.

@@ -1,0 +1,76 @@
+{
+  "imported_capture": {
+    "examples_source_commit": "9e5fba96d34a7bb7106a5a0e478a668078c6a312",
+    "original_body_path": "examples/http-vs-browser-cost/expected_output/live/body-007.html",
+    "original_report_sha256": "6c3b20618869358b9027e79d347109520262f36eb73e8b1f0284ad41b4f19d2f",
+    "original_row": {
+      "arm": "requests",
+      "target": "static",
+      "status": 200,
+      "target_status": 200,
+      "credits": null,
+      "valid": true,
+      "valid_records": 3,
+      "records": [
+        [
+          "Ant Farm Deluxe",
+          "$1,234.50",
+          "12,345",
+          "45.5%"
+        ],
+        [
+          "Ant Farm Mini",
+          "$99.00",
+          "1,020",
+          "3.8%"
+        ],
+        [
+          "Magnifier",
+          "$12.25",
+          "987,654",
+          "50.7%"
+        ]
+      ],
+      "ready": true,
+      "outcome": "valid",
+      "retries": 0,
+      "body_file": "body-007.html",
+      "elapsed_ms": 58.57804196421057,
+      "body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "round": 0
+    },
+    "copied_body_sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+    "bytes_equal": true
+  },
+  "inspected_source": {
+    "markdown": {
+      "repo": "ScrapingAnt/extractor",
+      "commit": "66d10caea9a90df3c14069bfd910b92f1ad1123a",
+      "file": "src/markdown_extraction.py",
+      "public_article_claim": "converter recipe, not deployment proof"
+    },
+    "browser_text": {
+      "repo": "ScrapingAnt/worker_general",
+      "commit": "11cc9f570656298f736979f548c5659c57b64b57",
+      "file": "src/common/browser-executor/execute-request.js",
+      "public_article_claim": "local selection reference, not deployed output"
+    },
+    "mcp": {
+      "repo": "ScrapingAnt/api_general",
+      "files": [
+        "src/business/mcp.py",
+        "src/routers/mcp.py"
+      ],
+      "public_article_claim": "source inspection corroborated by public discovery; not retrieval validation",
+      "commit": "e3f92b1a79571636b50cfddf2fb604df113192f1",
+      "scoped_files_match_head": true,
+      "file_sha256": {
+        "src/business/mcp.py": "560f048f03db80a081170c80481834c035cbd443a621a140ee40310ef5e6158c",
+        "src/routers/mcp.py": "64ea3a9dd01b31c27af3782fd7475b32ed327805040d87cf66f55d09a89e42a2"
+      }
+    }
+  },
+  "checked_at": "2026-10-11",
+  "ownership": "Existing ScrapingAnt-owned capture; authored synthetic local-only inputs; no user/customer content",
+  "new_paid_calls": 0
+}

@@ -1,0 +1,779 @@
+{
+  "measurement": "offline_reference_lexical_survival_not_llm_accuracy",
+  "transform_repeats": 5,
+  "api_calls": 0,
+  "model_calls": 0,
+  "token_scope": "exact representation content; prompts/schema/tool envelopes excluded",
+  "environment": {
+    "python": "3.12.11",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "beautifulsoup4": "4.12.2",
+    "soupsieve": "2.5",
+    "html2text": "2020.1.16",
+    "tiktoken": "0.11.0",
+    "playwright": "1.62.0",
+    "chromium": "151.0.7922.34"
+  },
+  "tokenizers": {
+    "o200k_base": {
+      "mergeable_ranks_sha256": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d",
+      "ordinary_token_count": 199998
+    },
+    "cl100k_base": {
+      "mergeable_ranks_sha256": "223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7",
+      "ordinary_token_count": 100256
+    }
+  },
+  "sources": {
+    "catalog": {
+      "sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "source_url": "https://scrapingant.github.io/scrapingant-examples/fixtures/html-tables.html",
+      "origin": "existing_non_sensitive_capture"
+    },
+    "links": {
+      "sha256": "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+      "source_url": "https://catalog.example/lamps",
+      "origin": "local_authored_fixture"
+    },
+    "attributes": {
+      "sha256": "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+      "source_url": "https://catalog.example/bottles",
+      "origin": "local_authored_fixture"
+    }
+  },
+  "rows": [
+    {
+      "case": "catalog",
+      "arm": "html",
+      "utf8_bytes": 3688,
+      "unicode_codepoints": 3688,
+      "o200k_base": 1522,
+      "cl100k_base": 1520,
+      "present_slots": 12,
+      "expected_non_null_slots": 12,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Ant Farm Deluxe",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$1,234.50",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "units_sold",
+          "expected": "12,345",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "share",
+          "expected": "45.5%",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Ant Farm Mini",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$99.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "units_sold",
+          "expected": "1,020",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "share",
+          "expected": "3.8%",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "name",
+          "expected": "Magnifier",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "displayed_price",
+          "expected": "$12.25",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "units_sold",
+          "expected": "987,654",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "share",
+          "expected": "50.7%",
+          "literal_present": true
+        }
+      ],
+      "sha256": "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+      "repeat_sha256": [
+        "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+        "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+        "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+        "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a",
+        "223e36496e52ecc057318a9debcc7219328af7ef48955fc2ad71dfa767855c3a"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "catalog.html"
+    },
+    {
+      "case": "catalog",
+      "arm": "markdown",
+      "utf8_bytes": 1504,
+      "unicode_codepoints": 1504,
+      "o200k_base": 573,
+      "cl100k_base": 576,
+      "present_slots": 12,
+      "expected_non_null_slots": 12,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Ant Farm Deluxe",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$1,234.50",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "units_sold",
+          "expected": "12,345",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "share",
+          "expected": "45.5%",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Ant Farm Mini",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$99.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "units_sold",
+          "expected": "1,020",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "share",
+          "expected": "3.8%",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "name",
+          "expected": "Magnifier",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "displayed_price",
+          "expected": "$12.25",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "units_sold",
+          "expected": "987,654",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "share",
+          "expected": "50.7%",
+          "literal_present": true
+        }
+      ],
+      "sha256": "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+      "repeat_sha256": [
+        "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+        "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+        "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+        "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0",
+        "6f066398811048d6bde27145008ee4b13f7df789236e104c9d3d9b97d746b2c0"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "catalog.markdown"
+    },
+    {
+      "case": "catalog",
+      "arm": "text",
+      "utf8_bytes": 1051,
+      "unicode_codepoints": 1051,
+      "o200k_base": 415,
+      "cl100k_base": 416,
+      "present_slots": 12,
+      "expected_non_null_slots": 12,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Ant Farm Deluxe",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$1,234.50",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "units_sold",
+          "expected": "12,345",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "share",
+          "expected": "45.5%",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Ant Farm Mini",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$99.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "units_sold",
+          "expected": "1,020",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "share",
+          "expected": "3.8%",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "name",
+          "expected": "Magnifier",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "displayed_price",
+          "expected": "$12.25",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "units_sold",
+          "expected": "987,654",
+          "literal_present": true
+        },
+        {
+          "record": 2,
+          "field": "share",
+          "expected": "50.7%",
+          "literal_present": true
+        }
+      ],
+      "sha256": "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd",
+      "repeat_sha256": [
+        "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd",
+        "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd",
+        "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd",
+        "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd",
+        "25a4468640f3bcf98c218d956927a11f9940b5e90043a732aa2107422b9622fd"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "catalog.text"
+    },
+    {
+      "case": "links",
+      "arm": "html",
+      "utf8_bytes": 491,
+      "unicode_codepoints": 491,
+      "o200k_base": 173,
+      "cl100k_base": 170,
+      "present_slots": 8,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$19.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "LAMP-A",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-a",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$24.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "LAMP-B",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-b",
+          "literal_present": true
+        }
+      ],
+      "sha256": "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+      "repeat_sha256": [
+        "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+        "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+        "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+        "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+        "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "links.html"
+    },
+    {
+      "case": "links",
+      "arm": "markdown",
+      "utf8_bytes": 218,
+      "unicode_codepoints": 218,
+      "o200k_base": 72,
+      "cl100k_base": 72,
+      "present_slots": 8,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$19.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "LAMP-A",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-a",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$24.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "LAMP-B",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-b",
+          "literal_present": true
+        }
+      ],
+      "sha256": "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066",
+      "repeat_sha256": [
+        "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066",
+        "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066",
+        "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066",
+        "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066",
+        "611097854e359fc0928ab0610ca88bb442ee05af0f263572164a5c44918fb066"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "links.markdown"
+    },
+    {
+      "case": "links",
+      "arm": "text",
+      "utf8_bytes": 174,
+      "unicode_codepoints": 174,
+      "o200k_base": 55,
+      "cl100k_base": 57,
+      "present_slots": 6,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$19.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "LAMP-A",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-a",
+          "literal_present": false
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Twin Lamp",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$24.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "LAMP-B",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/lamp-b",
+          "literal_present": false
+        }
+      ],
+      "sha256": "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c",
+      "repeat_sha256": [
+        "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c",
+        "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c",
+        "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c",
+        "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c",
+        "62942f8de4d36bb96336f0cd80ef9d1d604b1d7d5a5693d892b01e96ee22ad5c"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "links.text"
+    },
+    {
+      "case": "attributes",
+      "arm": "html",
+      "utf8_bytes": 399,
+      "unicode_codepoints": 399,
+      "o200k_base": 143,
+      "cl100k_base": 139,
+      "present_slots": 8,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Red Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$12.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "BOTTLE-RED",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/red-bottle",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Blue Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$14.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "BOTTLE-BLUE",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/blue-bottle",
+          "literal_present": true
+        }
+      ],
+      "sha256": "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+      "repeat_sha256": [
+        "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+        "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+        "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+        "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+        "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "attributes.html"
+    },
+    {
+      "case": "attributes",
+      "arm": "markdown",
+      "utf8_bytes": 128,
+      "unicode_codepoints": 128,
+      "o200k_base": 45,
+      "cl100k_base": 44,
+      "present_slots": 6,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Red Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$12.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "BOTTLE-RED",
+          "literal_present": false
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/red-bottle",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Blue Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$14.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "BOTTLE-BLUE",
+          "literal_present": false
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/blue-bottle",
+          "literal_present": true
+        }
+      ],
+      "sha256": "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7",
+      "repeat_sha256": [
+        "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7",
+        "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7",
+        "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7",
+        "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7",
+        "5036795425e1570ddc809a6d468d9ba6ba50ed79f2a2d8dc0cf033f8146f85f7"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "attributes.markdown"
+    },
+    {
+      "case": "attributes",
+      "arm": "text",
+      "utf8_bytes": 75,
+      "unicode_codepoints": 75,
+      "o200k_base": 26,
+      "cl100k_base": 26,
+      "present_slots": 4,
+      "expected_non_null_slots": 8,
+      "slots": [
+        {
+          "record": 0,
+          "field": "name",
+          "expected": "Red Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "displayed_price",
+          "expected": "$12.00",
+          "literal_present": true
+        },
+        {
+          "record": 0,
+          "field": "sku",
+          "expected": "BOTTLE-RED",
+          "literal_present": false
+        },
+        {
+          "record": 0,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/red-bottle",
+          "literal_present": false
+        },
+        {
+          "record": 1,
+          "field": "name",
+          "expected": "Blue Bottle",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "displayed_price",
+          "expected": "$14.00",
+          "literal_present": true
+        },
+        {
+          "record": 1,
+          "field": "sku",
+          "expected": "BOTTLE-BLUE",
+          "literal_present": false
+        },
+        {
+          "record": 1,
+          "field": "buy_url",
+          "expected": "https://catalog.example/buy/blue-bottle",
+          "literal_present": false
+        }
+      ],
+      "sha256": "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768",
+      "repeat_sha256": [
+        "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768",
+        "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768",
+        "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768",
+        "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768",
+        "ef17d0b23593d9702f9523254482c5321ddfc1e14ef7a3616eb202e815819768"
+      ],
+      "byte_deterministic_in_five_local_repeats": true,
+      "output_file": "attributes.text"
+    }
+  ],
+  "counterfactuals": [
+    {
+      "case": "links",
+      "changed_field": "buy_url",
+      "outputs_identical": {
+        "html": false,
+        "markdown": false,
+        "text": true
+      },
+      "original_source_sha256": "b1cc5930c8eb8c7fe91bca99c7d944eb78b1bbfec1b26e3878e266fbd31e7656",
+      "changed_source_sha256": "89922266a2aecece3b967c2b384782add734e56e55c574d5c1dd233cfea235e4"
+    },
+    {
+      "case": "attributes",
+      "changed_field": "sku",
+      "outputs_identical": {
+        "html": false,
+        "markdown": true,
+        "text": true
+      },
+      "original_source_sha256": "bd638f5e1730263da748251f96b575bcfdfb8d0c03986dbea5ff39205b0e9320",
+      "changed_source_sha256": "c51428570d93b94940595f13002e3821b73c80ba996ef1289418a1a7ee9f5b10"
+    }
+  ],
+  "ground_truth_sha256": "d6d10cef65eab63c2ac66797784823bc54a07b1753d720f5b94144fb6b3c2d50",
+  "task_sha256": "15156241cec5f65de3f7bd49d53eff100478a29fac356e47e5d4a6d87288ed4c",
+  "runtime_sha256": {
+    "replay.py": "1e844775c1e81bd9d2c6853ce880f404bc9e189738aada3d24435ec3a5a8c62b",
+    "contract.py": "f18d604ca2ce5e07cbd4b1adb2a7754ae1927044135337fabaed41603fcb852b",
+    "requirements.txt": "1b6955a84bc944b4f8d678a47c24fdc83b8e7f4fdac4b467c7d6909cde2d3577"
+  }
+}

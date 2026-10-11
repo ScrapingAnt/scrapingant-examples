@@ -1,0 +1,11 @@
+test_displayed_strings_are_not_numeric_coercions (test_contract.ContractTests.test_displayed_strings_are_not_numeric_coercions) ... ok
+test_extra_missing_duplicate_and_reordered_records_fail (test_contract.ContractTests.test_extra_missing_duplicate_and_reordered_records_fail) ... ok
+test_literal_oracle_accepts_all_cases (test_contract.ContractTests.test_literal_oracle_accepts_all_cases) ... ok
+test_shape_type_and_extra_fields_fail (test_contract.ContractTests.test_shape_type_and_extra_fields_fail) ... ok
+test_wrong_and_invented_values_fail (test_contract.ContractTests.test_wrong_and_invented_values_fail) ... ok
+test_zero_correct_is_undefined_and_failures_stay_charged (test_contract.ContractTests.test_zero_correct_is_undefined_and_failures_stay_charged) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK
