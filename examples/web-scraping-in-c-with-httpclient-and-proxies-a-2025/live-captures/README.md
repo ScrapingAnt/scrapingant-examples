@@ -22,8 +22,10 @@ Raw used `browser=false`. Rendered used `browser=true` and added
 `wait_for_selector=#loaded`. Each had a 95-second caller deadline and a 1 MiB byte
 limit. The key was absent from the URL and evidence files.
 
-The probe required outer status 200, `Ant-page-status-code: 200`, HTML content type,
-the expected actual `Ant-credits-cost` receipt, and exact DOM markers. It checked
+The probe required outer status 200, `Ant-page-status-code: 200`,
+the expected actual `Ant-credits-cost` receipt, and exact DOM markers. A declared
+Content-Type was checked for HTML when present; both observed responses reported
+`text/html`. It checked
 for credential echoes before saving accepted body bytes. `receipt.json` contains
 allowlisted, sanitized metadata; `response.html` contains the accepted response bytes.
 
