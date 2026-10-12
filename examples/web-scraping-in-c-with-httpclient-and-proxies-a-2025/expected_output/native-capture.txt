@@ -1,0 +1,1 @@
+PASS 1/1 saved native full-client capture: exact four fields, hashes, statuses and actual 10-credit receipt; replay API calls=0

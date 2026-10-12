@@ -1,0 +1,63 @@
+OFFLINE: fake HTTP handler only; no API or target requests
+PASS raw request shape, encoded URL, key header and literal field oracle
+SIMULATED raw: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=1
+PASS rendered request shape, encoded URL, key header and literal field oracle
+SIMULATED rendered: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=10
+PASS raw application shell has no product
+PASS malformed non-HTML content rejected
+PASS missing price rejected
+PASS invalid decimal rejected
+PASS negative price rejected
+PASS missing title rejected
+PASS invalid currency rejected
+PASS currency trailing newline rejected
+PASS duplicate products rejected
+PASS missing target status rejected
+PASS target 403 under API 200 rejected
+PASS JSON content type rejected
+PASS absent content type accepted only with checked HTML schema
+PASS source-shaped success: no outer type, original target HTML type
+PASS original non-HTML type overrides outer HTML type
+PASS malformed original target type rejected
+PASS no content type cannot admit non-HTML body
+PASS malformed credit receipt rejected
+PASS negative credit receipt rejected
+PASS duplicate credit receipts rejected
+PASS oversized response rejected
+PASS missing credit receipt rejected; cost remains unknown
+PASS HTTP 400 stops once; no retry or key disclosure
+PASS HTTP 403 stops once; no retry or key disclosure
+PASS HTTP 404 stops once; no retry or key disclosure
+PASS HTTP 405 stops once; no retry or key disclosure
+PASS HTTP 409 stops once; no retry or key disclosure
+PASS HTTP 422 stops once; no retry or key disclosure
+PASS HTTP 423 stops once; no retry or key disclosure
+PASS HTTP 429 stops once; no retry or key disclosure
+PASS 403 detail category: quota
+PASS 403 detail category: IP access
+PASS 403 detail category: authentication
+PASS array error body becomes sanitized API failure
+PASS null error body becomes sanitized API failure
+PASS string error body becomes sanitized API failure
+PASS invalid JSON error body becomes sanitized API failure
+PASS non-string detail error body becomes sanitized API failure
+PASS 502 then 503 then success: three attempts, 1s/2s scheduled delays
+PASS HTTP 500 exhaustion capped at three attempts
+PASS HTTP 502 exhaustion capped at three attempts
+PASS HTTP 503 exhaustion capped at three attempts
+PASS HTTP 504 exhaustion capped at three attempts
+PASS transport exhaustion capped and sanitized
+PASS body transport IOException capped and sanitized
+PASS transport failure then success recovers once
+PASS cancellation before send makes zero attempts
+PASS cancellation during send never retried
+PASS cancellation during backoff prevents replacement send
+PASS cancellation during body read never retried
+PASS live-style one-attempt budget disables retries
+PASS invalid attempt limit and target stop before send
+PASS missing key stops before send
+PASS successful response content disposed
+PASS error response content disposed
+PASS literal oracle catches valid-shaped wrong price and SKU
+PASS committed JSON oracle agrees with independent literals
+PASS 59/59 offline cases; live API calls=0

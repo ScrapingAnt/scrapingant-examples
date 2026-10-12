@@ -1,0 +1,24 @@
+{
+  "scope": "offline-synthetic",
+  "cases": 59,
+  "records": [
+    {
+      "mode": "raw",
+      "sku": "CSHARP-001",
+      "title": "C# \u0026 HTTP",
+      "price": 99.95,
+      "currency": "USD",
+      "credits": 1,
+      "attempts": 1
+    },
+    {
+      "mode": "rendered",
+      "sku": "CSHARP-001",
+      "title": "C# \u0026 HTTP",
+      "price": 99.95,
+      "currency": "USD",
+      "credits": 10,
+      "attempts": 1
+    }
+  ]
+}

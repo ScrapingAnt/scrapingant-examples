@@ -1,0 +1,66 @@
+OFFLINE JSON-LD: saved owned bytes and fake HTTP handlers; no key lookup or requests
+PASS native source and managed response match independent four-field literals
+PASS ArticleFields does not silently fall back to JSON-LD
+PASS JSON-LD does not silently fall back to article attributes
+PASS array root rejected
+PASS null root rejected
+PASS string root rejected
+PASS number root rejected
+PASS malformed JSON rejected
+PASS non-HTML body rejected
+PASS missing JSON-LD script rejected
+PASS multiple JSON-LD scripts rejected
+PASS context rejected
+PASS type rejected
+PASS type-list rejected
+PASS offers-array rejected
+PASS offers-null rejected
+PASS offer-type rejected
+PASS sku rejected
+PASS name rejected
+PASS price rejected
+PASS currency rejected
+PASS numeric-price rejected
+PASS negative-price rejected
+PASS bad-price rejected
+PASS lower-currency rejected
+PASS blank-title rejected
+PASS blank-sku rejected
+PASS graph rejected
+PASS duplicate SKU property rejected
+PASS duplicate price property rejected
+PASS currency trailing newline rejected
+PASS graph alongside Product rejected
+PASS unsupported contract rejected
+PASS raw CLI keeps ArticleFields default without key lookup
+PASS raw CLI selects explicit JSON-LD contract without key lookup
+PASS rendered CLI keeps ArticleFields default without key lookup
+PASS rendered CLI selects explicit JSON-LD contract without key lookup
+PASS CLI accepts explicit ArticleFields selector
+PASS unknown contract CLI input stops before key lookup
+PASS wrong option CLI input stops before key lookup
+PASS HTTP target CLI input stops before key lookup
+PASS userinfo CLI input stops before key lookup
+PASS fragment CLI input stops before key lookup
+PASS unknown mode CLI input stops before key lookup
+PASS incomplete args CLI input stops before key lookup
+PASS raw native FetchAsync fake has explicit request shape and literal record
+SIMULATED JSON-LD raw: SYNTH-000 | Synthetic product 000 | 12.34 | USD; mock credits=1
+PASS rendered native FetchAsync fake has explicit request shape and literal record
+SIMULATED JSON-LD rendered: SYNTH-000 | Synthetic product 000 | 12.34 | USD; mock credits=10
+PASS missing-receipt native acquisition stops after one fake attempt
+PASS malformed-receipt native acquisition stops after one fake attempt
+PASS duplicate-receipt native acquisition stops after one fake attempt
+PASS target403 native acquisition stops after one fake attempt
+PASS missing-target native acquisition stops after one fake attempt
+PASS non-HTML-type native acquisition stops after one fake attempt
+PASS invalid-type native acquisition stops after one fake attempt
+PASS duplicate-type native acquisition stops after one fake attempt
+PASS malformed-native native acquisition stops after one fake attempt
+PASS api403 native acquisition stops after one fake attempt
+PASS api503 native acquisition stops after one fake attempt
+PASS absent declared type still requires native HTML and schema
+PASS native cancellation before send makes zero attempts
+PASS native literal oracle distinguishes valid-shaped wrong price and SKU
+PASS committed native oracle agrees with independent literals
+PASS 62/62 native JSON-LD and CLI offline cases; live API calls=0

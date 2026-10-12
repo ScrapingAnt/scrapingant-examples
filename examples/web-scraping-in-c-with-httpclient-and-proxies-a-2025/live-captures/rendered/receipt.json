@@ -1,0 +1,21 @@
+{
+  "phase": "result",
+  "scope": "owned-delayed-marker-only",
+  "mode": "rendered",
+  "started_utc": "2026-10-11T21:39:00.8327320+00:00",
+  "finished_utc": "2026-10-11T21:39:04.0267390+00:00",
+  "latency_ms": 3193,
+  "requests": 1,
+  "outer_status": 200,
+  "target_status": 200,
+  "actual_cost": 10,
+  "original_target_type": "text/html",
+  "outer_type": "text/html",
+  "body_bytes": 796,
+  "body_sha256": "f004947fad2498c56cc12f09d65d2adc9cb68f518e32a18c9aa0e54bba0e56c9",
+  "marker_valid": true,
+  "accepted": true,
+  "failure": null,
+  "validates_public_sku_parser": false,
+  "body_saved": true
+}

@@ -1,0 +1,265 @@
+article_id: web-scraping-in-c-with-httpclient-and-proxies-a-2025
+canonical_url: https://scrapingant.com/blog/web-scraping-in-c-with-httpclient-and-proxies-a-2025
+owner: Oleg Kulyk
+source_ref: "The article pins the immutable commit containing this packet."
+tested_at: 2026-10-12
+requires_api_key: false
+scope: offline-contracts-and-owned-live-client-acceptance
+default_run_scope: offline-synthetic
+live_capture:
+  recorded_at: 2026-10-11
+  required_api_key_when_recorded: true
+  replay_requires_api_key: false
+  source_commit: 2b764ba84182ca47f0abcd3d5fa1a0e8315ab947
+  reused_method: ManagedClient.BuildUri only
+  managed_client_fetch_async_executed: false
+  public_product_parser_executed_live: false
+  public_live_cli_executed: false
+  target: https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html
+  timeout: 30
+  proxy_type: datacenter
+  proxy_country: us
+  return_page_source: false
+  raw_browser: false
+  rendered_browser: true
+  rendered_wait_for_selector: "#loaded"
+  requests_per_mode: 1
+  retries: 0
+  auto_redirect: false
+  caller_deadline_seconds: 95
+  body_limit_bytes: 1048576
+  remote_browser_version: not recorded
+  replay_command: python3 live-captures/verify_captures.py
+  provenance: live-captures/README.md
+native_product_capture:
+  recorded_at: 2026-10-12
+  required_api_key_when_recorded: true
+  replay_requires_api_key: false
+  client_commit: b24cddeaaad174c6b11679a61fedaf7197f87960
+  managed_client_sha256: 0738d9d197acb5f1268326f85186e52be7bc2f549299112b1e31caa85478d1f7
+  method: ManagedClient.FetchAsync
+  contract: SingleProductOfferJsonLd
+  client_attempts: 1
+  provider_requests: 1
+  actual_receipt_credits: 10
+  public_live_cli_executed: false
+  real_store_validated: false
+  target: https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-000.html
+  fixture_commit: 0d0ccf1b230d8548217b4fdebb5b22a47786cc9f
+  browser: true
+  timeout: 30
+  proxy_type: datacenter
+  proxy_country: us
+  return_page_source: false
+  retries: 0
+  auto_redirect: false
+  caller_deadline_seconds: 95
+  observer_body_limit_bytes: 1048576
+  client_body_limit_characters: 1048576
+  native_script_unchanged_from_source: true
+  source_body_bytes: 588
+  response_body_bytes: 601
+  replay_command: python3 live-captures/product-jsonld/verify_capture.py
+  provenance: live-captures/product-jsonld/README.md
+current_client:
+  managed_client_sha256: f6da3e2c175a5e72c674cb39fcda45a7285077deb232b867212e178e0b3735a7
+  correction_after_live_capture: exact three-character currency guard in the default ArticleFields parser only
+  native_jsonld_path_changed: false
+  native_capture_replayed_offline: true
+  live_request_repeated: false
+environment:
+  os: macOS 26.6.2 arm64
+  dotnet_sdk: 10.0.401
+  dotnet_runtime: 10.0.12
+  python: 3.12.11
+  browser: offline run uses none; live remote browser version not recorded
+dependencies:
+  HtmlAgilityPack: 1.13.0
+  nuget_lockfile: packages.lock.json
+runtime_provenance:
+  url: https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+  metadata: https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json
+  sha512: 69f64eb00dc045398755c440b152225d544301a345a146a16e86a56a0c52b7c94b2c331520e976dbb821f18d31930aafbd25bb85961e3517e0665414ce0cbcff
+  checksum_verified_before_extraction: true
+run_command: ./run.sh
+capture_command: ./run.sh --capture
+fixtures:
+  - fixtures/raw.html
+  - fixtures/shell.html
+  - fixtures/rendered.html
+  - fixtures/oracle.json
+outputs:
+  - expected_output/offline.txt
+  - expected_output/results.json
+  - expected_output/oracle.txt
+  - expected_output/oracle-controls.txt
+  - live-captures/raw/receipt.json
+  - live-captures/raw/response.html
+  - live-captures/rendered/receipt.json
+  - live-captures/rendered/response.html
+  - expected_output/jsonld.txt
+  - expected_output/jsonld-results.json
+  - expected_output/jsonld-oracle.txt
+  - expected_output/jsonld-oracle-controls.txt
+  - expected_output/marker-captures.txt
+  - expected_output/native-capture.txt
+  - expected_output/native-capture-controls.txt
+  - live-captures/product-jsonld/source-response.html
+  - live-captures/product-jsonld/source-receipt.json
+  - live-captures/product-jsonld/response.html
+  - live-captures/product-jsonld/receipt.json
+  - live-captures/product-jsonld/oracle.json
+measurements:
+  - name: CSharp_offline_cases_passed
+    value: 59
+    denominator: 59 named fake-handler and boundary cases
+    source: expected_output/offline.txt
+  - name: independent_oracle_mutation_controls_passed
+    value: 5
+    denominator: 5 deliberately corrupted output variants
+    source: expected_output/oracle-controls.txt
+  - name: simulated_records_matching_literal_oracle
+    value: 2
+    denominator: 2 simulated raw/rendered records, each with 4 required fields
+    source: expected_output/results.json
+  - name: default_run_live_API_calls
+    value: 0
+    denominator: the offline client/parser run only
+    source: expected_output/offline.txt
+  - name: recorded_owned_fixture_live_API_calls
+    value: 3
+    denominator: two October 11 marker requests and one October 12 native-product client request
+    source: live-captures/product-jsonld/README.md
+  - name: native_contract_CSharp_offline_cases_passed
+    value: 62
+    denominator: 62 separately named native schema, CLI and fake full-client cases
+    source: expected_output/jsonld.txt
+  - name: native_record_oracle_mutation_controls_passed
+    value: 7
+    denominator: 7 deliberately corrupted simulated native-record variants
+    source: expected_output/jsonld-oracle-controls.txt
+  - name: native_saved_capture_corruption_controls_passed
+    value: 8
+    denominator: 8 deliberately corrupted actual-capture variants
+    source: expected_output/native-capture-controls.txt
+  - name: native_product_actual_receipt
+    value: 10
+    denominator: one rendered owned-synthetic full FetchAsync request
+    source: live-captures/product-jsonld/receipt.json
+  - name: native_product_elapsed_ms
+    value: 2125
+    denominator: one owned-synthetic request; not a production benchmark
+    source: live-captures/product-jsonld/receipt.json
+  - name: owned_raw_credit_receipt
+    value: 1
+    denominator: one owned-fixture raw request
+    source: live-captures/raw/receipt.json
+  - name: owned_rendered_credit_receipt
+    value: 10
+    denominator: one owned-fixture rendered request
+    source: live-captures/rendered/receipt.json
+  - name: owned_raw_elapsed_ms
+    value: 985
+    denominator: one owned-fixture raw request; not a latency benchmark
+    source: live-captures/raw/receipt.json
+  - name: owned_rendered_elapsed_ms
+    value: 3193
+    denominator: one owned-fixture rendered request; not a latency benchmark
+    source: live-captures/rendered/receipt.json
+limitations:
+  - No account or usage endpoint call; default client/parser run makes no API requests.
+  - Catalog rendered HTML and credit receipts remain authored simulations; live-captures contains separate genuine owned-page responses and receipts.
+  - The owned marker probe reused only BuildUri, not ManagedClient.FetchAsync, the SKU parser or public live CLI.
+  - The separate October 12 native owned Product/Offer request exercised full FetchAsync; public CLI, real stores and arbitrary JSON-LD remain unverified.
+  - UTF-8 fixture responses only; other target encodings require an adapter.
+  - Three owned-page elapsed times are single observations, not production latency, throughput, reliability, CAPTCHA solving or paid capacity results.
+  - The native source contains static JSON-LD; its rendered request does not establish JavaScript-driven product updates.
+  - Delays are injected; schedule is tested without sleeping.
+  - HTML parser may tolerate malformed markup; required schema validation is not universal HTML validation.
+  - Optional live commands are illustrative and unexecuted; CLI performs one attempt each.
+  - Publication approved by Oleg Kulyk on October 12, 2026; final source build, visibility and exact-head CI remain release checks. No separate human methodology-review report is asserted.
+  - Retrieval defaults differ across documentation and source; explicit settings avoid reliance on defaults.
+claims:
+  - id: C1
+    text: The tested client constructs an encoded general-endpoint GET with key header and six explicit query parameters.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C2
+    text: Two simulated raw/rendered HTML bodies produce the literal SKU, title, price and currency.
+    type: measured
+    source: expected_output/results.json
+  - id: C3
+    text: The empty application shell and missing or invalid required fields fail acceptance.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C4
+    text: API 200 with unsuccessful or missing target status fails acceptance.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C14
+    text: Source-shaped HTML success with absent outer type is accepted using the original target content-type; explicit non-HTML or invalid types and non-HTML bodies fail.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C5
+    text: Missing, malformed or duplicate credit receipts fail acceptance rather than inventing a cost.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C6
+    text: The client stops outer 400/403/404/405/409/422/423/429 with one attempt and sanitizes errors.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C7
+    text: Transport and outer 500/502/503/504 retries are bounded to three attempts, with scheduled 1s/2s waits.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C8
+    text: Cancellation before or during send, body read and backoff stops without automatic replacement.
+    type: measured
+    source: expected_output/offline.txt
+  - id: C9
+    text: The public live CLI uses a one-attempt budget and an optional explicit contract selector; this CLI remains unexecuted.
+    type: measured
+    source: Program.cs
+  - id: C10
+    text: The general endpoint returns HTML; structured AI extraction is a separate endpoint.
+    type: product
+    source: https://docs.scrapingant.com/request-response-format
+    accessed_at: 2026-10-11
+  - id: C11
+    text: Raw datacenter retrieval of a non-Google target is documented at 1 credit and JS-rendered datacenter retrieval at 10 credits.
+    type: product
+    source: https://docs.scrapingant.com/credits-cost
+    accessed_at: 2026-10-11
+  - id: C12
+    text: Outer API status and Ant-page-status-code belong to different layers; 403 access and 409 concurrency need corrective action.
+    type: product
+    source: https://docs.scrapingant.com/errors
+    accessed_at: 2026-10-11
+  - id: C13
+    text: The current Free allowance is 10000 API credits per month with no credit card; Enthusiast is 100000 credits per month at 19 USD per month.
+    type: product
+    source: https://scrapingant.com/#pricing
+    accessed_at: 2026-10-11
+    limitation: Documentation observation, not measured capacity or live billing.
+  - id: C15
+    text: One raw and one rendered owned-fixture request returned the exact expected DOM markers with actual credit receipts of 1 and 10.
+    type: measured
+    source: live-captures/README.md
+    limitation: Separate marker probe reused BuildUri only; no live product-parser or complete acquisition validation.
+  - id: C16
+    text: Saved raw and rendered response bodies match their literal SHA-256s, receipts and DOM markers in a key-free offline replay.
+    type: measured
+    source: live-captures/verify_captures.py
+  - id: C17
+    text: One rendered owned-synthetic Product/Offer request passed full public FetchAsync with the literal SKU, title, decimal price and currency, one attempt and an actual 10-credit receipt.
+    type: measured
+    source: live-captures/product-jsonld/receipt.json
+    limitation: Public live CLI and real-store/universal JSON-LD validation are absent.
+  - id: C18
+    text: An explicit single Product/Offer JSON-LD contract and CLI selector retain ArticleFields as default and reject ambiguous or unsupported shapes without fallback or HTML rewriting.
+    type: measured
+    source: expected_output/jsonld.txt
+  - id: C19
+    text: The 601-byte managed response and 588-byte direct source have distinct hashes but identical native JSON-LD script text; saved replay checks exact four-field literals independently.
+    type: measured
+    source: live-captures/product-jsonld/verify_capture.py
