@@ -52,6 +52,7 @@ public static class OfflineChecks
         await ContentCase("negative price rejected", Raw.Replace("99.95", "-1"));
         await ContentCase("missing title rejected", Raw.Replace("C# &amp; HTTP", ""));
         await ContentCase("invalid currency rejected", Raw.Replace("USD", "usd"));
+        await ContentCase("currency trailing newline rejected", Raw.Replace("data-currency=\"USD\"", "data-currency=\"USD\n\""));
         await ContentCase("duplicate products rejected", Raw.Replace("</body>", "<article data-sku=\"SECOND\"></article></body>"));
         await RejectedResponse("missing target status rejected", Html(Raw, targetStatus: null));
         await RejectedResponse("target 403 under API 200 rejected", Html(Raw, targetStatus: "403"));

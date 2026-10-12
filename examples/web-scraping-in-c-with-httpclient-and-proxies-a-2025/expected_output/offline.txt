@@ -10,6 +10,7 @@ PASS invalid decimal rejected
 PASS negative price rejected
 PASS missing title rejected
 PASS invalid currency rejected
+PASS currency trailing newline rejected
 PASS duplicate products rejected
 PASS missing target status rejected
 PASS target 403 under API 200 rejected
@@ -59,4 +60,4 @@ PASS successful response content disposed
 PASS error response content disposed
 PASS literal oracle catches valid-shaped wrong price and SKU
 PASS committed JSON oracle agrees with independent literals
-PASS 58/58 offline cases; live API calls=0
+PASS 59/59 offline cases; live API calls=0

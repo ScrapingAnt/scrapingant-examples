@@ -15,7 +15,7 @@ EXPECTED_RECORDS = [
 
 
 def verify(value):
-    if value.get("scope") != "offline-synthetic" or value.get("cases") != 58:
+    if value.get("scope") != "offline-synthetic" or value.get("cases") != 59:
         raise ValueError("Unexpected scope or case count")
     if value.get("records") != EXPECTED_RECORDS:
         raise ValueError("Independent literal record oracle mismatch")
@@ -23,7 +23,7 @@ def verify(value):
 
 class Controls(unittest.TestCase):
     def check_mutation(self, mutate):
-        value = {"scope": "offline-synthetic", "cases": 58, "records": copy.deepcopy(EXPECTED_RECORDS)}
+        value = {"scope": "offline-synthetic", "cases": 59, "records": copy.deepcopy(EXPECTED_RECORDS)}
         mutate(value)
         with self.assertRaises(ValueError):
             verify(value)

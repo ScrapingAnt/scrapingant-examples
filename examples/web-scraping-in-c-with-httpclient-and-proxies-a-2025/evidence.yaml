@@ -61,6 +61,12 @@ native_product_capture:
   response_body_bytes: 601
   replay_command: python3 live-captures/product-jsonld/verify_capture.py
   provenance: live-captures/product-jsonld/README.md
+current_client:
+  managed_client_sha256: f6da3e2c175a5e72c674cb39fcda45a7285077deb232b867212e178e0b3735a7
+  correction_after_live_capture: exact three-character currency guard in the default ArticleFields parser only
+  native_jsonld_path_changed: false
+  native_capture_replayed_offline: true
+  live_request_repeated: false
 environment:
   os: macOS 26.6.2 arm64
   dotnet_sdk: 10.0.401
@@ -105,8 +111,8 @@ outputs:
   - live-captures/product-jsonld/oracle.json
 measurements:
   - name: CSharp_offline_cases_passed
-    value: 58
-    denominator: 58 named fake-handler and boundary cases
+    value: 59
+    denominator: 59 named fake-handler and boundary cases
     source: expected_output/offline.txt
   - name: independent_oracle_mutation_controls_passed
     value: 5

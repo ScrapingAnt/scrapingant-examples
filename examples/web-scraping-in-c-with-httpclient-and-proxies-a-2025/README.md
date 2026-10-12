@@ -27,7 +27,7 @@ The recorded SDK output is `10.0.401`. The recorded environment was macOS 26.6.2
 .NET runtime 10.0.12, and Python 3.12.11. The scoped PR workflow installs SDK 10.0.401
 and Python 3.12.11 on Linux; that workflow is separate verification when CI executes.
 
-`run.sh` restores locked dependencies, builds with warnings treated as errors, runs 58 C#
+`run.sh` restores locked dependencies, builds with warnings treated as errors, runs 59 C#
 legacy cases and 62 separate native JSON-LD/CLI cases, validates each suite's two
 simulated records against independent literals, runs five legacy and seven native
 record mutations, replays the two saved markers and one actual native-client capture,
@@ -44,9 +44,10 @@ For a workspace-only SDK, set `DOTNET` to its executable; `DOTNET_CLI_HOME` and
 - `Program.cs` / `LiveOptions.cs`: offline modes and an explicit one-attempt live
   command with an optional contract selector.
 - `JsonLdChecks.cs` / `verify_jsonld.py`: 62 native contract/CLI controls and a second
-  independent literal oracle, separate from the original 58-case denominator.
+  independent literal oracle, separate from the 59-case default client denominator.
 - `OfflineChecks.cs`: fake transport and response matrix; expected values are literals,
-  independent of the HTML parser and fixture markup.
+  independent of the HTML parser and fixture markup. The trailing-newline currency
+  control rejects `USD\n` rather than accepting a four-character value.
 - `fixtures/raw.html`: authored static catalog with one product.
 - `fixtures/shell.html`: authored empty application shell; parsing finds no product.
 - `fixtures/rendered.html`: authored *simulated* final DOM; no JavaScript was executed to produce it.
@@ -96,13 +97,13 @@ overall caller cancellation and target-site HTTP status are distinct controls.
 ```text
 SIMULATED raw: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=1
 SIMULATED rendered: CSHARP-001 | C# & HTTP | 99.95 | USD; credits=10
-PASS 58/58 offline cases; live API calls=0
+PASS 59/59 offline cases; live API calls=0
 PASS independent literal oracle: 2 simulated records, 4 fields each
 PASS 5/5 independent oracle mutation controls
 ```
 
 The receipt values 1 and 10 above are **mock header values**, matching documented retrieval
-choices. They are not measured service charges. Passing 58 cases is an offline case
+choices. They are not measured service charges. Passing 59 cases is an offline case
 denominator, not a production or target success rate.
 
 ## Optional live invocation — illustrative, not executed

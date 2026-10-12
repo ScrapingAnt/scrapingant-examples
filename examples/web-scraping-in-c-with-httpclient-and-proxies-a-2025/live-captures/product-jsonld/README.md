@@ -10,8 +10,13 @@ It says "SYNTHETIC, no live store or sale"; no real-store coverage is claimed.
 The public client source used by the call is commit
 `b24cddeaaad174c6b11679a61fedaf7197f87960`, with `ManagedClient.cs` SHA-256
 `0738d9d197acb5f1268326f85186e52be7bc2f549299112b1e31caa85478d1f7`.
-The current packet retains that exact client implementation. A separate one-dispatch
-observer invoked the public method, buffered received bytes unchanged and saved them
+That executed source remains the historical live-call pin. The current packet adds
+only a three-character currency length guard to the default ArticleFields parser;
+the native JSON-LD path is unchanged. Its corrected `ManagedClient.cs` SHA-256 is
+`f6da3e2c175a5e72c674cb39fcda45a7285077deb232b867212e178e0b3735a7`.
+The corrected client replays the saved native bytes offline;
+no live request was repeated. A separate one-dispatch observer invoked the public
+method at the historical pin, buffered received bytes unchanged and saved them
 after the client and an independent four-field literal oracle accepted the result.
 The observer and credential binding are not included in this public packet.
 
@@ -72,7 +77,7 @@ request/attempt, statuses, actual receipt and flags, unchanged native script, an
 literal SKU/title/decimal price/currency in `oracle.json`. Eight corruption controls
 reject modified bodies, wrong/unknown receipts, wrong fields and broadened client/CLI/
 store claims. It reads no key and makes no request. `./run.sh` includes this replay,
-the historical marker replay, the original 58 client cases and 62 separate native
+the historical marker replay, 59 default client cases and 62 separate native
 contract/CLI cases. All handlers in those executable checks are fake.
 
 This capture establishes full public-client acquisition on one owned synthetic

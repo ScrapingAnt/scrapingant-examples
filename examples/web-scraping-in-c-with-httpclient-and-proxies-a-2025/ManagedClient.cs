@@ -165,7 +165,7 @@ public sealed class ManagedClient(
         var title = Text(".//h1");
         var priceText = Text(".//*[@class='price']");
         var currency = node.GetAttributeValue("data-currency", "");
-        if (sku.Length == 0 || title.Length == 0 || !Regex.IsMatch(currency, "^[A-Z]{3}$") ||
+        if (sku.Length == 0 || title.Length == 0 || currency.Length != 3 || !Regex.IsMatch(currency, "^[A-Z]{3}$") ||
             !decimal.TryParse(priceText, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var price) ||
             price < 0)
             throw new ContentFailure("Missing or invalid required product fields");
