@@ -2,7 +2,7 @@
   "article_id": "scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "canonical_url": "https://scrapingant.com/blog/scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "owner": "Oleg Kulyk",
-  "review_state": "AI-assisted evidence implementation; one-post capture and public integration independently reviewed; publication/index restoration approved by Oleg Kulyk on2026-10-12; no separate human methodology-review report asserted",
+  "review_state": "AI-assisted evidence implementation; one-post capture and public integration independently reviewed; publication/index restoration approved by Oleg Kulyk on 2026-10-12; no separate human methodology-review report asserted",
   "examples_repo_commit": "6d500a8e78db711b9fcf2181a17a256421588cab",
   "commit_note": "examples_repo_commit identifies the original 50-test offline snapshot. New single-post code is identified by file hashes below; the article pins the final immutable packet tree. The existing collector/schema/transport and original captures are unchanged.",
   "tested_at": "2026-10-12",
@@ -188,7 +188,7 @@
     "No applications, profiles, wage/skills inference, universal Indeed/LinkedIn support, ready-made jobs database, live success rate or production reliability result.",
     "Default managed controls use mocks. Separate authenticated owned and selected-post raw requests are recorded. Public OpenAPI describes query authentication only; the collector.py managed CLI and public portable module live CLI were not executed.",
     "Each of two separately recorded raw observations has a1credit receipt. One selected posting passed its exact oracle; this is not a source-wide yield or cost forecast.",
-    "Named-author review and independent review of this public integration pending; article remains unlisted; no restoration or deployment approved.",
+    "Publication/index restoration approved by Oleg Kulyk on 2026-10-12; independent source/capture review passed; final release checks remain. Owner deployment is separate; no human methodology-review report is asserted.",
     "Managed HTML acceptance does not require an outer Content-Type. Unknown original target media type is deferred to the required schema. Managed redirect guard covers API endpoint redirects only; no remote-target redirect proof.",
     "One-post completeness is not board completeness: max_pages1, board_inventory_completefalse; no managed pagination/refresh/rendering/genericATS/production claim.",
     "applicationURL is the observed hosted form page, equal to HTTPSsourceURL. No distinct submission endpoint or submitted application validated.",
@@ -412,6 +412,5 @@
     "expected_output/live-single-post-2026-10-12/collection.json": "fc7a9c13d50a8125b71caffdd0fff2297510d7f3e08b19fc36e17472763b929d",
     "expected_output/live-single-post-2026-10-12/greenhouse-html-field-projection.json": "368f784642bd1e62f7fe8a06a222c76a8fd1fe1ae6fd87a74bc42016d344ef06",
     "expected_output/live-single-post-2026-10-12/greenhouse-job-api-projection.json": "ddcd883665bb80dcdbabe77c46e5e4b8e1ececa028535b99abae79348e69bcbd"
-  },
-  "limits": []
+  }
 }
