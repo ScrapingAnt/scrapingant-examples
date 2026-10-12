@@ -1,0 +1,1 @@
+PASS native independent literal oracle: 2 simulated records, 4 fields each

@@ -1,0 +1,24 @@
+{
+  "scope": "offline-owned-jsonld",
+  "cases": 62,
+  "records": [
+    {
+      "mode": "raw",
+      "sku": "SYNTH-000",
+      "title": "Synthetic product 000",
+      "price": 12.34,
+      "currency": "USD",
+      "credits": 1,
+      "attempts": 1
+    },
+    {
+      "mode": "rendered",
+      "sku": "SYNTH-000",
+      "title": "Synthetic product 000",
+      "price": 12.34,
+      "currency": "USD",
+      "credits": 10,
+      "attempts": 1
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name: C# managed acquisition offline evidence
+on:
+  pull_request:
+    paths:
+      - 'examples/web-scraping-in-c-with-httpclient-and-proxies-a-2025/**'
+      - '.github/workflows/csharp-managed-acquisition-offline.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.401'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.11'
+      - name: Offline handler matrix and literal output oracle
+        run: examples/web-scraping-in-c-with-httpclient-and-proxies-a-2025/run.sh

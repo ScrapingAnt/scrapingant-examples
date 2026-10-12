@@ -1,0 +1,23 @@
+{
+  "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/apify-continuation-v1/commerce/product-000.html",
+  "started_utc": "2026-10-12T08:16:47.757169+00:00",
+  "finished_utc": "2026-10-12T08:16:48.151635+00:00",
+  "unauthenticated": true,
+  "requests": 1,
+  "redirects": false,
+  "status": 200,
+  "headers": {
+    "Content-Type": "text/html; charset=utf-8",
+    "Content-Length": "369",
+    "ETag": "W/\"6acbe2ba-24c\"",
+    "Last-Modified": "Sun, 11 Oct 2026 19:25:46 GMT"
+  },
+  "body_bytes": 588,
+  "body_sha256": "7c091cea8ce4b224709e8cc978a79b0c51d7294b68d62afd538d887bc7d43dcd",
+  "source_repo": "https://github.com/ScrapingAnt/scrapingant-examples",
+  "fixture_last_commit": "0d0ccf1b230d8548217b4fdebb5b22a47786cc9f",
+  "local_file_sha256": "7c091cea8ce4b224709e8cc978a79b0c51d7294b68d62afd538d887bc7d43dcd",
+  "matches_local_fixture": true,
+  "synthetic_catalog_only": true,
+  "body_representation": "Response entity bytes after requests.iter_content automatic decoding; raw Content-Length header is retained separately"
+}
