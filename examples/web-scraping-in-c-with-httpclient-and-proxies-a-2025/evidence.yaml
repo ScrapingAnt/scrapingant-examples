@@ -177,7 +177,7 @@ limitations:
   - Delays are injected; schedule is tested without sleeping.
   - HTML parser may tolerate malformed markup; required schema validation is not universal HTML validation.
   - Optional live commands are illustrative and unexecuted; CLI performs one attempt each.
-  - Named-author review is pending; full blog build and exact-head CI are separate pending gates.
+  - Publication approved by Oleg Kulyk on October 12, 2026; final source build, visibility and exact-head CI remain release checks. No separate human methodology-review report is asserted.
   - Retrieval defaults differ across documentation and source; explicit settings avoid reliance on defaults.
 claims:
   - id: C1

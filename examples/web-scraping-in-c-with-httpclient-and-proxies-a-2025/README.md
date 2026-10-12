@@ -166,4 +166,4 @@ Its published SHA-512 was verified before extraction:
 `69f64eb00dc045398755c440b152225d544301a345a146a16e86a56a0c52b7c94b2c331520e976dbb821f18d31930aafbd25bb85961e3517e0665414ce0cbcff`.
 
 Drafted with AI assistance, verified with offline client/parser controls and separate
-owned-fixture retrieval/full-client captures. Named-author review is pending.
+owned-fixture retrieval/full-client captures. Publication approved by Oleg Kulyk on October 12, 2026; no separate human methodology-review report is asserted.
