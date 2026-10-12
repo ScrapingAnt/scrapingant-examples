@@ -1,0 +1,76 @@
+{
+  "added_ids": [
+    "NS-004"
+  ],
+  "changed": [
+    {
+      "fields": {
+        "location": {
+          "after": "Remote - UK",
+          "before": "Leeds, UK"
+        },
+        "title": {
+          "after": "Senior Platform Engineer",
+          "before": "Platform Engineer"
+        }
+      },
+      "jobID": "NS-001"
+    }
+  ],
+  "next_snapshot": {
+    "complete": true,
+    "counters": {
+      "accepted_pages": 2,
+      "cards_seen": 3,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 0,
+      "fetched_pages": 2,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 3,
+      "valid_cards": 3
+    },
+    "employer": "Northstar Demonstration Labs",
+    "failures": [],
+    "observedUTC": "2026-10-11T21:14:49Z",
+    "records": [
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-001",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-001",
+        "location": "Remote - UK",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": "2026-10-01",
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-001",
+        "title": "Senior Platform Engineer"
+      },
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-003",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-003",
+        "location": "Dublin, Ireland",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": "2026-10-05",
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-003",
+        "title": "Support Engineer"
+      },
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-004",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-004",
+        "location": "Bristol, UK",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": null,
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-004",
+        "title": "Operations Coordinator"
+      }
+    ],
+    "source": "http://127.0.0.1:55325/careers/roles?page=1"
+  },
+  "removals_suppressed": false,
+  "removed_ids": [
+    "NS-002"
+  ],
+  "retained_previous_ids": []
+}

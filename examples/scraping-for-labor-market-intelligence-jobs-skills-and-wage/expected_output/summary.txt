@@ -1,0 +1,7 @@
+python=3.12.11
+first_page_only: pages=1 unique_jobs=2 oracle_matches=false
+bounded_collection: pages=2 cards=4 duplicates=1 unique_jobs=3 oracle_matches=true
+complete_refresh: added=NS-004 changed=NS-001:title,location absent=NS-002
+partial_refresh: failures=http_503 removed=0 retained_previous=NS-002,NS-003
+managed_api_calls=0 paid_calls=0
+greenhouse_replay: candidate_posts=19 validated_for_refresh=false missing_required=applicationURL

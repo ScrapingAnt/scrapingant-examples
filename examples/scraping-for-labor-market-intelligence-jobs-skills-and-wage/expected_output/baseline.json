@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "counters": {
+    "accepted_pages": 2,
+    "cards_seen": 4,
+    "conflicting_ids": 0,
+    "duplicate_cards": 1,
+    "failures": 0,
+    "fetched_pages": 2,
+    "rejected_cards": 0,
+    "requested_pages": 2,
+    "unique_records": 3,
+    "valid_cards": 4
+  },
+  "employer": "Northstar Demonstration Labs",
+  "failures": [],
+  "observedUTC": "2026-10-11T21:14:49Z",
+  "records": [
+    {
+      "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-001",
+      "employer": "Northstar Demonstration Labs",
+      "jobID": "NS-001",
+      "location": "Leeds, UK",
+      "observedUTC": "2026-10-11T21:14:49Z",
+      "sourcePostedDate": "2026-10-01",
+      "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-001",
+      "title": "Platform Engineer"
+    },
+    {
+      "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-002",
+      "employer": "Northstar Demonstration Labs",
+      "jobID": "NS-002",
+      "location": "Remote - UK",
+      "observedUTC": "2026-10-11T21:14:49Z",
+      "sourcePostedDate": null,
+      "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-002",
+      "title": "Data Analyst"
+    },
+    {
+      "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-003",
+      "employer": "Northstar Demonstration Labs",
+      "jobID": "NS-003",
+      "location": "Dublin, Ireland",
+      "observedUTC": "2026-10-11T21:14:49Z",
+      "sourcePostedDate": "2026-10-05",
+      "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-003",
+      "title": "Support Engineer"
+    }
+  ],
+  "source": "http://127.0.0.1:55325/careers/roles?page=1"
+}

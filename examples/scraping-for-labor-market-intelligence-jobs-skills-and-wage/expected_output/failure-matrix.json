@@ -1,0 +1,218 @@
+[
+  {
+    "case": "baseline",
+    "complete": true,
+    "counters": {
+      "accepted_pages": 2,
+      "cards_seen": 4,
+      "conflicting_ids": 0,
+      "duplicate_cards": 1,
+      "failures": 0,
+      "fetched_pages": 2,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 3,
+      "valid_cards": 4
+    },
+    "failures": []
+  },
+  {
+    "case": "hostile_next",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 2,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 1,
+      "unique_records": 2,
+      "valid_cards": 2
+    },
+    "failures": [
+      {
+        "code": "next_url_rejected",
+        "page": 1
+      }
+    ]
+  },
+  {
+    "case": "loop",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 2,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 1,
+      "unique_records": 2,
+      "valid_cards": 2
+    },
+    "failures": [
+      {
+        "code": "pagination_loop",
+        "page": 1
+      }
+    ]
+  },
+  {
+    "case": "page_budget",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 2,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 1,
+      "unique_records": 2,
+      "valid_cards": 2
+    },
+    "failures": [
+      {
+        "code": "page_budget",
+        "page": 2
+      }
+    ]
+  },
+  {
+    "case": "conflict",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 2,
+      "cards_seen": 4,
+      "conflicting_ids": 1,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 2,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 2,
+      "valid_cards": 4
+    },
+    "failures": [
+      {
+        "card": 1,
+        "code": "conflicting_id",
+        "jobID": "NS-001",
+        "page": 2
+      }
+    ]
+  },
+  {
+    "case": "missing_location",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 2,
+      "cards_seen": 4,
+      "conflicting_ids": 0,
+      "duplicate_cards": 1,
+      "failures": 1,
+      "fetched_pages": 2,
+      "rejected_cards": 1,
+      "requested_pages": 2,
+      "unique_records": 2,
+      "valid_cards": 3
+    },
+    "failures": [
+      {
+        "card": 2,
+        "code": "record_invalid",
+        "fields": [
+          "location"
+        ],
+        "page": 2
+      }
+    ]
+  },
+  {
+    "case": "denied",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 2,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 2,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 2,
+      "valid_cards": 2
+    },
+    "failures": [
+      {
+        "code": "listing_envelope",
+        "page": 2
+      }
+    ]
+  },
+  {
+    "case": "http_fail",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 1,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 1,
+      "valid_cards": 1
+    },
+    "failures": [
+      {
+        "code": "http_503",
+        "page": 2
+      }
+    ]
+  },
+  {
+    "case": "empty",
+    "complete": true,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 0,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 0,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 1,
+      "unique_records": 0,
+      "valid_cards": 0
+    },
+    "failures": []
+  },
+  {
+    "case": "empty_unconfirmed",
+    "complete": false,
+    "counters": {
+      "accepted_pages": 0,
+      "cards_seen": 0,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 1,
+      "unique_records": 0,
+      "valid_cards": 0
+    },
+    "failures": [
+      {
+        "code": "unconfirmed_empty",
+        "page": 1
+      }
+    ]
+  }
+]

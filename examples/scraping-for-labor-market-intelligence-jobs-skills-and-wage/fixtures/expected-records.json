@@ -1,0 +1,32 @@
+[
+  {
+    "jobID": "NS-001",
+    "title": "Platform Engineer",
+    "employer": "Northstar Demonstration Labs",
+    "location": "Leeds, UK",
+    "sourceURL": "__ORIGIN__/careers/jobs/NS-001",
+    "applicationURL": "__ORIGIN__/careers/apply/NS-001",
+    "observedUTC": "2026-10-11T21:00:00Z",
+    "sourcePostedDate": "2026-10-01"
+  },
+  {
+    "jobID": "NS-002",
+    "title": "Data Analyst",
+    "employer": "Northstar Demonstration Labs",
+    "location": "Remote - UK",
+    "sourceURL": "__ORIGIN__/careers/jobs/NS-002",
+    "applicationURL": "__ORIGIN__/careers/apply/NS-002",
+    "observedUTC": "2026-10-11T21:00:00Z",
+    "sourcePostedDate": null
+  },
+  {
+    "jobID": "NS-003",
+    "title": "Support Engineer",
+    "employer": "Northstar Demonstration Labs",
+    "location": "Dublin, Ireland",
+    "sourceURL": "__ORIGIN__/careers/jobs/NS-003",
+    "applicationURL": "__ORIGIN__/careers/apply/NS-003",
+    "observedUTC": "2026-10-11T21:00:00Z",
+    "sourcePostedDate": "2026-10-05"
+  }
+]

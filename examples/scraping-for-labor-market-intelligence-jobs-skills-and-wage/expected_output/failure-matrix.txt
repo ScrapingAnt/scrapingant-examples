@@ -1,0 +1,12 @@
+case | requested_pages | unique_records | complete | failure
+--- | --- | --- | --- | ---
+baseline | 2 | 3 | true | none
+hostile_next | 1 | 2 | false | next_url_rejected
+loop | 1 | 2 | false | pagination_loop
+page_budget | 1 | 2 | false | page_budget
+conflict | 2 | 2 | false | conflicting_id
+missing_location | 2 | 2 | false | record_invalid
+denied | 2 | 2 | false | listing_envelope
+http_fail | 2 | 1 | false | http_503
+empty | 1 | 0 | true | none
+empty_unconfirmed | 1 | 0 | false | unconfirmed_empty

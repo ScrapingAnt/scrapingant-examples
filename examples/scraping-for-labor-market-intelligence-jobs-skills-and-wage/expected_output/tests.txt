@@ -1,0 +1,55 @@
+test_all_required_fields_reject_null_or_blank (test_collector.CollectorTests.test_all_required_fields_reject_null_or_blank) ... ok
+test_application_url_must_match_approved_origin (test_collector.CollectorTests.test_application_url_must_match_approved_origin) ... ok
+test_bad_page_budget_prevents_acquisition (test_collector.CollectorTests.test_bad_page_budget_prevents_acquisition) ... ok
+test_body_limit (test_collector.CollectorTests.test_body_limit) ... ok
+test_changed_filter_rejected (test_collector.CollectorTests.test_changed_filter_rejected) ... ok
+test_changed_total_page_count (test_collector.CollectorTests.test_changed_total_page_count) ... ok
+test_cli_success_and_partial_exit (test_collector.CollectorTests.test_cli_success_and_partial_exit) ... ok
+test_conflict_excludes_id_and_marks_partial (test_collector.CollectorTests.test_conflict_excludes_id_and_marks_partial) ... ok
+test_duplicate_envelope (test_collector.CollectorTests.test_duplicate_envelope) ... ok
+test_duplicate_query_rejected (test_collector.CollectorTests.test_duplicate_query_rejected) ... ok
+test_error_html_http200_is_not_empty (test_collector.CollectorTests.test_error_html_http200_is_not_empty) ... ok
+test_fragment_next_rejected (test_collector.CollectorTests.test_fragment_next_rejected) ... ok
+test_hostile_next (test_collector.CollectorTests.test_hostile_next) ... ok
+test_http503_is_recorded_and_keeps_partial_records (test_collector.CollectorTests.test_http503_is_recorded_and_keeps_partial_records) ... ok
+test_invalid_observation_time_before_acquisition (test_collector.CollectorTests.test_invalid_observation_time_before_acquisition) ... ok
+test_invalid_source_date_is_rejected (test_collector.CollectorTests.test_invalid_source_date_is_rejected) ... ok
+test_json_is_not_html (test_collector.CollectorTests.test_json_is_not_html) ... ok
+test_literal_oracle_and_duplicate (test_collector.CollectorTests.test_literal_oracle_and_duplicate) ... ok
+test_loop_is_not_fetched_again (test_collector.CollectorTests.test_loop_is_not_fetched_again) ... ok
+test_missing_next_is_partial (test_collector.CollectorTests.test_missing_next_is_partial) ... ok
+test_missing_required_field (test_collector.CollectorTests.test_missing_required_field) ... ok
+test_missing_source_date_stays_null (test_collector.CollectorTests.test_missing_source_date_stays_null) ... ok
+test_observation_time_and_provenance (test_collector.CollectorTests.test_observation_time_and_provenance) ... ok
+test_oracle_detects_semantically_wrong_title (test_collector.CollectorTests.test_oracle_detects_semantically_wrong_title) ... ok
+test_page_budget (test_collector.CollectorTests.test_page_budget) ... ok
+test_partial_refresh_retains_original_observation_timestamps (test_collector.CollectorTests.test_partial_refresh_retains_original_observation_timestamps) ... ok
+test_partial_refresh_suppresses_disappearance (test_collector.CollectorTests.test_partial_refresh_suppresses_disappearance) ... ok
+test_redirect_is_rejected_before_external_follow (test_collector.CollectorTests.test_redirect_is_rejected_before_external_follow) ... ok
+test_refresh_complete_add_change_absence (test_collector.CollectorTests.test_refresh_complete_add_change_absence) ... ok
+test_refresh_rejects_forged_provenance_and_string_complete (test_collector.CollectorTests.test_refresh_rejects_forged_provenance_and_string_complete) ... ok
+test_refresh_rejects_other_source_and_duplicate_records (test_collector.CollectorTests.test_refresh_rejects_other_source_and_duplicate_records) ... ok
+test_source_url_must_match_record_id (test_collector.CollectorTests.test_source_url_must_match_record_id) ... ok
+test_timestamp_only_change_is_not_a_content_alert (test_collector.CollectorTests.test_timestamp_only_change_is_not_a_content_alert) ... ok
+test_valid_empty_and_unconfirmed_empty_are_distinct (test_collector.CollectorTests.test_valid_empty_and_unconfirmed_empty_are_distinct) ... ok
+test_valid_empty_can_mark_source_absence (test_collector.CollectorTests.test_valid_empty_can_mark_source_absence) ... ok
+test_wrong_next_page (test_collector.CollectorTests.test_wrong_next_page) ... ok
+test_wrong_next_path (test_collector.CollectorTests.test_wrong_next_path) ... ok
+test_bad_count_and_duplicate_id_rejected (test_collector.GreenhouseReplayTests.test_bad_count_and_duplicate_id_rejected) ... ok
+test_bad_url_and_missing_field_rejected (test_collector.GreenhouseReplayTests.test_bad_url_and_missing_field_rejected) ... ok
+test_empty_feed_distinct_from_failed_envelope (test_collector.GreenhouseReplayTests.test_empty_feed_distinct_from_failed_envelope) ... ok
+test_literal_id_oracle_and_full_known_record (test_collector.GreenhouseReplayTests.test_literal_id_oracle_and_full_known_record) ... ok
+test_source_updated_at_is_not_posted_date (test_collector.GreenhouseReplayTests.test_source_updated_at_is_not_posted_date) ... ok
+test_environment_key_and_invalid_mode (test_collector.ManagedContractTests.test_environment_key_and_invalid_mode) ... ok
+test_error_message_has_no_request_url_or_key (test_collector.ManagedContractTests.test_error_message_has_no_request_url_or_key) ... ok
+test_explicit_non_html_target_rejected_despite_outer_html (test_collector.ManagedContractTests.test_explicit_non_html_target_rejected_despite_outer_html) ... ok
+test_explicit_request_parameters_and_header_secret (test_collector.ManagedContractTests.test_explicit_request_parameters_and_header_secret) ... ok
+test_http_target_not_sent_to_managed_api (test_collector.ManagedContractTests.test_http_target_not_sent_to_managed_api) ... ok
+test_missing_target_type_does_not_replace_listing_schema_guard (test_collector.ManagedContractTests.test_missing_target_type_does_not_replace_listing_schema_guard) ... ok
+test_response_acceptance_and_target_status (test_collector.ManagedContractTests.test_response_acceptance_and_target_status) ... ok
+test_source_shaped_html_without_outer_content_type (test_collector.ManagedContractTests.test_source_shaped_html_without_outer_content_type) ... ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 1.538s
+
+OK

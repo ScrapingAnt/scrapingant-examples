@@ -1,0 +1,80 @@
+{
+  "added_ids": [],
+  "changed": [
+    {
+      "fields": {
+        "location": {
+          "after": "Remote - UK",
+          "before": "Leeds, UK"
+        },
+        "title": {
+          "after": "Senior Platform Engineer",
+          "before": "Platform Engineer"
+        }
+      },
+      "jobID": "NS-001"
+    }
+  ],
+  "next_snapshot": {
+    "complete": false,
+    "counters": {
+      "accepted_pages": 1,
+      "cards_seen": 1,
+      "conflicting_ids": 0,
+      "duplicate_cards": 0,
+      "failures": 1,
+      "fetched_pages": 1,
+      "rejected_cards": 0,
+      "requested_pages": 2,
+      "unique_records": 1,
+      "valid_cards": 1
+    },
+    "employer": "Northstar Demonstration Labs",
+    "failures": [
+      {
+        "code": "http_503",
+        "page": 2
+      }
+    ],
+    "observedUTC": "2026-10-11T21:14:49Z",
+    "records": [
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-001",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-001",
+        "location": "Remote - UK",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": "2026-10-01",
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-001",
+        "title": "Senior Platform Engineer"
+      },
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-002",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-002",
+        "location": "Remote - UK",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": null,
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-002",
+        "title": "Data Analyst"
+      },
+      {
+        "applicationURL": "http://127.0.0.1:55325/careers/apply/NS-003",
+        "employer": "Northstar Demonstration Labs",
+        "jobID": "NS-003",
+        "location": "Dublin, Ireland",
+        "observedUTC": "2026-10-11T21:14:49Z",
+        "sourcePostedDate": "2026-10-05",
+        "sourceURL": "http://127.0.0.1:55325/careers/jobs/NS-003",
+        "title": "Support Engineer"
+      }
+    ],
+    "source": "http://127.0.0.1:55325/careers/roles?page=1"
+  },
+  "removals_suppressed": true,
+  "removed_ids": [],
+  "retained_previous_ids": [
+    "NS-002",
+    "NS-003"
+  ]
+}

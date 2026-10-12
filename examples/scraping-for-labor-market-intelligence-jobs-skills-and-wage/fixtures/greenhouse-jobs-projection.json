@@ -1,0 +1,187 @@
+{
+  "capture": {
+    "url": "https://boards-api.greenhouse.io/v1/boards/greenhouse/jobs",
+    "observed_utc": "2026-10-11T21:03:15.995679+00:00",
+    "status": 200,
+    "response_sha256": "b7c458403eb0e58052562733f283431ac29fb3d333695dd07e58d4238468d69c",
+    "permission_basis": "Official Greenhouse Job Board API docs describe published job GET endpoints as publicly available without authentication; no claim about reuse terms or broader ATS access.",
+    "source_meta": {
+      "total": 19
+    },
+    "jobs_count": 19,
+    "retained_fields": "id,title,location,absolute_url,updated_at only; source metadata copied separately"
+  },
+  "jobs": [
+    {
+      "id": 8126988,
+      "title": "Commercial Counsel",
+      "location": {
+        "name": "Eastern Timezone"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+      "updated_at": "2026-10-09T18:28:27-04:00"
+    },
+    {
+      "id": 8234044,
+      "title": "Enterprise Sales Development Representative",
+      "location": {
+        "name": "Anywhere in the United States"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8234044?gh_jid=8234044",
+      "updated_at": "2026-10-09T20:21:48-04:00"
+    },
+    {
+      "id": 8168227,
+      "title": "Growth Account Executive",
+      "location": {
+        "name": "Anywhere in Ireland"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8168227?gh_jid=8168227",
+      "updated_at": "2026-09-02T05:03:37-04:00"
+    },
+    {
+      "id": 8208105,
+      "title": "Manager, Corporate IT",
+      "location": {
+        "name": "Northern Ireland, United Kingdom"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8208105?gh_jid=8208105",
+      "updated_at": "2026-09-22T11:20:55-04:00"
+    },
+    {
+      "id": 6180015,
+      "title": "Mid-Market Sales Development Representative",
+      "location": {
+        "name": "Anywhere in the United States"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/6180015?gh_jid=6180015",
+      "updated_at": "2026-10-09T20:22:16-04:00"
+    },
+    {
+      "id": 8233584,
+      "title": "Product Marketing Manager, Strategic Partnerships",
+      "location": {
+        "name": "Anywhere in the United States"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8233584?gh_jid=8233584",
+      "updated_at": "2026-10-05T18:36:42-04:00"
+    },
+    {
+      "id": 8172357,
+      "title": "Program Manager, Product & GTM Enablement",
+      "location": {
+        "name": "Anywhere in the United States"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8172357?gh_jid=8172357",
+      "updated_at": "2026-10-01T00:20:47-04:00"
+    },
+    {
+      "id": 8245894,
+      "title": "Project Manager",
+      "location": {
+        "name": "Eastern or Central Timezone"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8245894?gh_jid=8245894",
+      "updated_at": "2026-10-09T16:48:29-04:00"
+    },
+    {
+      "id": 8168281,
+      "title": "Senior Account Executive, Mid-Market",
+      "location": {
+        "name": "Anywhere in Ireland"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8168281?gh_jid=8168281",
+      "updated_at": "2026-09-11T09:55:40-04:00"
+    },
+    {
+      "id": 8220443,
+      "title": "Senior Implementation Consultant",
+      "location": {
+        "name": "Eastern or Central Timezone"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8220443?gh_jid=8220443",
+      "updated_at": "2026-10-07T10:04:29-04:00"
+    },
+    {
+      "id": 8211770,
+      "title": "Senior Program Manager, GTM & Field Enablement",
+      "location": {
+        "name": "Anywhere in Ireland"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8211770?gh_jid=8211770",
+      "updated_at": "2026-09-25T09:41:52-04:00"
+    },
+    {
+      "id": 8211828,
+      "title": "Senior Software Engineer",
+      "location": {
+        "name": "Ontario"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8211828?gh_jid=8211828",
+      "updated_at": "2026-10-05T18:35:40-04:00"
+    },
+    {
+      "id": 8204473,
+      "title": "Senior Software Engineer ",
+      "location": {
+        "name": "Ontario"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8204473?gh_jid=8204473",
+      "updated_at": "2026-10-05T18:35:42-04:00"
+    },
+    {
+      "id": 8204474,
+      "title": "Senior Software Engineer ",
+      "location": {
+        "name": "British Columbia"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8204474?gh_jid=8204474",
+      "updated_at": "2026-10-05T18:35:41-04:00"
+    },
+    {
+      "id": 8214721,
+      "title": "Software Engineer",
+      "location": {
+        "name": "Ontario"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8214721?gh_jid=8214721",
+      "updated_at": "2026-10-05T18:35:39-04:00"
+    },
+    {
+      "id": 8148418,
+      "title": "Software Engineer (Contract, Argentina)",
+      "location": {
+        "name": "Argentina"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8148418?gh_jid=8148418",
+      "updated_at": "2026-09-18T11:47:46-04:00"
+    },
+    {
+      "id": 8222047,
+      "title": "Strategic Consultant ",
+      "location": {
+        "name": "Anywhere in Ireland"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8222047?gh_jid=8222047",
+      "updated_at": "2026-09-30T15:51:33-04:00"
+    },
+    {
+      "id": 8227655,
+      "title": "Strategic Consultant I",
+      "location": {
+        "name": "London, United Kingdom"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8227655?gh_jid=8227655",
+      "updated_at": "2026-09-24T10:19:10-04:00"
+    },
+    {
+      "id": 8233862,
+      "title": "VP, Product Marketing",
+      "location": {
+        "name": "Anywhere in the United States"
+      },
+      "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8233862?gh_jid=8233862",
+      "updated_at": "2026-10-05T18:36:26-04:00"
+    }
+  ]
+}

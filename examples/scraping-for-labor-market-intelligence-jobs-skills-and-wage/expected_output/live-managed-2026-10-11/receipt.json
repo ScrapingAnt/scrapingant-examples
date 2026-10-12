@@ -1,0 +1,41 @@
+{
+  "target_url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+  "endpoint": "https://api.scrapingant.com/v2/general",
+  "parameters": {
+    "url": "https://scrapingant.github.io/scrapingant-examples/fixtures/dynamic-delayed.html",
+    "browser": "false",
+    "proxy_type": "datacenter",
+    "proxy_country": "us",
+    "timeout": "30",
+    "return_page_source": "false"
+  },
+  "actual_credits": 1,
+  "dispatched_at_utc": "2026-10-11T21:38:39.695211+00:00",
+  "http_status": 200,
+  "target_status": "200",
+  "credit_receipt": "1",
+  "target_content_type": "text/html; charset=utf-8",
+  "outer_content_type": "text/html; charset=utf-8",
+  "response_bytes": 752,
+  "response_sha256": "d670add5613e47f7e29d08480a1eec2b2fca04e94e18eba4628fe44e9b124e93",
+  "completed_at_utc": "2026-10-11T21:38:40.432850+00:00",
+  "raw_fixture_marker_validated": true,
+  "capture_method": "One call through unchanged scrapingant_transport.managed_html with browser=false",
+  "evidence_scope": "Owned raw HTML transport and initial source marker acceptance only; no employer/ATS HTML, job adapter, pagination, managed CLI or JavaScript rendering validated",
+  "job_adapter_validated": false,
+  "managed_cli_executed": false,
+  "fixture_marker": "<div id=\"test\">Web Scraping is hard</div>",
+  "fixture_source": {
+    "repository_commit": "33cf262cf3a8442a845f5d4ac50d8ec7b80d0ff4",
+    "path": "fixtures/dynamic-delayed.html",
+    "url": "https://github.com/ScrapingAnt/scrapingant-examples/blob/33cf262cf3a8442a845f5d4ac50d8ec7b80d0ff4/fixtures/dynamic-delayed.html",
+    "source_bytes_equal_capture": true
+  },
+  "transport_source": {
+    "repository_commit": "33cf262cf3a8442a845f5d4ac50d8ec7b80d0ff4",
+    "path": "examples/scraping-for-labor-market-intelligence-jobs-skills-and-wage/scrapingant_transport.py",
+    "sha256": "e0ed7c9fc3c6a12f0aa3bc5b29224293ec0c94f3345f9fcecf07124759c04660"
+  },
+  "default_runner": "Offline replay only; this capture does not add a live call to run.sh",
+  "authentication": "x-api-key header; secret not retained"
+}

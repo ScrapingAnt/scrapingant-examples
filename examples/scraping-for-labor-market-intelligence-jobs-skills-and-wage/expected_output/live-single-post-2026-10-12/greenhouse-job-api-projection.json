@@ -1,0 +1,31 @@
+{
+  "capture": {
+    "source_url": "https://boards-api.greenhouse.io/v1/boards/greenhouse/jobs/8126988",
+    "started_at_utc": "2026-10-12T08:26:43.444298+00:00",
+    "method": "GET",
+    "redirects_followed": 0,
+    "automatic_retries": 0,
+    "authentication": "none",
+    "provider_calls": 0,
+    "scope": "One published employer job HTML page, plus robots and official public JSON reference",
+    "http_status": 200,
+    "content_type": "application/json",
+    "location": null,
+    "bytes": 13625,
+    "body_sha256": "7134ecd7cbee0a9e94abd4821a6903c77617688bb6308dc8faced23f45083191",
+    "body_limit_exceeded": false,
+    "completed_at_utc": "2026-10-12T08:26:43.750013+00:00"
+  },
+  "fields": {
+    "id": 8126988,
+    "title": "Commercial Counsel",
+    "company_name": "Greenhouse",
+    "location": {
+      "name": "Eastern Timezone"
+    },
+    "absolute_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "first_published": "2026-08-24T13:52:04-04:00",
+    "updated_at": "2026-10-09T18:28:27-04:00"
+  },
+  "hash_scope": "Original complete response hash was measured before projection; full response is withheld and its hash cannot be reproduced from these projected fields or the owned fixture."
+}
