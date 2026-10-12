@@ -9,6 +9,7 @@ namespace ManagedAcquisition;
 
 public sealed record Product(string Sku, string Title, decimal Price, string Currency);
 public sealed record Acquisition(Product Product, int Credits, int Attempts);
+public enum ProductContract { ArticleFields, SingleProductOfferJsonLd }
 public sealed class ContentFailure(string message) : Exception(message);
 public sealed class ApiFailure(int status, string category) : Exception($"API HTTP {status}: {category}")
 {
@@ -45,7 +46,8 @@ public sealed class ManagedClient(
 
     // GET only. Cancellation is never retried. The caller owns the overall deadline.
     public async Task<Acquisition> FetchAsync(Uri target, bool browser,
-        CancellationToken cancellationToken, int maxAttempts = 3)
+        CancellationToken cancellationToken, int maxAttempts = 3,
+        ProductContract contract = ProductContract.ArticleFields)
     {
         if (maxAttempts is < 1 or > 3) throw new ArgumentOutOfRangeException(nameof(maxAttempts));
         if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentException("An API key is required");
@@ -87,7 +89,7 @@ public sealed class ManagedClient(
                        string.Equals(declared.MediaType, "application/xhtml+xml", StringComparison.OrdinalIgnoreCase))))
                     throw new ContentFailure("Declared content type is not HTML");
                 // General responses can omit the outer type. The final HTML/schema guard still applies.
-                var product = ParseProduct(html);
+                var product = ParseProduct(html, contract);
                 var values = response.Headers.TryGetValues("Ant-credits-cost", out var receipts)
                     ? receipts.ToArray() : [];
                 if (values.Length != 1 || !int.TryParse(values[0], NumberStyles.None,
@@ -146,12 +148,14 @@ public sealed class ManagedClient(
         return text.ToString();
     }
 
-    public static Product ParseProduct(string html)
+    public static Product ParseProduct(string html, ProductContract contract = ProductContract.ArticleFields)
     {
         if (!html.Contains("<html", StringComparison.OrdinalIgnoreCase))
             throw new ContentFailure("Expected an HTML document");
         var document = new HtmlDocument();
         document.LoadHtml(html);
+        if (contract == ProductContract.SingleProductOfferJsonLd) return ParseSingleProductOfferJsonLd(document);
+        if (contract != ProductContract.ArticleFields) throw new ContentFailure("Unsupported product contract");
         var products = document.DocumentNode.SelectNodes("//article[@data-sku]");
         if (products is null || products.Count != 1)
             throw new ContentFailure("Expected exactly one product");
@@ -166,5 +170,39 @@ public sealed class ManagedClient(
             price < 0)
             throw new ContentFailure("Missing or invalid required product fields");
         return new Product(sku, title, price, currency);
+    }
+
+    // Explicit fixture contract: one Product object and one Offer object, with string values.
+    // No automatic fallback, @graph/list support, external context lookup or HTML transformation.
+    private static Product ParseSingleProductOfferJsonLd(HtmlDocument document)
+    {
+        var scripts = document.DocumentNode.SelectNodes("//script[@type='application/ld+json']");
+        if (scripts is null || scripts.Count != 1)
+            throw new ContentFailure("Expected exactly one product JSON-LD script");
+        try
+        {
+            using var json = JsonDocument.Parse(scripts[0].InnerText);
+            var product = json.RootElement;
+            static string Text(JsonElement node, string name) =>
+                node.TryGetProperty(name, out var value) && value.ValueKind == JsonValueKind.String
+                    ? value.GetString() ?? "" : "";
+            static bool UniqueNames(JsonElement node) => node.EnumerateObject().Select(p => p.Name)
+                .Distinct(StringComparer.Ordinal).Count() == node.EnumerateObject().Count();
+            if (product.ValueKind != JsonValueKind.Object ||
+                !UniqueNames(product) || product.TryGetProperty("@graph", out _) ||
+                Text(product, "@context") != "https://schema.org" || Text(product, "@type") != "Product" ||
+                !product.TryGetProperty("offers", out var offer) || offer.ValueKind != JsonValueKind.Object ||
+                !UniqueNames(offer) || Text(offer, "@type") != "Offer")
+                throw new ContentFailure("Expected the single Product and Offer JSON-LD contract");
+            var sku = Text(product, "sku").Trim();
+            var title = Text(product, "name").Trim();
+            var currency = Text(offer, "priceCurrency");
+            if (sku.Length == 0 || title.Length == 0 || currency.Length != 3 || !Regex.IsMatch(currency, "^[A-Z]{3}$") ||
+                !decimal.TryParse(Text(offer, "price"), NumberStyles.AllowDecimalPoint,
+                    CultureInfo.InvariantCulture, out var price) || price < 0)
+                throw new ContentFailure("Missing or invalid required JSON-LD product fields");
+            return new Product(sku, title, price, currency);
+        }
+        catch (JsonException) { throw new ContentFailure("Malformed product JSON-LD"); }
     }
 }
