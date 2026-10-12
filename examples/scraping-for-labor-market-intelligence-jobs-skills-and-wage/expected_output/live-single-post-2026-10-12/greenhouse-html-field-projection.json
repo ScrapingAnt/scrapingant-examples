@@ -1,0 +1,62 @@
+{
+  "capture": {
+    "source_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "started_at_utc": "2026-10-12T08:26:42.655117+00:00",
+    "method": "GET",
+    "redirects_followed": 0,
+    "automatic_retries": 0,
+    "authentication": "none",
+    "provider_calls": 0,
+    "scope": "One published employer job HTML page, plus robots and official public JSON reference",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "location": null,
+    "bytes": 104223,
+    "body_sha256": "b8385bbc2da7e5d34e469dad34117c059449bb68786df0e5063dc21ed09bb886",
+    "body_limit_exceeded": false,
+    "completed_at_utc": "2026-10-12T08:26:43.254586+00:00"
+  },
+  "collection": {
+    "source": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "employer": "Greenhouse",
+    "complete": true,
+    "completeness_scope": "one_selected_posting_page",
+    "board_inventory_complete": false,
+    "max_pages": 1,
+    "counters": {
+      "requested_pages": 1,
+      "fetched_pages": 1,
+      "accepted_pages": 1,
+      "unique_records": 1,
+      "failures": 0
+    },
+    "records": [
+      {
+        "jobID": "8126988",
+        "title": "Commercial Counsel",
+        "employer": "Greenhouse",
+        "location": "Eastern Timezone",
+        "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+        "applicationURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+        "observedUTC": "2026-10-12T08:26:43Z",
+        "sourcePostedDate": null
+      }
+    ],
+    "failures": [],
+    "observedUTC": "2026-10-12T08:26:43Z",
+    "source_metadata": {
+      "canonical_url": "http://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+      "canonical_scheme_differs": true,
+      "application_url_semantics": "observed hosted form page; no submission validation"
+    }
+  },
+  "html_field_contract": {
+    "jobID": "Locked numeric ID from published API URL; canonical host/path/query and application action agree",
+    "title": "One h1, matching og:title and document title",
+    "employer": "Document title suffix at Greenhouse, verified against public API company_name",
+    "location": "One job__location text node, matching og:description",
+    "applicationURL": "Observed application-form action resolved against approved HTTPS source; hosted form page only, no submission",
+    "sourcePostedDate": "No posting-date marker in this raw HTML contract; null; API first_published not transplanted"
+  },
+  "hash_scope": "Original complete response hash was measured before projection; full response is withheld and its hash cannot be reproduced from these projected fields or the owned fixture."
+}

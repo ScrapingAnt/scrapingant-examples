@@ -11,11 +11,13 @@ if [[ "${1:-}" == "--check" ]]; then
   scratch_dir="$(mktemp -d)"
   trap 'rm -rf "$scratch_dir"' EXIT
   "$PYTHON_BIN" -m unittest -v test_collector
+  "$PYTHON_BIN" -m unittest -v test_greenhouse_single_post
   "$PYTHON_BIN" demo.py --output-dir "$scratch_dir"
   "$PYTHON_BIN" verify_captures.py --fresh-dir "$scratch_dir"
 elif [[ $# -eq 0 ]]; then
   mkdir -p expected_output
   "$PYTHON_BIN" -m unittest -v test_collector 2>&1 | tee expected_output/tests.txt
+  "$PYTHON_BIN" -m unittest -v test_greenhouse_single_post 2>&1 | tee expected_output/single-post-tests.txt
   "$PYTHON_BIN" demo.py
   "$PYTHON_BIN" verify_captures.py
 else

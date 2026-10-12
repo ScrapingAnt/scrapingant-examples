@@ -1,0 +1,38 @@
+{
+  "source": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "employer": "Greenhouse",
+  "complete": true,
+  "completeness_scope": "one_selected_posting_page",
+  "board_inventory_complete": false,
+  "max_pages": 1,
+  "counters": {
+    "requested_pages": 1,
+    "fetched_pages": 1,
+    "accepted_pages": 1,
+    "unique_records": 1,
+    "failures": 0
+  },
+  "records": [
+    {
+      "jobID": "8126988",
+      "title": "Commercial Counsel",
+      "employer": "Greenhouse",
+      "location": "Eastern Timezone",
+      "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+      "applicationURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+      "observedUTC": "2026-10-12T08:26:43Z",
+      "sourcePostedDate": null
+    }
+  ],
+  "failures": [],
+  "observedUTC": "2026-10-12T08:26:43Z",
+  "source_metadata": {
+    "canonical_url": "http://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "canonical_scheme_differs": true,
+    "application_url_semantics": "observed hosted form page; no submission validation"
+  },
+  "execution": {
+    "mode": "owned_source_shaped_fixture",
+    "provider_dispatches": 0
+  }
+}

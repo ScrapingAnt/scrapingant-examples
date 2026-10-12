@@ -7,6 +7,7 @@ import platform
 from collector import ListingParser, SourcePolicy, collect, direct_html, refresh
 from fixture_server import FixtureServer, FIXTURES
 from greenhouse_replay import CAPTURE_PATH, project_capture
+from greenhouse_single_post import collect_one, record_oracle_matches
 
 
 def write_json(directory, name, value):
@@ -77,6 +78,12 @@ def run(directory):
                        'validated_for_refresh=false missing_required=applicationURL')
         (directory / "summary.txt").write_text("\n".join(summary) + "\n")
         print("\n".join(summary))
+    owned_body = (FIXTURES / "greenhouse-single-post.html").read_text()
+    single_post = collect_one(fetch=lambda url: owned_body, observed_utc="2026-10-12T08:26:43Z")
+    single_post["execution"] = {"mode": "owned_source_shaped_fixture", "provider_dispatches": 0}
+    assert single_post["complete"] and record_oracle_matches(single_post["records"])
+    write_json(directory, "greenhouse-single-post-owned.json", single_post)
+    print("single_post_offline: owned_fixture=1 literal_record_matches=true provider_calls=0")
 
 
 if __name__ == "__main__":

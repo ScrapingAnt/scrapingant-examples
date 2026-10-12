@@ -1,0 +1,78 @@
+{
+  "version": "greenhouse-single-post-8126988-v1",
+  "source_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "board_token": "greenhouse",
+  "job_id": "8126988",
+  "employer": "Greenhouse",
+  "source_access_basis": {
+    "official_documentation": "https://docs.greenhouse.io/job-board.html",
+    "official_public_job_get": "https://boards-api.greenhouse.io/v1/boards/greenhouse/jobs/8126988",
+    "published_absolute_url_matches_source": true,
+    "html_public_GET_status": 200,
+    "html_GET_authentication": "none",
+    "HTML_redirects_followed": 0,
+    "HTML_challenge_observed": false,
+    "robots_url": "https://job-boards.greenhouse.io/robots.txt",
+    "robots_active_disallow_rules": [],
+    "scope_decision": "One ordinary public published-job HTML page linked by its documented public API; not blanket HTML permission or general ATS support."
+  },
+  "field_contract": {
+    "jobID": "Locked numeric ID from published API URL; canonical host/path/query and application action agree",
+    "title": "One h1, matching og:title and document title",
+    "employer": "Document title suffix at Greenhouse, verified against public API company_name",
+    "location": "One job__location text node, matching og:description",
+    "applicationURL": "Observed application-form action resolved against approved HTTPS source; hosted form page only, no submission",
+    "sourcePostedDate": "No posting-date marker in this raw HTML contract; null; API first_published not transplanted"
+  },
+  "observed_http_canonical": "http://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "canonical_behavior": "Check exact same host/path/query; retain HTTP discrepancy as metadata; never fetch or use HTTP canonical for records",
+  "sourceURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "applicationURL": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "applicationURL_semantics": "Observed hosted form page, same as source URL; no submission endpoint or submitted application validated",
+  "sourcePostedDate": null,
+  "completeness_scope": "one_selected_posting_page",
+  "board_inventory_complete": false,
+  "max_pages": 1,
+  "empty_state": "No legitimate empty contract for this known detail page. Missing page, zero required markers, challenge/error HTML, duplicate or conflicting markers produce incomplete failure, not removals.",
+  "refresh": "Not part of this single-post test",
+  "managed_request": {
+    "url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "browser": "false",
+    "proxy_type": "datacenter",
+    "proxy_country": "us",
+    "timeout": "30",
+    "return_page_source": "false"
+  },
+  "expected_documented_credits": 1,
+  "dispatches": 1,
+  "retry": false,
+  "API_endpoint_redirects": false,
+  "remote_target_redirect_path": "Not established by local NoRedirect; source direct GET was 200 without redirect",
+  "fallback": false,
+  "full_source_HTML": {
+    "bytes": 104223,
+    "sha256": "b8385bbc2da7e5d34e469dad34117c059449bb68786df0e5063dc21ed09bb886",
+    "retention": "Full employer HTML is withheld; only field projection and measured receipt/bytes/hash are distributed.",
+    "reproducible_from_projection": false
+  },
+  "owned_source_shaped_fixture": {
+    "path": "fixtures/greenhouse-single-post.html",
+    "sha256": "67537cef37a8ed55a3016448cede0c081a2cda0c0a718bf2a97904a4b795723b",
+    "scope": "Hand-authored structure plus public field facts; no copied description/form fields/scripts/tracking; not genuine HTML bytes"
+  },
+  "official_feed_direct_HTTP_alternative": "Public job JSON and raw HTML already supply relevant facts; managed retrieval is an optional path acceptance test, not a demonstrated necessity.",
+  "pre_persistence_credential_echo_guard": "Reject plain, HTML-entity and JSON-escaped key echoes in body/allowlisted headers/receipt; do not retain unsafe body or values; keep safe status/hash/known receipt only.",
+  "semantic_preflight_acceptance": {
+    "required": "Complete one selected posting layout and exact independent literal record",
+    "ignored_record_field": "observedUTC only",
+    "full_body_hash_and_byte_equality": "diagnostic only; wrapper or tracking nonce drift may change bytes without changing acceptance",
+    "source_provenance": "Recorded direct public acquisition, distinct from local semantic validation.",
+    "truncation": "reject missing/mismatched form closure, missing HTML closure, unfinished field markers and oversized prefix"
+  },
+  "live_semantic_acceptance": {
+    "required": "exact independent literal record except observedUTC",
+    "mismatch": "retain parsed record and known receipt but accepted=false"
+  },
+  "credit_header_policy": "Inspect every allowlisted header value for echoes. Duplicate/ambiguous credit receipts are unknown/null and unaccepted, even if identical; never select the first amount.",
+  "portable_example_scope": "Parser/one-dispatch observation functions adapted from the accepted one-call helper; public CLI and runner are offline only. The public CLI was not used for the recorded paid acquisition."
+}

@@ -1,0 +1,45 @@
+{
+  "source_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+  "endpoint": "https://api.scrapingant.com/v2/general",
+  "parameters": {
+    "url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "browser": "false",
+    "proxy_type": "datacenter",
+    "proxy_country": "us",
+    "timeout": "30",
+    "return_page_source": "false"
+  },
+  "expected_documented_credits": 1,
+  "provider_dispatches": 1,
+  "actual_credits": 1,
+  "requests": 1,
+  "actual_receipt_credits": 1,
+  "accepted": true,
+  "scope": "one selected published job HTML page; raw only; no board inventory or refresh",
+  "dispatched_at_utc": "2026-10-12T09:42:19.062837+00:00",
+  "http_status": 200,
+  "target_status": "200",
+  "credit_receipt": "1",
+  "target_content_type": "text/html; charset=utf-8",
+  "outer_content_type": "text/html; charset=utf-8",
+  "allowlisted_header_counts": {
+    "target_status": 1,
+    "credit_receipt": 1,
+    "target_content_type": 1,
+    "outer_content_type": 1
+  },
+  "duplicate_credit_receipt": false,
+  "response_bytes": 104223,
+  "response_sha256": "b8385bbc2da7e5d34e469dad34117c059449bb68786df0e5063dc21ed09bb886",
+  "full_body_captured": true,
+  "body_hash_scope": "full response bytes as received",
+  "completed_at_utc": "2026-10-12T09:42:20.237010+00:00",
+  "body_distributed": false,
+  "hash_reproducible_from_projection": false,
+  "hash_note": "Full response hash was measured before field projection. Full employer HTML is withheld; neither the projection nor the owned source-shaped fixture reproduces those bytes.",
+  "execution_provenance": {
+    "reviewed_execution_helper_sha256": "a0063e82ecd690532633245a56749c4ad99827b027306226766b65a9268751d6",
+    "unchanged_transport_sha256": "e0ed7c9fc3c6a12f0aa3bc5b29224293ec0c94f3345f9fcecf07124759c04660",
+    "portable_example": "Parser and observer logic adapted into greenhouse_single_post.py. Public CLI is offline only and was not used for this recorded acquisition."
+  }
+}

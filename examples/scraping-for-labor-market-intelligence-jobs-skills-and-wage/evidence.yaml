@@ -2,10 +2,10 @@
   "article_id": "scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "canonical_url": "https://scrapingant.com/blog/scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "owner": "Oleg Kulyk",
-  "review_state": "AI-assisted draft; named-author review and independent review of this capture update pending",
+  "review_state": "AI-assisted draft; one-post capture independently accepted; public integration independent review and named-author review pending",
   "examples_repo_commit": "6d500a8e78db711b9fcf2181a17a256421588cab",
-  "commit_note": "Identifies the verified offline code/output snapshot. Later commits add provenance and the separately recorded owned raw transport capture; core code is unchanged. Article links the final immutable packet tree.",
-  "tested_at": "2026-10-11",
+  "commit_note": "examples_repo_commit identifies the original 50-test offline snapshot. New single-post code is identified by file hashes below; the article pins the final immutable packet tree. The existing collector/schema/transport and original captures are unchanged.",
+  "tested_at": "2026-10-12",
   "observed_utc": "2026-10-11T21:14:49Z",
   "requires_api_key": false,
   "environment": {
@@ -30,8 +30,10 @@
     "default_managed_requests_mocked_only": true,
     "recorded_live_owned_transport_calls": 1,
     "recorded_transport_API_credits": 1,
-    "recorded_live_job_adapter_calls": 0,
-    "recorded_managed_CLI_executed": false
+    "recorded_live_job_adapter_calls": 1,
+    "recorded_managed_CLI_executed": false,
+    "recorded_selected_post_API_credits": 1,
+    "recorded_public_single_post_CLI_executed": false
   },
   "fixtures": [
     "fixtures/denied.html",
@@ -42,7 +44,9 @@
     "fixtures/page-1.html",
     "fixtures/page-2.html",
     "fixtures/refresh-1.html",
-    "fixtures/refresh-2.html"
+    "fixtures/refresh-2.html",
+    "fixtures/greenhouse-single-post.html",
+    "fixtures/greenhouse-single-post-expected-record.json"
   ],
   "outputs": [
     "expected_output/baseline.json",
@@ -56,7 +60,13 @@
     "expected_output/partial-refresh.json",
     "expected_output/record-example.json",
     "expected_output/summary.txt",
-    "expected_output/tests.txt"
+    "expected_output/tests.txt",
+    "expected_output/greenhouse-single-post-owned.json",
+    "expected_output/single-post-tests.txt",
+    "expected_output/live-single-post-2026-10-12/receipt.json",
+    "expected_output/live-single-post-2026-10-12/collection.json",
+    "expected_output/live-single-post-2026-10-12/greenhouse-html-field-projection.json",
+    "expected_output/live-single-post-2026-10-12/greenhouse-job-api-projection.json"
   ],
   "measurements": [
     {
@@ -107,6 +117,20 @@
       "unit": "successful recorded API call",
       "denominator": "one request to the existing owned fixture; API 200/target 200, Ant-credits-cost 1, body 752 bytes; not jobs or ATS coverage",
       "source": "expected_output/live-managed-2026-10-11/receipt.json"
+    },
+    {
+      "name": "single_post_passing_tests",
+      "value": 46,
+      "unit": "test methods",
+      "denominator": "46 additional offline test methods; subtests not counted as extra methods; zero provider calls",
+      "source": "expected_output/single-post-tests.txt"
+    },
+    {
+      "name": "selected_post_raw_managed_acceptance",
+      "value": 1,
+      "unit": "accepted posting",
+      "denominator": "one dispatched raw request / one selected published detail page; API/target200, observed1credit,104223bytes; no inventory or repeat sampling",
+      "source": "expected_output/live-single-post-2026-10-12/collection.json"
     }
   ],
   "external_sources": [
@@ -123,7 +147,7 @@
     {
       "url": "https://docs.scrapingant.com/credits-cost",
       "checked_at": "2026-10-11",
-      "claim": "Ordinary non-Google datacenter request documented 1 credit raw /10 rendered. Separate recorded owned raw fixture receipt is 1 credit; no measured cost per valid job."
+      "claim": "Ordinary non-Google datacenter request documented1credit raw/10rendered. Separate owned and selected-post raw receipts each recorded1credit; no generalized valid-job yield estimate."
     },
     {
       "url": "https://scrapingant.com/#pricing",
@@ -156,21 +180,27 @@
   },
   "limitations": [
     "Owned fictional HTML demonstrates one fixed adapter, not live ATS HTML acquisition, rendering or general support.",
-    "Greenhouse capture is genuine observed JSON availability on one board at one time. Default runner only replays it; separate owned raw transport result does not validate an employer HTML source.",
+    "The 19-post public JSON list remains a separate candidate replay. A separately recorded one-page raw managed HTML result validates only posting8126988 at its observation time.",
     "Greenhouse employer label is supplied by caller; applicationURL is unverified/null and candidates cannot enter the validated fixture refresh sink.",
     "updated_at is retained as source_updated_at; sourcePostedDate stays null. Neither observation time nor update time is relabeled a posting date.",
     "Completeness is conditional on this validated source envelope and declared page sequence; source-specific validation is required for a different source.",
     "removed_ids denotes source-list absence only; incomplete acquisitions suppress all removals and retain prior records with prior timestamps.",
     "No applications, profiles, wage/skills inference, universal Indeed/LinkedIn support, ready-made jobs database, live success rate or production reliability result.",
-    "Default managed request controls use mocks; a separate authenticated owned raw fixture call exercised unchanged managed_html. Public OpenAPI describes query authentication only; no job source or managed CLI was exercised.",
-    "One owned raw fixture credit receipt is 1 API credit; no successful-job yield or cost per valid job measured. Current pricing and remaining credit costs are documented dated facts.",
-    "Named-author review and independent review of this capture update are pending; article remains unlisted; no restoration or deployment approved.",
-    "Managed HTML acceptance does not require an outer Content-Type. Unknown original target media type is deferred to the required schema. Managed redirect guard covers API endpoint redirects only; no remote-target redirect proof."
+    "Default managed controls use mocks. Separate authenticated owned and selected-post raw requests are recorded. Public OpenAPI describes query authentication only; the collector.py managed CLI and public portable module live CLI were not executed.",
+    "Each of two separately recorded raw observations has a1credit receipt. One selected posting passed its exact oracle; this is not a source-wide yield or cost forecast.",
+    "Named-author review and independent review of this public integration pending; article remains unlisted; no restoration or deployment approved.",
+    "Managed HTML acceptance does not require an outer Content-Type. Unknown original target media type is deferred to the required schema. Managed redirect guard covers API endpoint redirects only; no remote-target redirect proof.",
+    "One-post completeness is not board completeness: max_pages1, board_inventory_completefalse; no managed pagination/refresh/rendering/genericATS/production claim.",
+    "applicationURL is the observed hosted form page, equal to HTTPSsourceURL. No distinct submission endpoint or submitted application validated.",
+    "HTTPcanonical differs in scheme; exact host/path/query checked and discrepancy retained. Records stayHTTPS; no HTTPcanonical acquisition.",
+    "Full employer HTML/API bodies withheld. Full-body hashes measured before projection cannot be reproduced from safe projections or the owned short structural fixture.",
+    "Portable single-post module adapts parser/observer logic from the accepted execution helper. Public CLI and default runner are offline; observers in tests receive mock delegates.",
+    "Existing official public JSON and directHTTP supplied required facts; this managed acquisition is optional and no necessity claim follows."
   ],
   "claims": [
     {
       "id": "C1",
-      "text": "CPython3.12.11, standard library only, 50 tests pass.",
+      "text": "Original offline snapshot CPython3.12.11 standard library only,50 tests pass; additional single-post46 tests separately recorded.",
       "type": "measured",
       "source": [
         ".python-version",
@@ -237,7 +267,7 @@
     },
     {
       "id": "C9",
-      "text": "Code uses environment key in header, outside URLs and sanitized errors. Header contract checked in current source and exercised once by separate owned raw managed_html call, not a job adapter or managed CLI.",
+      "text": "Environment key sent in header outside URL/errors; source-backed contract exercised by separate owned and selected-post raw calls. Public OpenAPI query auth is not header-auth evidence.",
       "type": "documented",
       "source": [
         "scrapingant_transport.py",
@@ -247,7 +277,7 @@
     },
     {
       "id": "C10",
-      "text": "Datacenter non-Google retrieval documented at 1 raw/10 rendered credits; one separate owned raw fixture receipt measured 1 credit, with no cost per valid job.",
+      "text": "Datacenter non-Google retrieval documented1raw/10rendered credits; separate owned and selected-post raw receipts each observed1credit, not a generalized yield estimate.",
       "type": "product",
       "source": "https://docs.scrapingant.com/credits-cost"
     },
@@ -259,7 +289,7 @@
     },
     {
       "id": "C12",
-      "text": "Default runner has no live ATS/provider/paid calls; managed job-source command remains unexecuted. One separate owned raw transport call is recorded.",
+      "text": "Default runner has zero live ATS/provider/paid calls; collector.py managed job-source command unexecuted. Separate owned raw and one selected-post raw observations are recorded.",
       "type": "documented",
       "source": [
         "run.sh",
@@ -292,9 +322,48 @@
         "expected_output/live-managed-2026-10-11/receipt.json",
         "expected_output/live-managed-2026-10-11/response.html"
       ]
+    },
+    {
+      "id": "C16",
+      "type": "measured",
+      "text": "Oct12 09:42:19.062837\u201309:42:20.237010UTC one raw managed request API/target200 observed1credit104223bytes; exact8126988/CommercialCounsel/Greenhouse/EasternTimezone record accepted at09:42:20Z.",
+      "source": [
+        "expected_output/live-single-post-2026-10-12/receipt.json",
+        "expected_output/live-single-post-2026-10-12/collection.json"
+      ]
+    },
+    {
+      "id": "C17",
+      "type": "documented",
+      "text": "Selected-post adapter requires exact source/canonical/form/field markers plus independent literal record except observedUTC; known oneposting has no legitimate empty state. 46 offline controls include semantic drift, wrappers, truncation, duplicate credits and encoded key echoes.",
+      "source": [
+        "greenhouse_single_post.py",
+        "greenhouse-single-post-contract.json",
+        "fixtures/greenhouse-single-post-expected-record.json",
+        "expected_output/single-post-tests.txt"
+      ]
+    },
+    {
+      "id": "C18",
+      "type": "documented",
+      "text": "applicationURL is observed hosted form page/sourceHTTPS; HTTPcanonical discrepancy retained; sourcePostedDate remainsnull. No inventory, pagination, refresh, rendering, public managedCLI or submission result follows.",
+      "source": [
+        "expected_output/live-single-post-2026-10-12/collection.json",
+        "greenhouse-single-post-contract.json"
+      ]
+    },
+    {
+      "id": "C19",
+      "type": "documented",
+      "text": "Distributed employer evidence is safe field/receipt projection only; original full HTML/API hashes cannot be reproduced from projections or owned short fixture. Public JSON/directHTTP alternatives already supplied relevant facts.",
+      "source": [
+        "expected_output/live-single-post-2026-10-12/greenhouse-html-field-projection.json",
+        "expected_output/live-single-post-2026-10-12/greenhouse-job-api-projection.json",
+        "expected_output/live-single-post-2026-10-12/receipt.json"
+      ]
     }
   ],
-  "requires_api_key_scope": "Default offline runner only; the separate recorded transport call used authentication that is not retained.",
+  "requires_api_key_scope": "Default offline runner only; separate recorded owned and selected-post transport calls used authentication not retained.",
   "environment_scope": "Default offline test run; live capture parameters and observation times are separately recorded.",
   "recorded_live_owned_transport": {
     "receipt": "expected_output/live-managed-2026-10-11/receipt.json",
@@ -315,5 +384,33 @@
       "return_page_source": "false"
     },
     "scope": "Unchanged managed_html accepted one owned raw fixture and its initial source marker. No employer/ATS HTML, job adapter, managed CLI, pagination or rendering proof."
+  },
+  "recorded_live_selected_post": {
+    "receipt": "expected_output/live-single-post-2026-10-12/receipt.json",
+    "collection": "expected_output/live-single-post-2026-10-12/collection.json",
+    "source_url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+    "started_at_utc": "2026-10-12T09:42:19.062837+00:00",
+    "completed_at_utc": "2026-10-12T09:42:20.237010+00:00",
+    "API_status": 200,
+    "target_status": 200,
+    "actual_receipt_credits": 1,
+    "requests": 1,
+    "accepted": true,
+    "body_bytes": 104223,
+    "body_sha256": "b8385bbc2da7e5d34e469dad34117c059449bb68786df0e5063dc21ed09bb886",
+    "full_body_distributed": false,
+    "hash_reproducible_from_projection": false,
+    "scope": "One selected published posting only; explicit raw acquisition and source-specific literal record. No board inventory/pagination/refresh/rendering/publicCLI/submission/generalATS result."
+  },
+  "single_post_file_hashes": {
+    "greenhouse_single_post.py": "a111d737e31712250808e755ba20555c6c4b4f149d6a6ed7c070ef9698913cd6",
+    "test_greenhouse_single_post.py": "7487928da632c652978fedf754f836db1cec7d03a2eff15d973f28e6722bbd08",
+    "greenhouse-single-post-contract.json": "003de766b6f33f932c067fc4ab9e99e8be8f44ba1fa6c43c533d9f9b57a3120b",
+    "fixtures/greenhouse-single-post.html": "67537cef37a8ed55a3016448cede0c081a2cda0c0a718bf2a97904a4b795723b",
+    "fixtures/greenhouse-single-post-expected-record.json": "9f9f7f19c1c45e012a7c9ec23e90833b733a145a2da568b6b9e7a894ecee8b0a",
+    "expected_output/live-single-post-2026-10-12/receipt.json": "04d602be37d5a58f2cbbc5ffe5a3f75e69217a57ea771e201529aaae7a89a58a",
+    "expected_output/live-single-post-2026-10-12/collection.json": "fc7a9c13d50a8125b71caffdd0fff2297510d7f3e08b19fc36e17472763b929d",
+    "expected_output/live-single-post-2026-10-12/greenhouse-html-field-projection.json": "368f784642bd1e62f7fe8a06a222c76a8fd1fe1ae6fd87a74bc42016d344ef06",
+    "expected_output/live-single-post-2026-10-12/greenhouse-job-api-projection.json": "ddcd883665bb80dcdbabe77c46e5e4b8e1ececa028535b99abae79348e69bcbd"
   }
 }
