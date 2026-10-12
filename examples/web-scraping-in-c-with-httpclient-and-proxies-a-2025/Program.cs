@@ -6,9 +6,14 @@ if (args.Length == 0 || args.SequenceEqual(new[] { "--offline" }))
     await OfflineChecks.RunAsync();
     return 0;
 }
+if (args.SequenceEqual(new[] { "--offline-jsonld" }))
+{
+    await JsonLdChecks.RunAsync();
+    return 0;
+}
 if (!LiveOptions.TryParse(args, out var options))
 {
-    Console.Error.WriteLine("Usage: dotnet run -- --offline | --live HTTPS_URL raw|rendered [--contract article-fields|single-product-offer-jsonld]");
+    Console.Error.WriteLine("Usage: dotnet run -- --offline | --offline-jsonld | --live HTTPS_URL raw|rendered [--contract article-fields|single-product-offer-jsonld]");
     return 2;
 }
 // Explicit live opt-in: one GET, no automatic paid retries, never runs from run.sh.

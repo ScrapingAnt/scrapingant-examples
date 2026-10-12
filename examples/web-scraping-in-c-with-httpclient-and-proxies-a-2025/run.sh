@@ -22,14 +22,29 @@ mkdir -p actual_output
 "$dotnet_cmd" run --no-restore --no-build --configuration Release -- --offline | tee actual_output/offline.txt
 python3 verify_output.py | tee actual_output/oracle.txt
 python3 verify_output.py --controls | tail -n 1 | tee actual_output/oracle-controls.txt
+"$dotnet_cmd" run --no-restore --no-build --configuration Release -- --offline-jsonld | tee actual_output/jsonld.txt
+python3 verify_jsonld.py | tee actual_output/jsonld-oracle.txt
+python3 verify_jsonld.py --controls | tail -n 1 | tee actual_output/jsonld-oracle-controls.txt
+python3 live-captures/verify_captures.py | tee actual_output/marker-captures.txt
+python3 live-captures/product-jsonld/verify_capture.py | tee actual_output/native-capture.txt
+python3 live-captures/product-jsonld/verify_capture.py --controls | tail -n 1 | tee actual_output/native-capture-controls.txt
 if [[ "${1:-}" == '--capture' ]]; then
   mkdir -p expected_output
   cp actual_output/offline.txt actual_output/results.json actual_output/oracle.txt actual_output/oracle-controls.txt expected_output/
+  cp actual_output/jsonld.txt actual_output/jsonld-results.json actual_output/jsonld-oracle.txt actual_output/jsonld-oracle-controls.txt expected_output/
+  cp actual_output/marker-captures.txt actual_output/native-capture.txt actual_output/native-capture-controls.txt expected_output/
   echo 'Captured offline outputs; live API calls=0'
 else
   diff -u expected_output/offline.txt actual_output/offline.txt
   diff -u expected_output/results.json actual_output/results.json
   diff -u expected_output/oracle.txt actual_output/oracle.txt
   diff -u expected_output/oracle-controls.txt actual_output/oracle-controls.txt
+  diff -u expected_output/jsonld.txt actual_output/jsonld.txt
+  diff -u expected_output/jsonld-results.json actual_output/jsonld-results.json
+  diff -u expected_output/jsonld-oracle.txt actual_output/jsonld-oracle.txt
+  diff -u expected_output/jsonld-oracle-controls.txt actual_output/jsonld-oracle-controls.txt
+  diff -u expected_output/marker-captures.txt actual_output/marker-captures.txt
+  diff -u expected_output/native-capture.txt actual_output/native-capture.txt
+  diff -u expected_output/native-capture-controls.txt actual_output/native-capture-controls.txt
   echo 'Recorded offline outputs match'
 fi

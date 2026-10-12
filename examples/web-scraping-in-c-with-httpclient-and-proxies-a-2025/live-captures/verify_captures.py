@@ -62,4 +62,4 @@ for mode, (cost, size, digest, text) in oracles.items():
         assert not loaded, "Raw capture has an actual loaded marker"
     else:
         assert len(loaded) == 1 and loaded[0]["tag"] == "div" and loaded[0]["text"].strip() == "loaded"
-print("PASS 2/2 saved owned-fixture captures: hashes, receipts and literal DOM markers; replay API calls=0; SKU parser not validated")
+print("PASS 2/2 saved delayed-marker captures: hashes, receipts and literal DOM markers; replay API calls=0; marker-only scope")
