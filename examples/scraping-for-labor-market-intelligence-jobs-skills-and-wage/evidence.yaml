@@ -2,7 +2,7 @@
   "article_id": "scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "canonical_url": "https://scrapingant.com/blog/scraping-for-labor-market-intelligence-jobs-skills-and-wage",
   "owner": "Oleg Kulyk",
-  "review_state": "AI-assisted draft; one-post capture independently accepted; public integration independent review and named-author review pending",
+  "review_state": "AI-assisted evidence implementation; one-post capture and public integration independently reviewed; publication/index restoration approved by Oleg Kulyk on2026-10-12; no separate human methodology-review report asserted",
   "examples_repo_commit": "6d500a8e78db711b9fcf2181a17a256421588cab",
   "commit_note": "examples_repo_commit identifies the original 50-test offline snapshot. New single-post code is identified by file hashes below; the article pins the final immutable packet tree. The existing collector/schema/transport and original captures are unchanged.",
   "tested_at": "2026-10-12",
@@ -412,5 +412,6 @@
     "expected_output/live-single-post-2026-10-12/collection.json": "fc7a9c13d50a8125b71caffdd0fff2297510d7f3e08b19fc36e17472763b929d",
     "expected_output/live-single-post-2026-10-12/greenhouse-html-field-projection.json": "368f784642bd1e62f7fe8a06a222c76a8fd1fe1ae6fd87a74bc42016d344ef06",
     "expected_output/live-single-post-2026-10-12/greenhouse-job-api-projection.json": "ddcd883665bb80dcdbabe77c46e5e4b8e1ececa028535b99abae79348e69bcbd"
-  }
+  },
+  "limits": []
 }

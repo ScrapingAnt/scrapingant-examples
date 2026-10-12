@@ -106,4 +106,4 @@ As checked in current documentation on October 11, ordinary non-Google datacente
 
 ## Review/publication state
 
-AI-assisted evidence implementation and draft. The recorded one-post capture passed independent acceptance review; independent review of this public integration and named-author methodology review are pending. The article remains unlisted; this packet establishes reproducibility within its stated boundaries and does not authorize restoration or deployment.
+AI-assisted evidence implementation. The recorded one-post capture and public integration passed independent review. Oleg Kulyk approved publication and index restoration on October 12, 2026; no separate human methodology-review report is asserted. Final build/visibility/CI checks remain release gates, and owner deployment is separate. This packet establishes reproducibility only within its stated boundaries.
