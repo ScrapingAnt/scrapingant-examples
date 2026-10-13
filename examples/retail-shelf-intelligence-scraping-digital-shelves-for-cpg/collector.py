@@ -173,8 +173,13 @@ def parse_page(body, *, requested_source_url, observed_at_utc):
         if not isinstance(body, bytes) or not body or len(body) > MAX_BYTES:
             raise ValueError("empty_or_oversized_body")
         page = ProductPage()
-        page.feed(body.decode("utf-8", errors="strict"))
-        page.close()
+        try:
+            page.feed(body.decode("utf-8", errors="strict"))
+            page.close()
+        except AssertionError:
+            # HTMLParser reports malformed marked declarations with assertions.
+            # Keep untrusted content inside the structured acceptance boundary.
+            raise ValueError("malformed_source_HTML") from None
         if page.canonicals != [requested_source_url] or page.in_script or page.duplicate_attributes:
             raise ValueError("invalid_source_envelope")
         groups = []

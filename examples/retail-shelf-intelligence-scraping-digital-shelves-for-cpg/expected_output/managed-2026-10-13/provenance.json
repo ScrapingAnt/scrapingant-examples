@@ -15,5 +15,5 @@
   "DOM_corroboration_scope": "Selected 3oz/16oz labels and out-of-stock class/text; the earlier direct capture's gram secondary labels were not present in this managed response.",
   "execution_source_file": "validation/raw-call-collector.py",
   "execution_source_path_basis": "relative to packet root",
-  "archival_source_scope": "Exact audit-only executed source bytes; excluded from default tests, demo and current CLI. The current collector strengthens saved-projection validation; native acquisition, collection and HTML parsing are unchanged."
+  "archival_source_scope": "Exact audit-only executed source bytes; excluded from default tests, demo and current CLI. The current collector strengthens saved-projection validation; native HTTP acquisition and valid-source field extraction remain unchanged; malformed HTMLParser marked-section assertions now become structured incomplete observations."
 }

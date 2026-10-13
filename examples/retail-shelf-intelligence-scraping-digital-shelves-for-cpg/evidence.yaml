@@ -54,15 +54,15 @@
   "review": {
     "AI_assisted": true,
     "independent_source_oracle": "Independently typed from direct source inspection; not produced by collector.py.",
-    "named_author_methodology_review": "pending",
-    "publication_approval": "pending",
+    "named_author_methodology_review": "Review delegated to an independent technical reviewer; no personal methodology-review report claimed.",
+    "publication_approval": "Owner conditionally approved publication and retail-only index/discovery restoration on 2026-10-13 after fresh independent review and exact-head checks.",
     "human_review_report_claimed": false
   },
   "measurements": [
     {
       "name": "scoped_offline_tests",
-      "value": 71,
-      "denominator": "71 scoped unittest methods; subtests are not counted separately",
+      "value": 74,
+      "denominator": "74 scoped unittest methods; subtests are not counted separately",
       "source": "expected_output/tests.txt"
     },
     {
@@ -185,7 +185,7 @@
   "claims": [
     {
       "id": "R1",
-      "text": "CPython3.12.11 standard library;71 scoped tests pass and6/6 behavioral mutations fail as expected.",
+      "text": "CPython3.12.11 standard library;74 scoped tests pass and6/6 behavioral mutations fail as expected.",
       "type": "measured",
       "source": [
         ".python-version",
@@ -294,6 +294,16 @@
         "expected_output/tests.txt",
         "expected_output/managed-2026-10-13/post-capture-offline-check.json"
       ]
+    },
+    {
+      "id": "R13",
+      "text": "Malformed HTMLParser marked-section declarations return incomplete JSON with no accepted stock observation or traceback; an HTTP200 acquisition retains its known receipt cost and has no per-accepted-record denominator.",
+      "type": "offline_failure_control",
+      "source": [
+        "collector.py",
+        "test_malformed_html.py",
+        "expected_output/tests.txt"
+      ]
     }
   ],
   "limitations": [
@@ -306,13 +316,13 @@
     "Optional managed raw/rendered CLI not executed by runner; mocks establish controls only. No account usage/status calls or provider retries.",
     "30-second socket timeout plus elapsed read checks is not a hard30-second wall-clock cap; blocking read may finish after threshold. Body cap262144bytes and bounded read chunks enforced.",
     "API endpoint redirects are rejected; remote target redirect behavior is not proven by that guard.",
-    "Verification is the scoped 71-test suite and separate offline workflow; no whole-repository offline test claim. The global monthly workflow and allowlist are unchanged.",
-    "Named-author methodology review and publication approval pending; no human methodology-review report asserted.",
+    "Verification is the scoped 74-test suite and separate offline workflow; no whole-repository offline test claim. The global monthly workflow and allowlist are unchanged.",
+    "Owner conditionally approved publication after delegated independent review; no personal named-author methodology-review report is asserted.",
     "The separately recorded real raw observation validates only two selected listed weight offers. It does not prove JavaScript necessity, rendered retrieval, managed repeat refresh, standalone publicmanagedCLI execution or retailer-wide success. Direct HTML already supplied the facts; source gram secondary labels were absent from the managed DOM."
   ],
   "file_sha256": {
     "adagio-field-contract.json": "96d5061641f52f55cdc49da6e09d564717223ae445b2ee79ee794a437fee9b0e",
-    "collector.py": "113f746c8e8418a924ce4151d47539d02fd250ca36463f1eb516cd9c4d85c9bd",
+    "collector.py": "02524586e8f66e790fdf6ff51bcc3aff901552d572f5c7d52cd66f5fdfa96d49",
     "demo.py": "7c11d5abc533cf51c518f3d7f2626639a512c982e14312dbfbfd83859c34cf75",
     "expected_output/adagio-projection-records.csv": "607fd371ac3207a1aca9a927b5a0969faf6b65ec56ca3f006ad43ee3a7cdd608",
     "expected_output/adagio-projection-replay.json": "d3dae40a20477e071c88863ddc1afdb48a8d7639266491b6223cc1bc07248db6",
@@ -322,8 +332,8 @@
     "expected_output/changed.json": "01300b8caaacfc44072a2dfd7811a2e2fa19bdc2d01a8568864e86f9c7288484",
     "expected_output/changes.json": "461619a22a332752667e343b010ba4919ceef7eddc6af43ad4602688b01e15b0",
     "expected_output/managed-2026-10-13/collection.json": "61b5839fc1d8995ba46a67c053da7c298d9298af9a83874401ce654a25701124",
-    "expected_output/managed-2026-10-13/post-capture-offline-check.json": "327df0eabe67501c90d6803e381f1586ea62cd35b54c38a70388142fdbb22477",
-    "expected_output/managed-2026-10-13/provenance.json": "988f1d62c9a96729467c4b2409c5585f6fad0d172dfe41e516b9e8117846a557",
+    "expected_output/managed-2026-10-13/post-capture-offline-check.json": "48f43c8b450ebea5b918fcecf77d045ef12b3b2858602a3aee24a683f1dc987c",
+    "expected_output/managed-2026-10-13/provenance.json": "7a08bf6c96ec133974dc58bbdbed25b9b3869a79db90c449d9adbd532d53d9c0",
     "expected_output/managed-2026-10-13/receipt.json": "c577554fac25d1eaff5e9b8158c2e092c85e24e28282c4feb253b153164cd083",
     "expected_output/naive-price.json": "1cca0ff059f638d9b6477323f126865e413038f517a308a2a023332ef2756cb5",
     "expected_output/negative-controls.txt": "c3fc09a9989dffad4304ec582672993c9c833f65d607d53567fa7cd07e785d45",
@@ -349,11 +359,12 @@
     "test_projection.py": "f1bc1772de0646e2edd3609dfdce2db5a9d46548f65a8615b9a8356fa46b68b2",
     "test_transport.py": "0b92a8aefe9c6b776df4226715706d1bf7cfbc0e7d4ea61a4a23c5debc143521",
     "validation/raw-call-collector.py": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
-    "validation/README.md": "83f4f168ebaf99ab1114658a6571beedd326c555f093e652566599d25d1155e1"
+    "validation/README.md": "848f29ee690b374ba737df0f92c7c28c244bf5a93a287297febbdce90ff88d78",
+    "test_malformed_html.py": "642e2ddc935f30cd3edb89b28a08191da88e3bcefacb4abe8798d999132b8664"
   },
   "post_capture_correction": {
-    "scope": "After the executed snapshot, only saved-projection validation and locator mapping were strengthened. Native acquisition, collection and HTML parser are unchanged.",
-    "current_collector_sha256": "113f746c8e8418a924ce4151d47539d02fd250ca36463f1eb516cd9c4d85c9bd",
+    "scope": "After the executed snapshot, saved-projection validation and locator mapping were strengthened, and malformed HTMLParser marked-section assertions were normalized into incomplete observations. Native HTTP acquisition and valid-source field extraction remain unchanged.",
+    "current_collector_sha256": "02524586e8f66e790fdf6ff51bcc3aff901552d572f5c7d52cd66f5fdfa96d49",
     "called_collector_sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
     "retained_genuine_body_replay": "expected_output/managed-2026-10-13/post-capture-offline-check.json",
     "provider_calls_for_correction": 0,
@@ -361,7 +372,6 @@
     "native_functions_unchanged": [
       "acquire",
       "collection",
-      "parse_page",
       "parse_group",
       "record",
       "ProductPage",
@@ -370,6 +380,9 @@
       "NoRedirect",
       "header",
       "secret_echo"
+    ],
+    "native_boundary_changes": [
+      "parse_page converts HTMLParser marked-section AssertionError into normalized incomplete acceptance; valid-source records and HTTP receipt cost are preserved."
     ]
   },
   "archival_execution_source": {

@@ -135,9 +135,10 @@ contradictory capture times, hashes, source kinds and material fields. The
 receipt retains the exact executed code hash and points to
 `validation/raw-call-collector.py`, an unchanged audit-only source snapshot.
 That snapshot is excluded from default tests, replay commands and the current
-CLI; use `collector.py` for the supported interface. Native acquisition,
-collection and HTML parsing are unchanged; saved-projection validation and
-locator mapping were strengthened after capture. A local replay of the retained
+CLI; use `collector.py` for the supported interface. Native HTTP acquisition
+and valid-source field extraction remain unchanged.
+The current collector rejects malformed HTMLParser marked sections as incomplete
+observations; saved-projection validation and locator mapping were strengthened after capture. A local replay of the retained
 genuine bytes under the final validator produces the same two records; no
 provider call is needed for that check. The separate direct projection requires
 consistent explicit UTC capture time, SHA256, direct-source kind and exact
