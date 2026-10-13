@@ -1,0 +1,34 @@
+[
+  {
+    "product_group_id": "001036",
+    "sku": "001036002",
+    "size_literal": "3oz",
+    "pack_size": 3,
+    "pack_unit": "oz",
+    "pack_measure": "weight",
+    "price_decimal": "9.00",
+    "currency": "USD",
+    "availability_literal": "https://schema.org/OutOfStock",
+    "market": "US",
+    "market_basis": "page microdata shippingDestination.addressCountry=US",
+    "offer_basis": "listed_variant_offer",
+    "purchase_basis": "unspecified",
+    "fulfilment": "unselected"
+  },
+  {
+    "product_group_id": "001036",
+    "sku": "001036004",
+    "size_literal": "16oz",
+    "pack_size": 16,
+    "pack_unit": "oz",
+    "pack_measure": "weight",
+    "price_decimal": "29.00",
+    "currency": "USD",
+    "availability_literal": "https://schema.org/OutOfStock",
+    "market": "US",
+    "market_basis": "page microdata shippingDestination.addressCountry=US",
+    "offer_basis": "listed_variant_offer",
+    "purchase_basis": "unspecified",
+    "fulfilment": "unselected"
+  }
+]

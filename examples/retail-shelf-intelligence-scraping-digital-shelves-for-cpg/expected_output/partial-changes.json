@@ -1,0 +1,46 @@
+{
+  "changes": [
+    {
+      "fields": {
+        "price": {
+          "after": "8.50",
+          "before": "8.25"
+        }
+      },
+      "sku": "000701002",
+      "variant": "3oz"
+    }
+  ],
+  "current_complete": false,
+  "new_observations": [],
+  "scope": "two selected offers; no inventory/disappearance inference",
+  "unobserved_prior_records": [
+    {
+      "availability": "out_of_stock",
+      "currency": "USD",
+      "fulfilment": "unselected",
+      "market": "unknown",
+      "market_basis": "unspecified",
+      "observed_at_utc": "2026-10-13T11:00:00Z",
+      "observed_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+      "offer_context": "owned fictional USD offer",
+      "offer_kind": "listed_variant_offer",
+      "pack_quantity": 16,
+      "pack_unit": "ounce",
+      "price": "24.00",
+      "product_id": "000701",
+      "purchase_basis": "unspecified",
+      "requested_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+      "sku": "000701004",
+      "source_evidence": {
+        "availability_token": "https://schema.org/OutOfStock",
+        "offer_path": "$.hasVariant[2].offers",
+        "pack_label": "16oz",
+        "price_token": "24.00",
+        "product_path": "$.hasVariant[2]"
+      },
+      "variant": "16oz",
+      "variant_id": null
+    }
+  ]
+}

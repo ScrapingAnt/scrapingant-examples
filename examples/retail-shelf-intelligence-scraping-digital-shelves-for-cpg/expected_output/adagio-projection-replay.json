@@ -1,0 +1,78 @@
+{
+  "acquisition": {
+    "actual_receipt_credits": null,
+    "api_http_status": null,
+    "credit_receipt_state": "not_applicable",
+    "projection_sha256": "1619e6ef12fc52fef9cd64d636069354ab28b436805ab2f389c8fcae7718956a",
+    "scope": "saved minimal facts; full HTML withheld; original body hash cannot be regenerated from this projection",
+    "source_body_sha256": "8b1400da3561c1861ebdd3d087e6c2455daa68ce626c9a7de5b5c25a186a4c50",
+    "source_kind": "direct_html_observation",
+    "source_observed_at_utc": "2026-10-13T10:37:02.818788+00:00",
+    "target_http_status": null,
+    "transport": "field_projection_replay"
+  },
+  "complete": true,
+  "cost": {
+    "accepted_records": 2,
+    "actual_receipt_credits": null,
+    "credits_per_accepted_record": null,
+    "unknown_charge_requests": 0
+  },
+  "records": [
+    {
+      "availability": "out_of_stock",
+      "currency": "USD",
+      "fulfilment": "unselected",
+      "market": "US",
+      "market_basis": "page_shipping_destination",
+      "observed_at_utc": "2026-10-13T10:37:02Z",
+      "observed_source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+      "offer_context": "public stated USD offer",
+      "offer_kind": "listed_variant_offer",
+      "pack_quantity": 3,
+      "pack_unit": "ounce",
+      "price": "9.00",
+      "product_id": "001036",
+      "purchase_basis": "unspecified",
+      "requested_source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+      "sku": "001036002",
+      "source_evidence": {
+        "availability_token": "https://schema.org/OutOfStock",
+        "offer_path": "projection.records[0].price_decimal",
+        "pack_label": "3oz",
+        "price_token": "9.00",
+        "product_path": "projection.records[0]"
+      },
+      "variant": "3oz",
+      "variant_id": null
+    },
+    {
+      "availability": "out_of_stock",
+      "currency": "USD",
+      "fulfilment": "unselected",
+      "market": "US",
+      "market_basis": "page_shipping_destination",
+      "observed_at_utc": "2026-10-13T10:37:02Z",
+      "observed_source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+      "offer_context": "public stated USD offer",
+      "offer_kind": "listed_variant_offer",
+      "pack_quantity": 16,
+      "pack_unit": "ounce",
+      "price": "29.00",
+      "product_id": "001036",
+      "purchase_basis": "unspecified",
+      "requested_source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+      "sku": "001036004",
+      "source_evidence": {
+        "availability_token": "https://schema.org/OutOfStock",
+        "offer_path": "projection.records[1].price_decimal",
+        "pack_label": "16oz",
+        "price_token": "29.00",
+        "product_path": "projection.records[1]"
+      },
+      "variant": "16oz",
+      "variant_id": null
+    }
+  ],
+  "rejected": []
+}

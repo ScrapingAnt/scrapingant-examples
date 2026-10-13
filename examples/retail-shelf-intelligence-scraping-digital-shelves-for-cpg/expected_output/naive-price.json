@@ -1,0 +1,9 @@
+{
+  "currency": "USD",
+  "matches": false,
+  "naive_group_low_price": "2.00",
+  "scope": "owned fictional data; aggregate sample price cannot be assigned to the selected weight offer",
+  "selected_SKU": "000701002",
+  "selected_offer_price": "8.25",
+  "selected_pack": "3oz"
+}

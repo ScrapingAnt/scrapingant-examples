@@ -1,0 +1,400 @@
+{
+  "title": "Selected retail SKU observations",
+  "slug": "retail-shelf-intelligence-scraping-digital-shelves-for-cpg",
+  "tested_at": "2026-10-13",
+  "environment": {
+    "python": "CPython 3.12.11",
+    "dependencies": "standard library only",
+    "runtime_pin": ".python-version",
+    "executed_platform": "macOS arm64"
+  },
+  "requires_api_key": false,
+  "requires_api_key_scope": "Default runner is offline even when a key is present; optional managed CLI requires an existing environment credential and explicit execution.",
+  "commands": [
+    {
+      "command": "PYTHON=python3 ./run.sh",
+      "scope": "actually run with python3 resolving to CPython3.12.11; owned loopback and local/in-memory inputs only"
+    },
+    {
+      "command": "python3 collector.py replay fixtures/baseline.html --observed-at 2026-10-13T11:00:00Z",
+      "scope": "actual CLI stdout captured by demo.py"
+    },
+    {
+      "command": "python3 collector.py replay fixtures/changed.html --observed-at 2026-10-13T12:00:00Z",
+      "scope": "actual CLI stdout captured by demo.py"
+    },
+    {
+      "command": "python3 collector.py replay fixtures/partial.html --observed-at 2026-10-13T12:00:00Z",
+      "scope": "actual CLI stdout captured; expected exit1"
+    },
+    {
+      "command": "python3 collector.py replay fixtures/changed-pack.html --observed-at 2026-10-13T12:00:00Z",
+      "scope": "actual CLI stdout captured; expected exit1"
+    },
+    {
+      "command": "python3 collector.py projection fixtures/adagio-field-projection.json",
+      "scope": "actual saved-facts replay; no HTTP request"
+    },
+    {
+      "command": "SCRAPINGANT_API_KEY=owned-offline-sentinel PYTHON=python3 ./run.sh",
+      "scope": "actually executed final offline packet with a noncredential sentinel in the environment; no external DNS/socket attempts or provider calls"
+    }
+  ],
+  "optional_commands": [
+    {
+      "command": "python3 collector.py direct",
+      "executed_by_default_runner": false
+    },
+    {
+      "command": "python3 collector.py managed --browser false",
+      "executed_by_default_runner": false,
+      "note": "Standalone public managed CLI not executed; any separately recorded parent observation has its own receipt and provenance."
+    }
+  ],
+  "review": {
+    "AI_assisted": true,
+    "independent_source_oracle": "Independently typed from direct source inspection; not produced by collector.py.",
+    "named_author_methodology_review": "Review delegated to an independent technical reviewer; no personal methodology-review report claimed.",
+    "publication_approval": "Owner conditionally approved publication and retail-only index/discovery restoration on 2026-10-13 after fresh independent review and exact-head checks.",
+    "human_review_report_claimed": false
+  },
+  "measurements": [
+    {
+      "name": "scoped_offline_tests",
+      "value": 74,
+      "denominator": "74 scoped unittest methods; subtests are not counted separately",
+      "source": "expected_output/tests.txt"
+    },
+    {
+      "name": "behavior_mutations_caught",
+      "value": 6,
+      "denominator": "six real mutated collector copies, each failing a behavioral assertion rather than an import/syntax error",
+      "source": "expected_output/negative-controls.txt"
+    },
+    {
+      "name": "owned_baseline_accepted",
+      "value": 2,
+      "denominator": "two selected fictional weight offers on one owned page",
+      "source": "expected_output/baseline.json"
+    },
+    {
+      "name": "owned_changed_field_reports",
+      "value": 2,
+      "denominator": "two matched offer identities; one includes price+explicit availability, the other OOS to unknown field observation",
+      "source": "expected_output/changes.json"
+    },
+    {
+      "name": "owned_partial_accepted",
+      "value": 1,
+      "denominator": "two selected fictional offers; second absent and its prior record/time retained",
+      "source": "expected_output/partial-changes.json"
+    },
+    {
+      "name": "owned_changed_pack_accepted",
+      "value": 1,
+      "denominator": "two selected fictional offers; changed 16oz to12oz violates fixed pack contract",
+      "source": "expected_output/changed-pack.json"
+    },
+    {
+      "name": "saved_source_projection_oracle_matches",
+      "value": 2,
+      "denominator": "two minimal factual offers at original capture time; replay creates no fresh HTTP observation",
+      "source": "expected_output/adagio-projection-replay.json"
+    },
+    {
+      "name": "external_DNS_socket_attempts_in_offline_test_process",
+      "value": 0,
+      "denominator": "scoped suite with audit hook rejecting non-loopback DNS/socket events; child CLI replays are local-file commands",
+      "source": "expected_output/tests.txt"
+    },
+    {
+      "name": "one_raw_managed_request_accepted",
+      "value": 2,
+      "denominator": "one raw managed request, API/target200, actual1-credit receipt; two selected offers at2026-10-13T10:59:39Z, no production-yield estimate",
+      "source": "expected_output/managed-2026-10-13/collection.json"
+    }
+  ],
+  "direct_source_observation": {
+    "url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+    "observed_at_utc": "2026-10-13T10:37:02.818788+00:00",
+    "HTTP_status": 200,
+    "body_bytes": 93262,
+    "source_body_sha256": "8b1400da3561c1861ebdd3d087e6c2455daa68ce626c9a7de5b5c25a186a4c50",
+    "provider_calls": 0,
+    "selected_offers": 2,
+    "projection_file": "fixtures/adagio-field-projection.json",
+    "oracle_file": "fixtures/adagio-source-oracle.json",
+    "scope": "Direct public HTML observation; only tiny factual projection distributed. Full body withheld. Source permission inspection found product route allowed by inspected robots and no automated-access restriction on inspected homepage/footer-linked policy; no blanket reuse permission asserted.",
+    "hash_scope": "Original full-body hash was measured before projection; it cannot be regenerated from projection/replay/owned fixture bytes."
+  },
+  "managed_observation": {
+    "status": "recorded_single_raw_observation",
+    "default_runner_calls": 0,
+    "standalone_public_CLI_executed": false,
+    "receipt": "expected_output/managed-2026-10-13/receipt.json",
+    "minimal_field_projection": "expected_output/managed-2026-10-13/collection.json",
+    "provenance": "expected_output/managed-2026-10-13/provenance.json",
+    "collector_sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+    "requests": 1,
+    "request_parameters": {
+      "browser": false,
+      "proxy_country": "us",
+      "proxy_type": "datacenter",
+      "return_page_source": false,
+      "timeout": 30,
+      "url": "https://www.adagio.com/black/earl_grey_lavender_tea.html"
+    },
+    "started_at_utc": "2026-10-13T10:59:37.176784+00:00",
+    "observed_at_utc": "2026-10-13T10:59:39.348080+00:00",
+    "API_status": 200,
+    "target_status": 200,
+    "target_media_type": "text/html",
+    "actual_receipt_credits": 1,
+    "accepted_records": 2,
+    "credits_per_accepted_record": "0.50",
+    "unknown_charge_requests": 0,
+    "source_body_bytes": 87942,
+    "source_body_sha256": "1e64467b5c69879349facba7c62c8e3d3a86a9e9d2e44454bc4f3c56a3b14473",
+    "full_body_distributed": false,
+    "scope": "One separately recorded acquire()/collection() raw call using frozen code; source-wide/refresh/rendering/standalone publicCLI validation not implied. Default reads saved minimal evidence only.",
+    "DOM_corroboration_limit": "Managed size+OutOfStock labels present; earlier direct-capture gram secondary labels absent. Full-body hashes cannot be regenerated from projections.",
+    "execution_source_file": "validation/raw-call-collector.py"
+  },
+  "external_sources": [
+    {
+      "url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+      "checked_at": "2026-10-13",
+      "claim": "Two selected SKU weight packs with variant Offer USD price and explicit OutOfStock; source-wide availability, checkout and subscription basis unvalidated."
+    },
+    {
+      "url": "https://docs.scrapingant.com/request-response-format",
+      "checked_at": "2026-10-13",
+      "claim": "Primary documentation rechecked general endpoint HTML and explicit browser/proxy_type/proxy_country/return_page_source/timeout parameters; interface fact, not source acceptance."
+    },
+    {
+      "url": "https://docs.scrapingant.com/custom-headers",
+      "checked_at": "2026-10-13",
+      "claim": "Primary documentation rechecked target media/status headers distinct from outer API response."
+    },
+    {
+      "url": "https://docs.scrapingant.com/credits-cost",
+      "checked_at": "2026-10-13",
+      "claim": "Primary documentation rechecked credit receipt; missing or malformed receipt is unknown. No new paid result inferred from documentation."
+    }
+  ],
+  "claims": [
+    {
+      "id": "R1",
+      "text": "CPython3.12.11 standard library;74 scoped tests pass and6/6 behavioral mutations fail as expected.",
+      "type": "measured",
+      "source": [
+        ".python-version",
+        "requirements.txt",
+        "expected_output/tests.txt",
+        "expected_output/negative-controls.txt"
+      ]
+    },
+    {
+      "id": "R2",
+      "text": "Owned baseline2/2 offers accept; aggregate sample2.00 differs from selected3oz8.25USD.",
+      "type": "measured",
+      "source": [
+        "expected_output/baseline.json",
+        "expected_output/naive-price.json",
+        "fixtures/baseline-records.json"
+      ]
+    },
+    {
+      "id": "R3",
+      "text": "Changed complete snapshot reports two matched field changes, including explicitOOS to unknown as a field observation.",
+      "type": "measured",
+      "source": [
+        "expected_output/changed.json",
+        "expected_output/changes.json"
+      ]
+    },
+    {
+      "id": "R4",
+      "text": "Partial1/2 acceptance retains prior unobserved record and original timestamp; changedpack rejects second offer without a price/disappearance claim.",
+      "type": "measured",
+      "source": [
+        "expected_output/partial-changes.json",
+        "expected_output/changed-pack-changes.json"
+      ]
+    },
+    {
+      "id": "R5",
+      "text": "Direct source inspection and minimal saved projection identify group001036/SKUs001036002+001036004,3/16oz,9.00/29.00USD,explicitOOS. Projection replay is not a managed receipt or fresh retrieval.",
+      "type": "measured",
+      "source": [
+        "fixtures/adagio-field-projection.json",
+        "fixtures/adagio-source-oracle.json",
+        "expected_output/adagio-projection-replay.json"
+      ]
+    },
+    {
+      "id": "R6",
+      "text": "Default runner uses owned loopback/local/in-memory inputs and rejects external DNS/socket attempts; optional commands are excluded even with an ambient key.",
+      "type": "executed_control",
+      "source": [
+        "run.sh",
+        "offline_tests.py",
+        "test_cli.py",
+        "expected_output/tests.txt"
+      ]
+    },
+    {
+      "id": "R7",
+      "text": "One fixed ProductGroup source shape selects exact group+SKU+size; pack ounces are weight; URLs are shared and variant_id stays null.",
+      "type": "source_contract",
+      "source": [
+        "adagio-field-contract.json",
+        "collector.py",
+        "test_collector.py"
+      ]
+    },
+    {
+      "id": "R8",
+      "text": "Managed request parameters and header auth are explicit; no retries/APIredirects/fallback/automatic rendering. Actual status/media/credits and field acceptance are separate.",
+      "type": "offline_interface_control",
+      "source": [
+        "collector.py",
+        "test_transport.py",
+        "expected_output/tests.txt"
+      ]
+    },
+    {
+      "id": "R9",
+      "text": "Receipt cost and cost per accepted record are separate; absent or malformed receipts are unknown and zero accepted records have no per-record denominator.",
+      "type": "offline_control",
+      "source": [
+        "test_changes.py",
+        "test_transport.py",
+        "expected_output/tests.txt"
+      ]
+    },
+    {
+      "id": "R10",
+      "text": "One raw managed request returnedAPI/target200,1actualcredit and2exactselectedSKU/size/decimalprice/USD/explicit-OOSrecords; observed0.50credit peracceptedrecord foroneobservation only. Frozen executioncode, minimalfieldprojection andfullbodyhash retained, bodywithheld.",
+      "type": "measured",
+      "source": [
+        "expected_output/managed-2026-10-13/receipt.json",
+        "expected_output/managed-2026-10-13/collection.json",
+        "expected_output/managed-2026-10-13/provenance.json",
+        "fixtures/adagio-source-oracle.json"
+      ]
+    },
+    {
+      "id": "R11",
+      "text": "Saved direct projection validates both explicitUTC capture times, common fullbodyhash/sourcekind and material identity/weight/context; sorted records preserve input fieldlocators. Post-capture local genuinebody replay equals both accepted ancestor records without another provider call.",
+      "type": "offline_control",
+      "source": [
+        "test_projection.py",
+        "collector.py",
+        "expected_output/tests.txt",
+        "expected_output/managed-2026-10-13/post-capture-offline-check.json"
+      ]
+    },
+    {
+      "id": "R13",
+      "text": "Malformed HTMLParser marked-section declarations return incomplete JSON with no accepted stock observation or traceback; an HTTP200 acquisition retains its known receipt cost and has no per-accepted-record denominator.",
+      "type": "offline_failure_control",
+      "source": [
+        "collector.py",
+        "test_malformed_html.py",
+        "expected_output/tests.txt"
+      ]
+    }
+  ],
+  "limitations": [
+    "One selected two-weight-offer page; no arbitrary retailer support, universal matching, retailer inventory, production yield, scheduler, analytics or revenue result.",
+    "Owned fixture timestamps and fictional tea data are controlled inputs. Full genuine source bodies are withheld; full-body hashes cannot be regenerated from projections.",
+    "Projection replay validates saved facts only, not current source freshness, HTML layout or a managed transport. Actual direct inspection is separately dated.",
+    "Page US shipping context is observed only from actual shippingDestination.addressCountry; proxy_country=us is merely requested. Fulfilment remains unselected and purchase basis unspecified. Optional auto-delivery discounts are not selected.",
+    "Missing/failed/ambiguous records are partial/failed acquisition, not out-of-stock or disappearance. Unknown availability transitions are field observations, not stock-in/out events.",
+    "Price comparisons require matching size/pack/currency/source/market/fulfilment/offer context; changed packs require review before selection updates.",
+    "Optional managed raw/rendered CLI not executed by runner; mocks establish controls only. No account usage/status calls or provider retries.",
+    "30-second socket timeout plus elapsed read checks is not a hard30-second wall-clock cap; blocking read may finish after threshold. Body cap262144bytes and bounded read chunks enforced.",
+    "API endpoint redirects are rejected; remote target redirect behavior is not proven by that guard.",
+    "Verification is the scoped 74-test suite and separate offline workflow; no whole-repository offline test claim. The global monthly workflow and allowlist are unchanged.",
+    "Owner conditionally approved publication after delegated independent review; no personal named-author methodology-review report is asserted.",
+    "The separately recorded real raw observation validates only two selected listed weight offers. It does not prove JavaScript necessity, rendered retrieval, managed repeat refresh, standalone publicmanagedCLI execution or retailer-wide success. Direct HTML already supplied the facts; source gram secondary labels were absent from the managed DOM."
+  ],
+  "file_sha256": {
+    "adagio-field-contract.json": "96d5061641f52f55cdc49da6e09d564717223ae445b2ee79ee794a437fee9b0e",
+    "collector.py": "02524586e8f66e790fdf6ff51bcc3aff901552d572f5c7d52cd66f5fdfa96d49",
+    "demo.py": "7c11d5abc533cf51c518f3d7f2626639a512c982e14312dbfbfd83859c34cf75",
+    "expected_output/adagio-projection-records.csv": "607fd371ac3207a1aca9a927b5a0969faf6b65ec56ca3f006ad43ee3a7cdd608",
+    "expected_output/adagio-projection-replay.json": "d3dae40a20477e071c88863ddc1afdb48a8d7639266491b6223cc1bc07248db6",
+    "expected_output/baseline.json": "ee6891fea23cdaca341086b766d52c5260ccccbcabba7ec90369ba80b09775f5",
+    "expected_output/changed-pack-changes.json": "fabc4f8b86b45cc74d3aa4907e86c25bd4b29d4442ed63aafc113e722d96afa4",
+    "expected_output/changed-pack.json": "454ba90d41707c87ef6cc32cef75d939d8ea0d3857d731d876ba8b09c50dbd78",
+    "expected_output/changed.json": "01300b8caaacfc44072a2dfd7811a2e2fa19bdc2d01a8568864e86f9c7288484",
+    "expected_output/changes.json": "461619a22a332752667e343b010ba4919ceef7eddc6af43ad4602688b01e15b0",
+    "expected_output/managed-2026-10-13/collection.json": "61b5839fc1d8995ba46a67c053da7c298d9298af9a83874401ce654a25701124",
+    "expected_output/managed-2026-10-13/post-capture-offline-check.json": "48f43c8b450ebea5b918fcecf77d045ef12b3b2858602a3aee24a683f1dc987c",
+    "expected_output/managed-2026-10-13/provenance.json": "7a08bf6c96ec133974dc58bbdbed25b9b3869a79db90c449d9adbd532d53d9c0",
+    "expected_output/managed-2026-10-13/receipt.json": "c577554fac25d1eaff5e9b8158c2e092c85e24e28282c4feb253b153164cd083",
+    "expected_output/naive-price.json": "1cca0ff059f638d9b6477323f126865e413038f517a308a2a023332ef2756cb5",
+    "expected_output/negative-controls.txt": "c3fc09a9989dffad4304ec582672993c9c833f65d607d53567fa7cd07e785d45",
+    "expected_output/partial-changes.json": "49744e22e1a253a38ac5dc8a420e796621bdbd0a1530b974f12afde27443fe15",
+    "expected_output/partial.json": "52f9fff6449a3c64df85c791b910a07353c4e1896257ae6211c748364c6eaf7e",
+    "expected_output/records.csv": "a926e91af16216918a84a457f432ae230f62400cc144d46016a6838f1a39ca20",
+    "expected_output/summary.txt": "4a7af9339fd68ad5c754c1afdee11074707cea8ff1dd0f2e2013259d132d5246",
+    "fixtures/adagio-field-projection.json": "1619e6ef12fc52fef9cd64d636069354ab28b436805ab2f389c8fcae7718956a",
+    "fixtures/adagio-source-oracle.json": "248859350dfeaa84525c5ca1f3d5ac596e410f7dae5563218a8b7fb13551d4ac",
+    "fixtures/baseline-records.json": "05b772cd23c4a72bb2eb00258bcadcd434373cad803b201ab5971a4feb47db50",
+    "fixtures/baseline.html": "89118c27b341adff56dd70ba924a7f0453191151b1611b72a86470b75f3d3ab3",
+    "fixtures/changed-pack.html": "de5d1f927b6769fe206a54fc30200333a395a74433158139afb93ae6bd56a343",
+    "fixtures/changed-records.json": "a591c08dcf162aa8536dd6aabc576a811cf72e5981594e9a2a52cd87356e5e7e",
+    "fixtures/changed.html": "94997fae1301b879e7b9b4ea009c6a4d7e9c84721968df334322241d34e54660",
+    "fixtures/partial-records.json": "8acc773c04eb44a23bcba3f50a627e93a785d6350893d3aac8747d3549c39740",
+    "fixtures/partial.html": "e782e098522e724f81b2328a8bcd8f0ca99b401551ecdf7cb58670545d3b30bb",
+    "mutation_check.py": "b9b0e7af440a260784c0178b3afde8162887046a276e25be0ee1adf8e8929a8f",
+    "offline_tests.py": "8d40f949aa7ac38c2791d63ae03ead595093acfaed3c3436c87a9870546fdd26",
+    "run.sh": "208fd88e6214993ab8292a32528dffcd766bb478f4d4fccecc896fa172700c3b",
+    "test_changes.py": "4411931b78ea9a995e8f8b479bf2455ab765eabebbcbb2fdf0decd5493aa47b8",
+    "test_cli.py": "8aaeb875d3ecae21aa5e537ffd10026b378f1ed9182f61c1eab160dd61019ee0",
+    "test_collector.py": "8a5a69ab3a3d27c81a18a387ee8d3e596014799676c52a1ec0b0fa620d6eb60b",
+    "test_projection.py": "f1bc1772de0646e2edd3609dfdce2db5a9d46548f65a8615b9a8356fa46b68b2",
+    "test_transport.py": "0b92a8aefe9c6b776df4226715706d1bf7cfbc0e7d4ea61a4a23c5debc143521",
+    "validation/raw-call-collector.py": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+    "validation/README.md": "848f29ee690b374ba737df0f92c7c28c244bf5a93a287297febbdce90ff88d78",
+    "test_malformed_html.py": "642e2ddc935f30cd3edb89b28a08191da88e3bcefacb4abe8798d999132b8664",
+    "README.md": "23994cc8d0d8f5f66995b686a1c3111001e6f3d681468d84613cf99cb1d94b45"
+  },
+  "post_capture_correction": {
+    "scope": "After the executed snapshot, saved-projection validation and locator mapping were strengthened, and malformed HTMLParser marked-section assertions were normalized into incomplete observations. Native HTTP acquisition and valid-source field extraction remain unchanged.",
+    "current_collector_sha256": "02524586e8f66e790fdf6ff51bcc3aff901552d572f5c7d52cd66f5fdfa96d49",
+    "called_collector_sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+    "retained_genuine_body_replay": "expected_output/managed-2026-10-13/post-capture-offline-check.json",
+    "provider_calls_for_correction": 0,
+    "execution_source_file": "validation/raw-call-collector.py",
+    "native_functions_unchanged": [
+      "acquire",
+      "collection",
+      "parse_group",
+      "record",
+      "ProductPage",
+      "decimal_price",
+      "utc_time",
+      "NoRedirect",
+      "header",
+      "secret_echo"
+    ],
+    "native_boundary_changes": [
+      "parse_page converts HTMLParser marked-section AssertionError into normalized incomplete acceptance; valid-source records and HTTP receipt cost are preserved."
+    ]
+  },
+  "archival_execution_source": {
+    "file": "validation/raw-call-collector.py",
+    "sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+    "purpose": "Exact audit-only source of the one recorded raw call, not the current supported collector.",
+    "excluded_from": [
+      "default unittest discovery",
+      "run.sh",
+      "demo.py commands",
+      "current collector.py CLI"
+    ]
+  }
+}

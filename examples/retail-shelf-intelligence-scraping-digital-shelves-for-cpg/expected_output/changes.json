@@ -1,0 +1,32 @@
+{
+  "changes": [
+    {
+      "fields": {
+        "availability": {
+          "after": "out_of_stock",
+          "before": "in_stock"
+        },
+        "price": {
+          "after": "8.75",
+          "before": "8.25"
+        }
+      },
+      "sku": "000701002",
+      "variant": "3oz"
+    },
+    {
+      "fields": {
+        "availability": {
+          "after": "unknown",
+          "before": "out_of_stock"
+        }
+      },
+      "sku": "000701004",
+      "variant": "16oz"
+    }
+  ],
+  "current_complete": true,
+  "new_observations": [],
+  "scope": "two selected offers; no inventory/disappearance inference",
+  "unobserved_prior_records": []
+}

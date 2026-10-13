@@ -1,0 +1,53 @@
+{
+  "acquisition": {
+    "actual_receipt_credits": null,
+    "api_http_status": null,
+    "body_sha256": "e782e098522e724f81b2328a8bcd8f0ca99b401551ecdf7cb58670545d3b30bb",
+    "credit_receipt_state": "not_applicable",
+    "scope": "locally replayed bytes; no fresh HTTP observation",
+    "target_http_status": null,
+    "transport": "offline_replay"
+  },
+  "complete": false,
+  "cost": {
+    "accepted_records": 1,
+    "actual_receipt_credits": null,
+    "credits_per_accepted_record": null,
+    "unknown_charge_requests": 0
+  },
+  "records": [
+    {
+      "availability": "in_stock",
+      "currency": "USD",
+      "fulfilment": "unselected",
+      "market": "unknown",
+      "market_basis": "unspecified",
+      "observed_at_utc": "2026-10-13T12:00:00Z",
+      "observed_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+      "offer_context": "owned fictional USD offer",
+      "offer_kind": "listed_variant_offer",
+      "pack_quantity": 3,
+      "pack_unit": "ounce",
+      "price": "8.50",
+      "product_id": "000701",
+      "purchase_basis": "unspecified",
+      "requested_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+      "sku": "000701002",
+      "source_evidence": {
+        "availability_token": "https://schema.org/InStock",
+        "offer_path": "$.hasVariant[1].offers",
+        "pack_label": "3oz",
+        "price_token": "8.50",
+        "product_path": "$.hasVariant[1]"
+      },
+      "variant": "3oz",
+      "variant_id": null
+    }
+  ],
+  "rejected": [
+    {
+      "reason": "missing_selected_SKU",
+      "sku": "000701004"
+    }
+  ]
+}

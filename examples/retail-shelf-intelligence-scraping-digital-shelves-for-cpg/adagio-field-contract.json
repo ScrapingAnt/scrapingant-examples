@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+  "source_sha256": "8b1400da3561c1861ebdd3d087e6c2455daa68ce626c9a7de5b5c25a186a4c50",
+  "observed_at_utc": "2026-10-13T10:37:02.818788+00:00",
+  "oracle": "adagio-expected-records.json",
+  "independence": "Literal expected records typed from separate source inspection; not produced by the examples worker adapter. Direct-source observation only, not a managed receipt.",
+  "extractors": {
+    "jsonld_block": "script[type=\"application/ld+json\"] object with @type=ProductGroup and productGroupID=001036",
+    "group_id": "$.productGroupID (string; preserve leading zeroes)",
+    "selected_variant": "$.hasVariant[?(@.sku == selected_sku)] exactly one per selected sku",
+    "sku": "selected.sku (string; do not infer a distinct variant_id)",
+    "size": "selected.size (literal3oz/16oz)",
+    "pack": "exact ^(3|16)oz$ size mapping to integer weight ounces, no sample or teabag count inference",
+    "price": "selected.offers.price as Decimal from literal JSON number/string; exactly two decimal output; never use $.offers.lowPrice",
+    "currency": "selected.offers.priceCurrency literalUSD",
+    "availability": "selected.offers.availability explicit schema.org literal; missing/unrecognized -> unknown",
+    "offer_url": "selected.offers.url equals single selected source URL",
+    "market": "page DOM [itemprop=\"shippingDestination\"] [itemprop=\"addressCountry\"][content=\"US\"]",
+    "shipping_label": "page DOM [itemprop=\"shippingLabel\"][content=\"Standard Ground\"] (context only; not selectedfulfilment)",
+    "dom_corrobation": [
+      "#itemBlock_001036002 .size =3oz with85gr secondarylabel; classOutOfStock and textout ofstock",
+      "#itemBlock_001036004 .size =16oz with454gr secondarylabel; classOutOfStock and textout ofstock"
+    ]
+  },
+  "structural_limits": [
+    "No hasVariant product isVariantOf property; group membership comes from containment.",
+    "Shared offer/source URL; identify selected records by group+SKU+size.",
+    "Posted listed-variant offer basis, not asserted one_time or subscription price.",
+    "Page US shipping context, not a proxy-country guarantee or selectedcheckoutdestination.",
+    "Fulfilment unselected; OutOfStock not treated as unknown or orderable.",
+    "No descriptions/reviews/images/customerclaims copied."
+  ],
+  "capture_kind": "direct_html_observation",
+  "DOM_corroboration_scope": "Gram secondary labels are the earlier direct-capture context only; managed capture showed size/OutOfStock labels without those gram labels."
+}
