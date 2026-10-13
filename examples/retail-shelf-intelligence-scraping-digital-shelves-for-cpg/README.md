@@ -174,5 +174,7 @@ JavaScript requirement follows from this one raw observation.
 This is one selected two-offer source contract. It supplies no universal SKU
 matching, source-wide coverage, checkout/inventory validation, scheduler,
 production yield, digital-shelf analytics or revenue result. The default runner
-never reruns a paid observation. Named-author methodology review and final
-publication approval remain pending; no human review report is asserted.
+never reruns a paid observation. Technical review was delegated to an independent
+reviewer. The owner conditionally authorized publication and retail-only
+index/discovery restoration after that review and final checks pass; no personal
+methodology-review report is claimed.

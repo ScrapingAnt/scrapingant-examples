@@ -360,7 +360,8 @@
     "test_transport.py": "0b92a8aefe9c6b776df4226715706d1bf7cfbc0e7d4ea61a4a23c5debc143521",
     "validation/raw-call-collector.py": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
     "validation/README.md": "848f29ee690b374ba737df0f92c7c28c244bf5a93a287297febbdce90ff88d78",
-    "test_malformed_html.py": "642e2ddc935f30cd3edb89b28a08191da88e3bcefacb4abe8798d999132b8664"
+    "test_malformed_html.py": "642e2ddc935f30cd3edb89b28a08191da88e3bcefacb4abe8798d999132b8664",
+    "README.md": "23994cc8d0d8f5f66995b686a1c3111001e6f3d681468d84613cf99cb1d94b45"
   },
   "post_capture_correction": {
     "scope": "After the executed snapshot, saved-projection validation and locator mapping were strengthened, and malformed HTMLParser marked-section assertions were normalized into incomplete observations. Native HTTP acquisition and valid-source field extraction remain unchanged.",
