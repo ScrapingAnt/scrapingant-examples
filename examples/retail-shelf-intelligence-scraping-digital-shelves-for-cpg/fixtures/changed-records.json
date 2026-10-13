@@ -1,0 +1,56 @@
+[
+  {
+    "product_id": "000701",
+    "sku": "000701002",
+    "variant_id": null,
+    "variant": "3oz",
+    "pack_quantity": 3,
+    "pack_unit": "ounce",
+    "price": "8.75",
+    "currency": "USD",
+    "availability": "out_of_stock",
+    "observed_at_utc": "2026-10-13T12:00:00Z",
+    "requested_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+    "observed_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+    "market": "unknown",
+    "fulfilment": "unselected",
+    "offer_kind": "listed_variant_offer",
+    "offer_context": "owned fictional USD offer",
+    "source_evidence": {
+      "product_path": "$.hasVariant[1]",
+      "offer_path": "$.hasVariant[1].offers",
+      "pack_label": "3oz",
+      "price_token": "8.75",
+      "availability_token": "https://schema.org/OutOfStock"
+    },
+    "market_basis": "unspecified",
+    "purchase_basis": "unspecified"
+  },
+  {
+    "product_id": "000701",
+    "sku": "000701004",
+    "variant_id": null,
+    "variant": "16oz",
+    "pack_quantity": 16,
+    "pack_unit": "ounce",
+    "price": "24.00",
+    "currency": "USD",
+    "availability": "unknown",
+    "observed_at_utc": "2026-10-13T12:00:00Z",
+    "requested_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+    "observed_source_url": "https://scrapingant.github.io/scrapingant-examples/examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/fixtures/baseline.html",
+    "market": "unknown",
+    "fulfilment": "unselected",
+    "offer_kind": "listed_variant_offer",
+    "offer_context": "owned fictional USD offer",
+    "source_evidence": {
+      "product_path": "$.hasVariant[2]",
+      "offer_path": "$.hasVariant[2].offers",
+      "pack_label": "16oz",
+      "price_token": "24.00",
+      "availability_token": null
+    },
+    "market_basis": "unspecified",
+    "purchase_basis": "unspecified"
+  }
+]

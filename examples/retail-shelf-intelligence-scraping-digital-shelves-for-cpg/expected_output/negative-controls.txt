@@ -1,0 +1,7 @@
+Caught: wrong selected price; test_collector.Records.test_selected_offers_match_independent_literal_oracle; exit=1
+Caught: wrong pack unit; test_collector.Records.test_selected_offers_match_independent_literal_oracle; exit=1
+Caught: OOS collapsed to unknown; test_collector.Records.test_explicit_OOS_and_unknown_remain_distinct; exit=1
+Caught: partial prior record dropped; test_changes.Changes.test_partial_omission_retains_prior_record_and_original_time; exit=1
+Caught: unknown credits become zero; test_transport.Managed.test_unknown_and_malformed_credit_cost_remain_unknown; exit=1
+Caught: key leaked into URL; test_transport.Managed.test_explicit_header_auth_and_request_settings; exit=1
+Behavior mutations caught: 6/6

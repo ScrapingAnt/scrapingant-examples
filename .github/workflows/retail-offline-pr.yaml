@@ -1,0 +1,26 @@
+name: retail-offline-pr
+
+on:
+  pull_request:
+    paths:
+      - 'examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg/**'
+      - '.github/workflows/retail-offline-pr.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  retail-offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.11'
+      - name: Run scoped offline tests and field replays
+        working-directory: examples/retail-shelf-intelligence-scraping-digital-shelves-for-cpg
+        env:
+          PYTHON: python
+        run: ./run.sh

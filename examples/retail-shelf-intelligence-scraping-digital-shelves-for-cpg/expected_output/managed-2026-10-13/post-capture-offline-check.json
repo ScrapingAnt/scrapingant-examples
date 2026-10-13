@@ -1,0 +1,12 @@
+{
+  "scope": "post-capture local replay of retained genuine bytes; no source/provider request",
+  "called_collector_sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+  "current_collector_sha256": "113f746c8e8418a924ce4151d47539d02fd250ca36463f1eb516cd9c4d85c9bd",
+  "body_sha256_matches_receipt": true,
+  "accepted_records": 2,
+  "records_equal_called_collection": true,
+  "complete": true,
+  "provider_calls": 0,
+  "full_body_distributed": false,
+  "change_scope": "Projection replay validation tightened after capture; managed transport and HTML field parser unchanged."
+}

@@ -1,0 +1,11 @@
+Runtime: cpython 3.12.11; standard library only
+Default scope: owned fixtures and saved factual projection; no external/provider/model calls
+Owned baseline: 2/2 selected offers accepted; complete=true
+Owned changed: 2/2 selected offers accepted; comparable field changes=2
+Owned partial: 1/2 selected offers accepted; unobserved prior records=1
+Changed-pack control: 1/2 accepted; reason=pack_identity_changed; prior pack retained=1
+Missing observations make no out-of-stock or disappearance claim; prior timestamps retained
+Naive from/sample price=2.00; selected 3oz offer=8.25 USD
+Adagio saved projection: 2/2 literal offers match independent source oracle; no fresh HTTP request
+Recorded managed observation: 1 request; API/target=200/200; 2/2 accepted; receipt credits=1; credits per accepted record=0.50
+Recorded managed data are read locally; standalone managed CLI excluded and no paid observation rerun

@@ -1,0 +1,19 @@
+{
+  "source_url": "https://www.adagio.com/black/earl_grey_lavender_tea.html",
+  "collector_sha256": "73c30dd543306c96f452de9b1c5a8441d22e477ef25945623c76a2e1a0fc4e2f",
+  "execution_scope": "One separately recorded raw managed acquire() call and collection() under the frozen code; the standalone public managed CLI was not invoked.",
+  "requests": 1,
+  "browser": false,
+  "receipt_file": "receipt.json",
+  "field_projection_file": "collection.json",
+  "full_HTML_distributed": false,
+  "original_body_sha256": "1e64467b5c69879349facba7c62c8e3d3a86a9e9d2e44454bc4f3c56a3b14473",
+  "hash_scope": "Full received body hash measured before projection; it cannot be reproduced from minimal field projection, direct-source capture projection or owned fixture bytes.",
+  "independent_oracle": "../../fixtures/adagio-source-oracle.json",
+  "field_acceptance": "Exactly the two selected group/SKU/size/ounce/price/USD/explicit-OOS observations match the independently typed direct-source oracle. Observation time is the managed completion time.",
+  "limits": "One observation, no source-wide yield, rendering/JavaScript need, repeated refresh or standalone public managed CLI validation. Direct raw HTML already supplied the selected facts. No further call or retry is part of this packet.",
+  "DOM_corroboration_scope": "Selected 3oz/16oz labels and out-of-stock class/text; the earlier direct capture's gram secondary labels were not present in this managed response.",
+  "execution_source_file": "validation/raw-call-collector.py",
+  "execution_source_path_basis": "relative to packet root",
+  "archival_source_scope": "Exact audit-only executed source bytes; excluded from default tests, demo and current CLI. The current collector strengthens saved-projection validation; native acquisition, collection and HTML parsing are unchanged."
+}
