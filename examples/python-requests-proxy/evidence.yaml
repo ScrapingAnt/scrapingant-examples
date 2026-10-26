@@ -1,7 +1,7 @@
 article_id: python-requests-proxy
 canonical_url: https://scrapingant.com/blog/python-requests-proxy
 owner: Oleg Kulyk
-examples_repo_commit: "0f897055"
+examples_repo_commit: "ee61b354"
 tested_at: 2026-10-26
 requires_api_key: true   # case 09 only
 environment:
