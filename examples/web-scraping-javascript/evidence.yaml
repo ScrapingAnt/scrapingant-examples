@@ -1,0 +1,19 @@
+article_id: web-scraping-javascript
+canonical_url: https://scrapingant.com/blog/web-scraping-javascript
+owner: Oleg Kulyk
+examples_repo_commit: "TBD"
+tested_at: 2026-10-26
+requires_api_key: true   # case 08 only
+environment: {os: "macOS 26 (Darwin 25.6.0, arm64)", node: "22.20.0"}
+dependencies: {cheerio: "1.2.0", jsdom: "29.1.1", axios: "1.20.0", playwright: "1.64.1", puppeteer: "25.16.0"}
+outputs: [expected_output/00_versions.txt, expected_output/01_fetch_regex.txt … 08_scrapingant_api.txt, expected_output/run.txt]
+limitations: [Public practice sites only; their content may change.]
+claims:
+  - {id: J1, text: "fetch + regex returns 200 Example Domain", source: 01_fetch_regex.txt}
+  - {id: J2, text: "fetch + cheerio: 20 books on books.toscrape.com, first three with prices", source: 02_fetch_cheerio.txt}
+  - {id: J3, text: "jsdom: 20 prices, first three", source: 03_jsdom.txt}
+  - {id: J4, text: "axios: page 2 has 20 books, 'Page 2 of 50'", source: 04_axios.txt}
+  - {id: J5, text: "fetch on quotes.toscrape.com/js/ finds 0 quotes in raw HTML", source: 05_fetch_js_page.txt}
+  - {id: J6, text: "Playwright renders 10 quotes", source: 06_playwright.txt}
+  - {id: J7, text: "Puppeteer renders 10 quotes", source: 07_puppeteer.txt}
+  - {id: J8, text: "ScrapingAnt API (browser default) returns 10 quotes, 200/200", source: 08_scrapingant_api.txt}

@@ -1,0 +1,23 @@
+article_id: ip-restriction-protection
+canonical_url: https://scrapingant.com/blog/ip-restriction-protection
+owner: Oleg Kulyk
+examples_repo_commit: "TBD"
+tested_at: 2026-10-26
+requires_api_key: true   # case 05 only
+environment: {os: "macOS 26 (Darwin 25.6.0, arm64)", python: "3.12.11"}
+dependencies: {requests: "2.34.2", proxy.py: "2.4.10"}
+run_command: ./run.sh
+measurements:
+  - "01: 10 requests in a burst: 5 x 200, 3 x 429 (Retry-After 10), 2 x 403 banned"
+  - "02: 8 requests honouring Retry-After: 8 x 200 after one 10 s wait"
+  - "03: 8 requests 2 s apart: 8 x 200"
+  - "04: 10 requests alternating two proxies: 10 x 200, 5 per simulated client"
+  - "05: 5 API requests, residential US: 5 x 200, 5 distinct exit IPs"
+limitations:
+  - The origin's limits are the lab's own rules, not any real site's; exit IPs in 01-04 are simulated by a proxy header.
+claims:
+  - {id: R1, text: "a burst over the limit gets 429 with Retry-After, then a ban", source: 01_naive_loop.txt}
+  - {id: R2, text: "honouring Retry-After keeps every request at 200", source: 02_respect_retry_after.txt}
+  - {id: R3, text: "pacing at the site's rate avoids 429 entirely", source: 03_throttle.txt}
+  - {id: R4, text: "two exits split the per-IP budget", source: 04_rotate_exit_ips.txt}
+  - {id: R5, text: "ScrapingAnt residential US: 5 requests, 5 exit IPs", source: 05_scrapingant_api.txt}

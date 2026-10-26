@@ -1,0 +1,53 @@
+--- 01_naive_loop
+1 200 None None
+2 200 None None
+3 200 None None
+4 200 None None
+5 200 None None
+6 429 10 rate limited
+7 429 10 rate limited
+8 429 10 rate limited
+9 403 None banned
+10 403 None banned
+exit=0
+--- 02_respect_retry_after
+1 200
+2 200
+3 200
+4 200
+5 200
+  429 on http://127.0.0.1:8000/item/6, waiting 10s
+6 200
+7 200
+8 200
+exit=0
+--- 03_throttle
+1 200
+2 200
+3 200
+4 200
+5 200
+6 200
+7 200
+8 200
+exit=0
+--- 04_rotate_exit_ips
+1 200 seen as proxy-a-8901
+2 200 seen as proxy-b-8902
+3 200 seen as proxy-a-8901
+4 200 seen as proxy-b-8902
+5 200 seen as proxy-a-8901
+6 200 seen as proxy-b-8902
+7 200 seen as proxy-a-8901
+8 200 seen as proxy-b-8902
+9 200 seen as proxy-a-8901
+10 200 seen as proxy-b-8902
+exit=0
+--- 05_scrapingant_api
+1 200 US Pennsylvania
+2 200 US Texas
+3 200 US North Carolina
+4 200 US New York
+5 200 US Texas
+5 different exit IPs in 5 requests
+exit=0

@@ -1,0 +1,19 @@
+checked 2026-10-26
+omkarcloud/botasaurus | stars 5800 | last push 2026-07-26 | archived false | MIT
+  pypi botasaurus 4.0.97 2026-01-06
+vinyzu-archive/Botright | stars 1041 | last push 2026-10-20 | archived false | GPL-3.0
+  pypi botright 0.5.1 2024-02-15
+ultrafunkamsterdam/nodriver | stars 4891 | last push 2026-10-08 | archived false | AGPL-3.0
+  pypi nodriver 0.50.6 2026-10-08
+ttlns/undetected-playwright-python | stars 51 | last push 2024-11-02 | archived true | Apache-2.0
+  pypi undetected-playwright 0.3.0 2024-05-19
+Kaliiiiiiiiii-Vinyzu/patchright | stars 4983 | last push 2026-10-25 | archived false | Apache-2.0
+  pypi patchright 1.64.3 2026-10-25
+daijro/camoufox | stars 12804 | last push 2026-10-25 | archived false | MPL-2.0
+  pypi camoufox 0.5.8 2026-10-06
+berstend/puppeteer-extra | stars 7413 | last push 2024-07-18 | archived false | MIT
+  npm puppeteer-extra-plugin-stealth 2.11.2 2023-03-01
+lexiforest/curl_cffi | stars 6777 | last push 2026-10-26 | archived false | MIT
+  pypi curl-cffi 0.17.0 2026-10-26
+ScrapeGraphAI/Scrapegraph-ai | stars 32240 | last push 2026-10-06 | archived false | MIT
+  pypi scrapegraphai 2.3.1 2026-10-06

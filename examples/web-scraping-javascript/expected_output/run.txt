@@ -1,0 +1,32 @@
+v22.20.0
+cheerio 1.2.0
+jsdom 29.1.1
+axios 1.20.0
+playwright 1.64.1
+puppeteer 25.16.0
+--- 01_fetch_regex
+200 Example Domain
+--- 02_fetch_cheerio
+20 books
+[
+  { title: 'A Light in the Attic', price: '£51.77' },
+  { title: 'Tipping the Velvet', price: '£53.74' },
+  { title: 'Soumission', price: '£50.10' }
+]
+--- 03_jsdom
+20 prices, first three: £51.77 £53.74 £50.10
+--- 04_axios
+200 20 books on page 2, Page 2 of 50
+--- 05_fetch_js_page
+200 0 quotes in the raw HTML
+--- 06_playwright
+10 quotes
+{
+  text: '“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”',
+  author: 'Albert Einstein'
+}
+--- 07_puppeteer
+10 quotes, first authors: Albert Einstein, J.K. Rowling, Albert Einstein
+--- 08_scrapingant_api
+200 200 10 quotes
+Albert Einstein | “The world as we have created it is a process of o
