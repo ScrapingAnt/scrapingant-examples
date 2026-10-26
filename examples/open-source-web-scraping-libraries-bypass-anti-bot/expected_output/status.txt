@@ -9,7 +9,7 @@ ttlns/undetected-playwright-python | stars 51 | last push 2024-11-02 | archived 
   pypi undetected-playwright 0.3.0 2024-05-19
 Kaliiiiiiiiii-Vinyzu/patchright | stars 4983 | last push 2026-10-25 | archived false | Apache-2.0
   pypi patchright 1.64.3 2026-10-25
-daijro/camoufox | stars 12804 | last push 2026-10-25 | archived false | MPL-2.0
+daijro/camoufox | stars 12805 | last push 2026-10-25 | archived false | MPL-2.0
   pypi camoufox 0.5.8 2026-10-06
 berstend/puppeteer-extra | stars 7413 | last push 2024-07-18 | archived false | MIT
   npm puppeteer-extra-plugin-stealth 2.11.2 2023-03-01
@@ -17,3 +17,7 @@ lexiforest/curl_cffi | stars 6777 | last push 2026-10-26 | archived false | MIT
   pypi curl-cffi 0.17.0 2026-10-26
 ScrapeGraphAI/Scrapegraph-ai | stars 32240 | last push 2026-10-06 | archived false | MIT
   pypi scrapegraphai 2.3.1 2026-10-06
+Botright: last 3 commits
+  2026-10-20 Update NodeMaven Sponsor
+  2026-10-11 Update NodeMaven Sponsor
+  2026-09-09 Update Nodemaven Sponsor

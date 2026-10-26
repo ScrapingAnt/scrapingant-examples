@@ -67,6 +67,7 @@ def wait_port(port):
 
 def main():
     only = sys.argv[1:]
+    serve = only == ["serve"]
     srv = http.server.ThreadingHTTPServer(("127.0.0.1", 8000), Origin)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     proxy = [PY, "-m", "proxy", "--hostname", "127.0.0.1", "--num-workers", "1", "--num-acceptors", "1"]
@@ -76,6 +77,18 @@ def main():
     for p in (8901, 8902):
         wait_port(p)
     failed = []
+    if serve:
+        print("READY: origin on 127.0.0.1:8000, proxies on 8901 and 8902. Ctrl-C to stop.", flush=True)
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            for k in kids:
+                k.terminate()
+            srv.shutdown()
+        return
     try:
         for case in sorted((ROOT / "cases").glob("*.py")):
             if only and case.stem not in only:

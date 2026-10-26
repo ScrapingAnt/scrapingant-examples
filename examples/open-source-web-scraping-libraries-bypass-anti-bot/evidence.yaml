@@ -12,5 +12,6 @@ limitations:
   - Two signals only (User-Agent string, navigator.webdriver); real anti-bot systems check far more.
 claims:
   - {id: A1, text: "status table values (stars, last push, archived, latest release and date)", source: status.txt}
+  - {id: A4, text: "Botright's last three commits (2026-09-09 to 2026-10-20) are sponsor README updates", source: status.txt}
   - {id: A2, text: "default headless Playwright: HeadlessChrome in the User-Agent, navigator.webdriver true", source: 01_playwright_headless.txt}
   - {id: A3, text: "ScrapingAnt API page: regular Chrome User-Agent, navigator.webdriver false", source: 02_scrapingant_api.txt}

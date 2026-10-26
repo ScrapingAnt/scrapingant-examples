@@ -8,3 +8,5 @@ Each file in `cases/` is a snippet from the article; outputs go to `expected_out
 uv venv .venv && source .venv/bin/activate && uv pip install -r requirements.txt
 SCRAPINGANT_API_KEY=... ./run.sh
 ```
+
+To run a snippet by hand, start the lab in one terminal with `python lab.py serve` (wait for READY) and run `python cases/01_naive_loop.py` in another.

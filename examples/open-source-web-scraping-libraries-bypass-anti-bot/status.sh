@@ -15,3 +15,5 @@ repo daijro/camoufox; pypi camoufox
 repo berstend/puppeteer-extra; npmv puppeteer-extra-plugin-stealth
 repo lexiforest/curl_cffi; pypi curl-cffi
 repo ScrapeGraphAI/Scrapegraph-ai; pypi scrapegraphai
+echo "Botright: last 3 commits"
+gh api "repos/Vinyzu/Botright/commits?per_page=3" --jq '.[] | "  \(.commit.author.date[:10]) \(.commit.message | split("\n")[0])"'

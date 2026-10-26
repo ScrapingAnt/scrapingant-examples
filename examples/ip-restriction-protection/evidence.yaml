@@ -13,6 +13,8 @@ measurements:
   - "03: 8 requests 2 s apart: 8 x 200"
   - "04: 10 requests alternating two proxies: 10 x 200, 5 per simulated client"
   - "05: 5 API requests, residential US: 5 x 200, 5 distinct exit IPs"
+notes:
+  - "lab.py gained a serve mode (python lab.py serve) so readers can run the snippets by hand; cases and outputs unchanged."
 limitations:
   - The origin's limits are the lab's own rules, not any real site's; exit IPs in 01-04 are simulated by a proxy header.
 claims:

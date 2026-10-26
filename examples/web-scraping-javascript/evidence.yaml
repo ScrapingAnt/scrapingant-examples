@@ -7,6 +7,8 @@ requires_api_key: true   # case 08 only
 environment: {os: "macOS 26 (Darwin 25.6.0, arm64)", node: "22.20.0"}
 dependencies: {cheerio: "1.2.0", jsdom: "29.1.1", axios: "1.20.0", playwright: "1.64.1", puppeteer: "25.16.0"}
 outputs: [expected_output/00_versions.txt, expected_output/01_fetch_regex.txt … 08_scrapingant_api.txt, expected_output/run.txt]
+notes:
+  - "06 gained an explicit waitFor on the first quote after review and was re-run on 2026-10-26; output unchanged."
 limitations: [Public practice sites only; their content may change.]
 claims:
   - {id: J1, text: "fetch + regex returns 200 Example Domain", source: 01_fetch_regex.txt}
