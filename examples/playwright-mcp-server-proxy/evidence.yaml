@@ -10,7 +10,9 @@ environment:
   python: "3.12.11 (proxy.py only)"
 dependencies: {"@playwright/mcp": "0.0.83", playwright: "1.64.1", "@modelcontextprotocol/sdk": "1.32.2", proxy.py: "2.4.10"}
 run_command: ./run.sh
-outputs: [expected_output/00_versions.txt, expected_output/01_proxy_server.txt … 08_scrapingant_mcp.txt, expected_output/run.txt]
+outputs: [expected_output/00_versions.txt, expected_output/01_proxy_server.txt … 09_dead_proxy.txt, expected_output/run.txt]
+notes:
+  - "09 was added after the first full run and recorded on its own on 2026-10-26 (node cases/navigate.mjs ... --proxy-server http://127.0.0.1:8903)."
 measurements: []
 limitations:
   - Proxies are local; httpbin.org is the only external target. Only Chromium (headless) is tested.
@@ -22,4 +24,5 @@ claims:
   - {id: M5, text: "the same config with a wrong password shows the proxy's 'Proxy Authentication Required' page", source: 05_config_wrong_password.txt}
   - {id: M6, text: "PLAYWRIGHT_MCP_PROXY_SERVER passed in the server's environment works like --proxy-server", source: 06_env_var.txt}
   - {id: M7, text: "plain Playwright: chromium.launch({proxy: {server, username, password}}) returns 200 through the auth proxy", source: 07_playwright_auth.txt}
+  - {id: M9, text: "--proxy-server pointing at a closed port gives net::ERR_PROXY_CONNECTION_FAILED", source: 09_dead_proxy.txt}
   - {id: M8, text: "ScrapingAnt MCP lists get_web_page_html/markdown/text; get_web_page_text with proxy_type=residential, proxy_country=JP returns a JP exit", source: 08_scrapingant_mcp.txt}

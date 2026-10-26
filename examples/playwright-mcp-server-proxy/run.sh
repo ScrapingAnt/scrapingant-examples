@@ -26,6 +26,7 @@ run 04_config_auth node cases/navigate.mjs $URL --config configs/proxy-auth.json
 run 05_config_wrong_password node cases/navigate.mjs $URL --config configs/proxy-auth-wrong.json
 run 06_env_var env PLAYWRIGHT_MCP_PROXY_SERVER=http://127.0.0.1:8901 node cases/navigate.mjs $URL
 run 07_playwright_auth node cases/playwright_auth.mjs
+run 09_dead_proxy node cases/navigate.mjs $URL --proxy-server http://127.0.0.1:8903
 if [ -n "${SCRAPINGANT_API_KEY:-}" ]; then run 08_scrapingant_mcp node cases/scrapingant_mcp.mjs; else echo "--- 08 skipped (no SCRAPINGANT_API_KEY)"; fi
 rm -rf .playwright-mcp
 exit $fail
