@@ -3,7 +3,7 @@ import os
 import requests
 import urllib3
 
-urllib3.disable_warnings()  # proxy mode re-signs HTTPS, so certificate checks are off for this proxy only
+urllib3.disable_warnings()  # proxy mode re-signs HTTPS, so these requests use verify=False; this silences the warning
 
 API_KEY = os.environ["SCRAPINGANT_API_KEY"]
 proxy = f"http://scrapingant&browser=false&proxy_country=FR:{API_KEY}@proxy.scrapingant.com:8080"

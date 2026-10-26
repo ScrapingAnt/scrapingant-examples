@@ -12,6 +12,8 @@ run_command: ./run.sh
 outputs: [expected_output/00_versions.txt, expected_output/01_proxy_basic.txt … 09_scrapingant_proxy_mode.txt, expected_output/run.txt]
 measurements:
   - "09: 5 requests through proxy mode with proxy_country=FR, 5 distinct exit IPs (denominator 5), all FR"
+notes:
+  - "Case 09's comment on urllib3.disable_warnings() was reworded after the recorded run; the code and output are unchanged."
 limitations:
   - All proxies are local; exit-IP changes are shown only for the ScrapingAnt proxy mode (case 09).
   - "Unencoded password" behaviour is shown for '#'; with only '@' and ':' urllib3 2.8.0 parsed the URL correctly in a probe, so the article does not claim '@' alone breaks it.
