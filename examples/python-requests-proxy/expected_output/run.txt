@@ -1,0 +1,44 @@
+--- 01_proxy_basic
+200 {'path': '/ip', 'via': 'proxy-a-8901', 'authorization_sent_to_site': False}
+exit=0
+--- 02_proxy_auth
+http://lab:p%40ss%23w0rd@127.0.0.1:8899
+200 {'path': '/ip', 'via': 'auth-proxy-8899', 'authorization_sent_to_site': False}
+exit=0
+--- 03_auth_param_is_not_proxy_auth
+407 Proxy Authentication Required
+ProxyError: True True
+exit=0
+--- 04_unencoded_password
+p@ss#w0rd -> ProxyError HTTPConnectionPool(host='ss', port=80): Max retries exceeded with url: http://12
+p%40ss%23w0rd -> 200 OK
+exit=0
+--- 05_https_through_proxy
+200 Example Domain
+exit=0
+--- 06_env_vars
+proxy-a-8901
+None
+proxy-a-8901
+proxy-b-8902
+proxy-a-8901
+exit=0
+--- 07_socks5
+200 {'path': '/socks', 'via': None, 'authorization_sent_to_site': False}
+exit=0
+--- 08_rotate
+1 http://127.0.0.1:8901 -> proxy-a-8901
+skip http://127.0.0.1:8903 ProxyError
+2 http://127.0.0.1:8902 -> proxy-b-8902
+3 http://127.0.0.1:8901 -> proxy-a-8901
+skip http://127.0.0.1:8903 ProxyError
+4 http://127.0.0.1:8902 -> proxy-b-8902
+exit=0
+--- 09_scrapingant_proxy_mode
+200 FR Aubervilliers
+200 FR Aubervilliers
+200 FR Aubervilliers
+200 FR Aubervilliers
+200 FR Aubervilliers
+5 different exit IPs in 5 requests
+exit=0

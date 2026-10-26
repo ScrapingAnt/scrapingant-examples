@@ -1,0 +1,25 @@
+article_id: playwright-mcp-server-proxy
+canonical_url: https://scrapingant.com/blog/playwright-mcp-server-proxy
+owner: Oleg Kulyk
+examples_repo_commit: "TBD"
+tested_at: 2026-10-26
+requires_api_key: true   # case 08 only
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  node: "22.20.0"
+  python: "3.12.11 (proxy.py only)"
+dependencies: {"@playwright/mcp": "0.0.83", playwright: "1.64.1", "@modelcontextprotocol/sdk": "1.32.2", proxy.py: "2.4.10"}
+run_command: ./run.sh
+outputs: [expected_output/00_versions.txt, expected_output/01_proxy_server.txt … 08_scrapingant_mcp.txt, expected_output/run.txt]
+measurements: []
+limitations:
+  - Proxies are local; httpbin.org is the only external target. Only Chromium (headless) is tested.
+claims:
+  - {id: M1, text: "--proxy-server http://127.0.0.1:8901 routes browser_navigate through the proxy", source: 01_proxy_server.txt}
+  - {id: M2, text: "--proxy-bypass httpbin.org sends that host direct", source: 02_proxy_bypass.txt}
+  - {id: M3, text: "credentials inside --proxy-server (http://lab:p%40ss%23w0rd@...) fail with net::ERR_INVALID_AUTH_CREDENTIALS", source: 03_credentials_in_url.txt}
+  - {id: M4, text: "a --config file with browser.launchOptions.proxy server/username/password authenticates", source: 04_config_auth.txt}
+  - {id: M5, text: "the same config with a wrong password shows the proxy's 'Proxy Authentication Required' page", source: 05_config_wrong_password.txt}
+  - {id: M6, text: "PLAYWRIGHT_MCP_PROXY_SERVER passed in the server's environment works like --proxy-server", source: 06_env_var.txt}
+  - {id: M7, text: "plain Playwright: chromium.launch({proxy: {server, username, password}}) returns 200 through the auth proxy", source: 07_playwright_auth.txt}
+  - {id: M8, text: "ScrapingAnt MCP lists get_web_page_html/markdown/text; get_web_page_text with proxy_type=residential, proxy_country=JP returns a JP exit", source: 08_scrapingant_mcp.txt}

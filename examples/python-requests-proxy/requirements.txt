@@ -1,0 +1,3 @@
+requests[socks]==2.34.2
+proxy.py==2.4.10
+pproxy==2.7.9

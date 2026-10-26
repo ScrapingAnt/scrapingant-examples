@@ -1,0 +1,33 @@
+Connection to 127.0.0.1 port 8899 [tcp/*] succeeded!
+Connection to 127.0.0.1 port 8901 [tcp/jmb-cds2] succeeded!
+v22.20.0
+@playwright/mcp 0.0.83
+playwright 1.64.1
+@modelcontextprotocol/sdk 1.32.2
+Python 3.12.11
+proxy-py==2.4.10
+--- 01_proxy_server
+$ node cases/navigate.mjs http://httpbin.org/headers --proxy-server http://127.0.0.1:8901
+X-Lab-Proxy: proxy-a-8901
+--- 02_proxy_bypass
+$ node cases/navigate.mjs http://httpbin.org/headers --proxy-server http://127.0.0.1:8901 --proxy-bypass httpbin.org
+no X-Lab-Proxy header (direct)
+--- 03_credentials_in_url
+$ node cases/navigate.mjs http://httpbin.org/headers --proxy-server http://lab:p%40ss%23w0rd@127.0.0.1:8899
+net::ERR_INVALID_AUTH_CREDENTIALS
+--- 04_config_auth
+$ node cases/navigate.mjs http://httpbin.org/headers --config configs/proxy-auth.json
+X-Lab-Proxy: auth-proxy-8899
+--- 05_config_wrong_password
+$ node cases/navigate.mjs http://httpbin.org/headers --config configs/proxy-auth-wrong.json
+Proxy Authentication Required
+--- 06_env_var
+$ env PLAYWRIGHT_MCP_PROXY_SERVER=http://127.0.0.1:8901 node cases/navigate.mjs http://httpbin.org/headers
+X-Lab-Proxy: proxy-a-8901
+--- 07_playwright_auth
+$ node cases/playwright_auth.mjs
+200 X-Lab-Proxy: auth-proxy-8899
+--- 08_scrapingant_mcp
+$ node cases/scrapingant_mcp.mjs
+tools: get_web_page_html, get_web_page_markdown, get_web_page_text
+exit: JP Ina

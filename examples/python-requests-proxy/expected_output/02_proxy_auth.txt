@@ -1,0 +1,3 @@
+http://lab:p%40ss%23w0rd@127.0.0.1:8899
+200 {'path': '/ip', 'via': 'auth-proxy-8899', 'authorization_sent_to_site': False}
+exit=0

@@ -1,0 +1,6 @@
+v22.20.0
+@playwright/mcp 0.0.83
+playwright 1.64.1
+@modelcontextprotocol/sdk 1.32.2
+Python 3.12.11
+proxy-py==2.4.10

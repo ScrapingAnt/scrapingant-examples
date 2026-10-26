@@ -1,0 +1,7 @@
+1 http://127.0.0.1:8901 -> proxy-a-8901
+skip http://127.0.0.1:8903 ProxyError
+2 http://127.0.0.1:8902 -> proxy-b-8902
+3 http://127.0.0.1:8901 -> proxy-a-8901
+skip http://127.0.0.1:8903 ProxyError
+4 http://127.0.0.1:8902 -> proxy-b-8902
+exit=0

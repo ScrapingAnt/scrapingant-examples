@@ -1,0 +1,27 @@
+article_id: python-requests-proxy
+canonical_url: https://scrapingant.com/blog/python-requests-proxy
+owner: Oleg Kulyk
+examples_repo_commit: "TBD"
+tested_at: 2026-10-26
+requires_api_key: true   # case 09 only
+environment:
+  os: macOS 26 (Darwin 25.6.0, arm64)
+  python: "3.12.11"
+dependencies: {requests: "2.34.2", urllib3: "2.8.0", pysocks: "1.7.1", proxy.py: "2.4.10", pproxy: "2.7.9"}
+run_command: ./run.sh
+outputs: [expected_output/00_versions.txt, expected_output/01_proxy_basic.txt … 09_scrapingant_proxy_mode.txt, expected_output/run.txt]
+measurements:
+  - "09: 5 requests through proxy mode with proxy_country=FR, 5 distinct exit IPs (denominator 5), all FR"
+limitations:
+  - All proxies are local; exit-IP changes are shown only for the ScrapingAnt proxy mode (case 09).
+  - "Unencoded password" behaviour is shown for '#'; with only '@' and ':' urllib3 2.8.0 parsed the URL correctly in a probe, so the article does not claim '@' alone breaks it.
+claims:
+  - {id: C1, text: "proxies dict with http and https keys; the origin sees the request via proxy-a-8901", source: 01_proxy_basic.txt}
+  - {id: C2, text: "credentials in the proxy URL, percent-encoded with quote(safe=''), authenticate to the proxy; the site receives no Authorization header", source: 02_proxy_auth.txt}
+  - {id: C3, text: "auth= goes to the site: HTTP target gets 407 from the proxy; HTTPS target raises ProxyError with 'Tunnel connection failed' and 407", source: 03_auth_param_is_not_proxy_auth.txt}
+  - {id: C4, text: "an unencoded '#' in the password makes requests connect to host 'ss' port 80 (ProxyError); the encoded form returns 200", source: 04_unencoded_password.txt}
+  - {id: C5, text: "an https:// URL goes through an http:// proxy (CONNECT) and returns 200 Example Domain", source: 05_https_through_proxy.txt}
+  - {id: C6, text: "HTTP_PROXY is used; NO_PROXY=localhost goes direct; environment proxy wins over session.proxies; trust_env=False uses session.proxies; per-request proxies win", source: 06_env_vars.txt}
+  - {id: C7, text: "socks5h:// with credentials works with requests[socks] (PySocks 1.7.1)", source: 07_socks5.txt}
+  - {id: C8, text: "itertools.cycle rotation skips the dead proxy on ProxyError and alternates a/b", source: 08_rotate.txt}
+  - {id: C9, text: "ScrapingAnt proxy mode: 5 requests, all 200 FR, 5 different exit IPs", source: 09_scrapingant_proxy_mode.txt}
