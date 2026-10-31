@@ -76,6 +76,14 @@ These are four observations, not success-rate estimates or a speed/price ranking
 
 Both pinned SDKs omit HTTP request timeouts. A scoped transport patch supplies 10-second connect and30-second read timeouts; SDK solving/polling behavior is otherwise retained. The JSON field `whole_run_deadline_seconds` records the intended SIGALRM interrupt, which can be caught by lower layers; measured invocations also had an external400-second subprocess timeout. Stopping a process does not cancel an already accepted provider task. Error output retains class/code only; raw responses, keys, tokens, task IDs, balances, cookies and worker IPs are omitted. A network ambiguity during task creation is marked explicitly, and never retried automatically.
 
+## NoneCap (hCaptcha)
+
+NoneCap solves hCaptcha only, so `09_nonecap.py` runs against hCaptcha's public demo (`https://accounts.hcaptcha.com/demo`) instead of the reCAPTCHA demo. NoneCap serves the 2Captcha `in.php`/`res.php` protocol, so the runner uses the same `2captcha-python` SDK with `server="api.nonecap.com/compat/2captcha"` and calls `solver.hcaptcha(sitekey, url)`. Like the others it is preflight-only unless `--live` is passed, creates at most one task, and reads `NONECAP_API_KEY` from the environment. Acceptance is the demo's own server-side check: after the POST the page prints hCaptcha's siteverify response, and only `"success": true` counts.
+
+```bash
+python -c 'import subprocess,sys; sys.exit(subprocess.run([sys.executable,"09_nonecap.py","--live","--trial","1"],timeout=400).returncode)'
+```
+
 ## Separate ScrapingAnt observation
 
 The separate ScrapingAnt probe was exercised locally after a key became available:
