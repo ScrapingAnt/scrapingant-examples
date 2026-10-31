@@ -12,6 +12,6 @@ case "${1:-}" in
 esac
 "$PYTHON_BIN" -m unittest -v test_paid_demo.py test_broad_matrix.py test_summarize_broad.py test_summarize_100.py test_recover_setup.py
 "$PYTHON_BIN" 01_test_keys.py | tee "$OUTPUT_DIR/01_test_keys.json"
-for script in 04_2captcha 05_anticaptcha 07_capsolver; do
+for script in 04_2captcha 05_anticaptcha 07_capsolver 09_nonecap; do
   "$PYTHON_BIN" "$script.py" | tee "$OUTPUT_DIR/$script.json"
 done

@@ -9,6 +9,7 @@ SPECS={
  '2captcha': ('2captcha-python','TWOCAPTCHA_API_KEY', TwoCaptcha, 'recaptcha'),
  'anticaptcha': ('anticaptchaofficial','ANTICAPTCHA_API_KEY',recaptchaV2Proxyless,'solve_and_return_solution'),
  'capsolver': ('capsolver','CAPSOLVER_API_KEY',capsolver,'solve'),
+ 'nonecap': ('2captcha-python','NONECAP_API_KEY', TwoCaptcha, 'hcaptcha'),
 }
 def main(provider):
     package,env,owner,method=SPECS[provider]
